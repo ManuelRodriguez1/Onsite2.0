@@ -1,0 +1,43 @@
+#ContenedorBannerHome
+{
+    height: 947px;
+    width: 100%;
+    padding: initial;
+}
+#ContenedorBannerHome img
+{
+    height: max-content;
+    width: 100%;
+}
+#ContenedorBannerHome .glyphicon-chevron-right:before
+{
+    content: " ";
+    background-image: url('../../../assets/iconos/flechabanner.svg');
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#ContenedorBannerHome .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next
+{
+    margin-right: -80px;
+}
+
+#ContenedorBannerHome .glyphicon-chevron-left:before
+{
+    content: " ";
+    background-image: url('../../../assets/iconos/flechabanner.svg');
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(180deg);
+}
+#ContenedorBannerHome .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev
+{
+    margin-left: -115px;
+}
+
+
