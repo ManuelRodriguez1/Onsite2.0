@@ -1,0 +1,64 @@
+.title{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 30px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+    margin-top: 69.52px;
+}
+.input, .input::placeholder{
+    font-family: 'Montserrat', sans-serif;;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 15px;
+}
+.fields{
+    margin-top: 50px;
+}
+.info{
+    margin-top: 26px;
+}
+.info p:nth-of-type(1), .title2{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 18px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+}
+.info p:nth-of-type(2){
+    font-family: 'Montserrat', sans-serif;;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 15px;
+    letter-spacing: -0.025em;
+    color: #2F80ED;
+}
+.fields2{
+    margin-top: 26px;
+}
+.title2{
+    margin-top: 30px;
+}
+.field3{
+    margin-top: 19px;
+}
+.buttons{
+    margin-top: 48px;
+    position: relative;
+}
+.next{
+    position: absolute;
+    right: 0;
+    border-color: #E76800;
+    color: #E76800;
+}
+.next:hover{
+    background: #E76800;
+    color: white;
+}

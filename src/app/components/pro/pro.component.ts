@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProComponent implements OnInit {
 
+  title = ['Enter your information:', 'hola mundo'];
+  select = 0;
   constructor() { }
 
   ngOnInit() {
