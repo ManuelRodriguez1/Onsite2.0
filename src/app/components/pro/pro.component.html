@@ -1,8 +1,8 @@
 <form action="">
-  <section>
-    <div class="title container">
-      <p>{{title[select]}}</p>
-    </div>
+  <div class="title container">
+    <p>{{title[select]}}</p>
+  </div>
+  <section *ngIf='page == 0'>
     <div class="fields container">
       <div class="row">
         <div class="col-sm input-group">
@@ -67,10 +67,102 @@
       </div>
     </div>
   </section>
+  <section *ngIf='page == 1'>
+    <div class="container skill">
+      <div class="row">
+        <div class="col-sm input-group">
+          <div class="input-group-prepend">
+            <div class="icon_img setting"></div>
+          </div>
+          <input type="text" readonly class="form-control" placeholder="Select Skills">
+          <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
+        </div>
+      </div>
+      <div class="list-group" *ngIf='up == true'>
+        <div class="list-group-item" *ngFor="let s of skills" (click)='selectskill(s)'>
+          <p>{{s}}</p>
+        </div>
+      </div>
+      <div class="skillselct">
+        <div class="skillsel" *ngFor='let s of selectskills'>
+          <p>{{s}}</p>
+          <div class="close" (click)='close(s)'></div>
+        </div>
+      </div>
+      <div *ngIf="selectskills.length > 0">
+        <div class="title">
+          <p>Let’s get specific</p>
+        </div>
+        <div class="row skill2">
+          <div class="col-sm input-group">
+            <div class="input-group-prepend">
+              <div class="icon_img setting"></div>
+            </div>
+            <input type="text" readonly class="form-control" placeholder="What Drywall skills do you have?">
+            <div class="down" [ngClass]="{'up': up2 == true}" (click)='list(2)'></div>
+          </div>
+        </div>
+        <div class="list-group" *ngIf='up2 == true'>
+          <div class="list-group-item" *ngFor="let s of skills2" (click)='selectskill2(s)'>
+            <p>{{s}}</p>
+          </div>
+        </div>
+        <div class="skillselct">
+          <div class="skillsel" *ngFor='let s of selectskills2'>
+            <p>{{s}}</p>
+            <div class="close" (click)='close(s)'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section *ngIf='page == 2' class="container">
+    <div class="texts2 ">
+      <p>Reach out to your past satisfied customers to get reviews. The more satisfied customer reviews, the<br> more likely you’ll be hired. </p>
+      <p>Share this link to get reviews</p>
+    </div>
+    <div class="row linkcont">
+      <div class="col-sm input-group">
+        <div class="input-group-prepend">
+          <div class="icon_img link"></div>
+        </div>
+        <input type="text" placeholder="Link" class="form-control">
+        <div class="input-group-append">
+          <div class="input-group-text fomatlink"><p>Link</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="texts2 move">
+      <p></p>
+      <p>Enter E-mails</p>
+    </div>
+    <div class="row customers" *ngFor="let c of customers">
+      <div class="col-sm input-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="icon_img prof"></div>
+          </div>
+          <input type="text" [placeholder]="c" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row addcust" (click)="addcustomer()">
+      <div class="input-group-prepend">
+        <div class="icon_img btnround"></div>
+      </div>
+      <p>Add Customer</p>
+    </div>
+  </section>
   <div class="buttons container">
-    <div class="btn btn-outline-warning next">
+    <div class="btn btn-outline-warning back" *ngIf='page > 0' (click)='back()'>
+      <p>Back</p>
+    </div>
+    <div class="btn btn-outline-warning next" (click)='next()'>
       <p>Next</p>
     </div>
-    <div class="btn back"></div>
   </div>
+
 </form>
+<div class="textv">
+  <p>{{text[select]}}</p>
+</div>
