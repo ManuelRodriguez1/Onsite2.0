@@ -50,8 +50,10 @@ table {
     height: 19.86px;
     margin-right: 15.2px;
     margin-top: 12px;
+    margin-left: 19px;
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 }
 .prof{
     background-image: url('./assets/iconos/profile.svg');
@@ -67,4 +69,8 @@ table {
 }
 .arrow{
     background-image: url('./assets/iconos/arrow1.svg');
+}
+
+body{
+  background: black;
 }

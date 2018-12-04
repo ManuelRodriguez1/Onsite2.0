@@ -26,7 +26,11 @@
     "firebase": "^5.5.9",
     "firebaseui": "^3.4.1",
     "jquery": "^3.3.1",
+<<<<<<< HEAD
     "parse": "^2.1.0",
+=======
+    "popper.js": "^1.14.5",
+>>>>>>> master
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },
