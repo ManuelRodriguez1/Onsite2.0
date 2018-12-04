@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ProComponent } from './components/pro/pro.component';
+import { HireComponent } from './components/hire/hire.component';
+
 import { MenuComponent } from './components/menu/menu.component';
 
 import { router } from "./routes/routes";
@@ -14,13 +16,16 @@ import { FooterComponent } from './components/footer/footer.component';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     ProComponent,
     MenuComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    HireComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+//import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +12,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+error: any[];
+  m = "menuHome";
 
-  constructor() { }
+constructor(location: Location ) {
 
-  ngOnInit() {
+if(location.path() != ''){
+  if(location.path() == '/Hire'){
+      this.m = "menuHire";
+  }else if(location.path() == '/Pro'){
+      this.m = "menuPro";
   }
+ }
+}
+  ngOnInit() {
 
+  }
+  onSubmit(formData) {
+  alert("holaaa");
+   }
 }
