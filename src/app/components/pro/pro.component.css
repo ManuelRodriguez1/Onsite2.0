@@ -51,6 +51,7 @@
 .buttons{
     margin-top: 48px;
     position: relative;
+    margin-bottom: 217px;
 }
 .next, .back{
     position: absolute;

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
+import * as firebase from 'firebase';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-pro',
@@ -15,12 +17,14 @@ export class ProComponent implements OnInit {
   page = 0;
   selectskills = null;
   selectskills2 = null;
-  title = ['Enter your information:', 'Select skills', ''];
+  title = ['Enter your information:', 'Select skills', 'Reviews'];
   text = ['About You', 'Your Skills'];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
   customers = ['Customer 1', 'Customer 2', 'Customer 3'];
-
+  customers2 = '';
+  database = firebase.database();
+  
   constructor(private service: ServiceService) { }
 
   ngOnInit() {
@@ -63,5 +67,21 @@ export class ProComponent implements OnInit {
   addcustomer() {
     var i = this.cust++;
     this.customers.push('Customer ' + i);
+  }
+  
+  test(f: NgForm){
+    this.database.ref('/users_pro').push({
+      name: f.value.name,
+      lastname: f.value.lastname,
+      email: f.value.email,
+      phone: f.value.phone,
+      user: f.value.user,
+      password: btoa(f.value.password),
+      zipcode: f.value.zipcode,
+      skills: this.selectskills,
+      specificSkills: this.selectskills2,
+      link: f.value.link,
+      description: f.value.description
+    })
   }
 }

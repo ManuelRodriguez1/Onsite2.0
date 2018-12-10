@@ -1,4 +1,4 @@
-<form  action="">
+<form #formPro="ngForm" (ngSubmit)="test(formPro)" action="">
   <div class="title container">
     <p>{{title[select]}}</p>
   </div>
@@ -9,13 +9,13 @@
           <div class="input-group-prepend">
             <div class="icon_img prof"></div>
           </div>
-          <input type="text" class="form-control" placeholder="First Name">
+          <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
         </div>
         <div class="col-sm input-group">
           <div class="input-group-prepend">
             <div class="icon_img prof"></div>
           </div>
-          <input type="text" class="form-control" placeholder="Last Name">
+          <input type="text" class="form-control" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
         </div>
       </div>
       <div class="row mt-3">
@@ -23,13 +23,13 @@
           <div class="input-group-prepend">
             <div class="icon_img email"></div>
           </div>
-          <input type="email" class="form-control" placeholder="E-mail">
+          <input type="email" class="form-control" placeholder="E-mail" name="email" #email="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
           <div class="input-group-prepend">
             <div class="icon_img tel"></div>
           </div>
-          <input type="text" class="form-control" placeholder="Phone Number">
+          <input type="text" class="form-control" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
         </div>
       </div>
     </div>
@@ -43,13 +43,13 @@
           <div class="input-group-prepend">
             <div class="icon_img email"></div>
           </div>
-          <input type="text" class="form-control" placeholder="E-mail">
+          <input type="text" class="form-control" placeholder="E-mail" name="user" #user="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
           <div class="input-group-prepend">
             <div class="icon_img pass"></div>
           </div>
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="password" #password="ngModel" ngModel>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@
           <div class="input-group-prepend">
             <div class="icon_img arrow"></div>
           </div>
-          <input type="text" class="form-control" placeholder="Enter city or zipcode.">
+          <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel>
         </div>
       </div>
     </div>
@@ -89,7 +89,6 @@
           <div class="close" (click)='close(1)'></div>
         </div>
       </div>
-      <input type="hidden" name="skills" [value]="selectskills">
       <div [hidden]="selectskills == null"> 
         <div class="title">
           <p>Let’s get specific</p>
@@ -132,7 +131,7 @@
         <div class="input-group-prepend">
           <div class="icon_img link"></div>
         </div>
-        <input type="text" placeholder="Link" class="form-control">
+        <input type="text" placeholder="Link" class="form-control" name="link" ngModel #link="ngModel">
         <div class="input-group-append">
           <div class="input-group-text fomatlink"><p>Link</p></div>
         </div>
@@ -167,17 +166,18 @@
       <div class="input-group-prepend">
         <div class="icon_img airplane"></div>
       </div>
-      <input type="text" class="form-control" placeholder="Say hello!">
+      <input type="text" class="form-control" placeholder="Say hello!" ngModel name="description" #description="ngModel">
     </div>
   </div>
   </section>
   <div class="buttons container">
-    <div class="btn btn-outline-warning back" *ngIf='page > 0' (click)='back()'>
+    <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 2' (click)='back()'>
       <p>Back</p>
     </div>
     <div class="btn btn-outline-warning next" (click)='next()' *ngIf='page < 2'>
       <p>Next</p>
     </div>
+    <button class="btn btn-outline-warning next" *ngIf="page == 2">Finish</button>
   </div>
 
 </form>
