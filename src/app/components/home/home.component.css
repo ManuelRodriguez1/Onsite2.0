@@ -1,32 +1,33 @@
 #ContenedorBannerHome
 {
-    height: 947px;
+    height: 911px;
     width: 100%;
     padding: initial;
+    max-width: initial;
 }
 #ContenedorBannerHome img
 {
     height: max-content;
     width: 100%;
+    
 }
-#ContenedorBannerHome .glyphicon-chevron-right:before
+#ContenedorBannerHome .flechaderechabannerHome
 {
-    content: " ";
-    background-image: url('../../../assets/iconos/flechabanner.svg');
+  
+    background-image: url('../../../assets/iconos/flechabanner.svg') !important;
     width: 30px;
     height: 30px;
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-}
-#ContenedorBannerHome .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next
-{
-    margin-right: -80px;
+    right: 10px;
+    top: 50%;
 }
 
-#ContenedorBannerHome .glyphicon-chevron-left:before
+
+#ContenedorBannerHome .flechaizquierdabannerHome
 {
-    content: " ";
+   
     background-image: url('../../../assets/iconos/flechabanner.svg');
     width: 30px;
     height: 30px;
@@ -34,10 +35,261 @@
     background-size: contain;
     background-repeat: no-repeat;
     transform: rotate(180deg);
+    left: 10px;
+    top: 50%;
 }
-#ContenedorBannerHome .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev
+.contenedorbannerhome
 {
-    margin-left: -115px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.contenedorseccionbanner
+{
+    width: 740px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.contenedorseccionbanner .tituloseccionbannerhome p
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 80px;
+    font-size: 115px;
+    text-align: center;
+    color: #ffffff;
+}
+.contenedorseccionbanner .subtituloseccionbannerhome p
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 40px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 60px;
+}
+.contenedorseccionbanner .btnseccionbannerhome
+{
+    width: 180px;
+    height: 37px;
+    background-color: #FFFFFF;
+    margin: auto;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.contenedorseccionbanner .btnseccionbannerhome p
+{
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #F08E00;
+    line-height: 37px;
 }
 
 
+
+
+
+
+/* Inicio Seccion 2 Home */
+#seccion2Home
+{
+    width: 100%;
+    height: 838px;
+    position: relative;
+
+}
+/* Fin Seccion 2 Home */
+
+
+
+/* Inicio Seccion 3 Home */
+#seccion3Home
+{
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 813px;
+    background-image: url('../../../assets/imagenes/fondoseccion3home.png');
+    background-size: cover;
+    position: relative;
+}
+.contenedorseccion3Home
+{
+    width: 1260px;
+    position: absolute;
+    max-width: 1260px;
+    top: 60%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    grid-template-columns: repeat(4, 305px 305px 305px 305px);
+    grid-column-gap: 24px;
+    display: grid;
+}
+.contenedorinfoseccion3Home
+{
+    width: 305px;
+    float: left;
+}
+.cuadroinfoseccion3home
+{
+    width: 41px;
+    height: 41px;
+    border: 1px solid #F08E00;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.tituloseccion3home
+{
+    overflow: hidden;
+    float: left;
+    margin-top: 10px;
+}
+.cuadrosecundseccion3home
+{
+    width: 9px;
+    height: 9px;
+    background-color: #F08E00;
+    float: right;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.cuadroinfoseccion3home p
+{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+    line-height: 41px;
+    font-weight: 900;
+    font-size: 22px;
+    text-align: center;
+}
+.tituloseccion3home p
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height:48px;
+    font-size: 35px;
+    color: #F08E00;
+    float: left;
+    margin-left: 13px;
+}
+.flechaseccion3home
+{
+    width: 99px;
+    height: 61px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/iconos/flechaseccion3.svg');
+    float: right;
+    overflow: hidden;
+}
+.subtituloseccion3home
+{
+    width: 80%;
+    overflow: hidden;
+
+}
+.subtituloseccion3home p
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 21px;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.contenedortituloseccion3home
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 50px;
+    font-size: 50px;
+    color: #FFFFFF;
+    margin-bottom: 100px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 1260px;
+}
+.contenedorinfoseccion3Home:nth-child(2) .flechaseccion3home
+{
+    background-image: url('../../../assets/iconos/flecha2seccion3.svg');
+}
+.contenedorinfoseccion3Home:nth-child(2)
+{
+    margin-left: 0px;
+}
+.contenedorinfoseccion3Home
+{}
+.contenedorinfoseccion3Home:last-child .flechaseccion3home
+{
+    background-image:initial;
+}
+
+/* Fin Seccion 3 Home */
+
+
+/* Inicio Seccion 4 Home */
+
+#seccion4Home
+{
+    width: 100%;
+    height: 823px;
+    position: relative;
+}
+
+
+/* Fin Seccion 4 Home */
+
+
+
+
+@media screen and (max-width: 1280px)
+{   
+    #seccion3Home
+    {
+        height: 1010px;
+    }
+    .contenedorseccion3Home
+    {
+        width: 640px;
+        position: absolute;
+        max-width: 640px;
+        top: 60%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        grid-template-columns: repeat(2, 305px  );
+        grid-column-gap: 25px;
+        grid-row-gap: 25px;
+        display: grid;
+    }
+    .contenedortituloseccion3home
+    {
+        width: 320px;
+        text-align: center;
+        top: 20%;
+    }   
+    .contenedorinfoseccion3Home .flechaseccion3home
+    {
+        opacity: 0;
+    }
+}

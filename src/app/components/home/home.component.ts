@@ -1,15 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
+declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  images = ['./assets/imagenes/Fondobanner.png', './assets/imagenes/Fondobanner.png',
+    './assets/imagenes/Fondobanner.png', './assets/imagenes/Fondobanner.png'];
+    @ViewChild('carousel') carousel: any;
+    Steps = [
+      {
+        'paso':'1', 'text':'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acmy challenge to you is how do we make this more appealing and 2020 design-wise but i prefer this approach - lets play with colors'
+      }, 
+      {
+        'paso':'2', 'text':'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acmy challenge to you is how do we make this more appealing and 2020 design-wise but i prefer this approach - lets play with colors'
+      }, 
+      {
+        'paso':'3', 'text':'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acmy challenge to you is how do we make this more appealing and 2020 design-wise but i prefer this approach - lets play with colors'
+      }, 
+      {
+        'paso':'4', 'text':'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acmy challenge to you is how do we make this more appealing and 2020 design-wise but i prefer this approach - lets play with colors'
+      }];
+  constructor(config: NgbCarouselConfig) {
 
+   
+    // customize default values of carousels used by this component tree
+    config.interval = 8000;
+    config.wrap=true;
+    config.showNavigationArrows = false;
+    
+  }
+  prev() {
+    this.carousel.prev();
+  }
+  next() {
+    this.carousel.next();
+  }
   ngOnInit() {
+    $(document).ready(function(){
+      
+      
+  });
+
+
   }
 
 }
