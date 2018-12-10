@@ -116,7 +116,7 @@
     color: rgba(0, 0, 0, 0.5);
 }
 .skill .list-group{
-    margin-left: 31.81px;
+    margin-left: 49.81px;
 }
 .skill .list-group-item{
     cursor: pointer;
@@ -156,6 +156,9 @@
     border-radius: 50%;
     opacity: 1;
 
+}
+.ss2 .close{
+    background-image: url('../../../assets/iconos/closeO.svg');
 }
 .skill2{
     margin-top: 42px;
@@ -205,9 +208,12 @@
 input::placeholder{
     color: rgba(0, 0, 0, 0.5);
 }
-.customers{
+.customers, .customers2{
     max-width: 797.62px;
     margin-top: 4px;
+}
+.customers2{
+    margin-top: 19px;
 }
 .addcust{
     cursor: pointer;
@@ -222,4 +228,27 @@ input::placeholder{
 }
 .addcust p{
     margin-top: 16px;
+}
+.ss2{
+    background: #E76800;
+    color: white;
+    position: relative;
+    font-weight: bold;
+}
+.ss2::after{
+    content: '';
+    width: 56px;
+    border: 1px solid #E76800;
+    height: 0px;
+    position: absolute;
+    right: -66px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.ss3{
+    margin-left: 56px;
+}
+.ss3 p{
+    margin-left: 13px;
+    margin-right: 13px;
 }

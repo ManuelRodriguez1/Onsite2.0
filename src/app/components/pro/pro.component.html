@@ -1,8 +1,8 @@
-<form action="">
+<form  action="">
   <div class="title container">
     <p>{{title[select]}}</p>
   </div>
-  <section *ngIf='page == 0'>
+  <section [hidden]='page > 0'>
     <div class="fields container">
       <div class="row">
         <div class="col-sm input-group">
@@ -23,7 +23,7 @@
           <div class="input-group-prepend">
             <div class="icon_img email"></div>
           </div>
-          <input type="text" class="form-control" placeholder="E-mail">
+          <input type="email" class="form-control" placeholder="E-mail">
         </div>
         <div class="col-sm input-group">
           <div class="input-group-prepend">
@@ -67,7 +67,7 @@
       </div>
     </div>
   </section>
-  <section *ngIf='page == 1'>
+  <section [hidden]='page < 1 || page > 1'>
     <div class="container skill">
       <div class="row">
         <div class="col-sm input-group">
@@ -78,18 +78,19 @@
           <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
         </div>
       </div>
-      <div class="list-group" *ngIf='up == true'>
-        <div class="list-group-item" *ngFor="let s of skills" (click)='selectskill(s)'>
+      <div class="list-group" [hidden]='up == false'>
+        <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
           <p>{{s}}</p>
         </div>
       </div>
-      <div class="skillselct">
-        <div class="skillsel" *ngFor='let s of selectskills'>
-          <p>{{s}}</p>
-          <div class="close" (click)='close(s)'></div>
+      <div class="skillselct" [hidden]="selectskills == null">
+        <div class="skillsel">
+          <p>{{selectskills}}</p>
+          <div class="close" (click)='close(1)'></div>
         </div>
       </div>
-      <div *ngIf="selectskills.length > 0">
+      <input type="hidden" name="skills" [value]="selectskills">
+      <div [hidden]="selectskills == null"> 
         <div class="title">
           <p>Let’s get specific</p>
         </div>
@@ -98,25 +99,30 @@
             <div class="input-group-prepend">
               <div class="icon_img setting"></div>
             </div>
-            <input type="text" readonly class="form-control" placeholder="What Drywall skills do you have?">
+            <input type="text" readonly class="form-control" [placeholder]="'What '+selectskills+ ' skills do you have?'">
             <div class="down" [ngClass]="{'up': up2 == true}" (click)='list(2)'></div>
           </div>
         </div>
-        <div class="list-group" *ngIf='up2 == true'>
+        <div class="list-group" [hidden]='up2 == false'>
           <div class="list-group-item" *ngFor="let s of skills2" (click)='selectskill2(s)'>
             <p>{{s}}</p>
           </div>
         </div>
-        <div class="skillselct">
-          <div class="skillsel" *ngFor='let s of selectskills2'>
-            <p>{{s}}</p>
-            <div class="close" (click)='close(s)'></div>
+        <div class="skillselct" [hidden]="selectskills2 == null">
+          <div class="skillsel ss2">
+            <p>{{selectskills}}</p>
+            <div class="close" (click)='close(1)'></div>
+          </div>
+          <div class="skillsel ss3">
+            <p>{{selectskills2}}</p>
+            <div class="close" (click)='close(2)'></div>
           </div>
         </div>
+        <input type="hidden" name="skills" [value]="selectskills2">
       </div>
     </div>
   </section>
-  <section *ngIf='page == 2' class="container">
+  <section [hidden]='page < 2' class="container">
     <div class="texts2 ">
       <p>Reach out to your past satisfied customers to get reviews. The more satisfied customer reviews, the<br> more likely you’ll be hired. </p>
       <p>Share this link to get reviews</p>
@@ -152,12 +158,24 @@
       </div>
       <p>Add Customer</p>
     </div>
+    <div class="texts2">
+      <p></p>
+      <p>White a message to your customers (Optional)</p>
+    </div>
+    <div class="row customers2">
+    <div class="col-sm input-group">
+      <div class="input-group-prepend">
+        <div class="icon_img airplane"></div>
+      </div>
+      <input type="text" class="form-control" placeholder="Say hello!">
+    </div>
+  </div>
   </section>
   <div class="buttons container">
     <div class="btn btn-outline-warning back" *ngIf='page > 0' (click)='back()'>
       <p>Back</p>
     </div>
-    <div class="btn btn-outline-warning next" (click)='next()'>
+    <div class="btn btn-outline-warning next" (click)='next()' *ngIf='page < 2'>
       <p>Next</p>
     </div>
   </div>

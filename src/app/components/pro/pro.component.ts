@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-pro',
@@ -7,24 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProComponent implements OnInit {
 
-  title = ['Enter your information:', 'Select skills', ''];
-  text = ['About You', 'Your Skills'];
-  skills = ['Concrete', 'Decorator', 'Drywall',
-    'Electrical', 'Excavation', 'Flooring',
-    'General Labor', 'Insulation', 'Interior Fishing Carpentry',
-    'Iron Worker', 'Landscaper', 'Mason',
-    'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
-  skills2 = ['Drywall Hanger', 'Drywall Apprentice', 'Metal Framer',
-    'Metal Framer Apprentice', 'Drywall Finisher', 'Fire Taper'];
-  customers = ['Customer 1', 'Customer 2', 'Customer 3'];
   cust = 4;
   select = 0;
   up = false;
   up2 = false;
   page = 0;
-  selectskills = [];
-  selectskills2 = [];
-  constructor() { }
+  selectskills = null;
+  selectskills2 = null;
+  title = ['Enter your information:', 'Select skills', ''];
+  text = ['About You', 'Your Skills'];
+  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
+  skills2: any = []
+  customers = ['Customer 1', 'Customer 2', 'Customer 3'];
+
+  constructor(private service: ServiceService) { }
 
   ngOnInit() {
 
@@ -38,41 +35,33 @@ export class ProComponent implements OnInit {
   }
   next() {
     this.page++;
-    this.select = this.page;
+    this.select = this.page; 
   }
   back() {
     this.page--;
     this.select = this.page;
   }
   selectskill(e) {
-    this.up = !this.up;
-    var add = true;
-    if (this.selectskills.length == 0) {
-      this.selectskills.push(e);
-    }
-    for (let i = 0; i < this.selectskills.length; i++) {
-      if (this.selectskills[i] == e) {
-        add = false;
-      }
-    }
-    if (add) {
-      this.selectskills.push(e);
-    }
+    this.up = !this.up; 
+    this.selectskills = e;
+    this.skills2 = [this.selectskills+' Hanger', this.selectskills+' Apprentice', 'Metal Framer',
+    'Metal Framer Apprentice', this.selectskills+' Finisher', 'Fire Taper'];
   }
-  selectskill2(e){
-    if (this.selectskills2.length == 0) {
-      this.selectskills2.push(e);
-    }
+  selectskill2(e) {
+    this.up2 = !this.up2; 
+    this.selectskills2 = e
   }
   close(e) {
-    for (let i = 0; i < this.selectskills.length; i++) {
-      if (this.selectskills[i] == e) {
-        this.selectskills.splice(i, 1);
-      }
+    if(e == 1){
+      this.selectskills = null
+      this.selectskills2 = null
+    }
+    if (e == 2) {
+      this.selectskills2 = null
     }
   }
-  addcustomer(){
+  addcustomer() {
     var i = this.cust++;
-    this.customers.push('Customer '+i);
+    this.customers.push('Customer ' + i);
   }
 }

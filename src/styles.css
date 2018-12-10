@@ -52,6 +52,9 @@ table {
 }
 .prof{
     background-image: url('./assets/iconos/profile.svg');
+    width: 21.61px;
+    height: 21.86px;
+    margin-right: 10.2px;
 }
 .email{
     background-image: url('./assets/iconos/@.svg');
@@ -70,6 +73,16 @@ table {
 }
 .link{
     background-image: url('./assets/iconos/link.svg');
+    width: 19.61px;
+    height: 16.86px;
+    margin-right: 12.2px;
+}
+.airplane{
+    background-image: url('./assets/iconos/airplane.svg');
+    width: 28.61px;
+    height: 18.86px;
+    margin-right: 8.2px;
+    margin-left: 16px;
 }
 .btnround{
     background-image: url('./assets/iconos/plus.svg');
