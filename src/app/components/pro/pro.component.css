@@ -51,6 +51,7 @@
 .buttons{
     margin-top: 48px;
     position: relative;
+    margin-bottom: 217px;
 }
 
 .textv{
@@ -115,6 +116,9 @@
     opacity: 1;
 
 }
+.ss2 .close{
+    background-image: url('../../../assets/iconos/closeO.svg');
+}
 .skill2{
     margin-top: 42px;
 }
@@ -163,9 +167,12 @@
 input::placeholder{
     color: rgba(0, 0, 0, 0.5);
 }
-.customers{
+.customers, .customers2{
     max-width: 797.62px;
     margin-top: 4px;
+}
+.customers2{
+    margin-top: 19px;
 }
 .addcust{
     cursor: pointer;

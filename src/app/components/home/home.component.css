@@ -120,7 +120,7 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 813px;
-    background-image: url('../../../assets/imagenes/fondoseccion3home.png');
+    /* background-image: url('../../assets/imagenes/fondoseccion3home.png'); */
     background-size: cover;
     position: relative;
 }

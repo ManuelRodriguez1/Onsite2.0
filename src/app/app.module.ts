@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { environment } from 'src/environments/environment';
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireModule } from "angularfire2";
+import { FormsModule } from "@angular/forms";
+import { AngularFireAuthModule } from "angularfire2/auth";
+
 import { AppComponent } from './app.component';
 import { ProComponent } from './components/pro/pro.component';
 import { HireComponent } from './components/hire/hire.component';
@@ -12,11 +18,8 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
-import { HirePrincipalComponent } from './components/hire-principal/hire-principal.component';
-import { MenuHomeComponent } from './components/hire-principal/menu-home/menu-home.component';
-import { MenuInboxComponent } from './components/hire-principal/menu-inbox/menu-inbox.component';
-import { MenuProjectsComponent } from './components/hire-principal/menu-projects/menu-projects.component';
-import { MenuExploreComponent } from './components/hire-principal/menu-explore/menu-explore.component';
+import { ProfileProComponent } from './components/profile-pro/profile-pro.component';
+
 
 
 
@@ -30,20 +33,16 @@ import { MenuExploreComponent } from './components/hire-principal/menu-explore/m
     HomeComponent,
     FooterComponent,
     HireComponent,
-    HirePrincipalComponent,
-    MenuHomeComponent,
-    MenuInboxComponent,
-    MenuProjectsComponent,
-    MenuExploreComponent
+    ProfileProComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(router),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    FormsModule,
     NgbModule,
-
-  //  AngularFireDatabaseModule,
-//    AngularFireModule.initializeApp(environment.firebase),
-
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

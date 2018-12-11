@@ -52,6 +52,9 @@ table {
 }
 .prof{
     background-image: url('./assets/iconos/profile.svg');
+    width: 21.61px;
+    height: 21.86px;
+    margin-right: 10.2px;
 }
 .email{
     background-image: url('./assets/iconos/@.svg');
@@ -64,6 +67,31 @@ table {
 }
 .arrow{
     background-image: url('./assets/iconos/arrow1.svg');
+}
+.setting{
+    background-image: url('./assets/iconos/setting.svg');
+}
+.link{
+    background-image: url('./assets/iconos/link.svg');
+    width: 19.61px;
+    height: 16.86px;
+    margin-right: 12.2px;
+}
+.airplane{
+    background-image: url('./assets/iconos/airplane.svg');
+    width: 28.61px;
+    height: 18.86px;
+    margin-right: 8.2px;
+    margin-left: 16px;
+}
+.btnround{
+    background-image: url('./assets/iconos/plus.svg');
+    border-radius: 50%;
+    background-color: #008AF3;
+    width: 26.72px;
+    height: 26.72px;
+    background-size: 8.38px;
+    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .info p:nth-of-type(1), .title2 {
