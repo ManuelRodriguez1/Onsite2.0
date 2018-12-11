@@ -12,7 +12,11 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { HirePrincipalComponent } from './components/hire-principal/hire-principal.component';
+import { MenuHomeComponent } from './components/hire-principal/menu-home/menu-home.component';
+import { MenuInboxComponent } from './components/hire-principal/menu-inbox/menu-inbox.component';
+import { MenuProjectsComponent } from './components/hire-principal/menu-projects/menu-projects.component';
+import { MenuExploreComponent } from './components/hire-principal/menu-explore/menu-explore.component';
 
 
 
@@ -25,12 +29,21 @@ import { FooterComponent } from './components/footer/footer.component';
     MenuComponent,
     HomeComponent,
     FooterComponent,
-    HireComponent
+    HireComponent,
+    HirePrincipalComponent,
+    MenuHomeComponent,
+    MenuInboxComponent,
+    MenuProjectsComponent,
+    MenuExploreComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(router),
-    NgbModule
+    NgbModule,
+
+  //  AngularFireDatabaseModule,
+//    AngularFireModule.initializeApp(environment.firebase),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

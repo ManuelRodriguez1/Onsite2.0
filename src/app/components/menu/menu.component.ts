@@ -18,7 +18,7 @@ error: any[];
 constructor(location: Location ) {
 
 if(location.path() != ''){
-  if(location.path() == '/Hire'){
+  if(location.path() == '/Hire' || location.path() == '/Hireprincipal'){
       this.m = "menuHire";
   }else if(location.path() == '/Pro'){
       this.m = "menuPro";
@@ -29,6 +29,8 @@ if(location.path() != ''){
 
   }
   onSubmit(formData) {
-  alert("holaaa");
+
+  location.href="/Hireprincipal";
+
    }
 }

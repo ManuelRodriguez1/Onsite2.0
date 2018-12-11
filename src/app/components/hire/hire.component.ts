@@ -20,4 +20,10 @@ export class HireComponent implements OnInit {
 
   }
 
+   botonFinal(){
+    alert("Hola");
+    location.href="/Hireprincipal"
+
+  }
+
 }

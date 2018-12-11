@@ -52,26 +52,7 @@
     margin-top: 48px;
     position: relative;
 }
-.next, .back{
-    position: absolute;
-    right: 15px;
-    border-color: #E76800;
-    color: #E76800;
-    width: 117px;
-    height: 31px;
-    line-height: 18px;
-    text-align: right;
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 0;
-}
-.back{
-    right: 140px;
-    text-align: left;
-}
-.next:hover, .back:hover{
-    background: #E76800;
-    color: white;
-}
+
 .textv{
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -93,33 +74,10 @@
 .form-control[readonly]{
     background: initial;
 }
-.down{
-    background-image: url('../../../assets/iconos/arrow2.svg');
-    width: 22px;
-    height: 11px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: absolute;
-    right: 35px;
-    z-index: 10;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    transition: .5s;
-}
+
 .up{
     transition: .5s;
     transform: translateY(-50%) rotate(180deg);
-}
-.skill .list-group-item{
-    color: rgba(0, 0, 0, 0.5);
-}
-.skill .list-group{
-    margin-left: 31.81px;
-}
-.skill .list-group-item{
-    cursor: pointer;
 }
 .skillselct{
     overflow: hidden;
