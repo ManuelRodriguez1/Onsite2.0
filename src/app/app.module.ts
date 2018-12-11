@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireModule } from "angularfire2";
 import { FormsModule } from "@angular/forms";
+import { AngularFireAuthModule } from "angularfire2/auth";
 
 import { AppComponent } from './app.component';
 import { ProComponent } from './components/pro/pro.component';
@@ -17,12 +18,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
-
-
-
-
-
-
+import { ProfileProComponent } from './components/profile-pro/profile-pro.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +27,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MenuComponent,
     HomeComponent,
     FooterComponent,
-    HireComponent
+    HireComponent,
+    ProfileProComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +36,8 @@ import { FooterComponent } from './components/footer/footer.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

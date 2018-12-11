@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { NgForm } from '@angular/forms';
+import { AngularFireAuth } from "angularfire2/auth";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-pro',
@@ -25,7 +27,7 @@ export class ProComponent implements OnInit {
   customers2 = '';
   database = firebase.database();
   
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService, public afAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
 
@@ -70,18 +72,22 @@ export class ProComponent implements OnInit {
   }
   
   test(f: NgForm){
-    this.database.ref('/users_pro').push({
-      name: f.value.name,
-      lastname: f.value.lastname,
-      email: f.value.email,
-      phone: f.value.phone,
-      user: f.value.user,
-      password: btoa(f.value.password),
-      zipcode: f.value.zipcode,
-      skills: this.selectskills,
-      specificSkills: this.selectskills2,
-      link: f.value.link,
-      description: f.value.description
+    this.database.app.auth().createUserWithEmailAndPassword(f.value.user, f.value.password).then(()=>{
+      this.database.ref('/users_pro').push({
+        name: f.value.name,
+        lastname: f.value.lastname,
+        email: f.value.email,
+        phone: f.value.phone,
+        user: f.value.user,
+        zipcode: f.value.zipcode,
+        skills: this.selectskills,
+        specificSkills: this.selectskills2,
+        link: f.value.link,
+        description: f.value.description
+      })
+      this.router.navigate(['ProfilePro'])
+    }).catch((error)=>{
+      alert(error.message)  
     })
   }
 }
