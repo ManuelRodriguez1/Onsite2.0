@@ -26,7 +26,7 @@ export class ProComponent implements OnInit {
   customers = ['Customer 1', 'Customer 2', 'Customer 3'];
   customers2 = '';
   database = firebase.database();
-  
+
   constructor(private service: ServiceService, public afAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
@@ -41,20 +41,20 @@ export class ProComponent implements OnInit {
   }
   next() {
     this.page++;
-    this.select = this.page; 
+    this.select = this.page;
   }
   back() {
     this.page--;
     this.select = this.page;
   }
   selectskill(e) {
-    this.up = !this.up; 
+    this.up = !this.up;
     this.selectskills = e;
     this.skills2 = [this.selectskills+' Hanger', this.selectskills+' Apprentice', 'Metal Framer',
     'Metal Framer Apprentice', this.selectskills+' Finisher', 'Fire Taper'];
   }
   selectskill2(e) {
-    this.up2 = !this.up2; 
+    this.up2 = !this.up2;
     this.selectskills2 = e
   }
   close(e) {
@@ -70,7 +70,7 @@ export class ProComponent implements OnInit {
     var i = this.cust++;
     this.customers.push('Customer ' + i);
   }
-  
+
   test(f: NgForm){
     this.database.app.auth().createUserWithEmailAndPassword(f.value.user, f.value.password).then(()=>{
       this.database.ref('/users_pro').push({
@@ -83,11 +83,12 @@ export class ProComponent implements OnInit {
         skills: this.selectskills,
         specificSkills: this.selectskills2,
         link: f.value.link,
-        description: f.value.description
+        description: f.value.description,
+        estado:"pro"
       })
       this.router.navigate(['ProfilePro'])
     }).catch((error)=>{
-      alert(error.message)  
+      alert(error.message)
     })
   }
 }

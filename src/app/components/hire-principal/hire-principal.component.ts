@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hire-principal.component.css']
 })
 export class HirePrincipalComponent implements OnInit {
-  menuVista = "Explore";
+  menuVista = "Home";
     m = 4;
   constructor() { }
 

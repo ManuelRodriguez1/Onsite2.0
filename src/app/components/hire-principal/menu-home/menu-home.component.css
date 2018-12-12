@@ -52,20 +52,21 @@ cursor: pointer;
 }
 
 .classnextkt{
-  border: 1px solid #5B5B5B;
-box-sizing: border-box;
-width: 117px;
-height: 30px;
-font-family: 'Montserrat', sans-serif;
-font-style: normal;
-font-weight: normal;
-line-height: 20px;
-font-size: 18px;
-letter-spacing: -0.025em;
-text-align: right;
-border-radius: 0px;
-color: #5B5B5B;
-float: right;
+/*right: 30px;
 margin-top: 70px;
+    position: relative;*/
+    float: left;
+position: initial;
 
+}
+
+
+
+.buttons.container{
+  position: absolute;
+  width: 300px;
+  float: right;
+  right: 0;
+  margin-right: 15px;
+  margin-top: 70px;
 }

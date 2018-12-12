@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-//import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-menu',
@@ -14,17 +12,28 @@ import { Location } from '@angular/common';
 export class MenuComponent implements OnInit {
 error: any[];
   m = "menuHome";
+  Sesion = true;
+    constructor(public af: AngularFireAuth, private router: Router,location: Location) {
+        this.af.authState.subscribe(auth => {
+            if (auth) {
+                this.Sesion = true;
+            } else {
+                this.Sesion = false;
+            }
+            console.log(this.Sesion);
+        });
 
-constructor(location: Location ) {
 
-if(location.path() != ''){
-  if(location.path() == '/Hire' || location.path() == '/Hireprincipal'){
-      this.m = "menuHire";
-  }else if(location.path() == '/Pro'){
-      this.m = "menuPro";
-  }
- }
-}
+        if(location.path() != ''){
+          if(location.path() == '/Hire' || location.path() == '/Hireprincipal'){
+              this.m = "menuHire";
+          }else if(location.path() == '/Pro'){
+              this.m = "menuPro";
+          }
+         }
+    }
+
+
   ngOnInit() {
 
   }
@@ -33,4 +42,10 @@ if(location.path() != ''){
   location.href="/Hireprincipal";
 
    }
+   logout() {
+     alert("dddd");
+        this.af.auth.signOut();
+        console.log('logged out');
+        this.router.navigateByUrl('/');
+    }
 }

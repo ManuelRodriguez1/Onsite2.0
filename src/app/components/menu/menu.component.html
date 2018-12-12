@@ -17,80 +17,21 @@
     <li class="nav-item">
       <a class="nav-link">My Account</a>
     </li>
-    <li class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
+    <li *ngIf="Sesion==false" class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
       <a class="nav-link ">Login</a>
     </li>
+    <li *ngIf="Sesion==true" class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
+      <a class="nav-link " (click)="logout()">Logout</a>
+    </li>
+
+
+
+
+
+
+
   </ul>
 </nav>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="imagenModaLogin"></div>
-        <div class="contenedorImagen">
-          <div class="tituloContImg">
-            <span>Lorem</span> ipsum dolor <span>sit amet</span>
-          </div>
-          <div class="botonesOnsite">
-            <a routerLink="/Pro">
-              <div class="bpro">
-                As a Pro
-              </div>
-            </a>
-            <a routerLink="/Hire">
-            <div class="bhire">
-              As a Hire
-            </div>
-            </a>
-          </div>
-          <div class="Formulario">
-            <div class="fields container">
-              <label for="">Username</label>
-              <div class="row">
-                <div class="col-sm input-group">
-                  <div class="input-group-prepend">
-                    <div class="icon_img usuarioNaranja"></div>
-                  </div>
-                  <input type="text" class="form-control">
-                </div>
-              </div>
-              <label class="labelpass" for="">Password</label>
-              <div class="row ">
-                <div class="col-sm input-group">
-                  <div class="input-group-prepend">
-                    <div class="icon_img llaveNaranja"></div>
-                  </div>
-                  <input type="text" class="form-control">
-                </div>
-              </div>
-              <div class="row lineaFinalultimate">
-                <div class="col-sm input-group">
-                  <div class="forgotPass">
-                    Forgot your password
-                  </div>
-                </div>
-                <div class="col-sm input-group">
-                  <div class="botonNaranja">
-                    Sign Up
-                  </div>
-                </div>
 
 
-
-
-
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-login></app-login>
