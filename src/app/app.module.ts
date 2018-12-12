@@ -13,13 +13,18 @@ import { ProComponent } from './components/pro/pro.component';
 import { HireComponent } from './components/hire/hire.component';
 
 import { MenuComponent } from './components/menu/menu.component';
-
+import {HirePrincipalComponent} from './components/hire-principal/hire-principal.component';
 import { router } from "./routes/routes";
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
+
+import {MenuHomeComponent} from './components/hire-principal/menu-home/menu-home.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -29,7 +34,9 @@ import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.co
     HomeComponent,
     FooterComponent,
     HireComponent,
-    ProfileProComponent
+    ProfileProComponent,
+    HirePrincipalComponent,
+    MenuHomeComponent
   ],
   imports: [
     BrowserModule,

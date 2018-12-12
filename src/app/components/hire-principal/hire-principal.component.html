@@ -1,0 +1,78 @@
+<div *ngIf="menuVista == 'Home'" class="">
+  <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Home.svg" alt="">
+</div>
+
+
+  <section class="contentHire">
+
+
+
+  <div class="row">
+    <div class="col-sm-3" style="background-color:lavender;">
+
+      <div class="menuYaLoguiado">
+        <div class="profilleloguiado">
+          <div class="blueprofileicon"></div>
+
+          <div class="nomsi"><span>Welcome</span><br>John Doe</div>
+
+        </div>
+        <div class="menuTeam">
+          <div class="">
+            <div (click)="menu(1)" class="itemsprincipales" [class.itemsprincipales1]="m == 1">
+              <div class="t1m">Home</div>
+              <div class="flechateam"></div>
+            </div>
+            <div (click)="menu(2)" class="itemsprincipales" [class.itemsprincipales1]="m == 2">
+              <div class="t1m">Inbox</div>
+              <div class="flechateam"></div>
+            </div>
+            <div (click)="menu(3)" class="itemsprincipales" [class.itemsprincipales1]="m == 3">
+              <div class="t1m">Projects</div>
+              <div class="flechateam"></div>
+            </div>
+
+            <div (click)="menu(4)" class="itemsprincipales" [class.itemsprincipales1]="m == 4">
+              <div class="t1m">Explore</div>
+              <div class="flechateam"></div>
+            </div>
+
+            <div (click)="menu(5)" class="itemsprincipales" [class.itemsprincipales1]="m == 5">
+              <div class="t1m">Sign Out</div>
+              <div class="flechateam"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-sm-8" style="background-color:lavenderblush;">
+
+        <div class="conxenhireright">
+
+          <div *ngIf="menuVista == 'Home'" class="menuHome">
+            <app-menu-home></app-menu-home>
+          </div>
+          <div *ngIf="menuVista == 'Inbox'" class="menuInbox">
+            hola1
+          </div>
+          <div *ngIf="menuVista == 'Projects'" class="menuProjects">
+            hola2
+          </div>
+
+          <div *ngIf="menuVista == 'Explore'" class="menuExplore">
+            hola3
+          </div>
+
+          <div *ngIf="menuVista == 'Start'" class="menuStart">
+            hola4
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</section>

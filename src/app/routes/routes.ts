@@ -3,6 +3,7 @@ import { ProComponent } from "../components/pro/pro.component";
 import { HomeComponent } from "../components/home/home.component";
 import { HireComponent } from "../components/hire/hire.component";
 import { ProfileProComponent } from "../components/pro/profile-pro/profile-pro.component";
+import { HirePrincipalComponent } from "../components/hire-principal/hire-principal.component";
 
 
 export const router: Routes = [
@@ -10,6 +11,7 @@ export const router: Routes = [
     { path: 'Home', component: HomeComponent },
     { path: 'Hire', component: HireComponent },
     { path: 'Pro', component: ProComponent },
+    { path: 'Hireprincipal', component: HirePrincipalComponent },
     { path: 'ProfilePro', component: ProfileProComponent }
 
 ]
