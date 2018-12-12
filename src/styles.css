@@ -123,16 +123,10 @@ table {
     color: rgba(0, 0, 0, 0.5);
 }
 .skill .list-group{
-    margin-left: 31.81px;
+    margin-left: 49.81px;
 }
 .skill .list-group-item{
     cursor: pointer;
-}
-
-
-.back{
-    right: 140px;
-    text-align: left;
 }
 .next:hover, .back:hover{
     background: #E76800;
@@ -149,4 +143,8 @@ table {
     text-align: right;
     font-family: 'Montserrat', sans-serif;
     border-radius: 0;
+}
+.back{
+    right: 140px;
+    text-align: left;
 }
