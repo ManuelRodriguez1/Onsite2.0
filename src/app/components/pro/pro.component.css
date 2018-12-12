@@ -119,21 +119,6 @@
 .ss2 .close{
     background-image: url('../../../assets/iconos/closeO.svg');
 }
-.ss2{
-    background: #E76800;
-    color: #FFFFFF;
-    font-weight: bold;
-    margin-right: 73px;
-}
-.ss2::after{
-    content: '';
-    position: absolute;
-    right: -66px;
-    width: 56px;
-    height: 0;
-    border: 1px solid #E76800;
-    top: 16.74px;
-}
 .skill2{
     margin-top: 42px;
 }
