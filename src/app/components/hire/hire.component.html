@@ -1,4 +1,5 @@
-<form action="" class="contenedorHireTotal">
+
+<form  #formData='ngForm'  (ngSubmit)="onSubmit(formData)" method="post" class="contenedorHireTotal">
   <img class="imagenabout" src="../../../assets/imagenes/About.svg" alt="">
   <section>
     <div class="title container">
@@ -14,13 +15,13 @@
           <div class="input-group-prepend">
             <div class="icon_img prof"></div>
           </div>
-          <input type="text" class="form-control" placeholder="First Name">
+          <input required type="text" class="input validate form-control" placeholder="First Name" (ngModel)="FirstName" name="FirstName">
         </div>
         <div class="col-sm input-group">
           <div class="input-group-prepend">
             <div class="icon_img prof"></div>
           </div>
-          <input type="text" class="form-control" placeholder="Last Name">
+          <input required type="text" class="input validate form-control" placeholder="Last Name" (ngModel)="LastName" name="LastName">
         </div>
       </div>
       <div class="row mt-3">
@@ -29,7 +30,7 @@
           <div class="input-group-prepend">
             <div class="icon_img tel"></div>
           </div>
-          <input type="text" class="form-control" placeholder="Phone Number">
+          <input required type="text" class="input validate form-control" placeholder="Phone Number" (ngModel)="PhoneNumber" name="PhoneNumber">
         </div>
 
         <div class="col-sm input-group">
@@ -47,13 +48,13 @@
           <div class="input-group-prepend">
             <div class="icon_img email"></div>
           </div>
-          <input type="text" class="form-control" placeholder="E-mail">
+          <input required type="text" class="input validate form-control" placeholder="E-mail" (ngModel)="Email" name="Email">
         </div>
         <div class="col-sm input-group">
           <div class="input-group-prepend">
             <div class="icon_img pass"></div>
           </div>
-          <input type="password" class="form-control" placeholder="Password">
+          <input required type="password" class="input validate form-control" placeholder="Password" (ngModel)="Password" name="Password">
         </div>
       </div>
     </div>
@@ -66,14 +67,18 @@
           <div class="input-group-prepend">
             <div class="icon_img arrow"></div>
           </div>
-          <input type="text" class="form-control" placeholder="Enter city or zipcode.">
+          <input type="text" required class="input validate form-control" placeholder="Enter city or zipcode." (ngModel)="Entercityorzipcode" name="Entercityorzipcode">
         </div>
       </div>
     </div>
   </section>
+
+
+
   <div class="buttons container">
-    <div (click)="botonFinal($event)"  class="btn btn-outline-warning next">
-      <p>Finish</p>
-    </div>
+        <span class="error">{{error}} </span>
+        <br>
+        <br>
+    <button type='submit'  name="button" [disabled]="!formData.valid"  class="btn btn-outline-warning next">Finish</button>
   </div>
 </form>

@@ -43,6 +43,13 @@
 
 
     </div>
+    <div class="buttons container ">
+
+      <div class="btn btn-outline-warning next  " (click)='next()'>
+        <p>Next</p>
+      </div>
+    </div>
+
   </div>
 
   <div *ngIf="HomeFormularioNw == 2">
@@ -54,34 +61,30 @@
       </div>
       <div class="row">
         <div class="col-sm input-group">
-          <input type="text" readonly class="form-control" placeholder="Search projects">
+          <input type="text" readonly class="form-control" placeholder="Select job category">
           <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
         </div>
       </div>
       <div class="list-group" *ngIf='up == true'>
-        <div class="list-group-item" *ngFor="let s of skills" (click)='selectskill(s)'>
+        <div class="list-group-item" *ngFor="let s of skills1" (click)='selectskill(s)'>
           <p>{{s}}</p>
         </div>
       </div>
-      <div class="col-sm input-group contenedorproyectos">
-        <div class="centradoFill">
-          <div class="title2"> You don’t have any projects </div>
-          <div (click)='getStarted()' class="btnNegro">Get Started</div>
+
+      <div class="buttons container ">
+        <div  *ngIf="page > 1" class="btn btn-outline-warning back classnextkt "  (click)='back()'>
+          <p>Back</p>
+        </div>
+        <div class="btn btn-outline-warning next  " (click)='next()'>
+          <p>Next</p>
         </div>
       </div>
+
+
+
     </div>
   </div>
 
-
-
-  <div class="buttons container">
-    <div class="btn btn-outline-warning back "  (click)='back()'>
-      <p>Back</p>
-    </div>
-    <div class="btn btn-outline-warning next " (click)='next()'>
-      <p>Next</p>
-    </div>
-  </div>
 
 
 

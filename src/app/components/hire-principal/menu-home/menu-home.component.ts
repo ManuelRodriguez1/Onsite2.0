@@ -9,12 +9,17 @@ export class MenuHomeComponent implements OnInit {
 up=false;
 selectskills = [];
 up2=false;
+  page = 1;
+    select = 0;
 HomeFormularioNw=0;
-skills = ['Concrete', 'Decorator', 'Drywall',
-  'Electrical', 'Excavation', 'Flooring',
-  'General Labor', 'Insulation', 'Interior Fishing Carpentry',
-  'Iron Worker', 'Landscaper', 'Mason',
-  'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
+skills = ['proyecto1', 'proyecto2', 'proyecto3',
+  'proyecto4', 'proyecto5', 'proyecto6'];
+
+  skills1 = ['Concrete', 'Decorator', 'Drywall',
+    'Electrical', 'Excavation', 'Flooring',
+    'General Labor', 'Insulation', 'Interior Fishing Carpentry',
+    'Iron Worker', 'Landscaper', 'Mason',
+    'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
 
   constructor() { }
 
@@ -46,8 +51,15 @@ skills = ['Concrete', 'Decorator', 'Drywall',
 
 
   getStarted(){
-    alert("Holaaaaa");
     this.HomeFormularioNw=1;
   }
-
+  next(){
+    alert(this.page);
+    this.page++;
+    this.HomeFormularioNw=  this.page;
+  }
+  back() {
+    this.page--;
+    this.select = this.page;
+  }
 }
