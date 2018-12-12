@@ -27,7 +27,7 @@ error: any[];
         if(location.path() != ''){
           if(location.path() == '/Hire' || location.path() == '/Hireprincipal'){
               this.m = "menuHire";
-          }else if(location.path() == '/Pro'){
+          }else if(location.path() == '/Pro' ){
               this.m = "menuPro";
           }
          }
@@ -43,7 +43,6 @@ error: any[];
 
    }
    logout() {
-     alert("dddd");
         this.af.auth.signOut();
         console.log('logged out');
         this.router.navigateByUrl('/');

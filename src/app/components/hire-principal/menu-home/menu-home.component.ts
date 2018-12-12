@@ -54,7 +54,6 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
     this.HomeFormularioNw=1;
   }
   next(){
-    alert(this.page);
     this.page++;
     this.HomeFormularioNw=  this.page;
   }
