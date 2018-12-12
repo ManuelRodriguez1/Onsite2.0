@@ -49,15 +49,11 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireDatabaseModule,
     FormsModule,
     NgbModule,
-<<<<<<< HEAD
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
-    })
-=======
-    AngularFirestoreModule,
+    }),
     AngularFireAuthModule
->>>>>>> master
   ],
   providers: [ServiceService,AuthGuard],
   bootstrap: [AppComponent]
