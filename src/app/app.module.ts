@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AgmCoreModule } from '@agm/core';
 
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from "angularfire2/database";
@@ -18,7 +19,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
-import { ProfileProComponent } from './components/profile-pro/profile-pro.component';
+import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,10 @@ import { ProfileProComponent } from './components/profile-pro/profile-pro.compon
     AngularFireDatabaseModule,
     FormsModule,
     NgbModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -82,7 +82,7 @@
     text-align: center;
     letter-spacing: -0.025em;
     transform: translateY(-50%) rotate(-90deg);
-    position: absolute;
+    position: fixed;
     right: -289px;
     color: transparent;
     -webkit-text-stroke: 1px #D1D1D1;

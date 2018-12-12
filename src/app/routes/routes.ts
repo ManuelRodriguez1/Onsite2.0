@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 import { ProComponent } from "../components/pro/pro.component";
 import { HomeComponent } from "../components/home/home.component";
 import { HireComponent } from "../components/hire/hire.component";
-import { ProfileProComponent } from "../components/profile-pro/profile-pro.component";
+import { ProfileProComponent } from "../components/pro/profile-pro/profile-pro.component";
 
 
 export const router: Routes = [
