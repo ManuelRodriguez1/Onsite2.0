@@ -27,6 +27,7 @@ import { ServiceService } from './services/service.service';
 
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProfileProComponent,
     HirePrincipalComponent,
     MenuHomeComponent,
-    LoginComponent
+    LoginComponent,
+    InboxComponent
   ],
   imports: [
     BrowserModule,
