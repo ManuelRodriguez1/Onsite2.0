@@ -1,0 +1,72 @@
+.form-control:disabled, .form-control[readonly]{
+  background: transparent;
+
+}
+.input-group{
+  margin-top:20px;
+  outline: 0;
+}
+.input-group-prepend{
+  display: none;
+}
+.form-control:focus{
+  box-shadow:none;
+  border-color:#ced4da;
+}
+.contenedorproyectos{
+  border: 1px solid #DADADA;
+box-sizing: border-box;
+height: 417px;
+}
+
+.centradoFill{
+    text-align: center;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    width: 250px;
+    height: 80px;
+}
+.btnNegro{
+  background: #5B5B5B;
+  height: 35px;
+  width: 167px;
+  font-family: 'Mukta', sans-serif;
+font-style: normal;
+font-weight: bold;
+line-height: 20px;
+font-size: 18px;
+text-align: center;
+letter-spacing: -0.025em;
+color: rgba(255, 255, 255, 0.96);
+    line-height: 35px;
+    position: absolute;
+left: 50%;
+transform: translateX(-50%);
+margin-top: 20px;
+cursor: pointer;
+}
+.skill .list-group{
+  margin-left: 0px;
+}
+
+.classnextkt{
+/*right: 30px;
+margin-top: 70px;
+    position: relative;*/
+    float: left;
+position: initial;
+
+}
+
+
+
+.buttons.container{
+  position: absolute;
+  width: 300px;
+  float: right;
+  right: 0;
+  margin-right: 15px;
+  margin-top: 70px;
+}

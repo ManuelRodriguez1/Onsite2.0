@@ -1,0 +1,92 @@
+<section>
+  <div *ngIf="HomeFormularioNw == 0">
+    <div class="container skill">
+      <div class="row">
+        <div class="title2">
+          Check uot your projects
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm input-group">
+          <input type="text" readonly class="form-control" placeholder="Search projects">
+          <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
+        </div>
+      </div>
+      <div class="list-group" *ngIf='up == true'>
+        <div class="list-group-item" *ngFor="let s of skills" (click)='selectskill(s)'>
+          <p>{{s}}</p>
+        </div>
+      </div>
+      <div class="col-sm input-group contenedorproyectos">
+        <div class="centradoFill">
+          <div class="title2"> You don’t have any projects </div>
+          <div (click)='getStarted()' class="btnNegro">Get Started</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="HomeFormularioNw == 1">
+    <div class="container skill">
+      <div class="row">
+        <div class="title2">
+            Name your project
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm input-group">
+          <input type="text"  class="form-control" placeholder="Type project name">
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="buttons container ">
+
+      <div class="btn btn-outline-warning next  " (click)='next()'>
+        <p>Next</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="HomeFormularioNw == 2">
+    <div class="container skill">
+      <div class="row">
+        <div class="title2">
+          What do you need help with?
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm input-group">
+          <input type="text" readonly class="form-control" placeholder="Select job category">
+          <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
+        </div>
+      </div>
+      <div class="list-group" *ngIf='up == true'>
+        <div class="list-group-item" *ngFor="let s of skills1" (click)='selectskill(s)'>
+          <p>{{s}}</p>
+        </div>
+      </div>
+
+      <div class="buttons container ">
+        <div  *ngIf="page > 1" class="btn btn-outline-warning back classnextkt "  (click)='back()'>
+          <p>Back</p>
+        </div>
+        <div class="btn btn-outline-warning next  " (click)='next()'>
+          <p>Next</p>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+</section>

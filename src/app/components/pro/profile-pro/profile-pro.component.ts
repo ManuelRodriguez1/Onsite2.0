@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-profile-pro',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileProComponent implements OnInit {
 
+  text = ['Home', 'Your Inbox'];
+  select = 1
+  lat: number = 51.678418;
+  lng: number = 7.809007;
   constructor() { }
 
   ngOnInit() {
+   
   }
 
 }

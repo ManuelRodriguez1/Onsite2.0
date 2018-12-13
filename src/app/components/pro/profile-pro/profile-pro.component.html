@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="cont">
+    <div class="profile"></div>
+    <div class="textw">
+      <p>Welcome</p>
+      <p>Mauro Poche</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="dropdown-menu show">
+        <div class="dropdown-item">Home</div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item">Inbox</div>
+        <div class="menusmall">
+          <div class="option">Inbox</div>
+          <div class="option">Sent</div>
+          <div class="option">Trash</div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item">Projects</div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item">Explore</div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item">Sign Out</div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="home" *ngIf="select == 0">
+        <div class="proyects anyproyects">
+          <div class="message">
+            <div class="title">You don’t have any projects</div>
+            <div class="start">Get Started</div>
+          </div>
+        </div>
+        <div class="proyects thereis">
+          <div class="title2">Project: <span> Excavation at 280 S.</span></div>
+          <agm-map [latitude]="lat" [longitude]="lng" class="map">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+          <div class="textsmall">
+            <div class="titlesmall">
+              This is what Jimmy needs from you
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="titless2">
+              Tags
+            </div>
+            <div class="boxes">
+              <div class="box">
+                <p>Drywall</p>
+              </div>
+              <div class="line"></div>
+              <div class="box add">
+                <p>Drywall Hanger</p>
+              </div>
+            </div>
+            <div class="wheather">
+              <div class="imgw"></div>
+              <div class="textwe">Cloudy</div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="grades">78°</div>
+            <div class="time">
+              <div class="imgt"></div>
+              <div class="textt">Current Time</div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="hour">9:01 am</div>
+          </div>
+        </div>
+      </div>
+      <div class="inbox" *ngIf="select == 1">
+        <app-inbox></app-inbox>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="textv">
+  <p>{{text[select]}}</p>
+</div>

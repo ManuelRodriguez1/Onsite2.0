@@ -3,36 +3,23 @@
   <ng-template ngbSlide>
     <img [src]="images[0]" alt="Random first slide">
     <div class="contenedorseccionbanner">
-      <div class="tituloseccionbannerhome"><p>Join as a Pro1</p></div>
+      <div class="tituloseccionbannerhome"><p>Join as a Pro</p></div>
       <div class="subtituloseccionbannerhome"><p>Some cool copy about our services and why you should join OnSite</p></div>
-      <div class="btnseccionbannerhome"><p>CLICK HERE</p></div>
+      <div (click)="pro()"  class="btnseccionbannerhome"><p>CLICK HERE</p></div>
    </div>
-   
+
   </ng-template>
   <ng-template ngbSlide>
     <img [src]="images[1]" alt="Random second slide">
     <div class="contenedorseccionbanner">
-      <div class="tituloseccionbannerhome"><p>Join as a Pro2</p></div>
+      <div class="tituloseccionbannerhome"><p>Join as a Hire</p></div>
       <div class="subtituloseccionbannerhome"><p>Some cool copy about our services and why you should join OnSite</p></div>
-      <div class="btnseccionbannerhome"><p>CLICK HERE</p></div>
+      <div (click)="hire()" class="btnseccionbannerhome"><p>CLICK HERE</p></div>
    </div>
   </ng-template>
-  <ng-template ngbSlide>
-    <img [src]="images[2]"  alt="Random third slide">
-    <div class="contenedorseccionbanner">
-      <div class="tituloseccionbannerhome"><p>Join as a Pro3</p></div>
-      <div class="subtituloseccionbannerhome"><p>Some cool copy about our services and why you should join OnSite</p></div>
-      <div class="btnseccionbannerhome"><p>CLICK HERE</p></div>
-   </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <img [src]="images[3]" alt="Random fourth slide">
-    <div class="contenedorseccionbanner">
-      <div class="tituloseccionbannerhome"><p>Join as a Pro4</p></div>
-      <div class="subtituloseccionbannerhome"><p>Some cool copy about our services and why you should join OnSite</p></div>
-      <div class="btnseccionbannerhome"><p>CLICK HERE</p></div>
-   </div>
-  </ng-template>
+
+
+
 </ngb-carousel>
 
 
@@ -87,7 +74,7 @@
 <div id="seccion3Home">
    <p class="contenedortituloseccion3home">How it works</p>
     <div class="contenedorseccion3Home ">
-       
+
             <div id="contenedor1seccion3homeinfo" class="contenedorinfoseccion3Home" *ngFor="let num of Steps">
                   <div class="cuadroinfoseccion3home">
                       <div class="cuadrosecundseccion3home"></div>
@@ -103,7 +90,7 @@
                   </div>
 
             </div>
-            
+
     </div>
 </div>
 

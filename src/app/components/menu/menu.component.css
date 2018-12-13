@@ -1,20 +1,29 @@
-.menuPro{
-background: #E76800;
-    position: initial !important;
-  }
-  .active::before{
-    color: red;
-    position: absolute;
-  }
-  .menuHire{
-          position: initial !important;
-    }
-  .menuHire.navbar-dark .navbar-nav .nav-link{
-color: #5B5B5B;
-position: absolute;
-    }
+.menuPro {
+  background: #E76800;
+  position: relative !important;
+}
 
-  .onsiteText {
+.active::before {
+  color: red;
+  position: absolute;
+}
+
+
+
+.menuHire {
+  background: white;
+  border-bottom: 1px solid rgba(231, 104, 0, 0.5);
+}
+
+.menuHire .onsiteText {
+  color: #E76800;
+}
+
+.menuHire.navbar-dark .navbar-nav .nav-link {
+  color: #5B5B5B;
+}
+
+.onsiteText {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -26,10 +35,6 @@ position: absolute;
   margin-top: 6px;
 }
 
-.logoOn {
-  width: 144.82px;
-  height: 39px;
-}
 
 .nav-item {
   font-family: 'Montserrat', sans-serif;
@@ -40,16 +45,9 @@ position: absolute;
   cursor: pointer;
 }
 
-.btnLogin {
-  width: 73.11px;
-  height: 30px;
-  border: 1px solid #F08E00;
-  box-sizing: border-box;
-  margin-top: 4px;
-}
 
 .navbar-dark .navbar-nav .nav-link {
-  color: white ;
+  color: white;
 }
 
 .btnLogin .nav-link {
@@ -65,172 +63,7 @@ position: absolute;
   padding-left: 30px;
 }
 
-.modal-content {
-  height: 100%;
-}
 
-.modal.show .modal-dialog {
-  width: 927.98px;
-  max-width: 927.98px;
-  height: 554.19px;
-  background: #FFFFFF;
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
-  margin-top: 230px;
-}
-
-.imagenModaLogin {
-  background-image: url("../../../assets/imagenes/modal.png");
-  height: 100%;
-  width: 50%;
-  float: left;
-  position: absolute;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.modal-body {
-  padding: 0px;
-  overflow: visible;
-}
-
-.close {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 16px;
-  font-size: 16px;
-  background: #E76800;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: #FFFFFF;
-  border-radius: 50px;
-  width: 27px;
-  height: 27px;
-  opacity: 1;
-  margin-right: -10px;
-  margin-top: -10px;
-  position: relative;
-  z-index: 1;
-}
-
-.contenedorImagen {
-  float: right;
-  width: 50%;
-  padding-top: 85px;
-  margin: 0;
-  position: absolute;
-  right: 0;
-  height: 100%;
-  padding-left: 50px;
-  padding-right: 60px;
-  overflow: hidden;
-}
-
-.tituloContImg {
-  font-family: 'Mukta', sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 42px;
-  font-size: 45px;
-  color: #704300;
-  border-bottom: 1px solid #C4C4C4;
-  padding-bottom: 15px;
-}
-
-.tituloContImg span {
-  color: #E76800;
-}
-
-.botonesOnsite div {
-  width: 96px;
-  height: 36px;
-  border: 1px solid #E76800;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: -0.025em;
-  color: #E76800;
-  line-height: 35px;
-  margin-right: 3px;
-}
-
-.botonesOnsite {
-  margin-top: 18px;
-  display: inline-flex;
-}
-
-.Formulario {
-  margin-top: 40px;
-}
-
-.Formulario label {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  font-size: 16px;
-  letter-spacing: -0.025em;
-  padding-bottom: 7px;
-  color: #74767F;
-}
-
-.labelpass {
-  margin-top: 30px;
-}
-
-.usuarioNaranja {
-  background-image: url("../../../assets/iconos/usuarioNaranja.svg");
-}
-
-.llaveNaranja {
-  background-image: url("../../../assets/iconos/llaveNaranja.svg");
-}
-
-.icon_img {
-  width: 21px;
-  height: 21px;
-  margin-top: 8px;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.forgotPass {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  font-size: 12px;
-  letter-spacing: -0.025em;
-  color: #C2C2C2;
-  margin-top: 8px;
-  margin-left: -15px;
-}
-
-.botonNaranja {
-  width: 96px;
-  height: 27px;
-  background: #E76800;
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  line-height: normal;
-  font-size: 15px;
-  text-align: center;
-  letter-spacing: -0.025em;
-  color: #FFFFFF;
-  position: absolute;
-  margin-right: 15px;
-  right: 0;
-  line-height: 25px;
-}
-
-.lineaFinalultimate {
-  margin-left: 35px;
-  margin-top: 25px;
-}
 
 .navbar {
   position: fixed;

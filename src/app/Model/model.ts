@@ -12,4 +12,5 @@ export class Pro{
     link?: string;
     customer?: string;
     message?: string;
+
 }
