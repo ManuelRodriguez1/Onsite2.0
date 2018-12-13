@@ -68,6 +68,9 @@ table {
 .arrow{
     background-image: url('./assets/iconos/arrow1.svg');
 }
+.arrowenter{
+    background-image: url('./assets/iconos/arrowenter.svg');
+}
 .setting{
     background-image: url('./assets/iconos/setting.svg');
 }
