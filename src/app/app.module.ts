@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
 
 import {MenuHomeComponent} from './components/hire-principal/menu-home/menu-home.component';
@@ -54,10 +55,11 @@ import { ExploreComponent } from './components/pro/profile-pro/explore/explore.c
     FormsModule,
     NgbModule,
     AngularFireAuthModule,
+    SlickCarouselModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
-    }),
-    AngularFireAuthModule
+    })
+    
   ],
   providers: [ServiceService,AuthGuard],
   bootstrap: [AppComponent]

@@ -29,20 +29,17 @@ export class HireComponent implements OnInit {
 alert("entrooo");
 
         if(formData.valid) {
-          console.log("hola");
+
            this.af.auth.createUserAndRetrieveDataWithEmailAndPassword(
             formData.value.Email,
             formData.value.Password
-
            ).then(
              (success) => {
                 var user = firebase.auth().currentUser;
                 user.updateProfile({
-                  displayName: formData.value.FirstName+" "+formData.value.LastName,
+                  displayName: "hire",
                   photoURL: "",
-
                 });
-
                 firebase.database().ref('users_hire/'+ user.uid).set({
                 nombre: formData.value.FirstName,
                 apellido: formData.value.LastName,
@@ -51,10 +48,10 @@ alert("entrooo");
                 zipcode: formData.value.Entercityorzipcode,
                 estado:'hire'
               });
+              this.router.navigateByUrl('/Hireprincipal');
            }).catch(
              (err) => {
              this.error = err.message;
-
            })
          }
        }

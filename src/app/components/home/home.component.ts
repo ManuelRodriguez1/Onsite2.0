@@ -59,5 +59,42 @@ pro(){
 
 
   }
+  slides = [
+    {img: "0",imagensuperior: "../../../assets/imagenes/img1seccion4Home.png",subtitulo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.",name:"Name - Name."},
+    {img: "1",imagensuperior: "../../../assets/imagenes/img2seccion4Home.png",subtitulo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.",name:"Name - Name."},
+    {img: "2",imagensuperior: "../../../assets/imagenes/img3seccion4Home.png",subtitulo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.",name:"Name - Name."},
+    {img: "3",imagensuperior: "../../../assets/imagenes/img1seccion4Home.png",subtitulo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.",name:"Name - Name."}
+  ];
+  slideConfig = {"slidesToShow": 3, "slidesToScroll": 3,"dots": true,"infinite": true,"autoplay": true,"autoplaySpeed": 1500,"prevArrow":"<div class='slick-prevew '></div>",
+  "nextArrow":"<div class='slick-nextsig '></div>",};
 
+
+  slickInit(e) {
+    console.log('slick initialized');
+  }
+
+  breakpoint(e) {
+  }
+
+  afterChange(e) {
+
+  }
+
+  beforeChange(e) {
+  }
+
+
+
+  slideConfigseccion2= {"slidesToShow": 1, "slidesToScroll": 1,"dots": true,"infinite": true,"autoplay": true,"autoplaySpeed": 1500000,"prevArrow":"<div class='slick-prevew '></div>",
+"nextArrow":"<div  class='slick-nextsig '></div>","fade": true};
+slidesseccion2 = [
+  {img: "0",imagenderecha: "../../../assets/imagenes/seccion2img1.png",titulo: "Lorem ipsum dolor sit amet",subtitulo:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus. Etiam suscipit mauris quis turpis vehicula tincidunt. Mauris vitae sapien eu nulla pharetra vehicula. Nam porta enim id vestibulum consequat. "},
+  {img: "1",imagenderecha: "../../../assets/imagenes/seccion2img1.png",titulo: "Lorem ipsum dolor sit amet",subtitulo:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus. Etiam suscipit mauris quis turpis vehicula tincidunt. Mauris vitae sapien eu nulla pharetra vehicula. Nam porta enim id vestibulum consequat. "},
+  {img: "2",imagenderecha: "../../../assets/imagenes/seccion2img1.png",titulo: "Lorem ipsum dolor sit amet",subtitulo:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus. Etiam suscipit mauris quis turpis vehicula tincidunt. Mauris vitae sapien eu nulla pharetra vehicula. Nam porta enim id vestibulum consequat. "},
+  {img: "3",imagenderecha: "../../../assets/imagenes/seccion2img1.png",titulo: "Lorem ipsum dolor sit amet",subtitulo:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus. Etiam suscipit mauris quis turpis vehicula tincidunt. Mauris vitae sapien eu nulla pharetra vehicula. Nam porta enim id vestibulum consequat. "}
+];
 }
+
+
+
+// ,"dotsClass": 'slide-dots'

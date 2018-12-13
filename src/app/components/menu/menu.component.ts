@@ -15,12 +15,17 @@ error: any[];
   Sesion = true;
     constructor(public af: AngularFireAuth, private router: Router,location: Location) {
         this.af.authState.subscribe(auth => {
+
             if (auth) {
                 this.Sesion = true;
+
+
+
+
             } else {
                 this.Sesion = false;
             }
-            console.log(this.Sesion);
+      
         });
 
 
