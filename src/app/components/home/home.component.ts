@@ -67,22 +67,20 @@ pro(){
   ];
   slideConfig = {"slidesToShow": 3, "slidesToScroll": 3,"dots": true,"infinite": true,"autoplay": true,"autoplaySpeed": 1500,"prevArrow":"<div class='slick-prevew '></div>",
   "nextArrow":"<div class='slick-nextsig '></div>",};
-  
-  
+
+
   slickInit(e) {
     console.log('slick initialized');
   }
-  
+
   breakpoint(e) {
-    console.log('breakpoint');
   }
-  
+
   afterChange(e) {
-    console.log('afterChange');
+
   }
-  
+
   beforeChange(e) {
-    console.log('beforeChange');
   }
 
 

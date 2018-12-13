@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+// import * as $ from 'jquery';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,22 +15,44 @@ export class LoginComponent implements OnInit {
   email;
   cerrarAbrir = "";
   abrir = false;
+  pagina = "";
+  childData = [];
+
+  list = "";
+  pepe = "";
+
   constructor(public af: AngularFireAuth, private router: Router) {
+
+
     this.af.authState.subscribe(authState => {
-      console.log(authState);
       if (authState) {
+        console.log(authState.displayName);
+          console.log(authState.email);
+        if (authState.displayName == "hire") {
+          this.router.navigateByUrl('/Hireprincipal');
+        } else if (authState.displayName == "pro") {
+          this.router.navigateByUrl('/ProfilePro');
 
-   firebase.database().ref('/users/belxy1' ).once('value').then(function(snapshot) {
-    var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-    console.log(snapshot.val());
-  });
+        }
 
-        this.router.navigateByUrl('/Hireprincipal');
-      } else {
-        console.log("3333");
       }
     });
+
+
+
+    if (this.pagina == "hire") {
+      this.router.navigateByUrl('/Hireprincipal');
+    } else if (this.pagina == "pro") {
+      this.router.navigateByUrl('/ProfilePro');
+    }
+
+
+
+
   }
+
+
+
   ngOnInit() {
   }
   onSubmit(formData) {
