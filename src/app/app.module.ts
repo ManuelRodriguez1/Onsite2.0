@@ -19,6 +19,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileProComponent } from './components/profile-pro/profile-pro.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProfileProComponent } from './components/profile-pro/profile-pro.compon
     AngularFireDatabaseModule,
     FormsModule,
     NgbModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

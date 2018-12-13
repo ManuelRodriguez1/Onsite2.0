@@ -196,3 +196,33 @@
     font-size: 15px;
     color: #FFFFFF;
 }
+.form-footer
+{
+    width: 245px;
+    height: 32px;
+    background-color: transparent;
+    float: left;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    border: 1px solid #ffffff;
+    outline: none;
+    border-right: none;
+    padding-left: 22px;
+    color: #ffffff;
+}
+.btn-footer
+{
+    width: 103px;
+    height: 32px;   
+    background: #E76800;
+    border: 1px solid #E76800;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    outline: none;
+    cursor: pointer;
+}
+.formfooter
+{
+    margin-top: 12px;
+}
