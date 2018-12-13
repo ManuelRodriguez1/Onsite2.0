@@ -22,6 +22,7 @@ export class FooterComponent implements OnInit {
         
       }).then(()=>{
         console.log('funciona!')
+        f
       })
     
   }
