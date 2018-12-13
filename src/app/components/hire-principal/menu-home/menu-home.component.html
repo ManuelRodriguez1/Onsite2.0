@@ -52,7 +52,7 @@
 
   </div>
 
-  <div *ngIf="HomeFormularioNw == 2">
+  <!--div *ngIf="HomeFormularioNw == 2">
     <div class="container skill">
       <div class="row">
         <div class="title2">
@@ -70,7 +70,7 @@
           <p>{{s}}</p>
         </div>
       </div>
-      
+
       <div class="buttons container ">
         <div  *ngIf="page > 1" class="btn btn-outline-warning back classnextkt "  (click)='back()'>
           <p>Back</p>
@@ -83,12 +83,70 @@
 
 
     </div>
-  </div>
+  </div-->
 
 
-  <div *ngIf="HomeFormularioNw == 3">
-   manu
+  <div *ngIf="HomeFormularioNw == 2">
+    <section>
+      <div class="container skill">
+        <div class="row">
+          <div class="title2">
+            What do you need help with?
+          </div>
+        </div>
+        <div class="row">
 
+          <div class="col-sm input-group">
+            <div class="input-group-prepend">
+              <div class="icon_img setting"></div>
+            </div>
+            <input type="text" readonly class="form-control" placeholder="Select job category">
+            <div class="down" [ngClass]="{'up3': up3 == true}" (click)='list3(1)'></div>
+          </div>
+        </div>
+        <div class="list-group" [hidden]='up3 == false'>
+          <div class="list-group-item" *ngFor="let s of skills1" (click)="selectskill(s)">
+            <p>{{s}}</p>
+          </div>
+        </div>
+        <div class="skillselct" [hidden]="selectskills == null">
+          <div class="skillsel">
+            <p>{{selectskills}}</p>
+            <div class="close" (click)='close(1)'></div>
+          </div>
+        </div>
+        <div [hidden]="selectskills == null">
+          <div class="title2">
+            Let’s get specific
+          </div>
+          <div class="row skill2">
+            <div class="col-sm input-group">
+              <div class="input-group-prepend">
+                <div class="icon_img setting"></div>
+              </div>
+              <input type="text" readonly class="form-control" [placeholder]="'What '+selectskills+ ' skills do you have?'">
+              <div class="down" [ngClass]="{'up3': up4 == true}" (click)='list3(2)'></div>
+            </div>
+          </div>
+          <div class="list-group" [hidden]='up4 == false'>
+            <div class="list-group-item" *ngFor="let s of skills2" (click)='selectskill2(s)'>
+              <p>{{s}}</p>
+            </div>
+          </div>
+          <div class="skillselct" [hidden]="selectskills2 == null">
+            <div class="skillsel ss2">
+              <p>{{selectskills}}</p>
+              <div class="close" (click)='close(1)'></div>
+            </div>
+            <div class="skillsel ss3">
+              <p>{{selectskills2}}</p>
+              <div class="close" (click)='close(2)'></div>
+            </div>
+          </div>
+          <input type="hidden" name="skills" [value]="selectskills2">
+        </div>
+      </div>
+    </section>
   </div>
 
 

@@ -172,7 +172,7 @@ table {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    background-image: url("src/assets/iconos/flechaslider.svg");
+    background-image: url("./assets/iconos/flechaslider.svg");
 }
 
 .contenedorseccion2home .slick-nextsig
@@ -186,7 +186,7 @@ table {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    background-image: url("src/assets/iconos/flechaslider.svg");
+    background-image: url("./assets/iconos/flechaslider.svg");
     transform:  translate(-50%,-50%) rotate(180deg);
 }
 #seccion4Home .slick-prevew
@@ -201,7 +201,7 @@ width: 22px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    background-image: url("src/assets/iconos/flechaslider.svg");
+    background-image: url("./assets/iconos/flechaslider.svg");
     transform: rotate(270deg);
 }
 #seccion4Home .slick-nextsig
@@ -216,7 +216,7 @@ height: 11px;
 background-repeat: no-repeat;
 background-position: center;
 background-size: contain;
-background-image: url("src/assets/iconos/flechaslider.svg");
+background-image: url("./assets/iconos/flechaslider.svg");
 transform: rotate(90deg);
 }
 .carousel-indicators li
@@ -230,4 +230,166 @@ transform: rotate(90deg);
 .back{
     right: 140px;
     text-align: left;
+}
+
+
+
+
+.title{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 30px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+    margin-top: 69.52px;
+}
+.input, .input::placeholder{
+    font-family: 'Montserrat', sans-serif;;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 15px;
+}
+.fields{
+    margin-top: 50px;
+}
+.info{
+    margin-top: 26px;
+}
+.info p:nth-of-type(1), .title2{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 18px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+}
+.info p:nth-of-type(2){
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 15px;
+    letter-spacing: -0.025em;
+    color: #2F80ED;
+}
+.fields2{
+    margin-top: 26px;
+}
+.title2{
+    margin-top: 30px;
+}
+.field3{
+    margin-top: 19px;
+}
+.buttons{
+    margin-top: 48px;
+    position: relative;
+    margin-bottom: 217px;
+}
+
+.textv{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 20px;
+    font-size: 150px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    transform: translateY(-50%) rotate(-90deg);
+    position: fixed;
+    right: -289px;
+    color: transparent;
+    -webkit-text-stroke: 1px #D1D1D1;
+    top: 50%;
+}
+.skill{
+    margin-top: 49.98px;
+}
+.form-control[readonly]{
+    background: initial;
+}
+
+.up{
+    transition: .5s;
+    transform: translateY(-50%) rotate(180deg);
+}
+.skillselct{
+    overflow: hidden;
+    margin: 0 54px 0;
+}
+.skillsel{
+    border: 0.5px solid #F08E00;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    position: relative;
+    float: left;
+    margin-right: 24px;
+    margin-top: 24px;
+}
+.skillsel p{
+    margin: 6px 37.32px 7px;
+}
+.close{
+    width: 15px;
+    height: 16px;
+    background-image: url('src/assets/iconos/close.svg');
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position: top center;
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    opacity: 1;
+
+}
+.ss2 .close{
+    background-image: url('./assets/iconos/closeO.svg');
+}
+.ss2{
+    background: #E76800;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin-right: 73px;
+}
+.ss2::after{
+    content: '';
+    position: absolute;
+    right: -66px;
+    width: 56px;
+    height: 0;
+    border: 1px solid #E76800;
+    top: 16.74px;
+}
+.skill2{
+    margin-top: 42px;
+}
+.texts2 p:first-child{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 16px;
+    letter-spacing: -0.025em;
+    color: #E76800;
+}
+.texts2 p:last-child{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 16px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+    margin-top: 19px;
 }
