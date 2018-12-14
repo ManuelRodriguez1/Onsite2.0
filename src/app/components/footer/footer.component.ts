@@ -11,18 +11,21 @@ import { AngularFireAuth } from "angularfire2/auth";
 export class FooterComponent implements OnInit {
 
   database = firebase.database();
+  today = new Date(Date.parse(Date()));
+  
   constructor(public afAuth: AngularFireAuth) { }
+  
+
 
   ngOnInit() {
   }
   test(f: NgForm){
    
       this.database.ref('/subscribers').push({
-        subscribe: f.value.subscribe
-        
+        subscribe: f.value.subscribe,
+        date: this.today
       }).then(()=>{
-        console.log('funciona!')
-        f
+       
       })
     
   }
