@@ -237,8 +237,11 @@
 {
     width: 116px;
     height: 16px;
-    background-color: red;
+    
     overflow: hidden;
+    margin-left: 10px;
+    float: left;
+    margin-top: 5px;
 }
 .contenedorinfoprofileworkes
 {

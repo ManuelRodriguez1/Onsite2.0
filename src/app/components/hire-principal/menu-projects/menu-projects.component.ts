@@ -11,7 +11,7 @@ export class MenuProjectsComponent implements OnInit {
   up2=false;
   page = 1;
   select = 0;
-  Homeprojects=2;
+  Homeprojects=1;
 
   projects = ['proyecto1', 'proyecto2', 'proyecto3',
   'proyecto4', 'proyecto5', 'proyecto6'];
