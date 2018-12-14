@@ -1,3 +1,135 @@
-<p>
-  menu-projects works!
-</p>
+<section class="projectsmenu">
+  <div *ngIf="Homeprojects == 1">
+    <div class="container skill">
+      <div class="row">
+        <div class="title2">
+          See who you hired.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm input-group">
+          <input type="text" readonly class="form-control" placeholder="Search projects">
+          <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
+        </div>
+      </div>
+      <div class="list-group" *ngIf='up == true'>
+        <div class="list-group-item" *ngFor="let s of projects" (click)='selectskill(s)'>
+          <p>{{s}}</p>
+        </div>
+      </div>
+     
+    </div>
+
+    <div class="container projectsgeneral" > 
+          <div class="contenedorprojectdescription" *ngFor="let infoproject of projectsinforma">
+              
+                  <div class="contenedorinfoproject">
+                        <p>{{ infoproject.nombre }}</p>
+                        <div class="lineaprojectsinfo"></div>
+                        <p>status: <span>{{ infoproject.staus}}</span></p>
+                  </div>
+
+          </div>
+    </div>
+    <div class="container lineaprojectssepa"></div>
+
+    <div class="container">
+        <div class="card-columns" >
+            <div class="card" *ngFor="let profileprojects of perfilprojects" >
+              <div class="imagenperfilprojects" >
+                   <img class="card-img-top" src="{{ profileprojects.fotoperfil }}" alt="Card image cap">
+              </div>
+             
+              <div class="card-body">
+                  <p class="nombreprojectperfil">{{ profileprojects.nombre }}</p>
+                  <p class="colaboracioprojectperfil">{{ profileprojects.subtitulo }}</p>
+                  <div class="iconoestrellasperfil"><img src="{{ profileprojects.estrellas }}" alt="" width="100%"></div>
+                  <div class="btnmessageproject">
+                      <div class="iconoinboxprofile"></div>
+                      <p>Message</p>
+                  </div>
+              </div>
+              <div class="lineaderechacards">
+                
+              </div>
+            </div>
+            
+            
+            
+            
+            
+            
+          </div>
+    </div>
+
+
+  </div>
+
+
+
+
+  <div *ngIf="Homeprojects == 2">
+
+        <div class="container profileprojectsworkers">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="perfilworkers">
+                <img src="../../../../assets/imagenes/profileproject/profileprojects.svg" alt="" width="100%">
+              </div>
+              <p class="nombreworkers">Jurgen Klopp</p>
+              <div class="contenedorestrellasworkers"></div>
+            </div>
+            <div class="col-sm">
+                <div class="contenedorinfoprofileworkes">
+                  <p>46</p>
+                  <p>Projects</p>
+                </div>
+            </div>
+            <div class="col-sm">
+              <div class="contenedorinfoprofileworkes">
+                <p>160</p>
+                <p>Hours</p>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="contenedorinfoprofileworkes">
+                <p>31</p>
+                <p>Reviews</p>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="contenedorinfoprofileworkes">
+                <p>81</p>
+                <p>Referrals</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container contenedorprojectsworkers">
+            <p class="tituloprojectsworkres">Projects</p>
+            <div class="lineaprojectssepa"></div>
+
+          <div class="container contenprojectworkersprofile">
+                <div class="infoprofileprojects" *ngFor="let projectwork of Projectsworkers">
+                      <div class="superiorinfoprofileprojects">
+                        <p>Excavation at 280 S</p>
+                      </div>
+                      <div class="inferiorinfoprofileprojects">
+                            <p>Status:</p>
+                            <p>{{projectwork.status}}</p>
+                            <p>Category:</p>
+                            <p>{{projectwork.category}}</p>
+                            <p>Specialized:</p>
+                            <p>{{projectwork.Specialized}}</p>
+                            <p>How many people?:</p>
+                            <p>{{projectwork.people}}</p>
+                      </div>
+                </div>
+          </div>
+
+        </div>  
+  </div>
+
+
+
+</section>
