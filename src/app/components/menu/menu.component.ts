@@ -32,7 +32,7 @@ error: any[];
         if(location.path() != ''){
           if(location.path() == '/Hire' || location.path() == '/Hireprincipal'){
               this.m = "menuHire";
-          }else if(location.path() == '/Pro' ){
+          }else if(location.path() == '/Pro' || location.path() == '/ProfilePro'){
               this.m = "menuPro";
           }
          }
