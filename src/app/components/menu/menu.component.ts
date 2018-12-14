@@ -25,7 +25,7 @@ error: any[];
             } else {
                 this.Sesion = false;
             }
-      
+
         });
 
 
@@ -50,6 +50,6 @@ error: any[];
    logout() {
         this.af.auth.signOut();
         console.log('logged out');
-        this.router.navigateByUrl('/');
+          location.href ="/";
     }
 }

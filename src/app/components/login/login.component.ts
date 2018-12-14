@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import * as $ from 'jquery';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   childData = [];
 
   list = "";
-  pepe = "";
+
 
   constructor(public af: AngularFireAuth, private router: Router) {
 
@@ -36,15 +36,16 @@ export class LoginComponent implements OnInit {
       this.af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password).then((resolve) => {
         formData.reset();
         this.abrir = true;
+        $(".modal-backdrop").css("display","none");
       }).then(() => {
         this.af.authState.subscribe(authState => {
           if (authState) {
             console.log(authState.displayName);
             console.log(authState.email);
             if (authState.displayName == "hire") {
-              this.router.navigateByUrl('/Hireprincipal');
+              location.href ="/Hireprincipal";
             } else if (authState.displayName == "pro") {
-              this.router.navigate(['/ProfilePro']);
+              location.href ='/ProfilePro';
               console.log('pro')
             }
           }

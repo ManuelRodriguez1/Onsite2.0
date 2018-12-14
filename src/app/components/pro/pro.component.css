@@ -32,17 +32,3 @@ input::placeholder{
 .customers2{
     margin-top: 19px;
 }
-.addcust{
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    line-height: 20px;
-    font-size: 15px;
-    letter-spacing: -0.025em;
-    color: #2F80ED;
-    margin-left: 40px;
-}
-.addcust p{
-    margin-top: 16px;
-}
