@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-menu-home',
   templateUrl: './menu-home.component.html',
@@ -23,7 +23,9 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
     'General Labor', 'Insulation', 'Interior Fishing Carpentry',
     'Iron Worker', 'Landscaper', 'Mason',
     'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
-  skills2: any = []
+  skills2: any = [];
+    cust = 4;
+    customers = ['Customer 1', 'Customer 2', 'Customer 3'];
   constructor() { }
 
 /*  selectskill(e) {
@@ -56,6 +58,8 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
     this.selectskills2 = e
   }
   ngOnInit() {
+
+
   }
 
 
@@ -84,12 +88,18 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
   next(){
     this.page++;
     this.HomeFormularioNw=  this.page;
+
   }
   back() {
     this.page--;
     this.select = this.page;
-  }
 
+  }
+  addcustomer() {
+
+    var i = this.cust++;
+    this.customers.push('Customer ' + i);
+  }
   close(e) {
     if(e == 1){
       this.selectskills = null

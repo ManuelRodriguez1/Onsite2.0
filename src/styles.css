@@ -246,7 +246,7 @@ transform: rotate(90deg);
     margin-top: 69.52px;
 }
 .input, .input::placeholder{
-    font-family: 'Montserrat', sans-serif;;
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: normal;
     line-height: 20px;
@@ -392,4 +392,19 @@ transform: rotate(90deg);
     letter-spacing: -0.025em;
     color: #5B5B5B;
     margin-top: 19px;
+}
+
+.addcust{
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 15px;
+    letter-spacing: -0.025em;
+    color: #2F80ED;
+    margin-left: 40px;
+}
+.addcust p{
+    margin-top: 16px;
 }
