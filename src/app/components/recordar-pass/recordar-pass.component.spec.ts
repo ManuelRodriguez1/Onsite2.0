@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProComponent } from './pro.component';
+import { RecordarPassComponent } from './recordar-pass.component';
 
-describe('ProComponent', () => {
-  let component: ProComponent;
-  let fixture: ComponentFixture<ProComponent>;
+describe('RecordarPassComponent', () => {
+  let component: RecordarPassComponent;
+  let fixture: ComponentFixture<RecordarPassComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProComponent ]
+      declarations: [ RecordarPassComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProComponent);
+    fixture = TestBed.createComponent(RecordarPassComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

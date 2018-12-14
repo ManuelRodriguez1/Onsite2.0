@@ -30,6 +30,8 @@ import { ServiceService } from './services/service.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
+import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
+import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.compone
     MenuHomeComponent,
     MenuProjectsComponent,
     LoginComponent,
-    InboxComponent
+    InboxComponent,
+    ExploreComponent,
+    RecordarPassComponent
   ],
   imports: [
     BrowserModule,

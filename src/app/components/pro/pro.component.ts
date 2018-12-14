@@ -72,7 +72,12 @@ export class ProComponent implements OnInit {
   }
 
   test(f: NgForm){
-    this.database.app.auth().createUserWithEmailAndPassword(f.value.user, f.value.password).then(()=>{
+    this.afAuth.auth.createUserWithEmailAndPassword(f.value.user, f.value.password).then(()=>{
+      var user = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: "pro",
+        photoURL: "",
+      });
       this.database.ref('/users_pro').push({
         name: f.value.name,
         lastname: f.value.lastname,

@@ -9,18 +9,18 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="dropdown-menu show">
-        <div class="dropdown-item">Home</div>
+        <div class="dropdown-item" (click)="menus(0)">Home</div>
         <div class="dropdown-divider"></div>
-        <div class="dropdown-item">Inbox</div>
-        <div class="menusmall">
+        <div class="dropdown-item" (click)="menus(1)">Inbox</div>
+        <div class="menusmall" *ngIf="menushow == true">
           <div class="option">Inbox</div>
           <div class="option">Sent</div>
           <div class="option">Trash</div>
         </div>
         <div class="dropdown-divider"></div>
-        <div class="dropdown-item">Projects</div>
+        <div class="dropdown-item" (click)="menus(2)">Projects</div>
         <div class="dropdown-divider"></div>
-        <div class="dropdown-item">Explore</div>
+        <div class="dropdown-item" (click)="menus(3)">Explore</div>
         <div class="dropdown-divider"></div>
         <div class="dropdown-item">Sign Out</div>
       </div>
@@ -33,7 +33,7 @@
             <div class="start">Get Started</div>
           </div>
         </div>
-        <div class="proyects thereis">
+        <div class="proyects thereis" *ngIf="project == true">
           <div class="title2">Project: <span> Excavation at 280 S.</span></div>
           <agm-map [latitude]="lat" [longitude]="lng" class="map">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
@@ -72,6 +72,9 @@
       </div>
       <div class="inbox" *ngIf="select == 1">
         <app-inbox></app-inbox>
+      </div>
+      <div class="explore" *ngIf="select == 3">
+        <app-explore></app-explore>
       </div>
 
     </div>

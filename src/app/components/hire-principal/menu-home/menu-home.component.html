@@ -31,12 +31,12 @@
     <div class="container skill">
       <div class="row">
         <div class="title2">
-            Name your project
+          Name your project
         </div>
       </div>
       <div class="row">
         <div class="col-sm input-group">
-          <input type="text"  class="form-control" placeholder="Type project name">
+          <input type="text" class="form-control" placeholder="Type project name">
         </div>
       </div>
 
@@ -52,7 +52,7 @@
 
   </div>
 
-  <div *ngIf="HomeFormularioNw == 2">
+  <!--div *ngIf="HomeFormularioNw == 2">
     <div class="container skill">
       <div class="row">
         <div class="title2">
@@ -70,7 +70,7 @@
           <p>{{s}}</p>
         </div>
       </div>
-      
+
       <div class="buttons container ">
         <div  *ngIf="page > 1" class="btn btn-outline-warning back classnextkt "  (click)='back()'>
           <p>Back</p>
@@ -83,13 +83,206 @@
 
 
     </div>
+  </div-->
+
+
+  <div *ngIf="HomeFormularioNw == 2">
+    <section>
+      <div class="container skill">
+        <div class="row">
+          <div class="title2">
+            What do you need help with?
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-sm input-group">
+            <!--div class="input-group-prepend">
+              <div class="icon_img setting"></div>
+            </div-->
+            <input type="text" readonly class="form-control" placeholder="Select job category">
+            <div class="down" [ngClass]="{'up3': up3 == true}" (click)='list3(1)'></div>
+          </div>
+        </div>
+        <div class="list-group" [hidden]='up3 == false'>
+          <div class="list-group-item" *ngFor="let s of skills1" (click)="selectskill(s)">
+            <p>{{s}}</p>
+          </div>
+        </div>
+        <div class="skillselct" [hidden]="selectskills == null">
+          <div class="skillsel">
+            <p>{{selectskills}}</p>
+            <div class="close" (click)='close(1)'></div>
+          </div>
+        </div>
+        <div [hidden]="selectskills == null">
+          <div class="title2">
+            Let’s get specific
+          </div>
+          <div class="row skill2">
+            <div class="col-sm input-group">
+
+              <input type="text" readonly class="form-control" [placeholder]="'What '+selectskills+ ' skills do you have?'">
+              <div class="down" [ngClass]="{'up3': up4 == true}" (click)='list3(2)'></div>
+            </div>
+          </div>
+          <div class="list-group" [hidden]='up4 == false'>
+            <div class="list-group-item" *ngFor="let s of skills2" (click)='selectskill2(s)'>
+              <p>{{s}}</p>
+            </div>
+          </div>
+          <div class="skillselct" [hidden]="selectskills2 == null">
+            <div class="skillsel ss2">
+              <p>{{selectskills}}</p>
+              <div class="close" (click)='close(1)'></div>
+            </div>
+            <div class="skillsel ss3">
+              <p>{{selectskills2}}</p>
+              <div class="close" (click)='close(2)'></div>
+            </div>
+          </div>
+          <input type="hidden" name="skills" [value]="selectskills2">
+
+          <br>
+          <br>
+
+          <div class="form-check checkbox">
+            <input type="checkbox" class="form-check-input input-assumpte" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1"><span>All workers must take a background test.</span></label>
+          </div>
+
+
+          <div class="form-check checkbox">
+            <input type="checkbox" class="form-check-input input-assumpte" id="exampleCheck2">
+            <label class="form-check-label" for="exampleCheck2"><span>All workers must pass a background test.</span></label>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!--div class="row addcust" (click)="addcustomer()">
+        <div class="input-group-prepend">
+          <div class="icon_img btnround"></div>
+        </div>
+        <p>Add another category</p>
+      </div-->
+
+
+
+      <div class="buttons container ">
+        <div *ngIf="page > 1" class="btn btn-outline-warning back classnextkt " (click)='back()'>
+          <p>Back</p>
+        </div>
+        <div class="btn btn-outline-warning next  " (click)='next()'>
+          <p>Next</p>
+        </div>
+      </div>
+
+    </section>
   </div>
+
 
 
   <div *ngIf="HomeFormularioNw == 3">
-   manu
+    <div class="container skill">
+      <div class="row">
+        <div class="title2">
+          Where is the job’s location?
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <div class="fields container">
+
+        <div class="row">
+          Where is the job’s location?
+        </div>
+        <div class="row">
+
+          <div class="col-sm input-group">
+            <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
+          </div>
+          <div class="col-sm input-group">
+            <input class="form-control" id="date" name="date" placeholder="Date" type="text" />
+
+            <span class="tospan">to</span>
+            <input class="form-control" id="date1" name="date1" placeholder="Date" type="text" />
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          Set hiring radius
+        </div>
+        <div class="row ">
+
+          <div class="col-sm input-group">
+
+            <input type="email" class="form-control" placeholder="Enter radius in miles" name="radius" #radius="ngModel" ngModel>
+          </div>
+          <div class="col-sm input-group">
+
+          </div>
+        </div>
+      </div>
+      <div class="info container">
+        <p>Are you willing to hire outside of your hiring radius?</p>
+      </div>
+      <div class="fields2 container">
+        <div class="row">
+
+
+    <div class="btnHome">
+      Yes
+    </div>
+
+    <div class="btnHome">
+      No
+    </div>
+
+        </div>
+      </div>
+      <div class="title2 container">
+        <p>Please enter extra hourly rate you’d pay for outside
+          <br>your hiring radius.</p>
+      </div>
+      <div class="field3 container">
+        <div class="row">
+          <div class="col-sm input-group">
+            <div class="input-group-prepend">
+              <div class="icon_img arrow"></div>
+            </div>
+            <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="buttons container ">
+
+      <div class="btn btn-outline-warning next  " (click)='next()'>
+        <p>Next</p>
+      </div>
+    </div>
 
   </div>
-
 
 </section>
