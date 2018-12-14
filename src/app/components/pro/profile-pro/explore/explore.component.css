@@ -238,3 +238,6 @@
     transform: translateY(-50%);
     border: 0.5px solid #C4C4C4;
 }
+.list-group-item{
+    cursor: pointer;
+}
