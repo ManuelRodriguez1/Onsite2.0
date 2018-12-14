@@ -257,28 +257,21 @@
       </div>
       <div class="field3 container">
         <div class="row">
-          <div class="col-sm input-group">
+          <!--div class="col-sm input-group">
             <div class="input-group-prepend">
               <div class="icon_img arrow"></div>
             </div>
             <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel>
-          </div>
+          </div-->
         </div>
       </div>
 
-
-
-
-
-
-
-
-
-
     </div>
     <div class="buttons container ">
-
-      <div class="btn btn-outline-warning next  " (click)='next()'>
+      <div *ngIf="page > 1" class="btn btn-outline-warning back classnextkt " (click)='back()'>
+        <p>Back</p>
+      </div>
+      <div class="btn btn-outline-warning next" (click)='next()'>
         <p>Next</p>
       </div>
     </div>

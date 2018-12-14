@@ -92,7 +92,7 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
   }
   back() {
     this.page--;
-    this.select = this.page;
+  this.HomeFormularioNw=  this.page;
 
   }
   addcustomer() {
