@@ -66,7 +66,6 @@ import { ProjectsComponent } from './components/pro/profile-pro/projects/project
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
     })
-
   ],
   providers: [ServiceService,AuthGuard],
   bootstrap: [AppComponent]
