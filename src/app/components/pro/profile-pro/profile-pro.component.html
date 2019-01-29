@@ -25,7 +25,7 @@
         <div class="dropdown-item">Sign Out</div>
       </div>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-9 divcol">
       <div class="home" *ngIf="select == 0">
         <div class="proyects anyproyects">
           <div class="message">
@@ -73,6 +73,9 @@
       <div class="inbox" *ngIf="select == 1">
         <app-inbox></app-inbox>
       </div>
+      <div class="projects" *ngIf="select == 2">
+        <app-projects></app-projects>
+      </div>
       <div class="explore" *ngIf="select == 3">
         <app-explore></app-explore>
       </div>
@@ -80,6 +83,6 @@
     </div>
   </div>
 </div>
-<div class="textv">
+<div class="textv" [ngClass]="righttv">
   <p>{{text[select]}}</p>
 </div>

@@ -22,4 +22,395 @@
 }
 .chat{
     border: 0.5px solid #000000;
+    margin-top: 31.93px;
+    height: 521.37px;
+    overflow: hidden;
+    position: relative;
+}
+.profileother{
+    overflow: hidden;
+}
+.profileother:last-child{
+    margin-bottom: 50px;
+}
+.titleinbox{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+    margin-top: 25px;
+    margin-left: 31.4px;
+    margin-bottom: 7px;
+}
+.imguser{
+    width: 40.54px;
+    height: 41px;
+    margin-left: 31.4px;
+    background: green;
+    border-radius: 50%;
+    float: left;
+}
+.continbox{
+    float: left;
+    margin-left: 8px;
+    margin-top: 8px;
+}
+.emailin{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+}
+.availble{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    font-size: 12px;
+    letter-spacing: -0.025em;
+    color: #C4C4C4;
+    margin-top: 7px;
+}
+.status{
+    width: 11px;
+    height: 11px;
+    background: purple;
+    border-radius: 50%;
+    float: left;
+}
+.availble p{
+    float: left;
+    margin-top: -2px;
+    margin-left: 3px;
+}
+.col{
+    overflow: hidden;
+}
+.div{
+    float: left;
+    margin: 0;
+    margin-top: 29px;
+    margin-left: 8.4px;
+    width: 94%;
+    border: 0.5px solid #000000;
+    margin-right: 7px;
+}
+.col1{
+    width: 30.3%;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0;
+    float: left;
+}
+.col1::-webkit-scrollbar{
+    width: 4px; 
+}
+.col1::-webkit-scrollbar-thumb{
+    background: #C4C4C4;
+}
+.newmmessage{
+    background: #000000;
+    width: 280.4px;
+    height: 40.51px;
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: normal; 
+    font-size: 15px;
+    letter-spacing: -0.025em;
+    color: #FFFFFF;
+    overflow: hidden;
+    width: 30.3%;
+    position: absolute; 
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+}
+.newmmessage p{
+    margin: 13.75px 0px 13.77px 31.4px;
+    float: left;
+}
+.imgmsg{
+    background-image: url('../../../../../assets/iconos/newmsg.svg');
+    width: 15.52px;
+    height: 15.52px;
+    float: right;
+    margin-right: 25.24px;
+    margin-top: 13.51px;
+    cursor: pointer;
+    background-size: contain;
+}
+.col2{
+    float: right;
+    width: 69.7%;
+    padding: 0;
+}
+.dataprofile{
+    margin-top: 27.07px;    
+}
+.imgprofile{
+    margin-left: 20px;
+    width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    background: #5B5B5B;
+    float: left;
+}
+.infoprofile{
+    float: left;
+    margin-left: 11px;
+}
+.infoprofile p:first-child{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+    margin-top: 7px;
+}
+.infoprofile p:nth-child(2){
+    line-height: 20px;
+    font-size: 14px;
+}
+.profilestatus{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 12px;
+    letter-spacing: -0.025em;
+    color: #828282;
+}
+.profilestatus p{
+    float: left;
+    margin-left: 3px;
+}
+.imgestado{
+    width: 12px;
+    height: 12px;
+    float: left;
+    border-radius: 50%;
+    background: green;
+    margin-top: 4px;
+}
+.help{
+    float: right;
+    margin-right: 28.22px;
+    margin-top: 37px;
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 16px;
+    font-size: 14px;
+    text-align: right;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+}
+.help p:nth-child(2){
+    font-size: 18px;
+    font-weight: bold;
+}
+.col2 .div{
+    margin-top: 25px;
+    width: 97%;
+    height: 100%;
+}
+.minichat{
+    overflow-y: scroll;
+    float: left;
+    width: 100%;
+}
+.minichat::-webkit-scrollbar{
+    width: 4px;
+}
+.minichat::-webkit-scrollbar-thumb{
+    background: #C4C4C4;
+}
+.date{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    color: #CBCBCB;
+    line-height: 20px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+.other{
+    width: 374px;
+    margin-left: 31px;
+    position: relative;
+    float: left;
+}
+.other::before{
+    position: absolute;
+    width: 0; 
+    height: 0; 
+    border-bottom: 18px solid transparent;
+    border-right: 18px solid #F8F8F8;
+    content: '';
+    top: 0;
+    left: -18px;
+}
+.content{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 16px;
+    font-size: 14px;
+    letter-spacing: -0.025em;
+    color: #828282;
+    background: #F8F8F8;
+    border-radius: 0px 5px 5px 5px;
+    overflow: hidden;
+}
+.content p:first-of-type{
+    margin-top: 10px;
+    margin-right: 21px;
+    margin-left: 20px;
+    margin-bottom: 7px;
+}
+.content .div{
+    width: 327px;
+    margin-top: 7px;
+}
+.adj{
+    margin-top: 9px;
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: -0.025em;
+    color: #2F80ED;
+    float: left;
+    margin-bottom: 10px;
+}
+.iconadj{
+    float: left;
+    margin-right: 11px;
+    width: 12px;
+    height: 13px;
+    background-image: url('../../../../../assets/iconos/adj.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 17px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+.adj p{
+    float: left;
+    margin: 0 !important;
+}
+.me{
+    width: 374px;
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 17px;
+    font-size: 14px;
+    text-align: right;
+    letter-spacing: -0.025em;
+    color: #FFFFFF;
+    margin-right: 23px;
+    margin-top: 20px;
+    position: relative;
+    float: right;
+}
+.content2{
+    position: relative;
+    background: #3FACFF;
+    border-radius: 5px 0px 5px 5px;
+    overflow: hidden;
+}
+.content2 p{
+    text-align: right;
+    margin-top: 11px;
+    margin-right: 12px;
+    margin-left: 49px;
+    margin-bottom: 13px;
+}
+.me::after{
+    content: '';
+    position: absolute;
+    border-top: 16px solid #3FACFF;
+    border-right: 16px solid transparent;
+    top: 0;
+    right: -16px;
+    width: 0;
+    height: 0;
+}
+.sendmessage{
+    width: 69.7%;
+    position: absolute;
+    right: 2px;
+    bottom: 1px;
+    overflow: hidden;
+    background: white;
+    z-index: 1;
+    border-bottom-width: 12px;
+    border-style: solid;
+    border-color: white;
+}
+.iconadj2{
+    float: left;
+    width: 20px;
+    height: 22px;
+    margin-left: 34px;
+    background-image: url('../../../../../assets/iconos/clip.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 7px;
+}
+.msginput{
+    float: left;
+    height: 38px;
+    width: 447px;
+    margin-left: 11px;
+    color: #2F80ED;
+    border: 1px solid #C4C4C4;
+    padding-right: 12px;
+    text-align: right; 
+    font-family: 'Archivo', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    font-size: 11px;
+    text-align: right;
+    letter-spacing: -0.025em;
+    outline: none;
+}
+.msginput::placeholder{
+    color: #2F80ED;
+}
+.icoletter{
+    background-image: url('../../../../../assets/iconos/email.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 38px;
+    height: 38px;
+    background-color: #008AF3;
+    border-radius: 50%;
+    float: left;
+    margin-left: 6px;
+    cursor: pointer;
+}
+.icoprice{
+    cursor: pointer;
+    float: left;
+    background-image: url('../../../../../assets/iconos/dollar.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 38px;
+    height: 38px;
+    background-color: #27AE60;
+    border-radius: 50%;
+    margin-left: 8px;
 }

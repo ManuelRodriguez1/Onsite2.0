@@ -1,6 +1,10 @@
 .container{
     margin-top: 85px;
     margin-bottom: 74px;
+    padding: 0;
+}
+.divcol{
+    padding: 0;
 }
 .dropdown-menu{
     position: initial;
@@ -107,6 +111,15 @@
     color: transparent;
     -webkit-text-stroke: 1px #D1D1D1;
     top: 50%;
+}
+.textv2{
+    right: -293px;
+}
+.textv3{
+    right: -214px;
+}
+.textv4{
+    right: -188px;
 }
 .thereis{
     border: 0;

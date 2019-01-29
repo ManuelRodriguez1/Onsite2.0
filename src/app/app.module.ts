@@ -32,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
 import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
 import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
+import { ProjectsComponent } from './components/pro/profile-pro/projects/projects.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.
     LoginComponent,
     InboxComponent,
     ExploreComponent,
-    RecordarPassComponent
+    RecordarPassComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
