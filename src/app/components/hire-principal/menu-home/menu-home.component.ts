@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase/app';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-menu-home',
@@ -6,17 +7,28 @@ import * as $ from 'jquery';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
-up=false;
-selectskills = null;
-selectskills2 = null;
-up2=false;
-up3=false;
-up4=false;
+
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+  selectedRam = "";
+  up = false;
+  selectskills = null;
+  selectskills2 = null;
+  howmany = "Select";
+  Enterradiusinmiles = "Enter radius in miles";
+  up2 = false;
+  up3 = false;
+  up4 = false;
+  up6 = false;
+  up5 = false;
+  datosprincipalesProjects;
   page = 1;
-    select = 0;
-HomeFormularioNw=0;
-skills = ['proyecto1', 'proyecto2', 'proyecto3',
-  'proyecto4', 'proyecto5', 'proyecto6'];
+  select = 0;
+  HomeFormularioNw = 0;
+  childData = [];
+  estadoProyecto = "pActive";//pFinished
+
+
 
   skills1 = ['Concrete', 'Decorator', 'Drywall',
     'Electrical', 'Excavation', 'Flooring',
@@ -24,41 +36,70 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
     'Iron Worker', 'Landscaper', 'Mason',
     'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = [];
-    cust = 4;
-    customers = ['Customer 1', 'Customer 2', 'Customer 3'];
-  constructor() { }
+  skills2Howmany: any = ["1", "2", "3", "4", "5"];
+  cust = 4;
+  customers = ['Customer 1', 'Customer 2', 'Customer 3'];
+  constructor() {
 
-/*  selectskill(e) {
-    alert(e);
-    this.up3 = !this.up3;
-    var add = true;
-    if (this.selectskills.length == 0) {
-      alert("111111111");
-      this.selectskills.push(e);
-    }
-    for (let i = 0; i < this.selectskills.length; i++) {
-      if (this.selectskills[i] == e) {
-        add = false;
+
+  }
+
+  /*  selectskill(e) {
+      alert(e);
+      this.up3 = !this.up3;
+      var add = true;
+      if (this.selectskills.length == 0) {
+        alert("111111111");
+        this.selectskills.push(e);
       }
-    }
-    if (add) {
-      this.selectskills.push(e);
-    }
-  }*/
+      for (let i = 0; i < this.selectskills.length; i++) {
+        if (this.selectskills[i] == e) {
+          add = false;
+        }
+      }
+      if (add) {
+        this.selectskills.push(e);
+      }
+    }*/
 
 
   selectskill(e) {
     this.up3 = !this.up3;
     this.selectskills = e;
-    this.skills2 = [this.selectskills+' Hanger', this.selectskills+' Apprentice', 'Metal Framer',
-    'Metal Framer Apprentice', this.selectskills+' Finisher', 'Fire Taper'];
+    this.skills2 = [this.selectskills + ' Hanger', this.selectskills + ' Apprentice', 'Metal Framer',
+      'Metal Framer Apprentice', this.selectskills + ' Finisher', 'Fire Taper'];
   }
   selectskill2(e) {
     this.up4 = !this.up4;
     this.selectskills2 = e
   }
-  ngOnInit() {
 
+
+  selectskill2up5(e) {
+    this.up5 = !this.up5;
+    this.howmany = e;
+
+  }
+  selectskill2up6(e) {
+    this.up6 = !this.up6;
+    this.Enterradiusinmiles = e;
+
+  }
+  ngOnInit() {
+    this.childData = this.VerDatosTiempoReal();
+
+    console.log(this.childData);
+    /*  firebase.database().ref('projectsHire/').push({
+        Project: "Excavation at 280 S",
+        Status: "Active",
+        Category:"Drywall",
+        Specialized: "Drywall Apprentice",
+        Howmanypeople: "4",
+        Joblocation: "1234 Meadow Dr. - Unit 123 - Wynwood, FL 33127",
+        AdditionalComments:"My whole front driveway is disgusting and I need help installing a new one. I think there are some utility lines; not sure so please help.",
+       zipcode: "",
+        mapa: '----------------------------'
+      });*/
 
   }
 
@@ -72,6 +113,34 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
     }
   }
 
+  setRam(value) {
+    this.selectedRam = value;
+    console.log(this.selectedRam);
+  }
+
+
+  VerDatosTiempoReal() {
+    var returnArr = [];
+    //console.log(childKey);
+    firebase.database().ref("projectsHire/").once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+        returnArr.push(childData);
+      });
+
+
+    });
+    return returnArr;
+  }
+
+  list4() {
+    this.up5 = !this.up5;
+  }
+  list5() {
+    this.up6 = !this.up6;
+  }
+
   list3(e) {
 
     if (e == 1) {
@@ -81,18 +150,25 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
     }
   }
 
+  final() {
+    alert("FINAL");
 
-  getStarted(){
-    this.HomeFormularioNw=1;
+
+
+
   }
-  next(){
+  getStarted() {
+    this.HomeFormularioNw = 1;
+  }
+  next() {
     this.page++;
-    this.HomeFormularioNw=  this.page;
+    this.HomeFormularioNw = this.page;
+
 
   }
   back() {
     this.page--;
-  this.HomeFormularioNw=  this.page;
+    this.HomeFormularioNw = this.page;
 
   }
   addcustomer() {
@@ -101,7 +177,7 @@ skills = ['proyecto1', 'proyecto2', 'proyecto3',
     this.customers.push('Customer ' + i);
   }
   close(e) {
-    if(e == 1){
+    if (e == 1) {
       this.selectskills = null
       this.selectskills2 = null
     }

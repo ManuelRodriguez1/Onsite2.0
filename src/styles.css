@@ -141,7 +141,7 @@ table {
     border-color: #E76800;
     color: #E76800;
     width: 117px;
-    height: 31px;
+    height: 30px;
     line-height: 18px;
     text-align: right;
     font-family: 'Montserrat', sans-serif;
@@ -281,6 +281,7 @@ transform: rotate(90deg);
 }
 .title2{
     margin-top: 30px;
+		margin-left: 15px;
 }
 .field3{
     margin-top: 19px;
@@ -372,7 +373,7 @@ transform: rotate(90deg);
     top: 16.74px;
 }
 .skill2{
-    margin-top: 42px;
+  /*  margin-top: 42px;*/
 }
 .texts2 p:first-child{
     font-family: 'Mukta', sans-serif;

@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as $ from 'jquery';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,15 +12,16 @@ import * as $ from 'jquery';
 })
 export class LoginComponent implements OnInit {
   error: any[];
+    error2: any[];
   password;
   email;
   cerrarAbrir = "";
   abrir = false;
   pagina = "";
   childData = [];
-
+  Forgot = 0;
   list = "";
-
+rtrespuesta="";
 
   constructor(public af: AngularFireAuth, private router: Router) {
 
@@ -27,7 +29,30 @@ export class LoginComponent implements OnInit {
 
   }
 
+Forgot1(){
+    this.Forgot = 1;
+}
+onRecuperation(formData) {
+var array=[];
+  if(formData.valid) {
+    var auth = firebase.auth();
+    var emailAddress = formData.value.email;
+    auth.sendPasswordResetEmail(emailAddress).then(function() {
+      alert("bien");
+      //  array.push("Check mail");
+        $("#email").val("");
+          $("#eror2").html("Check mail");
 
+    }).catch(
+      (err) => {
+
+      //array.push();
+        $("#eror2").html(err.message);
+    })
+
+  }
+
+}
 
   ngOnInit() {
   }
@@ -36,16 +61,16 @@ export class LoginComponent implements OnInit {
       this.af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password).then((resolve) => {
         formData.reset();
         this.abrir = true;
-        $(".modal-backdrop").css("display","none");
+        $(".modal-backdrop").css("display", "none");
       }).then(() => {
         this.af.authState.subscribe(authState => {
           if (authState) {
             console.log(authState.displayName);
             console.log(authState.email);
             if (authState.displayName == "hire") {
-              location.href ="/Hireprincipal";
+              location.href = "/Hireprincipal";
             } else if (authState.displayName == "pro") {
-              location.href ='/ProfilePro';
+              location.href = '/ProfilePro';
               console.log('pro')
             }
           }

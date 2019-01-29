@@ -5,7 +5,7 @@ import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireModule } from "angularfire2";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppComponent } from './app.component';
@@ -60,12 +60,13 @@ import { ProjectsComponent } from './components/pro/profile-pro/projects/project
     AngularFireDatabaseModule,
     FormsModule,
     NgbModule,
+    ReactiveFormsModule,
     AngularFireAuthModule,
     SlickCarouselModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
     })
-    
+
   ],
   providers: [ServiceService,AuthGuard],
   bootstrap: [AppComponent]

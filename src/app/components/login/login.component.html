@@ -23,7 +23,7 @@
               </div>
             </a>
           </div-->
-          <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="Formulario">
+          <form  #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="Formulario" *ngIf="Forgot==0">
             <div class="fields container">
               <label for="">Username</label>
               <div class="row">
@@ -47,7 +47,7 @@
               </div>
               <div class="row lineaFinalultimate">
                 <div class="col-sm input-group">
-                  <div class='forgotPass' routerLink='../Recuperar'>
+                  <div class='forgotPass' (click)="Forgot1()" >
                     Forgot your password
                   </div>
                 </div>
@@ -59,8 +59,49 @@
               </div>
             </div>
           </form>
+
+
+
+
+
+
+
+
+
+
+
+
+           <div class="center"   *ngIf="Forgot==1">
+
+                     <div class="z-depth-1 grey lighten-4 row" style="margin-top:50px; height: 150px;">
+                       <form #formData='ngForm' (ngSubmit)="onRecuperation(formData)"  class="col s12" method="post">
+                         <div class="row">
+                           <div class="col-sm input-group">
+                             <div class="input-group-prepend">
+                               <div class="icon_img usuarioNaranja"></div>
+                             </div>
+                             <input class='validate form-control' id="exampleInputEmail1" type='email' (ngModel)="email" name='email' placeholder="Username" required/>
+
+                           </div>
+                         </div>
+                         <br />
+                         <div class="principal">
+                           <div class='row'>
+                             <button [disabled]="!formData.valid" class="botonNaranja">
+                               Ok
+                             </button>                           </div>
+                         </div>
+                       </form>
+                     </div>
+               </div>
+
+
+
+
+
           <br>
           <span class="error" *ngIf="error">{{ error }}</span>
+            <span class="error" id="eror2" *ngIf="error2">{{ error2 }}</span>
         </div>
       </div>
     </div>

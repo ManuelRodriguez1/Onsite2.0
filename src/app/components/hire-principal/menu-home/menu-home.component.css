@@ -6,7 +6,9 @@
   margin-top: 20px;
   outline: 0;
 }
-
+.marginleft0{
+  margin-left: 0;
+}
 .input-group-prepend {
   /*display: none;*/
 }
@@ -117,6 +119,7 @@ margin-top: 70px;
   height: 16px;
   content: '';
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .input-assumpte:checked+label:before {
@@ -145,19 +148,146 @@ margin-top: 70px;
   color: rgba(0, 0, 0, 0.5);
   line-height: 40px;
 }
-.btnHome{
-width: 135px;
-height: 33.72px;
-border: 1px solid #5B5B5B;
-box-sizing: border-box;
+
+.btnHome {
+  width: 135px;
+  height: 33.72px;
+  border: 1px solid #5B5B5B;
+  box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  font-size: 15px;
+  text-align: center;
+  letter-spacing: -0.025em;
+  margin-left: 20px;
+  color: #5B5B5B;
+  line-height: 32px;
+}
+
+/*Se muestra los projects */
+
+.contenedor_PP {
+  height: 253px;
+  width: 100%;
+  border-bottom: 1px solid #DADADA;
+  overflow: hidden;
+  font-family: 'Mukta', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 22px;
+  font-size: 16px;
+  letter-spacing: -0.025em;
+  color: #5B5B5B;
+  float: left;
+}
+
+.nantext {
+  font-family: 'Mukta', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  color: #E76800;
+}
+
+.contenedor_PP_1 {
+  float: left;
+  width: 500px;
+  height: 100%
+}
+
+.contenedor_PP_2 {
+  width: 313px;
+  height: 100%;
+  position: relative;
+  float: left;
+}
+
+/*
+.contenedor_PP_2 div {
+  width: 284px;
+  height: 207px;
+  background: red;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: relative;
+}*/
+
+.contenedorpaddingHome {
+  height: 1013px;
+  overflow-y: scroll;
+}
+ .datosneg{
+   float: left;
+   margin-top: 40px;
+   padding-right: 10px;
+
+   height: 100%;
+ }
+ .datosneg2{
+   height: 100%;
+   margin-top: 40px;
+ }
+
+ .bolddatos2{
+  color: #5B5B5B;
+  font-weight: bold;
+ }
+  #map-canvas {
+   width: 284px;
+   height: 207px;
+
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   position: relative;
+ }
+ agm-map{
+   height: 100%;
+ }
+ .CActive{
+   color:#219653;
+   font-weight: bold;
+
+
+ }
+ .CFinished{
+   color:#CF0C0C;
+   font-weight: bold;
+
+ }
+.maplinea{
+  background: #C4C4C4;
+  width: 1px;
+  height: 160px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.empleos1012{
+font-family: 'Mukta', sans-serif;
 font-style: normal;
-font-weight: normal;
+font-weight: 300;
 line-height: 20px;
-font-size: 15px;
-text-align: center;
-letter-spacing: -0.025em;
-    margin-left: 20px;
+    margin-top: 37px;
+font-size: 20px;
 color: #5B5B5B;
-    line-height: 32px;
+
+}
+
+.submensajeshire{
+font-family: 'Mukta', sans-serif;
+font-style: normal;
+font-weight: 500;
+line-height: 20px;
+font-size: 18px;
+
+
+color: #5B5B5B;
+}
+.fields20{
+  margin-top:20px;
 }
