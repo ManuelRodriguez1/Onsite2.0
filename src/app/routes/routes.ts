@@ -15,12 +15,8 @@ export const router: Routes = [
     { path: 'Home', component: HomeComponent },
     { path: 'Hire', component: HireComponent },
     { path: 'Pro', component: ProComponent },
-<<<<<<< Updated upstream
-    { path: 'ProfilePro', component: ProfileProComponent, canActivate: [AuthGuard] },
-=======
     { path: 'Recuperar', component: RecordarPassComponent },
     { path: 'ProfilePro', component: ProfileProComponent , canActivate: [AuthGuard]},
->>>>>>> Stashed changes
     { path: 'Hireprincipal', component: HirePrincipalComponent, canActivate: [AuthGuard] }//login
 
 ]
