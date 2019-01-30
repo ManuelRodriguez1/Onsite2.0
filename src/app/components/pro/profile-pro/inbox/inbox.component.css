@@ -29,6 +29,7 @@
 }
 .profileother{
     overflow: hidden;
+    cursor: pointer;
 }
 .profileother:last-child{
     margin-bottom: 50px;

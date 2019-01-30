@@ -5,11 +5,12 @@
 
   <div class="chat">
     <div class="cols-sm-3 col col1">
-        <div class="profileother" *ngFor="let i of data">
+        <div class="carga" *ngIf="datos.length == 0">Cargando...</div>
+        <div class="profileother" *ngFor="let d of datos" (click)="info(d.email)">
           <div class="titleinbox">Subject Line</div>
           <div class="imguser"></div>
           <div class="continbox">
-            <div class="emailin">Email Name Space</div>
+            <div class="emailin">{{ d.email }}</div>
             <div class="availble">
               <div class="status"></div>
               <p>Available </p>
@@ -18,12 +19,12 @@
           <div class="dropdown-divider div"></div>
         </div>
     </div>
-    <div class="cols-sm-6 col col2">
+    <div class="cols-sm-6 col col2" *ngIf="email != ''">
       <div class="dataprofile">
         <div class="imgprofile"></div>
         <div class="infoprofile">
           <p>Subject Line</p>
-          <p>Email Name Space</p>
+          <p>{{ email }}</p>
           <div class="profilestatus">
             <div class="imgestado"></div>
             <p>Available</p>
@@ -65,7 +66,7 @@
       <p>New Message</p>
       <div class="imgmsg"></div>
     </div>
-    <div class="sendmessage">
+    <div class="sendmessage" *ngIf="email != ''">
       <div class="iconadj2"></div>
       <input type="text" class="msginput" placeholder="Short Field">
       <div class="icoletter"></div>

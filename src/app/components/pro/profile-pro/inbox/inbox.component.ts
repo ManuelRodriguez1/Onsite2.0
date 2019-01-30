@@ -8,22 +8,23 @@ import * as firebase from 'firebase';
 })
 export class InboxComponent implements OnInit {
 
-  data = ["", "", "", "", ""];
   emailUser: any
   database = firebase.database();
   user = firebase.auth().currentUser
-  infouser: any
+  datos: any[]
+  email = ''
 
   constructor() { }
 
   ngOnInit() {
-     
-    this.database.ref('users_pro')
-    .on('value', function(e){
-      console.log(e.val())
+    this.datos = []
+    this.database.ref('users_pro/')
+    .on('value', e => {
+      e.forEach(i => {
+        this.datos.push(i.val())
+      })
     })
-    
-    
+    console.log(this.datos)
   }
 
   initChat(){
@@ -33,4 +34,7 @@ export class InboxComponent implements OnInit {
     })
   }
 
+  info(e){
+    this.email = e
+  }
 }
