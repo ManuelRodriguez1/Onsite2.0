@@ -70,7 +70,6 @@ import { ProfileComponent } from './components/hire-principal/profile/profile.co
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
     })
-
   ],
   providers: [ServiceService,AuthGuard],
   bootstrap: [AppComponent]
