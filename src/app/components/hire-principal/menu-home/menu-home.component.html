@@ -2,13 +2,13 @@
   <div *ngIf="HomeFormularioNw == 0">
     <div class="container skill">
       <div class="row">
-        <div class="title2">
+        <div class="title2 t2mar0" >
           Check uot your projects
         </div>
       </div>
       <div class="row">
         <div class="col-sm input-group">
-          <input type="text" readonly class="form-control" placeholder="Search projects" id="nombreProjects">
+          <input type="text" readonly class="form-control mosnserat" placeholder="Search projects" id="nombreProjects">
           <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
         </div>
       </div>
@@ -400,19 +400,16 @@ Set hiring radius
           <br>your hiring radius.</p>
       </div>
 
-<!--div class="row">
-  ram: {{ selectedRam }}
+<div class="row">
+
   <div class="col-sm ">
-    <input #ramSelector name="ram" type="range" min="0" max="{{ ramMaxValue }}" [(ngModel)]="mymodel" (ngModelChange)="setRam($event)" value="0">
+<div class="custom-slider" style="margin-top:30px">
+    <ng5-slider [(value)]="value" class="inputrangenaranja" [options]="options"></ng5-slider>
+  </div>
   </div>
 
-</div-->
-<div style="position:relative; margin:auto; width:90%">
-    <span style="position:absolute; color:red; border:1px solid blue; min-width:100px;">
-    <span id="myValue"></span>
-    </span>
-    <input type="range" id="myRange" max="1000" min="0" style="width:80%">
-  </div>
+</div>
+
 
 
       <!--div class="field3 container">

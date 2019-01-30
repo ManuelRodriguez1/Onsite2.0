@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as firebase from 'firebase/app';
 @Component({
   selector: 'app-menu-projects',
   templateUrl: './menu-projects.component.html',
@@ -12,15 +12,35 @@ export class MenuProjectsComponent implements OnInit {
   page = 1;
   select = 0;
   Homeprojects=1;
+childData=[];
 
-  projects = ['proyecto1', 'proyecto2', 'proyecto3',
-  'proyecto4', 'proyecto5', 'proyecto6'];
   selectsproject = [];
-  
+
   constructor() { }
 
   ngOnInit() {
+    this.childData=this.VerDatosTiempoReal();
   }
+  perfilPro(x){
+    alert("hola");
+    alert(x)
+  }
+
+
+    VerDatosTiempoReal() {
+      var returnArr = [];
+      //console.log(childKey);
+      firebase.database().ref("projectsHire/").once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+          returnArr.push(childData);
+        });
+
+
+      });
+      return returnArr;
+    }
   selectskill(e) {
     this.up = !this.up;
     var add = true;
@@ -49,7 +69,12 @@ export class MenuProjectsComponent implements OnInit {
     {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
     {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
     {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"}
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+
   ];
 
   Projectsworkers = [

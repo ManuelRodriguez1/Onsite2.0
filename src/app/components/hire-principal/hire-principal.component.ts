@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hire-principal.component.css']
 })
 export class HirePrincipalComponent implements OnInit {
-  menuVista = "Home";
+  menuVista = "Projects";
     m = 4;
+      menushow = false
   constructor() { }
 
   ngOnInit() {
@@ -17,6 +18,7 @@ export class HirePrincipalComponent implements OnInit {
           this.menuVista = "Home";
       } else if (e == 2) {
           this.menuVista = "Inbox";
+          this.menushow = !this.menushow
       } else if (e == 3) {
           this.menuVista = "Projects";
       } else if (e == 4) {

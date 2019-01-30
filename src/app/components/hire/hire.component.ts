@@ -33,8 +33,6 @@ export class HireComponent implements OnInit {
 
     console.log(formData);
     if (formData.valid) {
-      alert("entrooo");
-
       this.af.auth.createUserAndRetrieveDataWithEmailAndPassword(
         formData.value.Email,
         formData.value.Password
@@ -74,22 +72,22 @@ export class HireComponent implements OnInit {
     }
     else {
       if (formData.control.controls.FirstName.status == "INVALID") {
-        this.error = "requerido FirstName";
+        this.error = "Require FirstName";
       }
       else if (formData.control.controls.LastName.status == "INVALID") {
-        this.error = "requerido LastName";
+        this.error = "Require LastName";
       }
       else if (formData.control.controls.PhoneNumber.status == "INVALID") {
-        this.error = "requerido PhoneNumber";
+        this.error = "Require PhoneNumber";
       }
       else if (formData.control.controls.Email.status == "INVALID") {
-        this.error = "requerido email";
+        this.error = "Require email";
       }
       else if (formData.control.controls.Password.status == "INVALID") {
-        this.error = "requerido Password";
+        this.error = "Require Password";
       }
       else if (formData.control.controls.Entercityorzipcode.status == "INVALID") {
-        this.error = "requerido Entercityorzipcode";
+        this.error = "Require Entercityorzipcode";
       }
 
     }

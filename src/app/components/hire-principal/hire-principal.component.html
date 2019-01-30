@@ -2,6 +2,14 @@
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Home.svg" alt="">
 </div>
 
+<div *ngIf="menuVista == 'Inbox'" class="">
+  <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/inboxchat.svg" alt="">
+</div>
+
+<div *ngIf="menuVista == 'Projects'" class="">
+  <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Projects.svg" alt="">
+</div>
+
 
   <section class="contentHire">
 
@@ -27,19 +35,24 @@
               <div class="t1m">Inbox</div>
               <div class="flechateam"></div>
             </div>
+            <div class="menusmall margintopinbox" *ngIf="menushow == true">
+              <div class="option">Inbox</div>
+              <div class="option">Sent</div>
+              <div class="option ">Trash</div>
+            </div>
             <div (click)="menu(3)" class="itemsprincipales" [class.itemsprincipales1]="m == 3">
               <div class="t1m">Projects</div>
-              <div class="flechateam"></div>
+
             </div>
 
             <div (click)="menu(4)" class="itemsprincipales" [class.itemsprincipales1]="m == 4">
               <div class="t1m">Explore</div>
-              <div class="flechateam"></div>
+
             </div>
 
             <div (click)="menu(5)" class="itemsprincipales" [class.itemsprincipales1]="m == 5">
               <div class="t1m">Sign Out</div>
-              <div class="flechateam"></div>
+
             </div>
           </div>
 
@@ -55,10 +68,10 @@
           <div *ngIf="menuVista == 'Home'" class="menuHome">
             <app-menu-home></app-menu-home>
           </div>
-          <div *ngIf="menuVista == 'Inbox'" class="menuInbox">
-            hola1
+          <div *ngIf="menuVista == 'Inbox'" class="menuHome">
+          <app-inbox></app-inbox>
           </div>
-          <div *ngIf="menuVista == 'Projects'" class="menuProjects">
+          <div *ngIf="menuVista == 'Projects'" class="menuHome">
             <app-menu-projects></app-menu-projects>
           </div>
 

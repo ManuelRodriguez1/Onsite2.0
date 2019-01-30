@@ -27,12 +27,12 @@
     width: 220px;
     height: 93px;
     margin-left: 13px;
-    border: 1px solid #b3b0b0;
+    border: 1px solid #F1F1F1;
     position: relative;
 }
 .contenedorprojectdescription:hover
 {
-    border: 1px solid #E76800;
+    border: 1px solid #F1F1F1;
 }
 .contenedorprojectdescription:nth-child(1)
 {
@@ -44,6 +44,7 @@
     display: -webkit-box;
     overflow-x: scroll;
     height: 120px;
+    padding: 0;
 }
 .contenedorinfoproject
 {
@@ -54,7 +55,7 @@
     transform: translate(-50%,-50%);
 }
 .contenedorinfoproject p:nth-child(1)
-{   
+{
     font-family: 'Mukta', sans-serif;
     font-style: normal;
     font-weight: bold;
@@ -74,7 +75,7 @@
     margin-bottom: 2px;
 }
 .contenedorinfoproject p:nth-child(3)
-{   
+{
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -111,12 +112,14 @@
     background-color: #c4c4c4;
     margin-top: 25px;
     margin-bottom: 30px;
- } 
+ }
  .card-columns .card
  {
     width: 222px;
     height: 255px;
     border: none;
+
+
  }
  .imagenperfilprojects
  {
@@ -194,22 +197,31 @@
 }
 .lineaderechacards
 {
-    width: 1px;
-    height: 225px;
-    background-color: #c4c4c4;
-    position: absolute;
-    right: 0px;
-    top: 0px;
+  width: 1px;
+height: 230px;
+background-color: #c4c4c4;
+position: absolute;
+right: 0px;
+top: 50%;
+transform: translateY(-50%);
 }
 
-
+.lineaabajocards{
+  height: 1px;
+width:  205px;
+background-color: #c4c4c4;
+position: absolute;
+bottom:  0px;
+left: 50%;
+transform: translateX(-50%);
+}
 
 
 /* Profile workers */
 
 .profileprojectsworkers
 {
-    
+
 }
 .perfilworkers
 {
@@ -221,7 +233,7 @@
     float: left;
 }
 .nombreworkers
-{   
+{
     font-family: 'Mukta', sans-serif;
     font-style: normal;
     font-weight: bold;
@@ -237,7 +249,7 @@
 {
     width: 116px;
     height: 16px;
-    
+
     overflow: hidden;
     margin-left: 10px;
     float: left;
@@ -290,7 +302,7 @@
     margin-top: 30px;
     display: -webkit-box;
     overflow-x:scroll;
-    height: 270px; 
+    height: 270px;
 }
 .infoprofileprojects
 {
@@ -304,7 +316,7 @@
 {
     width: 185px;
     border-bottom: 1px solid #c4c4c4;
-    height: 37px; 
+    height: 37px;
     margin: auto;
 }
 .superiorinfoprofileprojects p
@@ -342,7 +354,7 @@
     line-height: 22px;
     font-size: 16px;
     letter-spacing: -0.025em;
-    color: #219653; 
+    color: #219653;
     margin-left: 15px;
 }
 .inferiorinfoprofileprojects p:nth-child(4),.inferiorinfoprofileprojects p:nth-child(6),.inferiorinfoprofileprojects p:nth-child(8)
@@ -353,6 +365,25 @@
     line-height: 22px;
     font-size: 16px;
     letter-spacing: -0.025em;
-    color: #5B5B5B; 
+    color: #5B5B5B;
     margin-left: 15px;
+}
+
+
+
+
+.projectsgeneral::-webkit-scrollbar{
+    height: 5px;
+}
+.projectsgeneral::-webkit-scrollbar-thumb{
+    background: #C4C4C4;
+}
+
+.card-columns{
+  -webkit-column-count: auto;
+column-count: auto;
+}
+.card-columns .card{
+  margin-bottom: 0px;
+  cursor: pointer;
 }
