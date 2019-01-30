@@ -33,6 +33,8 @@ import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.compone
 import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
 import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
 import { ProjectsComponent } from './components/pro/profile-pro/projects/projects.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { ProfileComponent } from './components/hire-principal/profile/profile.component';
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import { ProjectsComponent } from './components/pro/profile-pro/projects/project
     InboxComponent,
     ExploreComponent,
     RecordarPassComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { ProjectsComponent } from './components/pro/profile-pro/projects/project
     ReactiveFormsModule,
     AngularFireAuthModule,
     SlickCarouselModule,
+    Ng5SliderModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
     })

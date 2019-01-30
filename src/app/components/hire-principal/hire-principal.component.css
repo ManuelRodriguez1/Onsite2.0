@@ -95,3 +95,15 @@ cursor: pointer;
     overflow: hidden;
     position: relative;
 }
+.margintopinbox{
+  margin-top:20px;
+}
+
+.margintopinbox::after{
+content: "";
+position: absolute;
+height: 1px;
+width: 100%;
+    left: 0;
+    border-bottom: 0.5px solid rgba(196,196,196,0.5);
+}

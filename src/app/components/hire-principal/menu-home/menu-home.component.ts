@@ -1,12 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import * as $ from 'jquery';
+import { Options,LabelType } from 'ng5-slider';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-menu-home',
   templateUrl: './menu-home.component.html',
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
+
+  value: number =1;
+   options: Options = {
+     floor: 1.00,
+     ceil: 100.00,
+     translate: (value: number, label: LabelType): string => {
+
+           return '$' + value+".00";
+
+     }
+   };
 
   lat: number = 51.678418;
   lng: number = 7.809007;
@@ -39,28 +53,11 @@ export class MenuHomeComponent implements OnInit {
   skills2Howmany: any = ["1", "2", "3", "4", "5"];
   cust = 4;
   customers = ['Customer 1', 'Customer 2', 'Customer 3'];
+  router: any;
   constructor() {
 
 
   }
-
-  /*  selectskill(e) {
-      alert(e);
-      this.up3 = !this.up3;
-      var add = true;
-      if (this.selectskills.length == 0) {
-        alert("111111111");
-        this.selectskills.push(e);
-      }
-      for (let i = 0; i < this.selectskills.length; i++) {
-        if (this.selectskills[i] == e) {
-          add = false;
-        }
-      }
-      if (add) {
-        this.selectskills.push(e);
-      }
-    }*/
 
 
   selectskill(e) {
@@ -89,17 +86,7 @@ export class MenuHomeComponent implements OnInit {
     this.childData = this.VerDatosTiempoReal();
 
     console.log(this.childData);
-    /*  firebase.database().ref('projectsHire/').push({
-        Project: "Excavation at 280 S",
-        Status: "Active",
-        Category:"Drywall",
-        Specialized: "Drywall Apprentice",
-        Howmanypeople: "4",
-        Joblocation: "1234 Meadow Dr. - Unit 123 - Wynwood, FL 33127",
-        AdditionalComments:"My whole front driveway is disgusting and I need help installing a new one. I think there are some utility lines; not sure so please help.",
-       zipcode: "",
-        mapa: '----------------------------'
-      });*/
+
 
   }
 
@@ -151,11 +138,29 @@ export class MenuHomeComponent implements OnInit {
   }
 
   final() {
-    alert("FINAL");
+
+      firebase.database().ref('projectsHire/').push({
+        Project: "Excavation at 280 S",
+        Status: "Active",
+        Category:"Drywall",
+        Specialized: "Drywall Apprentice",
+        Howmanypeople: "4",
+        Joblocation: "1234 Meadow Dr. - Unit 123 - Wynwood, FL 33127",
+        AdditionalComments:"My whole front driveway is disgusting and I need help installing a new one. I think there are some utility lines; not sure so please help.",
+       zipcode: "",
+        mapa: '----------------------------'
+      });
+
+      this.reload();
 
 
 
 
+
+
+  }
+  reload(){
+    location.reload();
   }
   getStarted() {
     this.HomeFormularioNw = 1;

@@ -38,7 +38,7 @@ var array=[];
     var auth = firebase.auth();
     var emailAddress = formData.value.email;
     auth.sendPasswordResetEmail(emailAddress).then(function() {
-      alert("bien");
+  
       //  array.push("Check mail");
         $("#email").val("");
           $("#eror2").html("Check mail");
