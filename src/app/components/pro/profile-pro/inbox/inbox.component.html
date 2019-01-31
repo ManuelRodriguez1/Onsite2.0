@@ -1,75 +1,74 @@
 <div class="input-group">
-    <input type="text" class="form-control search0" placeholder="Search by name, status or project. ">
-    <div class="search"></div>
-  </div>
+  <input type="text" class="form-control search0" placeholder="Search by name, status or project. ">
+  <div class="search"></div>
+</div>
 
-  <div class="chat">
-    <div class="cols-sm-3 col col1">
-        <div class="carga" *ngIf="datos.length == 0">Cargando...</div>
-        <div class="profileother" *ngFor="let d of datos" (click)="info(d.email)">
-          <div class="titleinbox">Subject Line</div>
-          <div class="imguser"></div>
-          <div class="continbox">
-            <div class="emailin">{{ d.email }}</div>
-            <div class="availble">
-              <div class="status"></div>
-              <p>Available </p>
-            </div>
-          </div>
-          <div class="dropdown-divider div"></div>
+<div class="chat">
+  <div class="cols-sm-3 col col1">
+    <div class="carga" *ngIf="datos.length == 0">Cargando...</div>
+    <div class="profileother" *ngFor="let d of datos" (click)="changeEmail(d.email)">
+      <div class="titleinbox">Subject Line</div>
+      <div class="imguser"></div>
+      <div class="continbox">
+        <div class="emailin">{{ d.email }}</div>
+        <div class="availble">
+          <div class="status"></div>
+          <p>Available </p>
         </div>
-    </div>
-    <div class="cols-sm-6 col col2" *ngIf="email != ''">
-      <div class="dataprofile">
-        <div class="imgprofile"></div>
-        <div class="infoprofile">
-          <p>Subject Line</p>
-          <p>{{ email }}</p>
-          <div class="profilestatus">
-            <div class="imgestado"></div>
-            <p>Available</p>
-          </div>
-        </div>
-        <div class="help">
-          <p>John Doe needs help with </p>
-          <p>Excavation</p>
-        </div>
-        <div class="dropdown-divider div"></div>
       </div>
-      <div class="minichat">
-        <div class="date">
-          <p>Day, Month, Year</p>
+      <div class="dropdown-divider div"></div>
+    </div>
+  </div>
+  <div class="cols-sm-6 col col2" *ngIf="email != null">
+    <div class="dataprofile" >
+      <div class="imgprofile"></div>
+      <div class="infoprofile">
+        <p>Subject Line</p>
+        <p>{{ email }}</p>
+        <div class="profilestatus">
+          <div class="imgestado"></div>
+          <p>Available</p>
         </div>
-        <div class="other">
+      </div>
+      <div class="help">
+        <p>John Doe needs help with </p>
+        <p>Excavation</p>
+      </div>
+      <div class="dropdown-divider div"></div>
+    </div>
+    <div class="minichat">
+      <div class="date">
+        <p>Day, Month, Year</p>
+      </div>
+      <div *ngFor="let d of datosChat">
+        <div class="other" *ngIf="d.id != user.uid">
           <div class="content">
-            <p>Hello it’s me John! 
-              <br> <br>
-              Is it me you’re looking for?
-              <br> <br>
-              I need some help with lorem ipsum dolor more ipsum and I’ve attached some images labelled as lorem ipsum more dolor. Do you think you’d be able to get it done by dolor lorem ipsum amit? Let us know if dolor ipsom is possible.
+            <p>
+              {{ d.message }}
             </p>
-            <div class="dropdown-divider div"></div>
+            <!-- <div class="dropdown-divider div"></div>
             <div class="adj">
               <div class="iconadj"></div>
               <p>Lorem_ipsum.pdf</p>
-            </div>
+            </div> -->
           </div>
         </div>
-        <div class="me">
+        <div class="me" *ngIf="d.id == user.uid">
           <div class="content2">
-            <p>I need some help with lorem ipsum dolor more ipsum and I’ve attached some images labelled</p>
+            <p>{{ d.message }}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="newmmessage">
-      <p>New Message</p>
-      <div class="imgmsg"></div>
-    </div>
-    <div class="sendmessage" *ngIf="email != ''">
-      <div class="iconadj2"></div>
-      <input type="text" class="msginput" placeholder="Short Field">
-      <div class="icoletter"></div>
-      <div class="icoprice"></div>
-    </div>
   </div>
+  <div class="newmmessage">
+    <p>New Message</p>
+    <div class="imgmsg"></div>
+  </div>
+  <div class="sendmessage" *ngIf="email != ''">
+    <div class="iconadj2"></div>
+    <input type="text" class="msginput" placeholder="Short Field">
+    <div class="icoletter" (click)="initChat()"></div>
+    <div class="icoprice"></div>
+  </div>
+</div>
