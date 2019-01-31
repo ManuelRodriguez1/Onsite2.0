@@ -35,18 +35,18 @@
 
     <div class="container">
       <div class="card-columns">
-        <div  class="card"   *ngFor="let profileprojects of perfilprojects">
-          <div (click)="perfilPro(profileprojects.nombre);">
-              <div class="imagenperfilprojects">
+        <div  class="card" *ngFor="let profileprojects of datos">
+          <div >
+              <div class="imagenperfilprojects" (click)="perfilPro(profileprojects.nombre);">
                 <img class="card-img-top" src="{{ profileprojects.fotoperfil }}" alt="Card image cap">
               </div>
               <div class="card-body">
-                <p class="nombreprojectperfil">{{ profileprojects.nombre }}</p>
-                <p class="colaboracioprojectperfil">{{ profileprojects.subtitulo }}</p>
+                <p class="nombreprojectperfil">{{ profileprojects.name }}</p>
+                <p class="colaboracioprojectperfil">{{ profileprojects.skills }}</p>
                 <div class="iconoestrellasperfil"><img src="{{ profileprojects.estrellas }}" alt="" width="100%"></div>
-                <div class="btnmessageproject">
+                <div (click)="messageboton(profileprojects.email)" class="btnmessageproject">
                   <div class="iconoinboxprofile"></div>
-                  <p>Message</p>
+                  <p>Message </p>
                 </div>
               </div>
               <div class="lineaderechacards"> </div>
