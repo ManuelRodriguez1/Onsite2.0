@@ -13,8 +13,14 @@ export class MenuProjectsComponent implements OnInit {
   select = 0;
   Homeprojects=1;
 childData=[];
-
+perfilIndividuals=[];
   selectsproject = [];
+ProfilesResena1=0;
+childDatarese=0;
+   ProfilesResena() {
+     this.childDatarese=1;
+       this.ProfilesResena1 = 1;
+  }
 
   constructor() { }
 
@@ -22,10 +28,11 @@ childData=[];
     this.childData=this.VerDatosTiempoReal();
   }
   perfilPro(x){
-    alert("hola");
-    alert(x)
-  }
 
+    this.Homeprojects=2;
+    this.perfilIndividuals=x;
+
+  }
 
     VerDatosTiempoReal() {
       var returnArr = [];
@@ -65,15 +72,15 @@ childData=[];
     {nombre: "prueba4",staus: "Active",}
   ];
   perfilprojects = [
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
-    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "Jimmy is helping with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "1Jimmys with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "2Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "3Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "4Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "5Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "6Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "7Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "8Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
+    {fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg",nombre: "9Jimmy with",subtitulo:"Drywall",estrellas:"../../../../assets/imagenes/profileproject/estrellas.svg"},
 
   ];
 

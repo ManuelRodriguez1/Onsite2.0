@@ -23,6 +23,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
 
 import {MenuHomeComponent} from './components/hire-principal/menu-home/menu-home.component';
+import {MenuExploreComponent} from './components/hire-principal/menu-explore/menu-explore.component';
 import {MenuProjectsComponent} from './components/hire-principal/menu-projects/menu-projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServiceService } from './services/service.service';
@@ -54,7 +55,8 @@ import { ProfileComponent } from './components/hire-principal/profile/profile.co
     ExploreComponent,
     RecordarPassComponent,
     ProjectsComponent,
-    ProfileComponent
+    ProfileComponent,
+    MenuExploreComponent
   ],
   imports: [
     BrowserModule,

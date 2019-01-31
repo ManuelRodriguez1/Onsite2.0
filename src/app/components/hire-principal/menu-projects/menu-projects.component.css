@@ -1,6 +1,7 @@
 .projectsmenu
 {
     margin-top: 150px;
+    width: 940px;
 }
 .projectsmenu .list-group
 {
@@ -17,6 +18,9 @@
     border: 1px solid #f1f1f1;
     outline: none;
 
+}
+.margin30si{
+  margin-top: 30px;
 }
 .projectsmenu .input-group .form-control:focus
 {
@@ -120,6 +124,7 @@
     border: none;
 
 
+
  }
  .imagenperfilprojects
  {
@@ -219,9 +224,19 @@ transform: translateX(-50%);
 
 /* Profile workers */
 
-.profileprojectsworkers
+.overrese
 {
+    overflow: hidden;
+}
 
+.perfilworkersresea{
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #E76800;
+  float: left;
+  margin-right: 20px;
 }
 .perfilworkers
 {
@@ -232,6 +247,20 @@ transform: translateX(-50%);
     background-color: #E76800;
     float: left;
 }
+
+.nombreworkersre
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 45px;
+    font-size: 18px;
+  color: #5B5B5B;
+
+
+}
+
+
 .nombreworkers
 {
     font-family: 'Mukta', sans-serif;
@@ -244,6 +273,30 @@ transform: translateX(-50%);
     margin-top: 18px;
     margin-left: 11px;
     float: left;
+}
+.leftresenaprim{
+  float: left;
+    width: 798px;
+    margin-bottom: 40px;
+}
+.clasrestext{
+    font-family: 'Mukta', sans-serif;
+font-style: normal;
+font-weight: normal;
+line-height: 19px;
+font-size: 16px;
+color: #828282;
+
+}
+.heightresena{
+  height: 100%;
+}
+.contenedorestrellasworkersres
+{
+    width: 116px;
+    height: 16px;
+    overflow: hidden;
+    margin-top: -10px;
 }
 .contenedorestrellasworkers
 {
@@ -303,6 +356,7 @@ transform: translateX(-50%);
     display: -webkit-box;
     overflow-x:scroll;
     height: 270px;
+    padding: 0px;
 }
 .infoprofileprojects
 {
@@ -382,8 +436,18 @@ transform: translateX(-50%);
 .card-columns{
   -webkit-column-count: auto;
 column-count: auto;
+height: 530px;
+overflow-y: scroll;
 }
 .card-columns .card{
   margin-bottom: 0px;
   cursor: pointer;
+}
+
+
+.card-columns .card:nth-child(4n+4) .lineaderechacards{
+display: none;
+}
+.infoprofileprojects:first-child{
+  margin-left: 0px;
 }
