@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-inbox',
@@ -14,7 +15,7 @@ export class InboxComponent implements OnInit {
   datos: any[]
   email = ''
 
-  constructor() { }
+  constructor(private service: ServiceService) { }
 
   ngOnInit() {
     this.datos = []
@@ -25,6 +26,7 @@ export class InboxComponent implements OnInit {
       })
     })
     console.log(this.datos)
+    console.log(this.service.devolverData())
   }
 
   initChat(){
@@ -36,5 +38,6 @@ export class InboxComponent implements OnInit {
 
   info(e){
     this.email = e
+    console.log(e)
   }
 }
