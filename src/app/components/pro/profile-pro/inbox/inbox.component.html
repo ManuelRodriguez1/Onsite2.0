@@ -10,7 +10,7 @@
       <div class="titleinbox">Subject Line</div>
       <div class="imguser"></div>
       <div class="continbox">
-        <div class="emailin">{{ d.test }}</div>
+        <div class="emailin">{{ d.email }}</div>
         <div class="availble">
           <div class="status"></div>
           <p>Available </p>
@@ -40,7 +40,7 @@
       <div class="date">
         <p>Day, Month, Year</p>
       </div>
-      <div *ngFor="let d of datosChat">
+      <div *ngFor="let d of datosChat | async">
         <div class="other" *ngIf="d.id != user.uid">
           <div class="content">
             <p>

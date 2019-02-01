@@ -6,7 +6,7 @@
 <div class="chat">
   <div class="cols-sm-3 col col1">
     <div class="carga" *ngIf="datos.length == 0">Cargando...</div>
-    <div class="profileother" *ngFor="let d of datos" (click)="changeEmail(d.email)">
+    <div class="profileother" *ngFor="let d of datos | async" (click)="changeEmail(d.email)">
       <div class="titleinbox">Subject Line</div>
       <div class="imguser"></div>
       <div class="continbox">
@@ -40,7 +40,7 @@
       <div class="date">
         <p>Day, Month, Year</p>
       </div>
-      <div *ngFor="let d of datosChat">
+      <div *ngFor="let d of datosChat | async">
         <div class="other" *ngIf="d.id != user.uid">
           <div class="content">
             <p>
