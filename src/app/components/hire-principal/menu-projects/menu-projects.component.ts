@@ -37,12 +37,8 @@ export class MenuProjectsComponent implements OnInit {
     this.childData = this.VerDatosTiempoReal();
   }
   messageboton(email) {
-    // var newuser = this.user.replace('.','-')
     var newuserdestinatario = email
     this.service.GuardarDatos(newuserdestinatario)
-    // this.database.ref('/chat/'+newuser+"-"+newuserdestinatario).push({
-    //     message: this.user
-    // })
   }
   perfilPro(x) {
     this.Homeprojects = 2;
