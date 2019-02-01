@@ -36,6 +36,7 @@ import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.
 import { ProjectsComponent } from './components/pro/profile-pro/projects/projects.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ProfileComponent } from './components/hire-principal/profile/profile.component';
+import { MenuInboxComponent } from './components/hire-principal/menu-inbox/menu-inbox.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ProfileComponent } from './components/hire-principal/profile/profile.co
     RecordarPassComponent,
     ProjectsComponent,
     ProfileComponent,
-    MenuExploreComponent
+    MenuExploreComponent,
+    MenuInboxComponent
   ],
   imports: [
     BrowserModule,

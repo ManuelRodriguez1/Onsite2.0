@@ -9,6 +9,7 @@ export class ServiceService {
 
   pro: AngularFireList<any>
   selectPro: Pro = new Pro();
+  emailDestinatario : any
 
   constructor(private afd: AngularFireDatabase) { }
 
@@ -27,6 +28,15 @@ export class ServiceService {
       customer: data.customer,
       message: data.message
     })
+  }
+
+  GuardarDatos(e)
+  {
+      this.emailDestinatario = e
+  }
+  DevolverDatos()
+  {
+    return this.emailDestinatario;
   }
 
 }

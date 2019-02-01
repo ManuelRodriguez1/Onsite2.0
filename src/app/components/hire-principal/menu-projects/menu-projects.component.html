@@ -1,6 +1,3 @@
-<!--h3>Child Component</h3>
-<label>Child Component</label>
-<p>hijoooo: {{ PData }}</p-->
 <section class="projectsmenu">
   <div *ngIf="Homeprojects == 1">
     <div class="container skill">
@@ -20,7 +17,6 @@
           <p>{{s.Project}}</p>
         </div>
       </div>
-
     </div>
 
     <div class="container projectsgeneral">
@@ -38,37 +34,28 @@
 
     <div class="container">
       <div class="card-columns">
-        <div class="card" *ngFor="let profileprojects of perfilprojects">
-          <div (click)="perfilPro(profileprojects);">
-            <div class="imagenperfilprojects">
-              <img class="card-img-top" src="{{ profileprojects.fotoperfil }}" alt="Card image cap">
-            </div>
-            <div class="card-body">
-              <p class="nombreprojectperfil">{{ profileprojects.nombre }}</p>
-              <p class="colaboracioprojectperfil">{{ profileprojects.subtitulo }}</p>
-              <div class="iconoestrellasperfil"><img src="{{ profileprojects.estrellas }}" alt="" width="100%"></div>
-              <div class="btnmessageproject">
-                <div class="iconoinboxprofile"></div>
-                <p>Message</p>
+        <div  class="card" *ngFor="let profileprojects of datos">
+          <div>
+              <div class="imagenperfilprojects" (click)="perfilPro(profileprojects.nombre);">
+                <img class="card-img-top" src="{{ profileprojects.fotoperfil }}" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <p class="nombreprojectperfil">{{ profileprojects.name }}</p>
+                <p class="colaboracioprojectperfil">{{ profileprojects.skills }}</p>
+                <div class="iconoestrellasperfil"><img src="{{ profileprojects.estrellas }}" alt="" width="100%"></div>
+                <div (click)="messageboton(profileprojects.email)" class="btnmessageproject">
+                  <div class="iconoinboxprofile"></div>
+                  <p>Message </p>
+                </div>
+              </div>
+              <div class="lineaderechacards"> </div>
+              <div class="lineaabajocards">
               </div>
             </div>
-            <div class="lineaderechacards"> </div>
-            <div class="lineaabajocards">
-            </div>
-          </div>
-
-        </div>
-
-
-
-
-
-
       </div>
     </div>
-
-
   </div>
+</div>
 
 
 
