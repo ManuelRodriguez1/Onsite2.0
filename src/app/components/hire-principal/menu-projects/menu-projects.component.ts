@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { ServiceService } from 'src/app/services/service.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 @Component({
   selector: 'app-menu-projects',
   templateUrl: './menu-projects.component.html',
@@ -25,7 +26,11 @@ export class MenuProjectsComponent implements OnInit {
   database = firebase.database();
   datos: any[]
   user = firebase.auth().currentUser.email
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService,private db:AngularFirestore) {
+
+
+
+}
   ngOnInit() {
     this.datos = []
     this.database.ref('users_pro/')
@@ -34,7 +39,8 @@ export class MenuProjectsComponent implements OnInit {
           this.datos.push(i.val())
         })
       })
-    this.childData = this.VerDatosTiempoReal();
+    this.childData =[];
+     this.VerDatosTiempoReal();
   }
   messageboton(email) {
     var newuserdestinatario = email
@@ -45,16 +51,9 @@ export class MenuProjectsComponent implements OnInit {
     this.perfilIndividuals = x;
   }
   VerDatosTiempoReal() {
-    var returnArr = [];
-    //console.log(childKey);
-    firebase.database().ref("projectsHire/").once('value', function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var childKey = childSnapshot.key;
-        var childData = childSnapshot.val();
-        returnArr.push(childData);
-      });
-    });
-    return returnArr;
+
+
+
   }
   selectskill(e) {
     this.up = !this.up;

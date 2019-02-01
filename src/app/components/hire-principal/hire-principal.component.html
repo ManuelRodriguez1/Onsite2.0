@@ -1,44 +1,25 @@
-
 <div *ngIf="menuVista == 'Home'" class="">
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Home.svg" alt="">
 </div>
-
 <div *ngIf="menuVista == 'Inbox'" class="">
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/inboxchat.svg" alt="">
 </div>
-
 <div *ngIf="menuVista == 'Projects'" class="">
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Projects.svg" alt="">
 </div>
-
 <div *ngIf="menuVista == 'Profile'" class="">
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Profile.svg" alt="">
 </div>
-
 <div *ngIf="menuVista == 'Explore'" class="">
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Explore.svg" alt="">
 </div>
-
-
-  <section class="contentHire">
-
-
-    <!--label>padreeeee</label>
-    <input type="text" #pcomponent (keyup)="0"/>
-
-
-    <app-menu-projects [PData]="pcomponent.value" (childEvent)="CData=$event"></app-menu-projects-->
-
-
+<section class="contentHire">
   <div class="row">
-    <div class="col-sm-3" >
-
+    <div class="col-sm-3">
       <div class="menuYaLoguiado">
         <div class="profilleloguiado">
           <div class="blueprofileicon"></div>
-
           <div class="nomsi"><span>Welcome</span><br>John Doe</div>
-
         </div>
         <div class="menuTeam">
           <div class="">
@@ -57,48 +38,32 @@
             </div>
             <div (click)="menu(3)" class="itemsprincipales" [class.itemsprincipales1]="m == 3">
               <div class="t1m">Projects</div>
-
             </div>
-
             <div (click)="menu(4)" class="itemsprincipales" [class.itemsprincipales1]="m == 4">
               <div class="t1m">Explore</div>
-
             </div>
-
             <div (click)="menu(5)" class="itemsprincipales" [class.itemsprincipales1]="m == 5">
               <div class="t1m">Sign Out</div>
-
             </div>
           </div>
-
         </div>
       </div>
-
-
     </div>
-    <div class="col-sm-8" >
-
-        <div class="conxenhireright">
-
-          <div *ngIf="menuVista == 'Home'" class="menuHome">
-            <app-menu-home></app-menu-home>
-          </div>
-          <div *ngIf="menuVista == 'Inbox'" class="menuHome">
+    <div class="col-sm-8">
+      <div class="conxenhireright">
+        <div *ngIf="menuVista == 'Home'" class="menuHome">
+          <app-menu-home></app-menu-home>
+        </div>
+        <div *ngIf="menuVista == 'Inbox'" class="menuHome">
           <app-menu-inbox></app-menu-inbox>
-          </div>
-          <div *ngIf="menuVista == 'Projects'" class="menuHome">
-            <app-menu-projects></app-menu-projects>
-          </div>
-
-          <div *ngIf="menuVista == 'Explore'" class="menuExplore">
-            <app-menu-explore></app-menu-explore>
-          </div>
-
-
+        </div>
+        <div *ngIf="menuVista == 'Projects'" class="menuHome">
+          <app-menu-projects></app-menu-projects>
+        </div>
+        <div *ngIf="menuVista == 'Explore'" class="menuExplore">
+          <app-menu-explore></app-menu-explore>
         </div>
       </div>
     </div>
-
-
-
+  </div>
 </section>
