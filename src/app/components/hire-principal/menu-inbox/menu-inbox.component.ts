@@ -35,9 +35,10 @@ export class MenuInboxComponent implements OnInit {
     //Ver mensajes del chat
     this.datosChat = this.db.collection('Chat/Chateando/'+this.me+'|'+other,
     ref => ref.orderBy('fecha','asc')).valueChanges()
-    setTimeout(() => {
+    setInterval(() => {
       $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight}, 200)
     }, 500);
+
   }
 
   changeEmail(e){
