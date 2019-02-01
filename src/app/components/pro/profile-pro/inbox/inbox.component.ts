@@ -28,7 +28,8 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.other = this.email.replace('.', '-')
-    this.datosChat = this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me).valueChanges()
+    this.datosChat = this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me,
+    ref => ref.orderBy('fecha','asc')).valueChanges()
   }
 
   otroInit(){

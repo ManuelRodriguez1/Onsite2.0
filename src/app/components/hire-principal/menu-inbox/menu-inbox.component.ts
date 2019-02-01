@@ -20,41 +20,52 @@ export class MenuInboxComponent implements OnInit {
   datos: Observable<any>
   email = ''
   datosChat: Observable<any>
-  contador = 0
+  contador = 1
+  me = ''
 
-  constructor(private service: ServiceService, private db: AngularFirestore) { }
+  constructor(private service: ServiceService, private db: AngularFirestore) {
+    this.email = this.service.DevolverDatos();
+    this.me = this.user.email.replace('.','-')
+    //Ver items a la izquierda
+    this.datos = this.db.collection('Chat/ListaChat/'+this.me).valueChanges()
+   }
 
   ngOnInit() {
-    var me = this.user.email.replace('.','-')
     var other = this.email.replace('.','-')
-    this.email = this.service.DevolverDatos();
-    //Ver items a la izquierda
-    this.datos = this.db.collection('Chat/ListaChat/'+me).snapshotChanges()
     //Ver mensajes del chat
-    this.datosChat = this.db.collection('Chat/Chateando/'+me+'|'+other).snapshotChanges()
+    this.datosChat = this.db.collection('Chat/Chateando/'+this.me+'|'+other,
+    ref => ref.orderBy('fecha','asc')).valueChanges() 
   }
 
   changeEmail(e){
     this.email = e
+    this.ngOnInit()
   }
 
   initChat(){
-    var me = this.user.email.replace('.','-')
     var other = this.email.replace('.','-')
     //Creando nueva caja de chat
-    this.db.collection('Chat/Chateando/'+me+'|'+other).add({
+    this.db.collection('Chat/Chateando/'+this.me+'|'+other).add({
       id: this.user.uid,
       fecha: new Date().getTime(),
       message: $('.msginput').val()
     })
-    //Con quien chatee
-    this.db.collection('Chat/ListaChat/'+me).add({
-      email: this.email
-    })
-    //Con quien chatee parte del usuario Pro
-    this.db.collection('Chat/ListaChat/'+other).add({
-      email: this.user.email
-    })
+
+    
+    console.log(this.datos)
+
+    if (this.contador == 0) {
+      //Con quien chatee
+      this.db.collection('Chat/ListaChat/'+this.me).add({
+        email: this.email
+      })
+      //Con quien chatee parte del usuario Pro
+      this.db.collection('Chat/ListaChat/'+other).add({
+        email: this.user.email
+      })  
+    }
+
+    this.contador = 1
   }
 
 }
