@@ -19,9 +19,7 @@ export class InboxComponent implements OnInit {
   contador = 0
   
 
-  constructor(private service: ServiceService) { 
-    
-  }
+  constructor(private service: ServiceService) { }
 
   ngOnInit() {
     

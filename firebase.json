@@ -9,7 +9,6 @@
       "**/.*",
       "**/node_modules/**"
     ],
-<<<<<<< Updated upstream
     "rewrites": [ {
       "source": "**",
       "destination": "/index.html"
@@ -21,13 +20,5 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
-=======
-    "rewrites": [
-      {
-        "source": "/",
-        "destination": "/index.html"
-      }
-    ]
->>>>>>> Stashed changes
   }
 }
