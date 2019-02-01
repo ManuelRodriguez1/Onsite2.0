@@ -140,7 +140,7 @@ export class MenuHomeComponent implements OnInit {
 
   final() {
     var user = firebase.auth().currentUser;
-alert("dg");
+    
       this.db.collection('projectsHire').add({
         Project: "Excavation at 280 S",
         Status: "Active",
