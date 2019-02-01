@@ -30,6 +30,9 @@ export class InboxComponent implements OnInit {
     this.other = this.email.replace('.', '-')
     this.datosChat = this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me,
     ref => ref.orderBy('fecha','asc')).valueChanges()
+    setTimeout(() => {
+      $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight}, 200)
+    }, 500);
   }
 
   otroInit(){
