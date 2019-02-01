@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
+import { AngularFirestore } from "angularfire2/firestore";
 
 @Component({
   selector: 'app-pro',
@@ -27,7 +28,7 @@ export class ProComponent implements OnInit {
   customers2 = '';
   database = firebase.database();
 
-  constructor(private service: ServiceService, public afAuth: AngularFireAuth, private router: Router) { }
+  constructor(private service: ServiceService, public afAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) { }
 
   ngOnInit() {
 
@@ -78,7 +79,8 @@ export class ProComponent implements OnInit {
         displayName: "pro",
         photoURL: "",
       });
-      this.database.ref('/users_pro').push({
+
+      this.db.collection('users_pro').add({
         name: f.value.name,
         lastname: f.value.lastname,
         email: f.value.email,
@@ -91,6 +93,7 @@ export class ProComponent implements OnInit {
         description: f.value.description,
         estado:"pro"
       })
+
       this.router.navigate(['ProfilePro'])
     }).catch((error)=>{
       alert(error.message)

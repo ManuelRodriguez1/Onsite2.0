@@ -21,14 +21,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
-
 import {MenuHomeComponent} from './components/hire-principal/menu-home/menu-home.component';
+import {MenuExploreComponent} from './components/hire-principal/menu-explore/menu-explore.component';
 import {MenuProjectsComponent} from './components/hire-principal/menu-projects/menu-projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServiceService } from './services/service.service';
-
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
 import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
 import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
 import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
@@ -56,6 +53,7 @@ import { MenuInboxComponent } from './components/hire-principal/menu-inbox/menu-
     RecordarPassComponent,
     ProjectsComponent,
     ProfileComponent,
+    MenuExploreComponent,
     MenuInboxComponent
   ],
   imports: [
@@ -71,9 +69,10 @@ import { MenuInboxComponent } from './components/hire-principal/menu-inbox/menu-
     Ng5SliderModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
-    })
+    }),
+    AngularFirestoreModule
   ],
-  providers: [ServiceService,AuthGuard],
+  providers: [ServiceService, AuthGuard, ServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

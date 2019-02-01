@@ -42,6 +42,8 @@ export class MenuHomeComponent implements OnInit {
   childData = [];
   estadoProyecto = "pActive";//pFinished
 
+  email="";
+  uid="";
 
 
   skills1 = ['Concrete', 'Decorator', 'Drywall',
@@ -58,6 +60,7 @@ export class MenuHomeComponent implements OnInit {
 
 
   }
+
 
 
   selectskill(e) {
@@ -84,10 +87,7 @@ export class MenuHomeComponent implements OnInit {
   }
   ngOnInit() {
     this.childData = this.VerDatosTiempoReal();
-
     console.log(this.childData);
-
-
   }
 
 
@@ -138,6 +138,7 @@ export class MenuHomeComponent implements OnInit {
   }
 
   final() {
+    var user = firebase.auth().currentUser;
 
       firebase.database().ref('projectsHire/').push({
         Project: "Excavation at 280 S",
@@ -148,8 +149,13 @@ export class MenuHomeComponent implements OnInit {
         Joblocation: "1234 Meadow Dr. - Unit 123 - Wynwood, FL 33127",
         AdditionalComments:"My whole front driveway is disgusting and I need help installing a new one. I think there are some utility lines; not sure so please help.",
        zipcode: "",
-        mapa: '----------------------------'
+        mapa: '----------------------------',
+        correoHire: user.email,
+        idHire:user.uid
+
       });
+
+
 
       this.reload();
 

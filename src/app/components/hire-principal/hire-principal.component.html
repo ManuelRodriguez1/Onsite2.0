@@ -1,3 +1,4 @@
+
 <div *ngIf="menuVista == 'Home'" class="">
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Home.svg" alt="">
 </div>
@@ -10,9 +11,23 @@
   <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Projects.svg" alt="">
 </div>
 
+<div *ngIf="menuVista == 'Profile'" class="">
+  <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Profile.svg" alt="">
+</div>
+
+<div *ngIf="menuVista == 'Explore'" class="">
+  <img class="imagenesMEnuDerecha" src="../../../assets/imagenes/Explore.svg" alt="">
+</div>
+
 
   <section class="contentHire">
 
+
+    <!--label>padreeeee</label>
+    <input type="text" #pcomponent (keyup)="0"/>
+
+
+    <app-menu-projects [PData]="pcomponent.value" (childEvent)="CData=$event"></app-menu-projects-->
 
 
   <div class="row">
@@ -76,12 +91,10 @@
           </div>
 
           <div *ngIf="menuVista == 'Explore'" class="menuExplore">
-            hola3
+            <app-menu-explore></app-menu-explore>
           </div>
 
-          <div *ngIf="menuVista == 'Start'" class="menuStart">
-            hola4
-          </div>
+
         </div>
       </div>
     </div>
