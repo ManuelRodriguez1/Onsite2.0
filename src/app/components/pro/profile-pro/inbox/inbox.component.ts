@@ -17,54 +17,35 @@ export class InboxComponent implements OnInit {
   user = firebase.auth().currentUser
   public datos: Observable<any>
   email = ''
-  datosChat: any[]
+  datosChat: Observable<any>
   contador = 0
-  
-
-  constructor(private service: ServiceService, private db: AngularFirestore) { }
+  other = ''
+  me = ''
+  constructor(private service: ServiceService, private db: AngularFirestore) {
+    this.me = this.user.email.replace('.', '-')
+    this.datos = this.db.collection('/Chat/ListaChat/'+this.me).valueChanges()
+   }
 
   ngOnInit() {
-    
-    var newuser = this.user.email.replace('.', '-');
-
-    this.datos = this.db.collection('/Chat/').valueChanges()
-   
+    this.other = this.email.replace('.', '-')
+    this.datosChat = this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me).valueChanges()
   }
 
   otroInit(){
-    var newuser = this.user.email.replace('.', '-');
-    var otheruser = this.email.replace('.', '-');
-    var usuario = this.user.displayName
-    if (usuario == 'pro') {
-      var temp =  newuser
-      newuser = otheruser
-      otheruser = temp
-    }
-    this.datosChat = []
-    this.database.ref('/Chat/Chateando/' + newuser + '|' + otheruser)
-      .on('value', e => {
-        e.forEach(i => {
-          this.datosChat.push(i.val())
-        })
-      })
+   
   }
 
   initChat() {
-    var newuser = this.user.email.replace('.', '-')
-    var otheruser = this.email.replace('.', '-')
-    //Con quien chateo
-    var usuario = this.user.displayName
-    if (usuario == 'pro') {
-      var temp =  newuser
-      newuser = otheruser
-      otheruser = temp
-    }
-  
+    this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me).add({
+      id: this.user.uid,
+      fecha: new Date().getTime(),
+      message: $('.msginput').val()
+    })
   }
 
   changeEmail(e){
     this.email = e
-    this.otroInit()
+    this.ngOnInit()
   }
 
 }
