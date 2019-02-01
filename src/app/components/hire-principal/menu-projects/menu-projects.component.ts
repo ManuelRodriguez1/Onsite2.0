@@ -14,15 +14,18 @@ export class MenuProjectsComponent implements OnInit {
   select = 0;
   Homeprojects = 1;
   childData = [];
-
+  perfilIndividuals = [];
   selectsproject = [];
+  ProfilesResena1 = 0;
+  childDatarese = 0;
+  ProfilesResena() {
+    this.childDatarese = 1;
+    this.ProfilesResena1 = 1;
+  }
   database = firebase.database();
   datos: any[]
   user = firebase.auth().currentUser.email
-
-
   constructor(private service: ServiceService) { }
-
   ngOnInit() {
     this.datos = []
     this.database.ref('users_pro/')
@@ -31,43 +34,29 @@ export class MenuProjectsComponent implements OnInit {
           this.datos.push(i.val())
         })
       })
-
-     
     this.childData = this.VerDatosTiempoReal();
   }
-
-
-  messageboton(email)
-  {
+  messageboton(email) {
     // var newuser = this.user.replace('.','-')
     var newuserdestinatario = email
-
     this.service.GuardarDatos(newuserdestinatario)
-
     // this.database.ref('/chat/'+newuser+"-"+newuserdestinatario).push({
     //     message: this.user
     // })
   }
-
-
-
   perfilPro(x) {
-    alert("hola");
-    alert(x)
+    this.Homeprojects = 2;
+    this.perfilIndividuals = x;
   }
-
-
   VerDatosTiempoReal() {
     var returnArr = [];
     //console.log(childKey);
-    firebase.database().ref("projectsHire/").once('value', function (snapshot) {
-      snapshot.forEach(function (childSnapshot) {
+    firebase.database().ref("projectsHire/").once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
         var childKey = childSnapshot.key;
         var childData = childSnapshot.val();
         returnArr.push(childData);
       });
-
-
     });
     return returnArr;
   }
@@ -86,9 +75,6 @@ export class MenuProjectsComponent implements OnInit {
       this.selectskills.push(e);
     }
   }
-
-
-
   projectsinforma = [
     { nombre: "Excavation at 280 S", staus: "Active" },
     { nombre: "Fireside Lodge", staus: "Active" },
@@ -106,9 +92,7 @@ export class MenuProjectsComponent implements OnInit {
     { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
     { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
     { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-
   ];
-
   Projectsworkers = [
     { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
     { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
@@ -118,9 +102,7 @@ export class MenuProjectsComponent implements OnInit {
     { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
     { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" }
   ];
-
   list(e) {
-
     if (e == 1) {
       this.up = !this.up;
     } else {

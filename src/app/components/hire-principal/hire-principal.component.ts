@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-hire-principal',
@@ -6,13 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hire-principal.component.css']
 })
 export class HirePrincipalComponent implements OnInit {
-  menuVista = "Projects";
+  upf = false;
+
+
+  //public CData: number;
+
+  menuVista = "Explore";
     m = 4;
       menushow = false
-  constructor() { }
+  constructor(public af: AngularFireAuth) { }
 
   ngOnInit() {
+
   }
+  logout() {
+       this.af.auth.signOut();
+       console.log('logged out');
+         location.href ="/";
+   }
   menu(e) {
       if (e == 1) {
           this.menuVista = "Home";
@@ -24,7 +36,7 @@ export class HirePrincipalComponent implements OnInit {
       } else if (e == 4) {
           this.menuVista = "Explore";
       } else if (e == 5) {
-          this.menuVista = "Start";
+        this.logout();
       }
       this.m = e;
   }

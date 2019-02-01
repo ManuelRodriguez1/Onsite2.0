@@ -17,7 +17,6 @@
           <p>{{s.Project}}</p>
         </div>
       </div>
-
     </div>
 
     <div class="container projectsgeneral">
@@ -36,7 +35,7 @@
     <div class="container">
       <div class="card-columns">
         <div  class="card" *ngFor="let profileprojects of datos">
-          <div >
+          <div>
               <div class="imagenperfilprojects" (click)="perfilPro(profileprojects.nombre);">
                 <img class="card-img-top" src="{{ profileprojects.fotoperfil }}" alt="Card image cap">
               </div>
@@ -53,19 +52,10 @@
               <div class="lineaabajocards">
               </div>
             </div>
-
-        </div>
-
-
-
-
-
-
       </div>
     </div>
-
-
   </div>
+</div>
 
 
 
@@ -73,12 +63,12 @@
   <div *ngIf="Homeprojects == 2">
 
     <div class="container profileprojectsworkers">
-      <div class="row">
+      <div class="row" *ngIf="perfilIndividuals">
         <div class="col-sm-4">
           <div class="perfilworkers">
             <img src="../../../../assets/imagenes/profileproject/profileprojects.svg" alt="" width="100%">
           </div>
-          <p class="nombreworkers">Jurgen Klopp</p>
+          <p class="nombreworkers">{{perfilIndividuals.nombre}}</p>
           <div class="contenedorestrellasworkers"><img src="../../../../assets/imagenes/profileproject/estrellasprofileworkers.svg" alt="" width="100%"></div>
         </div>
         <div class="col-sm">
@@ -131,7 +121,59 @@
 
     </div>
     <div class="container">
+      <p class="tituloprojectsworkres">Reviews</p>
+      <div class="lineaprojectssepa"></div>
 
+      <div class="col-sm input-group contenedorproyectos" *ngIf="childDatarese == 0">
+        <div class="centradoFill">
+          <div class="title2">Jimmy has no reviews </div>
+          <div (click)='ProfilesResena()' class="btnNegro">Leave Review</div>
+        </div>
+      </div>
+
+
+      <div *ngIf="ProfilesResena1 == 1">
+        <div class="col-sm-12 overrese" *ngFor="let perfilprojects of perfilprojects ">
+          <div class="heightresea">
+            <div class="perfilworkersresea">
+              <img src="../../../../assets/imagenes/profileproject/profileprojects.svg" alt="" width="100%">
+            </div>
+  </div>
+  <div class="leftresenaprim">
+    <p class="nombreworkersre">{{perfilprojects.nombre}}</p>
+    <div class="contenedorestrellasworkersres"><img src="../../../../assets/imagenes/profileproject/estrellasprofileworkers.svg" alt="" width="100%"></div>
+
+
+  <div class="clasrestext">
+    Jimmy was exceptional at getting his job done. orem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a accumsan ex. Nunc nec purus at erat placerat dapibus in sed purus. Cras in diam euismod, dapibus purus quis, interdum dui. Praesent gravida
+    consequat turpis egestas gravida. The only issue I had was that he was not on time.
+  </div>
+  </div>
+
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <div class="container">
+      <p class="tituloprojectsworkres margin30si">Skills</p>
+      <div class="lineaprojectssepa"></div>
+      <div>
+        <div class="skillselct">
+          <div class="skillsel ss2">
+            <p>Drywall</p>
+          </div>
+          <div class="skillsel ss3">
+            <p>Drywall Hanger</p>
+          </div>
+          <input type="hidden" name="skills" [value]="selectskills2" id="selectskills2">
+          <br>
+          <br>
+        </div>
+      </div>
     </div>
   </div>
 
