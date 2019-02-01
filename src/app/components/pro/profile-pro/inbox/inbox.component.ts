@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { ServiceService } from 'src/app/services/service.service';
 import * as $ from 'jquery';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inbox',
@@ -13,30 +15,20 @@ export class InboxComponent implements OnInit {
   emailUser: any
   database = firebase.database();
   user = firebase.auth().currentUser
-  datos: any[]
+  public datos: Observable<any>
   email = ''
   datosChat: any[]
   contador = 0
   
 
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService, private db: AngularFirestore) { }
 
   ngOnInit() {
     
     var newuser = this.user.email.replace('.', '-');
-    //Llamando las personas con las que he chateado
-    this.datos = []
-    this.database.ref('/Chat/ListaChat/' + newuser)
-      .on('value', e => {
-        e.forEach(i => {
-          this.datos.push(i.val())
-        })
-      })
-    // console.log(this.datos)
-    this.email = this.service.DevolverDatos();
-    console.log(this.email)
-    //Mensaje del chat
-      this.otroInit()
+
+    this.datos = this.db.collection('/Chat/').valueChanges()
+   
   }
 
   otroInit(){
@@ -67,25 +59,7 @@ export class InboxComponent implements OnInit {
       newuser = otheruser
       otheruser = temp
     }
-
-    this.database.ref('/Chat/Chateando/' + newuser + '|' + otheruser).push({
-      id: this.user.uid,
-      fecha: new Date().getTime(),
-      message: $(".msginput").val()
-    })
-
-    //Con quien chatee
-    if (this.contador == 0 && usuario == 'hire') {
-      this.database.ref('/Chat/ListaChat/' + newuser).push({
-        email: this.email
-      })
-      this.database.ref('/Chat/ListaChat/' + otheruser).push({
-        email: this.user.email
-      })
-      this.ngOnInit()
-    }
-
-    this.contador = 1
+  
   }
 
   changeEmail(e){

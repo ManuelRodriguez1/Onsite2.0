@@ -6,11 +6,11 @@
 <div class="chat">
   <div class="cols-sm-3 col col1">
     <div class="carga" *ngIf="datos.length == 0">Cargando...</div>
-    <div class="profileother" *ngFor="let d of datos" (click)="changeEmail(d.email)">
+    <div class="profileother" *ngFor="let d of datos | async" (click)="changeEmail(d.email)">
       <div class="titleinbox">Subject Line</div>
       <div class="imguser"></div>
       <div class="continbox">
-        <div class="emailin">{{ d.email }}</div>
+        <div class="emailin">{{ d.test }}</div>
         <div class="availble">
           <div class="status"></div>
           <p>Available </p>

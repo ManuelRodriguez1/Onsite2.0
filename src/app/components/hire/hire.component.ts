@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AngularFirestore } from "angularfire2/firestore";
 @Component({
   selector: 'app-hire',
   templateUrl: './hire.component.html',
@@ -17,7 +18,7 @@ export class HireComponent implements OnInit {
   Password;
   error;
 
-  constructor(public af: AngularFireAuth, private router: Router) {
+  constructor(public af: AngularFireAuth, private router: Router, private db: AngularFirestore) {
 
 
   }
@@ -43,32 +44,21 @@ export class HireComponent implements OnInit {
             displayName: "hire",
             photoURL: "",
           });
-          firebase.database().ref('users_hire/' + user.uid).set({
+          this.db.collection('users_hire').add({
             nombre: formData.value.FirstName,
             apellido: formData.value.LastName,
             telefono: formData.value.PhoneNumber,
             correo: user.email,
             zipcode: formData.value.Entercityorzipcode,
             estado: 'hire'
-          });
+          })
           this.router.navigateByUrl('/Hireprincipal');
         }).catch(
           (err) => {
             this.error = err.message;
             console.log(err);
-            /* if(!formData.control.controls.FirstName.status){
-                 this.error = err."jiehjfihe";
-             }*/
+       
           })
-      // }else{
-      /*alert("salioooo");
-
-      if(!formData.control.controls.FirstName.status){
-       //   this.error = "requerido";
-      }
-*/
-
-
     }
     else {
       if (formData.control.controls.FirstName.status == "INVALID") {
