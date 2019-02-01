@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import * as $ from 'jquery';
 import { Options,LabelType } from 'ng5-slider';
 import {Router} from '@angular/router';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-menu-home',
@@ -56,7 +57,7 @@ export class MenuHomeComponent implements OnInit {
   cust = 4;
   customers = ['Customer 1', 'Customer 2', 'Customer 3'];
   router: any;
-  constructor() {
+  constructor(private db: AngularFirestore) {
 
 
   }
@@ -139,8 +140,8 @@ export class MenuHomeComponent implements OnInit {
 
   final() {
     var user = firebase.auth().currentUser;
-
-      firebase.database().ref('projectsHire/').push({
+alert("dg");
+      this.db.collection('projectsHire').add({
         Project: "Excavation at 280 S",
         Status: "Active",
         Category:"Drywall",
@@ -153,11 +154,13 @@ export class MenuHomeComponent implements OnInit {
         correoHire: user.email,
         idHire:user.uid
 
-      });
+      }).then(()=>{
+        this.reload();
+      })
 
 
 
-      this.reload();
+
 
 
 
