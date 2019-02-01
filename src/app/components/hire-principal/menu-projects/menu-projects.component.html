@@ -34,13 +34,13 @@
 
     <div class="container">
       <div class="card-columns">
-        <div  class="card" *ngFor="let profileprojects of datos">
+        <div  class="card" *ngFor="let profileprojects of projects | async">
           <div>
               <div class="imagenperfilprojects" (click)="perfilPro(profileprojects.nombre);">
                 <img class="card-img-top" src="{{ profileprojects.fotoperfil }}" alt="Card image cap">
               </div>
               <div class="card-body">
-                <p class="nombreprojectperfil">{{ profileprojects.name }}</p>
+                <p class="nombreprojectperfil">{{ profileprojects.email }}</p>
                 <p class="colaboracioprojectperfil">{{ profileprojects.skills }}</p>
                 <div class="iconoestrellasperfil"><img src="{{ profileprojects.estrellas }}" alt="" width="100%"></div>
                 <div (click)="messageboton(profileprojects.email)" class="btnmessageproject">
