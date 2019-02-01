@@ -66,6 +66,8 @@ export class MenuInboxComponent implements OnInit {
     }
 
     this.contador = 1
+
+    $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight})
   }
 
 }

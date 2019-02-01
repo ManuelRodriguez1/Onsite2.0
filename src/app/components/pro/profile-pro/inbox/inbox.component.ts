@@ -42,6 +42,7 @@ export class InboxComponent implements OnInit {
       fecha: new Date().getTime(),
       message: $('.msginput').val()
     })
+    $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight})
   }
 
   changeEmail(e){
