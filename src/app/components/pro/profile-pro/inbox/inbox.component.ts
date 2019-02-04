@@ -28,7 +28,11 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.other = this.email.replace('.', '-')
-    this.datosChat = this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me).valueChanges()
+    this.datosChat = this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me,
+    ref => ref.orderBy('fecha','asc')).valueChanges()
+    setTimeout(() => {
+      $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight}, 200)
+    }, 500);
   }
 
   otroInit(){
@@ -41,6 +45,7 @@ export class InboxComponent implements OnInit {
       fecha: new Date().getTime(),
       message: $('.msginput').val()
     })
+    $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight})
   }
 
   changeEmail(e){
