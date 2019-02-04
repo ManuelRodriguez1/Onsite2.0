@@ -20,7 +20,7 @@ export class MenuInboxComponent implements OnInit {
   datos: Observable<any>
   email = ''
   datosChat: Observable<any>
-  contador = 1
+  contador = 0
   me = ''
   contador2 = 0
   intervalo
