@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="list-group" *ngIf='up == true'>
-        <div class="list-group-item" *ngFor="let s of childData" (click)='selectskill(s)'>
+        <div class="list-group-item" *ngFor="let s of childData | async" (click)='selectskill(s)'>
           <p>{{s.Project}}</p>
         </div>
       </div>

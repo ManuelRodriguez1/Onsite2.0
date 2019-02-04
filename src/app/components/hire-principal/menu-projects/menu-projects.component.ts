@@ -17,7 +17,7 @@ export class MenuProjectsComponent implements OnInit {
   page = 1;
   select = 0;
   Homeprojects = 1;
-  childData = [];
+  childData : Observable<any>;
   perfilIndividuals = [];
   selectsproject = [];
   ProfilesResena1 = 0;
@@ -37,8 +37,8 @@ export class MenuProjectsComponent implements OnInit {
   constructor(private service: ServiceService, private db : AngularFirestore) { }
   ngOnInit() {
 
-    this.projects =  this.db.collection('/users_pro').valueChanges()
-
+    this.projects =  this.db.collection('/users_pro').valueChanges();
+this.childData=this.db.collection('/projectsHire').valueChanges();
 
     // this.datos = []
     // this.database.ref('users_pro/')
