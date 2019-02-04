@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 import { Options,LabelType } from 'ng5-slider';
 import {Router} from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
-
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-menu-home',
   templateUrl: './menu-home.component.html',
@@ -40,9 +40,9 @@ export class MenuHomeComponent implements OnInit {
   page = 1;
   select = 0;
   HomeFormularioNw = 0;
-  childData = [];
+  childData: Observable<any>;
+  childData1: Observable<any>;
   estadoProyecto = "pActive";//pFinished
-
   email="";
   uid="";
 
@@ -87,8 +87,9 @@ export class MenuHomeComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.childData = this.VerDatosTiempoReal();
-    console.log(this.childData);
+    this.childData = this.db.collection('/projectsHire').valueChanges()
+    this.childData1 = this.db.collection('/projectsHire').valueChanges()
+
   }
 
 
@@ -103,24 +104,9 @@ export class MenuHomeComponent implements OnInit {
 
   setRam(value) {
     this.selectedRam = value;
-    console.log(this.selectedRam);
   }
 
 
-  VerDatosTiempoReal() {
-    var returnArr = [];
-    //console.log(childKey);
-    firebase.database().ref("projectsHire/").once('value', function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var childKey = childSnapshot.key;
-        var childData = childSnapshot.val();
-        returnArr.push(childData);
-      });
-
-
-    });
-    return returnArr;
-  }
 
   list4() {
     this.up5 = !this.up5;
@@ -140,7 +126,7 @@ export class MenuHomeComponent implements OnInit {
 
   final() {
     var user = firebase.auth().currentUser;
-    
+
       this.db.collection('projectsHire').add({
         Project: "Excavation at 280 S",
         Status: "Active",
