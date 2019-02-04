@@ -58,9 +58,6 @@ export class MenuInboxComponent implements OnInit {
       message: $('.msginput').val()
     })
 
-
-    console.log(this.datos)
-
     if (this.contador == 0) {
       //Con quien chatee
       this.db.collection('Chat/ListaChat/' + this.me).add({
