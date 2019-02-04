@@ -23,32 +23,33 @@ export class InboxComponent implements OnInit {
   me = ''
   constructor(private service: ServiceService, private db: AngularFirestore) {
     this.me = this.user.email.replace('.', '-')
-    this.datos = this.db.collection('/Chat/ListaChat/'+this.me).valueChanges()
-   }
+    this.datos = this.db.collection('/Chat/ListaChat/' + this.me).valueChanges()
+  }
 
   ngOnInit() {
     this.other = this.email.replace('.', '-')
-    this.datosChat = this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me,
-    ref => ref.orderBy('fecha','asc')).valueChanges()
-    setTimeout(() => {
-      $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight}, 200)
-    }, 500);
+    this.datosChat = this.db.collection('/Chat/Chateando/' + this.other + '|' + this.me,
+      ref => ref.orderBy('fecha', 'asc')).valueChanges()
+    this.datosChat.subscribe(() => {
+      setTimeout(() => {
+        $('.minichat').animate({ scrollTop: $('.minichat')[0].scrollHeight }, 200)
+      }, 20);
+    })
   }
 
-  otroInit(){
-   
+  otroInit() {
+
   }
 
   initChat() {
-    this.db.collection('/Chat/Chateando/'+this.other+'|'+this.me).add({
+    this.db.collection('/Chat/Chateando/' + this.other + '|' + this.me).add({
       id: this.user.uid,
       fecha: new Date().getTime(),
       message: $('.msginput').val()
     })
-    $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight})
   }
 
-  changeEmail(e){
+  changeEmail(e) {
     this.email = e
     this.ngOnInit()
   }

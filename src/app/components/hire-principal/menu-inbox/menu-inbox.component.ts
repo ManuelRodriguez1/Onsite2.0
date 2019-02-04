@@ -22,56 +22,58 @@ export class MenuInboxComponent implements OnInit {
   datosChat: Observable<any>
   contador = 1
   me = ''
+  contador2 = 0
+  intervalo
 
   constructor(private service: ServiceService, private db: AngularFirestore) {
     this.email = this.service.DevolverDatos();
-    this.me = this.user.email.replace('.','-')
+    this.me = this.user.email.replace('.', '-')
     //Ver items a la izquierda
-    this.datos = this.db.collection('Chat/ListaChat/'+this.me).valueChanges()
-   }
-
-  ngOnInit() {
-    var other = this.email.replace('.','-')
-    //Ver mensajes del chat
-    this.datosChat = this.db.collection('Chat/Chateando/'+this.me+'|'+other,
-    ref => ref.orderBy('fecha','asc')).valueChanges()
-    setInterval(() => {
-      $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight}, 200)
-    }, 500);
-
+    this.datos = this.db.collection('Chat/ListaChat/' + this.me).valueChanges()
   }
 
-  changeEmail(e){
+  ngOnInit() {
+    var other = this.email.replace('.', '-')
+    //Ver mensajes del chat
+    this.datosChat = this.db.collection('Chat/Chateando/' + this.me + '|' + other,
+      ref => ref.orderBy('fecha', 'asc')).valueChanges()
+    this.datosChat.subscribe(() => {
+      setTimeout(() => {
+        $('.minichat').animate({ scrollTop: $('.minichat')[0].scrollHeight }, 200)
+      }, 20)
+    })
+  }
+
+  changeEmail(e) {
     this.email = e
     this.ngOnInit()
   }
 
-  initChat(){
-    var other = this.email.replace('.','-')
+  initChat() {
+    var other = this.email.replace('.', '-')
     //Creando nueva caja de chat
-    this.db.collection('Chat/Chateando/'+this.me+'|'+other).add({
+    this.db.collection('Chat/Chateando/' + this.me + '|' + other).add({
       id: this.user.uid,
       fecha: new Date().getTime(),
       message: $('.msginput').val()
     })
 
-    
+
     console.log(this.datos)
 
     if (this.contador == 0) {
       //Con quien chatee
-      this.db.collection('Chat/ListaChat/'+this.me).add({
+      this.db.collection('Chat/ListaChat/' + this.me).add({
         email: this.email
       })
       //Con quien chatee parte del usuario Pro
-      this.db.collection('Chat/ListaChat/'+other).add({
+      this.db.collection('Chat/ListaChat/' + other).add({
         email: this.user.email
-      })  
+      })
     }
 
     this.contador = 1
 
-    $('.minichat').animate({scrollTop: $('.minichat')[0].scrollHeight})
   }
 
 }
