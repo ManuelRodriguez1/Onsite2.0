@@ -14,7 +14,7 @@
 #ContenedorBannerHome .flechaderechabannerHome
 {
   
-    background-image: url('../../../assets/iconos/flechabanner.svg') !important;
+    background-image: url('/assets/iconos/flechabanner.svg') !important;
     width: 30px;
     height: 30px;
     position: absolute;
@@ -28,7 +28,7 @@
 #ContenedorBannerHome .flechaizquierdabannerHome
 {
    
-    background-image: url('../../../assets/iconos/flechabanner.svg');
+    background-image: url('/assets/iconos/flechabanner.svg');
     width: 30px;
     height: 30px;
     position: absolute;
@@ -198,7 +198,7 @@ ul.slide-dots
     background-position: center;
     background-repeat: no-repeat;
     height: 813px;
-    background-image: url('../../../assets/imagenes/fondoseccion3home.png'); 
+    background-image: url('/assets/imagenes/fondoseccion3home.png'); 
     background-size: cover;
     position: relative;
 }
@@ -273,7 +273,7 @@ ul.slide-dots
     height: 61px;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url('../../../assets/iconos/flechaseccion3.svg');
+    background-image: url('/assets/iconos/flechaseccion3.svg');
     float: right;
     overflow: hidden;
 }
@@ -309,7 +309,7 @@ ul.slide-dots
 }
 .contenedorinfoseccion3Home:nth-child(2) .flechaseccion3home
 {
-    background-image: url('../../../assets/iconos/flecha2seccion3.svg');
+    background-image: url('/assets/iconos/flecha2seccion3.svg');
 }
 .contenedorinfoseccion3Home:nth-child(2)
 {

@@ -50,6 +50,6 @@ error: any[];
    logout() {
         this.af.auth.signOut();
         console.log('logged out');
-          location.href ="/";
+          location.href ="./";
     }
 }

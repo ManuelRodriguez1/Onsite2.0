@@ -36,14 +36,14 @@ export class HomeComponent implements OnInit {
 
   }
 hire(){
-  //  this.router.navigateByUrl('/Hire');
-  location.href ="/Hire";
+   this.router.navigateByUrl('/Hire');
+  // location.href ="/Hire";
 
 }
 
 pro(){
-    //  this.router.navigateByUrl('/Pro');
-      location.href ="/Pro";
+     this.router.navigateByUrl('/Pro');
+      // location.href ="/Pro";
 }
   prev() {
     this.carousel.prev();
