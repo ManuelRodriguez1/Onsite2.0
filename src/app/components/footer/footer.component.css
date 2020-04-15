@@ -1,0 +1,228 @@
+.contenedorfooter
+{
+    width: 100%;
+    height: 427px;
+    position: relative;
+    background-color: #000000;
+}
+.superiorfooter
+{
+    width: 100%;
+    height: 378px;
+    position: relative;
+    
+}
+.inferiorfooter
+{
+    width: 100%;
+    height: calc(100% - 379px);    
+    border-top: 1px solid #727272;
+    position: relative;
+}
+#contenedorinferiorfooter
+{
+    width: 1268px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+#contenedorinferiorfooter p:nth-child(1)
+{
+    float: left;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 14px;
+    color: #D1D1D1;
+}
+#contenedorinferiorfooter p:nth-child(2)
+{
+    float: right;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 14px;
+    color: #D1D1D1;
+}
+#contenedorinferiorfooter a
+{
+    font-weight: bold;
+    color: #D1D1D1;
+}
+.contenedorsuperiorfooter
+{
+    width: 1268px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.izquierdasuperiorfooter
+{
+    width: 200px;
+    float: left;
+    
+}
+#iconologofooter
+{
+    width: 144px;
+    height: 39px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/iconos/logofooter.svg');
+    overflow: hidden;
+}
+.contenedortextoizqfooter
+{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.contenedortextoizqfooter p:nth-child(1)
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 26px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.contenedortextoizqfooter p:nth-child(2)
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 26px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.contenedorredesizquierdafooter
+{
+    width: 100%;
+    margin-top: 55px;
+    overflow: hidden;
+}
+.contenedorredesizquierdafooter p
+{
+    float: left;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 11px;
+    font-size: 15px;
+    color: #D1D1D1;
+}
+.iconoredesfooter
+{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: left;
+    margin-left: 12px;
+}
+#iconofootfacebook
+{
+    width: 9px;
+    height: 17px;
+    background-image: url('../../../assets/iconos/facebookfooter.svg');
+}
+#iconofootinstagram
+{
+    width: 17px;
+    height: 17px;
+    background-image: url('../../../assets/iconos/instagramfooter.svg');
+}
+#iconofoottwitter
+{
+    width: 20px;
+    height: 17px;
+    background-image: url('../../../assets/iconos/twitterfooter.svg');
+}
+.derechasuperiorfooter
+{
+    width: 357px;
+    float: right;
+}
+.contenedorform
+{
+    overflow: hidden;
+}
+.contenedorform p
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 14px;
+    font-size: 15px;
+    color: #979797;
+}
+.contenedoritemsfooter
+{
+    width: 100%;
+    position: relative;  
+    overflow: hidden; 
+    margin-top: 90px;
+}
+.izquierdaitemsfooter
+{
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
+.derechaitemsfooter
+{
+    float: right;
+    position: relative;
+    overflow: hidden;
+}
+.izquierdaitemsfooter p
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 25px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.derechaitemsfooter p
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 25px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.form-footer
+{
+    width: 245px;
+    height: 32px;
+    background-color: transparent;
+    float: left;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    border: 1px solid #ffffff;
+    outline: none;
+    border-right: none;
+    padding-left: 22px;
+    color: #ffffff;
+}
+.btn-footer
+{
+    width: 103px;
+    height: 32px;   
+    background: #E76800;
+    border: 1px solid #E76800;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    outline: none;
+    cursor: pointer;
+}
+.formfooter
+{
+    margin-top: 12px;
+}
