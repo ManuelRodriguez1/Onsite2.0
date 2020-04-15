@@ -1,0 +1,71 @@
+<div class="title">
+  See: <span> what’s out there</span>
+</div>
+<div class="select">
+  <input type="text" class="form-control" [placeholder]="skill">
+  <div class="down" (click)="seelist()"></div>
+</div>
+<div class="text1">
+  Sort: Newest Jobs
+</div>
+<div class="list-group" *ngIf="list == true">
+  <div class="list-group-item" *ngFor="let s of skills" (click)="placeh(s)">
+    <p>{{s}}</p>
+  </div>
+</div>
+<div class="maps" *ngIf="info == true">
+  <agm-map [latitude]="lat" [longitude]="lng" class="map">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+</div>
+<div class="title" *ngIf="info == true">
+  <span>12 available {{skill}} pros</span> near you.
+</div>
+<div class="clients" *ngIf="info == true">
+  <div class="card text-center" style="width: 205px;" *ngFor="let s of skills">
+    <div class="card-body">
+      <div class="imgperson"></div>
+      <h5 class="card-title">Jimmy needs help with</h5>
+      <p class="card-text">{{skill}}</p>
+      <div class="dropdown-divider"></div>
+      <p class="card-text text-left"><span>Project Description:</span> Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Donec ac condimentum dui. Phasellus lectus mi.</p>
+      <div class="details" (click)="detailssee()">
+        <div class="arrowenter"></div> Project Details
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dots" *ngIf="info == true">
+  <div class="dot" *ngFor="let d of dots"></div>
+</div>
+<div class="title last" *ngIf="details == true">
+    Project Detail
+</div>
+<div class="dropdown-divider" *ngIf="details == true"></div>
+<div class="details2" *ngIf="details  == true">
+  <div class="title2">
+      Project: <span> Excavation at 280 S</span>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Status</p>
+      <p>Category:</p>
+      <p>Specialized:</p>
+      <p>How many people?:</p>
+      <p>Job location:</p>
+      <p>Additional Comments:</p>
+    </div>
+    <div class="col-sm-5">
+      <p class="status"><span>Active</span></p>
+      <p><span> Drywall</span></p>
+      <p><span>Drywall Apprentice</span></p>
+      <p><span>4</span></p>
+      <p><span> Meadow Dr. - Unit 123 - Wynwood, FL 33127</span></p>
+      <p>My whole front driveway is disgusting and I need help installing a new one. I think there are some utility lines; not sure so please help.</p>
+    </div>
+    <div class="col-sm-3 l3">
+      <div class="littlemap"></div>
+    </div>
+  </div>
+</div>
