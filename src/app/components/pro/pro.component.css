@@ -32,3 +32,10 @@ input::placeholder{
 .customers2{
     margin-top: 19px;
 }
+.alertMessage{
+    color: #F43E40;
+    position: absolute;
+    bottom: -16px;
+    left: 65px;
+    font-size: 13px;
+}
