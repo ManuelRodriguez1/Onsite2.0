@@ -1,4 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-dark {{m}}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<nav>
+    <div class="backgroundWhiteMenu">
+        <input type="checkbox" id="check-menu">
+        <label for="check-menu">
+    <i class="fas fa-bars" id="btn-menu-active"></i>
+    <i class="fas fa-times" id="btn-menu-cancel"></i>
+  </label>
+        <a href="#"><img src="assets/logos/Logo_principal_menu.svg" alt="Logo Onhive"></a>
+        <!-- <div class="onsiteText">Lorem impsum dolor seat</div> -->
+        <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">How it works</a></li>
+            <li data-toggle="modal" data-target="#exampleModal"><a>Sign in</a></li>
+            <li><a href="#" class="singupAzul">Sign up</a></li>
+            <!--li><a href="#">My Account</a></li>
+    <li *ngIf="Sesion==false" class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
+      <a class="nav-link ">Login</a>
+    </li>
+    <li *ngIf="Sesion==true" class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
+      <a class="nav-link " (click)="logout()">Logout</a>
+    </li-->
+        </ul>
+    </div>
+</nav>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark {{m}}">
   <a class="navbar-brand" href="#"><img src="assets/imagenes/Logo.svg" class="logoOn" alt="Logo OnSite"></a>
   <div class="onsiteText">Lorem impsum dolor seat</div>
   <ul class="navbar-nav ml-auto">
@@ -23,15 +50,6 @@
     <li *ngIf="Sesion==true" class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
       <a class="nav-link " (click)="logout()">Logout</a>
     </li>
-
-
-
-
-
-
-
   </ul>
-</nav>
-
-
+</nav> -->
 <app-login></app-login>

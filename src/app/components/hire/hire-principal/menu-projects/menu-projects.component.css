@@ -1,0 +1,453 @@
+.projectsmenu
+{
+    margin-top: 150px;
+    width: 940px;
+}
+.projectsmenu .list-group
+{
+    margin-left: -15px;
+}
+.projectsmenu .input-group
+{
+    margin-top: 20px;
+    padding-left: 0px;
+}
+.projectsmenu .input-group .form-control
+{
+    background-color: transparent;
+    border: 1px solid #f1f1f1;
+    outline: none;
+
+}
+.margin30si{
+  margin-top: 30px;
+}
+.projectsmenu .input-group .form-control:focus
+{
+    box-shadow: none;
+}
+.contenedorprojectdescription
+{
+    width: 220px;
+    height: 93px;
+    margin-left: 13px;
+    border: 1px solid #F1F1F1;
+    position: relative;
+}
+.contenedorprojectdescription:hover
+{
+    border: 1px solid #F1F1F1;
+}
+.contenedorprojectdescription:nth-child(1)
+{
+    margin-left: 0px;
+}
+.projectsgeneral
+{
+    margin-top: 25px;
+    display: -webkit-box;
+    overflow-x: scroll;
+    height: 120px;
+    padding: 0;
+}
+.contenedorinfoproject
+{
+    width: 163px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.contenedorinfoproject p:nth-child(1)
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+}
+.lineaprojectsinfo
+{
+    width: 100%;
+    height: 1px;
+    background-color: #f1f1f1;
+    margin: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.contenedorinfoproject p:nth-child(3)
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    color: rgba(0, 0, 0, 0.5);
+}
+.contenedorinfoproject span
+{
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    color: #219653;
+}
+.projectsgeneral::-webkit-scrollbar-thumb
+  {
+  background-color: #c4c4c4 !important;
+
+
+  }
+  .projectsgeneral::-webkit-scrollbar
+  {
+  width:2px;
+  background-color: transparent;
+  }
+ .lineaprojectssepa
+ {
+    height: 1px;
+    background-color: #c4c4c4;
+    margin-top: 25px;
+    margin-bottom: 30px;
+ }
+ .card-columns .card
+ {
+    width: 222px;
+    height: 255px;
+    border: none;
+
+
+
+ }
+ .imagenperfilprojects
+ {
+     width: 52px;
+     height: 52px;
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: contain;
+     margin: auto;
+     margin-top: 30px;
+     border-radius: 50%;
+     overflow: hidden;
+ }
+ .card-body .nombreprojectperfil
+ {
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 22px;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+ }
+ .card-body .colaboracioprojectperfil
+ {
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 22px;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+ }
+ .card-body .iconoestrellasperfil
+ {
+     width: 63px;
+     height: 12px;
+     margin: auto;
+     margin-top: 20px;
+ }
+
+ .btnmessageproject
+{
+    width: 94px;
+    height: 26px;
+    border: 1px solid #c4c4c4;
+    margin: auto;
+    margin-top: 33px;
+}
+.iconoinboxprofile
+{
+    width: 14px;
+    height: 13px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("../../../../../assets/iconos/Inbox.svg");
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.btnmessageproject p
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 22px;
+    font-size: 14px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+    margin-left: 7px;
+    float: left;
+}
+.lineaderechacards
+{
+  width: 1px;
+height: 230px;
+background-color: #c4c4c4;
+position: absolute;
+right: 0px;
+top: 50%;
+transform: translateY(-50%);
+}
+
+.lineaabajocards{
+  height: 1px;
+width:  205px;
+background-color: #c4c4c4;
+position: absolute;
+bottom:  0px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+
+/* Profile workers */
+
+.overrese
+{
+    overflow: hidden;
+}
+
+.perfilworkersresea{
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #E76800;
+  float: left;
+  margin-right: 20px;
+}
+.perfilworkers
+{
+    width: 81px;
+    height: 81px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #E76800;
+    float: left;
+}
+
+.nombreworkersre
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 45px;
+    font-size: 18px;
+  color: #5B5B5B;
+
+
+}
+
+
+.nombreworkers
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 25px;
+    font-size: 25px;
+    letter-spacing: -0.025em;
+    color: #E76800;
+    margin-top: 18px;
+    margin-left: 11px;
+    float: left;
+}
+.leftresenaprim{
+  float: left;
+    width: 798px;
+    margin-bottom: 40px;
+}
+.clasrestext{
+    font-family: 'Mukta', sans-serif;
+font-style: normal;
+font-weight: normal;
+line-height: 19px;
+font-size: 16px;
+color: #828282;
+
+}
+.heightresena{
+  height: 100%;
+}
+.contenedorestrellasworkersres
+{
+    width: 116px;
+    height: 16px;
+    overflow: hidden;
+    margin-top: -10px;
+}
+.contenedorestrellasworkers
+{
+    width: 116px;
+    height: 16px;
+
+    overflow: hidden;
+    margin-left: 10px;
+    float: left;
+    margin-top: 5px;
+}
+.contenedorinfoprofileworkes
+{
+    width: 65px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.contenedorinfoprofileworkes p:nth-child(1)
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 20px;
+    letter-spacing: -0.025em;
+    color: #E76800;
+}
+.contenedorinfoprofileworkes p:nth-child(2)
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 18px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+}
+.contenedorprojectsworkers
+{
+    margin-top: 30px;
+}
+.tituloprojectsworkres
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 18px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+}
+.contenprojectworkersprofile
+{
+    margin-top: 30px;
+    display: -webkit-box;
+    overflow-x:scroll;
+    height: 270px;
+    padding: 0px;
+}
+.infoprofileprojects
+{
+    width: 220px;
+    height: 243px;
+    border: 1px solid #c4c4c3;
+    position: relative;
+    margin-left: 10px;
+}
+.superiorinfoprofileprojects
+{
+    width: 185px;
+    border-bottom: 1px solid #c4c4c4;
+    height: 37px;
+    margin: auto;
+}
+.superiorinfoprofileprojects p
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 37px;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: -0.025em;
+    color: #E76800;
+}
+.inferiorinfoprofileprojects
+{
+    width: 185px;
+    margin: auto;
+    margin-top: 20px;
+}
+.inferiorinfoprofileprojects p:nth-child(2n+1)
+{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 16px;
+    letter-spacing: -0.025em;
+    color: rgba(0, 0, 0, 0.5);
+}
+.inferiorinfoprofileprojects p:nth-child(2)
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 22px;
+    font-size: 16px;
+    letter-spacing: -0.025em;
+    color: #219653;
+    margin-left: 15px;
+}
+.inferiorinfoprofileprojects p:nth-child(4),.inferiorinfoprofileprojects p:nth-child(6),.inferiorinfoprofileprojects p:nth-child(8)
+{
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 22px;
+    font-size: 16px;
+    letter-spacing: -0.025em;
+    color: #5B5B5B;
+    margin-left: 15px;
+}
+
+
+
+
+.projectsgeneral::-webkit-scrollbar{
+    height: 5px;
+}
+.projectsgeneral::-webkit-scrollbar-thumb{
+    background: #C4C4C4;
+}
+
+.card-columns{
+  -webkit-column-count: auto;
+column-count: auto;
+height: 530px;
+overflow-y: scroll;
+}
+.card-columns .card{
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+
+
+.card-columns .card:nth-child(4n+4) .lineaderechacards{
+display: none;
+}
+.infoprofileprojects:first-child{
+  margin-left: 0px;
+}

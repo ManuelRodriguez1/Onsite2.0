@@ -13,7 +13,7 @@ import { ProComponent } from './components/pro/pro.component';
 import { HireComponent } from './components/hire/hire.component';
 import { AuthGuard } from './services/auth.service';
 import { MenuComponent } from './components/menu/menu.component';
-import {HirePrincipalComponent} from './components/hire-principal/hire-principal.component';
+import {HirePrincipalComponent} from './components/hire/hire-principal/hire-principal.component';
 import { router } from "./routes/routes";
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
@@ -21,9 +21,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
-import {MenuHomeComponent} from './components/hire-principal/menu-home/menu-home.component';
-import {MenuExploreComponent} from './components/hire-principal/menu-explore/menu-explore.component';
-import {MenuProjectsComponent} from './components/hire-principal/menu-projects/menu-projects.component';
+import {MenuHomeComponent} from './components/hire/hire-principal/menu-home/menu-home.component';
+import {MenuExploreComponent} from './components/hire/hire-principal/menu-explore/menu-explore.component';
+import {MenuProjectsComponent} from './components/hire/hire-principal/menu-projects/menu-projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServiceService } from './services/service.service';
 import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
@@ -31,8 +31,8 @@ import { ExploreComponent } from './components/pro/profile-pro/explore/explore.c
 import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
 import { ProjectsComponent } from './components/pro/profile-pro/projects/projects.component';
 import { Ng5SliderModule } from 'ng5-slider';
-import { ProfileComponent } from './components/hire-principal/profile/profile.component';
-import { MenuInboxComponent } from './components/hire-principal/menu-inbox/menu-inbox.component';
+import { ProfileComponent } from './components/hire/hire-principal/profile/profile.component';
+import { MenuInboxComponent } from './components/hire/hire-principal/menu-inbox/menu-inbox.component';
 
 
 @NgModule({

@@ -1,34 +1,43 @@
 <div id="ContenedorBannerHome">
-<ngb-carousel *ngIf="images" #carousel>
-  <ng-template ngbSlide>
-    <img [src]="images[0]" alt="Random first slide">
-    <div class="contenedorseccionbanner">
-      <div class="tituloseccionbannerhome"><p>Join as a Pro</p></div>
-      <div class="subtituloseccionbannerhome"><p>Some cool copy about our services and why you should join OnSite</p></div>
-      <div (click)="pro()"  class="btnseccionbannerhome"><p>CLICK HERE</p></div>
-   </div>
+    <ngb-carousel *ngIf="images" #carousel>
+        <ng-template ngbSlide>
+            <img class="imgSliderHome" [src]="images[0]" alt="Random first slide">
+            <div class="contenedorseccionbanner">
+                <div class="tituloseccionbannerhome">
+                    <p>Join as a Pro</p>
+                </div>
+                <div class="subtituloseccionbannerhome">
+                    <p>Some cool copy about our services and why you should join Onhive</p>
+                </div>
+                <div (click)="pro()" class="btnseccionbannerhome">
+                    <p>JOIN US</p>
+                </div>
+            </div>
 
-  </ng-template>
-  <ng-template ngbSlide>
-    <img [src]="images[1]" alt="Random second slide">
-    <div class="contenedorseccionbanner">
-      <div class="tituloseccionbannerhome"><p>Join as a Hire</p></div>
-      <div class="subtituloseccionbannerhome"><p>Some cool copy about our services and why you should join OnSite</p></div>
-      <div (click)="hire()" class="btnseccionbannerhome"><p>CLICK HERE</p></div>
-   </div>
-  </ng-template>
+        </ng-template>
+        <ng-template ngbSlide>
+            <img class="imgSliderHome" [src]="images[1]" alt="Random second slide">
+            <div class="contenedorseccionbanner">
+                <div class="tituloseccionbannerhome">
+                    <p>Join as a Hire</p>
+                </div>
+                <div class="subtituloseccionbannerhome">
+                    <p>Some cool copy about our services and why you should join Onhive</p>
+                </div>
+                <div (click)="hire()" class="btnseccionbannerhome">
+                    <p>JOIN US</p>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-carousel>
 
 
+    <div class="flechaizquierdabannerHome" (click)="prev()">
 
-</ngb-carousel>
+    </div>
+    <div class="flechaderechabannerHome" (click)="next()">
 
-
-<div class="flechaizquierdabannerHome" (click)="prev()" >
-
-</div>
-<div class="flechaderechabannerHome" (click)="next()">
-
-</div>
+    </div>
 
 </div>
 
@@ -36,35 +45,30 @@
 <div id="seccion2Home">
 
     <div class="contenedorseccion2home">
-    <ngx-slick-carousel class="carousel" 
-    #slickModal="slick-carousel" 
-    [config]="slideConfigseccion2" 
-    (init)="slickInit($event)"
-    (breakpoint)="breakpoint($event)"
-    (afterChange)="afterChange($event)"
-    (beforeChange)="beforeChange($event)">
-  <div ngxSlickItem *ngFor="let slide of slidesseccion2" class="slide">
 
 
-            <div class="izquierdaseccion2home">
-                <img src="{{ slide.imagenderecha }}" alt="" width="100%">
+
+        <div class="izquierdaseccion2home">
+
+        </div>
+        <div class="derechaseccion2home">
+            <div class="contenedorderechaseccion2Home">
+                <p class="text1seccion2home">About us</p>
+                <p class="text2seccion2home">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus. Etiam suscipit mauris quis turpis
+                    vehicula tincidunt. Mauris vitae sapien eu nulla pharetra vehicula. Nam porta enim id vestibulum.
+                </p>
+                <div class="btnseccion2home">
+                    <p>Learn more</p>
+                </div>
             </div>
-            <div class="derechaseccion2home">
-                    <div class="contenedorderechaseccion2Home">
-                          <p class="text1seccion2home">{{ slide.titulo }}</p>
-                          <p class="text2seccion2home">{{ slide.subtitulo }}</p>
-                          <div class="btnseccion2home">
-                            <p>Learn more</p>
-                          </div>
-                    </div>
-            </div>
+        </div>
 
 
 
 
-</div>
-</ngx-slick-carousel>
-</div>
+
+    </div>
 </div>
 
 
@@ -72,57 +76,50 @@
 
 
 <div id="seccion3Home">
-   <p class="contenedortituloseccion3home">How it works</p>
+    <p class="contenedortituloseccion3home">How it works</p>
     <div class="contenedorseccion3Home ">
 
-            <div id="contenedor1seccion3homeinfo" class="contenedorinfoseccion3Home" *ngFor="let num of Steps">
-                  <div class="cuadroinfoseccion3home">
-                      <div class="cuadrosecundseccion3home"></div>
-                    <p>{{num.paso}}</p>
-                  </div>
-                  <div class="tituloseccion3home">
-                    <p>Step {{num.paso}} </p>
-                  </div>
-                  <div class="flechaseccion3home" ></div>
+        <div id="contenedor1seccion3homeinfo" class="contenedorinfoseccion3Home" *ngFor="let num of Steps">
+            <div class="cuadroinfoseccion3home">
+                <div class="cuadrosecundseccion3home"></div>
+                <p>{{num.paso}}</p>
+            </div>
+            <div class="tituloseccion3home">
+                <p>Step {{num.paso}} </p>
+            </div>
+            <div class="flechaseccion3home"></div>
 
-                  <div class="subtituloseccion3home">
-                      <p>{{num.text}}</p>
-                  </div>
-
+            <div class="subtituloseccion3home">
+                <p>{{num.text}}</p>
             </div>
 
-    </div>
-</div>
-
-
-<div id="seccion4Home">
-    <div class="contenedorinformacionseccion4">
-      <div class="tituloseccion4home"><p>Real Tasks</p></div>
-  
-  <ngx-slick-carousel class="carousel" 
-  #slickModal="slick-carousel" 
-  [config]="slideConfig" 
-  (init)="slickInit($event)"
-  (breakpoint)="breakpoint($event)"
-  (afterChange)="afterChange($event)"
-  (beforeChange)="beforeChange($event)">
-<div ngxSlickItem *ngFor="let slide of slides" class="slide">
- 
- 
-    <div class="contenedorinfoseccion4{{ slide.img }} sliderseccion4">
-      <div class="contenedorimagensuperior"  >
-          <img src="{{ slide.imagensuperior }}" alt="" width="100%">
-      </div>
-      <div class="contenedorinferiorseccion4">
-          <p>{{slide.subtitulo}}</p>
-          <p>{{slide.name}}</p>
-      </div>
+        </div>
 
     </div>
-
- 
-</div>
-</ngx-slick-carousel>
 </div>
 
+<div class="container-carousel container1280Final">
+    <div id="seccion4Home">
+        <div class="contenedorinformacionseccion4">
+            <div class="tituloseccion4home">
+                <p>Reviews</p>
+            </div>
+
+            <!--            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+-->
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                    <div class="contenedorinfoseccion4{{ slide.img }} sliderseccion4">
+                        <div class="contenedorimagensuperior">
+                            <img src="{{slide.imagensuperior }}" alt="" width="100%">
+                        </div>
+                        <div class="contenedorinferiorseccion4">
+                            <p>{{slide.subtitulo}}</p>
+                            <p>{{slide.name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </div>
 </div>

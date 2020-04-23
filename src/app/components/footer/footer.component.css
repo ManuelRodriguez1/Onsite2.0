@@ -1,185 +1,180 @@
-.contenedorfooter
-{
+.contenedorfooter {
     width: 100%;
-    height: 427px;
+    height: 370px;
     position: relative;
-    background-color: #000000;
+    background-color: #010973;
+    overflow: hidden;
 }
-.superiorfooter
-{
+
+.inferiorfooter {
     width: 100%;
-    height: 378px;
+    height: 50px;
+    border-top: 1px solid #FFFFFF;
     position: relative;
-    
+    margin-top: 50px;
 }
-.inferiorfooter
-{
-    width: 100%;
-    height: calc(100% - 379px);    
-    border-top: 1px solid #727272;
-    position: relative;
-}
-#contenedorinferiorfooter
-{
+
+#contenedorinferiorfooter {
     width: 1268px;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
-#contenedorinferiorfooter p:nth-child(1)
-{
+
+#contenedorinferiorfooter p:nth-child(1) {
     float: left;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: normal;
-    line-height: normal;
-    font-size: 14px;
-    color: #D1D1D1;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
 }
-#contenedorinferiorfooter p:nth-child(2)
-{
+
+#contenedorinferiorfooter p:nth-child(2) {
     float: right;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    line-height: normal;
     font-size: 14px;
-    color: #D1D1D1;
+    line-height: 19px;
+    text-align: right;
+    /* White */
+    color: #FFFFFF;
 }
-#contenedorinferiorfooter a
-{
+
+#contenedorinferiorfooter a {
     font-weight: bold;
     color: #D1D1D1;
 }
-.contenedorsuperiorfooter
-{
-    width: 1268px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+
+.contenedorsuperiorfooter {
+    width: 1280px;
+    position: relative;
+    height: 222px;
+    margin: 0 auto;
+    margin-top: 50px;
 }
-.izquierdasuperiorfooter
-{
-    width: 200px;
+
+.izquierdasuperiorfooter {
     float: left;
-    
+    width: 50%;
 }
-#iconologofooter
-{
-    width: 144px;
-    height: 39px;
+
+#iconologofooter {
+    width: 200px;
+    height: 65px;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url('../../../assets/iconos/logofooter.svg');
+    background-image: url('../../../assets/logos/Logo_White.svg');
+    /*  background-image: url('../../../../assets/logos/Logo_White.svg');*/
     overflow: hidden;
 }
-.contenedortextoizqfooter
-{
+
+.contenedortextoizqfooter {
     width: 100%;
     overflow: hidden;
     margin-top: 20px;
 }
-.contenedortextoizqfooter p:nth-child(1)
-{
-    font-family: 'Montserrat', sans-serif;
+
+.contenedortextoizqfooter p:nth-child(1),
+.contenedortextoizqfooter p:nth-child(2) {
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: 100;
-    line-height: 26px;
-    font-size: 15px;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 32px;
     color: #FFFFFF;
 }
-.contenedortextoizqfooter p:nth-child(2)
-{
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 100;
-    line-height: 26px;
-    font-size: 15px;
-    color: #FFFFFF;
-}
-.contenedorredesizquierdafooter
-{
+
+.contenedorredesizquierdafooter {
     width: 100%;
     margin-top: 55px;
     overflow: hidden;
 }
-.contenedorredesizquierdafooter p
-{
+
+.contenedorredesizquierdafooter p {
     float: left;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: normal;
-    line-height: 11px;
-    font-size: 15px;
-    color: #D1D1D1;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
 }
-.iconoredesfooter
-{
+
+.iconoredesfooter {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     float: left;
     margin-left: 12px;
 }
-#iconofootfacebook
-{
+
+#iconofootfacebook {
     width: 9px;
     height: 17px;
     background-image: url('../../../assets/iconos/facebookfooter.svg');
 }
-#iconofootinstagram
-{
+
+#iconofootinstagram {
     width: 17px;
     height: 17px;
     background-image: url('../../../assets/iconos/instagramfooter.svg');
 }
-#iconofoottwitter
-{
+
+#iconofoottwitter {
     width: 20px;
     height: 17px;
     background-image: url('../../../assets/iconos/twitterfooter.svg');
 }
-.derechasuperiorfooter
-{
+
+.derechasuperiorfooter {
     width: 357px;
     float: right;
 }
-.contenedorform
-{
+
+.contenedorform {
     overflow: hidden;
+    bottom: 0;
+    position: absolute;
+    right: 0;
 }
-.contenedorform p
-{
-    font-family: 'Montserrat', sans-serif;
+
+.contenedorform p {
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    line-height: 14px;
-    font-size: 15px;
-    color: #979797;
+    font-size: 20px;
+    line-height: 32px;
+    color: #FFFFFF;
 }
-.contenedoritemsfooter
-{
+
+.contenedoritemsfooter {
     width: 100%;
-    position: relative;  
-    overflow: hidden; 
+    position: relative;
+    overflow: hidden;
     margin-top: 90px;
 }
-.izquierdaitemsfooter
-{
+
+.izquierdaitemsfooter {
     float: left;
     position: relative;
     overflow: hidden;
 }
-.derechaitemsfooter
-{
+
+.derechaitemsfooter {
     float: right;
     position: relative;
     overflow: hidden;
 }
-.izquierdaitemsfooter p
-{
+
+
+/*
+.izquierdaitemsfooter p {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -187,8 +182,9 @@
     font-size: 15px;
     color: #FFFFFF;
 }
-.derechaitemsfooter p
-{
+
+
+.derechaitemsfooter p {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -196,10 +192,11 @@
     font-size: 15px;
     color: #FFFFFF;
 }
-.form-footer
-{
-    width: 245px;
-    height: 32px;
+*/
+
+.form-footer {
+    width: 315px;
+    height: 47px;
     background-color: transparent;
     float: left;
     font-size: 15px;
@@ -211,18 +208,24 @@
     padding-left: 22px;
     color: #ffffff;
 }
-.btn-footer
-{
-    width: 103px;
-    height: 32px;   
+
+.btn-footer {
+    width: 136px;
+    height: 47px;
     background: #E76800;
     border: 1px solid #E76800;
     box-sizing: border-box;
     color: #FFFFFF;
-    outline: none;
+    /*outline: none;*/
     cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.04em;
 }
-.formfooter
-{
+
+.formfooter {
     margin-top: 12px;
 }

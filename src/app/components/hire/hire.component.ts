@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AngularFirestore } from "angularfire2/firestore";
+import {AppComponent }  from '../../app.component';
+
 @Component({
   selector: 'app-hire',
   templateUrl: './hire.component.html',
@@ -17,27 +19,35 @@ export class HireComponent implements OnInit {
   Email;
   Password;
   error;
+  appComponent = AppComponent;
 
   constructor(public af: AngularFireAuth, private router: Router, private db: AngularFirestore) {
 
 
   }
   ngOnInit() {
-
+    
 
   }
 
-
+  SendVerificationMail() {
+    return this.af.auth.currentUser.sendEmailVerification()
+    .then(() => {
+      this.router.navigate(['/Hireprincipal']);
+    })
+  }
 
 
   onSubmit(formData) {
 
     console.log(formData);
     if (formData.valid) {
-      this.af.auth.createUserAndRetrieveDataWithEmailAndPassword(
+      this.af.auth.createUserWithEmailAndPassword(
         formData.value.Email,
         formData.value.Password
-      ).then(
+      ).then((result) => {
+        this.SendVerificationMail();
+      }).then(
         (success) => {
           var user = firebase.auth().currentUser;
           user.updateProfile({
