@@ -1,47 +1,29 @@
 .contenedorHireTotal {
   overflow: hidden;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding: 10% 20% 0 10%;  
 }
-
-.imagenabout {
+.image-about {
   position: absolute;
-  right: 0;
+  right: 4%;
 }
-
-.title {
-  font-family: 'Mukta', sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 20px;
-  font-size: 30px;
-  letter-spacing: -0.025em;
-  color: #E76800;
-  margin-top: 69.52px;
+.info p{
+  color: #010973;
+  font-size: 26px;
+  line-height: 35px;
 }
-
-.title span {
-  color: #704300;
+.info span{
+  color: #000000;
 }
-
 .input, .input::placeholder {
   font-family: 'Montserrat', sans-serif;
-  ;
   font-style: normal;
   font-weight: normal;
   line-height: 20px;
   font-size: 15px;
 }
-
 .fields {
-  margin-top: 50px;
+  margin-top: 2%;
 }
-
-.info {
-  margin-top: 26px;
-}
-
-
 .info p:nth-of-type(2) {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
@@ -51,38 +33,19 @@
   letter-spacing: -0.025em;
   color: #2F80ED;
 }
-
-.fields2 {
-  margin-top: 26px;
-}
-
-.title2 {
-  margin-top: 30px;
-}
-
-.field3 {
-  margin-top: 19px;
-}
-
-.buttons {
-  margin-top: 48px;
-  position: relative;
-}
-
 .next {
-  position: absolute;
-  right: 15px;
   border-color: #E76800;
-  color: #E76800;
-  width: 117px;
-  height: 31px;
+  color: #ffffff;
+  background: #E76800;
+  width: 130px;
+  height: 42px;
   line-height: 18px;
-  text-align: right;
+  text-align: center;
   font-family: 'Montserrat', sans-serif;
   border-radius: 0;
+  font-weight: bold;
 }
-
 .next:hover {
-  background: #E76800;
-  color: white;
+  background: white;
+  color: #E76800;
 }
