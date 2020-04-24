@@ -20,7 +20,7 @@ export class ProComponent implements OnInit {
   page = 0;
   selectskills = null;
   selectskills2 = null;
-  title = ['Enter your information:', 'Select skills', 'Reviews'];
+  title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
