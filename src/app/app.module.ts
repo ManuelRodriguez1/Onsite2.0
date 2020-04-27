@@ -31,7 +31,6 @@ import { ExploreComponent } from './components/pro/profile-pro/explore/explore.c
 import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
 import { ProjectsComponent } from './components/pro/profile-pro/projects/projects.component';
 import { Ng5SliderModule } from 'ng5-slider';
-import { ProfileComponent } from './components/hire/hire-principal/profile/profile.component';
 import { MenuInboxComponent } from './components/hire/hire-principal/menu-inbox/menu-inbox.component';
 import { ProfileHireComponent } from './components/hire/hire-principal/profile-hire/profile-hire.component';
 
@@ -53,7 +52,6 @@ import { ProfileHireComponent } from './components/hire/hire-principal/profile-h
     ExploreComponent,
     RecordarPassComponent,
     ProjectsComponent,
-    ProfileComponent,
     MenuExploreComponent,
     MenuInboxComponent,
     ProfileHireComponent
