@@ -72,16 +72,7 @@ export class HomeComponent implements OnInit {
     "slidesToShow": 3,
     "slidesToScroll": 3,
     responsive: [
-      {
-        breakpoint: 1160,
-        settings: {
-          variableWidth: false,
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true
-        }
-      },
+
       {
         breakpoint: 900,
         settings: {
@@ -96,18 +87,19 @@ export class HomeComponent implements OnInit {
         breakpoint: 800,
         settings: {
           variableWidth: false,
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
-          dots: true
+          dots: false
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 680,
         settings: {
           variableWidth: false,
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          dots: false
         }
       }
     ],

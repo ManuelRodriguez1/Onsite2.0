@@ -27,7 +27,7 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: 18px;
+    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
     line-height: 25px;
     letter-spacing: 0.04em;
     color: #FFFFFF;
@@ -38,7 +38,7 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: calc(12px + (14 - 12) * ((100vw - 375px) / (1280 - 375)));
     line-height: 19px;
     text-align: right;
     /* White */
@@ -51,7 +51,6 @@
 }
 
 .contenedorsuperiorfooter {
-    width: 1280px;
     position: relative;
     height: 222px;
     margin: 0 auto;
@@ -63,13 +62,9 @@
     width: 50%;
 }
 
-#iconologofooter {
+#iconologofooter img {
     width: 200px;
     height: 65px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('../../../assets/logos/Logo_White.svg');
-    /*  background-image: url('../../../../assets/logos/Logo_White.svg');*/
     overflow: hidden;
 }
 
@@ -84,8 +79,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
-    line-height: 32px;
+    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(24px + (32 - 24) * ((100vw - 375px) / (1280 - 375)));
     color: #FFFFFF;
 }
 
@@ -100,7 +95,7 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: 18px;
+    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
     line-height: 25px;
     letter-spacing: 0.04em;
     color: #FFFFFF;
@@ -148,7 +143,7 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
     line-height: 32px;
     color: #FFFFFF;
 }
@@ -195,7 +190,7 @@
 */
 
 .form-footer {
-    width: 315px;
+    width: calc(210px + (315 - 210) * ((100vw - 375px) / (1280 - 375)));
     height: 47px;
     background-color: transparent;
     float: left;
@@ -228,4 +223,37 @@
 
 .formfooter {
     margin-top: 12px;
+}
+
+@media (max-width: 700px) {
+    .izquierdasuperiorfooter {
+        width: 100%;
+    }
+    .derechasuperiorfooter {
+        width: 100%;
+        margin-top: 50px;
+    }
+    .contenedorform {
+        position: relative;
+        width: 100%;
+    }
+    .contenedorfooter {
+        height: auto;
+    }
+    .contenedorsuperiorfooter {
+        height: 370px;
+    }
+    #iconologofooter img {
+        width: 155px;
+    }
+    #contenedorinferiorfooter p:nth-child(2) {
+        text-align: left;
+        float: left;
+    }
+    .inferiorfooter {
+        height: 80px;
+    }
+    #contenedorinferiorfooter p:nth-child(2) {
+        width: 100%;
+    }
 }

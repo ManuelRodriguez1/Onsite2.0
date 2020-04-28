@@ -1,19 +1,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--menu prueba-->
-<nav>
-    <div class="backgroundWhiteMenu">
-        <input type="checkbox" id="check-menu">
-        <label for="check-menu">
-    <i class="fas fa-bars" id="btn-menu-active"></i>
-    <i class="fas fa-times" id="btn-menu-cancel"></i>
-  </label>
+<nav class="top-nav">
+    <div class="backgroundWhiteMenu container1280Final">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+
         <a href="#"><img src="assets/logos/Logo_principal_menu.svg" alt="Logo Onhive"></a>
-        <!-- <div class="onsiteText">Lorem impsum dolor seat</div> -->
-        <ul>
+        <ul class="menu">
             <li><a href="#">About us</a></li>
             <li><a href="#">How it works</a></li>
             <li data-toggle="modal" data-target="#exampleModal"><a>Sign in</a></li>
-            <li><a href="#" class="singupAzul">Sign up</a></li>
+            <li class="btnFinalSignUp"><a href="#" class="singupAzul">Sign up</a></li>
             <!--li><a href="#">My Account</a></li>
     <li *ngIf="Sesion==false" class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
       <a class="nav-link ">Login</a>

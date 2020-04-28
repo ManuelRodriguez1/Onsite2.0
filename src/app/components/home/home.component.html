@@ -44,14 +44,14 @@
 
 <div id="seccion2Home">
 
-    <div class="contenedorseccion2home">
+    <div class="contenedorseccion2home row ">
 
 
 
-        <div class="izquierdaseccion2home">
-
+        <div class="col-12 col-md-6 izquierdaseccion2home">
+            <img src="../../../assets/imagenes/seccion2img1.png">
         </div>
-        <div class="derechaseccion2home">
+        <div class="col-12 col-md-6 derechaseccion2home">
             <div class="contenedorderechaseccion2Home">
                 <p class="text1seccion2home">About us</p>
                 <p class="text2seccion2home">
@@ -76,10 +76,10 @@
 
 
 <div id="seccion3Home">
-    <p class="contenedortituloseccion3home">How it works</p>
-    <div class="contenedorseccion3Home ">
+    <p class="contenedortituloseccion3home container1280Final">How it works</p>
+    <div class="row contenedorseccion3Home container1280Final ">
 
-        <div id="contenedor1seccion3homeinfo" class="contenedorinfoseccion3Home" *ngFor="let num of Steps">
+        <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home " *ngFor="let num of Steps">
             <div class="cuadroinfoseccion3home">
                 <div class="cuadrosecundseccion3home"></div>
                 <p>{{num.paso}}</p>
@@ -87,7 +87,6 @@
             <div class="tituloseccion3home">
                 <p>Step {{num.paso}} </p>
             </div>
-            <div class="flechaseccion3home"></div>
 
             <div class="subtituloseccion3home">
                 <p>{{num.text}}</p>
@@ -105,8 +104,6 @@
                 <p>Reviews</p>
             </div>
 
-            <!--            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
--->
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
                 <div ngxSlickItem *ngFor="let slide of slides" class="slide">
                     <div class="contenedorinfoseccion4{{ slide.img }} sliderseccion4">

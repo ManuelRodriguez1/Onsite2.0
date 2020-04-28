@@ -130,10 +130,6 @@ table {
     border-spacing: 0;
 }
 
-.container1280Final {
-    width: 1280px !important;
-}
-
 .icon_img {
     width: 16.61px;
     height: 19.86px;
@@ -720,4 +716,15 @@ table {
 
 .form-check-label span {
     margin-left: 10px;
+}
+
+.container1280Final {
+    width: 1280px !important;
+}
+
+@media screen and (max-width: 1320px) {
+    .container1280Final {
+        /*   background-color: blue;*/
+        width: calc(100% - 60px) !important;
+    }
 }
