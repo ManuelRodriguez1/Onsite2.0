@@ -48,7 +48,8 @@ export class MenuHomeComponent implements OnInit {
   estadoProyecto = "pActive";//pFinished
   email="";
   uid="";
-
+  files = ['Add files'];
+  file = 1;
 
   skills1 = ['Concrete', 'Decorator', 'Drywall',
     'Electrical', 'Excavation', 'Flooring',
@@ -57,8 +58,8 @@ export class MenuHomeComponent implements OnInit {
     'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = [];
   skills2Howmany: any = ["1", "2", "3", "4", "5"];
-  cust = 4;
-  customers = ['Customer 1', 'Customer 2', 'Customer 3'];
+  cust = 1;
+  customers = ['Customer 1'];
   router: any;
   database = firebase.database();
   constructor(private db: AngularFirestore) {
@@ -67,6 +68,10 @@ export class MenuHomeComponent implements OnInit {
   }
 
 
+  addFile() {
+    var i = this.file++;
+    this.files.push('File ' + i);
+  }
 
   selectskill(e) {
     this.up3 = !this.up3;
@@ -182,6 +187,10 @@ export class MenuHomeComponent implements OnInit {
 
     var i = this.cust++;
     this.customers.push('Customer ' + i);
+  }
+  addfiles() {
+    var i = this.cust++;
+    this.files.push('File ' + i);
   }
   close(e) {
     if (e == 1) {

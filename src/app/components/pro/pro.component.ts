@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
 import * as firebase from 'firebase/app';
-import {  } from "firebase/auth";
 import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
@@ -21,13 +20,14 @@ export class ProComponent implements OnInit {
   page = 0;
   selectskills = null;
   selectskills2 = null;
-  title = ['Enter your information:', 'Select skills', 'Reviews'];
+  title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
-  customers = ['Customer 1', 'Customer 2', 'Customer 3'];
+  customers = ['Add certificate file'];
   customers2 = '';
   database = firebase.database();
+  notSame: boolean = false
 
   constructor(private service: ServiceService, public afAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) { }
 
@@ -74,6 +74,11 @@ export class ProComponent implements OnInit {
   }
 
   test(f: NgForm){
+
+    let pass = f.value.user
+    let confirmpass = f.value.password
+    if (pass !== confirmpass){notSame: true}
+
     this.afAuth.auth.createUserWithEmailAndPassword(f.value.user, f.value.password).then(()=>{
       var user = firebase.auth().currentUser;
       user.updateProfile({
@@ -86,7 +91,7 @@ export class ProComponent implements OnInit {
         lastname: f.value.lastname,
         email: f.value.email,
         phone: f.value.phone,
-        user: f.value.user,
+        password: f.value.password,
         zipcode: f.value.zipcode,
         skills: this.selectskills,
         specificSkills: this.selectskills2,

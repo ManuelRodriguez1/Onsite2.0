@@ -6,50 +6,33 @@
     <div class="fields container">
       <div class="row">
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img prof"></div>
-          </div>
           <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
         </div>
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img prof"></div>
-          </div>
           <input type="text" class="form-control" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img email"></div>
-          </div>
           <input type="email" class="form-control" placeholder="E-mail" name="email" #email="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img tel"></div>
-          </div>
           <input type="text" class="form-control" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
         </div>
       </div>
     </div>
     <div class="info container">
-      <p>Enter account information.</p>
+      <p>Enter your password</p>
       <p>Your username will be your e-mail address.</p>
     </div>
     <div class="fields2 container">
       <div class="row">
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img email"></div>
-          </div>
-          <input type="text" class="form-control" placeholder="E-mail" name="user" #user="ngModel" ngModel>
+          <input type="password" class="form-control" placeholder="Password" name="user" #user="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img pass"></div>
-          </div>
-          <input type="password" class="form-control" placeholder="Password" name="password" #password="ngModel" ngModel>
+          <input type="password" class="form-control" placeholder="Password confirmation" name="password" #password="ngModel" ngModel>
+          <span [hidden]="user.value == password.value" class="alertMessage">Passwords aren't the same</span>
         </div>
       </div>
     </div>
@@ -59,10 +42,10 @@
     <div class="field3 container">
       <div class="row">
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img arrow"></div>
-          </div>
           <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel>
+        </div>
+        <div class="col-sm input-group" style="visibility: hidden;">
+          <input type="text" class="form-control" disabled placeholder="" name="">
         </div>
       </div>
     </div>
@@ -71,10 +54,7 @@
     <div class="container skill">
       <div class="row">
         <div class="col-sm input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img setting"></div>
-          </div>
-          <input type="text" readonly class="form-control" placeholder="Select Skills">
+          <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()" style="cursor: default;">
           <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
         </div>
       </div>
@@ -89,7 +69,7 @@
           <div class="close" (click)='close(1)'></div>
         </div>
       </div>
-      <div [hidden]="selectskills == null">
+      <!-- <div [hidden]="selectskills == null">
         <div class="title">
           <p>Let’s get specific</p>
         </div>
@@ -118,15 +98,17 @@
           </div>
         </div>
         <input type="hidden" name="skills" [value]="selectskills2">
-      </div>
+      </div> -->
     </div>
   </section>
-  <section [hidden]='page < 2' class="container">
+  <section [hidden]='page < 2 || page > 2' class="container">
     <div class="texts2 ">
-      <p>Reach out to your past satisfied customers to get reviews. The more satisfied customer reviews, the<br> more likely you’ll be hired. </p>
-      <p>Share this link to get reviews</p>
+      <p>In this last step you can add your certificate(s) as JPG or PDF file(s) to support your skill(s). This <br>step is not mandatory and you can add them later in your account settings. </p>
+      <div class="title2 container">
+        <p>Certificates</p>
+      </div>
     </div>
-    <div class="row linkcont">
+    <!-- <div class="row linkcont">
       <div class="col-sm input-group">
         <div class="input-group-prepend">
           <div class="icon_img link"></div>
@@ -136,18 +118,15 @@
           <div class="input-group-text fomatlink"><p>Link</p></div>
         </div>
       </div>
-    </div>
-    <div class="texts2 move">
+    </div> -->
+    <!-- <div class="texts2 move">
       <p></p>
       <p>Enter E-mails</p>
-    </div>
+    </div> -->
     <div class="row customers" *ngFor="let c of customers">
       <div class="col-sm input-group">
         <div class="input-group">
-          <div class="input-group-prepend">
-            <div class="icon_img prof"></div>
-          </div>
-          <input type="text" [placeholder]="c" class="form-control">
+          <input type="file" [placeholder]="c" class="form-control">
         </div>
       </div>
     </div>
@@ -155,29 +134,37 @@
       <div class="input-group-prepend">
         <div class="icon_img btnround"></div>
       </div>
-      <p>Add Customer</p>
     </div>
     <div class="texts2">
-      <p></p>
-      <p>White a message to your customers (Optional)</p>
+      <input type="checkbox">
+      <p>I accept and agree to the <a href="#">Terms of Use.</a></p>
     </div>
-    <div class="row customers2">
+    <!-- <div class="row customers2">
     <div class="col-sm input-group">
       <div class="input-group-prepend">
         <div class="icon_img airplane"></div>
       </div>
       <input type="text" class="form-control" placeholder="Say hello!" ngModel name="description" #description="ngModel">
     </div>
-  </div>
+  </div> -->
+  </section>
+  <section [hidden]='page < 3' class="container">
+    <div class="title">
+      <p>Verify your email</p>
+    </div>
+    <div class="texts2">
+      <p>We have sent you an email to verify your email address, please check your inbox. If you haven't <br>received the email, resend to verify.</p>
+    </div>
   </section>
   <div class="buttons container">
-    <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 2' (click)='back()'>
+    <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 3' (click)='back()'>
       <p>Back</p>
     </div>
-    <div class="btn btn-outline-warning next" (click)='next()' *ngIf='page < 2'>
+    <div class="btn btn-outline-warning next" (click)='next()' *ngIf='page < 3'>
       <p>Next</p>
     </div>
-    <button class="btn btn-outline-warning next" *ngIf="page == 2">Finish</button>
+    <button class="btn back" *ngIf="page == 3">Change email</button>
+    <button class="btn btn-outline-warning next" *ngIf="page == 3">Resend</button>
   </div>
 
 </form>
