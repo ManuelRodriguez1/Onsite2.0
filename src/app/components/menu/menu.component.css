@@ -12,6 +12,7 @@
      letter-spacing: 0.04em;
      width: 100%;
      top: 0;
+     box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
  }
  
  .btnFinalSignUp {

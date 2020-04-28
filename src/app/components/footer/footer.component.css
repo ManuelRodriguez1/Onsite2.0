@@ -190,7 +190,7 @@
 */
 
 .form-footer {
-    width: calc(210px + (315 - 210) * ((100vw - 375px) / (1280 - 375)));
+    width: calc(170px + (315 - 170) * ((100vw - 375px) / (1280 - 375)));
     height: 47px;
     background-color: transparent;
     float: left;
