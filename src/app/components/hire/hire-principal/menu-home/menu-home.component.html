@@ -1,4 +1,8 @@
-<form #formProject="ngForm" (ngSubmit)="addProject(formProject)" class="form-Project">
+<form
+  #formProject="ngForm"
+  (ngSubmit)="addProject(formProject)"
+  class="form-Project"
+>
   <div class="home" *ngIf="select == 0">
     <div *ngIf="HomeFormularioNw == 0">
       <div class="list-group" *ngIf="up == true">
@@ -11,20 +15,20 @@
         </div>
       </div>
       <div class="started py-5">
-          <div class="container py-5">
-            <div class="started-title mt-2 pt-5">You don’t have any projects</div>
-            <div class="started-button mt-2" (click)="next()">Get Started</div>        
-          </div>
+        <div class="container py-5">
+          <div class="started-title mt-2 pt-5">You don’t have any projects</div>
+          <div class="started-button mt-2" (click)="next()">Get Started</div>
+        </div>
       </div>
     </div>
     <div *ngIf="HomeFormularioNw == 1">
-      <div class="container skill">
+      <div class="container">
         <div class="row">
-          <div class="project-title">
+          <div class="title-form">
             Project’s name
           </div>
         </div>
-        <div class="row my-2">
+        <div class="row py-2">
           <div class="col-sm-6 input-group">
             <input
               required
@@ -36,38 +40,55 @@
             />
           </div>
         </div>
-        <div class="row my-2">
-          <div class="project-title my-2">
-            Project description 
+        <div class="row py-2">
+          <div class="title-form my-2">
+            Project description
           </div>
-          <p>Type what the project is about and the estimated time you expect it to be completed. Include an overview of what you need done.</p>
+          <p class="description-form">
+            Type what the project is about and the estimated time you expect it
+            to be completed. Include an overview of what you need done.
+          </p>
         </div>
         <div class="row my-3">
           <div class="col-sm input-group">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Describe your project here..."></textarea>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="4"
+              placeholder="Describe your project here..."
+            ></textarea>
           </div>
         </div>
         <div class="row text-right">
           <div class="col-sm">
-            <span>4000 characters remaining</span>
+            <span class="description-form">4000 characters remaining</span>
           </div>
         </div>
-        <div class="row my-2">
-          <div class="project-title my-2">
+        <div class="row py-2">
+          <div class="title-form my-2">
             Brief material
           </div>
-          <p>Add any documents or images that might be helpful in explaining more about your project.</p>
+          <p class="description-form">
+            Add any documents or images that might be helpful in explaining more
+            about your project.
+          </p>
         </div>
-        <div class="row my-3">
-          <div class="col-sm-2 input-group addfileborder py-4 px-3">
-            <button class="btn btn-addfile">Add a file</button>
+        <div class="row py-3">
+          <div
+            class="col-sm-2 input-group addfileborder py-4 justify-content-center"
+            *ngFor="let f of files"
+          >
+            <div class="upload-btn-wrapper align-self-center plus-button">
+              <button class="btn">Add a file</button>
+              <input type="file" name="myfile" />
+            </div>
           </div>
-          <div class="col-sm-2 input-group pl-5">
-            <img src="../../../../../assets/iconos/plus-button.svg" alt="">
+          <div class="col-sm-2 input-group pl-5" (click)="addfiles()">
+            <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" />
           </div>
         </div>
-        <div class="row">
-          <div class="title2">
+        <div class="row py-2">
+          <div class="title-form">
             What do you need help with?
           </div>
         </div>
@@ -104,59 +125,102 @@
           </div>
         </div>
       </div>
+      <div class="row py-2">
+        <div class="title-form">
+          Location
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-sm-6 input-group">
+          <input
+            required
+            type="text"
+            class="form-control"
+            placeholder="Street name, City, State ZIP"
+            name="location"
+            id="location"
+          />
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="title-form">
+          Estimated budget
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-sm-6 input-group">
+          <input
+            required
+            type="text"
+            class="form-control"
+            placeholder="$10,000 - $20,000"
+            name="estimated"
+            id="estimated"
+          />
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="title-form">
+          Number of people per skills
+        </div>
+      </div>
       <div class="row">
-              <div class="title2">
-                How many people?
-              </div>
-            </div>
-            <div class="row skill2Howmany">
-              <div class="col-sm-6 input-group">
-                <input
-                  type="text"
-                  readonly
-                  class="form-control"
-                  [placeholder]="howmany"
-                  id="selmanypeople"
-                  name="selmanypeople"
-                />
-                <div class="down" (click)="list4()"></div>
-              </div>
-              <div class="col-sm empleos1012">
-                Average rate 10 - 12 / Hour
-              </div>
-            </div>
-            <div class="col-sm-6 list-group" [hidden]="up5 == false">
-              <div
-                class="list-group-item"
-                *ngFor="let s of skills2Howmany"
-                (click)="selectskill2up5(s)"
-              >
-                <p>{{ s }}</p>
-              </div>
-            </div>
-            <div class="form-check checkbox">
-            <input
-              type="checkbox"
-              class="form-check-input input-assumpte"
-              id="exampleCheck1"
-            />
-            <label class="form-check-label" for="exampleCheck1"
-              ><span>All workers must take a background test.</span></label
-            >
-          </div>
-          <div class="form-check checkbox">
-            <input
-              type="checkbox"
-              class="form-check-input input-assumpte"
-              id="exampleCheck2"
-            />
-            <label class="form-check-label" for="exampleCheck2"
-              ><span>All workers must pass a background test.</span></label
-            >
-          </div>
-          <button class="btn btn-outline-warning next" *ngIf="page == 3">
-          Finish
-        </button>
+        <div class="col-sm-6 py-3">
+          <label class="form-check-label py-3">Start date</label>
+          <input type="date" name="startdate" max="3000-12-31"
+                    min="1000-01-01" class="form-control py-2">
+        </div>
+        <div class="col-sm-6 py-3">
+          <label class="form-check-label py-3">End date</label>
+          <input type="date" name="enddate" max="3000-12-31"
+                    min="1000-01-01" class="form-control py-2">
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="title2">
+          How many people?
+        </div>
+      </div>
+      <div class="row skill2Howmany">
+        <div class="col-sm-6 input-group">
+          <input
+            type="text"
+            readonly
+            class="form-control"
+            [placeholder]="howmany"
+            id="selmanypeople"
+            name="selmanypeople"
+          />
+          <div class="down" (click)="list4()"></div>
+        </div>
+        <div class="col-sm empleos1012">
+          Average rate 10 - 12 / Hour
+        </div>
+      </div> -->
+      <div class="form-check checkbox input-group">
+        <input
+          type="checkbox"
+          class="form-check-input input-assumpte"
+          id="exampleCheck1"
+        />
+        <label class="form-check-label" for="exampleCheck1"
+          ><span>All workers must take a background test.</span></label
+        >
+      </div>
+      <div class="form-check checkbox input-group">
+        <input
+          type="checkbox"
+          class="form-check-input input-assumpte"
+          id="exampleCheck2"
+        />
+        <label class="form-check-label" for="exampleCheck2"
+          ><span>All workers must pass a background test.</span></label
+        >
+      </div>
+      <button class="btn btn-post my-5 float-right">Post</button>
+      <button class="btn btn-outline-warning next" *ngIf="page == 3">
+        Finish
+      </button>
     </div>
   </div>
 </form>

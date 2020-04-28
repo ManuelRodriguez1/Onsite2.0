@@ -38,13 +38,21 @@
 .image-dashboard{
   position: absolute;
 }
-.project-title{
+.title-form{
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 26px;
   line-height: 35px;
   color: #010973;
+}
+.description-form{
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 160%;
+  color: #000000;
 }
 .btn-addfile{
   background-color: #C4C4C4;
@@ -60,10 +68,57 @@
 .addfileborder{
   border: 1px dashed #C4C4C4;
 }
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;  
+}
 
+.btn {
+  border: 1px solid #C4C4C4;
+  color: #000000;
+  background-color: #C4C4C4;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.btn-post{
+  width: 134px;
+  height: 47px;
+  background-color: #010973;
+  color: #FFFFFF;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.btn-post:hover{
+  background-color: #FFFFFF;
+  color: #010973;
+}
 .form-control:disabled, .form-control[readonly] {
   background: transparent;
+}
+.input-assumpte:checked+label:before {
+  background-color: #010973;
+}
+.input-assumpte+label:before{
+  border: 1px solid #010973;
+}
+.plus-button:hover{
+  cursor: pointer;
 }
 
 .input-group {
