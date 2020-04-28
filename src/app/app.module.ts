@@ -33,7 +33,7 @@ import { ProjectsComponent } from './components/pro/profile-pro/projects/project
 import { Ng5SliderModule } from 'ng5-slider';
 import { MenuInboxComponent } from './components/hire/hire-principal/menu-inbox/menu-inbox.component';
 import { ProfileHireComponent } from './components/hire/hire-principal/profile-hire/profile-hire.component';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 
 @NgModule({
   declarations: [
@@ -67,6 +67,7 @@ import { ProfileHireComponent } from './components/hire/hire-principal/profile-h
     AngularFireAuthModule,
     SlickCarouselModule,
     Ng5SliderModule,
+    NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
     }),
