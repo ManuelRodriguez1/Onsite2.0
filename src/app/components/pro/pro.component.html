@@ -102,10 +102,10 @@
     </div>
   </section>
   <section [hidden]='page < 2 || page > 2' class="container">
-    <div class="texts2 ">
-      <p>In this last step you can add your certificate(s) as JPG or PDF file(s) to support your skill(s). This <br>step is not mandatory and you can add them later in your account settings. </p>
-      <div class="title2 container">
-        <p>Certificates</p>
+    <div class="texts2">
+      <p class="changeColor">In this last step you can add your certificate(s) as JPG or PDF file(s) to support your skill(s). This step is not mandatory and you can add them later in your account settings. </p>
+      <div class="title2">
+        <p class="changeColorBlue">Certificates</p>
       </div>
     </div>
     <!-- <div class="row linkcont">
@@ -125,8 +125,9 @@
     </div> -->
     <div class="row customers" *ngFor="let c of customers">
       <div class="col-sm input-group">
-        <div class="input-group">
-          <input type="file" [placeholder]="c" class="form-control">
+        <div class="input-group custom-file">
+          <input type="file" class="custom-file-input" id="customFile" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
+          <label for="customFile" class="custom-file-label">{{c}}</label>
         </div>
       </div>
     </div>
@@ -135,10 +136,11 @@
         <div class="icon_img btnround"></div>
       </div>
     </div>
-    <div class="texts2">
-      <input type="checkbox">
-      <p>I accept and agree to the <a href="#">Terms of Use.</a></p>
-    </div>
+    <label class="texts2 form-group form-check">
+      <input type="checkbox" class="form-check-input check-out" id="check1" value="1">
+      <span class="form-check-input form-checked"></span>
+      <p class="form-check-label" for="check1">I accept and agree to the <a href="#">Terms of Use.</a></p>
+    </label>
     <!-- <div class="row customers2">
     <div class="col-sm input-group">
       <div class="input-group-prepend">
@@ -160,11 +162,15 @@
     <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 3' (click)='back()'>
       <p>Back</p>
     </div>
-    <div class="btn btn-outline-warning next" (click)='next()' *ngIf='page < 3'>
-      <p>Next</p>
-    </div>
-    <button class="btn back" *ngIf="page == 3">Change email</button>
-    <button class="btn btn-outline-warning next" *ngIf="page == 3">Resend</button>
+    <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
+    || email.value == '' || phone.value == '' || password.value == '' || zipcode.value == ''">
+      Next
+    </button>
+    <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills == null">
+      Next
+    </button>
+    <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 2">Finish</button>
+    <button class="btn btn-outline-warning next" *ngIf="page == 4">Resend</button>
   </div>
 
 </form>

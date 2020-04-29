@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "angularfire2/firestore";
+import { AngularFireStorage } from "angularfire2/storage";
+import bsCustomFileInput from 'bs-custom-file-input';;
 
 @Component({
   selector: 'app-pro',
@@ -28,8 +30,10 @@ export class ProComponent implements OnInit {
   customers2 = '';
   database = firebase.database();
   notSame: boolean = false
+  file: any[] = []
 
-  constructor(private service: ServiceService, public afAuth: AngularFireAuth, private router: Router, private db: AngularFirestore) { }
+  constructor(private service: ServiceService, public afAuth: AngularFireAuth,
+    private router: Router, private db: AngularFirestore, private afs: AngularFireStorage) { }
 
   ngOnInit() {
 
@@ -52,15 +56,15 @@ export class ProComponent implements OnInit {
   selectskill(e) {
     this.up = !this.up;
     this.selectskills = e;
-    this.skills2 = [this.selectskills+' Hanger', this.selectskills+' Apprentice', 'Metal Framer',
-    'Metal Framer Apprentice', this.selectskills+' Finisher', 'Fire Taper'];
+    this.skills2 = [this.selectskills + ' Hanger', this.selectskills + ' Apprentice', 'Metal Framer',
+      'Metal Framer Apprentice', this.selectskills + ' Finisher', 'Fire Taper'];
   }
   selectskill2(e) {
     this.up2 = !this.up2;
     this.selectskills2 = e
   }
   close(e) {
-    if(e == 1){
+    if (e == 1) {
       this.selectskills = null
       this.selectskills2 = null
     }
@@ -70,23 +74,20 @@ export class ProComponent implements OnInit {
   }
   addcustomer() {
     var i = this.cust++;
-    this.customers.push('Customer ' + i);
+    this.customers.push('Add certificate file');
   }
 
-  test(f: NgForm){
+  test(f: NgForm) {
 
-    let pass = f.value.user
-    let confirmpass = f.value.password
-    if (pass !== confirmpass){notSame: true}
-
-    this.afAuth.auth.createUserWithEmailAndPassword(f.value.user, f.value.password).then(()=>{
+    this.afAuth.auth.createUserWithEmailAndPassword(f.value.email, f.value.password).then(() => {
       var user = firebase.auth().currentUser;
       user.updateProfile({
         displayName: "pro",
         photoURL: "",
       });
 
-      this.db.collection('users_pro').add({
+      this.db.collection('users_pro').doc(user.uid).set({
+        id: user.uid,
         name: f.value.name,
         lastname: f.value.lastname,
         email: f.value.email,
@@ -94,15 +95,36 @@ export class ProComponent implements OnInit {
         password: f.value.password,
         zipcode: f.value.zipcode,
         skills: this.selectskills,
-        specificSkills: this.selectskills2,
-        link: f.value.link,
-        description: f.value.description,
-        estado:"pro"
+        // specificSkills: this.selectskills2,
+        // link: f.value.link,
+        // description: f.value.description,
+        estado: "pro",
+        certificate: this.customers2
       })
 
+      for (let i = 0; i < this.file.length; i++) {
+        var fileDoc = this.afs.ref('Users_pro/' + user.uid + "/certificado_" + (i+1)).put(this.file[i])
+        fileDoc.then((url) => {
+          url.ref.getDownloadURL()
+            .then((url) => {
+              this.customers2 += url + ','
+              setTimeout(() => {
+                this.db.collection('users_pro').doc(user.uid).update({
+                  "certificate": this.customers2
+                })
+              }, 200);
+            })
+        })
+      }
+
       this.router.navigate(['ProfilePro'])
-    }).catch((error)=>{
+    }).catch((error) => {
       alert(error.message)
     })
+
+  }
+
+  uploadDoc(e){
+    this.file.push(e.target.files[0])
   }
 }

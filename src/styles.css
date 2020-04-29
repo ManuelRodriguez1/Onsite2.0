@@ -251,7 +251,7 @@ table {
     color: #FF8600;
 }
 .next:active,
-.back:active {
+.back:active, .next:disabled {
     background: #FFB665 !important;
     color: white !important;
     border-color: #FFB665 !important;
