@@ -130,10 +130,6 @@ table {
     border-spacing: 0;
 }
 
-.container1280Final {
-    width: 1280px !important;
-}
-
 .icon_img {
     width: 16.61px;
     height: 19.86px;
@@ -227,20 +223,24 @@ table {
     cursor: pointer;
     transition: .5s;
 }
-@media(min-width: 1280px){
-    .container{
+
+@media(min-width: 1280px) {
+    .container {
         max-width: 948px !important;
         margin-left: auto !important;
         margin-right: auto !important;
     }
 }
+
 .list-group-item {
     color: rgba(0, 0, 0, 0.5);
 }
+
 .list-group-item {
     cursor: pointer;
 }
-.list-group-item:hover{
+
+.list-group-item:hover {
     background: #ECECEC;
     color: #FF8600;
 }
@@ -250,6 +250,7 @@ table {
     background: #fff;
     color: #FF8600;
 }
+
 .next:active,
 .back:active, .next:disabled {
     background: #FFB665 !important;
@@ -452,12 +453,14 @@ table {
 .form-control[readonly] {
     background: initial;
 }
-.form-control{
+
+.form-control {
     font-family: 'Open Sans', sans-serif !important;
     font-style: normal !important;
     height: 45px;
     border-radius: 2px;
 }
+
 .up {
     transition: .5s;
     transform: translateY(-50%) rotate(180deg);
@@ -465,7 +468,8 @@ table {
 
 .skillselct {
     overflow: hidden;
-    margin: -40px 0 0 9px;;
+    margin: -40px 0 0 9px;
+    ;
 }
 
 .skillsel {
@@ -737,4 +741,19 @@ table {
 
 .form-check-label span {
     margin-left: 10px;
+}
+
+.container1280Final {
+    width: 1280px !important;
+}
+
+body.modal-open {
+    padding-right: 0px !important;
+}
+
+@media screen and (max-width: 1320px) {
+    .container1280Final {
+        /*   background-color: blue;*/
+        width: calc(100% - 60px) !important;
+    }
 }

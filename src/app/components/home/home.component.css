@@ -2,12 +2,14 @@
     width: 100%;
     padding: initial;
     max-width: initial;
-    max-height: 800px;
     height: 100%;
+    /* max-height: 800px;*/
+    max-height: calc(508px + (800 - 508) * ((100vw - 375px) / (1280 - 375)));
 }
 
 .imgSliderHome {
-    max-height: 800px;
+    /* max-height: 800px;*/
+    max-height: calc(508px + (800 - 508) * ((100vw - 375px) / (1280 - 375)));
     height: 100%;
     object-fit: cover;
 }
@@ -48,7 +50,7 @@
 }
 
 .contenedorseccionbanner {
-    width: 740px;
+    width: calc(300px + (740 - 300) * ((100vw - 375px) / (1280 - 375)));
     position: absolute;
     top: 50%;
     left: 50%;
@@ -60,8 +62,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: 62px;
-    line-height: 84px;
+    font-size: calc(45px + (62 - 45) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(50px + (84 - 50) * ((100vw - 375px) / (1280 - 375)));
     color: #FFFFFF;
     text-align: center;
 }
@@ -70,8 +72,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 40px;
-    line-height: 54px;
+    font-size: calc(14px + (40 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(17px + (54 - 17) * ((100vw - 375px) / (1280 - 375)));
     text-align: center;
     color: #FFFFFF;
 }
@@ -103,33 +105,34 @@
 
 #seccion2Home {
     width: 100%;
-    height: 760px;
+    height: calc(300px + (760 - 300) * ((100vw - 375px) / (1280 - 375)));
     position: relative;
+    margin-top: -2px;
 }
 
 .contenedorseccion2home {
-    width: 100%;
     height: 100%;
 }
 
-.izquierdaseccion2home {
-    width: 50%;
+.izquierdaseccion2home img {
+    width: 100%;
     height: 100%;
-    float: left;
+    object-fit: cover;
+    /*float: left;
     background-color: antiquewhite;
-    background-image: url('../../../assets/imagenes/seccion2img1.png');
+    background-image: url('');*/
 }
 
 .derechaseccion2home {
-    width: 50%;
+    /*  width: 50%;
     height: 100%;
     float: right;
     background-color: #ffffff;
-    position: relative;
+    position: relative;*/
 }
 
 .contenedorderechaseccion2Home {
-    width: 450px;
+    width: calc(340px + (450 - 340) * ((100vw - 375px) / (1280 - 375)));
     position: relative;
     top: 50%;
     left: 50%;
@@ -150,8 +153,8 @@
     margin-top: 50px;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
-    line-height: 32px;
+    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(17px + (32 - 17) * ((100vw - 375px) / (1280 - 375)));
     color: #000000;
 }
 
@@ -188,22 +191,15 @@
     position: relative;
 }
 
-.contenedorseccion3Home {
-    width: 1280px;
-    position: absolute;
-    max-width: 1280px;
-    top: 60%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    grid-template-columns: repeat(4, 305px 305px 305px 305px);
-    grid-column-gap: 24px;
-    display: grid;
-}
-
 .contenedorinfoseccion3Home {
     width: 305px;
     float: left;
+    margin-bottom: 20px;
+}
+
+.contenedorseccion3Home {
+    margin: 0 auto;
+    margin-top: 60px;
 }
 
 .cuadroinfoseccion3home {
@@ -243,28 +239,18 @@
 }
 
 .tituloseccion3home p {
-    font-family: 'Mukta', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: bold;
     line-height: 48px;
-    font-size: 35px;
+    font-size: calc(20px + (35 - 20) * ((100vw - 375px) / (1280 - 375)));
     color: #F08E00;
     float: left;
     margin-left: 13px;
 }
 
-.flechaseccion3home {
-    width: 99px;
-    height: 61px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('/assets/iconos/flechaseccion3.svg');
-    float: right;
-    overflow: hidden;
-}
-
 .subtituloseccion3home {
-    width: 90%;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -272,8 +258,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
-    line-height: 32px;
+    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(17px + (32 - 17) * ((100vw - 375px) / (1280 - 375)));
     color: #FFFFFF;
 }
 
@@ -285,7 +271,6 @@
     line-height: 54px;
     color: #FFFFFF;
     padding-top: 78px;
-    width: 1280px;
     margin: 0 auto;
 }
 
@@ -313,12 +298,22 @@
     position: relative;
 }
 
+.slick-slider {
+    margin: 0 -15px;
+}
+
+.slick-slide {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
 .sliderseccion4 {
-    width: 383px;
-    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    /*  height: auto;
     margin-right: 50px;
     float: left;
-    position: relative;
+    position: relative;*/
 }
 
 .container-carousel {
@@ -346,8 +341,8 @@
 }
 
 .contenedorimagensuperior {
-    width: 383px;
-    height: 202px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     margin: auto;
 }
@@ -359,7 +354,7 @@
 }
 
 .contenedorinferiorseccion4 {
-    width: 383px;
+    width: 100%;
     margin: auto;
     outline: none;
     margin-bottom: 80px;
@@ -369,7 +364,7 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
     line-height: 32px;
     color: #5B5B5B;
 }
@@ -396,24 +391,28 @@
 
 /* Fin Seccion 4 Home */
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1320px) {
+    .contenedorderechaseccion2Home {
+        width: calc(100% - 60px) !important;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .contenedortituloseccion3home {
+        padding-top: 45px;
+    }
     #seccion3Home {
-        height: 1010px;
+        height: auto;
+        padding-bottom: 45px;
     }
-    .contenedorseccion3Home {
-        width: 640px;
-        position: absolute;
-        max-width: 640px;
-        top: 60%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        grid-template-columns: repeat(2, 305px);
-        grid-column-gap: 25px;
-        grid-row-gap: 25px;
-        display: grid;
+}
+
+@media screen and (max-width: 768px) {
+    #seccion2Home {
+        height: 870px;
     }
-    .contenedorinfoseccion3Home .flechaseccion3home {
-        opacity: 0;
+    .izquierdaseccion2home,
+    .derechaseccion2home {
+        height: 50%;
     }
 }

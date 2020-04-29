@@ -15,6 +15,9 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
   projectname;
    options: Options = {
      floor: 1.00,
@@ -25,7 +28,13 @@ export class MenuHomeComponent implements OnInit {
 
      }
    };
-
+   
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
   lat: number = 51.678418;
   lng: number = 7.809007;
   selectedRam = "";
@@ -48,7 +57,8 @@ export class MenuHomeComponent implements OnInit {
   estadoProyecto = "pActive";//pFinished
   email="";
   uid="";
-
+  files = ['Add files'];
+  file = 1;
 
   skills1 = ['Concrete', 'Decorator', 'Drywall',
     'Electrical', 'Excavation', 'Flooring',
@@ -57,16 +67,50 @@ export class MenuHomeComponent implements OnInit {
     'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = [];
   skills2Howmany: any = ["1", "2", "3", "4", "5"];
-  cust = 4;
-  customers = ['Customer 1', 'Customer 2', 'Customer 3'];
+  cust = 1;
+  customers = ['Customer 1'];
   router: any;
   database = firebase.database();
   constructor(private db: AngularFirestore) {
-
+    this.dropdownList = [
+      { item_id: 1, item_text: 'Concrete' },
+      { item_id: 2, item_text: 'Decorator' },
+      { item_id: 3, item_text: 'Drywall' },
+      { item_id: 4, item_text: 'Electrical' },
+      { item_id: 6, item_text: 'Excavation' },
+      { item_id: 7, item_text: 'Flooring' },
+      { item_id: 8, item_text: 'General Labor' },
+      { item_id: 9, item_text: 'Insulation' },
+      { item_id: 10, item_text: 'Interior Fishing Carpentry' },
+      { item_id: 11, item_text: 'Iron Worker' },
+      { item_id: 12, item_text: 'Landscaper' },
+      { item_id: 13, item_text: 'Mason' },
+      { item_id: 14, item_text: 'Plastering' },
+      { item_id: 15, item_text: 'Plumbing' },
+      { item_id: 16, item_text: 'Roofer' },
+      { item_id: 17, item_text: 'Waterproof Installation' }
+    ];
+    this.selectedItems = [
+      { item_id: 3, item_text: 'Drywall' },
+      { item_id: 4, item_text: 'Electrical' }
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 4,
+      allowSearchFilter: true
+    };
 
   }
 
 
+  addFile() {
+    var i = this.file++;
+    this.files.push('File ' + i);
+  }
 
   selectskill(e) {
     this.up3 = !this.up3;
@@ -183,6 +227,10 @@ export class MenuHomeComponent implements OnInit {
     var i = this.cust++;
     this.customers.push('Customer ' + i);
   }
+  addfiles() {
+    var i = this.cust++;
+    this.files.push('File ' + i);
+  }
   close(e) {
     if (e == 1) {
       this.selectskills = null
@@ -192,4 +240,7 @@ export class MenuHomeComponent implements OnInit {
       this.selectskills2 = null
     }
   }
+
+  
+  
 }

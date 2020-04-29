@@ -1,0 +1,83 @@
+.fund-image {
+  position: absolute;
+  right: 4%;
+}
+.update {
+  background-color: #010973;
+  color: #ffffff;
+  border-color: #010973;
+  width: 134px;
+  height: 47px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+}
+.upload {
+  width: 215px;
+  height: 47px;
+}
+.separator {
+  border: 1px solid #9d9d9d;
+  width: 100%;
+}
+.name-profile {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 35px;
+  color: #010973;
+}
+.option-profile a {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 160%;
+  color: #000000;
+}
+.option-profile a:hover {
+  color: #010973;
+  text-decoration: underline;
+}
+.active a {
+  color: #010973;
+  text-decoration: underline;
+}
+.avatar-change {
+  border-radius: 50%;
+  width: 74px;
+  height: 74px;
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.btn-Add {
+  border: 1px solid #010973;
+  color: #ffffff;
+  background-color: #010973;
+  border-radius: 2px;
+  width: 215px;
+  height: 47px;
+  font-size: 10px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  cursor: pointer;
+}
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}

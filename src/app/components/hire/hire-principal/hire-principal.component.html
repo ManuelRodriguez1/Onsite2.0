@@ -1,32 +1,5 @@
 <div class="container py-5">
-  <div class="cont py-5">
-    <div class="profile"></div>
-    <div class="textw">
-      <p>Wellcome</p>
-      <!-- <p>{{users_hire.data.name}}</p> -->
-      <p>Mauro Poche</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="dropdown-menu show">
-        <div class="dropdown-item" (click)="menu(0)">Home</div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item" (click)="menu(1)">Inbox</div>
-        <div class="menusmall" *ngIf="menushow == true">
-          <div class="option">Inbox</div>
-          <div class="option">Sent</div>
-          <div class="option">Trash</div>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item" (click)="menu(2)">Projects</div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item" (click)="menu(3)">Explore</div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item">Sign Out</div>
-      </div>
-    </div>
-    <div class="col-sm-9 divcol">
+    <div class="col-sm-12 divcol">
       <div class="home" *ngIf="select == 0">
         <app-menu-home></app-menu-home>
       </div>
