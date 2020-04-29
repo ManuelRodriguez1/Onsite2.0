@@ -1,0 +1,33 @@
+.content-verified h2{
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 35px;
+    color: #010973;
+}
+.content-verified p{
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 160%;
+}
+.btn-continue{
+    width: 134px;
+    height: 47px;
+    background-color: #010973;
+    color: #FFFFFF;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+.btn-continue:hover{
+    background-color: #FFFFFF;
+    color: #010973;
+    border-color: #010973;
+}

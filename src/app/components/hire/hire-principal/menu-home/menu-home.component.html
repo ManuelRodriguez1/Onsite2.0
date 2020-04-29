@@ -9,7 +9,6 @@
         <div
           class="list-group-item"
           *ngFor="let s of childData1 | async"
-          (click)="selectskill(s)"
         >
           <p>{{ s.Project }}</p>
         </div>
@@ -92,48 +91,18 @@
             What do you need help with?
           </div>
         </div>
-        <ng-multiselect-dropdown-angular7
-  [placeholder]="'custom placeholder'"
-  [data]="dropdownList"
-  [(ngModel)]="selectedItems"
-  [settings]="dropdownSettings"
-  (onSelect)="onItemSelect($event)"
-  (onSelectAll)="onSelectAll($event)"
->
-</ng-multiselect-dropdown-angular7>
-        <div class="row">
-          <div class="col-sm input-group">
-            <input
-              type="text"
-              readonly
-              class="form-control"
-              placeholder="Select job category"
-              id="Selectjobcategory"
-              name="Selectjobcategory"
-            />
-            <div
-              class="down"
-              [ngClass]="{ up3: up3 == true }"
-              (click)="list3(1)"
-            ></div>
-          </div>
-        </div>
-        <div class="list-group" [hidden]="up3 == false">
-          <div
-            class="list-group-item"
-            *ngFor="let s of skills1"
-            (click)="selectskill(s)"
+        <div class="row py-2">
+          <ng-multiselect-dropdown-angular7
+            [placeholder]="'Skills'"
+            [data]="dropdownList"
+            [(ngModel)]="selectedItems"
+            [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            class="input-group multi-drop"
           >
-            <p>{{ s }}</p>
-          </div>
+          </ng-multiselect-dropdown-angular7>
         </div>
-        <div class="skillselct" [hidden]="selectskills == null">
-          <div class="skillsel">
-            <p>{{ selectskills }}</p>
-            <div class="close" (click)="close(1)"></div>
-          </div>
-        </div>
-      </div>
       <div class="row py-2">
         <div class="title-form">
           Location
@@ -230,6 +199,7 @@
       <button class="btn btn-outline-warning next" *ngIf="page == 3">
         Finish
       </button>
+    </div>
     </div>
   </div>
 </form>

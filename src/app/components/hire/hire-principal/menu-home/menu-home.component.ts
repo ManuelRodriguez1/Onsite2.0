@@ -73,15 +73,26 @@ export class MenuHomeComponent implements OnInit {
   database = firebase.database();
   constructor(private db: AngularFirestore) {
     this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
+      { item_id: 1, item_text: 'Concrete' },
+      { item_id: 2, item_text: 'Decorator' },
+      { item_id: 3, item_text: 'Drywall' },
+      { item_id: 4, item_text: 'Electrical' },
+      { item_id: 6, item_text: 'Excavation' },
+      { item_id: 7, item_text: 'Flooring' },
+      { item_id: 8, item_text: 'General Labor' },
+      { item_id: 9, item_text: 'Insulation' },
+      { item_id: 10, item_text: 'Interior Fishing Carpentry' },
+      { item_id: 11, item_text: 'Iron Worker' },
+      { item_id: 12, item_text: 'Landscaper' },
+      { item_id: 13, item_text: 'Mason' },
+      { item_id: 14, item_text: 'Plastering' },
+      { item_id: 15, item_text: 'Plumbing' },
+      { item_id: 16, item_text: 'Roofer' },
+      { item_id: 17, item_text: 'Waterproof Installation' }
     ];
     this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
+      { item_id: 3, item_text: 'Drywall' },
+      { item_id: 4, item_text: 'Electrical' }
     ];
     this.dropdownSettings = {
       singleSelection: false,
@@ -89,7 +100,7 @@ export class MenuHomeComponent implements OnInit {
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 4,
       allowSearchFilter: true
     };
 

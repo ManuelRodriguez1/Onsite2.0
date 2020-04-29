@@ -34,6 +34,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { MenuInboxComponent } from './components/hire/hire-principal/menu-inbox/menu-inbox.component';
 import { ProfileHireComponent } from './components/hire/hire-principal/profile-hire/profile-hire.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
+import { EmailVerificationComponent } from './components/hire/hire-principal/email-verification/email-verification.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
     ProjectsComponent,
     MenuExploreComponent,
     MenuInboxComponent,
-    ProfileHireComponent
+    ProfileHireComponent,
+    EmailVerificationComponent
   ],
   imports: [
     BrowserModule,
