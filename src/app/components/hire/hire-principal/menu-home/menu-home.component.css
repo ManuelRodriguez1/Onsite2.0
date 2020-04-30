@@ -635,3 +635,14 @@ width: 100%;
   letter-spacing: -0.025em;
   color: #5B5B5B;
 }
+.selected-skill{
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 160%;
+  color: #000000;
+}
+.form-group{
+  padding-left: 0%;
+}
