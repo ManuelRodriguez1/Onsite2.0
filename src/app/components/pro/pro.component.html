@@ -6,7 +6,8 @@
     <div class="fields container">
       <div class="row">
         <div class="col-sm input-group">
-          <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
+          <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel"
+            placeholder="First Name">
         </div>
         <div class="col-sm input-group">
           <input type="text" class="form-control" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
@@ -31,7 +32,8 @@
           <input type="password" class="form-control" placeholder="Password" name="user" #user="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
-          <input type="password" class="form-control" placeholder="Password confirmation" name="password" #password="ngModel" ngModel>
+          <input type="password" class="form-control" placeholder="Password confirmation" name="password"
+            #password="ngModel" ngModel>
           <span [hidden]="user.value == password.value" class="alertMessage">Passwords aren't the same</span>
         </div>
       </div>
@@ -42,7 +44,8 @@
     <div class="field3 container">
       <div class="row">
         <div class="col-sm input-group">
-          <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel>
+          <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel"
+            ngModel>
         </div>
         <div class="col-sm input-group" style="visibility: hidden;">
           <input type="text" class="form-control" disabled placeholder="" name="">
@@ -54,7 +57,8 @@
     <div class="container skill">
       <div class="row">
         <div class="col-sm input-group">
-          <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()" style="cursor: default;">
+          <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
+            style="cursor: default;">
           <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
         </div>
       </div>
@@ -103,7 +107,8 @@
   </section>
   <section [hidden]='page < 2 || page > 2' class="container">
     <div class="texts2">
-      <p class="changeColor">In this last step you can add your certificate(s) as JPG or PDF file(s) to support your skill(s). This step is not mandatory and you can add them later in your account settings. </p>
+      <p class="changeColor">In this last step you can add your certificate(s) as JPG or PDF file(s) to support your
+        skill(s). This step is not mandatory and you can add them later in your account settings. </p>
       <div class="title2">
         <p class="changeColorBlue">Certificates</p>
       </div>
@@ -123,22 +128,24 @@
       <p></p>
       <p>Enter E-mails</p>
     </div> -->
-    <div class="row customers" *ngFor="let c of customers">
+    <div class="row">
       <div class="col-sm input-group">
-        <div class="input-group custom-file">
-          <input type="file" class="custom-file-input" id="customFile" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
-          <label for="customFile" class="custom-file-label">{{c}}</label>
+        <div class="input-group custom-file" *ngFor="let c of customers; let i = index">
+          <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg"
+            name="certificate" [attr.aria-label]="i" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
+          <label for="customFile" class="custom-file-label">
+            <div class="afterFile">{{c}}</div>
+          </label>
+        </div>
+        <div class="input-group-prepend iconAdd" (click)="addcustomer()">
+          <div class="icon_img btnround"></div>
         </div>
       </div>
     </div>
-    <div class="row addcust" (click)="addcustomer()">
-      <div class="input-group-prepend">
-        <div class="icon_img btnround"></div>
-      </div>
-    </div>
+
     <label class="texts2 form-group form-check">
       <input type="checkbox" class="form-check-input check-out" id="check1" value="1">
-      <span class="form-check-input form-checked"></span>
+      <span class="form-check-input form-checked" (click)="check()"></span>
       <p class="form-check-label" for="check1">I accept and agree to the <a href="#">Terms of Use.</a></p>
     </label>
     <!-- <div class="row customers2">
@@ -155,7 +162,8 @@
       <p>Verify your email</p>
     </div>
     <div class="texts2">
-      <p>We have sent you an email to verify your email address, please check your inbox. If you haven't <br>received the email, resend to verify.</p>
+      <p>We have sent you an email to verify your email address, please check your inbox. If you haven't <br>received
+        the email, resend to verify.</p>
     </div>
   </section>
   <div class="buttons container">
@@ -166,10 +174,12 @@
     || email.value == '' || phone.value == '' || password.value == '' || zipcode.value == ''">
       Next
     </button>
-    <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills == null">
+    <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2'
+      [disabled]="selectskills == null">
       Next
     </button>
-    <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 2">Finish</button>
+    <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 2"
+      [disabled]="checkbox == false">Finish</button>
     <button class="btn btn-outline-warning next" *ngIf="page == 4">Resend</button>
   </div>
 

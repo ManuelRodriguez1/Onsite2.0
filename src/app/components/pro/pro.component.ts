@@ -6,7 +6,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
-import bsCustomFileInput from 'bs-custom-file-input';;
+declare var $: any
 
 @Component({
   selector: 'app-pro',
@@ -15,7 +15,7 @@ import bsCustomFileInput from 'bs-custom-file-input';;
 })
 export class ProComponent implements OnInit {
 
-  cust = 4;
+  cust = 1;
   select = 0;
   up = false;
   up2 = false;
@@ -31,6 +31,7 @@ export class ProComponent implements OnInit {
   database = firebase.database();
   notSame: boolean = false
   file: any[] = []
+  checkbox: boolean = false
 
   constructor(private service: ServiceService, public afAuth: AngularFireAuth,
     private router: Router, private db: AngularFirestore, private afs: AngularFireStorage) { }
@@ -123,8 +124,10 @@ export class ProComponent implements OnInit {
     })
 
   }
-
   uploadDoc(e){
     this.file.push(e.target.files[0])
+  }
+  check(){
+    this.checkbox = !this.checkbox
   }
 }
