@@ -1,6 +1,6 @@
 .contenedorHireTotal {
   overflow: hidden;
-  padding: 10% 20% 0 10%;  
+  padding: 10% 20% 0 10%;
 }
 .image-about {
   position: absolute;
@@ -48,4 +48,18 @@
 .next:hover {
   background: white;
   color: #E76800;
+}
+.alertMessage{
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 15px;
+  letter-spacing: -0.025em;
+  color: #E76800;
+}
+.next:disabled{
+  background: #FFB665 !important;
+  color: white !important;
+  border-color: #FFB665 !important;
 }

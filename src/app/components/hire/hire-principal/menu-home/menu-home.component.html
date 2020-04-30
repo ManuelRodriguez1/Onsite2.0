@@ -99,9 +99,23 @@
             [settings]="dropdownSettings"
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="onItemDeSelect($event)"
             class="input-group multi-drop"
           >
           </ng-multiselect-dropdown-angular7>
+        </div>
+        <div class="row my-3">
+          <div class="col-sm-6 form-group" *ngFor="let p of peoples">
+          <label class="my-2 selected-skill">{{p}}</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              placeholder=""
+              name="people"
+              id="people"
+            />
+          </div>
         </div>
       <div class="row py-2">
         <div class="title-form">

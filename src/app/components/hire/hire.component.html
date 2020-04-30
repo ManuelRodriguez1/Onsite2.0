@@ -1,8 +1,8 @@
 <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" method="post" class="contenedorHireTotal">
   <img class="image-about" src="../../../assets/imagenes/About You.svg" alt="">
-  <div class="container">
+  <div class="container py-3 pl-5">
     <div class="info container">
-      <p>Enter your personal information</p>
+      <p>Enter your information</p>
     </div>
     <div class="fields container">
       <div class="row">
@@ -29,10 +29,17 @@
     <div class="fields container">
       <div class="row">
         <div class="col-sm input-group">
-          <input required type="password" class="input validate form-control" placeholder="Password" (ngModel)="Password" name="Password" id="Password">
+          <input type="password" class="form-control" placeholder="Password" name="user" #user="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
-          <input required type="password" class="input validate form-control" placeholder="Password confirmation" (ngModel)="Password" name="Password confirmation" id="Passwordconfirmation">
+          <input type="password" class="form-control" placeholder="Password confirmation" name="Password" #password="ngModel" ngModel>
+        </div>
+      </div>
+    </div>
+    <div class="fields container">
+      <div class="row float-right">
+        <div class="col-sm input-group float-right">
+            <span [hidden]="user.value == password.value" class="alertMessage">Passwords aren't the same</span>
         </div>
       </div>
     </div>
@@ -45,7 +52,7 @@
           <input type="text" required class="input validate form-control" placeholder="Enter city or zipcode." (ngModel)="Entercityorzipcode" id="Entercityorzipcode" name="Entercityorzipcode">
         </div>
       </div>
-    </div>  
+    </div>
     <div class="buttons container">
       <span class="error">{{error}} </span>
       <br>
