@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit , Input} from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -11,9 +11,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class MenuComponent implements OnInit {
 error: any[];
-  m = "menuHome";
+ m = "";
   Sesion = true;
-    constructor(public af: AngularFireAuth, private router: Router,location: Location) {
+    constructor(public af: AngularFireAuth, private router: Router,location: Location,private activatedRoute: ActivatedRoute) {
+
+      this.activatedRoute.queryParams.subscribe(params => {
+       this.m=params.Login;
+      });
         this.af.authState.subscribe(auth => {
 
             if (auth) {
@@ -29,17 +33,12 @@ error: any[];
         });
 
 
-        if(location.path() != ''){
-          if(location.path() == '/Hire' || location.path() == '/Hireprincipal'){
-              this.m = "menuHire";
-          }else if(location.path() == '/Pro' || location.path() == '/ProfilePro'){
-              this.m = "menuPro";
-          }
-         }
+     
     }
 
 
   ngOnInit() {
+ 
 
   }
   onSubmit(formData) {

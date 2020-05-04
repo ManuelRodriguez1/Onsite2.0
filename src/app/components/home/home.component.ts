@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router,NavigationExtras  } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-home',
@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
     config.interval = 8000;
     config.wrap = true;
     config.showNavigationArrows = false;
+
+
 
   }
   //array de imagenes home hero slider
@@ -39,14 +41,13 @@ export class HomeComponent implements OnInit {
     }];
 
   hire() {
-    this.router.navigateByUrl('/Hire');
+    this.router.navigateByUrl("/Hire?Login=Hirer");
     // location.href ="/Hire";
 
   }
 
   pro() {
-    this.router.navigateByUrl('/Pro');
-    // location.href ="/Pro";
+    this.router.navigateByUrl("/Pro?Login=Pro");
   }
   prev() {
     this.carousel.prev();
@@ -55,7 +56,7 @@ export class HomeComponent implements OnInit {
     this.carousel.next();
   }
   ngOnInit() {
-
+ 
 
   }
 

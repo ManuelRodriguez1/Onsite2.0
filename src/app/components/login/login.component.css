@@ -2,11 +2,107 @@
     height: 100%;
 }
 
+.heigInput {
+    height: 45px;
+}
+
+
+/***/
+
+.checkbox {
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    display: -webkit-box;
+    display: flex;
+    position: relative;
+}
+
+.checkbox__input {
+    cursor: pointer;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+}
+
+.checkbox__input:checked~.checkbox__checkmark::after,
+.checkbox__input:checked:hover~.checkbox__checkmark::after {
+    display: block;
+}
+
+.checkbox__input:focus~.checkbox__checkmark {
+    border-color: #9D9D9D;
+}
+
+.checkbox__checkmark {
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid #9D9D9D;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    min-height: 23px;
+    min-width: 23px;
+}
+
+.checkbox__checkmark::after {
+    border: solid #21D8C6;
+    border-width: 0 2px 2px 0;
+    content: "";
+    display: none;
+    height: 13px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 7px;
+}
+
+
+/* Page setup, nothing to do with the checkbox */
+
+body {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: verdana, arial, sans-serif;
+}
+
+
+/***/
+
+.remember_me {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+}
+
+.botonNaranja:hover {
+    background: transparent;
+    border: 1px solid #FF8600;
+    color: #FF8600;
+}
+
+.botonNaranja:active {
+    background: #FFB665 !important;
+    color: white !important;
+    border-color: #FFB665 !important;
+}
+
 .modal.show .modal-dialog {
-    width: 708px;
-    height: 660px;
+    max-width: 470px;
+    height: 523px;
     background: #FFFFFF;
-    margin-top: 310px;
+    margin-top: 150px !important;
 }
 
 .modal-body {
@@ -14,56 +110,30 @@
     overflow: visible;
 }
 
-.close {
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    line-height: 16px;
-    font-size: 16px;
-    background: #E76800;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    color: #FFFFFF;
-    border-radius: 50px;
-    width: 27px;
-    height: 27px;
-    opacity: 1;
-    margin-right: -10px;
-    margin-top: -10px;
-    position: relative;
-    z-index: 1;
-}
-
 .contenedorImagen {
     float: right;
     width: 100%;
-    padding-top: 85px;
+    padding: 60px;
     margin: 0;
     position: absolute;
     right: 0;
     height: 100%;
-    padding-left: 50px;
-    padding-right: 60px;
     overflow: hidden;
 }
 
 .tituloContImg {
-    font-family: 'Mukta', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: bold;
-    line-height: 42px;
-    font-size: 45px;
-    color: #704300;
-    border-bottom: 1px solid #C4C4C4;
-    padding-bottom: 15px;
-}
-
-.tituloContImg span {
-    color: #E76800;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 52px;
+    text-align: center;
+    color: #000000;
 }
 
 .botonesOnsite div {
     width: 96px;
-    height: 36px;
+    height: 45px;
     border: 1px solid #E76800;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
@@ -119,34 +189,37 @@
 }
 
 .forgotPass {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    font-size: 12px;
-    letter-spacing: -0.025em;
-    color: #C2C2C2;
-    margin-top: 8px;
-    margin-left: -15px;
-    cursor: pointer;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    color: #FF8600;
+}
+
+.memberSing {
+    margin-top: 70px;
+    text-align: center;
+}
+
+.memberSing a {
+    color: #FF8600;
 }
 
 .botonNaranja {
-    width: 96px;
-    height: 27px;
+    width: 100%;
+    height: 45px;
     background: #E76800;
-    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #E76800;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: bold;
-    line-height: normal;
-    font-size: 15px;
-    text-align: center;
-    letter-spacing: -0.025em;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
     color: #FFFFFF;
-    position: absolute;
-    margin-right: 15px;
-    right: 0;
-    line-height: 25px;
+    margin-top: 20px;
 }
 
 .bhirenone {
@@ -158,7 +231,6 @@
 }
 
 .lineaFinalultimate {
-    margin-left: 35px;
     margin-top: 25px;
 }
 
@@ -178,4 +250,16 @@
 .abrir .modal-backdrop,
 .abrir {
     display: none !important;
+}
+
+.classMargincampo {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1320px) {
+    .modal.show .modal-dialog {
+        /*   background-color: blue;*/
+        width: calc(100% - 60px) !important;
+        margin: 0 auto;
+    }
 }

@@ -734,6 +734,10 @@ table {
     cursor: pointer;
 }
 
+a:hover {
+    text-decoration: none !important;
+}
+
 .input-assumpte:checked+label:before {
     background-color: #E76800;
 }

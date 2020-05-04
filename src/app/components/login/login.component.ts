@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   email;
   cerrarAbrir = "";
   abrir = false;
+  abrirup = false;
   pagina = "";
   childData = [];
   Forgot = 0;
@@ -58,6 +59,18 @@ var array=[];
   }
   onSubmit(formData) {
     if (formData.valid) {
+/*
+      if (isRemberMeChecked) {
+       
+        localStorage.setItem('Name', formData.value.email);
+        localStorage.setItem('token',  formData.value.password);
+     
+    } else {
+      
+        sessionStorage.setItem('Name', formData.value.email);
+        sessionStorage.setItem('token', formData.value.password);
+     
+    }*/
       this.af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password).then((resolve) => {
         formData.reset();
         this.abrir = true;

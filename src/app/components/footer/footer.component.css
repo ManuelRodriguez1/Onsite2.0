@@ -27,8 +27,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
-    line-height: 25px;
+    font-size: calc(14px + (16 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: 22px;
     letter-spacing: 0.04em;
     color: #FFFFFF;
 }
@@ -79,8 +79,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
-    line-height: calc(24px + (32 - 24) * ((100vw - 375px) / (1280 - 375)));
+    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(24px + (36 - 24) * ((100vw - 375px) / (1280 - 375)));
     color: #FFFFFF;
 }
 
@@ -95,8 +95,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
-    line-height: 25px;
+    font-size: calc(14px + (16 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: 22px;
     letter-spacing: 0.04em;
     color: #FFFFFF;
 }
@@ -143,8 +143,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
-    line-height: 32px;
+    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: 36px;
     color: #FFFFFF;
 }
 
@@ -166,28 +166,6 @@
     position: relative;
     overflow: hidden;
 }
-
-
-/*
-.izquierdaitemsfooter p {
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 25px;
-    font-size: 15px;
-    color: #FFFFFF;
-}
-
-
-.derechaitemsfooter p {
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 25px;
-    font-size: 15px;
-    color: #FFFFFF;
-}
-*/
 
 .form-footer {
     width: calc(170px + (315 - 170) * ((100vw - 375px) / (1280 - 375)));

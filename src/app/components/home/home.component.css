@@ -87,6 +87,19 @@
     cursor: pointer;
     background: #FF8600;
     border-radius: 2px;
+    border: 1px solid #FF8600;
+}
+
+.contenedorseccionbanner .btnseccionbannerhome:hover {
+    background: transparent;
+    border: 1px solid #FF8600;
+    color: #FF8600;
+}
+
+.contenedorseccionbanner .btnseccionbannerhome:active {
+    background: #FFB665 !important;
+    color: white !important;
+    border-color: #FFB665 !important;
 }
 
 .contenedorseccionbanner .btnseccionbannerhome p {
@@ -95,7 +108,6 @@
     font-size: 18px;
     line-height: 25px;
     letter-spacing: 0.04em;
-    color: white;
     line-height: 47px;
     text-align: center;
 }
@@ -142,19 +154,19 @@
 .contenedorderechaseccion2Home .text1seccion2home {
     font-style: normal;
     font-weight: normal;
-    font-size: 40px;
-    line-height: 54px;
+    font-size: 30px;
+    line-height: 41px;
     color: #000000;
     font-family: 'Open Sans', sans-serif;
 }
 
 .contenedorderechaseccion2Home .text2seccion2home {
     font-family: 'Open Sans', sans-serif;
-    margin-top: 50px;
+    margin-top: 30px;
     font-style: normal;
     font-weight: normal;
-    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
-    line-height: calc(17px + (32 - 17) * ((100vw - 375px) / (1280 - 375)));
+    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(17px + (36 - 17) * ((100vw - 375px) / (1280 - 375)));
     color: #000000;
 }
 
@@ -163,6 +175,19 @@
     height: 47px;
     background-color: #010973;
     margin-top: 50px;
+    border: 1px solid #010973;
+    color: #FFFFFF;
+}
+
+.btnseccion2home:hover {
+    background-color: transparent;
+    border: 1px solid #010973;
+    color: #010973;
+}
+
+.btnseccion2home:active {
+    background-color: #373C7D;
+    color: #ffffff;
 }
 
 .btnseccion2home p {
@@ -173,7 +198,6 @@
     line-height: 45px;
     text-align: center;
     letter-spacing: 0.04em;
-    color: #FFFFFF;
 }
 
 
@@ -186,7 +210,6 @@
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    height: 569px;
     background-color: #010973;
     position: relative;
 }
@@ -200,6 +223,7 @@
 .contenedorseccion3Home {
     margin: 0 auto;
     margin-top: 60px;
+    padding-bottom: 60px;
 }
 
 .cuadroinfoseccion3home {
@@ -243,7 +267,7 @@
     font-style: normal;
     font-weight: bold;
     line-height: 48px;
-    font-size: calc(20px + (35 - 20) * ((100vw - 375px) / (1280 - 375)));
+    font-size: calc(20px + (25 - 20) * ((100vw - 375px) / (1280 - 375)));
     color: #F08E00;
     float: left;
     margin-left: 13px;
@@ -258,8 +282,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
-    line-height: calc(17px + (32 - 17) * ((100vw - 375px) / (1280 - 375)));
+    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
+    line-height: calc(17px + (36 - 17) * ((100vw - 375px) / (1280 - 375)));
     color: #FFFFFF;
 }
 
@@ -267,8 +291,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 40px;
-    line-height: 54px;
+    font-size: 30px;
+    line-height: 41px;
     color: #FFFFFF;
     padding-top: 78px;
     margin: 0 auto;
@@ -333,8 +357,8 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 40px;
-    line-height: 54px;
+    font-size: 30px;
+    line-height: 41px;
     color: #000000;
     margin-top: 80px;
     margin-bottom: 30px;
@@ -364,7 +388,7 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: calc(14px + (20 - 14) * ((100vw - 375px) / (1280 - 375)));
+    font-size: calc(14px + (18 - 14) * ((100vw - 375px) / (1280 - 375)));
     line-height: 32px;
     color: #5B5B5B;
 }
