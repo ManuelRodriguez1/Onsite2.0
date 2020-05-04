@@ -9,6 +9,8 @@ import { ServiceService } from 'src/app/services/service.service';
 import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormGroup, FormControl } from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
+
 @Component({
   selector: 'app-menu-home',
   templateUrl: './menu-home.component.html',
@@ -19,6 +21,9 @@ export class MenuHomeComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
   projectname;
+  peoples = [];
+  people = 0;
+
    options: Options = {
      floor: 1.00,
      ceil: 100.00,
@@ -28,13 +33,6 @@ export class MenuHomeComponent implements OnInit {
 
      }
    };
-   
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
   lat: number = 51.678418;
   lng: number = 7.809007;
   selectedRam = "";
@@ -68,20 +66,29 @@ export class MenuHomeComponent implements OnInit {
   skills2: any = [];
   skills2Howmany: any = ["1", "2", "3", "4", "5"];
   cust = 1;
-  customers = ['Customer 1'];
   router: any;
   database = firebase.database();
   constructor(private db: AngularFirestore) {
     this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
+      { item_id: 1, item_text: 'Concrete' },
+      { item_id: 2, item_text: 'Decorator' },
+      { item_id: 3, item_text: 'Drywall' },
+      { item_id: 4, item_text: 'Electrical' },
+      { item_id: 6, item_text: 'Excavation' },
+      { item_id: 7, item_text: 'Flooring' },
+      { item_id: 8, item_text: 'General Labor' },
+      { item_id: 9, item_text: 'Insulation' },
+      { item_id: 10, item_text: 'Interior Fishing Carpentry' },
+      { item_id: 11, item_text: 'Iron Worker' },
+      { item_id: 12, item_text: 'Landscaper' },
+      { item_id: 13, item_text: 'Mason' },
+      { item_id: 14, item_text: 'Plastering' },
+      { item_id: 15, item_text: 'Plumbing' },
+      { item_id: 16, item_text: 'Roofer' },
+      { item_id: 17, item_text: 'Waterproof Installation' }
     ];
     this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
+      { item_id: 3, item_text: 'Drywall' }
     ];
     this.dropdownSettings = {
       singleSelection: false,
@@ -89,16 +96,33 @@ export class MenuHomeComponent implements OnInit {
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 4,
       allowSearchFilter: true
     };
 
   }
 
-
+  onItemSelect(item: any) {
+    //console.log(item);
+    var p = item['item_text'];
+    console.log(p);
+    this.peoples.push(p);
+    console.log(this.peoples);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  onItemDeSelect(){
+    var p = this.people--;
+    this.peoples.pop();
+  }
   addFile() {
     var i = this.file++;
     this.files.push('File ' + i);
+  }
+  addPeoples() {
+    var p = this.people++;
+    this.peoples.push('People ' + p);
   }
 
   selectskill(e) {
@@ -111,7 +135,6 @@ export class MenuHomeComponent implements OnInit {
     this.up4 = !this.up4;
     this.selectskills2 = e
   }
-
 
   selectskill2up5(e) {
     this.up5 = !this.up5;
@@ -126,7 +149,6 @@ export class MenuHomeComponent implements OnInit {
   ngOnInit() {
     this.childData = this.db.collection('/projectsHire').valueChanges()
     this.childData1 = this.db.collection('/projectsHire').valueChanges()
-
   }
 
 
@@ -164,7 +186,7 @@ export class MenuHomeComponent implements OnInit {
   test(f: NgForm){
     console.log(f.value);
       this.db.collection('projects_hire').add({
-        /* jdgjsdjhj: f.value.EnterAddress1,        
+        /* jdgjsdjhj: f.value.EnterAddress1,
         location:"123",
         comments:"asd",
         status:"Active",
@@ -211,11 +233,6 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw = this.page;
 
   }
-  addcustomer() {
-
-    var i = this.cust++;
-    this.customers.push('Customer ' + i);
-  }
   addfiles() {
     var i = this.cust++;
     this.files.push('File ' + i);
@@ -230,6 +247,4 @@ export class MenuHomeComponent implements OnInit {
     }
   }
 
-  
-  
 }

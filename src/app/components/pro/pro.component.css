@@ -39,3 +39,107 @@ input::placeholder{
     left: 65px;
     font-size: 13px;
 }
+.changeColor{
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 20px !important;
+    line-height: 160% !important;
+    color: black !important;
+}
+.changeColorBlue{
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 26px !important;
+    line-height: 35px !important;
+    color: #010973 !important;
+}
+.form-check-label{
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    line-height: 160% !important;
+    margin-left: 14px !important;
+}
+.form-check-label a{
+    color: #FF8600 !important;
+}
+.form-check{
+    margin-left: 20px;
+}
+.form-check-input{
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    background-color: transparent;
+    border: 1px solid #9D9D9D;
+    bottom: 2px;
+    cursor: pointer;
+}
+.form-check > .check-out{
+    display: none;
+}
+.form-check-input:checked + .form-checked{
+    background: #FF8600;
+}
+.alertMessage{
+    left: 15px;
+}
+.customFile{
+    display: none;
+}
+.custom-file-label{
+    width: 166px;
+    height: 112px;
+    border: 1px dashed #9D9D9D;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-bottom: 35px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 37px;
+}
+.custom-file-label:nth-child(4n){
+    margin-right: 0;
+}
+.custom-file-label::after{
+    display: none;
+}
+.custom-file-label .afterFile{
+    width: 124px;
+    height: 26px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 25px;
+    letter-spacing: 0.04em;
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    text-align: center;
+    color: black;
+    background: #ECECEC;
+    border-radius: 2px;
+    position: absolute;
+}
+.custom-file-label .afterFile:hover{
+    background: #e8e8e8;
+}
+.input-group > .custom-file{
+    overflow: hidden;
+    height: auto;
+    width: auto;
+    flex: initial;
+}
+.iconAdd{
+    align-items: center;
+    height: 126px;
+}
+.btnround{
+    margin-left: 0;
+}

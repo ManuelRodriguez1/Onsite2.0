@@ -190,13 +190,18 @@ table {
 .btnround {
     background-image: url('./assets/iconos/plus.svg');
     border-radius: 50%;
-    background-color: #008AF3;
-    width: 26.72px;
-    height: 26.72px;
-    background-size: 8.38px;
-    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.25);
+    background-color: #010973;
+    width: 38px;
+    height: 38px;
+    background-size: 13.97px;
+    cursor: pointer;
 }
-
+.btnround:hover{
+    background-color: #1F257C;
+}
+.btnround:active{
+    background-color: #373C7D;
+}
 .info p:nth-of-type(1),
 .title2 {
     font-family: 'Mukta', sans-serif;
@@ -252,7 +257,7 @@ table {
 }
 
 .next:active,
-.back:active {
+.back:active, .next:disabled {
     background: #FFB665 !important;
     color: white !important;
     border-color: #FFB665 !important;

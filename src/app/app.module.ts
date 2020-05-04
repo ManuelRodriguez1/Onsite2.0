@@ -8,6 +8,7 @@ import { AngularFireModule } from "angularfire2";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule, AngularFireStorage } from "angularfire2/storage";
 import { AppComponent } from './app.component';
 import { ProComponent } from './components/pro/pro.component';
 import { HireComponent } from './components/hire/hire.component';
@@ -34,6 +35,8 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { MenuInboxComponent } from './components/hire/hire-principal/menu-inbox/menu-inbox.component';
 import { ProfileHireComponent } from './components/hire/hire-principal/profile-hire/profile-hire.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
+import { EmailVerificationComponent } from './components/hire/hire-principal/email-verification/email-verification.component';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
     ProjectsComponent,
     MenuExploreComponent,
     MenuInboxComponent,
-    ProfileHireComponent
+    ProfileHireComponent,
+    EmailVerificationComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +75,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
     }),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
-  providers: [ServiceService, AuthGuard, ServiceService],
+  providers: [ServiceService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

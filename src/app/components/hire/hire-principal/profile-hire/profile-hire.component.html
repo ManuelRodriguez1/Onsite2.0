@@ -61,8 +61,11 @@
       <div class="fields container">
         <div class="row">
           <div class="col-sm-12 input-group">
-            <img src="../../../../../assets/iconos/Ellipse 7.svg" alt="">
-            <button type='submit' name="upload-file" class="btn btn-outline-warning update upload ml-5 mt-2">Upload file</button>
+            <img [src]="url" height="200" class="avatar-change">
+            <div class="upload-btn-wrapper align-self-center plus-button pl-4">
+              <button class="btn-Add">Add a file</button>
+              <input type="file" name="my-avatar" (change)="onSelectFile($event)"/>
+            </div>
           </div>
         </div>
       </div>
