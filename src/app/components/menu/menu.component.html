@@ -4,14 +4,21 @@
     <div class="backgroundWhiteMenu container1280Final">
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <div class="aimg">
+            <a href="#">
+                <img src="assets/logos/Logo_principal_menu.svg" alt="Logo Onhive">
+
+            </a>
+        </div>
+        <div class="aimg2 {{m}}">{{m}}</div>
 
 
-        <a href="#"><img src="assets/logos/Logo_principal_menu.svg" alt="Logo Onhive"></a>
+
         <ul class="menu">
             <li><a href="#">About us</a></li>
             <li><a href="#">How it works</a></li>
             <li data-toggle="modal" data-target="#exampleModal"><a>Sign in</a></li>
-            <li class="btnFinalSignUp"><a href="#" class="singupAzul">Sign up</a></li>
+            <li class="btnFinalSignUp" data-toggle="modalup" data-target="#exampleModalup"><a class="singupAzul">Sign up</a></li>
             <!--li><a href="#">My Account</a></li>
     <li *ngIf="Sesion==false" class="nav-item btnLogin" data-toggle="modal" data-target="#exampleModal">
       <a class="nav-link ">Login</a>
@@ -23,7 +30,7 @@
     </div>
 </nav>
 
-<!-- <nav class="navbar navbar-expand-lg navbar-dark {{m}}">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark ">
   <a class="navbar-brand" href="#"><img src="assets/imagenes/Logo.svg" class="logoOn" alt="Logo OnSite"></a>
   <div class="onsiteText">Lorem impsum dolor seat</div>
   <ul class="navbar-nav ml-auto">
