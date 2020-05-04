@@ -157,15 +157,6 @@
     </div>
   </div> -->
   </section>
-  <section [hidden]='page < 3' class="container">
-    <div class="title">
-      <p>Verify your email</p>
-    </div>
-    <div class="texts2">
-      <p>We have sent you an email to verify your email address, please check your inbox. If you haven't <br>received
-        the email, resend to verify.</p>
-    </div>
-  </section>
   <div class="buttons container">
     <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 3' (click)='back()'>
       <p>Back</p>
@@ -180,7 +171,6 @@
     </button>
     <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 2"
       [disabled]="checkbox == false">Finish</button>
-    <button class="btn btn-outline-warning next" *ngIf="page == 4">Resend</button>
   </div>
 
 </form>

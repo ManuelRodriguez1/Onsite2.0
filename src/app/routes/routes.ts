@@ -10,6 +10,7 @@ import { EmailVerificationComponent } from "../components/hire/hire-principal/em
 import { HirePrincipalComponent } from "../components/hire/hire-principal/hire-principal.component";
 import { AuthGuard } from '../services/auth.service';
 import { RecordarPassComponent } from '../components/recordar-pass/recordar-pass.component';
+import { VerifyEmailComponent } from '../components/pro/verify-email/verify-email.component';
 ​
 ​
 export const router: Routes = [
@@ -21,7 +22,8 @@ export const router: Routes = [
     { path: 'ProfilePro', component: ProfileProComponent , canActivate: [AuthGuard]},
     { path: 'Hireprincipal', component: HirePrincipalComponent, canActivate: [AuthGuard] },//login
     { path: 'ProfileHire',component: ProfileHireComponent},
-    { path: 'VerificationEmail', component: EmailVerificationComponent}
+    { path: 'VerificationEmail', component: EmailVerificationComponent},
+    { path: 'VerifyEmailPro', component: VerifyEmailComponent}
 ​
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

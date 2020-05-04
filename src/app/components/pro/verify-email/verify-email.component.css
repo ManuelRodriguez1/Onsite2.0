@@ -1,0 +1,41 @@
+.changeButton{
+    background: transparent;
+    border: 0;
+    color: #010973;
+    font-weight: normal;
+}
+.changeButton:hover{
+    background: #FF8600;
+    color: white;
+}
+.large{
+    width: 269px;
+}
+.error{
+    background: #354963;
+    border-radius: 4px;
+    height: 0;
+    margin-top: 21px;
+    color: white;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    line-height: 56px;
+    padding-left: 37px;
+    position: relative;
+    overflow: hidden;
+}
+.errorh{
+    height: 55px;
+    transition: .5s;
+}
+.error::before{
+    content: '';
+    background: url('../../../../assets/iconos/error-icon.svg') no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12.73px;
+    height: 12.73px;
+}

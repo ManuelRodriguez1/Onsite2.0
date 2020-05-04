@@ -6,7 +6,6 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
-declare var $: any
 
 @Component({
   selector: 'app-pro',
@@ -15,7 +14,7 @@ declare var $: any
 })
 export class ProComponent implements OnInit {
 
-  cust = 1;
+  cust = 0;
   select = 0;
   up = false;
   up2 = false;
@@ -74,14 +73,17 @@ export class ProComponent implements OnInit {
     }
   }
   addcustomer() {
-    var i = this.cust++;
     this.customers.push('Add certificate file');
+    this.cust = this.cust + 1;
+    console.log(this.cust);
+    
   }
 
   test(f: NgForm) {
 
     this.afAuth.auth.createUserWithEmailAndPassword(f.value.email, f.value.password).then(() => {
       var user = firebase.auth().currentUser;
+      this.verficationEmail()
       user.updateProfile({
         displayName: "pro",
         photoURL: "",
@@ -117,17 +119,23 @@ export class ProComponent implements OnInit {
             })
         })
       }
-
-      this.router.navigate(['ProfilePro'])
+      this.router.navigate(['VerifyEmailPro'])
     }).catch((error) => {
       alert(error.message)
     })
 
   }
   uploadDoc(e){
+    var i = this.cust
     this.file.push(e.target.files[0])
+    this.customers[i] = e.target.files[0].name
+    console.log(i);
+    
   }
   check(){
     this.checkbox = !this.checkbox
+  }
+  verficationEmail(){
+    return this.afAuth.auth.currentUser.sendEmailVerification()
   }
 }
