@@ -83,9 +83,9 @@ export class ProComponent implements OnInit {
 
     this.afAuth.auth.createUserWithEmailAndPassword(f.value.email, f.value.password).then(() => {
       var user = firebase.auth().currentUser;
-      this.verficationEmail()
+      user.sendEmailVerification()
       user.updateProfile({
-        displayName: "pro",
+        displayName: f.value.name,
         photoURL: "",
       });
 
@@ -134,8 +134,5 @@ export class ProComponent implements OnInit {
   }
   check(){
     this.checkbox = !this.checkbox
-  }
-  verficationEmail(){
-    return this.afAuth.auth.currentUser.sendEmailVerification()
   }
 }

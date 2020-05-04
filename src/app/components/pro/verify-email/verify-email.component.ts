@@ -15,14 +15,14 @@ export class VerifyEmailComponent implements OnInit {
   section: number = 0
   text: any[] = ["Verification", "Email Change"]
   error: boolean = false
-
+  
   constructor(private router: Router, public af: AngularFireAuth, private db: AngularFirestore) { }
 
   ngOnInit() {
   }
 
   resend() {
-    return this.af.auth.currentUser.sendEmailVerification()
+    this.af.auth.currentUser.sendEmailVerification()
   }
 
   add() {
@@ -31,17 +31,29 @@ export class VerifyEmailComponent implements OnInit {
 
   updateEmail(f: NgForm) {
     var user = firebase.auth().currentUser
+    var password = ''
     var data = this.db.collection("users_pro").doc(user.uid).get()
-    
-    if (f.value.email == user.email) {
-      this.error = true
-    } else {
-      user.updateEmail(f.value.email)
-        .then(() => {
-          this.db.collection("users_pro").doc(user.uid).update({
-            "email": f.value.email
-          })
-        })
-    }
+    var credential
+    data.subscribe((d) => {
+      password = d.data().password;
+      credential = firebase.auth.EmailAuthProvider.credential(user.email, password)
+    })
+    setTimeout(() => {
+      user.reauthenticateWithCredential(credential).then(()=>{
+        if (f.value.pass == password && f.value.email != user.email) {
+          user.updateEmail(f.value.email)
+            .then(() => {
+              this.db.collection("users_pro").doc(user.uid).update({
+                "email": f.value.email
+              })
+              user.sendEmailVerification()
+              this.section = 0
+              this.error == false
+            })
+        }else{
+          this.error = true
+        }
+      })
+    }, 1000);
   }
 }

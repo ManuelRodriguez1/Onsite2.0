@@ -37,6 +37,7 @@ import { ProfileHireComponent } from './components/hire/hire-principal/profile-h
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 import { EmailVerificationComponent } from './components/hire/hire-principal/email-verification/email-verification.component';
 import { VerifyEmailComponent } from './components/pro/verify-email/verify-email.component';
+import { VerifySuccessComponent } from './components/pro/verify-success/verify-success.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { VerifyEmailComponent } from './components/pro/verify-email/verify-email
     MenuInboxComponent,
     ProfileHireComponent,
     EmailVerificationComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    VerifySuccessComponent
   ],
   imports: [
     BrowserModule,
