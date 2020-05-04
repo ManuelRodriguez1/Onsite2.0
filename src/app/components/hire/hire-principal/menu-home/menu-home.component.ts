@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
+import { ProjectService } from '../../../../services/project.service';
 
 @Component({
   selector: 'app-menu-home',
@@ -17,58 +18,32 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
+  // Multiselect-dropdown
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
+
   projectname;
   peoples = [];
   people = 0;
 
-   options: Options = {
-     floor: 1.00,
-     ceil: 100.00,
-     translate: (value: number, label: LabelType): string => {
-
-           return '$' + value+".00";
-
-     }
-   };
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-  selectedRam = "";
-  up = false;
-  selectskills = null;
-  selectskills2 = null;
   howmany = "Select";
-  Enterradiusinmiles = "Enter radius in miles";
-  up2 = false;
-  up3 = false;
-  up4 = false;
-  up6 = false;
-  up5 = false;
-  datosprincipalesProjects;
+
   page = 1;
   select = 0;
   HomeFormularioNw = 0;
-  childData: Observable<any>;
-  childData1: Observable<any>;
-  estadoProyecto = "pActive";//pFinished
-  email="";
-  uid="";
-  files = ['Add files'];
-  file = 1;
 
-  skills1 = ['Concrete', 'Decorator', 'Drywall',
-    'Electrical', 'Excavation', 'Flooring',
-    'General Labor', 'Insulation', 'Interior Fishing Carpentry',
-    'Iron Worker', 'Landscaper', 'Mason',
-    'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
-  skills2: any = [];
+  files = ['Add files'];
+  file: any[] = [];
+
+
   skills2Howmany: any = ["1", "2", "3", "4", "5"];
-  cust = 1;
+  cust = 0;
   router: any;
-  database = firebase.database();
-  constructor(private db: AngularFirestore) {
+
+  projects=[];
+
+  constructor(private db: AngularFirestore, public projectService: ProjectService) {
     this.dropdownList = [
       { item_id: 1, item_text: 'Concrete' },
       { item_id: 2, item_text: 'Decorator' },
@@ -103,7 +78,6 @@ export class MenuHomeComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    //console.log(item);
     var p = item['item_text'];
     console.log(p);
     this.peoples.push(p);
@@ -116,85 +90,23 @@ export class MenuHomeComponent implements OnInit {
     var p = this.people--;
     this.peoples.pop();
   }
-  addFile() {
+  /* addFile() {
     var i = this.file++;
     this.files.push('File ' + i);
-  }
+  } */
   addPeoples() {
     var p = this.people++;
     this.peoples.push('People ' + p);
   }
 
-  selectskill(e) {
-    this.up3 = !this.up3;
-    this.selectskills = e;
-    this.skills2 = [this.selectskills + ' Hanger', this.selectskills + ' Apprentice', 'Metal Framer',
-      'Metal Framer Apprentice', this.selectskills + ' Finisher', 'Fire Taper'];
-  }
-  selectskill2(e) {
-    this.up4 = !this.up4;
-    this.selectskills2 = e
-  }
-
-  selectskill2up5(e) {
-    this.up5 = !this.up5;
-    this.howmany = e;
-
-  }
-  selectskill2up6(e) {
-    this.up6 = !this.up6;
-    this.Enterradiusinmiles = e;
-
-  }
   ngOnInit() {
-    this.childData = this.db.collection('/projectsHire').valueChanges()
-    this.childData1 = this.db.collection('/projectsHire').valueChanges()
-  }
-
-
-  list(e) {
-
-    if (e == 1) {
-      this.up = !this.up;
-    } else {
-      this.up2 = !this.up2;
-    }
-  }
-
-  setRam(value) {
-    this.selectedRam = value;
-  }
-
-
-
-  list4() {
-    this.up5 = !this.up5;
-  }
-  list5() {
-    this.up6 = !this.up6;
-  }
-
-  list3(e) {
-
-    if (e == 1) {
-      this.up3 = !this.up3;
-    } else {
-      this.up4 = !this.up4;
-    }
-  }
-
-  test(f: NgForm){
-    console.log(f.value);
-      this.db.collection('projects_hire').add({
-        /* jdgjsdjhj: f.value.EnterAddress1,
-        location:"123",
-        comments:"asd",
-        status:"Active",
-        AdditionalComments:"comentario" */
-      }).catch((error)=>{
-      alert(error.message)
+    /* this.childData = this.db.collection('/projectsHire').valueChanges()
+    this.childData1 = this.db.collection('/projectsHire').valueChanges() */
+    this.projectService.getProjects().subscribe(projects =>{
+      this.projects = projects;
     })
   }
+
   final(f: NgForm) {
     var user = firebase.auth().currentUser;
 
@@ -225,26 +137,26 @@ export class MenuHomeComponent implements OnInit {
   next() {
     this.page++;
     this.HomeFormularioNw++;
-
-
   }
+
   back() {
     this.page--;
     this.HomeFormularioNw = this.page;
+  }
 
-  }
   addfiles() {
-    var i = this.cust++;
-    this.files.push('File ' + i);
+    this.files.push('Add a file');
+    this.cust = this.cust + 1;
+    console.log(this.cust);
   }
-  close(e) {
-    if (e == 1) {
-      this.selectskills = null
-      this.selectskills2 = null
-    }
-    if (e == 2) {
-      this.selectskills2 = null
-    }
+  
+
+  uploadDoc(e){
+    var i = this.cust
+    this.file.push(e.target.files[0])
+    this.files[i] = e.target.files[0].name
+    console.log(i);
   }
+  
 
 }
