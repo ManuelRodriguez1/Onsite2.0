@@ -27,6 +27,7 @@ import {MenuExploreComponent} from './components/hire/hire-principal/menu-explor
 import {MenuProjectsComponent} from './components/hire/hire-principal/menu-projects/menu-projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServiceService } from './services/service.service';
+import { ProjectService } from './services/project.service';
 import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
 import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
 import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
@@ -82,7 +83,7 @@ import { VerifySuccessComponent } from './components/pro/verify-success/verify-s
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [ServiceService, AuthGuard],
+  providers: [ServiceService, AuthGuard, ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
