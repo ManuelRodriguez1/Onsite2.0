@@ -1,43 +1,29 @@
 <div id="ContenedorBannerHome">
-    <ngb-carousel *ngIf="images" #carousel>
-        <ng-template ngbSlide>
-            <img class="imgSliderHome" [src]="images[0]" alt="Random first slide">
-            <div class="contenedorseccionbanner">
-                <div class="tituloseccionbannerhome">
-                    <p>Join as a Pro</p>
-                </div>
-                <div class="subtituloseccionbannerhome">
-                    <p>Some cool copy about our services and why you should join Onhive</p>
-                </div>
-                <div (click)="pro()" class="btnseccionbannerhome">
-                    <p>JOIN US</p>
-                </div>
-            </div>
-
-        </ng-template>
-        <ng-template ngbSlide>
-            <img class="imgSliderHome" [src]="images[1]" alt="Random second slide">
-            <div class="contenedorseccionbanner">
-                <div class="tituloseccionbannerhome">
-                    <p>Join as a Hire</p>
-                </div>
-                <div class="subtituloseccionbannerhome">
-                    <p>Some cool copy about our services and why you should join Onhive</p>
-                </div>
-                <div (click)="hire()" class="btnseccionbannerhome">
-                    <p>JOIN US</p>
-                </div>
-            </div>
-        </ng-template>
-    </ngb-carousel>
 
 
-    <div class="flechaizquierdabannerHome" (click)="prev()">
+    <div class="contenedorseccionbanner container1280Final">
+        <div class="tituloseccionbannerhome">
+            <p>Join as a Pro</p>
+        </div>
+        <div class="subtituloseccionbannerhome">
+            <p>Some cool copy about our services and why you should join Onhive</p>
+        </div>
+        <div (click)="pro()" class="btnseccionbannerhome">
+            <p>Join as a pro</p>
+        </div>
+        <div (click)="hire()" class="btnseccionbannerhome">
+            <p>Join as a hirer</p>
+        </div>
+    </div>
+
+
+
+    <!--<div class="flechaizquierdabannerHome" (click)="prev()">
 
     </div>
     <div class="flechaderechabannerHome" (click)="next()">
 
-    </div>
+    </div>-->
 
 </div>
 

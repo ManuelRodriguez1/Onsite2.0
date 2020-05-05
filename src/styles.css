@@ -196,12 +196,15 @@ table {
     background-size: 13.97px;
     cursor: pointer;
 }
-.btnround:hover{
+
+.btnround:hover {
     background-color: #1F257C;
 }
-.btnround:active{
+
+.btnround:active {
     background-color: #373C7D;
 }
+
 .info p:nth-of-type(1),
 .title2 {
     font-family: 'Mukta', sans-serif;
@@ -257,7 +260,8 @@ table {
 }
 
 .next:active,
-.back:active, .next:disabled {
+.back:active,
+.next:disabled {
     background: #FFB665 !important;
     color: white !important;
     border-color: #FFB665 !important;
@@ -761,7 +765,6 @@ body.modal-open {
 
 @media screen and (max-width: 1320px) {
     .container1280Final {
-        /*   background-color: blue;*/
         width: calc(100% - 60px) !important;
     }
 }
