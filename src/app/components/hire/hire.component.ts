@@ -34,7 +34,7 @@ export class HireComponent implements OnInit {
 
   SendVerificationMail() {
     return this.af.auth.currentUser.sendEmailVerification().then(() => {
-      this.router.navigate(["/Hireprincipal"]);
+      /* this.router.navigate(["/Hireprincipal"]); */
     });
   }
   next() {
@@ -63,15 +63,17 @@ export class HireComponent implements OnInit {
             displayName: "hire",
             photoURL: "",
           });
-          this.db.collection("users_hire").add({
+          this.db.collection("users_hire").doc(user.uid).set({
             nombre: formData.value.FirstName,
             apellido: formData.value.LastName,
             telefono: formData.value.PhoneNumber,
+            password: formData.value.Password,
             correo: user.email,
             zipcode: formData.value.Entercityorzipcode,
             estado: "hire",
           });
-          this.router.navigateByUrl("/Hireprincipal");
+          /* this.router.navigateByUrl("/Hireprincipal"); */
+          this.router.navigate(['ChangeEmail']);
         })
         .catch((err) => {
           this.error = err.message;

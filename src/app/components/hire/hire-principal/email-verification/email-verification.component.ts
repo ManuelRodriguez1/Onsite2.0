@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-email-verification',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailVerificationComponent implements OnInit {
 
-  constructor() { }
+  text: any[] = ["Verification", "Email Change"];
+  error: boolean = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  Continue(){
+    this.router.navigate(["/Hireprincipal"]);
+  }
 }
