@@ -143,3 +143,15 @@ input::placeholder{
 .btnround{
     margin-left: 0;
 }
+.skillsel{
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.skill{
+    position: relative;
+}
+.skillselct{
+    position: absolute;
+    top: 5px;
+    margin-top: 0;
+}

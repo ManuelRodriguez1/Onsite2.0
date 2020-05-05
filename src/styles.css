@@ -257,6 +257,7 @@ table {
 .back:hover {
     background: #fff;
     color: #FF8600;
+    border: 1px solid #FF8600;
 }
 
 .next:active,
@@ -266,12 +267,23 @@ table {
     color: white !important;
     border-color: #FFB665 !important;
 }
-
+.btnOrange{
+    border-color: #FF8600;
+    color: #fff;
+    height: 47px;
+    line-height: 31px;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 2px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    background-color: #FF8600;
+    font-size: 16px; 
+}
 .next,
 .back {
     position: absolute;
     right: 15px;
-    border-color: #FF8600;
+    border: 0;
     color: #fff;
     width: 135px;
     height: 47px;
@@ -283,6 +295,7 @@ table {
     letter-spacing: 0.04em;
     background-color: #FF8600;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .contenedorseccion2home ul.slick-dots {
@@ -440,18 +453,18 @@ table {
 }
 
 .textv {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 800;
     line-height: 20px;
-    font-size: 150px;
+    font-size: 100px;
     text-align: center;
     letter-spacing: -0.025em;
     transform: translateY(-50%) rotate(-90deg);
     position: fixed;
-    right: -289px;
+    right: -216px;
     color: transparent;
-    -webkit-text-stroke: 1px #D1D1D1;
+    -webkit-text-stroke: 1px #010973;
     top: 50%;
 }
 
@@ -762,7 +775,118 @@ a:hover {
 body.modal-open {
     padding-right: 0px !important;
 }
-
+.changeButton{
+    background: transparent;
+    border: 0;
+    color: #010973;
+    font-weight: normal;
+}
+.changeButton:hover{
+    background: #FF8600;
+    color: white;
+}
+.small{
+    width: 134px;
+}
+.medium{
+    width: 215px;
+}
+.large{
+    width: 269px;
+}
+.blueBtn{
+    background: #010973;
+    color: white;
+    height: 47px;
+    cursor: pointer;
+    font-family: 'Open sans', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+    border: 0;
+}
+.orangeBtn{
+    color: #fff;
+    height: 47px;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 2px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    background: #FF8600;
+    font-size: 16px; 
+    cursor: pointer;
+    border-radius: 2px;
+    border: 0;
+}
+.blueBtn:hover{
+    background: white;
+    color: #010973;
+    border: 1px solid #010973;
+}
+.orangeBtn:hover{
+    background: white;
+    color: #FF8600;
+    border: 1px solid #FF8600;
+}
+.blueBtn:active{
+    background: #373C7D;
+    color: white;
+}
+.orangeBtn:active{
+    color: white;
+    background: #FFB665;
+}
+.error{
+    background: #354963;
+    border-radius: 4px;
+    height: 0;
+    margin-top: 21px;
+    color: white;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    line-height: 56px;
+    padding-left: 37px;
+    position: relative;
+    overflow: hidden;
+}
+.errorh{
+    height: 55px;
+    transition: .5s;
+}
+.error::before{
+    content: '';
+    background: url('./assets/iconos/error-icon.svg') no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12.73px;
+    height: 12.73px;
+}
+h1, .h1{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    line-height: 41px;
+    font-weight: bold;
+}
+h2, .h2{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    line-height: 33px;
+}
+h3, .h3{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 62px;
+    line-height: 84px;
+}
+h4, .h4{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 55px;
+    line-height: 75px;
+    font-weight: 800;
+}
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;

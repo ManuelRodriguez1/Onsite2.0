@@ -68,9 +68,9 @@
         </div>
       </div>
       <div class="skillselct" [hidden]="selectskills == null">
-        <div class="skillsel">
-          <p>{{selectskills}}</p>
-          <div class="close" (click)='close(1)'></div>
+        <div class="skillsel" *ngFor="let s of selectskills">
+          <p>{{s}}</p>
+          <div class="close" (click)='close(s)'></div>
         </div>
       </div>
       <!-- <div [hidden]="selectskills == null">

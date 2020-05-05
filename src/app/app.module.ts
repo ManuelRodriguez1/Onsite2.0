@@ -27,6 +27,7 @@ import {MenuExploreComponent} from './components/hire/hire-principal/menu-explor
 import {MenuProjectsComponent} from './components/hire/hire-principal/menu-projects/menu-projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServiceService } from './services/service.service';
+import { ProjectService } from './services/project.service';
 import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
 import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
 import { RecordarPassComponent } from './components/recordar-pass/recordar-pass.component';
@@ -37,6 +38,8 @@ import { ProfileHireComponent } from './components/hire/hire-principal/profile-h
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 import { EmailVerificationComponent } from './components/hire/hire-principal/email-verification/email-verification.component';
 import { VerifyEmailComponent } from './components/pro/verify-email/verify-email.component';
+import { VerifySuccessComponent } from './components/pro/verify-success/verify-success.component';
+import { PlantillaComponent } from './components/plantilla/plantilla.component';
 
 
 @NgModule({
@@ -60,7 +63,9 @@ import { VerifyEmailComponent } from './components/pro/verify-email/verify-email
     MenuInboxComponent,
     ProfileHireComponent,
     EmailVerificationComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    VerifySuccessComponent,
+    PlantillaComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +85,7 @@ import { VerifyEmailComponent } from './components/pro/verify-email/verify-email
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [ServiceService, AuthGuard],
+  providers: [ServiceService, AuthGuard, ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,14 +19,14 @@ export class ProComponent implements OnInit {
   up = false;
   up2 = false;
   page = 0;
-  selectskills = null;
+  selectskills: any[] = [];
   selectskills2 = null;
   title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
   customers = ['Add certificate file'];
-  customers2 = '';
+  customers2: any[] = [];
   database = firebase.database();
   notSame: boolean = false
   file: any[] = []
@@ -54,8 +54,9 @@ export class ProComponent implements OnInit {
     this.select = this.page;
   }
   selectskill(e) {
-    this.up = !this.up;
-    this.selectskills = e;
+    // this.up = !this.up;
+    var i = this.selectskills.indexOf(e)
+    i === -1 && this.selectskills.push(e);    
     this.skills2 = [this.selectskills + ' Hanger', this.selectskills + ' Apprentice', 'Metal Framer',
       'Metal Framer Apprentice', this.selectskills + ' Finisher', 'Fire Taper'];
   }
@@ -64,10 +65,8 @@ export class ProComponent implements OnInit {
     this.selectskills2 = e
   }
   close(e) {
-    if (e == 1) {
-      this.selectskills = null
-      this.selectskills2 = null
-    }
+    var i = this.selectskills.indexOf(e)
+    i !== -1 && this.selectskills.splice(i, 1)
     if (e == 2) {
       this.selectskills2 = null
     }
@@ -83,9 +82,9 @@ export class ProComponent implements OnInit {
 
     this.afAuth.auth.createUserWithEmailAndPassword(f.value.email, f.value.password).then(() => {
       var user = firebase.auth().currentUser;
-      this.verficationEmail()
+      user.sendEmailVerification()
       user.updateProfile({
-        displayName: "pro",
+        displayName: f.value.name,
         photoURL: "",
       });
 
@@ -110,7 +109,7 @@ export class ProComponent implements OnInit {
         fileDoc.then((url) => {
           url.ref.getDownloadURL()
             .then((url) => {
-              this.customers2 += url + ','
+              this.customers2.push(url)
               setTimeout(() => {
                 this.db.collection('users_pro').doc(user.uid).update({
                   "certificate": this.customers2
@@ -134,8 +133,5 @@ export class ProComponent implements OnInit {
   }
   check(){
     this.checkbox = !this.checkbox
-  }
-  verficationEmail(){
-    return this.afAuth.auth.currentUser.sendEmailVerification()
   }
 }

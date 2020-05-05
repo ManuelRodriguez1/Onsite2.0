@@ -1,31 +1,15 @@
 <div class="container">
-  <div class="cont">
-    <div class="profile"></div>
-    <div class="textw">
-      <p>Welcome</p>
-      <p>Mauro Poche</p>
-    </div>
-  </div>
   <div class="row">
     <div class="col-sm-3">
-      <div class="dropdown-menu show">
-        <div class="dropdown-item" (click)="menus(0)">Home</div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item" (click)="menus(1)">Inbox</div>
-        <div class="menusmall" *ngIf="menushow == true">
-          <div class="option">Inbox</div>
-          <div class="option">Sent</div>
-          <div class="option">Trash</div>
+      <div class="cont">
+        <div class="profile"></div>
+        <div class="textw">
+          <p>Welcome</p>
+          <p>Mauro Poche</p>
         </div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item" (click)="menus(2)">Projects</div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item" (click)="menus(3)">Explore</div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-item">Sign Out</div>
       </div>
     </div>
-    <div class="col-sm-9 divcol">
+    <div class="col-sm-8 divcol">
       <div class="home" *ngIf="select == 0">
         <div class="proyects anyproyects">
           <div class="message">
@@ -84,5 +68,5 @@
   </div>
 </div>
 <div class="textv" [ngClass]="righttv">
-  <p>{{text[select]}}</p>
+  <p>{{text}}</p>
 </div>
