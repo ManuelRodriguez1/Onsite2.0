@@ -73,36 +73,6 @@
           <div class="close" (click)='close(s)'></div>
         </div>
       </div>
-      <!-- <div [hidden]="selectskills == null">
-        <div class="title">
-          <p>Let’s get specific</p>
-        </div>
-        <div class="row skill2">
-          <div class="col-sm input-group">
-            <div class="input-group-prepend">
-              <div class="icon_img setting"></div>
-            </div>
-            <input type="text" readonly class="form-control" [placeholder]="'What '+selectskills+ ' skills do you have?'">
-            <div class="down" [ngClass]="{'up': up2 == true}" (click)='list(2)'></div>
-          </div>
-        </div>
-        <div class="list-group" [hidden]='up2 == false'>
-          <div class="list-group-item" *ngFor="let s of skills2" (click)='selectskill2(s)'>
-            <p>{{s}}</p>
-          </div>
-        </div>
-        <div class="skillselct" [hidden]="selectskills2 == null">
-          <div class="skillsel ss2">
-            <p>{{selectskills}}</p>
-            <div class="close" (click)='close(1)'></div>
-          </div>
-          <div class="skillsel ss3">
-            <p>{{selectskills2}}</p>
-            <div class="close" (click)='close(2)'></div>
-          </div>
-        </div>
-        <input type="hidden" name="skills" [value]="selectskills2">
-      </div> -->
     </div>
   </section>
   <section [hidden]='page < 2 || page > 2' class="container">
@@ -113,26 +83,12 @@
         <p class="changeColorBlue">Certificates</p>
       </div>
     </div>
-    <!-- <div class="row linkcont">
-      <div class="col-sm input-group">
-        <div class="input-group-prepend">
-          <div class="icon_img link"></div>
-        </div>
-        <input type="text" placeholder="Link" class="form-control" name="link" ngModel #link="ngModel">
-        <div class="input-group-append">
-          <div class="input-group-text fomatlink"><p>Link</p></div>
-        </div>
-      </div>
-    </div> -->
-    <!-- <div class="texts2 move">
-      <p></p>
-      <p>Enter E-mails</p>
-    </div> -->
+ 
     <div class="row">
       <div class="col-sm input-group">
-        <div class="input-group custom-file" *ngFor="let c of customers; let i = index">
+        <div class="input-group custom-file" *ngFor="let c of customers;">
           <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg"
-            name="certificate" [attr.aria-label]="i" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
+            name="certificate" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
           <label for="customFile" class="custom-file-label">
             <div class="afterFile">{{c}}</div>
           </label>
