@@ -19,6 +19,10 @@ export class HireComponent implements OnInit {
   Email;
   Password;
   error;
+  select = 0;
+  page = 0;
+  title = ['Enter your information:', 'Select skills'];
+  text = ['About You', 'Your Skills'];
   appComponent = AppComponent;
 
   constructor(
@@ -32,6 +36,14 @@ export class HireComponent implements OnInit {
     return this.af.auth.currentUser.sendEmailVerification().then(() => {
       this.router.navigate(["/Hireprincipal"]);
     });
+  }
+  next() {
+    this.page++;
+    this.select = this.page;
+  }
+  back() {
+    this.page--;
+    this.select = this.page;
   }
 
   onSubmit(formData) {
