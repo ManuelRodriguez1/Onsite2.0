@@ -4,13 +4,14 @@
       <div class="cont">
         <div class="profile"></div>
         <div class="textw">
-          <p>Welcome</p>
-          <p>Mauro Poche</p>
+          <p>{{name}} {{lastName}}</p>
         </div>
+        <p class="optionSelect" (click)="selectOption(1)" [class.noOption]="select == 2">Profile overall</p>
+        <p class="optionSelect" (click)="selectOption(2)" [class.noOption]="select == 1">Edit profile</p>
       </div>
     </div>
     <div class="col-sm-8 divcol">
-      <div class="home" *ngIf="select == 0">
+      <!-- <div class="home" *ngIf="select == 0">
         <div class="proyects anyproyects">
           <div class="message">
             <div class="title">You don’t have any projects</div>
@@ -53,7 +54,7 @@
             <div class="hour">9:01 am</div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="inbox" *ngIf="select == 1">
         <app-inbox></app-inbox>
       </div>
