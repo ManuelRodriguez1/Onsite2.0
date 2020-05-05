@@ -1,8 +1,8 @@
-
-.move{
+.move {
     margin-bottom: 18px;
 }
-.fomatlink{
+
+.fomatlink {
     background: #E76800;
     color: white;
     width: 96px;
@@ -18,28 +18,27 @@
     padding-left: 33px;
     cursor: pointer;
 }
-.linkcont{
+
+.linkcont {
     max-width: 490px;
     margin-top: 19px;
 }
-input::placeholder{
+
+input::placeholder {
     color: rgba(0, 0, 0, 0.5);
 }
-.customers, .customers2{
+
+.customers,
+.customers2 {
     max-width: 797.62px;
     margin-top: 4px;
 }
-.customers2{
+
+.customers2 {
     margin-top: 19px;
 }
-.alertMessage{
-    color: #F43E40;
-    position: absolute;
-    bottom: -16px;
-    left: 65px;
-    font-size: 13px;
-}
-.changeColor{
+
+.changeColor {
     font-family: 'Open Sans', sans-serif !important;
     font-style: normal !important;
     font-weight: normal !important;
@@ -47,7 +46,8 @@ input::placeholder{
     line-height: 160% !important;
     color: black !important;
 }
-.changeColorBlue{
+
+.changeColorBlue {
     font-family: 'Open Sans', sans-serif !important;
     font-style: normal !important;
     font-weight: bold !important;
@@ -55,7 +55,8 @@ input::placeholder{
     line-height: 35px !important;
     color: #010973 !important;
 }
-.form-check-label{
+
+.form-check-label {
     font-family: 'Open Sans', sans-serif !important;
     font-style: normal !important;
     font-weight: normal !important;
@@ -63,13 +64,16 @@ input::placeholder{
     line-height: 160% !important;
     margin-left: 14px !important;
 }
-.form-check-label a{
+
+.form-check-label a {
     color: #FF8600 !important;
 }
-.form-check{
+
+.form-check {
     margin-left: 20px;
 }
-.form-check-input{
+
+.form-check-input {
     width: 20px;
     height: 20px;
     border-radius: 2px;
@@ -78,19 +82,20 @@ input::placeholder{
     bottom: 2px;
     cursor: pointer;
 }
-.form-check > .check-out{
+
+.form-check>.check-out {
     display: none;
 }
-.form-check-input:checked + .form-checked{
+
+.form-check-input:checked+.form-checked {
     background: #FF8600;
 }
-.alertMessage{
-    left: 15px;
-}
-.customFile{
+
+.customFile {
     display: none;
 }
-.custom-file-label{
+
+.custom-file-label {
     width: 166px;
     height: 112px;
     border: 1px dashed #9D9D9D;
@@ -101,13 +106,16 @@ input::placeholder{
     cursor: pointer;
     margin-right: 37px;
 }
-.custom-file-label:nth-child(4n){
+
+.custom-file-label:nth-child(4n) {
     margin-right: 0;
 }
-.custom-file-label::after{
+
+.custom-file-label::after {
     display: none;
 }
-.custom-file-label .afterFile{
+
+.custom-file-label .afterFile {
     width: 124px;
     height: 26px;
     font-family: 'Open Sans', sans-serif;
@@ -127,30 +135,37 @@ input::placeholder{
     border-radius: 2px;
     position: absolute;
 }
-.custom-file-label .afterFile:hover{
+
+.custom-file-label .afterFile:hover {
     background: #e8e8e8;
 }
-.input-group > .custom-file{
+
+.input-group>.custom-file {
     overflow: hidden;
     height: auto;
     width: auto;
     flex: initial;
 }
-.iconAdd{
+
+.iconAdd {
     align-items: center;
     height: 126px;
 }
-.btnround{
+
+.btnround {
     margin-left: 0;
 }
-.skillsel{
+
+.skillsel {
     margin-right: 10px;
     margin-bottom: 10px;
 }
-.skill{
+
+.skill {
     position: relative;
 }
-.skillselct{
+
+.skillselct {
     position: absolute;
     top: 5px;
     margin-top: 0;

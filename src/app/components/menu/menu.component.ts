@@ -22,24 +22,12 @@ error: any[];
 
             if (auth) {
                 this.Sesion = true;
-
-
-
-
             } else {
                 this.Sesion = false;
             }
-
         });
-
-
-     
     }
-
-
   ngOnInit() {
- 
-
   }
   onSubmit(formData) {
 
