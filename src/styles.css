@@ -267,7 +267,8 @@ table {
     color: white !important;
     border-color: #FFB665 !important;
 }
-.btnOrange{
+
+.btnOrange {
     border-color: #FF8600;
     color: #fff;
     height: 47px;
@@ -277,8 +278,9 @@ table {
     font-weight: 800;
     letter-spacing: 0.04em;
     background-color: #FF8600;
-    font-size: 16px; 
+    font-size: 16px;
 }
+
 .next,
 .back {
     position: absolute;
@@ -775,26 +777,32 @@ a:hover {
 body.modal-open {
     padding-right: 0px !important;
 }
-.changeButton{
+
+.changeButton {
     background: transparent;
     border: 0;
     color: #010973;
     font-weight: normal;
 }
-.changeButton:hover{
+
+.changeButton:hover {
     background: #FF8600;
     color: white;
 }
-.small{
+
+.small {
     width: 134px;
 }
-.medium{
+
+.medium {
     width: 215px;
 }
-.large{
+
+.large {
     width: 269px;
 }
-.blueBtn{
+
+.blueBtn {
     background: #010973;
     color: white;
     height: 47px;
@@ -806,7 +814,8 @@ body.modal-open {
     border-radius: 2px;
     border: 0;
 }
-.orangeBtn{
+
+.orangeBtn {
     color: #fff;
     height: 47px;
     font-family: 'Open Sans', sans-serif;
@@ -814,30 +823,35 @@ body.modal-open {
     font-weight: 800;
     letter-spacing: 0.04em;
     background: #FF8600;
-    font-size: 16px; 
+    font-size: 16px;
     cursor: pointer;
     border-radius: 2px;
     border: 0;
 }
-.blueBtn:hover{
+
+.blueBtn:hover {
     background: white;
     color: #010973;
     border: 1px solid #010973;
 }
-.orangeBtn:hover{
+
+.orangeBtn:hover {
     background: white;
     color: #FF8600;
     border: 1px solid #FF8600;
 }
-.blueBtn:active{
+
+.blueBtn:active {
     background: #373C7D;
     color: white;
 }
-.orangeBtn:active{
+
+.orangeBtn:active {
     color: white;
     background: #FFB665;
 }
-.error{
+
+.error {
     background: #354963;
     border-radius: 4px;
     height: 0;
@@ -850,11 +864,13 @@ body.modal-open {
     position: relative;
     overflow: hidden;
 }
-.errorh{
+
+.errorh {
     height: 55px;
     transition: .5s;
 }
-.error::before{
+
+.error::before {
     content: '';
     background: url('./assets/iconos/error-icon.svg') no-repeat;
     background-size: contain;
@@ -865,28 +881,46 @@ body.modal-open {
     width: 12.73px;
     height: 12.73px;
 }
-h1, .h1{
+
+h1,
+.h1 {
     font-family: 'Open Sans', sans-serif;
     font-size: 30px;
     line-height: 41px;
     font-weight: bold;
 }
-h2, .h2{
+
+h2,
+.h2 {
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     line-height: 33px;
 }
-h3, .h3{
+
+h3,
+.h3 {
     font-family: 'Open Sans', sans-serif;
     font-size: 62px;
     line-height: 84px;
 }
-h4, .h4{
+
+h4,
+.h4 {
     font-family: 'Open Sans', sans-serif;
     font-size: 55px;
     line-height: 75px;
     font-weight: 800;
 }
+
+.alertMessage {
+    color: #F43E40;
+    position: absolute;
+    bottom: -16px;
+    left: 65px;
+    font-size: 13px;
+    left: 15px;
+}
+
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;
