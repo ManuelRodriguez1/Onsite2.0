@@ -7,7 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./hire-principal.component.css']
 })
 export class HirePrincipalComponent implements OnInit {
-  text = ['Home', 'Your Inbox', 'Projects', 'Explore'];
+  text = ['','Your Inbox', 'Projects', 'Explore'];
   righttv = '' 
   select = 0
   lat: number = 51.678418;

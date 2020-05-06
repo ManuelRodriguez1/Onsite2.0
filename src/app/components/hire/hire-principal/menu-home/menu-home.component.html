@@ -3,6 +3,7 @@
   (ngSubmit)="addProject(formProject)"
   class="form-Project"
 >
+  <section class="container">
   <div class="home" *ngIf="select == 0">
     <div *ngIf="HomeFormularioNw == 0">
       <div class="list-project" *ngIf="projects.length > 0; else noprojects">
@@ -246,4 +247,8 @@
     </div>
     </div>
   </div>
+</section>
 </form>
+<div class="textv" [ngClass]="righttv">
+  <p>{{text[section]}}</p>
+</div>
