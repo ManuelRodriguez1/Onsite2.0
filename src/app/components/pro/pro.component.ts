@@ -73,9 +73,7 @@ export class ProComponent implements OnInit {
   }
   addcustomer() {
     this.customers.push('Add certificate file');
-    this.cust = this.cust + 1;
-    console.log(this.cust);
-    
+    this.cust = this.cust + 1;    
   }
 
   test(f: NgForm) {

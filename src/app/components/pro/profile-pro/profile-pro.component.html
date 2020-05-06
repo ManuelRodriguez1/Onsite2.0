@@ -82,10 +82,14 @@
         <div class="title2">
           <p class="changeColorBlue">Update password</p>
         </div>
-        <form action="">
+        <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
           <div class="row fields">
             <div class="input-group col-sm">
-              <input type="password" class="form-control" placeholder="Current password">
+              <input type="password" [class.errorInput]="cPass.value != pass && cPass.value != ''"
+                [class.correctInput]="cPass.value == pass && cPass.value != ''" class="form-control"
+                placeholder="Current password" name="cPass" #cPass="ngModel" ngModel>
+              <span class="textError" [hidden]="cPass.value == pass || cPass.value == ''">It isn't the current
+                password</span>
             </div>
             <div class="input-group col-sm">
               <input type="text" class="form-control" hidden>
@@ -93,13 +97,22 @@
           </div>
           <div class="row fields">
             <div class="input-group col-sm">
-              <input type="password" class="form-control" placeholder="New password">
+              <input type="password" [class.errorInput]="pass1.value?.length < 6 && pass1.value != ''"
+                [class.correctInput]="pass1.value?.length > 5 && pass1.value != ''" class="form-control"
+                placeholder="New password" name="pass1" ngModel #pass1="ngModel">
+              <span class="textError" [hidden]="pass1.value?.length > 5 || pass1.value == ''">Password must be at leat 6
+                characters.</span>
             </div>
             <div class="input-group col-sm">
-              <input type="password" class="form-control" placeholder="Confirm new password">
+              <input type="password" [class.correctInput]="pass2.value == pass1.value && pass2.value != ''"
+                [class.errorInput]="pass2.value != pass1.value && pass2.value != ''" class="form-control"
+                placeholder="Confirm new password" name="pass2" ngModel #pass2="ngModel">
+              <span class="textError" [hidden]="pass2.value == pass1.value || pass2.value == ''">Password doesn’t
+                match.</span>
             </div>
           </div>
-          <button class="blueBtn small mt-12">Update</button>
+          <button type="submit" class="blueBtn small mt-12"
+            [disabled]="(cPass.value == '' || pass1.value == '' || pass2.value == '') && (pass1.value != pass2.value)">Update</button>
         </form>
         <hr class="hr mt-30">
         <div class="title2">
@@ -108,7 +121,7 @@
         <div class="fields flex">
           <div class="profile mini" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
           <input type="file" class="custom-file-input customFile" id="customProfile" accept=".jpg, .jpeg, .png, .svg"
-                name="certificate" (change)="imageProfile($event)">
+            name="certificate" (change)="imageProfile($event)">
           <label for="customProfile" class="blueBtn medium ml-30 labelButton">Upload file</label>
         </div>
         <hr class="hr mt-30">

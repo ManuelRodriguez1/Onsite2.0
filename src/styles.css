@@ -992,6 +992,27 @@ h4,
     top: 5px;
     margin-top: 0;
 }
+.errorInput{
+    border: 1px solid #F43E40;
+    color: #F43E40 !important;
+}
+.errorInput:focus{
+    border-color: #F43E40;
+    box-shadow: 0 0 0 0.2rem rgba(244, 62, 64, 0.25);
+}
+.textError{
+    font-size: 14px;
+    color: #F43E40;
+    width: 100%;
+    line-height: 160%;
+}
+.correctInput{
+    border: 1px solid #21D8C6;
+    color: #21D8C6 !important;
+}
+.correctInput:focus{
+    box-shadow: 0 0 0 0.2rem rgba(33, 216, 198, 0.25);
+}
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;
