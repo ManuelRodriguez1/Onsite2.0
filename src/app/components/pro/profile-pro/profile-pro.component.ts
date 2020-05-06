@@ -43,6 +43,8 @@ export class ProfileProComponent implements OnInit {
   ) { }
 //Show data of User
   ngOnInit() {
+    console.log(this.user);
+    console.log(this.afAuth.auth.currentUser);
     var data = this.af.collection("users_pro").doc(this.user.uid).get()
     data.subscribe((d) => {
       this.name = d.data().name

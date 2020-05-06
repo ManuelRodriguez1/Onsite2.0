@@ -24,7 +24,7 @@ export const router: Routes = [
     { path: 'Recuperar', component: RecordarPassComponent },
     { path: 'ProfilePro', component: ProfileProComponent , canActivate: [AuthGuard]},
     { path: 'Hireprincipal', component: HirePrincipalComponent, canActivate: [AuthGuard] },//login
-    { path: 'ProfileHire',component: ProfileHireComponent},
+    { path: 'ProfileHire',component: ProfileHireComponent, canActivate: [AuthGuard]},
     { path: 'ChangeEmail', component: ChangeEmailComponent},
     { path: 'VerificationEmail', component: EmailVerificationComponent},
     { path: 'VerifyEmailPro', component: VerifyEmailComponent},

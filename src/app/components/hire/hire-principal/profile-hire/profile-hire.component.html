@@ -1,74 +1,76 @@
-<img class="fund-image my-5 py-5" src="../../../assets/imagenes/Profile_hire.svg" alt="">
-<div class="container my-5 py-5">
+<div class="container">
   <div class="row">
-    <div class="col-md-4 mt-4">
-      <div class="image-profile">
-        <img src="../../../../../assets/iconos/Ellipse 6.svg" alt="">
-      </div>
-      <div class="options-profile mt-4">
-        <p class="name-profile my-2">Gordon Freeman</p>
-        <p class="option-profile my-2"><a href="">Profile overall</a></p>
-        <p class="option-profile active my-2"><a href="">Edit Profile</a></p>
+    <div class="col-sm-3">
+      <div class="cont">
+        <div class="profile" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
+        <div class="textw">
+          <p>{{name}} {{lastName}}</p>
+        </div>
+        <p class="optionSelect" (click)="selectOption(1)" [class.noOption]="select == 2">Profile overall</p>
+        <p class="optionSelect" (click)="selectOption(2)" [class.noOption]="select == 1">Edit profile</p>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="info container">
-        <p>Account Information</p>
-      </div>
-      <div class="fields container">
-        <div class="row">
-          <div class="col-sm input-group">
-            <input required type="text" class="input  form-control" placeholder="First Name" name="pFirstName" id="pFirstName" minlength="4">
-          </div>
-          <div class="col-sm input-group">
-            <input required type="text" class="input  form-control" placeholder="Last Name" id="pLastName" name="pLastName">
-          </div>
+    <div class="col-sm-8 divcol">
+      <div *ngIf="select == 1">
+        <div class="title2">
+          <p class="changeColorBlue">Account Information</p>
         </div>
-        <div class="row mt-3">
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input  form-control" placeholder="E-mail" name="pEmail" id="pEmail">
-          </div>
-        </div>
-        <div class="row my-3">
-          <div class="col-md-6">
-            <button type='submit' name="button" class="btn btn-outline-warning update">Update</button>
-          </div>
-        </div>
-        <hr class="separator my-4">
-      </div>
-      <div class="info container">
-        <p>Update password</p>
-      </div>
-      <div class="fields container">
-        <div class="row">
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input form-control" placeholder="Current password" name="ppassword" id="ppassword" minlength="4">
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input  form-control" placeholder="New password" name="newpassword" id="newpassword">
-          </div>
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input  form-control" placeholder="Confirm new password" name="conewpassword" id="conewpassword">
-          </div>
-        </div>
-        <hr class="separator my-4">
-      </div>
-      <div class="info container">
-        <p>Profile picture</p>
-      </div>
-      <div class="fields container">
-        <div class="row">
-          <div class="col-sm-12 input-group">
-            <img [src]="url" height="200" class="avatar-change">
-            <div class="upload-btn-wrapper align-self-center plus-button pl-4">
-              <button class="btn-Add">Add a file</button>
-              <input type="file" name="my-avatar" (change)="onSelectFile($event)"/>
+        <form action="">
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input type="text" class="form-control" [placeholder]="name">
+            </div>
+            <div class="input-group col-sm">
+              <input type="text" class="form-control" [placeholder]="lastName">
             </div>
           </div>
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input type="email" class="form-control" [placeholder]="email" id="email">
+            </div>
+            <div class="input-group col-sm">
+              <input type="text" hidden>
+            </div>
+          </div>
+          <button class="blueBtn small mt-12">Update</button>
+        </form>
+        <hr class="hr mt-30">
+        <div class="title2">
+          <p class="changeColorBlue">Update password</p>
+        </div>
+        <form action="">
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input type="password" class="form-control" placeholder="Current password" id="currentpassword" name="currentpassword">
+            </div>
+            <div class="input-group col-sm">
+              <input type="text" class="form-control" hidden>
+            </div>
+          </div>
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input type="password" class="form-control" placeholder="New password" id="newpassword" name="newpassword">
+            </div>
+            <div class="input-group col-sm">
+              <input type="password" class="form-control" placeholder="Confirm new password" id="confirpassword" name="confirpassword">
+            </div>
+          </div>
+          <button class="blueBtn small mt-12">Update</button>
+        </form>
+        <hr class="hr mt-30">
+        <div class="title2">
+          <p class="changeColorBlue">Profile picture</p>
+        </div>
+        <div class="fields flex">
+          <div class="profile mini" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
+          <input type="file" class="custom-file-input customFile" id="customProfile" accept=".jpg, .jpeg, .png, .svg"
+                name="certificate" (change)="imageProfile($event)">
+          <label for="customProfile" class="blueBtn medium ml-30 labelButton">Upload file</label>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="textv" [ngClass]="righttv">
+  <p>{{text}}</p>
 </div>
