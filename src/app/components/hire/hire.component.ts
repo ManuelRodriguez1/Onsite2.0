@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ServiceService } from 'src/app/services/service.service';
 import * as firebase from "firebase/app";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
@@ -19,6 +20,10 @@ export class HireComponent implements OnInit {
   Email;
   Password;
   error;
+  select = 0;
+  page = 0;
+  title = ['Enter your information:', 'Select skills'];
+  text = ['About You', 'Your Skills'];
   appComponent = AppComponent;
 
   constructor(
@@ -30,8 +35,16 @@ export class HireComponent implements OnInit {
 
   SendVerificationMail() {
     return this.af.auth.currentUser.sendEmailVerification().then(() => {
-      this.router.navigate(["/Hireprincipal"]);
+      /* this.router.navigate(["/Hireprincipal"]); */
     });
+  }
+  next() {
+    this.page++;
+    this.select = this.page;
+  }
+  back() {
+    this.page--;
+    this.select = this.page;
   }
 
   onSubmit(formData) {
@@ -42,24 +55,26 @@ export class HireComponent implements OnInit {
           formData.value.Email,
           formData.value.Password
         )
-        .then((result) => {
-          this.SendVerificationMail();
-        })
         .then((success) => {
           var user = firebase.auth().currentUser;
           user.updateProfile({
             displayName: "hire",
             photoURL: "",
+          }).then((result) => {
+            this.SendVerificationMail();
           });
-          this.db.collection("users_hire").add({
-            nombre: formData.value.FirstName,
-            apellido: formData.value.LastName,
-            telefono: formData.value.PhoneNumber,
-            correo: user.email,
+          this.db.collection("users_hire").doc(user.uid).set({
+            id: user.uid,
+            name: formData.value.FirstName,
+            lastname: formData.value.LastName,
+            phone: formData.value.PhoneNumber,
+            password: formData.value.Password,
+            email: user.email,
             zipcode: formData.value.Entercityorzipcode,
             estado: "hire",
           });
-          this.router.navigateByUrl("/Hireprincipal");
+          /* this.router.navigateByUrl("/Hireprincipal"); */
+          this.router.navigate(['ChangeEmail']);
         })
         .catch((err) => {
           this.error = err.message;

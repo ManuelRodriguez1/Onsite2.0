@@ -1,65 +1,15 @@
-.contenedorHireTotal {
-  overflow: hidden;
-  padding: 10% 20% 0 10%;
-}
-.image-about {
-  position: absolute;
-  right: 4%;
-}
-.info p{
-  color: #010973;
-  font-size: 26px;
-  line-height: 35px;
-}
-.info span{
-  color: #000000;
-}
-.input, .input::placeholder {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 20px;
-  font-size: 15px;
-}
-.fields {
-  margin-top: 2%;
-}
-.info p:nth-of-type(2) {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-  font-size: 15px;
-  letter-spacing: -0.025em;
-  color: #2F80ED;
-}
-.next {
-  border-color: #E76800;
-  color: #ffffff;
-  background: #E76800;
-  width: 130px;
-  height: 42px;
-  line-height: 18px;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 0;
-  font-weight: bold;
-}
-.next:hover {
-  background: white;
-  color: #E76800;
-}
 .alertMessage{
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-  font-size: 15px;
-  letter-spacing: -0.025em;
-  color: #E76800;
+  color: #F43E40;
+  position: absolute;
+  bottom: -16px;
+  left: 65px;
+  font-size: 13px;
 }
 .next:disabled{
   background: #FFB665 !important;
   color: white !important;
   border-color: #FFB665 !important;
+}
+.alertMessage{
+  left: 15px;
 }

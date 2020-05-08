@@ -73,9 +73,7 @@ export class ProComponent implements OnInit {
   }
   addcustomer() {
     this.customers.push('Add certificate file');
-    this.cust = this.cust + 1;
-    console.log(this.cust);
-    
+    this.cust = this.cust + 1;    
   }
 
   test(f: NgForm) {
@@ -84,7 +82,7 @@ export class ProComponent implements OnInit {
       var user = firebase.auth().currentUser;
       user.sendEmailVerification()
       user.updateProfile({
-        displayName: f.value.name,
+        displayName: 'pro',
         photoURL: "",
       });
 
@@ -105,11 +103,11 @@ export class ProComponent implements OnInit {
       })
 
       for (let i = 0; i < this.file.length; i++) {
-        var fileDoc = this.afs.ref('Users_pro/' + user.uid + "/certificado_" + (i+1)).put(this.file[i])
+        var fileDoc = this.afs.ref('Users_pro/' + user.uid + "/"+this.file[i].name).put(this.file[i])
         fileDoc.then((url) => {
           url.ref.getDownloadURL()
             .then((url) => {
-              this.customers2.push(url)
+              this.customers2.push({"name": this.file[i].name, "url": url})
               setTimeout(() => {
                 this.db.collection('users_pro').doc(user.uid).update({
                   "certificate": this.customers2

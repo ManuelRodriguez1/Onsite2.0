@@ -1,74 +1,244 @@
-<img class="fund-image my-5 py-5" src="../../../assets/imagenes/Profile_hire.svg" alt="">
-<div class="container my-5 py-5">
+<div class="container">
   <div class="row">
-    <div class="col-md-4 mt-4">
-      <div class="image-profile">
-        <img src="../../../../../assets/iconos/Ellipse 6.svg" alt="">
-      </div>
-      <div class="options-profile mt-4">
-        <p class="name-profile my-2">Gordon Freeman</p>
-        <p class="option-profile my-2"><a href="">Profile overall</a></p>
-        <p class="option-profile active my-2"><a href="">Edit Profile</a></p>
+    <div class="col-sm-3">
+      <div class="cont">
+        <div
+          class="profile"
+          [ngStyle]="{ 'background-image': 'url(' + imageP + ')' }"
+        ></div>
+        <div class="textw">
+          <p>{{ profile.name }} {{ profile.lastname }} </p>
+        </div>
+        <p
+          class="optionSelect"
+          (click)="selectOption(2)"
+          [class.noOption]="select == 2"
+        >
+          Profile overall
+        </p>
+        <p
+          class="optionSelect"
+          (click)="selectOption(1)"
+          [class.noOption]="select == 1"
+        >
+          Edit profile
+        </p>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="info container">
-        <p>Account Information</p>
-      </div>
-      <div class="fields container">
-        <div class="row">
-          <div class="col-sm input-group">
-            <input required type="text" class="input  form-control" placeholder="First Name" name="pFirstName" id="pFirstName" minlength="4">
-          </div>
-          <div class="col-sm input-group">
-            <input required type="text" class="input  form-control" placeholder="Last Name" id="pLastName" name="pLastName">
-          </div>
+    <div class="col-sm-8 divcol">
+      <div *ngIf="select == 1">
+        <div class="title2">
+          <p class="changeColorBlue">Account Information</p>
         </div>
-        <div class="row mt-3">
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input  form-control" placeholder="E-mail" name="pEmail" id="pEmail">
-          </div>
-        </div>
-        <div class="row my-3">
-          <div class="col-md-6">
-            <button type='submit' name="button" class="btn btn-outline-warning update">Update</button>
-          </div>
-        </div>
-        <hr class="separator my-4">
-      </div>
-      <div class="info container">
-        <p>Update password</p>
-      </div>
-      <div class="fields container">
-        <div class="row">
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input form-control" placeholder="Current password" name="ppassword" id="ppassword" minlength="4">
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input  form-control" placeholder="New password" name="newpassword" id="newpassword">
-          </div>
-          <div class="col-sm-6 input-group">
-            <input required type="text" class="input  form-control" placeholder="Confirm new password" name="conewpassword" id="conewpassword">
-          </div>
-        </div>
-        <hr class="separator my-4">
-      </div>
-      <div class="info container">
-        <p>Profile picture</p>
-      </div>
-      <div class="fields container">
-        <div class="row">
-          <div class="col-sm-12 input-group">
-            <img [src]="url" height="200" class="avatar-change">
-            <div class="upload-btn-wrapper align-self-center plus-button pl-4">
-              <button class="btn-Add">Add a file</button>
-              <input type="file" name="my-avatar" (change)="onSelectFile($event)"/>
+        <form #aF="ngForm" (ngSubmit)="accountForm(aF)" action="">
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                #name="ngModel"
+                ngModel
+                [placeholder]="profile.name"
+              />
+            </div>
+            <div class="input-group col-sm">
+              <input
+                type="text"
+                class="form-control"
+                id="lastname"
+                name="lastname"
+                #lastname="ngModel"
+                ngModel
+                [placeholder]="profile.lastname"
+              />
             </div>
           </div>
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                #email="ngModel"
+                ngModel
+                [placeholder]="profile.email"
+              />
+            </div>
+            <div class="input-group col-sm">
+              <input type="text" hidden />
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="blueBtn small mt-12"
+            id="btnAccount"
+            [class.disabled]="
+              name.value == '' && lastname.value == '' && email.value == ''
+            "
+            [disabled]="
+              name.value == '' && lastname.value == '' && email.value == ''
+            "
+          >
+            Update
+          </button>
+        </form>
+        <hr class="hr mt-30" />
+        <div class="title2">
+          <p class="changeColorBlue">Update password</p>
+        </div>
+        <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input
+                type="password"
+                [class.errorInput]="
+                  cPass.value != profile.password && cPass.value != ''
+                "
+                [class.correctInput]="
+                  cPass.value == profile.password && cPass.value != ''
+                "
+                class="form-control"
+                placeholder="Current password"
+                name="cPass"
+                id="cPass"
+                #cPass="ngModel"
+                ngModel
+              />
+              <span
+                class="textError"
+                [hidden]="cPass.value == profile.password || cPass.value == ''"
+                >It isn't the current password</span
+              >
+            </div>
+            <div class="input-group col-sm">
+              <input type="text" class="form-control" hidden />
+            </div>
+          </div>
+          <div class="row fields">
+            <div class="input-group col-sm">
+              <input
+                type="password"
+                [class.errorInput]="
+                  pass1.value?.length < 6 && pass1.value != ''
+                "
+                [class.correctInput]="
+                  pass1.value?.length > 5 && pass1.value != ''
+                "
+                class="form-control"
+                placeholder="New password"
+                name="pass1"
+                id="pass1"
+                ngModel
+                #pass1="ngModel"
+              />
+              <span
+                class="textError"
+                [hidden]="pass1.value?.length > 5 || pass1.value == ''"
+                >Password must be at leat 6 characters.</span
+              >
+            </div>
+            <div class="input-group col-sm">
+              <input
+                type="password"
+                [class.correctInput]="
+                  pass2.value == pass1.value && pass2.value != ''
+                "
+                [class.errorInput]="
+                  pass2.value != pass1.value && pass2.value != ''
+                "
+                class="form-control"
+                placeholder="Confirm new password"
+                name="pass2"
+                id="pass2"
+                ngModel
+                #pass2="ngModel"
+              />
+              <span
+                class="textError"
+                [hidden]="pass2.value == pass1.value || pass2.value == ''"
+                >Password doesn’t match.</span
+              >
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="blueBtn small mt-12"
+            id="buttonPass"
+            [class.disabled]="
+              cPass.value == '' ||
+              pass1.value == '' ||
+              pass2.value == '' ||
+              pass1.value != pass2.value ||
+              cPass.value != profile.password ||
+              pass1.value?.length < 6
+            "
+            [disabled]="
+              cPass.value == '' ||
+              pass1.value == '' ||
+              pass2.value == '' ||
+              pass1.value != pass2.value ||
+              cPass.value != profile.password ||
+              pass1.value?.length < 6
+            "
+          >
+            Update
+          </button>
+        </form>
+        <hr class="hr mt-30" />
+        <div class="title2">
+          <p class="changeColorBlue">Profile picture</p>
+        </div>
+        <div class="fields flex">
+          <div
+            class="profile mini"
+            [ngStyle]="{ 'background-image': 'url(' + imageP + ')' }"
+          ></div>
+          <input
+            type="file"
+            class="custom-file-input customFile"
+            id="customProfile"
+            accept=".jpg, .jpeg, .png, .svg"
+            name="certificate"
+            (change)="imageProfile($event)"
+          />
+          <label for="customProfile" class="blueBtn medium ml-30 labelButton"
+            >Upload file</label
+          >
+        </div>
+      </div>
+      <div class="col-sm-12 divcol">
+        <div *ngIf="select == 2">
+          <div class="overall">
+            <div class="row">
+              <div class="col-sm-6">
+                <p class="changeColorBlue title2">Projects posted</p>
+
+              </div>
+              <div class="col-sm-6">
+                <p class="changeColorBlue title2">Projects completed</p>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <p class="changeColorBlue title2">Profile completed</p>
+                {{ emailVerified }}
+              </div>
+              <div class="col-sm-6">
+                <p class="changeColorBlue title2">Certified hirer</p>
+                {{ emailVerified }}
+              </div>
+            </div>
+            <hr class="hr mt-30" />
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="textv" [ngClass]="righttv">
+    <p>{{ text }}</p>
   </div>
 </div>

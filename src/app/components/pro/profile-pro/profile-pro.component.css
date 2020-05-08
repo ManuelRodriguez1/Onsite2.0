@@ -35,8 +35,10 @@
 .profile{
     width: 150px;
     height: 150px;
-    background: black;
+    background: #9D9D9D;
     border-radius: 50%;
+    background-size: contain;
+    background-position: center;
 }
 .textw{
     margin-top: 43px;
@@ -58,16 +60,7 @@
     margin-top: 163px;
     text-align: center;
 }
-.title{
-    font-family: 'Mukta', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    line-height: 20px;
-    font-size: 22px;
-    text-align: center;
-    letter-spacing: -0.025em;
-    color: rgba(0, 0, 0, 0.5)
-}
+
 .start{
     width: 167px;
     height: 35px;
@@ -98,17 +91,6 @@
 }
 .thereis{
     border: 0;
-}
-.title2{
-    font-family: 'Mukta', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 45px;
-    font-size: 20px;
-    letter-spacing: -0.025em;
-}
-.title2 span{
-    font-weight: bold;
 }
 .map{
     width: 922px;
@@ -230,4 +212,51 @@
     font-size: 15px;
     letter-spacing: -0.025em;
     color: #5B5B5B;
+}
+/* Estilos EditProfile */
+.optionSelect{
+    margin-top: 21px;
+}
+.noOption{
+    color: #010973;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.mt-0{
+    margin-top: 0;
+}
+.mt-12{
+    margin-top: 12px;
+}
+.mt-21{
+    margin-top: 21px;
+}
+.mt-30{
+    margin-top: 30px;
+}
+.ml-30{
+    margin-left: 30px;
+}
+.mini{
+    width: 74px;
+    height: 74px;
+}
+.flex{
+    display: inline-flex;
+    align-items: center;
+}
+.labelButton{
+    text-align: center;
+    line-height: 47px;
+}
+.disabled{
+    cursor: not-allowed;
+    background: #373C7D;
+    color: white;
+    border: 0;
+}
+iframe{
+    overflow: hidden;
+    width: 166px;
+    height: 112px;
 }

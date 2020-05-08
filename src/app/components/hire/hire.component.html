@@ -1,62 +1,68 @@
-<form #formData='ngForm' (ngSubmit)="onSubmit(formData)" method="post" class="contenedorHireTotal">
-  <img class="image-about" src="../../../assets/imagenes/About You.svg" alt="">
-  <div class="container py-3 pl-5">
-    <div class="info container">
-      <p>Enter your information</p>
-    </div>
+<form #formData='ngForm' (ngSubmit)="onSubmit(formData)" method="">
+  <div class="title container">
+    <p>{{title[select]}}</p>
+  </div>
+  <section [hidden]='page > 0'>
     <div class="fields container">
       <div class="row">
         <div class="col-sm input-group">
-          <input required type="text" class="input validate form-control" placeholder="First Name" (ngModel)="FirstName" name="FirstName" id="FirstName" minlength="4">
+          <input required type="text" class="form-control" id="FirstName" name="FirstName" (ngModel)="FirstName"
+            placeholder="First Name" #name="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
-          <input required type="text" class="input validate form-control" placeholder="Last Name" (ngModel)="LastName" id="LastName" name="LastName">
+          <input required type="text" class="form-control" placeholder="Last Name" name="LastName" (ngModel)="LastName" #lastname="ngModel" ngModel>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-sm input-group">
-          <input required type="text" class="input validate form-control" placeholder="E-mail" (ngModel)="Email" name="Email" id="Email">
+          <input required type="text" class="validate form-control" placeholder="E-mail" (ngModel)="Email" name="Email" id="Email" #email="ngModel" ngModel>
         </div>
         <div class="col-sm input-group">
-          <input required type="text" class="input validate form-control" placeholder="Phone Number" (ngModel)="PhoneNumber" id="PhoneNumber" name="PhoneNumber">
+          <input type="text" class="form-control" placeholder="Phone Number" name="PhoneNumber" #phone="ngModel" ngModel>
         </div>
       </div>
     </div>
     <div class="info container">
       <p>Enter your password</p>
-      <span> Your username will be your e-mail address.</span>
+      <p>Your username will be your e-mail address.</p>
     </div>
-    <div class="fields container">
+    <div class="fields2 container">
       <div class="row">
         <div class="col-sm input-group">
-          <input type="password" class="form-control" placeholder="Password" name="user" #user="ngModel" ngModel>
+          <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''"
+            [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user"
+            #user="ngModel" ngModel>
+          <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be at leat 6
+            characters.</span>
         </div>
         <div class="col-sm input-group">
-          <input type="password" class="form-control" placeholder="Password confirmation" name="Password" #password="ngModel" ngModel>
+          <input type="password" class="form-control"
+            [class.errorInput]="user.value != password.value && password.value != ''"
+            [class.correctInput]="user.value == password.value && password.value != ''"
+            placeholder="Password confirmation" name="Password" #password="ngModel" ngModel>
+          <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password doesn’t
+            match.</span>
         </div>
       </div>
     </div>
-    <div class="fields container">
-      <div class="row float-right">
-        <div class="col-sm input-group float-right">
-            <span [hidden]="user.value == password.value" class="alertMessage">Passwords aren't the same</span>
-        </div>
-      </div>
-    </div>
-    <div class="info container">
+    <div class="title2 container">
       <p>Where are you located?</p>
     </div>
-    <div class="fields container">
+    <div class="field3 container">
       <div class="row">
-        <div class="col-sm-6 input-group">
-          <input type="text" required class="input validate form-control" placeholder="Enter city or zipcode." (ngModel)="Entercityorzipcode" id="Entercityorzipcode" name="Entercityorzipcode">
+        <div class="col-sm input-group">
+          <input required type="text" class="validate form-control" placeholder="Enter city or zipcode." name="Entercityorzipcode"(ngModel)="Entercityorzipcode" id="Entercityorzipcode" #zipcode="ngModel" ngModel>
+        </div>
+        <div class="col-sm input-group" style="visibility: hidden;">
+          <input type="text" class="form-control" disabled placeholder="" name="">
         </div>
       </div>
     </div>
     <div class="buttons container">
-      <span class="error">{{error}} </span>
-      <br>
-      <button type='submit' name="button" class="btn btn-outline-warning next">Next</button>
+      <button type='submit' name="button" class="btn btn-outline-warning next" *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == '' || email.value == '' || phone.value == '' || password.value == '' || zipcode.value == ''">Next</button>
     </div>
-  </div>
+  </section>
 </form>
+<div class="textv">
+  <p>{{text[select]}}</p>
+</div>

@@ -40,6 +40,8 @@ import { EmailVerificationComponent } from './components/hire/hire-principal/ema
 import { VerifyEmailComponent } from './components/pro/verify-email/verify-email.component';
 import { VerifySuccessComponent } from './components/pro/verify-success/verify-success.component';
 import { PlantillaComponent } from './components/plantilla/plantilla.component';
+import { ChangeEmailComponent } from './components/hire/hire-principal/change-email/change-email.component';
+import { DomPipe } from './pipes/dom.pipe';
 
 
 @NgModule({
@@ -65,7 +67,9 @@ import { PlantillaComponent } from './components/plantilla/plantilla.component';
     EmailVerificationComponent,
     VerifyEmailComponent,
     VerifySuccessComponent,
-    PlantillaComponent
+    PlantillaComponent,
+    ChangeEmailComponent,
+    DomPipe
   ],
   imports: [
     BrowserModule,

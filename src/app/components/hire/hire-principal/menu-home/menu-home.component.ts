@@ -43,6 +43,10 @@ export class MenuHomeComponent implements OnInit {
 
   projects=[];
 
+  section: number = 1;
+  text: any[] = ["Dashboard", "Projects","New Project"];
+  righttv = 'text-dashboard';
+
   constructor(private db: AngularFirestore, public projectService: ProjectService) {
     this.dropdownList = [
       { item_id: 1, item_text: 'Concrete' },
@@ -104,6 +108,12 @@ export class MenuHomeComponent implements OnInit {
     this.childData1 = this.db.collection('/projectsHire').valueChanges() */
     this.projectService.getProjects().subscribe(projects =>{
       this.projects = projects;
+      if(projects.length>0){
+        this.section = 1;
+        this.righttv = 'text-project'
+      }else{
+        this.righttv = 'text-dashboard'
+      }
     })
   }
 
@@ -137,6 +147,8 @@ export class MenuHomeComponent implements OnInit {
   next() {
     this.page++;
     this.HomeFormularioNw++;
+    this.section = 2;
+    this.righttv='text-new-project';
   }
 
   back() {
@@ -149,7 +161,6 @@ export class MenuHomeComponent implements OnInit {
     this.cust = this.cust + 1;
     console.log(this.cust);
   }
-  
 
   uploadDoc(e){
     var i = this.cust
@@ -157,6 +168,4 @@ export class MenuHomeComponent implements OnInit {
     this.files[i] = e.target.files[0].name
     console.log(i);
   }
-  
-
 }

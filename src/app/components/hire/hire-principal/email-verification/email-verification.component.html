@@ -1,13 +1,14 @@
-<div class="container my-5 py-5 content-verified">
-  <div class="row mt-5 mb-5 pt-5">
-    <div class="col-sm">
-      <h2>Your email has been verified! </h2>
-      <p class="py-3">Click on ‘Continue’ to edit your profile where you can add you CV and any certificates you have to make your profile more attractive for hirers.</p>
-    </div>
+<section class="container">
+  <div class="title">
+      <p>Your email has been verified! </p>
   </div>
-  <div class="row pb-5 mb-5">
-    <div class="col-sm">
-      <button class="btn btn-continue float-right">Continue</button>
-    </div>
+  <div class="texts2">
+    <p>Click on ‘Continue’ to edit your profile where you can add you CV and any certificates you have to make your profile more attractive for hirers.</p>
   </div>
+  <div class="buttons">
+    <button class="btn btn-outline-warning next" (click)="Continue()">Continue</button>
+  </div>
+</section>
+<div class="textv">
+  <p>{{text[section]}}</p>
 </div>
