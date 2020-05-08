@@ -65,11 +65,11 @@ export class HireComponent implements OnInit {
           });
           this.db.collection("users_hire").doc(user.uid).set({
             id: user.uid,
-            nombre: formData.value.FirstName,
-            apellido: formData.value.LastName,
-            telefono: formData.value.PhoneNumber,
+            name: formData.value.FirstName,
+            lastname: formData.value.LastName,
+            phone: formData.value.PhoneNumber,
             password: formData.value.Password,
-            correo: user.email,
+            email: user.email,
             zipcode: formData.value.Entercityorzipcode,
             estado: "hire",
           });

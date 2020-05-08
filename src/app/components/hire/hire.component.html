@@ -29,11 +29,19 @@
     <div class="fields2 container">
       <div class="row">
         <div class="col-sm input-group">
-          <input type="password" class="form-control" placeholder="Password" name="user" #user="ngModel" ngModel>
+          <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''"
+            [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user"
+            #user="ngModel" ngModel>
+          <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be at leat 6
+            characters.</span>
         </div>
         <div class="col-sm input-group">
-          <input type="password" class="form-control" placeholder="Password confirmation" name="Password" #password="ngModel" ngModel>
-          <span [hidden]="user.value == password.value" class="alertMessage">Passwords aren't the same</span>
+          <input type="password" class="form-control"
+            [class.errorInput]="user.value != password.value && password.value != ''"
+            [class.correctInput]="user.value == password.value && password.value != ''"
+            placeholder="Password confirmation" name="Password" #password="ngModel" ngModel>
+          <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password doesn’t
+            match.</span>
         </div>
       </div>
     </div>
