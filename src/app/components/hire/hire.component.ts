@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ServiceService } from 'src/app/services/service.service';
 import * as firebase from "firebase/app";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
@@ -54,16 +55,16 @@ export class HireComponent implements OnInit {
           formData.value.Email,
           formData.value.Password
         )
-        .then((result) => {
-          this.SendVerificationMail();
-        })
         .then((success) => {
           var user = firebase.auth().currentUser;
           user.updateProfile({
             displayName: "hire",
             photoURL: "",
+          }).then((result) => {
+            this.SendVerificationMail();
           });
           this.db.collection("users_hire").doc(user.uid).set({
+            id: user.uid,
             nombre: formData.value.FirstName,
             apellido: formData.value.LastName,
             telefono: formData.value.PhoneNumber,
