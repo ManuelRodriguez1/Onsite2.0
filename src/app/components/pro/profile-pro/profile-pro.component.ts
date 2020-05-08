@@ -26,12 +26,16 @@ export class ProfileProComponent implements OnInit {
   skills: any[] = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   selectskills: any[] = [];
   customers = [{ 'name': 'Add certificate file', 'url': '' }];
+  cv = [{ "name": 'Add a file', "url": '' }]
+  cvClose: boolean = false
+  countC: number = 0
   // Datos usuario
   cust: number = 0
   imageP: any = ''
   user = firebase.auth().currentUser
   profile: any = ''
   credential: any
+  user_pro: any = this.af.collection("users_pro").doc(this.user.uid)
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -41,13 +45,19 @@ export class ProfileProComponent implements OnInit {
   ) { }
   //Show data of User
   ngOnInit() {
-    var data = this.af.collection("users_pro").doc(this.user.uid).snapshotChanges()
+    var data = this.user_pro.snapshotChanges()
     data.subscribe((d) => {
       this.profile = d.payload.data()
       this.selectskills = this.profile.skills
       if (this.profile.certificate != null) { this.customers = this.profile.certificate }
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
       this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.profile.password)
+      if (this.profile.cvUrl != null) {
+        this.cv = this.profile.cvUrl
+        if (this.profile.cvUrl[0].name == 'Add a file') { this.cvClose = false }
+        else { this.cvClose = true }
+      }
+      this.countC = this.customers.length
     })
   }
   //Show Option
@@ -56,7 +66,7 @@ export class ProfileProComponent implements OnInit {
   }
   // Update account information
   accountForm(f: NgForm) {
-    var col = this.af.collection("users_pro").doc(this.user.uid)
+    var col = this.user_pro
     if (f.value.name != '') { col.update({ "name": f.value.name }); $("#name").val(''); }
     if (f.value.lastname != '') { col.update({ "lastname": f.value.lastname }); $("#lastname").val('') }
     if (f.value.email != '') {
@@ -77,7 +87,7 @@ export class ProfileProComponent implements OnInit {
       this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
         this.user.updatePassword(f.value.pass2)
           .then(() => {
-            this.af.collection("users_pro").doc(this.user.uid).update({
+            this.user_pro.update({
               "password": f.value.pass2
             })
             $("#cPass, #pass1, #pass2").val('')
@@ -98,11 +108,31 @@ export class ProfileProComponent implements OnInit {
         .then((url) => {
           this.imageP = url
           setTimeout(() => {
-            this.af.collection("users_pro").doc(this.user.uid).update({
+            this.user_pro.update({
               "photoUrl": this.imageP
             })
           }, 200);
         })
+    })
+  }
+  //Section CV
+  uploadCV(e: any) {
+    var cv = this.afs.ref('Users_pro/' + this.user.uid + "/CV/" + e.target.files[0].name).put(e.target.files[0])
+    cv.then((url) => {
+      url.ref.getDownloadURL()
+        .then((url) => {
+          setTimeout(() => {
+            this.user_pro.update({
+              "cvUrl": [{ "name": e.target.files[0].name, "url": url }]
+            })
+          }, 200);
+        })
+    })
+  }
+  deleteCV(e: any) {
+    this.afs.ref('Users_pro/' + this.user.uid + '/CV/' + e.name).delete()
+    this.user_pro.update({
+      "cvUrl": [{ "name": 'Add a file', "url": '' }]
     })
   }
   //Section Skills
@@ -121,7 +151,7 @@ export class ProfileProComponent implements OnInit {
   }
 
   updateSkills() {
-    this.af.collection("users_pro").doc(this.user.uid).update({
+    this.user_pro.update({
       "skills": this.selectskills
     })
   }
@@ -144,6 +174,19 @@ export class ProfileProComponent implements OnInit {
           }, 200);
         })
     })
+  }
+
+  deleteCert(e: any) {
+    var i = this.customers.indexOf(e);
+    if (i !== -1) {
+      this.afs.ref('Users_pro/' + this.user.uid + "/" + e.name).delete()
+      this.customers.splice(i, 1)
+      setTimeout(() => {
+        this.user_pro.update({
+          "certificate": this.customers
+        })
+      }, 200);
+    }
   }
 
 }

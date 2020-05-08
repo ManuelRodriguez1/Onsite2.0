@@ -6,11 +6,11 @@
         <div class="textw">
           <p>{{profile.name}} {{profile.lastname}}</p>
         </div>
-        <p class="optionSelect" (click)="selectOption(1)" [class.noOption]="select == 2">Profile overall</p>
-        <p class="optionSelect" (click)="selectOption(2)" [class.noOption]="select == 1">Edit profile</p>
+        <p class="optionSelect" (click)="selectOption(1)" [class.noOption]="select == 1">Profile overall</p>
+        <p class="optionSelect" (click)="selectOption(2)" [class.noOption]="select == 2">Edit profile</p>
       </div>
     </div>
-    <div class="col-sm-8 divcol">
+    <div class="col-sm-8 divcol" [class.projects]="select == 1">
       <!-- <div class="home" *ngIf="select == 0">
         <div class="proyects anyproyects">
           <div class="message">
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div> -->
-      <div *ngIf="select == 1">
+      <div *ngIf="select == 2">
         <div class="title2">
           <p class="changeColorBlue">Account Information</p>
         </div>
@@ -79,7 +79,8 @@
               <input type="text" hidden>
             </div>
           </div>
-          <button type="submit" class="blueBtn small mt-12" id="btnAccount" [class.disabled]="name.value == '' && lastname.value == '' && email.value == ''"
+          <button type="submit" class="blueBtn small mt-12" id="btnAccount"
+            [class.disabled]="name.value == '' && lastname.value == '' && email.value == ''"
             [disabled]="name.value == '' && lastname.value == '' && email.value == ''">Update</button>
         </form>
         <hr class="hr mt-30">
@@ -134,11 +135,17 @@
         <div class="title2">
           <p class="changeColorBlue">CV</p>
         </div>
-        <div class="input-group custom-file">
-          <input type="file" class="custom-file-input customFile" accept=".pdf" id="customFileCV">
-          <label for="customFileCV" class="custom-file-label">
-            <div class="afterFile">Add a file</div>
-          </label>
+        <div class="row">
+          <div class="col-sm input-group">
+            <div class="input-group custom-file">
+              <input *ngIf="cv[0].name == 'Add a file'" type="file" class="custom-file-input customFile"
+                (change)="uploadCV($event)" accept=".pdf" id="customFileCV">
+              <label for="customFileCV" class="custom-file-label" [class.cDefault]="cv[0].name != 'Add a file'">
+                <div class="afterFile">{{cv[0].name}}</div>
+              </label>
+              <div class="deleteCert" title="Delete CV" [hidden]="cvClose == false" (click)="deleteCV(cv[0])"></div>
+            </div>
+          </div>
         </div>
         <hr class="hr mt-30">
         <div class="title2">
@@ -147,8 +154,8 @@
         <div class="skill mt-21">
           <div class="row">
             <div class="col-sm input-group">
-              <input type="text" id="skillsUnselect" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
-                style="cursor: default;">
+              <input type="text" id="skillsUnselect" readonly class="form-control" placeholder="Select Skills"
+                onfocus="this.blur()" style="cursor: default;">
               <div class="down" [ngClass]="{'up': up == true}" (click)='list()'></div>
             </div>
           </div>
@@ -171,21 +178,118 @@
         </div>
         <div class="row">
           <div class="col-sm input-group">
-            <div class="input-group custom-file" *ngFor="let c of customers">
-              <input type="file" class="custom-file-input customFile" id="customFileCert" accept=".pdf, .jpg, .jpeg"
-                name="certificate" #certificate="ngModel" ngModel (change)="uploadCert($event)">
-              <label for="customFileCert" class="custom-file-label">
+            <div class="input-group custom-file" *ngFor="let c of customers; let i = index">
+              <input type="file" *ngIf="c.name == 'Add certificate file'" class="custom-file-input customFile"
+                id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel
+                (change)="uploadCert($event)">
+              <label for="customFileCert{{i}}" class="custom-file-label" [class.cDefault]="c.name != 'Add certificate file'">
                 <div class="afterFile">{{c.name}}</div>
               </label>
+              <div class="deleteCert" title="Delete certificate" *ngIf="c.name != 'Add certificate file'"
+                (click)="deleteCert(c)"></div>
             </div>
             <div class="input-group-prepend iconAdd" (click)="addcustomer()">
-              <div class="icon_img btnround"></div>
+              <div class="icon_img btnround" title="Add certificate"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="projects" *ngIf="select == 2">
-
+      <div *ngIf="select == 1" class="normalText">
+        <div class="row mt-51 ml-48">
+          <div class="col-sm">
+            <div class="title3">
+              <p>Rating</p>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="title3">
+              <p>Jobs completed</p>
+            </div>
+            <p class="mt-23 smallText">2</p>
+          </div>
+        </div>
+        <div class="row mt-45 ml-48">
+          <div class="col-sm">
+            <div class="title3">
+              <p>Jobs on time</p>
+            </div>
+            <p class="mt-23 smallText">2</p>
+          </div>
+          <div class="col-sm">
+            <div class="title3">
+              <p>Certificates</p>
+            </div>
+            <p class="mt-23 smallText">{{ countC }}</p>
+          </div>
+        </div>
+        <hr class="hr mt-30">
+        <div class="ml-48">
+          <div class="title2">
+            <p>Profile description</p>
+          </div>
+          <p class="mt-23">Profile Description...</p>
+        </div>
+        <hr class="hr mt-30">
+        <div class="ml-48">
+          <div class="title2">
+            <p>CV</p>
+          </div>
+          <div class="cvTemp"></div>
+        </div>
+        <hr class="hr mt-30">
+        <div class="ml-48">
+          <div class="title2">
+            <p>Skills</p>
+          </div>
+          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of selectskills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+        <hr class="hr mt-30">
+        <div class="ml-48">
+          <div class="title2">
+            <p>Certificates</p>
+          </div>
+          <div class="row">
+            <div class="col-sm input-group">
+            <div *ngFor="let co of customers">
+              <div class="cvTemp"></div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <hr class="hr mt-30">
+        <div class="ml-48">
+          <div class="title2">
+            <p>Reviews</p>
+          </div>
+          <div class="row mt-38 mb-43">
+            <div class="col-sm">
+              <div class="media">
+                <div class="profile mini"></div>
+                <div class="media-body">
+                  <div class="title3 mt-25 ml-14">
+                    <p>Gordon Freeman</p>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-21 smallText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vulputate mi sit amet mauris commodo quis imperdiet massa tincidunt. Morbi blandit cursus risus at ultrices. Nunc non blandit. <a class="orange" href="#">Show less</a></p>
+            </div>
+            <div class="col-sm">
+              <div class="media">
+                <div class="profile mini"></div>
+                <div class="media-body">
+                  <div class="title3 mt-25 ml-14">
+                    <p>John Doe</p>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-21 smallText">Review... <a class="orange" href="#">Show more</a></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
