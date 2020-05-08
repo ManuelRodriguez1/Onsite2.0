@@ -43,7 +43,7 @@ export class MenuHomeComponent implements OnInit {
 
   projects=[];
 
-  section: number = 0;
+  section: number = 1;
   text: any[] = ["Dashboard", "Projects","New Project"];
   righttv = 'text-dashboard';
 

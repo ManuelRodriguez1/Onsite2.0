@@ -1,19 +1,21 @@
 <div class="container py-5">
     <div class="col-sm-12 divcol">
-      <div class="home" *ngIf="select == 0">
-        <app-menu-home></app-menu-home>
-      </div>
-      <div class="inbox" *ngIf="select == 1">
-        <app-inbox></app-inbox>
-      </div>
-      <div class="projects" *ngIf="select == 2">
-        <app-projects></app-projects>
-      </div>
-      <div class="explore" *ngIf="select == 3">
-        <app-explore></app-explore>
-      </div>
+        <div class="home" *ngIf="select == 0">
+            <app-menu-home></app-menu-home>
+        </div>
+        <div class="inbox" *ngIf="select == 1">
+            <app-inbox></app-inbox>
+        </div>
+        <div class="projects" *ngIf="select == 2">
+            <app-projects></app-projects>
+        </div>
+        <div class="explore" *ngIf="select == 3">
+            <app-explore></app-explore>
+        </div>
     </div>
-  </div>
-<div class="textv" [ngClass]="righttv">
-  <p>{{text[select]}}</p>
 </div>
+<div class="textv" [ngClass]="righttv">
+    <p>{{text[select]}}</p>
+</div>
+
+<router-outlet></router-outlet>.

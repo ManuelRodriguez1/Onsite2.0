@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^7.1.0",
     "@angular/platform-browser-dynamic": "^7.1.0",
     "@angular/router": "^7.1.0",
+    "@google-cloud/storage": "^4.7.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "@types/googlemaps": "^3.30.16",
     "angularfire2": "^5.1.1",
@@ -65,5 +66,17 @@
     "ts-node": "~7.0.1",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManuelRodriguez1/Onsite2.0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManuelRodriguez1/Onsite2.0/issues"
+  },
+  "homepage": "https://github.com/ManuelRodriguez1/Onsite2.0#readme"
 }

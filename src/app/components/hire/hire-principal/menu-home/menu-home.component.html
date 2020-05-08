@@ -6,7 +6,7 @@
   <section class="container">
   <div class="home" *ngIf="select == 0">
     <div *ngIf="HomeFormularioNw == 0">
-      <div class="list-project" *ngIf="projects.length > 0; else noprojects">
+      <div class="list-project">
         <div class="started">
           <div class="m-0">
             <div class="row py-3 px-5">
@@ -42,14 +42,7 @@
           </div>
         </div>
       </div>
-      <ng-template #noprojects>
-        <div class="started py-5">
-          <div class="container py-5">
-            <div class="started-title mt-2 pt-5">You don’t have any projects</div>
-            <div class="started-button mt-2" (click)="next()">Get Started</div>
-          </div>
-        </div>
-      </ng-template>
+      
     </div>
     <div *ngIf="HomeFormularioNw == 1">
       <div class="container">
