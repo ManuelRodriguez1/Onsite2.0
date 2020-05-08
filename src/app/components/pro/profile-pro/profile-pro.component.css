@@ -249,3 +249,14 @@
     text-align: center;
     line-height: 47px;
 }
+.disabled{
+    cursor: not-allowed;
+    background: #373C7D;
+    color: white;
+    border: 0;
+}
+iframe{
+    overflow: hidden;
+    width: 166px;
+    height: 112px;
+}

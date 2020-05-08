@@ -5,6 +5,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
+declare var $: any
 
 @Component({
   selector: 'app-profile-pro',
@@ -24,50 +25,67 @@ export class ProfileProComponent implements OnInit {
   up: boolean = false
   skills: any[] = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   selectskills: any[] = [];
-  customers = ['Add certificate file'];
+  customers = [{ 'name': 'Add certificate file', 'url': '' }];
   // Datos usuario
   cust: number = 0
   imageP: any = ''
   user = firebase.auth().currentUser
-  name: string = ''
-  lastName: string = ''
-  email: string = ''
-  pass: string = ''
+  profile: any = ''
   credential: any
 
   constructor(
     public afAuth: AngularFireAuth,
     private af: AngularFirestore,
     private afs: AngularFireStorage,
-    private router: Router
+    private router: Router,
   ) { }
-//Show data of User
+  //Show data of User
   ngOnInit() {
-    var data = this.af.collection("users_pro").doc(this.user.uid).get()
+    var data = this.af.collection("users_pro").doc(this.user.uid).snapshotChanges()
     data.subscribe((d) => {
-      this.name = d.data().name
-      this.lastName = d.data().lastname
-      this.email = d.data().email
-      this.pass = d.data().password
-      this.selectskills = d.data().skills
-      if(d.data().photoUrl != null){ this.imageP = d.data().photoUrl}
-      this.credential = firebase.auth.EmailAuthProvider.credential(this.user.email, d.data().password)
+      this.profile = d.payload.data()
+      this.selectskills = this.profile.skills
+      if (this.profile.certificate != null) { this.customers = this.profile.certificate }
+      if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
+      this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.profile.password)
     })
   }
-//Show Option
+  //Show Option
   selectOption(e) {
     this.select = e
   }
-  //Update Password
-  passForm(f: NgForm){
-    if(f.value.pass1 == f.value.pass2){
-      this.user.reauthenticateWithCredential(this.credential).then(()=>{
-        this.user.updatePassword(f.value.pass2)
-        .then(()=>{
-          this.af.collection("users_pro").doc(this.user.uid).update({
-            "password": f.value.pass2
+  // Update account information
+  accountForm(f: NgForm) {
+    var col = this.af.collection("users_pro").doc(this.user.uid)
+    if (f.value.name != '') { col.update({ "name": f.value.name }); $("#name").val(''); }
+    if (f.value.lastname != '') { col.update({ "lastname": f.value.lastname }); $("#lastname").val('') }
+    if (f.value.email != '') {
+      this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
+        this.user.updateEmail(f.value.email)
+          .then(() => {
+            col.update({ "email": f.value.email })
+          }).then(() => {
+            this.user.sendEmailVerification()
+            $("#email").val('')
           })
-        })
+      })
+    }
+  }
+  //Update Password
+  passForm(f: NgForm) {
+    if (f.value.pass1 == f.value.pass2) {
+      this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
+        this.user.updatePassword(f.value.pass2)
+          .then(() => {
+            this.af.collection("users_pro").doc(this.user.uid).update({
+              "password": f.value.pass2
+            })
+            $("#cPass, #pass1, #pass2").val('')
+            setTimeout(() => {
+              $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
+              $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
+            }, 200);
+          })
       })
     }
   }
@@ -87,7 +105,7 @@ export class ProfileProComponent implements OnInit {
         })
     })
   }
-//Section Skills
+  //Section Skills
   list() {
     this.up = !this.up;
   }
@@ -107,10 +125,25 @@ export class ProfileProComponent implements OnInit {
       "skills": this.selectskills
     })
   }
-//Section Certificate
+  //Section Certificate
   addcustomer() {
-    this.customers.push('Add certificate file');
-    this.cust = this.cust + 1;    
+    this.customers.push({ 'name': 'Add certificate file', 'url': '' });
+    this.cust = this.customers.length - 1;
+  }
+
+  uploadCert(e) {
+    var fileDoc = this.afs.ref('Users_pro/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
+    fileDoc.then((url) => {
+      url.ref.getDownloadURL()
+        .then((url) => {
+          this.customers[this.cust] = { "name": e.target.files[0].name, "url": url }
+          setTimeout(() => {
+            this.af.collection('users_pro').doc(this.user.uid).update({
+              "certificate": this.customers
+            })
+          }, 200);
+        })
+    })
   }
 
 }

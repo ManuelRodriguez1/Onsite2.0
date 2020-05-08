@@ -4,7 +4,7 @@
       <div class="cont">
         <div class="profile" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
         <div class="textw">
-          <p>{{name}} {{lastName}}</p>
+          <p>{{profile.name}} {{profile.lastname}}</p>
         </div>
         <p class="optionSelect" (click)="selectOption(1)" [class.noOption]="select == 2">Profile overall</p>
         <p class="optionSelect" (click)="selectOption(2)" [class.noOption]="select == 1">Edit profile</p>
@@ -59,24 +59,28 @@
         <div class="title2">
           <p class="changeColorBlue">Account Information</p>
         </div>
-        <form action="">
+        <form #aF="ngForm" (ngSubmit)="accountForm(aF)" action="">
           <div class="row fields">
             <div class="input-group col-sm">
-              <input type="text" class="form-control" [placeholder]="name">
+              <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel
+                [placeholder]="profile.name">
             </div>
             <div class="input-group col-sm">
-              <input type="text" class="form-control" [placeholder]="lastName">
+              <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel" ngModel
+                [placeholder]="profile.lastname">
             </div>
           </div>
           <div class="row fields">
             <div class="input-group col-sm">
-              <input type="email" class="form-control" [placeholder]="email">
+              <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel
+                [placeholder]="profile.email">
             </div>
             <div class="input-group col-sm">
               <input type="text" hidden>
             </div>
           </div>
-          <button class="blueBtn small mt-12">Update</button>
+          <button type="submit" class="blueBtn small mt-12" id="btnAccount" [class.disabled]="name.value == '' && lastname.value == '' && email.value == ''"
+            [disabled]="name.value == '' && lastname.value == '' && email.value == ''">Update</button>
         </form>
         <hr class="hr mt-30">
         <div class="title2">
@@ -85,10 +89,11 @@
         <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
           <div class="row fields">
             <div class="input-group col-sm">
-              <input type="password" [class.errorInput]="cPass.value != pass && cPass.value != ''"
-                [class.correctInput]="cPass.value == pass && cPass.value != ''" class="form-control"
-                placeholder="Current password" name="cPass" #cPass="ngModel" ngModel>
-              <span class="textError" [hidden]="cPass.value == pass || cPass.value == ''">It isn't the current
+              <input type="password" [class.errorInput]="cPass.value != profile.password && cPass.value != ''"
+                [class.correctInput]="cPass.value == profile.password && cPass.value != ''" class="form-control"
+                placeholder="Current password" name="cPass" id="cPass" #cPass="ngModel" ngModel>
+              <span class="textError" [hidden]="cPass.value == profile.password || cPass.value == ''">It isn't the
+                current
                 password</span>
             </div>
             <div class="input-group col-sm">
@@ -99,20 +104,21 @@
             <div class="input-group col-sm">
               <input type="password" [class.errorInput]="pass1.value?.length < 6 && pass1.value != ''"
                 [class.correctInput]="pass1.value?.length > 5 && pass1.value != ''" class="form-control"
-                placeholder="New password" name="pass1" ngModel #pass1="ngModel">
+                placeholder="New password" name="pass1" id="pass1" ngModel #pass1="ngModel">
               <span class="textError" [hidden]="pass1.value?.length > 5 || pass1.value == ''">Password must be at leat 6
                 characters.</span>
             </div>
             <div class="input-group col-sm">
               <input type="password" [class.correctInput]="pass2.value == pass1.value && pass2.value != ''"
                 [class.errorInput]="pass2.value != pass1.value && pass2.value != ''" class="form-control"
-                placeholder="Confirm new password" name="pass2" ngModel #pass2="ngModel">
+                placeholder="Confirm new password" name="pass2" id="pass2" ngModel #pass2="ngModel">
               <span class="textError" [hidden]="pass2.value == pass1.value || pass2.value == ''">Password doesn’t
                 match.</span>
             </div>
           </div>
-          <button type="submit" class="blueBtn small mt-12"
-            [disabled]="(cPass.value == '' || pass1.value == '' || pass2.value == '') && (pass1.value != pass2.value)">Update</button>
+          <button type="submit" class="blueBtn small mt-12" id="buttonPass"
+            [class.disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != profile.password || pass1.value?.length < 6"
+            [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != profile.password || pass1.value?.length < 6">Update</button>
         </form>
         <hr class="hr mt-30">
         <div class="title2">
@@ -129,8 +135,8 @@
           <p class="changeColorBlue">CV</p>
         </div>
         <div class="input-group custom-file">
-          <input type="file" class="custom-file-input customFile" accept=".pdf" id="customFile">
-          <label for="customFile" class="custom-file-label">
+          <input type="file" class="custom-file-input customFile" accept=".pdf" id="customFileCV">
+          <label for="customFileCV" class="custom-file-label">
             <div class="afterFile">Add a file</div>
           </label>
         </div>
@@ -141,7 +147,7 @@
         <div class="skill mt-21">
           <div class="row">
             <div class="col-sm input-group">
-              <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
+              <input type="text" id="skillsUnselect" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
                 style="cursor: default;">
               <div class="down" [ngClass]="{'up': up == true}" (click)='list()'></div>
             </div>
@@ -166,10 +172,10 @@
         <div class="row">
           <div class="col-sm input-group">
             <div class="input-group custom-file" *ngFor="let c of customers">
-              <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg"
-                name="certificate" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
-              <label for="customFile" class="custom-file-label">
-                <div class="afterFile">{{c}}</div>
+              <input type="file" class="custom-file-input customFile" id="customFileCert" accept=".pdf, .jpg, .jpeg"
+                name="certificate" #certificate="ngModel" ngModel (change)="uploadCert($event)">
+              <label for="customFileCert" class="custom-file-label">
+                <div class="afterFile">{{c.name}}</div>
               </label>
             </div>
             <div class="input-group-prepend iconAdd" (click)="addcustomer()">

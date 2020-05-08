@@ -41,6 +41,7 @@ import { VerifyEmailComponent } from './components/pro/verify-email/verify-email
 import { VerifySuccessComponent } from './components/pro/verify-success/verify-success.component';
 import { PlantillaComponent } from './components/plantilla/plantilla.component';
 import { ChangeEmailComponent } from './components/hire/hire-principal/change-email/change-email.component';
+import { DomPipe } from './pipes/dom.pipe';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { ChangeEmailComponent } from './components/hire/hire-principal/change-em
     VerifyEmailComponent,
     VerifySuccessComponent,
     PlantillaComponent,
-    ChangeEmailComponent
+    ChangeEmailComponent,
+    DomPipe
   ],
   imports: [
     BrowserModule,

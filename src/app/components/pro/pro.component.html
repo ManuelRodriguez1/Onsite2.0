@@ -29,12 +29,19 @@
     <div class="fields2 container">
       <div class="row">
         <div class="col-sm input-group">
-          <input type="password" class="form-control" placeholder="Password" name="user" #user="ngModel" ngModel>
+          <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''"
+            [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user"
+            #user="ngModel" ngModel>
+          <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be at leat 6
+            characters.</span>
         </div>
         <div class="col-sm input-group">
-          <input type="password" class="form-control" placeholder="Password confirmation" name="password"
-            #password="ngModel" ngModel>
-          <span [hidden]="user.value == password.value" class="alertMessage">Passwords aren't the same</span>
+          <input type="password" class="form-control"
+            [class.errorInput]="user.value != password.value && password.value != ''"
+            [class.correctInput]="user.value == password.value && password.value != ''"
+            placeholder="Password confirmation" name="password" #password="ngModel" ngModel>
+          <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password doesn’t
+            match.</span>
         </div>
       </div>
     </div>
@@ -77,13 +84,13 @@
   </section>
   <section [hidden]='page < 2 || page > 2' class="container">
     <div class="texts2">
-      <p class="changeColor">In this last step you can add your certificate(s) as JPG or PDF file(s) to support your
+      <p class="changeColor">In this last step you can add your certificate(s) PDF file(s) to support your
         skill(s). This step is not mandatory and you can add them later in your account settings. </p>
       <div class="title2">
         <p class="changeColorBlue">Certificates</p>
       </div>
     </div>
- 
+
     <div class="row">
       <div class="col-sm input-group">
         <div class="input-group custom-file" *ngFor="let c of customers;">
@@ -118,7 +125,7 @@
       <p>Back</p>
     </div>
     <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
-    || email.value == '' || phone.value == '' || password.value == '' || zipcode.value == ''">
+    || email.value == '' || phone.value == '' || password.value == '' || zipcode.value == '' || user.value.length < 6 || user.value != password.value">
       Next
     </button>
     <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2'
