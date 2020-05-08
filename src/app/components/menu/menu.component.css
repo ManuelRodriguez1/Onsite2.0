@@ -27,6 +27,20 @@
          height: 50px;
      }
      
+     .flechaUsuario {
+         margin-left: 10px;
+     }
+     
+     .imagenUserMenu {
+         width: 50px;
+         background: red;
+         height: 50px;
+         border-radius: 50%;
+         float: left;
+         margin-top: 15px;
+         margin-right: 8px;
+     }
+     
      nav .aimg {
          position: absolute;
          height: 65px;

@@ -1,5 +1,5 @@
 <!-- Modal Sign in-->
-<div class="modal fade " [ngClass]="{'abrir': abrir == true}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -91,79 +91,78 @@ Ok
 
 
 <!-- Modal Sign UP-->
-<div class="modalup fade {{abrirup}} " [ngClass]="{'abrirup': abrirup == true}" id="exampleModalup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
+
+<div class="container">
+    <br>
+    <div class="modal fade" id="mi_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
 
 
-                <div class="contenedorImagen">
-                    <div class="tituloContImg">
-                        Sign in to Onhive
-                    </div>
-                    <div class="botonesOnsite">
-                        <a class="decora">
-                            <div [ngClass]="{'activar': activar == false}" class=" bhirenone bpro">
-                                As a Pro
-                            </div>
-                        </a>
-                        <a class="decora">
-                            <div [ngClass]="{'activar1': activar1 == true}" class="bhirenone bpro">
-                                As a Hire
-                            </div>
-                        </a>
-                    </div>
-                    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="Formulario" *ngIf="Forgot==0">
-                        <div class="fields container">
-                            <div class="row">
-                                <div class="col-sm input-group">
-                                    <input class='validate form-control heigInput' id="exampleInputEmail1" type='email' (ngModel)="email" name='email' placeholder="E-mail" required/>
+                    <div class="contenedorImagen">
+                        <div class="tituloContImg">
+                            Sign up to Onhive
+                        </div>
 
-                                </div>
+                        <div class="row">
+                            <div class="col-sm input-group textNormal margint30">
+                                Get started and choose the profile you want to join as.
                             </div>
-                            <div class="row classMargincampo">
-                                <div class="col-sm input-group">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm input-group textNormal textnomarMargin">
+                                <div class="botonesOnsite margint30">
 
-                                    <input class='validate form-control heigInput' type='password' id="exampleInputPassword1" (ngModel)="password" name='password' placeholder="Password" required/>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm input-group">
-                                    <button [disabled]="!formData.valid" class="botonNaranja">
-                                        Continue
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row lineaFinalultimate">
-                                <div class="col-sm input-group">
-                                    <div>
-                                        <label class="checkbox">
-                                            <input type="checkbox" class="checkbox__input"/>
-                                            <span class="checkbox__checkmark"></span>
-                                            <span class="remember_me">Remember me</span>
-                                        </label>
+                                    <div class="  ">
+                                        <button (click)="activarpro()" class="blueBtn small btnup">As a pro</button>
                                     </div>
-                                </div>
-                                <div class="col-sm input-group">
-                                    <div class='forgotPass' (click)="Forgot1()">
-                                        Forgot your password
+
+                                    <div class=" ">
+                                        <button (click)="activarhire()" class="blueBtn small btnup">As a hirer</button>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm memberSing">
-                                    Not a member yet? <a>Sign up</a>
+
                                 </div>
                             </div>
                         </div>
-                    </form>
-
-
-                    <br>
-                    <span class="error" *ngIf="error">{{ error }}</span>
-                    <span class="error" id="eror2" *ngIf="error2">{{ error2 }}</span>
+                        <div *ngIf="activar==true">
+                            <div class="row">
+                                <div class="col-sm input-group textNormal margint30 colorGris">
+                                    Join as a pro if you’re willing to find a project to work in.
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm input-group">
+                                    <button (click)="pro()" class="botonNaranja margint30">
+                                            Continue
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="activar1==true">
+                            <div class="row">
+                                <div class="col-sm input-group textNormal margint30 colorGris">
+                                    Join as a hire if you’re willing to find a project to work in.
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm input-group">
+                                    <button (click)="hire()" class="botonNaranja margint30" (click)="activarhire()">
+                                            Continue
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm memberSing margint30">
+                                Already a member? <a> Sign in </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>

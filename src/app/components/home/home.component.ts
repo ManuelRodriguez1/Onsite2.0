@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Router,NavigationExtras  } from '@angular/router';
+import { Router  } from '@angular/router';
+
 declare var $: any;
 @Component({
   selector: 'app-home',
@@ -41,13 +42,13 @@ export class HomeComponent implements OnInit {
     }];
 
   hire() {
-    this.router.navigateByUrl("/Hire?Login=Hirer");
-    // location.href ="/Hire";
-
+    this.router.navigateByUrl("/Hire");
   }
 
   pro() {
-    this.router.navigateByUrl("/Pro?Login=Pro");
+    this.router.navigateByUrl("/Pro");
+
+
   }
   prev() {
     this.carousel.prev();
@@ -55,8 +56,8 @@ export class HomeComponent implements OnInit {
   next() {
     this.carousel.next();
   }
+
   ngOnInit() {
- 
 
   }
 

@@ -162,33 +162,7 @@
 }
 
 .btnseccion2home {
-    width: 215px;
-    height: 47px;
-    background-color: #010973;
     margin-top: 50px;
-    border: 1px solid #010973;
-    color: #FFFFFF;
-}
-
-.btnseccion2home:hover {
-    background-color: transparent;
-    border: 1px solid #010973;
-    color: #010973;
-}
-
-.btnseccion2home:active {
-    background-color: #373C7D;
-    color: #ffffff;
-}
-
-.btnseccion2home p {
-    font-family: 'Open Sans', sans-serif;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 45px;
-    text-align: center;
-    letter-spacing: 0.04em;
 }
 
 

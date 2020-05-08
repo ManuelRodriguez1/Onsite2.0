@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   email;
   cerrarAbrir = "";
   abrir = false;
-  abrirup = false;
+  activar=true;
+  activar1=false;
   pagina = "";
   childData = [];
   Forgot = 0;
@@ -30,6 +31,29 @@ rtrespuesta="";
 
   }
 
+  hire() {
+    this.router.navigateByUrl("/Hire");
+    // location.href ="/Hire";
+
+  }
+
+  pro() {
+    this.router.navigateByUrl("/Pro");
+  }
+  activarpro(){
+ 
+    if(this.activar!=true){
+      this.activar = !this.activar;
+    }
+    
+    this.activar1 = false;
+}
+activarhire(){
+  if(this.activar1!=true){
+    this.activar1 = !this.activar1;
+  }
+  this.activar = false;
+}
 Forgot1(){
     this.Forgot = 1;
 }
@@ -73,15 +97,16 @@ var array=[];
     }*/
       this.af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password).then((resolve) => {
         formData.reset();
-        this.abrir = true;
-        $(".modal-backdrop").css("display", "none");
+       this.abrir = true;
+       $(".modal-backdrop").css("display", "none");
       }).then(() => {
         this.af.authState.subscribe(authState => {
           if (authState) {
+            console.log(authState);
             console.log(authState.displayName);
             console.log(authState.email);
             if (authState.displayName == "hire") {
-              location.href = "/Hireprincipal";
+             location.href = "/Hireprincipal";
             } else if (authState.displayName == "pro") {
               location.href = '/ProfilePro';
               console.log('pro')

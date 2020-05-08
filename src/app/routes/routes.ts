@@ -16,18 +16,18 @@ import { PlantillaComponent } from '../components/plantilla/plantilla.component'
 ​
 ​
 export const router: Routes = [
-    { path: '', redirectTo: 'Home', pathMatch: 'full', canActivate:[AuthGuard] },
-    { path: 'Home', component: HomeComponent },
-    { path: 'Hire', component: HireComponent },
-    { path: 'Pro', component: ProComponent },
-    { path: 'Recuperar', component: RecordarPassComponent },
-    { path: 'ProfilePro', component: ProfileProComponent , canActivate: [AuthGuard]},
-    { path: 'Hireprincipal', component: HirePrincipalComponent, canActivate: [AuthGuard] },//login
-    { path: 'ProfileHire',component: ProfileHireComponent},
-    { path: 'VerificationEmail', component: EmailVerificationComponent},
-    { path: 'VerifyEmailPro', component: VerifyEmailComponent},
-    { path: 'SuccesEmail', component: VerifySuccessComponent}, 
-    { path: 'Plantilla', component: PlantillaComponent}
+{ path: '', redirectTo: 'Home', pathMatch: 'full' },
+{ path: 'Home', component: HomeComponent }, 
+{ path: 'Hire', component: HireComponent },
+{ path: 'Pro', component: ProComponent },
+{ path: 'Recuperar', component: RecordarPassComponent },
+{ path: 'ProfilePro', component: ProfileProComponent , data: {  role: "pro" }, canActivate: [AuthGuard]},
+{ path : 'VerifyEmailPro', component: VerifyEmailComponent } ,
+{path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
+{path: 'ProfileHire', component: ProfileHireComponent},
+{ path: 'VerificationEmail', component: EmailVerificationComponent},
+{ path: 'SuccesEmail', component: VerifySuccessComponent}, 
+{ path: 'Plantilla', component: PlantillaComponent}
 ​
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
