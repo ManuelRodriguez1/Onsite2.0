@@ -206,12 +206,23 @@
             <div class="title3">
               <p>Rating</p>
             </div>
+            <div class="stars mt-23">
+              <div class="rating">
+                <p>n/a</p>
+              </div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG mr-13"></div>
+              <p class="smallText">(no reviews)</p>
+            </div>
           </div>
           <div class="col-sm">
             <div class="title3">
               <p>Jobs completed</p>
             </div>
-            <p class="mt-23 smallText">2</p>
+            <p class="mt-23 smallText">0</p>
           </div>
         </div>
         <div class="row mt-45 ml-48">
@@ -260,13 +271,13 @@
           </div>
           <div class="row">
             <div class="col-sm input-group">
-              <ng-container  *ngIf="customers.length != 0 && customers.length != null">
+              <ng-container  *ngIf="customers.length != 0 && customers.length != null && customers[0].name != 'Add certificate file'">
                 <div *ngFor="let co of customers">
-                  <div class="fileIcon"></div>
+                  <div class="fileIcon certIcon"></div>
                   <p>{{co.name}}</p>
                 </div>
               </ng-container>
-            <div *ngIf="customers.length == 0 || customers.length == null">
+            <div *ngIf="customers.length == 0 || customers.length == null || customers[0].name == 'Add certificate file'">
               <p>No files have been uploaded.</p>
             </div>
           </div>

@@ -1055,6 +1055,32 @@ h4,
     margin-top: 17px;
     margin-right: 12px;
 }
+.certIcon{
+    background-image: url('./assets/iconos/cert.svg');
+}
+.stars{
+    display: flex;
+}
+.rating{
+    width: 37px;
+    height: 20px;
+    background: #9D9D9D;
+    font-size: 14px;
+    line-height: 138%;
+    color: white;
+    margin-right: 7px;
+    text-align: center;
+}
+.starG{
+    width: 18px;
+    height: 18px;
+    background: url('./assets/iconos/startGray.svg') no-repeat center;
+    background-size: contain;
+    margin-right: 3px;
+}
+.starO{
+    background-image: url('./assets/iconos/startOrange.svg');
+}
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;
