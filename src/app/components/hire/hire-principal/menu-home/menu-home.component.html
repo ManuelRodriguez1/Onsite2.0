@@ -4,240 +4,234 @@
   class="form-Project"
 >
   <section class="container">
-  <div class="home" *ngIf="select == 0">
-    <div *ngIf="HomeFormularioNw == 0">
-      <div class="list-project">
-        <div class="started">
-          <div class="m-0">
-            <div class="row py-3 px-5">
-              <div class="col-sm-2 title-list">Projects</div>
-              <div class="col-sm-10 list-options">
-                <a href="" class="active">All</a>
-                <a href="">Active</a>
-                <a href="">Pending</a>
-                <a href="">Archived</a>
-                <a href="">Deleted</a>
+    <div class="home" *ngIf="select == 0">
+      <div *ngIf="HomeFormularioNw == 0">
+        <div class="list-project">
+          <div class="started">
+            <div class="m-0">
+              <div class="row py-3 px-5">
+                <div class="col-sm-2 title-list">Projects</div>
+                <div class="col-sm-10 list-options">
+                  <a href="" class="active">All</a>
+                  <a href="#">Active</a>
+                  <a href="#">Pending</a>
+                  <a href="#">Archived</a>
+                  <a href="#">Deleted</a>
+                </div>
               </div>
-            </div>
-            <hr class="m-0">
-            <div class="row py-3 px-5 title-table">
-              <div class="col-sm-5">Name</div>
-              <div class="col-sm-5">Status</div>
-            </div>
-            <div class="row py-2 px-4 pb-3" *ngFor="let p of projects">
-              <div class="col-sm-5"><li class="list-name"><span class="project-name">{{p.name}}</span></li></div>
-              <div class="col-sm-3">{{p.status}}</div>
-              <div class="col-sm-4 text-right">
-                <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
-                <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
-                <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+              <hr class="m-0">
+              <div class="row py-3 px-5 title-table">
+                <div class="col-sm-5">Name</div>
+                <div class="col-sm-5">Status</div>
               </div>
-            </div>
-            <hr class="m-0">
-            <div class="row py-3 px-5">
-              <div class="col-sm-6 input-group pl-3" (click)="next()">
-                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" /><span class="mt-2 new-project">Create new project</span>
+              <div class="row py-2 px-4 pb-3" *ngFor="let p of projects">
+                <div class="col-sm-5">
+                  <li class="list-name">
+                    <span class="project-name">{{p.name}}</span>
+                  </li>
+                </div>
+                <div class="col-sm-3">{{p.status}}</div>
+                <div class="col-sm-4 text-right">
+                  <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                  <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                  <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                </div>
+              </div>
+              <hr class="m-0">
+              <div class="row py-3 px-5">
+                <div class="col-sm-6 input-group pl-3" (click)="next()">
+                  <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
+                  <span class="mt-2 new-project">Create new project</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-    </div>
-    <div *ngIf="HomeFormularioNw == 1">
-      <div class="container">
-        <div class="row">
-          <div class="title-form">
-            Project’s name
+      <div *ngIf="HomeFormularioNw == 1">
+        <div class="container">
+          <div class="row py-2">
+            <div class="title2">
+              <h1 class="changeColorBlue">Account Information</h1>
+            </div>
           </div>
-        </div>
-        <div class="row py-2">
-          <div class="col-sm-6 input-group">
-            <input
-              required
-              type="text"
-              class="form-control"
-              placeholder="e.g. Excavation at 280 S."
-              name="projectname"
-              id="projectname"
-            />
+          <div class="row">
+            <div class="col-sm-6 input-group">
+              <input
+                required
+                type="text"
+                class="form-control"
+                placeholder="e.g. Excavation at 280 S."
+                name="projectname"
+                id="projectname"
+              />
+            </div>
           </div>
-        </div>
-        <div class="row py-2">
-          <div class="title-form my-2">
-            Project description
+          <div class="row">
+            <div class="title2">
+              <h1 class="changeColorBlue">Project description</h1>
+            </div>
           </div>
-          <p class="description-form">
-            Type what the project is about and the estimated time you expect it
-            to be completed. Include an overview of what you need done.
-          </p>
-        </div>
-        <div class="row my-3">
-          <div class="col-sm input-group">
-            <textarea
-              class="form-control"
-              id="description"
-              rows="4"
-              name="description"
-              placeholder="Describe your project here..."
-            ></textarea>
+          <div class="row py-2">
+            <p class="description-form">
+              Type what the project is about and the estimated time you expect it
+              to be completed. Include an overview of what you need done.
+            </p>
           </div>
-        </div>
-        <div class="row text-right">
-          <div class="col-sm">
-            <span class="description-form">4000 characters remaining</span>
+          <div class="row">
+            <div class="col-sm input-group">
+              <textarea
+                class="form-control"
+                id="description"
+                rows="4"
+                name="description"
+                placeholder="Describe your project here..."
+              ></textarea>
+            </div>
           </div>
-        </div>
-        <div class="row py-2">
-          <div class="title-form my-2">
-            Brief material
+          <div class="row text-right">
+            <div class="col-sm">
+              <span class="description-form">4000 characters remaining</span>
+            </div>
           </div>
-          <p class="description-form">
-            Add any documents or images that might be helpful in explaining more
-            about your project.
-          </p>
-        </div>
-        <div class="row">
-          <div class="col-sm input-group">
-            <div class="input-group custom-file" *ngFor="let f of files; let i = index">
-              <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg"
-                name="material" [attr.aria-label]="i" (change)="uploadDoc($event)">
-              <label for="customFile" class="custom-file-label">
-                <div class="afterFile">{{f}}</div>
+          <div class="row">
+            <div class="title2">
+              <h1 class="changeColorBlue">Brief material</h1>
+            </div>
+            <p class="description-form">
+              Add any documents or images that might be helpful in explaining more
+              about your project.
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-sm input-group m-0">
+              <div class="input-group custom-file" *ngFor="let f of files; let i = index">
+                <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg"
+                  name="material" [attr.aria-label]="i" (change)="uploadDoc($event)">
+                <label for="customFile" class="custom-file-label">
+                  <div class="afterFile">{{f}}</div>
+                </label>
+              </div>
+              <div class="input-group-prepend iconAdd" (click)="addfiles()">
+                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="title2 m-0 pb-3">
+              <h1 class="changeColorBlue">Skills</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="container skill m-0 pb-3">
+              <div class="col-sm input-group">
+                <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
+                  style="cursor: default;">
+                <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
+              </div>
+              <div class="list-group" [hidden]='up == false'>
+                <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
+                  <p>{{s}}</p>
+                </div>
+              </div>
+              <div class="skillselct" [hidden]="selectskills == null">
+                <div class="skillsel" *ngFor="let s of selectskills">
+                  <p>{{s}}</p>
+                  <div class="close" (click)='close(s)'></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group" *ngFor="let p of selectskills">
+            <p class="description-form pb-2">{{p}}</p>
+              <input
+                required
+                type="text"
+                class="form-control"
+                placeholder=""
+                name="people"
+                id="people"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="title2 pb-3">
+              <h1 class="changeColorBlue">Location</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 input-group">
+              <input
+                required
+                type="text"
+                class="form-control"
+                placeholder="Street name, City, State ZIP"
+                name="location"
+                id="location"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="title2 pb-3">
+              <h1 class="changeColorBlue">Estimated budget</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 input-group">
+              <input
+                required
+                type="text"
+                class="form-control"
+                placeholder="$10,000 - $20,000"
+                name="estimated"
+                id="estimated"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="title2">
+              <h1 class="changeColorBlue">Number of people per skills</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <p class="description-form py-3">Start date</p>
+              <input type="date" name="startdate" max="3000-12-31"
+                        min="1000-01-01" class="form-control py-2">
+            </div>
+            <div class="col-sm-6 form-group">
+              <p class="description-form py-3">End date</p>
+              <input type="date" name="enddate" max="3000-12-31"
+                        min="1000-01-01" class="form-control py-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-check checkbox form-group">
+              <input
+                type="checkbox"
+                class="form-check-input input-assumpte"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1">
+                <span>All workers must take a background test.</span>
               </label>
             </div>
-            <div class="input-group-prepend iconAdd" (click)="addfiles()">
-              <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" />
+          </div>
+          <div class="row">
+            <div class="form-check checkbox form-group">
+              <input
+                type="checkbox"
+                class="form-check-input input-assumpte"
+                id="exampleCheck2"
+              />
+              <label class="form-check-label" for="exampleCheck2">
+                <span>All workers must pass a background test.</span>
+              </label>
             </div>
           </div>
-        </div>
-        <div class="row py-2">
-          <div class="title-form">
-            What do you need help with?
-          </div>
-        </div>
-        <div class="row py-2">
-          <ng-multiselect-dropdown-angular7
-            [placeholder]="'Skills'"
-            [data]="dropdownList"
-            [settings]="dropdownSettings"
-            (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)"
-            (onDeSelect)="onItemDeSelect($event)"
-            class="input-group multi-drop"
-          >
-          </ng-multiselect-dropdown-angular7>
-        </div>
-        <div class="row my-3">
-          <div class="col-sm-6 form-group" *ngFor="let p of peoples">
-          <label class="my-2 selected-skill">{{p}}</label>
-            <input
-              required
-              type="text"
-              class="form-control"
-              placeholder=""
-              name="people"
-              id="people"
-            />
-          </div>
-        </div>
-      <div class="row py-2">
-        <div class="title-form">
-          Location
-        </div>
+        <button class="btn btn-post my-5 float-right">Post</button>
       </div>
-      <div class="row my-2">
-        <div class="col-sm-6 input-group">
-          <input
-            required
-            type="text"
-            class="form-control"
-            placeholder="Street name, City, State ZIP"
-            name="location"
-            id="location"
-          />
-        </div>
-      </div>
-      <div class="row py-2">
-        <div class="title-form">
-          Estimated budget
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col-sm-6 input-group">
-          <input
-            required
-            type="text"
-            class="form-control"
-            placeholder="$10,000 - $20,000"
-            name="estimated"
-            id="estimated"
-          />
-        </div>
-      </div>
-      <div class="row py-2">
-        <div class="title-form">
-          Number of people per skills
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 py-3">
-          <label class="form-check-label py-3">Start date</label>
-          <input type="date" name="startdate" max="3000-12-31"
-                    min="1000-01-01" class="form-control py-2">
-        </div>
-        <div class="col-sm-6 py-3">
-          <label class="form-check-label py-3">End date</label>
-          <input type="date" name="enddate" max="3000-12-31"
-                    min="1000-01-01" class="form-control py-2">
-        </div>
-      </div>
-      <!-- <div class="row">
-        <div class="title2">
-          How many people?
-        </div>
-      </div>
-      <div class="row skill2Howmany">
-        <div class="col-sm-6 input-group">
-          <input
-            type="text"
-            readonly
-            class="form-control"
-            [placeholder]="howmany"
-            id="selmanypeople"
-            name="selmanypeople"
-          />
-          <div class="down" (click)="list4()"></div>
-        </div>
-        <div class="col-sm empleos1012">
-          Average rate 10 - 12 / Hour
-        </div>
-      </div> -->
-      <div class="form-check checkbox input-group">
-        <input
-          type="checkbox"
-          class="form-check-input input-assumpte"
-          id="exampleCheck1"
-        />
-        <label class="form-check-label" for="exampleCheck1"
-          ><span>All workers must take a background test.</span></label
-        >
-      </div>
-      <div class="form-check checkbox input-group">
-        <input
-          type="checkbox"
-          class="form-check-input input-assumpte"
-          id="exampleCheck2"
-        />
-        <label class="form-check-label" for="exampleCheck2"
-          ><span>All workers must pass a background test.</span></label
-        >
-      </div>
-      <button class="btn btn-post my-5 float-right">Post</button>
-      <!-- <button class="btn btn-outline-warning next" *ngIf="page == 3">
-        Finish
-      </button> -->
-    </div>
     </div>
   </div>
 </section>
