@@ -16,6 +16,9 @@ error: any[];
     userMenu="Home";
     Sesion = true;
     estado="";
+    imageP: any = ''
+    profile: any = ''
+
     UserName="";
 
 
@@ -31,22 +34,22 @@ error: any[];
       });
         this.router.events.subscribe((event: Event) => {
           if (event instanceof NavigationEnd) {
-              this.paginaMensajeMenu( firebase.auth().currentUser);
+              this.paginaMensajeMenu(firebase.auth().currentUser);
           }
         }); 
     }
   ngOnInit() {
   }
   paginaMensajeMenu(user) {
-console.log(user);
-console.log(user.displayname);
+console.log(user.displayName);
 
-    if(location.pathname=="/Hire" || user.displayname=="hire"){
+    if(location.pathname=="/Hire" || user.displayName=="hire"){
       this.m="Hirer";
       }else if(location.pathname=="/Pro" || user.displayName=="pro"){
         this.m="Pro";
      }else if(location.pathname=="/Home"){
       this.m="Home";
+      this.userMenu="Home";
      }
         
         if(location.pathname=="/Home" || location.pathname=="/Pro" || location.pathname=="/Hire"){
@@ -61,15 +64,32 @@ console.log(user.displayname);
           }
 
           if(user.displayName=="hire"){
+          
             this.userMenu="Hirer";
-            this.UserName="";
+     
+
+           var data = this.afstore.collection("users_hire").doc(user.uid).snapshotChanges()
+            data.subscribe((d) => {
+              this.profile = d.payload.data()
+              console.log(this.profile);
+              if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
+              if (this.profile.name != null) { this.UserName = this.profile.name }
+
+            })
           
           }else if(user.displayName=="pro"){
             this.userMenu="Pro";  
-            this.UserName="";
-           /* this.af.collection('users_pro').doc(this.user.uid).update({
-              "certificate": this.customers
-            });*/
+            var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
+            data.subscribe((d) => {
+              this.profile = d.payload.data()
+              console.log(this.profile);
+              if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
+              if (this.profile.name != null) { this.UserName = this.profile.name }
+
+            })
+          
+        
+          
          }
 
  

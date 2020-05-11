@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
             console.log(authState.displayName+"============"+role);
             if (authState.displayName !== role  ) {
               this.auth.auth.signOut();
-             // this.router.navigate(['/Home']);            
+              this.router.navigate(['/Home']);            
              } 
           }
         });
