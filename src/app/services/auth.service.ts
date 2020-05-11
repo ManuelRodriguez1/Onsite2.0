@@ -19,13 +19,16 @@ export class AuthGuard implements CanActivate {
         .map(state => !!state)
         .do(authenticated => {
       if(!authenticated){
+        this.auth.auth.signOut();
         this.router.navigate([ '/Home' ]);
+        
       }else{
         const role = route.data.role;
         this.auth.authState.subscribe(authState => {
           if (authState) {
             console.log(authState.displayName+"============"+role);
             if (authState.displayName !== role  ) {
+              this.auth.auth.signOut();
               this.router.navigate(['/Home']);            
              } 
           }

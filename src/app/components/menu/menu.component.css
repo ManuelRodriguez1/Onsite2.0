@@ -33,12 +33,15 @@
      
      .imagenUserMenu {
          width: 50px;
-         background: red;
          height: 50px;
          border-radius: 50%;
          float: left;
          margin-top: 15px;
          margin-right: 8px;
+         background: #9D9D9D;
+         background-size: cover;
+         background-position: center;
+         background-repeat: none;
      }
      
      nav .aimg {

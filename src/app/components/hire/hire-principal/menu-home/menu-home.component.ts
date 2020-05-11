@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
-import * as $ from 'jquery';
-import { Options,LabelType } from 'ng5-slider';
-import {Router} from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-import { ServiceService } from 'src/app/services/service.service';
 import { NgForm } from '@angular/forms';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { FormGroup, FormControl } from '@angular/forms';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 import { ProjectService } from '../../../../services/project.service';
 
 @Component({
@@ -18,10 +10,9 @@ import { ProjectService } from '../../../../services/project.service';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
-  // Multiselect-dropdown
-  dropdownList = [];
-  selectedItems = [];
-  dropdownSettings = {};
+  up = false;
+  selectskills: any[] = [];
+  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
 
   projectname;
   peoples = [];
@@ -48,59 +39,26 @@ export class MenuHomeComponent implements OnInit {
   righttv = 'text-dashboard';
 
   constructor(private db: AngularFirestore, public projectService: ProjectService) {
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Concrete' },
-      { item_id: 2, item_text: 'Decorator' },
-      { item_id: 3, item_text: 'Drywall' },
-      { item_id: 4, item_text: 'Electrical' },
-      { item_id: 6, item_text: 'Excavation' },
-      { item_id: 7, item_text: 'Flooring' },
-      { item_id: 8, item_text: 'General Labor' },
-      { item_id: 9, item_text: 'Insulation' },
-      { item_id: 10, item_text: 'Interior Fishing Carpentry' },
-      { item_id: 11, item_text: 'Iron Worker' },
-      { item_id: 12, item_text: 'Landscaper' },
-      { item_id: 13, item_text: 'Mason' },
-      { item_id: 14, item_text: 'Plastering' },
-      { item_id: 15, item_text: 'Plumbing' },
-      { item_id: 16, item_text: 'Roofer' },
-      { item_id: 17, item_text: 'Waterproof Installation' }
-    ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'Drywall' }
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 4,
-      allowSearchFilter: true
-    };
-
   }
 
-  onItemSelect(item: any) {
-    var p = item['item_text'];
-    console.log(p);
-    this.peoples.push(p);
-    console.log(this.peoples);
+  list(e) {
+    if (e == 1) {
+      this.up = !this.up;
+    }
   }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
+
   onItemDeSelect(){
-    var p = this.people--;
     this.peoples.pop();
   }
-  /* addFile() {
-    var i = this.file++;
-    this.files.push('File ' + i);
-  } */
-  addPeoples() {
-    var p = this.people++;
-    this.peoples.push('People ' + p);
+  selectskill(e) {
+    // this.up = !this.up;
+    var i = this.selectskills.indexOf(e)
+    i === -1 && this.selectskills.push(e);
+  }
+
+  close(e) {
+    var i = this.selectskills.indexOf(e)
+    i !== -1 && this.selectskills.splice(i, 1)
   }
 
   ngOnInit() {
