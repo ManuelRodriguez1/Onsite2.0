@@ -216,6 +216,11 @@
 /* Estilos EditProfile */
 .optionSelect{
     margin-top: 21px;
+    cursor: pointer;
+}
+.optionSelect:hover{
+    color: #010973;
+    text-decoration: underline;
 }
 .noOption{
     color: #010973;
@@ -231,11 +236,38 @@
 .mt-21{
     margin-top: 21px;
 }
+.mt-23{
+    margin-top: 23px;
+}
+.mt-25{
+    margin-top: 25px;
+}
+.mt-27{
+    margin-top: 27px;
+}
 .mt-30{
     margin-top: 30px;
 }
+.mt-38{
+    margin-top: 38px;
+}
+.mt-45{
+    margin-top: 45px;
+}
+.mt-51{
+    margin-top: 51px;
+}
+.ml-14{
+    margin-left: 14px;
+}
 .ml-30{
     margin-left: 30px;
+}
+.ml-48{
+    margin-left: 48px;
+}
+.mb-43{
+    margin-bottom: 43px;
 }
 .mini{
     width: 74px;
@@ -259,4 +291,24 @@ iframe{
     overflow: hidden;
     width: 166px;
     height: 112px;
+}
+.cDefault{
+    cursor: default;
+}
+/* Estilos overall */
+.projects{
+    box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+}
+.cvTemp{
+    width: 118px;
+    height: 70px;
+    background: #9D9D9D;
+    margin-top: 17px;
+    margin-right: 12px;
+}
+.onlySkill p{
+    margin-right: 10px;
+}
+.orange{
+    color: #FF8600;
 }
