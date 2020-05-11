@@ -3,6 +3,7 @@ import { Router,ActivatedRoute , Event, NavigationEnd} from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { AngularFirestore } from "angularfire2/firestore";
 
 @Component({
   selector: 'app-menu',
@@ -11,75 +12,67 @@ import * as firebase from 'firebase/app';
 })
 export class MenuComponent implements OnInit {
 error: any[];
- m = "Home";
- userMenu="Home";
-  Sesion = true;
-  estado="";
+    m = "";
+    userMenu="Home";
+    Sesion = true;
+    estado="";
+    UserName="";
 
 
-    constructor(public af: AngularFireAuth, private router: Router,location: Location,private activatedRoute: ActivatedRoute) 
+
+    constructor(public af: AngularFireAuth, private router: Router,location: Location,private afstore: AngularFirestore) 
     {
       this.af.authState.subscribe(auth => {
-        console.log(auth);
-
           if (auth) {
-              this.Sesion = true;
-              this.estado = auth.displayName;
-            
+              this.Sesion = true;            
           } else {
               this.Sesion = false;
           }
-
       });
         this.router.events.subscribe((event: Event) => {
           if (event instanceof NavigationEnd) {
-       
-              this.paginaMensajeMenu();
+              this.paginaMensajeMenu( firebase.auth().currentUser);
           }
-        });
-
-       
+        }); 
     }
   ngOnInit() {
-
   }
-  paginaMensajeMenu() {
+  paginaMensajeMenu(user) {
+console.log(user);
+console.log(user.displayname);
 
-    if(location.pathname=="/Hire" || location.pathname=="/Hireprincipal"){
+    if(location.pathname=="/Hire" || user.displayname=="hire"){
       this.m="Hirer";
-      }else if(location.pathname=="/Pro"|| location.pathname=="/ProfilePro"){
+      }else if(location.pathname=="/Pro" || user.displayName=="pro"){
         this.m="Pro";
+     }else if(location.pathname=="/Home"){
+      this.m="Home";
      }
         
         if(location.pathname=="/Home" || location.pathname=="/Pro" || location.pathname=="/Hire"){
           this.userMenu="Home";
-          this.m="Home";
-          this.af.authState.subscribe(auth => {
-              if (auth) {
-                  if(auth.displayName=="hire"){
-                    location.href ="/Hireprincipal";
-                  }else if(auth.displayName=="Pro"){
-                    location.href ="/ProfilePro";
-
+              if (user.displayName) {
+                  if(user.displayName=="hire"){
+                    this.router.navigateByUrl("/Hireprincipal");
+                  }else if(user.displayName=="pro"){
+                    this.router.navigateByUrl("/ProfilePro");
                   }
-                
               }
-    
-          });
-
-          
-           
-         
           }
 
+          if(user.displayName=="hire"){
+            this.userMenu="Hirer";
+            this.UserName="";
+          
+          }else if(user.displayName=="pro"){
+            this.userMenu="Pro";  
+            this.UserName="";
+           /* this.af.collection('users_pro').doc(this.user.uid).update({
+              "certificate": this.customers
+            });*/
+         }
 
-
-      if(location.pathname=="/Hireprincipal"){
-      this.userMenu="Hirer";
-      }
-      if(location.pathname=="/ProfilePro"){
-      this.userMenu="Pro";
-      }
+ 
      
 
       
@@ -92,6 +85,7 @@ error: any[];
    logout() {
         this.af.auth.signOut();
         console.log('logged out');
-          location.href ="./";
+        this.router.navigateByUrl("/Home");
+
     }
 }

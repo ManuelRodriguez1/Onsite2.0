@@ -26,7 +26,7 @@ export const router: Routes = [
 { path: 'ProfilePro', component: ProfileProComponent , data: {  role: "pro" }, canActivate: [AuthGuard]},
 { path : 'VerifyEmailPro', component: VerifyEmailComponent } ,
 {path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
-{path: 'ProfileHire', component: ProfileHireComponent},
+{path: 'ProfileHire', component: ProfileHireComponent , data: { role: "hire" }, canActivate:[AuthGuard]},
 { path: 'VerificationEmail', component: EmailVerificationComponent},
 { path: 'SuccesEmail', component: VerifySuccessComponent}, 
 { path: 'Plantilla', component: PlantillaComponent},
