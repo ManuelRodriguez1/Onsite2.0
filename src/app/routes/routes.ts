@@ -18,6 +18,7 @@ import { PlantillaComponent } from '../components/plantilla/plantilla.component'
 ​
 export const router: Routes = [
 { path: '', redirectTo: 'Home', pathMatch: 'full' },
+
 { path: 'Home', component: HomeComponent }, 
 { path: 'Hire', component: HireComponent },
 { path: 'Pro', component: ProComponent },
@@ -28,8 +29,9 @@ export const router: Routes = [
 {path: 'ProfileHire', component: ProfileHireComponent},
 { path: 'VerificationEmail', component: EmailVerificationComponent},
 { path: 'SuccesEmail', component: VerifySuccessComponent}, 
-{ path: 'Plantilla', component: PlantillaComponent}
-    { path: 'ChangeEmail', component: ChangeEmailComponent},
+{ path: 'Plantilla', component: PlantillaComponent},
+{ path: 'ChangeEmail', component: ChangeEmailComponent},
 ​
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
+
