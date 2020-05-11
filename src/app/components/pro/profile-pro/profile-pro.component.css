@@ -299,13 +299,6 @@ iframe{
 .projects{
     box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
 }
-.cvTemp{
-    width: 118px;
-    height: 70px;
-    background: #9D9D9D;
-    margin-top: 17px;
-    margin-right: 12px;
-}
 .onlySkill p{
     margin-right: 10px;
 }
