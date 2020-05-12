@@ -1055,6 +1055,60 @@ h4,
     margin-top: 17px;
     margin-right: 12px;
 }
+.certIcon{
+    background-image: url('./assets/iconos/cert.svg');
+}
+.stars{
+    display: flex;
+}
+.rating{
+    width: 37px;
+    height: 20px;
+    background: #9D9D9D;
+    font-size: 14px;
+    line-height: 138%;
+    color: white;
+    margin-right: 7px;
+    text-align: center;
+}
+.starG{
+    width: 18px;
+    height: 18px;
+    background: url('./assets/iconos/startGray.svg') no-repeat center;
+    background-size: contain;
+    margin-right: 3px;
+}
+.starO{
+    background-image: url('./assets/iconos/startOrange.svg');
+}
+.shadow{
+    box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+}
+.orange{
+    color: #FF8600;
+}
+.arrowDownGray{
+    width: 15px;
+    height: 8px;
+    background: url('./assets/iconos/arrowDownGray.svg') center no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+.searchGray{
+    width: 28px;
+    height: 32px;
+    background: url('./assets/iconos/searchGray.svg') center no-repeat;
+    background-size: contain;
+}
+.iconSkills{
+    width: 19px;
+    height: 26px;
+    background: url('./assets/iconos/iconSkill.svg') center no-repeat;
+    background-size: contain;
+}
+.purple{
+    color: #010973;
+}
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;

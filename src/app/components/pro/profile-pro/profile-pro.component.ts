@@ -16,7 +16,7 @@ export class ProfileProComponent implements OnInit {
 
   text = 'Profile';
   righttv = ''
-  select = 1
+  select = 2
   lat: number = 51.678418;
   lng: number = 7.809007;
   menushow = false
@@ -49,9 +49,13 @@ export class ProfileProComponent implements OnInit {
     data.subscribe((d) => {
       this.profile = d.payload.data()
       this.selectskills = this.profile.skills
-      
-      if (this.profile.certificate != null && this.profile.certificate.length != 0) { 
-        this.countC = this.customers.length; this.customers = this.profile.certificate }
+
+      if (this.profile.certificate != null && this.profile.certificate.length != 0) {
+        this.countC = this.customers.length; this.customers = this.profile.certificate
+      }
+      if (this.profile.certificate[0].name == 'Add certificate file') {
+        this.countC = 0
+      }
 
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
 
