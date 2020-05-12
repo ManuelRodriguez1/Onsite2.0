@@ -1081,6 +1081,34 @@ h4,
 .starO{
     background-image: url('./assets/iconos/startOrange.svg');
 }
+.shadow{
+    box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+}
+.orange{
+    color: #FF8600;
+}
+.arrowDownGray{
+    width: 15px;
+    height: 8px;
+    background: url('./assets/iconos/arrowDownGray.svg') center no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+.searchGray{
+    width: 28px;
+    height: 32px;
+    background: url('./assets/iconos/searchGray.svg') center no-repeat;
+    background-size: contain;
+}
+.iconSkills{
+    width: 19px;
+    height: 26px;
+    background: url('./assets/iconos/iconSkill.svg') center no-repeat;
+    background-size: contain;
+}
+.purple{
+    color: #010973;
+}
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;
