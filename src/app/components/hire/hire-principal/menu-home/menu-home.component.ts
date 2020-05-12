@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { NgForm } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
+import { AngularFireAuth } from "angularfire2/auth";
+import { Router } from "@angular/router";
+import { AngularFireStorage } from "angularfire2/storage";
+import {formatDate} from '@angular/common';
+
 
 @Component({
   selector: 'app-menu-home',
@@ -28,17 +33,25 @@ export class MenuHomeComponent implements OnInit {
   file: any[] = [];
 
 
-  skills2Howmany: any = ["1", "2", "3", "4", "5"];
+  skills2Howmany: any[] = [];
   cust = 0;
   router: any;
 
   projects=[];
+  projectsHire: any[] = [];
+  projectsHirePending: any[] = [];
 
   section: number = 1;
   text: any[] = ["Dashboard", "Projects","New Project"];
   righttv = 'text-dashboard';
 
-  constructor(private db: AngularFirestore, public projectService: ProjectService) {
+  user = firebase.auth().currentUser
+  option = 0;
+
+  constructor(private db: AngularFirestore, 
+    public projectService: ProjectService,
+    public afAuth: AngularFireAuth,
+    private afs: AngularFireStorage) {
   }
 
   list(e) {
@@ -47,9 +60,6 @@ export class MenuHomeComponent implements OnInit {
     }
   }
 
-  onItemDeSelect(){
-    this.peoples.pop();
-  }
   selectskill(e) {
     // this.up = !this.up;
     var i = this.selectskills.indexOf(e)
@@ -62,8 +72,18 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* this.childData = this.db.collection('/projectsHire').valueChanges()
-    this.childData1 = this.db.collection('/projectsHire').valueChanges() */
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").get()
+      .toPromise().then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+              console.log(doc.id, " => ", doc.data());
+              let commentData = doc.data();
+              console.log(commentData["status"]);
+              if(commentData["status"]== "Pending"){
+                this.projectsHirePending.push(commentData);
+              }
+              this.projectsHire.push(commentData);
+          });
+      });
     this.projectService.getProjects().subscribe(projects =>{
       this.projects = projects;
       if(projects.length>0){
@@ -75,26 +95,29 @@ export class MenuHomeComponent implements OnInit {
     })
   }
 
-  final(f: NgForm) {
-    var user = firebase.auth().currentUser;
+  addPeople(e){
+    this.skills2Howmany.push(e)
+  }
 
-      this.db.collection('projects_hire').add({
-        name: f.value.projectname,
-        category: f.value.Selectjobcategory,
-        specializes: f.value.selectskills,
-        people: f.value.selmanypeople,
-        location:"123",
-        comments:"asd",
-        status:"Active",
-        AdditionalComments:"comentario",
-       zipcode: "",
-        mapa: '----------------------------',
-        correoHire: user.email,
-        idHire:user.uid
-
-      }).then(()=>{
-        this.reload();
-      })
+  addProject(f: NgForm) {
+    var currentDate = new Date();
+    var cValue = formatDate(currentDate, 'yyyy-MM-dd', 'en-US');
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").add({
+      projectname: f.value.projectname,
+      creationdate: cValue,
+      description: f.value.description,
+      location: f.value.location,
+      estimated: f.value.estimated,
+      startdate: f.value.startdate,
+      enddate: f.value.enddate,
+      taketest: f.value.taketest,
+      passtest: f.value.passtest,
+      skills: this.selectskills,
+      status: 'Active'
+    }).catch((error) => {
+      alert(error.message)
+    })
+    this.HomeFormularioNw = 0;
   }
   reload(){
     location.reload();
@@ -125,5 +148,8 @@ export class MenuHomeComponent implements OnInit {
     this.file.push(e.target.files[0])
     this.files[i] = e.target.files[0].name
     console.log(i);
+  }
+  selectOption(e) {
+    this.option = e
   }
 }

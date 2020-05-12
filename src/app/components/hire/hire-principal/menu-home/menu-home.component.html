@@ -12,11 +12,11 @@
               <div class="row py-3 px-5">
                 <div class="col-sm-2 title-list">Projects</div>
                 <div class="col-sm-10 list-options">
-                  <a href="" class="active">All</a>
-                  <a href="#">Active</a>
-                  <a href="#">Pending</a>
-                  <a href="#">Archived</a>
-                  <a href="#">Deleted</a>
+                  <span (click)="selectOption(1)" [class.noOption]="option == 1">All</span>
+                  <span (click)="selectOption(2)" [class.noOption]="option == 2">Active</span>
+                  <span (click)="selectOption(3)" [class.noOption]="option == 3">Pending</span>
+                  <span (click)="selectOption(4)" [class.noOption]="option == 4">Archived</span>
+                  <span (click)="selectOption(5)" [class.noOption]="option == 5">Deleted</span>
                 </div>
               </div>
               <hr class="m-0">
@@ -24,17 +24,36 @@
                 <div class="col-sm-5">Name</div>
                 <div class="col-sm-5">Status</div>
               </div>
-              <div class="row py-2 px-4 pb-3" *ngFor="let p of projects">
-                <div class="col-sm-5">
-                  <li class="list-name">
-                    <span class="project-name">{{p.name}}</span>
-                  </li>
+              <div class="col-sm-12 divcol" [class.projects]="option == 1">
+                <div class="col-sm-12 divcol" *ngIf="option == 1">
+                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
+                    <div class="col-sm-5">
+                      <li class="list-name">
+                        <span class="project-name">{{p.projectname}}</span>
+                      </li>
+                    </div>
+                    <div class="col-sm-3">{{p.status}}</div>
+                    <div class="col-sm-4 text-right">
+                      <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                    </div>
+                  </div>
                 </div>
-                <div class="col-sm-3">{{p.status}}</div>
-                <div class="col-sm-4 text-right">
-                  <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
-                  <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
-                  <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                <div class="col-sm-12 divcol" *ngIf="option == 2">
+                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHirePending">
+                    <div class="col-sm-5">
+                      <li class="list-name">
+                        <span class="project-name">{{p.projectname}}</span>
+                      </li>
+                    </div>
+                    <div class="col-sm-3">{{p.status}}</div>
+                    <div class="col-sm-4 text-right">
+                      <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                    </div>
+                  </div>
                 </div>
               </div>
               <hr class="m-0">
@@ -64,6 +83,7 @@
                 placeholder="e.g. Excavation at 280 S."
                 name="projectname"
                 id="projectname"
+                ngModel #projectname="ngModel"
               />
             </div>
           </div>
@@ -86,6 +106,7 @@
                 rows="4"
                 name="description"
                 placeholder="Describe your project here..."
+                ngModel #description="ngModel"
               ></textarea>
             </div>
           </div>
@@ -152,6 +173,8 @@
                 placeholder=""
                 name="people"
                 id="people"
+                ngModel #people="ngModel"
+                (keyup)="addPeople(p)"
               />
             </div>
           </div>
@@ -169,6 +192,7 @@
                 placeholder="Street name, City, State ZIP"
                 name="location"
                 id="location"
+                ngModel #location="ngModel"
               />
             </div>
           </div>
@@ -186,6 +210,7 @@
                 placeholder="$10,000 - $20,000"
                 name="estimated"
                 id="estimated"
+                ngModel #estimated="ngModel"
               />
             </div>
           </div>
@@ -198,12 +223,12 @@
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">Start date</p>
               <input type="date" name="startdate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2">
+                        min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel">
             </div>
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">End date</p>
               <input type="date" name="enddate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2">
+                        min="1000-01-01" class="form-control py-2" ngModel #enddate="ngModel">
             </div>
           </div>
           <div class="row">
@@ -211,9 +236,11 @@
               <input
                 type="checkbox"
                 class="form-check-input input-assumpte"
-                id="exampleCheck1"
+                id="taketest"
+                name="taketest"
+                ngModel #taketest="ngModel"
               />
-              <label class="form-check-label" for="exampleCheck1">
+              <label class="form-check-label" for="taketest">
                 <span>All workers must take a background test.</span>
               </label>
             </div>
@@ -223,14 +250,16 @@
               <input
                 type="checkbox"
                 class="form-check-input input-assumpte"
-                id="exampleCheck2"
+                id="passtest"
+                name="passtest"
+                ngModel #passtest="ngModel"
               />
-              <label class="form-check-label" for="exampleCheck2">
+              <label class="form-check-label" for="passtest">
                 <span>All workers must pass a background test.</span>
               </label>
             </div>
           </div>
-        <button class="btn btn-post my-5 float-right">Post</button>
+        <button class="btn btn-post my-5 float-right" type="submit">Post</button>
       </div>
     </div>
   </div>
