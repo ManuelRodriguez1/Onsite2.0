@@ -1,4 +1,4 @@
-<div class="container shadow">
+<div class="container shadow" *ngIf="select == 0">
   <div class="divcol mt-44 ml-48">
     <form action="">
       <div class="row fields">
@@ -18,7 +18,7 @@
   </div>
   <hr class="hr mt-47">
   <div class="project">
-    <div class="projects row">
+    <div class="projects row" (click)="sendInfo()">
       <div class="col-sm-6 ml-48">
         <p class="mt-47"><span class="title2">Project:</span> Excavation at 280 S.</p>
         <p class="mt-20">Project Description...</p>
@@ -34,6 +34,78 @@
     </div>
   </div>
 </div>
+
+<div class="container shadow" *ngIf="select == 1">
+  <div class="row fields mt-47 h-326">
+    <div class="col-sm ml-48">
+      <p><span class="title2">Project:</span> Excavation at 280 S.</p>
+      <p class="mt-12">Status: Active</p>
+      <p class="mt-44">Project Description...</p>
+    </div>
+    <div class="col-sm mr-48">
+      <button class="blueBtn small fr" (click)="apply()" [disabled]="modal != 0" [class.disabled]="modal != 0"
+        [class.grayBtn]="modal != 0"><span *ngIf="modal == 0">Apply</span> <span *ngIf="modal != 0">Applied</span></button>
+    </div>
+  </div>
+  <hr class="hr">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Hirer</p>
+      </div>
+      <div class="fields flex">
+        <div class="profile mini"></div>
+        <div class="ml-14">
+          <p class="title2 mt-0">Gordon Freeman</p>
+          <p class="mt-8"><span class="verify fl mr-6"></span>Verified user</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="hr mt-33">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Skills</p>
+      </div>
+      <div class="mt-20" style="overflow: hidden;">
+        <div class="skillsel onlySkill">
+          <p>Drywall</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="hr mt-38">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Location</p>
+      </div>
+      <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>1234 Meadow Dr. Unit 123 Wynwood, FL 33127</p>
+    </div>
+  </div>
+  <hr class="hr mt-33">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Location Map</p>
+      </div>
+      <div class="mapBig mt-20 mb-57"></div>
+    </div>
+  </div>
+</div>
+
 <div class="textv mr-97">
   <p>Explore</p>
+</div>
+
+<div class="modal" [class.showModal]="modal == 1">
+  <div class="message">
+    <div class="title mt-44">
+      <p>You have successfully <br>applied to this offer</p>
+    </div>
+    <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and agree
+      on payment terms.</p>
+    <button class="blueBtn large mt-30 mb-45" (click)=hideModal()>Back to explore</button>
+  </div>
 </div>
