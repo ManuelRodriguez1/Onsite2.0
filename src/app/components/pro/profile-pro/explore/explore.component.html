@@ -6,7 +6,7 @@
           <div class="searchGray absoluteSearch"></div>
           <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects">
           <div class="normalText fl ml-48">
-            <p><strong>1,382 Results</strong></p>
+            <p><strong>{{ projects.length }} Results</strong></p>
           </div>
           <div class="normalText fr ml-137">
             <p>Sort by: <a class="orange" href=""><strong>Latest</strong></a></p>
@@ -18,14 +18,15 @@
   </div>
   <hr class="hr mt-47">
   <div class="project">
-    <div class="projects row" (click)="sendInfo()">
+    <div class="lds-roller" *ngIf="loading == true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="projects row" (click)="sendInfo()" *ngFor="let p of projects">
       <div class="col-sm-6 ml-48">
-        <p class="mt-47"><span class="title2">Project:</span> Excavation at 280 S.</p>
-        <p class="mt-20">Project Description...</p>
+        <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
+        <p class="mt-20">{{ p[0].description }}</p>
         <p class="mt-20">Status: Open</p>
         <div class="mt-49 mb-42">
           <div class="iconSkills fl mt-mr2"></div>
-          <p class="purple normalText">Excavation, plumbing, flooring, concrete </p>
+          <p class="purple normalText"><span *ngFor="let s of p[0].skills">{{ s }}, </span> </p>
         </div>
       </div>
       <div class="col-sm-5">
