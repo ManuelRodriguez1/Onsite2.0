@@ -46,7 +46,11 @@ export class MenuHomeComponent implements OnInit {
   righttv = 'text-dashboard';
 
   user = firebase.auth().currentUser
-  option = 0;
+  option = 1;
+
+  customers2: any[] = [];
+
+  profile: any = ''
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
@@ -61,7 +65,6 @@ export class MenuHomeComponent implements OnInit {
   }
 
   selectskill(e) {
-    // this.up = !this.up;
     var i = this.selectskills.indexOf(e)
     i === -1 && this.selectskills.push(e);
   }
@@ -75,36 +78,34 @@ export class MenuHomeComponent implements OnInit {
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").get()
       .toPromise().then(querySnapshot => {
           querySnapshot.forEach(doc => {
-              console.log(doc.id, " => ", doc.data());
               let commentData = doc.data();
-              console.log(commentData["status"]);
-              if(commentData["status"]== "Pending"){
+              if(commentData["status"]== 1){
                 this.projectsHirePending.push(commentData);
               }
               this.projectsHire.push(commentData);
           });
       });
-    this.projectService.getProjects().subscribe(projects =>{
-      this.projects = projects;
-      if(projects.length>0){
-        this.section = 1;
-        this.righttv = 'text-project'
-      }else{
-        this.righttv = 'text-dashboard'
-      }
-    })
+    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
+    data.subscribe(data=>console.log(data))
   }
 
   addPeople(e){
     this.skills2Howmany.push(e)
   }
 
+  /* Status Project
+  1 = Pending
+  2 = Active
+  3 = Archived
+  4 = Delete */
+
   addProject(f: NgForm) {
     var currentDate = new Date();
-    var cValue = formatDate(currentDate, 'yyyy-MM-dd', 'en-US');
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").add({
+    var idP = this.db.createId();
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).set({
+      id: idP,
       projectname: f.value.projectname,
-      creationdate: cValue,
+      creationdate: currentDate,
       description: f.value.description,
       location: f.value.location,
       estimated: f.value.estimated,
@@ -113,15 +114,38 @@ export class MenuHomeComponent implements OnInit {
       taketest: f.value.taketest,
       passtest: f.value.passtest,
       skills: this.selectskills,
-      status: 'Active'
-    }).catch((error) => {
+      status: 1,
+      statusname: 'Pending',
+      briefmaterial: this.customers2
+    }).then(()=>{
+      for (let i = 0; i < this.file.length; i++) {
+        var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/"+this.file[i].name).put(this.file[i])
+        fileDoc.then((url) => {
+          url.ref.getDownloadURL()
+            .then((url) => {
+              this.customers2.push({"name": this.file[i].name, "url": url})
+              setTimeout(() => {
+                this.db.collection('users_hire').doc(this.user.uid).update({
+                  "project": true
+                })
+                this.db.collection('users_hire').doc(this.user.uid).collection("projects").doc(idP).update({
+                  'briefmaterial': this.customers2
+                })
+              }, 200);
+            })
+        })
+      }
+    })
+    .catch((error) => {
       alert(error.message)
     })
     this.HomeFormularioNw = 0;
   }
+
   reload(){
     location.reload();
   }
+
   getStarted() {
     this.HomeFormularioNw = 1;
   }
@@ -147,7 +171,6 @@ export class MenuHomeComponent implements OnInit {
     var i = this.cust
     this.file.push(e.target.files[0])
     this.files[i] = e.target.files[0].name
-    console.log(i);
   }
   selectOption(e) {
     this.option = e

@@ -212,27 +212,26 @@
       <div class="col-sm-12 divcol">
         <div *ngIf="select == 2">
           <div class="overall">
-            <div class="row">
+            <div class="row pt-5 pl-3">
               <div class="col-sm-6">
-                <p class="changeColorBlue title2">Projects posted</p>
-
+                <p class="title3 py-2">Projects posted</p>
+                  {{ projects?.length }}
               </div>
               <div class="col-sm-6">
-                <p class="changeColorBlue title2">Projects completed</p>
-
+                <p class="title3 py-2">Projects completed</p>
+                  NA
               </div>
             </div>
-            <div class="row">
+            <div class="row py-5 pl-3">
               <div class="col-sm-6">
-                <p class="changeColorBlue title2">Profile completed</p>
+                <p class="title3 py-2">Profile completed</p>
                 {{ emailVerified }}
               </div>
               <div class="col-sm-6">
-                <p class="changeColorBlue title2">Certified hirer</p>
+                <p class="title3 py-2">Certified hirer</p>
                 {{ emailVerified }}
               </div>
             </div>
-            <hr class="hr mt-30" />
           </div>
         </div>
       </div>

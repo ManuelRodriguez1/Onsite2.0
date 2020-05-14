@@ -105,6 +105,11 @@
   color: #9D9D9D;
   padding: 2%;
 }
+.project-name:hover{
+  text-decoration: none;
+  color: #000000 !important;
+  cursor: text !important;
+}
 span:hover{
   color: #FF8600 !important;
   text-decoration: underline;
@@ -140,6 +145,14 @@ span:hover{
   font-size: 14px;
   line-height: 150%;
   color: #010973;
+}
+.new-project:hover{
+  color: #010973 !important;
+  font-weight: bold;
+}
+.activeOption{
+  color: #E76800 !important;
+  text-decoration: underline !important;
 }
 .customFile{
   display: none;

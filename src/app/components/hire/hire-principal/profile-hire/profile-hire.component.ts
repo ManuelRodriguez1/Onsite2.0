@@ -24,9 +24,10 @@ export class ProfileHireComponent implements OnInit {
   email: string = ''
   currentPassword: string = ''
   profile: any = ''
+  projects: any[] = []
   credential: any
   emailVerified: any
-
+  countProject= 0
   constructor(
     public afAuth: AngularFireAuth,
     private af: AngularFirestore,
@@ -36,7 +37,13 @@ export class ProfileHireComponent implements OnInit {
 
   ngOnInit() {
     this.emailVerified = this.user.emailVerified;
-    console.log(this.user);
+    var datap = this.af.collection("users_hire").doc(this.user.uid).collection("projects").get()
+    .toPromise().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+          let commentData = doc.data();
+          this.projects.push(commentData);
+      });
+    });
     var data = this.af.collection("users_hire").doc(this.user.uid).snapshotChanges()
     data.subscribe((d) => {
       this.profile = d.payload.data()
