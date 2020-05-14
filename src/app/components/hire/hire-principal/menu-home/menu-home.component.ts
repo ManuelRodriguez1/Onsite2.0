@@ -50,6 +50,8 @@ export class MenuHomeComponent implements OnInit {
 
   customers2: any[] = [];
 
+  profile: any = ''
+
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
@@ -77,17 +79,25 @@ export class MenuHomeComponent implements OnInit {
       .toPromise().then(querySnapshot => {
           querySnapshot.forEach(doc => {
               let commentData = doc.data();
-              if(commentData["status"]== "Pending"){
+              if(commentData["status"]== 1){
                 this.projectsHirePending.push(commentData);
               }
               this.projectsHire.push(commentData);
           });
       });
+    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
+    data.subscribe(data=>console.log(data))
   }
 
   addPeople(e){
     this.skills2Howmany.push(e)
   }
+
+  /* Status Project
+  1 = Pending
+  2 = Active
+  3 = Archived
+  4 = Delete */
 
   addProject(f: NgForm) {
     var currentDate = new Date();
@@ -104,7 +114,8 @@ export class MenuHomeComponent implements OnInit {
       taketest: f.value.taketest,
       passtest: f.value.passtest,
       skills: this.selectskills,
-      status: 'Active',
+      status: 1,
+      statusname: 'Pending',
       briefmaterial: this.customers2
     }).then(()=>{
       for (let i = 0; i < this.file.length; i++) {
@@ -134,6 +145,7 @@ export class MenuHomeComponent implements OnInit {
   reload(){
     location.reload();
   }
+
   getStarted() {
     this.HomeFormularioNw = 1;
   }
