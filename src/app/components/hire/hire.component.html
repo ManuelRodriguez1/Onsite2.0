@@ -15,12 +15,15 @@
       </div>
       <div class="row mt-3">
         <div class="col-sm input-group">
-          <input required type="text" class="validate form-control" placeholder="E-mail" (ngModel)="Email" name="Email" id="Email" #email="ngModel" ngModel>
+          <input required type="text" class="validate form-control" placeholder="E-mail" (ngModel)="Email" name="Email" id="Email" #email="ngModel" ngModel [ngClass]="{'errorInput': error!=null}">
         </div>
         <div class="col-sm input-group">
           <input type="text" class="form-control" placeholder="Phone Number" name="PhoneNumber" #phone="ngModel" ngModel>
         </div>
       </div>
+    </div>
+    <div class="fields container">
+      <span class="errorEmail">{{error}} </span>
     </div>
     <div class="info container">
       <p>Enter your password</p>

@@ -40,6 +40,9 @@ export class MenuHomeComponent implements OnInit {
   projects=[];
   projectsHire: any[] = [];
   projectsHirePending: any[] = [];
+  projectsHireActive: any[] = [];
+  projectsHireArchived: any[] = [];
+  projectsHireDeleted: any[] = [];
 
   section: number = 1;
   text: any[] = ["Dashboard", "Projects","New Project"];
@@ -79,8 +82,14 @@ export class MenuHomeComponent implements OnInit {
       .toPromise().then(querySnapshot => {
           querySnapshot.forEach(doc => {
               let commentData = doc.data();
-              if(commentData["status"]== 1){
-                this.projectsHirePending.push(commentData);
+              if(commentData["status"] == 1){
+                this.projectsHirePending.push(commentData)
+              }else if(commentData["status"] == 2){
+                this.projectsHireActive.push(commentData)
+              }else if(commentData["status"] == 3){
+                this.projectsHireArchived.push(commentData)
+              }else if(commentData["status"] == 0){
+                this.projectsHireDeleted.push(commentData)
               }
               this.projectsHire.push(commentData);
           });

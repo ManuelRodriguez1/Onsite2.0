@@ -25,6 +25,7 @@ export class ProfileHireComponent implements OnInit {
   currentPassword: string = ''
   profile: any = ''
   projects: any[] = []
+  projectsCompleted: any[] = []
   credential: any
   emailVerified: any
   countProject= 0
@@ -41,6 +42,9 @@ export class ProfileHireComponent implements OnInit {
     .toPromise().then(querySnapshot => {
       querySnapshot.forEach(doc => {
           let commentData = doc.data();
+          if(commentData['status']==2){
+            this.projectsCompleted.push(commentData)
+          }
           this.projects.push(commentData);
       });
     });
