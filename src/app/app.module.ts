@@ -41,7 +41,7 @@ import { VerifyEmailComponent } from './components/pro/verify-email/verify-email
 import { VerifySuccessComponent } from './components/pro/verify-success/verify-success.component';
 import { PlantillaComponent } from './components/plantilla/plantilla.component';
 import { ChangeEmailComponent } from './components/hire/hire-principal/change-email/change-email.component';
-import { DomPipe } from './pipes/dom.pipe';
+import { LatestPipe } from './pipes/latest.pipe';
 
 
 @NgModule({
@@ -69,7 +69,7 @@ import { DomPipe } from './pipes/dom.pipe';
     VerifySuccessComponent,
     PlantillaComponent,
     ChangeEmailComponent,
-    DomPipe
+    LatestPipe
   ],
   imports: [
     BrowserModule,
@@ -84,7 +84,7 @@ import { DomPipe } from './pipes/dom.pipe';
     Ng5SliderModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
+      apiKey: 'AIzaSyBmzxZXY2uUS9cKxiHAT09tnR1bKiJtJWI'
     }),
     AngularFirestoreModule,
     AngularFireStorageModule
