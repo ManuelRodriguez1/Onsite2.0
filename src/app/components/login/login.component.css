@@ -77,6 +77,16 @@
     width: 7px;
 }
 
+.forgot p {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.flechaforgot {
+    position: absolute;
+    margin-top: 15px;
+}
+
 
 /* Page setup, nothing to do with the checkbox */
 
@@ -111,6 +121,12 @@ body {
 }
 
 .botonNaranja:active {
+    background: #FFB665 !important;
+    color: white !important;
+    border-color: #FFB665 !important;
+}
+
+.botonNaranja:disabled {
     background: #FFB665 !important;
     color: white !important;
     border-color: #FFB665 !important;

@@ -6,82 +6,87 @@
 
 
                 <div class="contenedorImagen">
-                    <div class="tituloContImg">
-                        Sign in to Onhive
+                    <div *ngIf="Forgot==0">
+                        <div class="tituloContImg">
+                            Sign in to Onhive
+                        </div>
+                        <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="Formulario">
+                            <div class="fields container">
+                                <div class="row">
+                                    <div class="col-sm input-group">
+                                        <input class='validate form-control  heigInput' id="exampleInputEmail1" type='email' (ngModel)="email" name='email' placeholder="E-mail" required/>
+                                        <span class="textError">{{error}}</span>
+
+                                    </div>
+                                </div>
+                                <div class="row classMargincampo">
+                                    <div class="col-sm input-group">
+                                        <input class='validate  form-control heigInput' type='password' id="exampleInputPassword1" (ngModel)="password" name='password' placeholder="Password" required/>
+                                        <span class="textError">{{error2}}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm input-group">
+                                        <button [disabled]="!formData.valid" class="botonNaranja">
+                                            Continue
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row lineaFinalultimate">
+                                    <div class="col-sm input-group">
+                                        <div>
+                                            <label class="checkbox">
+                                                <input type="checkbox" class="checkbox__input"/>
+                                                <span class="checkbox__checkmark"></span>
+                                                <span class="remember_me">Remember me</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm input-group">
+                                        <div class='forgotPass' (click)="Forgot1()">
+                                            Forgot your password
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm memberSing">
+                                        Not a member yet? <a>Sign up</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="Formulario" *ngIf="Forgot==0">
-                        <div class="fields container">
-                            <div class="row">
-                                <div class="col-sm input-group">
-                                    <input class='validate form-control heigInput' id="exampleInputEmail1" type='email' (ngModel)="email" name='email' placeholder="E-mail" required/>
+                    <div class="center forgot" *ngIf="Forgot==1">
+                        <svg (click)="Forgot2()" width="12" class="flechaforgot" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 1L1 11L11 21" stroke="black"/>
+                            </svg>
+                        <div class="tituloContImg">
 
-                                </div>
-                            </div>
-                            <div class="row classMargincampo">
-                                <div class="col-sm input-group">
-
-                                    <input class='validate form-control heigInput' type='password' id="exampleInputPassword1" (ngModel)="password" name='password' placeholder="Password" required/>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm input-group">
-                                    <button [disabled]="!formData.valid" class="botonNaranja">
-                                        Continue
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row lineaFinalultimate">
-                                <div class="col-sm input-group">
-                                    <div>
-                                        <label class="checkbox">
-                                            <input type="checkbox" class="checkbox__input"/>
-                                            <span class="checkbox__checkmark"></span>
-                                            <span class="remember_me">Remember me</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm input-group">
-                                    <div class='forgotPass' (click)="Forgot1()">
-                                        Forgot your password
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm memberSing">
-                                    Not a member yet? <a>Sign up</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="center" *ngIf="Forgot==1">
+                            Reset your password </div>
+                        <p>Enter your Onhive.com email address so we can reset your password.</p>
 
                         <div class="z-depth-1 grey lighten-4 row" style="margin-top:50px; height: 150px;">
                             <form #formData='ngForm' (ngSubmit)="onRecuperation(formData)" class="col s12" method="post">
-                                <div class="row">
+                                <div class="row ">
                                     <div class="col-sm input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="icon_img usuarioNaranja"></div>
-                                        </div>
-                                        <input class='validate form-control' id="exampleInputEmail1" type='email' (ngModel)="email" name='email' placeholder="Username" required/>
+
+                                        <input class='validate form-control' id="exampleInputEmail1" type='email' (ngModel)="email" name='email' placeholder="Enter email" required/>
+                                        <span class="textError">{{error}}</span>
 
                                     </div>
                                 </div>
-                                <br />
-                                <div class="principal">
-                                    <div class='row'>
-                                        <button [disabled]="!formData.valid" class="botonNaranja">
-Ok
-</button> </div>
+
+                                <div class="row">
+                                    <div class="col-sm input-group">
+                                        <button [disabled]="!formData.valid" class="botonNaranja">Next</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <br>
-                    <span class="error" *ngIf="error">{{ error }}</span>
-                    <span class="error" id="eror2" *ngIf="error2">{{ error2 }}</span>
+
                 </div>
             </div>
         </div>

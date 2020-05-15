@@ -22,7 +22,7 @@ export const router: Routes = [
 { path: 'Home', component: HomeComponent }, 
 { path: 'Hire', component: HireComponent },
 { path: 'Pro', component: ProComponent },
-{ path: 'Recuperar', component: RecordarPassComponent },
+{ path: 'ResetPassword ', component: RecordarPassComponent },
 { path: 'ProfilePro', component: ProfileProComponent , data: {  role: "pro" }, canActivate: [AuthGuard]},
 { path : 'VerifyEmailPro', component: VerifyEmailComponent } ,
 {path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
