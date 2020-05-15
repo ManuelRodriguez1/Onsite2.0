@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from "angularfire2/firestore";
+import { getAllRouteGuards } from '@angular/router/src/utils/preactivation';
 
 @Component({
   selector: 'app-menu',
@@ -23,9 +24,28 @@ error: any[];
 
 
 
-    constructor(public af: AngularFireAuth, private router: Router,location: Location,private afstore: AngularFirestore) 
+    constructor(public af: AngularFireAuth, private router: Router,private afstore: AngularFirestore) 
     {
+      if(location.pathname=="/Home" || location.pathname=="/Pro" || location.pathname=="/Hire"){
+              
+  
+        this.userMenu="Home";
+                this.af.authState.subscribe(auth => {
+                  console.log(auth);
+                  if(auth.displayName=="hire"){
+                    this.router.navigate(['/Hireprincipal']);
+                  }else if(auth.displayName=="pro"){
+                    this.router.navigate(['/ProfilePro']);
+
+                  }
+                });
+                      
+                    
+                }
+        
+        
       this.af.authState.subscribe(auth => {
+        console.log(auth);
           if (auth) {
               this.Sesion = true;            
           } else {
@@ -41,33 +61,27 @@ error: any[];
   ngOnInit() {
   }
   paginaMensajeMenu(user) {
-console.log(user.displayName);
+    console.log(user);
+    if(user){
+      this.estado=user.displayName;
+    }
 
-    if(location.pathname=="/Hire" || user.displayName=="hire"){
+    if(location.pathname=="/Hire" || this.estado=="hire"){
       this.m="Hirer";
-      }else if(location.pathname=="/Pro" || user.displayName=="pro"){
+      }else if(location.pathname=="/Pro" || this.estado=="pro"){
         this.m="Pro";
      }else if(location.pathname=="/Home"){
       this.m="Home";
       this.userMenu="Home";
+     }else{
+      this.m="Home";
+      this.userMenu="Home";
      }
         
-        if(location.pathname=="/Home" || location.pathname=="/Pro" || location.pathname=="/Hire"){
-          this.userMenu="Home";
-              if (user.displayName) {
-                  if(user.displayName=="hire"){
-                    this.router.navigateByUrl("/Hireprincipal");
-                  }else if(user.displayName=="pro"){
-                    this.router.navigateByUrl("/ProfilePro");
-                  }
-              }
-          }
+  
 
-          if(user.displayName=="hire"){
-          
+          if(this.estado=="hire"){
             this.userMenu="Hirer";
-     
-
            var data = this.afstore.collection("users_hire").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
               this.profile = d.payload.data()
@@ -76,7 +90,7 @@ console.log(user.displayName);
 
             })
           
-          }else if(user.displayName=="pro"){
+          }else if(this.estado=="pro"){
             this.userMenu="Pro";  
             var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
@@ -91,15 +105,10 @@ console.log(user.displayName);
          }
 
  
-     
 
       
   }
-  onSubmit(formData) {
 
-  this.router.navigateByUrl("/Hireprincipal");
-
-   }
    logout() {
         this.af.auth.signOut();
         console.log('logged out');

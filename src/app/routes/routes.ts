@@ -20,20 +20,19 @@ import { ExploreComponent } from '../components/pro/profile-pro/explore/explore.
 export const router: Routes = [
     { path: '', redirectTo: 'Home', pathMatch: 'full' },
 
-    { path: 'Home', component: HomeComponent },
-    { path: 'Hire', component: HireComponent },
-    { path: 'Pro', component: ProComponent },
-    { path: 'Recuperar', component: RecordarPassComponent },
-    { path: 'ProfilePro', component: ProfileProComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
+{ path: 'Home', component: HomeComponent }, 
+{ path: 'Hire', component: HireComponent },
+{ path: 'Pro', component: ProComponent },
+{ path: 'ResetPassword ', component: RecordarPassComponent },
+{ path: 'ProfilePro', component: ProfileProComponent , data: {  role: "pro" }, canActivate: [AuthGuard]},
+{ path : 'VerifyEmailPro', component: VerifyEmailComponent } ,
+{ path: 'ChangeEmail', component: ChangeEmailComponent},
+{ path: 'Plantilla', component: PlantillaComponent},
+{ path: 'VerificationEmail', component: EmailVerificationComponent},
+{ path: 'SuccesEmail', component: VerifySuccessComponent}, 
+{path: 'ProfileHire', component: ProfileHireComponent , data: { role: "hire" }, canActivate:[AuthGuard]},
+{path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
     { path: 'ExplorePro', component: ExploreComponent, data: { role: "pro" }, canActivate: [AuthGuard]},
-    { path: 'VerifyEmailPro', component: VerifyEmailComponent },
-    { path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
-    { path: 'ProfileHire', component: ProfileHireComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
-    { path: 'VerificationEmail', component: EmailVerificationComponent },
-    { path: 'SuccesEmail', component: VerifySuccessComponent },
-    { path: 'Plantilla', component: PlantillaComponent },
-    { path: 'ChangeEmail', component: ChangeEmailComponent },
-
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
 

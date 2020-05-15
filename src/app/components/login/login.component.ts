@@ -57,11 +57,16 @@ activarhire(){
 Forgot1(){
     this.Forgot = 1;
 }
+Forgot2(){
+  this.Forgot = 0;
+}
 onRecuperation(formData) {
+  alert("holaaaaaa");
 var array=[];
   if(formData.valid) {
     var auth = firebase.auth();
     var emailAddress = formData.value.email;
+    alert(formData.value.email);
     auth.sendPasswordResetEmail(emailAddress).then(function() {
   
       //  array.push("Check mail");
@@ -83,8 +88,8 @@ var array=[];
   }
   onSubmit(formData) {
     if (formData.valid) {
-/*
-      if (isRemberMeChecked) {
+
+     /* if (isRemberMeChecked) {
        
         localStorage.setItem('Name', formData.value.email);
         localStorage.setItem('token',  formData.value.password);
@@ -115,7 +120,24 @@ var array=[];
         })
       }).catch(
         (err) => {
-          this.error = err.message;
+          console.log(err);
+          if(err.code=="auth/user-not-found"){
+            this.error = err.message;
+            this.error2 = [];
+            $("#exampleInputPassword1").removeClass("errorInput");
+            $("#exampleInputEmail1").addClass("errorInput");
+
+
+           
+          }else if(err.code=="auth/wrong-password"){
+            this.error2 = err.message;
+            $("#exampleInputPassword1").addClass("errorInput");
+            this.error=[];
+            $("#exampleInputEmail1").removeClass("errorInput");
+          }else{
+            this.error = err.message;
+          }
+          return false;
         })
     }
   }
