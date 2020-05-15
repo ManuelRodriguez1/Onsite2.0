@@ -16,7 +16,7 @@ export class ProfileProComponent implements OnInit {
 
   text = 'Profile';
   righttv = ''
-  select = 1
+  select = 2
   lat: number = 51.678418;
   lng: number = 7.809007;
   menushow = false
@@ -49,15 +49,22 @@ export class ProfileProComponent implements OnInit {
     data.subscribe((d) => {
       this.profile = d.payload.data()
       this.selectskills = this.profile.skills
-      if (this.profile.certificate != null) { this.customers = this.profile.certificate }
+
+      if (this.profile.certificate != null && this.profile.certificate.length != 0) {
+        this.countC = this.customers.length; this.customers = this.profile.certificate
+      }
+      if (this.profile.certificate[0].name == 'Add certificate file') {
+        this.countC = 0
+      }
+
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
+
       this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.profile.password)
       if (this.profile.cvUrl != null) {
         this.cv = this.profile.cvUrl
         if (this.profile.cvUrl[0].name == 'Add a file') { this.cvClose = false }
         else { this.cvClose = true }
       }
-      this.countC = this.customers.length
     })
   }
   //Show Option
@@ -80,6 +87,7 @@ export class ProfileProComponent implements OnInit {
           })
       })
     }
+    if (f.value.description != '') { col.update({ "description": f.value.description }); $("#description").val('') }
   }
   //Update Password
   passForm(f: NgForm) {
@@ -186,6 +194,10 @@ export class ProfileProComponent implements OnInit {
           "certificate": this.customers
         })
       }, 200);
+    }
+    if (this.customers.length == 0) {
+      this.customers = [{ 'name': 'Add certificate file', 'url': '' }];
+      this.countC = 0
     }
   }
 

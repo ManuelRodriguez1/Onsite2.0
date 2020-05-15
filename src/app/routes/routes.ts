@@ -1,4 +1,4 @@
-​
+
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProComponent } from "../components/pro/pro.component";
@@ -14,10 +14,11 @@ import { RecordarPassComponent } from '../components/recordar-pass/recordar-pass
 import { VerifyEmailComponent } from '../components/pro/verify-email/verify-email.component';
 import { VerifySuccessComponent } from '../components/pro/verify-success/verify-success.component';
 import { PlantillaComponent } from '../components/plantilla/plantilla.component';
-​
-​
+import { ExploreComponent } from '../components/pro/profile-pro/explore/explore.component';
+
+
 export const router: Routes = [
-{ path: '', redirectTo: 'Home', pathMatch: 'full' },
+    { path: '', redirectTo: 'Home', pathMatch: 'full' },
 
 { path: 'Home', component: HomeComponent }, 
 { path: 'Hire', component: HireComponent },
@@ -25,13 +26,13 @@ export const router: Routes = [
 { path: 'ResetPassword ', component: RecordarPassComponent },
 { path: 'ProfilePro', component: ProfileProComponent , data: {  role: "pro" }, canActivate: [AuthGuard]},
 { path : 'VerifyEmailPro', component: VerifyEmailComponent } ,
-{path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
-{path: 'ProfileHire', component: ProfileHireComponent , data: { role: "hire" }, canActivate:[AuthGuard]},
+{ path: 'ChangeEmail', component: ChangeEmailComponent},
+{ path: 'Plantilla', component: PlantillaComponent},
 { path: 'VerificationEmail', component: EmailVerificationComponent},
 { path: 'SuccesEmail', component: VerifySuccessComponent}, 
-{ path: 'Plantilla', component: PlantillaComponent},
-{ path: 'ChangeEmail', component: ChangeEmailComponent},
-​
+{path: 'ProfileHire', component: ProfileHireComponent , data: { role: "hire" }, canActivate:[AuthGuard]},
+{path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
+    { path: 'ExplorePro', component: ExploreComponent, data: { role: "pro" }, canActivate: [AuthGuard]},
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
 

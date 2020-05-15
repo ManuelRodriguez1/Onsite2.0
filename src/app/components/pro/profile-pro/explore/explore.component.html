@@ -1,71 +1,112 @@
-<div class="title">
-  See: <span> what’s out there</span>
-</div>
-<div class="select">
-  <input type="text" class="form-control" [placeholder]="skill">
-  <div class="down" (click)="seelist()"></div>
-</div>
-<div class="text1">
-  Sort: Newest Jobs
-</div>
-<div class="list-group" *ngIf="list == true">
-  <div class="list-group-item" *ngFor="let s of skills" (click)="placeh(s)">
-    <p>{{s}}</p>
+<div class="container shadow" *ngIf="select == 0">
+  <div class="divcol mt-44 ml-48">
+    <form action="">
+      <div class="row fields">
+        <div class="input-group">
+          <div class="searchGray absoluteSearch"></div>
+          <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects">
+          <div class="normalText fl ml-48">
+            <p><strong>{{ projects.length }} Results</strong></p>
+          </div>
+          <div class="normalText fr ml-137">
+            <p>Sort by: <a class="orange" href=""><strong>Latest</strong></a></p>
+            <div class="arrowDownGray fr mt-mr"></div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
-</div>
-<div class="maps" *ngIf="info == true">
-  <agm-map [latitude]="lat" [longitude]="lng" class="map">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-  </agm-map>
-</div>
-<div class="title" *ngIf="info == true">
-  <span>12 available {{skill}} pros</span> near you.
-</div>
-<div class="clients" *ngIf="info == true">
-  <div class="card text-center" style="width: 205px;" *ngFor="let s of skills">
-    <div class="card-body">
-      <div class="imgperson"></div>
-      <h5 class="card-title">Jimmy needs help with</h5>
-      <p class="card-text">{{skill}}</p>
-      <div class="dropdown-divider"></div>
-      <p class="card-text text-left"><span>Project Description:</span> Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. Donec ac condimentum dui. Phasellus lectus mi.</p>
-      <div class="details" (click)="detailssee()">
-        <div class="arrowenter"></div> Project Details
+  <hr class="hr mt-47">
+  <div class="project">
+    <div class="lds-roller" *ngIf="loading == true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="projects row" (click)="sendInfo()" *ngFor="let p of projects">
+      <div class="col-sm-6 ml-48">
+        <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
+        <p class="mt-20">{{ p[0].description }}</p>
+        <p class="mt-20">Status: Open</p>
+        <div class="mt-49 mb-42">
+          <div class="iconSkills fl mt-mr2"></div>
+          <p class="purple normalText"><span *ngFor="let s of p[0].skills">{{ s }}, </span> </p>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div class="map mt-47"></div>
       </div>
     </div>
   </div>
 </div>
-<div class="dots" *ngIf="info == true">
-  <div class="dot" *ngFor="let d of dots"></div>
-</div>
-<div class="title last" *ngIf="details == true">
-    Project Detail
-</div>
-<div class="dropdown-divider" *ngIf="details == true"></div>
-<div class="details2" *ngIf="details  == true">
-  <div class="title2">
-      Project: <span> Excavation at 280 S</span>
+
+<div class="container shadow" *ngIf="select == 1">
+  <div class="row fields mt-47 h-326">
+    <div class="col-sm ml-48">
+      <p><span class="title2">Project:</span> Excavation at 280 S.</p>
+      <p class="mt-12">Status: Active</p>
+      <p class="mt-44">Project Description...</p>
+    </div>
+    <div class="col-sm mr-48">
+      <button class="blueBtn small fr" (click)="apply()" [disabled]="modal != 0" [class.disabled]="modal != 0"
+        [class.grayBtn]="modal != 0"><span *ngIf="modal == 0">Apply</span> <span *ngIf="modal != 0">Applied</span></button>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Status</p>
-      <p>Category:</p>
-      <p>Specialized:</p>
-      <p>How many people?:</p>
-      <p>Job location:</p>
-      <p>Additional Comments:</p>
+  <hr class="hr">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Hirer</p>
+      </div>
+      <div class="fields flex">
+        <div class="profile mini"></div>
+        <div class="ml-14">
+          <p class="title2 mt-0">Gordon Freeman</p>
+          <p class="mt-8"><span class="verify fl mr-6"></span>Verified user</p>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-5">
-      <p class="status"><span>Active</span></p>
-      <p><span> Drywall</span></p>
-      <p><span>Drywall Apprentice</span></p>
-      <p><span>4</span></p>
-      <p><span> Meadow Dr. - Unit 123 - Wynwood, FL 33127</span></p>
-      <p>My whole front driveway is disgusting and I need help installing a new one. I think there are some utility lines; not sure so please help.</p>
+  </div>
+  <hr class="hr mt-33">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Skills</p>
+      </div>
+      <div class="mt-20" style="overflow: hidden;">
+        <div class="skillsel onlySkill">
+          <p>Drywall</p>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-3 l3">
-      <div class="littlemap"></div>
+  </div>
+  <hr class="hr mt-38">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Location</p>
+      </div>
+      <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>1234 Meadow Dr. Unit 123 Wynwood, FL 33127</p>
     </div>
+  </div>
+  <hr class="hr mt-33">
+  <div class="row fields">
+    <div class="col-sm ml-48">
+      <div class="title2">
+        <p>Location Map</p>
+      </div>
+      <div class="mapBig mt-20 mb-57"></div>
+    </div>
+  </div>
+</div>
+
+<div class="textv mr-97">
+  <p>Explore</p>
+</div>
+
+<div class="modal" [class.showModal]="modal == 1">
+  <div class="message">
+    <div class="title mt-44">
+      <p>You have successfully <br>applied to this offer</p>
+    </div>
+    <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and agree
+      on payment terms.</p>
+    <button class="blueBtn large mt-30 mb-45" (click)=hideModal()>Back to explore</button>
   </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from "firebase/app";
+import { AngularFirestore } from "angularfire2/firestore";
 
 @Component({
   selector: 'app-explore',
@@ -7,31 +9,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreComponent implements OnInit {
 
-  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-  dots = []
-  list = false
-  info = false
-  details = false
-  skill = 'What type of job are you looking for?'
-  constructor() { }
+  select: number = 0
+  modal: number = 0
+  projects: any[] = []
+  loading: boolean
+  user: any = firebase.auth().currentUser
+  // Datos usuario
+  name: string
+  lastname: string
+  photo: string
+
+  constructor(private af: AngularFirestore) { /* firebase.firestore().enablePersistence() */ }
 
   ngOnInit() {
-    for (let i = 0; i < (this.skills.length / 4); i++) {
-      this.dots.push(i)
-    }
+    this.loading = true
+    this.af.collection("users_hire").ref.where("project", "==", true)
+      .onSnapshot((d) => {
+        d.docChanges().forEach((d) => {
+          this.name = d.doc.data().name
+          this.lastname = d.doc.data().lastname
+          this.photo = d.doc.data().photoUrl
+          d.doc.ref.collection("projects").where("status", ">", 0).where("status", "<", 3)
+            .onSnapshot({ includeMetadataChanges: true }, (d) => {
+              d.docChanges().forEach((d) => {                
+                this.projects.push([d.doc.data(), { "photo": this.photo, "name": this.name + ' ' + this.lastname }])
+                if(d.type === 'modified'){
+                  console.warn("test modified");
+                  //Probar con map y reemplazar el dato existente exitos https://es.stackoverflow.com/questions/125780/reemplazar-dato-en-un-arreglo
+                }
+              })
+            })
+        })
+      })
+    this.loading = false
   }
-  seelist(){
-    this.list = !this.list
+  sendInfo() {
+    return false
   }
-  placeh(e){
-    this.skill = e
-    this.list = !this.list
-    this.info = !this.info
+  apply() {
+    this.modal = 1
   }
-  detailssee(){
-    this.details = true
+  hideModal() {
+    this.modal = 2
+    this.select = 0
   }
-
 }

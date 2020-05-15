@@ -420,7 +420,7 @@ table {
     font-style: normal;
     font-weight: bold;
     line-height: 35px;
-    font-size: 26px;
+    font-size: 22px;
     color: #010973;
 }
 
@@ -1044,6 +1044,195 @@ h4,
     font-size: 18px;
     line-height: 200%;
 }
+.form-control{
+    font-size: 14px;
+}
+.fileIcon{
+    width: 40px;
+    height: 56px;
+    background: url('./assets/iconos/file.svg')no-repeat center;
+    background-size: contain;
+    margin-top: 17px;
+    margin-right: 12px;
+}
+.certIcon{
+    background-image: url('./assets/iconos/cert.svg');
+}
+.stars{
+    display: flex;
+}
+.rating{
+    width: 37px;
+    height: 20px;
+    background: #9D9D9D;
+    font-size: 14px;
+    line-height: 138%;
+    color: white;
+    margin-right: 7px;
+    text-align: center;
+}
+.starG{
+    width: 18px;
+    height: 18px;
+    background: url('./assets/iconos/startGray.svg') no-repeat center;
+    background-size: contain;
+    margin-right: 3px;
+}
+.starO{
+    background-image: url('./assets/iconos/startOrange.svg');
+}
+.shadow{
+    box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+}
+.orange{
+    color: #FF8600;
+}
+.arrowDownGray{
+    width: 15px;
+    height: 8px;
+    background: url('./assets/iconos/arrowDownGray.svg') center no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+.searchGray{
+    width: 28px;
+    height: 32px;
+    background: url('./assets/iconos/searchGray.svg') center no-repeat;
+    background-size: contain;
+}
+.iconSkills{
+    width: 19px;
+    height: 26px;
+    background: url('./assets/iconos/iconSkill.svg') center no-repeat;
+    background-size: contain;
+}
+.purple{
+    color: #010973;
+}
+.profile{
+    width: 150px;
+    height: 150px;
+    background: #9D9D9D;
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+}
+.mini{
+    width: 74px;
+    height: 74px;
+}
+.flex{
+    display: inline-flex;
+    align-items: center;
+}
+.disabled{
+    cursor: not-allowed;
+    background: #373C7D;
+    color: white;
+    border: 0;
+}
+.verify{
+    width: 12px;
+    height: 13px;
+    background: url('./assets/iconos/check.svg') no-repeat center;
+    background-size: contain;
+}
+.onlySkill p{
+    margin-right: 10px;
+}
+.locationIcon{
+    width: 16px;
+    height: 21px;
+    background: url('./assets/iconos/locationIcon.svg') no-repeat center;
+    background-size: contain;
+}
+/* loading temporal */
+.lds-roller {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .lds-roller div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+  }
+  .lds-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #010973;
+    margin: -4px 0 0 -4px;
+  }
+  .lds-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+  }
+  .lds-roller div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+  }
+  .lds-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+  }
+  .lds-roller div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+  }
+  .lds-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+  }
+  .lds-roller div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+  }
+  .lds-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+  }
+  .lds-roller div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+  }
+  .lds-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+  }
+  .lds-roller div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+  }
+  .lds-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+  }
+  .lds-roller div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+  }
+  .lds-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+  }
+  .lds-roller div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+  }
+  .lds-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+  }
+  .lds-roller div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+  }
+  @keyframes lds-roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  /* fin loading temporal */
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;

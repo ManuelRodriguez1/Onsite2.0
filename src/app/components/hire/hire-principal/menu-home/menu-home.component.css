@@ -96,7 +96,7 @@
   text-align: right;
   padding: 2%;
 }
-.list-options a{
+.list-options span{
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
@@ -105,9 +105,15 @@
   color: #9D9D9D;
   padding: 2%;
 }
-a:hover{
+.project-name:hover{
+  text-decoration: none;
+  color: #000000 !important;
+  cursor: text !important;
+}
+span:hover{
   color: #FF8600 !important;
   text-decoration: underline;
+  cursor: pointer;
 }
 .active{
   color: #FF8600 !important;
@@ -139,6 +145,14 @@ a:hover{
   font-size: 14px;
   line-height: 150%;
   color: #010973;
+}
+.new-project:hover{
+  color: #010973 !important;
+  font-weight: bold;
+}
+.activeOption{
+  color: #E76800 !important;
+  text-decoration: underline !important;
 }
 .customFile{
   display: none;

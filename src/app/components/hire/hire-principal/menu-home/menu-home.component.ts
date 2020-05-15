@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { NgForm } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
+import { AngularFireAuth } from "angularfire2/auth";
+import { Router } from "@angular/router";
+import { AngularFireStorage } from "angularfire2/storage";
+import {formatDate} from '@angular/common';
+
 
 @Component({
   selector: 'app-menu-home',
@@ -28,17 +33,29 @@ export class MenuHomeComponent implements OnInit {
   file: any[] = [];
 
 
-  skills2Howmany: any = ["1", "2", "3", "4", "5"];
+  skills2Howmany: any[] = [];
   cust = 0;
   router: any;
 
   projects=[];
+  projectsHire: any[] = [];
+  projectsHirePending: any[] = [];
 
   section: number = 1;
   text: any[] = ["Dashboard", "Projects","New Project"];
   righttv = 'text-dashboard';
 
-  constructor(private db: AngularFirestore, public projectService: ProjectService) {
+  user = firebase.auth().currentUser
+  option = 1;
+
+  customers2: any[] = [];
+
+  profile: any = ''
+
+  constructor(private db: AngularFirestore, 
+    public projectService: ProjectService,
+    public afAuth: AngularFireAuth,
+    private afs: AngularFireStorage) {
   }
 
   list(e) {
@@ -47,11 +64,7 @@ export class MenuHomeComponent implements OnInit {
     }
   }
 
-  onItemDeSelect(){
-    this.peoples.pop();
-  }
   selectskill(e) {
-    // this.up = !this.up;
     var i = this.selectskills.indexOf(e)
     i === -1 && this.selectskills.push(e);
   }
@@ -62,43 +75,77 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* this.childData = this.db.collection('/projectsHire').valueChanges()
-    this.childData1 = this.db.collection('/projectsHire').valueChanges() */
-    this.projectService.getProjects().subscribe(projects =>{
-      this.projects = projects;
-      if(projects.length>0){
-        this.section = 1;
-        this.righttv = 'text-project'
-      }else{
-        this.righttv = 'text-dashboard'
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").get()
+      .toPromise().then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+              let commentData = doc.data();
+              if(commentData["status"]== 1){
+                this.projectsHirePending.push(commentData);
+              }
+              this.projectsHire.push(commentData);
+          });
+      });
+    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
+    data.subscribe(data=>console.log(data))
+  }
+
+  addPeople(e){
+    this.skills2Howmany.push(e)
+  }
+
+  /* Status Project
+  1 = Pending
+  2 = Active
+  3 = Archived
+  4 = Delete */
+
+  addProject(f: NgForm) {
+    var currentDate = new Date();
+    var idP = this.db.createId();
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).set({
+      id: idP,
+      projectname: f.value.projectname,
+      creationdate: currentDate,
+      description: f.value.description,
+      location: f.value.location,
+      estimated: f.value.estimated,
+      startdate: f.value.startdate,
+      enddate: f.value.enddate,
+      taketest: f.value.taketest,
+      passtest: f.value.passtest,
+      skills: this.selectskills,
+      status: 1,
+      statusname: 'Pending',
+      briefmaterial: this.customers2
+    }).then(()=>{
+      for (let i = 0; i < this.file.length; i++) {
+        var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/"+this.file[i].name).put(this.file[i])
+        fileDoc.then((url) => {
+          url.ref.getDownloadURL()
+            .then((url) => {
+              this.customers2.push({"name": this.file[i].name, "url": url})
+              setTimeout(() => {
+                this.db.collection('users_hire').doc(this.user.uid).update({
+                  "project": true
+                })
+                this.db.collection('users_hire').doc(this.user.uid).collection("projects").doc(idP).update({
+                  'briefmaterial': this.customers2
+                })
+              }, 200);
+            })
+        })
       }
     })
+    .catch((error) => {
+      alert(error.message)
+    })
+    this.HomeFormularioNw = 0;
   }
 
-  final(f: NgForm) {
-    var user = firebase.auth().currentUser;
-
-      this.db.collection('projects_hire').add({
-        name: f.value.projectname,
-        category: f.value.Selectjobcategory,
-        specializes: f.value.selectskills,
-        people: f.value.selmanypeople,
-        location:"123",
-        comments:"asd",
-        status:"Active",
-        AdditionalComments:"comentario",
-       zipcode: "",
-        mapa: '----------------------------',
-        correoHire: user.email,
-        idHire:user.uid
-
-      }).then(()=>{
-        this.reload();
-      })
-  }
   reload(){
     location.reload();
   }
+
   getStarted() {
     this.HomeFormularioNw = 1;
   }
@@ -124,6 +171,8 @@ export class MenuHomeComponent implements OnInit {
     var i = this.cust
     this.file.push(e.target.files[0])
     this.files[i] = e.target.files[0].name
-    console.log(i);
+  }
+  selectOption(e) {
+    this.option = e
   }
 }

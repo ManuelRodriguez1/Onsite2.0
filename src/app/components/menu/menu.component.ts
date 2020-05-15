@@ -85,7 +85,6 @@ error: any[];
            var data = this.afstore.collection("users_hire").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
               this.profile = d.payload.data()
-              console.log(this.profile);
               if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
               if (this.profile.name != null) { this.UserName = this.profile.name }
 
@@ -96,7 +95,6 @@ error: any[];
             var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
               this.profile = d.payload.data()
-              console.log(this.profile);
               if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
               if (this.profile.name != null) { this.UserName = this.profile.name }
 

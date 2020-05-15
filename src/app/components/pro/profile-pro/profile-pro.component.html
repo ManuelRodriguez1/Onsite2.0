@@ -73,15 +73,21 @@
           <div class="row fields">
             <div class="input-group col-sm">
               <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel
-                [placeholder]="profile.email">
-            </div>
+              [placeholder]="profile.email">
+          </div>
+          <div class="input-group col-sm">
+            <input type="text" hidden>
+          </div>
+        </div>
+        <div class="row fields">
             <div class="input-group col-sm">
-              <input type="text" hidden>
+              <textarea class="form-control" rows="8" maxlength="400" id="description" name="description" #description="ngModel" ngModel
+               placeholder="Enter an appealing description of yourself so people want to hire you (400 characters left)"></textarea>
             </div>
           </div>
           <button type="submit" class="blueBtn small mt-12" id="btnAccount"
-            [class.disabled]="name.value == '' && lastname.value == '' && email.value == ''"
-            [disabled]="name.value == '' && lastname.value == '' && email.value == ''">Update</button>
+            [class.disabled]="name.value == '' && lastname.value == '' && email.value == '' && description.value == ''"
+            [disabled]="name.value == '' && lastname.value == '' && email.value == '' && description.value == ''">Update</button>
         </form>
         <hr class="hr mt-30">
         <div class="title2">
@@ -200,21 +206,26 @@
             <div class="title3">
               <p>Rating</p>
             </div>
+            <div class="stars mt-23">
+              <div class="rating">
+                <p>n/a</p>
+              </div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG mr-13"></div>
+              <p class="smallText">(no reviews)</p>
+            </div>
           </div>
           <div class="col-sm">
             <div class="title3">
               <p>Jobs completed</p>
             </div>
-            <p class="mt-23 smallText">2</p>
+            <p class="mt-23 smallText">0</p>
           </div>
         </div>
         <div class="row mt-45 ml-48">
-          <div class="col-sm">
-            <div class="title3">
-              <p>Jobs on time</p>
-            </div>
-            <p class="mt-23 smallText">2</p>
-          </div>
           <div class="col-sm">
             <div class="title3">
               <p>Certificates</p>
@@ -227,14 +238,20 @@
           <div class="title2">
             <p>Profile description</p>
           </div>
-          <p class="mt-23">Profile Description...</p>
+          <p class="mt-23"><span *ngIf="profile.description == null">Profile Description...</span>{{profile.description}}</p>
         </div>
         <hr class="hr mt-30">
         <div class="ml-48">
           <div class="title2">
             <p>CV</p>
           </div>
-          <div class="cvTemp"></div>
+          <div *ngIf="cv[0].name != 'Add a file' && cv[0].name != null">
+            <div class="fileIcon"></div>
+            <p>{{cv[0].name}}</p>
+          </div>
+          <div *ngIf="cv[0].name == 'Add a file' || cv[0].name == null">
+            <p>No files have been uploaded.</p>
+          </div>
         </div>
         <hr class="hr mt-30">
         <div class="ml-48">
@@ -254,8 +271,14 @@
           </div>
           <div class="row">
             <div class="col-sm input-group">
-            <div *ngFor="let co of customers">
-              <div class="cvTemp"></div>
+              <ng-container  *ngIf="customers.length != 0 && customers.length != null && customers[0].name != 'Add certificate file'">
+                <div *ngFor="let co of customers">
+                  <div class="fileIcon certIcon"></div>
+                  <p>{{co.name}}</p>
+                </div>
+              </ng-container>
+            <div *ngIf="customers.length == 0 || customers.length == null || customers[0].name == 'Add certificate file'">
+              <p>No files have been uploaded.</p>
             </div>
           </div>
           </div>
