@@ -7,6 +7,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFireStorage } from "angularfire2/storage";
 import {formatDate} from '@angular/common';
+import { last } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class MenuHomeComponent implements OnInit {
   customers2: any[] = [];
 
   profile: any = ''
+  modal: number = 0
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
@@ -78,7 +80,51 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").get()
+    /* const arrticle = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
+      arrticle.subscribe(payload => {
+        payload.forEach(item => {
+          this.profile = item.payload.doc.data()
+          this.projectsHire.push(this.profile)
+        })
+      }) */
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
+    .onSnapshot({ includeMetadataChanges: true }, (d) => {
+      d.docChanges().forEach((d) => {
+        this.projectsHire.push([d.doc.data()])
+        if(d.doc.data().status === 2){
+          this.projectsHireActive.push(d.doc.data())
+        }if(d.doc.data().status == 1){
+          this.projectsHirePending.push(d.doc.data())
+        }if(d.doc.data().status == 3){
+          this.projectsHireArchived.push(d.doc.data())
+        }
+        if(d.type === 'modified'){
+          this.projectsHire.forEach((data)=>{
+            if(data[0].t == d.doc.data().t){
+              this.projectsHire.splice(data, 1)
+            }
+          })
+        }/* else if(d.type === 'added'){
+          this.projectsHire.forEach((data)=>{
+            if(data[0].status === 2){
+              this.projectsHireActive.push(data)
+            }if(data[0].status == 1){
+              this.projectsHireDeleted.push(data)
+            }if(data.status == 3){
+              this.projectsHireArchived.push(data)
+            }
+          })
+        } */else if(d.type === 'removed'){
+          this.projectsHire.forEach((data)=>{
+            if(data[0].t == d.doc.data().t){
+              this.projectsHire.pop()
+              this.projectsHire.splice(this.projectsHire.indexOf(data),1)
+            }
+          })
+        }
+      })
+    })
+    /* this.db.collection("users_hire").doc(this.user.uid).collection("projects").get()
       .toPromise().then(querySnapshot => {
           querySnapshot.forEach(doc => {
               let commentData = doc.data();
@@ -95,7 +141,7 @@ export class MenuHomeComponent implements OnInit {
           });
       });
     var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
-    data.subscribe(data=>console.log(data))
+    data.subscribe(data=>console.log(data)) */
   }
 
   addPeople(e){
@@ -109,6 +155,7 @@ export class MenuHomeComponent implements OnInit {
   4 = Delete */
 
   addProject(f: NgForm) {
+    this.modal = 1
     var currentDate = new Date();
     var idP = this.db.createId();
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).set({
@@ -184,4 +231,15 @@ export class MenuHomeComponent implements OnInit {
   selectOption(e) {
     this.option = e
   }
+
+  showModal(){
+    this.modal = 1
+  }
+
+  hideModal() {
+    this.modal = 2
+    this.select = 0
+    //location.reload();
+  }
+
 }
