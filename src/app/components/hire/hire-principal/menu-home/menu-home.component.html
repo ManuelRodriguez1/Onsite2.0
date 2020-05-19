@@ -29,6 +29,22 @@
                   <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
                     <div class="col-sm-5">
                       <li class="list-name">
+                        <span class="project-name">{{p[0].projectname}}</span>
+                      </li>
+                    </div>
+                    <!-- <div class="col-sm-3">{{p[0].statusname}}</div> -->
+                    <div class="col-sm-3">{{p[0].statusname}}</div>
+                    <div class="col-sm-4 text-right">
+                      <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 divcol" *ngIf="option == 2">
+                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHireActive">
+                    <div class="col-sm-5">
+                      <li class="list-name">
                         <span class="project-name">{{p.projectname}}</span>
                       </li>
                     </div>
@@ -84,7 +100,9 @@
                 name="projectname"
                 id="projectname"
                 ngModel #projectname="ngModel"
+                [class.correctInput]="projectname.value != ''"
               />
+              <span class="textError" [hidden]="projectname.value != ''">* this field is required</span>
             </div>
           </div>
           <div class="row">
@@ -108,6 +126,7 @@
                 placeholder="Describe your project here..."
                 ngModel #description="ngModel"
               ></textarea>
+              <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
             </div>
           </div>
           <div class="row text-right">
@@ -127,14 +146,16 @@
           <div class="row">
             <div class="col-sm input-group m-0">
               <div class="input-group custom-file" *ngFor="let f of files; let i = index">
-                <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg"
-                  name="material" [attr.aria-label]="i" (change)="uploadDoc($event)">
-                <label for="customFile" class="custom-file-label">
-                  <div class="afterFile">{{f}}</div>
+                <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg"
+                  name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
+                <label for="customFileCert{{i}}" class="custom-file-label" >
+                  <div class="afterFile">{{f.name}}</div>
                 </label>
+                <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'"
+                (click)="deleteBriefMaterial(f)"></div>
               </div>
               <div class="input-group-prepend iconAdd" (click)="addfiles()">
-                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" />
+                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" title="Add material" />
               </div>
             </div>
           </div>
@@ -193,6 +214,7 @@
                 name="location"
                 id="location"
                 ngModel #location="ngModel"
+                [class.correctInput]="location.value != ''"
               />
             </div>
           </div>
@@ -211,6 +233,7 @@
                 name="estimated"
                 id="estimated"
                 ngModel #estimated="ngModel"
+                [class.correctInput]="estimated.value != ''"
               />
             </div>
           </div>
@@ -223,12 +246,13 @@
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">Start date</p>
               <input type="date" name="startdate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel">
+                        min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel" [class.correctInput]="startdate.value != ''">
             </div>
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">End date</p>
               <input type="date" name="enddate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2" ngModel #enddate="ngModel">
+                        min="1000-01-01" class="form-control py-2" ngModel #enddate="ngModel" [class.errorInput]="startdate.value > enddate.value" [class.correctInput]="enddate.value != '' && startdate.value < enddate.value">
+                        <span class="textError" [hidden]="startdate.value <= enddate.value">dates do not match</span>
             </div>
           </div>
           <div class="row">
@@ -259,7 +283,7 @@
               </label>
             </div>
           </div>
-        <button class="blueBtn small my-5 float-right" type="submit" [class.disabled]="projectname.value == '' || description.value == '' || location.value == '' || estimated.value == ''" [disabled]=" projectname.value == '' || description.value == '' || location.value == '' || estimated.value == ''">Post</button>
+        <button class="blueBtn small my-5 float-right" type="submit" [class.disabled]="projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value" [disabled]=" projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value">Post</button>
       </div>
     </div>
   </div>
@@ -267,4 +291,17 @@
 </form>
 <div class="textv" [ngClass]="righttv">
   <p>{{text[section]}}</p>
+</div>
+<div class="modal" [class.showModal]="modal == 1">
+  <div class="message">
+    <div class="title mt-5">
+      <p>You have successfully <br>posted a project</p>
+    </div>
+    <p class="my-3 smallText py-3">Soon you will receive applications from Pro users. <br>You can check them in the Projects section and make an <br>offer through the messages section.</p>
+    <div class="my-3 pb-5">
+      <button class="blueBtn large w360" (click)=hideModal()>Go to projects</button>
+      <!-- <span class="mt-12 mb-12 orLines">or</span>
+      <button class="blueBtn large mb-45 w360" (click)=hideModal()>Back to dashboard</button> -->
+    </div>
+  </div>
 </div>

@@ -7,6 +7,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFireStorage } from "angularfire2/storage";
 import {formatDate} from '@angular/common';
+import { last } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -29,9 +30,9 @@ export class MenuHomeComponent implements OnInit {
   select = 0;
   HomeFormularioNw = 0;
 
-  files = ['Add files'];
+  files = [{ 'name': 'Add material file', 'url': '' }];
   file: any[] = [];
-
+  countC: number = 0
 
   skills2Howmany: any[] = [];
   cust = 0;
@@ -40,17 +41,22 @@ export class MenuHomeComponent implements OnInit {
   projects=[];
   projectsHire: any[] = [];
   projectsHirePending: any[] = [];
+  projectsHireActive: any[] = [];
+  projectsHireArchived: any[] = [];
+  projectsHireDeleted: any[] = [];
 
   section: number = 1;
   text: any[] = ["Dashboard", "Projects","New Project"];
   righttv = 'text-dashboard';
 
   user = firebase.auth().currentUser
+  user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
   option = 1;
 
   customers2: any[] = [];
 
   profile: any = ''
+  modal: number = 0
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
@@ -75,18 +81,43 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").get()
-      .toPromise().then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-              let commentData = doc.data();
-              if(commentData["status"]== 1){
-                this.projectsHirePending.push(commentData);
-              }
-              this.projectsHire.push(commentData);
-          });
-      });
-    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
-    data.subscribe(data=>console.log(data))
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
+    .onSnapshot({ includeMetadataChanges: true }, (d) => {
+      d.docChanges().forEach((d) => {
+        this.projectsHire.push([d.doc.data()])
+        if(d.doc.data().status === 2){
+          this.projectsHireActive.push(d.doc.data())
+        }if(d.doc.data().status == 1){
+          this.projectsHirePending.push(d.doc.data())
+        }if(d.doc.data().status == 3){
+          this.projectsHireArchived.push(d.doc.data())
+        }
+        if(d.type === 'modified'){
+          this.projectsHire.forEach((data)=>{
+            if(data[0].t == d.doc.data().t){
+              this.projectsHire.splice(data, 1)
+            }
+          })
+        }/* else if(d.type === 'added'){
+          this.projectsHire.forEach((data)=>{
+            if(data[0].status === 2){
+              this.projectsHireActive.push(data)
+            }if(data[0].status == 1){
+              this.projectsHireDeleted.push(data)
+            }if(data.status == 3){
+              this.projectsHireArchived.push(data)
+            }
+          })
+        } */else if(d.type === 'removed'){
+          this.projectsHire.forEach((data)=>{
+            if(data[0].t == d.doc.data().t){
+              this.projectsHire.pop()
+              this.projectsHire.splice(this.projectsHire.indexOf(data),1)
+            }
+          })
+        }
+      })
+    })
   }
 
   addPeople(e){
@@ -100,6 +131,7 @@ export class MenuHomeComponent implements OnInit {
   4 = Delete */
 
   addProject(f: NgForm) {
+    this.modal = 1
     var currentDate = new Date();
     var idP = this.db.createId();
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).set({
@@ -162,17 +194,52 @@ export class MenuHomeComponent implements OnInit {
   }
 
   addfiles() {
-    this.files.push('Add a file');
-    this.cust = this.cust + 1;
-    console.log(this.cust);
+    this.files.push({ 'name': 'Add material file', 'url': '' });
+    this.cust = this.files.length - 1;
   }
 
   uploadDoc(e){
-    var i = this.cust
+    /* var i = this.cust
     this.file.push(e.target.files[0])
     this.files[i] = e.target.files[0].name
+    this.files[i] = {"name": e.target.files[0].name,"url":e.target.files[0].name}
+     */
+    var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
+    fileDoc.then((url) => {
+      url.ref.getDownloadURL()
+        .then((url) => {
+          this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
+        })
+    })
   }
   selectOption(e) {
     this.option = e
   }
+
+  showModal(){
+    this.modal = 1
+  }
+
+  hideModal() {
+    this.modal = 2
+    this.select = 0
+  }
+
+  deleteBriefMaterial(e: any) {
+    var i = this.files.indexOf(e);
+    if (i !== -1) {
+      this.afs.ref('Users_pro/' + this.user.uid + "/" + e.name).delete()
+      this.files.splice(i, 1)
+      setTimeout(() => {
+        this.user_hire.update({
+          "briefmaterial": this.files
+        })
+      }, 200);
+    }
+    if (this.files.length == 0) {
+      this.files = [{ 'name': 'Add material file', 'url': '' }];
+      this.countC = 0
+    }
+  }
+
 }

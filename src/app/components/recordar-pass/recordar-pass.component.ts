@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 export class RecordarPassComponent implements OnInit {
 
   error: any[];
+  
 
   constructor(public af: AngularFireAuth, private router: Router) {
 
