@@ -64,6 +64,9 @@
 .mr-48{
     margin-right: 48px;
 }
+.mb-12{
+    margin-bottom: 12px;
+}
 .mb-42{
     margin-bottom: 42px;
 }
@@ -167,6 +170,29 @@
     background: #ECECEC;
     color: #9D9D9D;
     border: 0;
+}
+.orLines{
+    color: #9D9D9D;
+    float: left;
+    width: 100%;
+    position: relative;
+}
+.orLines::before, .orLines::after{
+    content: '';
+    width: 151px;
+    border: 0.5px solid #9D9D9D;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+.orLines::before{
+    left: 55px;
+}
+.orLines::after{
+    right: 55px;
+}
+.w360{
+    width: 360px;
 }
 @media(min-width: 1045px){
     .container{

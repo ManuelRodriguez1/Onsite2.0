@@ -72,12 +72,13 @@ export class HireComponent implements OnInit {
             email: user.email,
             zipcode: formData.value.Entercityorzipcode,
             estado: "hire",
+            project: false
           });
           /* this.router.navigateByUrl("/Hireprincipal"); */
           this.router.navigate(['ChangeEmail']);
         })
         .catch((err) => {
-          this.error = err.message;
+          this.error = "* "+err.message;
           console.log(err);
         });
     } else {
@@ -87,7 +88,7 @@ export class HireComponent implements OnInit {
         this.error = "Require LastName";
       } else if (formData.control.controls.PhoneNumber.status == "INVALID") {
         this.error = "Require PhoneNumber";
-      } else if (formData.control.controls.Email.status == "INVALID") {
+      } else if (formData.control.controls.email.status == "INVALID") {
         this.error = "Require email";
       } else if (formData.control.controls.Password.status == "INVALID") {
         this.error = "Require Password";

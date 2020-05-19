@@ -19,7 +19,7 @@
   <hr class="hr mt-47">
   <div class="project">
     <div class="lds-roller" *ngIf="loading == true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    <div class="projects row" (click)="sendInfo()" *ngFor="let p of projects">
+    <div class="projects row" (click)="sendInfo(p)" *ngFor="let p of projects | latest: 'first'">
       <div class="col-sm-6 ml-48">
         <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
         <p class="mt-20">{{ p[0].description }}</p>
@@ -30,7 +30,9 @@
         </div>
       </div>
       <div class="col-sm-5">
-        <div class="map mt-47"></div>
+        <div class="map mt-47">
+          <agm-map [latitude]="lat" [longitude]="long" ></agm-map>
+        </div>
       </div>
     </div>
   </div>
@@ -39,9 +41,9 @@
 <div class="container shadow" *ngIf="select == 1">
   <div class="row fields mt-47 h-326">
     <div class="col-sm ml-48">
-      <p><span class="title2">Project:</span> Excavation at 280 S.</p>
-      <p class="mt-12">Status: Active</p>
-      <p class="mt-44">Project Description...</p>
+      <p><span class="title2">Project:</span> {{infoProject[0].projectname}}.</p>
+      <p class="mt-12">Status: {{infoProject[0].statusname}}</p>
+      <p class="mt-44">{{infoProject[0].description}}</p>
     </div>
     <div class="col-sm mr-48">
       <button class="blueBtn small fr" (click)="apply()" [disabled]="modal != 0" [class.disabled]="modal != 0"
@@ -55,9 +57,9 @@
         <p>Hirer</p>
       </div>
       <div class="fields flex">
-        <div class="profile mini"></div>
+        <div class="profile mini" [ngStyle]="{'background-image' : 'url('+infoProject[1].photo+')'}"></div>
         <div class="ml-14">
-          <p class="title2 mt-0">Gordon Freeman</p>
+          <p class="title2 mt-0">{{infoProject[1].name}}</p>
           <p class="mt-8"><span class="verify fl mr-6"></span>Verified user</p>
         </div>
       </div>
@@ -70,8 +72,8 @@
         <p>Skills</p>
       </div>
       <div class="mt-20" style="overflow: hidden;">
-        <div class="skillsel onlySkill">
-          <p>Drywall</p>
+        <div class="skillsel onlySkill" *ngFor="let si of infoProject[0].skills">
+          <p>{{si}}</p>
         </div>
       </div>
     </div>
@@ -82,7 +84,7 @@
       <div class="title2">
         <p>Location</p>
       </div>
-      <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>1234 Meadow Dr. Unit 123 Wynwood, FL 33127</p>
+      <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>{{infoProject[0].location}}</p>
     </div>
   </div>
   <hr class="hr mt-33">
@@ -91,7 +93,9 @@
       <div class="title2">
         <p>Location Map</p>
       </div>
-      <div class="mapBig mt-20 mb-57"></div>
+      <div class="mapBig mt-20 mb-57">
+        <agm-map [latitude]="lat" [longitude]="long"></agm-map>
+      </div>
     </div>
   </div>
 </div>
@@ -107,6 +111,8 @@
     </div>
     <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and agree
       on payment terms.</p>
-    <button class="blueBtn large mt-30 mb-45" (click)=hideModal()>Back to explore</button>
+    <button class="blueBtn large mt-30 w360" (click)=hideModal()>Back to dashboard</button>
+    <span class="mt-12 mb-12 orLines">or</span>
+    <button class="blueBtn large mb-45 w360" (click)=hideModal()>Back to explore</button>
   </div>
 </div>

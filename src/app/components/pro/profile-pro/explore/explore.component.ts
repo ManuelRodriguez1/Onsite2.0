@@ -18,8 +18,12 @@ export class ExploreComponent implements OnInit {
   name: string
   lastname: string
   photo: string
+  //Informacion proyecto
+  infoProject: any[] = [] 
+  lat: number = 51.678418
+  long: number = 7.809007
 
-  constructor(private af: AngularFirestore) { /* firebase.firestore().enablePersistence() */ }
+  constructor(private af: AngularFirestore) { firebase.firestore().enablePersistence() }
 
   ngOnInit() {
     this.loading = true
@@ -34,8 +38,11 @@ export class ExploreComponent implements OnInit {
               d.docChanges().forEach((d) => {                
                 this.projects.push([d.doc.data(), { "photo": this.photo, "name": this.name + ' ' + this.lastname }])
                 if(d.type === 'modified'){
-                  console.warn("test modified");
-                  //Probar con map y reemplazar el dato existente exitos https://es.stackoverflow.com/questions/125780/reemplazar-dato-en-un-arreglo
+                  this.projects.forEach((data)=>{
+                    if(data[0].t == d.doc.data().t){
+                      this.projects.splice(data, 1)
+                    }
+                  })
                 }
               })
             })
@@ -43,8 +50,9 @@ export class ExploreComponent implements OnInit {
       })
     this.loading = false
   }
-  sendInfo() {
-    return false
+  sendInfo(e) {
+    this.infoProject = e
+    this.select = 1
   }
   apply() {
     this.modal = 1

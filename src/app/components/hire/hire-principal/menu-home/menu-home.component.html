@@ -29,6 +29,22 @@
                   <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
                     <div class="col-sm-5">
                       <li class="list-name">
+                        <span class="project-name">{{p[0].projectname}}</span>
+                      </li>
+                    </div>
+                    <!-- <div class="col-sm-3">{{p[0].statusname}}</div> -->
+                    <div class="col-sm-3">{{p[0].statusname}}</div>
+                    <div class="col-sm-4 text-right">
+                      <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 divcol" *ngIf="option == 2">
+                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHireActive">
+                    <div class="col-sm-5">
+                      <li class="list-name">
                         <span class="project-name">{{p.projectname}}</span>
                       </li>
                     </div>
@@ -267,4 +283,17 @@
 </form>
 <div class="textv" [ngClass]="righttv">
   <p>{{text[section]}}</p>
+</div>
+<div class="modal" [class.showModal]="modal == 1">
+  <div class="message">
+    <div class="title mt-5">
+      <p>You have successfully <br>posted a project</p>
+    </div>
+    <p class="my-3 smallText py-3">Soon you will receive applications from Pro users. <br>You can check them in the Projects section and make an <br>offer through the messages section.</p>
+    <div class="my-3 pb-5">
+      <button class="blueBtn large w360" (click)=hideModal()>Go to projects</button>
+      <!-- <span class="mt-12 mb-12 orLines">or</span>
+      <button class="blueBtn large mb-45 w360" (click)=hideModal()>Back to dashboard</button> -->
+    </div>
+  </div>
 </div>
