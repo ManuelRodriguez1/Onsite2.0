@@ -12,7 +12,8 @@ import * as $ from 'jquery';
 })
 export class LoginComponent implements OnInit {
   error: any[];
-    error2: any[];
+  error2: any[];
+  error3: any[];
   password;
   email;
   cerrarAbrir = "";
@@ -61,23 +62,24 @@ Forgot2(){
   this.Forgot = 0;
 }
 onRecuperation(formData) {
-  alert("holaaaaaa");
 var array=[];
   if(formData.valid) {
     var auth = firebase.auth();
-    var emailAddress = formData.value.email;
-    alert(formData.value.email);
+    var emailAddress = formData.value.emailreset;
     auth.sendPasswordResetEmail(emailAddress).then(function() {
   
       //  array.push("Check mail");
-        $("#email").val("");
-          $("#eror2").html("Check mail");
+        $("#exampleInputEmail1").val("");
+        $("#exampleInputEmail1").removeClass("errorInput");
+        this.error3 = "Check mail";
 
     }).catch(
       (err) => {
 
       //array.push();
-        $("#eror2").html(err.message);
+      $("#exampleInputEmail1").addClass("errorInput");
+      this.error3 = err.message;
+       
     })
 
   }
