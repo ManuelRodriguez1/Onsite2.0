@@ -1,14 +1,45 @@
-<section class="container">
-  <div class="title">
-      <p>Your email has been verified! </p>
-  </div>
-  <div class="texts2">
-    <p>Click on ‘Continue’ to edit your profile where you can add you CV and any certificates you have to make your profile more attractive for hirers.</p>
-  </div>
-  <div class="buttons">
-    <button class="btn btn-outline-warning next" (click)="Continue()">Continue</button>
-  </div>
+<section class="container" *ngIf="estadoEmail==1">
+    <div class="title">
+        <p>Your email has been verified! </p>
+    </div>
+    <div class="texts2">
+        <p>Click on ‘Continue’ to edit your profile where you can add you CV and any certificates you have to make your profile more attractive for hirers.</p>
+    </div>
+    <div class="buttons">
+        <button class="btn btn-outline-warning next" (click)="Continue()">Continue</button>
+    </div>
+
+    <div class="textv">
+        <p>{{text[section]}}</p>
+    </div>
+
 </section>
-<div class="textv">
-  <p>{{text[section]}}</p>
-</div>
+
+<section class="container" *ngIf="estadoEmail==2">
+
+    <form #updateForm="ngForm" (ngSubmit)="updatepass(updateForm)" action="">
+        <div class="title">
+            <p>Reset your password for OnHive</p>
+        </div>
+        <div class="error" [class.errorh]="error">
+            <!--<p>You can't change your email to the same address</p-->
+        </div>
+        <div class="fields2">
+            <div class="row">
+                <div class="col-sm input-group">
+                    <input type="password" #email="ngModel" name="pass1" placeholder="Password" class="form-control" ngModel>
+                </div>
+                <div class="col-sm input-group">
+                    <input type="password" #pass="ngModel" name="pass2" placeholder="check Password" class="form-control" ngModel>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="submit" class="btn btn-outline-warning next large">Reset your password</button>
+        </div>
+    </form>
+    <div class="textv">
+        <p>{{text[section]}}</p>
+    </div>
+
+</section>
