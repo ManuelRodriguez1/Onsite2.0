@@ -42,6 +42,7 @@ import { VerifySuccessComponent } from './components/pro/verify-success/verify-s
 import { PlantillaComponent } from './components/plantilla/plantilla.component';
 import { ChangeEmailComponent } from './components/hire/hire-principal/change-email/change-email.component';
 import { LatestPipe } from './pipes/latest.pipe';
+import { SignoutComponent } from './components/pro/signout/signout.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { LatestPipe } from './pipes/latest.pipe';
     VerifySuccessComponent,
     PlantillaComponent,
     ChangeEmailComponent,
-    LatestPipe
+    LatestPipe,
+    SignoutComponent
   ],
   imports: [
     BrowserModule,

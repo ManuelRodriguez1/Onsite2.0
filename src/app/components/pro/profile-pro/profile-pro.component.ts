@@ -5,6 +5,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
+import * as crypto from "crypto-js";
 declare var $: any
 
 @Component({
@@ -36,12 +37,15 @@ export class ProfileProComponent implements OnInit {
   profile: any = ''
   credential: any
   user_pro: any = this.af.collection("users_pro").doc(this.user.uid)
+  password: string =''
+  //Validar correo
+  emailVal: boolean = true
 
   constructor(
     public afAuth: AngularFireAuth,
     private af: AngularFirestore,
     private afs: AngularFireStorage,
-    private router: Router,
+    private router: Router
   ) { }
   //Show data of User
   ngOnInit() {
@@ -49,6 +53,10 @@ export class ProfileProComponent implements OnInit {
     data.subscribe((d) => {
       this.profile = d.payload.data()
       this.selectskills = this.profile.skills
+      this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
+      setTimeout(() => {
+        this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.password)  
+      }, 100);
 
       if (this.profile.certificate != null && this.profile.certificate.length != 0) {
         this.countC = this.customers.length; this.customers = this.profile.certificate
@@ -59,7 +67,6 @@ export class ProfileProComponent implements OnInit {
 
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
 
-      this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.profile.password)
       if (this.profile.cvUrl != null) {
         this.cv = this.profile.cvUrl
         if (this.profile.cvUrl[0].name == 'Add a file') { this.cvClose = false }
@@ -76,7 +83,7 @@ export class ProfileProComponent implements OnInit {
     var col = this.user_pro
     if (f.value.name != '') { col.update({ "name": f.value.name }); $("#name").val(''); }
     if (f.value.lastname != '') { col.update({ "lastname": f.value.lastname }); $("#lastname").val('') }
-    if (f.value.email != '') {
+    if (f.value.email != '' && /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(f.value.email)) {
       this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
         this.user.updateEmail(f.value.email)
           .then(() => {
@@ -86,6 +93,8 @@ export class ProfileProComponent implements OnInit {
             $("#email").val('')
           })
       })
+    }else{
+      this.emailVal = false    
     }
     if (f.value.description != '') { col.update({ "description": f.value.description }); $("#description").val('') }
   }
@@ -96,7 +105,7 @@ export class ProfileProComponent implements OnInit {
         this.user.updatePassword(f.value.pass2)
           .then(() => {
             this.user_pro.update({
-              "password": f.value.pass2
+              "password": crypto.AES.encrypt(f.value.pass2, 'N@!o').toString()
             })
             $("#cPass, #pass1, #pass2").val('')
             setTimeout(() => {

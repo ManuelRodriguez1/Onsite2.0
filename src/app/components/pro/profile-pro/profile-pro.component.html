@@ -1,3 +1,4 @@
+<app-signout></app-signout>
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
@@ -73,7 +74,8 @@
           <div class="row fields">
             <div class="input-group col-sm">
               <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel
-              [placeholder]="profile.email">
+              [placeholder]="profile.email" [class.errorInput]="!emailVal">
+              <span class="textError" [hidden]="emailVal">Wrong email</span>
           </div>
           <div class="input-group col-sm">
             <input type="text" hidden>
@@ -96,10 +98,10 @@
         <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
           <div class="row fields">
             <div class="input-group col-sm">
-              <input type="password" [class.errorInput]="cPass.value != profile.password && cPass.value != ''"
-                [class.correctInput]="cPass.value == profile.password && cPass.value != ''" class="form-control"
+              <input type="password" [class.errorInput]="cPass.value != password && cPass.value != ''"
+                [class.correctInput]="cPass.value == password && cPass.value != ''" class="form-control"
                 placeholder="Current password" name="cPass" id="cPass" #cPass="ngModel" ngModel>
-              <span class="textError" [hidden]="cPass.value == profile.password || cPass.value == ''">It isn't the
+              <span class="textError" [hidden]="cPass.value == password || cPass.value == ''">It isn't the
                 current
                 password</span>
             </div>
@@ -124,8 +126,8 @@
             </div>
           </div>
           <button type="submit" class="blueBtn small mt-12" id="buttonPass"
-            [class.disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != profile.password || pass1.value?.length < 6"
-            [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != profile.password || pass1.value?.length < 6">Update</button>
+            [class.disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6"
+            [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6">Update</button>
         </form>
         <hr class="hr mt-30">
         <div class="title2">
