@@ -57,6 +57,8 @@ export class MenuHomeComponent implements OnInit {
 
   profile: any = ''
   modal: number = 0
+  confirm: number = 0
+  confirm2 = ''
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
@@ -81,7 +83,7 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<=", 4)
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
     .onSnapshot({ includeMetadataChanges: true }, (d) => {
       d.docChanges().forEach((d) => {
         this.projectsHire.push([d.doc.data()])
@@ -246,11 +248,25 @@ export class MenuHomeComponent implements OnInit {
   }
 
   delete(idP){
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
-      status: 4,
-      statusname: 'Deleted',
-    })
-    this.modal = 3
+    this.showModalDelete()
+    console.log(this.confirm)
+    console.log(idP)
+    this.confirm2 = idP
+    if( this.confirm == 1){
+      this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
+        status: 4,
+        statusname: 'Deleted',
+      })
+      this.modal = 3
+    }else{
+      this.confirm = 0
+    }
+  }
+
+  confirmDelete(){
+    this.confirm = 1
+    console.log(this.confirm)
+    this.delete(this.confirm2)
   }
 
 }

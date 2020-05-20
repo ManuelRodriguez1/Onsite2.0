@@ -32,12 +32,11 @@
                         <span class="project-name">{{p[0].projectname}}</span>
                       </li>
                     </div>
-                    <!-- <div class="col-sm-3">{{p[0].statusname}}</div> -->
                     <div class="col-sm-3">{{p[0].statusname}}</div>
                     <div class="col-sm-4 text-right">
                       <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
                       <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
-                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3" (click)="showModalDelete()">
+                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3" (click)="delete(p[0].id)">
                     </div>
                   </div>
                 </div>
@@ -308,7 +307,7 @@
       <p>Are you sure <br>want to delete this<br>project</p>
     </div>
     <div class="my-3 pb-5 d-flex justify-content-center">
-        <button class="blueBtn small w360 pl-3 mr-3" (click)="delete(p[0].id)">Yes</button>
+        <button class="blueBtn small w360 pl-3 mr-3" (click)="confirmDelete()">Yes</button>
         <button class="blueBtn small mb-45 w360" (click)=hideModal()>No</button>
     </div>
   </div>
