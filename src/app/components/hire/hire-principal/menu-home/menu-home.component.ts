@@ -81,7 +81,7 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<=", 4)
     .onSnapshot({ includeMetadataChanges: true }, (d) => {
       d.docChanges().forEach((d) => {
         this.projectsHire.push([d.doc.data()])
@@ -148,7 +148,7 @@ export class MenuHomeComponent implements OnInit {
       skills: this.selectskills,
       status: 1,
       statusname: 'Pending',
-      briefmaterial: this.customers2
+      briefmaterial: this.files
     }).then(()=>{
       for (let i = 0; i < this.file.length; i++) {
         var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/"+this.file[i].name).put(this.file[i])
@@ -219,9 +219,12 @@ export class MenuHomeComponent implements OnInit {
   showModal(){
     this.modal = 1
   }
+  showModalDelete(){
+    this.modal = 2
+  }
 
   hideModal() {
-    this.modal = 2
+    this.modal = 3
     this.select = 0
   }
 
@@ -240,6 +243,14 @@ export class MenuHomeComponent implements OnInit {
       this.files = [{ 'name': 'Add material file', 'url': '' }];
       this.countC = 0
     }
+  }
+
+  delete(idP){
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
+      status: 4,
+      statusname: 'Deleted',
+    })
+    this.modal = 3
   }
 
 }

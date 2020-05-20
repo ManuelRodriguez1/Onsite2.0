@@ -31,13 +31,16 @@ error: any[];
   
         this.userMenu="Home";
                 this.af.authState.subscribe(auth => {
-                  console.log(auth);
-                  if(auth.displayName=="hire"){
-                    this.router.navigate(['/Hireprincipal']);
-                  }else if(auth.displayName=="pro"){
-                    this.router.navigate(['/ProfilePro']);
-
+                 
+                  if(auth){
+                    if(auth.displayName=="hire"){
+                      this.router.navigate(['/Hireprincipal']);
+                    }else if(auth.displayName=="pro"){
+                      this.router.navigate(['/ProfilePro']);
+  
+                    }
                   }
+              
                 });
                       
                     
@@ -82,12 +85,17 @@ error: any[];
 
           if(this.estado=="hire"){
             this.userMenu="Hirer";
+            console.log(user.uid)
            var data = this.afstore.collection("users_hire").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
               this.profile = d.payload.data()
-              if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
-              if (this.profile.name != null) { this.UserName = this.profile.name }
+              console.log(this.profile );
+             if(d){
+              if (this.profile.photoUrl!="") { this.imageP = this.profile.photoUrl }
+              if (this.profile.name!="") { this.UserName = this.profile.name }
 
+             }
+             
             })
           
           }else if(this.estado=="pro"){

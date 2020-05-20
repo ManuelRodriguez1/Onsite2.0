@@ -38,16 +38,21 @@ export class ProfileHireComponent implements OnInit {
 
   ngOnInit() {
     this.emailVerified = this.user.emailVerified;
-    var datap = this.af.collection("users_hire").doc(this.user.uid).collection("projects").get()
-    .toPromise().then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-          let commentData = doc.data();
-          if(commentData['status']==2){
-            this.projectsCompleted.push(commentData)
-          }
-          this.projects.push(commentData);
-      });
-    });
+    this.af.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
+    .onSnapshot({ includeMetadataChanges: true }, (d) => {
+      d.docChanges().forEach((d) => {
+        this.projects.push([d.doc.data()])
+        if(d.doc.data().status === 3){
+          this.projectsCompleted.push(d.doc.data())
+        }else if(d.type === 'removed'){
+          this.projects.forEach((data)=>{
+            if(data[0].t == d.doc.data().t){
+              this.projects.splice(this.projects.indexOf(data),1)
+            }
+          })
+        }
+      })
+    })
     var data = this.af.collection("users_hire").doc(this.user.uid).snapshotChanges()
     data.subscribe((d) => {
       this.profile = d.payload.data()

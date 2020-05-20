@@ -57,11 +57,10 @@ export class HireComponent implements OnInit {
         )
         .then((success) => {
           var user = firebase.auth().currentUser;
+          this.SendVerificationMail();
           user.updateProfile({
             displayName: "hire",
             photoURL: "",
-          }).then((result) => {
-            this.SendVerificationMail();
           });
           this.db.collection("users_hire").doc(user.uid).set({
             id: user.uid,
@@ -72,10 +71,18 @@ export class HireComponent implements OnInit {
             email: user.email,
             zipcode: formData.value.Entercityorzipcode,
             estado: "hire",
-            project: false
-          });
-          /* this.router.navigateByUrl("/Hireprincipal"); */
-          this.router.navigate(['ChangeEmail']);
+            project: "false"
+
+
+          }).then((success) => {
+               location.href="/Hireprincipal";
+
+            });
+    //  this.router.navigate(['Hireprincipal'])
+
+        
+
+         
         })
         .catch((err) => {
           this.error = "* "+err.message;
