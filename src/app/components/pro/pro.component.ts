@@ -1,12 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { ServiceService } from 'src/app/services/service.service';
-import * as firebase from 'firebase/app';
 import { NgForm } from '@angular/forms';
-import { AngularFireAuth } from "angularfire2/auth";
-import { Router } from "@angular/router";
+import { ProService } from 'src/app/services/pro.service';
 import { AngularFirestore } from "angularfire2/firestore";
-import { AngularFireStorage } from "angularfire2/storage";
-import * as crypto from "crypto-js";
 
 @Component({
   selector: 'app-pro',
@@ -28,15 +23,16 @@ export class ProComponent implements OnInit {
   skills2: any = []
   customers = ['Add certificate file'];
   customers2: any[] = [];
-  database = firebase.database();
   notSame: boolean = false
   file: any[] = []
   checkbox: boolean = false
   verifyEmail: boolean = false
   emailText: string[] = []
 
-  constructor(private service: ServiceService, public afAuth: AngularFireAuth,
-    private router: Router, private db: AngularFirestore, private afs: AngularFireStorage) { }
+  constructor(
+    private servicePro: ProService,
+    private db: AngularFirestore
+  ) { }
 
   ngOnInit() {
 
@@ -90,57 +86,12 @@ export class ProComponent implements OnInit {
     this.cust = this.cust + 1;
   }
   test(f: NgForm) {
-
-    this.afAuth.auth.createUserWithEmailAndPassword(f.value.email, f.value.password).then(() => {
-      var user = firebase.auth().currentUser;
-      user.sendEmailVerification()
-      user.updateProfile({
-        displayName: 'pro',
-        photoURL: "",
-      });
-
-      this.db.collection('users_pro').doc(user.uid).set({
-        id: user.uid,
-        name: f.value.name,
-        lastname: f.value.lastname,
-        email: f.value.email,
-        phone: f.value.phone,
-        password: crypto.AES.encrypt(f.value.password, 'N@!o').toString(),
-        zipcode: f.value.zipcode,
-        skills: this.selectskills,
-        // specificSkills: this.selectskills2,
-        // link: f.value.link,
-        // description: f.value.description,
-        estado: "pro",
-        certificate: this.customers2
-      })
-
-      for (let i = 0; i < this.file.length; i++) {
-        var fileDoc = this.afs.ref('Users_pro/' + user.uid + "/" + this.file[i].name).put(this.file[i])
-        fileDoc.then((url) => {
-          url.ref.getDownloadURL()
-            .then((url) => {
-              this.customers2.push({ "name": this.file[i].name, "url": url })
-              setTimeout(() => {
-                this.db.collection('users_pro').doc(user.uid).update({
-                  "certificate": this.customers2
-                })
-              }, 200);
-            })
-        })
-      }
-      this.router.navigate(['ProfilePro'])
-    }).catch((error) => {
-      alert(error.message)
-    })
-
+    this.servicePro.registerPro(f, this.file, this.customers2, this.selectskills)
   }
   uploadDoc(e) {
     var i = this.cust
     this.file.push(e.target.files[0])
     this.customers[i] = e.target.files[0].name
-    console.log(i);
-
   }
   check() {
     this.checkbox = !this.checkbox

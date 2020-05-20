@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from "angularfire2/auth";
@@ -37,7 +37,7 @@ export class ProfileProComponent implements OnInit {
   profile: any = ''
   credential: any
   user_pro: any = this.af.collection("users_pro").doc(this.user.uid)
-  password: string =''
+  password: string = ''
   //Validar correo
   emailVal: boolean = true
 
@@ -55,14 +55,16 @@ export class ProfileProComponent implements OnInit {
       this.selectskills = this.profile.skills
       this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
       setTimeout(() => {
-        this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.password)  
+        this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.password)
       }, 100);
 
       if (this.profile.certificate != null && this.profile.certificate.length != 0) {
         this.countC = this.customers.length; this.customers = this.profile.certificate
       }
-      if (this.profile.certificate[0].name == 'Add certificate file') {
-        this.countC = 0
+      if (this.profile.certificate != null) {
+        if (this.profile.certificate[0].name == 'Add certificate file') {
+          this.countC = 0
+        }
       }
 
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
@@ -83,18 +85,20 @@ export class ProfileProComponent implements OnInit {
     var col = this.user_pro
     if (f.value.name != '') { col.update({ "name": f.value.name }); $("#name").val(''); }
     if (f.value.lastname != '') { col.update({ "lastname": f.value.lastname }); $("#lastname").val('') }
-    if (f.value.email != '' && /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(f.value.email)) {
-      this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
-        this.user.updateEmail(f.value.email)
-          .then(() => {
-            col.update({ "email": f.value.email })
-          }).then(() => {
-            this.user.sendEmailVerification()
-            $("#email").val('')
-          })
-      })
-    }else{
-      this.emailVal = false    
+    if (f.value.email.trim() != '') {
+      if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(f.value.email)) {
+        this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
+          this.user.updateEmail(f.value.email)
+            .then(() => {
+              col.update({ "email": f.value.email })
+            }).then(() => {
+              this.user.sendEmailVerification()
+              $("#email").val('')
+            })
+        })
+      } else {
+        this.emailVal = false
+      }
     }
     if (f.value.description != '') { col.update({ "description": f.value.description }); $("#description").val('') }
   }

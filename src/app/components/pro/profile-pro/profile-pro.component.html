@@ -274,9 +274,9 @@
           <div class="row">
             <div class="col-sm input-group">
               <ng-container  *ngIf="customers.length != 0 && customers.length != null && customers[0].name != 'Add certificate file'">
-                <div *ngFor="let co of customers">
+                <div *ngFor="let co of customers" class="mr-30">
                   <div class="fileIcon certIcon"></div>
-                  <p>{{co.name}}</p>
+                  <p class="ellipsis">{{co.name}}</p>
                 </div>
               </ng-container>
             <div *ngIf="customers.length == 0 || customers.length == null || customers[0].name == 'Add certificate file'">
