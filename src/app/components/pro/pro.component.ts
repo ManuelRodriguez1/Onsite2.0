@@ -6,6 +6,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
+import * as crypto from "crypto-js";
 
 @Component({
   selector: 'app-pro',
@@ -31,6 +32,8 @@ export class ProComponent implements OnInit {
   notSame: boolean = false
   file: any[] = []
   checkbox: boolean = false
+  verifyEmail: boolean = false
+  emailText: string[] = []
 
   constructor(private service: ServiceService, public afAuth: AngularFireAuth,
     private router: Router, private db: AngularFirestore, private afs: AngularFireStorage) { }
@@ -45,9 +48,20 @@ export class ProComponent implements OnInit {
       this.up2 = !this.up2;
     }
   }
-  next() {
-    this.page++;
-    this.select = this.page;
+  next(email) {
+    var temp = false
+    this.db.collection('users_pro').get().subscribe((u) => {
+      u.forEach((e) => {
+        if (email === e.data().email) {
+          temp = true
+        }
+        this.verifyEmail = temp
+      })
+      if (!this.verifyEmail) {
+        this.page++;
+        this.select = this.page;
+      }
+    })
   }
   back() {
     this.page--;
@@ -56,7 +70,7 @@ export class ProComponent implements OnInit {
   selectskill(e) {
     // this.up = !this.up;
     var i = this.selectskills.indexOf(e)
-    i === -1 && this.selectskills.push(e);    
+    i === -1 && this.selectskills.push(e);
     this.skills2 = [this.selectskills + ' Hanger', this.selectskills + ' Apprentice', 'Metal Framer',
       'Metal Framer Apprentice', this.selectskills + ' Finisher', 'Fire Taper'];
   }
@@ -73,9 +87,8 @@ export class ProComponent implements OnInit {
   }
   addcustomer() {
     this.customers.push('Add certificate file');
-    this.cust = this.cust + 1;    
+    this.cust = this.cust + 1;
   }
-
   test(f: NgForm) {
 
     this.afAuth.auth.createUserWithEmailAndPassword(f.value.email, f.value.password).then(() => {
@@ -92,7 +105,7 @@ export class ProComponent implements OnInit {
         lastname: f.value.lastname,
         email: f.value.email,
         phone: f.value.phone,
-        password: f.value.password,
+        password: crypto.AES.encrypt(f.value.password, 'N@!o').toString(),
         zipcode: f.value.zipcode,
         skills: this.selectskills,
         // specificSkills: this.selectskills2,
@@ -103,11 +116,11 @@ export class ProComponent implements OnInit {
       })
 
       for (let i = 0; i < this.file.length; i++) {
-        var fileDoc = this.afs.ref('Users_pro/' + user.uid + "/"+this.file[i].name).put(this.file[i])
+        var fileDoc = this.afs.ref('Users_pro/' + user.uid + "/" + this.file[i].name).put(this.file[i])
         fileDoc.then((url) => {
           url.ref.getDownloadURL()
             .then((url) => {
-              this.customers2.push({"name": this.file[i].name, "url": url})
+              this.customers2.push({ "name": this.file[i].name, "url": url })
               setTimeout(() => {
                 this.db.collection('users_pro').doc(user.uid).update({
                   "certificate": this.customers2
@@ -116,20 +129,20 @@ export class ProComponent implements OnInit {
             })
         })
       }
-      this.router.navigate(['VerifyEmailPro'])
+      this.router.navigate(['ProfilePro'])
     }).catch((error) => {
       alert(error.message)
     })
 
   }
-  uploadDoc(e){
+  uploadDoc(e) {
     var i = this.cust
     this.file.push(e.target.files[0])
     this.customers[i] = e.target.files[0].name
     console.log(i);
-    
+
   }
-  check(){
+  check() {
     this.checkbox = !this.checkbox
   }
 }

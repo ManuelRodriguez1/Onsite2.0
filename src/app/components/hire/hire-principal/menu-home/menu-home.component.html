@@ -100,7 +100,9 @@
                 name="projectname"
                 id="projectname"
                 ngModel #projectname="ngModel"
+                [class.correctInput]="projectname.value != ''"
               />
+              <span class="textError" [hidden]="projectname.value != ''">* this field is required</span>
             </div>
           </div>
           <div class="row">
@@ -124,6 +126,7 @@
                 placeholder="Describe your project here..."
                 ngModel #description="ngModel"
               ></textarea>
+              <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
             </div>
           </div>
           <div class="row text-right">
@@ -143,14 +146,16 @@
           <div class="row">
             <div class="col-sm input-group m-0">
               <div class="input-group custom-file" *ngFor="let f of files; let i = index">
-                <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg"
-                  name="material" [attr.aria-label]="i" (change)="uploadDoc($event)">
-                <label for="customFile" class="custom-file-label">
-                  <div class="afterFile">{{f}}</div>
+                <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg"
+                  name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
+                <label for="customFileCert{{i}}" class="custom-file-label" >
+                  <div class="afterFile">{{f.name}}</div>
                 </label>
+                <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'"
+                (click)="deleteBriefMaterial(f)"></div>
               </div>
               <div class="input-group-prepend iconAdd" (click)="addfiles()">
-                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" />
+                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" title="Add material" />
               </div>
             </div>
           </div>
@@ -209,6 +214,7 @@
                 name="location"
                 id="location"
                 ngModel #location="ngModel"
+                [class.correctInput]="location.value != ''"
               />
             </div>
           </div>
@@ -227,6 +233,7 @@
                 name="estimated"
                 id="estimated"
                 ngModel #estimated="ngModel"
+                [class.correctInput]="estimated.value != ''"
               />
             </div>
           </div>
@@ -239,12 +246,13 @@
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">Start date</p>
               <input type="date" name="startdate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel">
+                        min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel" [class.correctInput]="startdate.value != ''">
             </div>
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">End date</p>
               <input type="date" name="enddate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2" ngModel #enddate="ngModel">
+                        min="1000-01-01" class="form-control py-2" ngModel #enddate="ngModel" [class.errorInput]="startdate.value > enddate.value" [class.correctInput]="enddate.value != '' && startdate.value < enddate.value">
+                        <span class="textError" [hidden]="startdate.value <= enddate.value">dates do not match</span>
             </div>
           </div>
           <div class="row">
@@ -275,7 +283,7 @@
               </label>
             </div>
           </div>
-        <button class="blueBtn small my-5 float-right" type="submit" [class.disabled]="projectname.value == '' || description.value == '' || location.value == '' || estimated.value == ''" [disabled]=" projectname.value == '' || description.value == '' || location.value == '' || estimated.value == ''">Post</button>
+        <button class="blueBtn small my-5 float-right" type="submit" [class.disabled]="projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value" [disabled]=" projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value">Post</button>
       </div>
     </div>
   </div>

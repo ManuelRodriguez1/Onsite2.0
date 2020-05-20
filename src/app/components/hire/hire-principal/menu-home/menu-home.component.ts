@@ -30,9 +30,9 @@ export class MenuHomeComponent implements OnInit {
   select = 0;
   HomeFormularioNw = 0;
 
-  files = ['Add files'];
+  files = [{ 'name': 'Add material file', 'url': '' }];
   file: any[] = [];
-
+  countC: number = 0
 
   skills2Howmany: any[] = [];
   cust = 0;
@@ -50,6 +50,7 @@ export class MenuHomeComponent implements OnInit {
   righttv = 'text-dashboard';
 
   user = firebase.auth().currentUser
+  user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
   option = 1;
 
   customers2: any[] = [];
@@ -80,13 +81,6 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* const arrticle = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
-      arrticle.subscribe(payload => {
-        payload.forEach(item => {
-          this.profile = item.payload.doc.data()
-          this.projectsHire.push(this.profile)
-        })
-      }) */
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
     .onSnapshot({ includeMetadataChanges: true }, (d) => {
       d.docChanges().forEach((d) => {
@@ -124,24 +118,6 @@ export class MenuHomeComponent implements OnInit {
         }
       })
     })
-    /* this.db.collection("users_hire").doc(this.user.uid).collection("projects").get()
-      .toPromise().then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-              let commentData = doc.data();
-              if(commentData["status"] == 1){
-                this.projectsHirePending.push(commentData)
-              }else if(commentData["status"] == 2){
-                this.projectsHireActive.push(commentData)
-              }else if(commentData["status"] == 3){
-                this.projectsHireArchived.push(commentData)
-              }else if(commentData["status"] == 0){
-                this.projectsHireDeleted.push(commentData)
-              }
-              this.projectsHire.push(commentData);
-          });
-      });
-    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
-    data.subscribe(data=>console.log(data)) */
   }
 
   addPeople(e){
@@ -218,15 +194,23 @@ export class MenuHomeComponent implements OnInit {
   }
 
   addfiles() {
-    this.files.push('Add a file');
-    this.cust = this.cust + 1;
-    console.log(this.cust);
+    this.files.push({ 'name': 'Add material file', 'url': '' });
+    this.cust = this.files.length - 1;
   }
 
   uploadDoc(e){
-    var i = this.cust
+    /* var i = this.cust
     this.file.push(e.target.files[0])
     this.files[i] = e.target.files[0].name
+    this.files[i] = {"name": e.target.files[0].name,"url":e.target.files[0].name}
+     */
+    var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
+    fileDoc.then((url) => {
+      url.ref.getDownloadURL()
+        .then((url) => {
+          this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
+        })
+    })
   }
   selectOption(e) {
     this.option = e
@@ -239,7 +223,23 @@ export class MenuHomeComponent implements OnInit {
   hideModal() {
     this.modal = 2
     this.select = 0
-    //location.reload();
+  }
+
+  deleteBriefMaterial(e: any) {
+    var i = this.files.indexOf(e);
+    if (i !== -1) {
+      this.afs.ref('Users_pro/' + this.user.uid + "/" + e.name).delete()
+      this.files.splice(i, 1)
+      setTimeout(() => {
+        this.user_hire.update({
+          "briefmaterial": this.files
+        })
+      }, 200);
+    }
+    if (this.files.length == 0) {
+      this.files = [{ 'name': 'Add material file', 'url': '' }];
+      this.countC = 0
+    }
   }
 
 }

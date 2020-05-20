@@ -782,3 +782,6 @@ width: 100%;
   border-radius: 6px;
   margin-bottom: 10%;
 }
+.cDefault{
+  cursor: default;
+}

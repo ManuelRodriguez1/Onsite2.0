@@ -22,6 +22,8 @@ export class ExploreComponent implements OnInit {
   infoProject: any[] = [] 
   lat: number = 51.678418
   long: number = 7.809007
+  //Filtro
+  filter: any = 'desc'
 
   constructor(private af: AngularFirestore) { firebase.firestore().enablePersistence() }
 
@@ -33,7 +35,7 @@ export class ExploreComponent implements OnInit {
           this.name = d.doc.data().name
           this.lastname = d.doc.data().lastname
           this.photo = d.doc.data().photoUrl
-          d.doc.ref.collection("projects").where("status", ">", 0).where("status", "<", 3)
+          d.doc.ref.collection("projects").orderBy("t", this.filter)
             .onSnapshot({ includeMetadataChanges: true }, (d) => {
               d.docChanges().forEach((d) => {                
                 this.projects.push([d.doc.data(), { "photo": this.photo, "name": this.name + ' ' + this.lastname }])
