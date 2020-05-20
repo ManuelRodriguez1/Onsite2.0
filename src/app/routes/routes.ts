@@ -24,7 +24,7 @@ export const router: Routes = [
 { path: 'Hire', component: HireComponent },
 { path: 'Pro', component: ProComponent },
 { path: 'ProfilePro', component: ProfileProComponent , data: {  role: "pro" }, canActivate: [AuthGuard]},
-{ path : 'VerifyEmailPro', component: VerifyEmailComponent } ,
+{ path : 'VerifyEmailPro', component: VerifyEmailComponent,  data: { role: "pro" }, canActivate: [AuthGuard]} ,
 { path: 'ChangeEmail', component: ChangeEmailComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
 { path: 'Plantilla', component: PlantillaComponent},
 { path: 'VerificationEmail', component: EmailVerificationComponent},

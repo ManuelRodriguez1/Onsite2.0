@@ -20,9 +20,20 @@
         <div class="derechasuperiorfooter">
             <div class="contenedorform">
                 <p>Subscribe to our newsletter</p>
-                <form #formsubscribe="ngForm" (ngSubmit)="test(formsubscribe)" action="" class="formfooter">
-                    <input type="text" class="form-footer" placeholder="Email address" name="subscribe" ngModel #subscribe="ngModel">
+                <form [formGroup]="registerForm" (ngSubmit)="test()" action="" class="formfooter">
+
+
+                    <input type="text" id="emailFooter" formControlName="email" class="form-control form-footer" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+
+
+
                     <button class="btn-footer"> Subscribe </button>
+
+                    <div *ngIf="submitted && f.email.errors" class="textError">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                    <div id="error1" class="colormsj"></div>
                 </form>
             </div>
 
