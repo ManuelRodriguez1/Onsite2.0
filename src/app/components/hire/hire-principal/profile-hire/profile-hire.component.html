@@ -98,7 +98,7 @@
                   cPass.value != profile.password && cPass.value != ''
                 "
                 [class.correctInput]="
-                  cPass.value == profile.password && cPass.value != ''
+                  cPass.value == password && cPass.value != ''
                 "
                 class="form-control"
                 placeholder="Current password"
@@ -109,7 +109,7 @@
               />
               <span
                 class="textError"
-                [hidden]="cPass.value == profile.password || cPass.value == ''"
+                [hidden]="cPass.value == password || cPass.value == ''"
                 >It isn't the current password</span
               >
             </div>
@@ -172,7 +172,7 @@
               pass1.value == '' ||
               pass2.value == '' ||
               pass1.value != pass2.value ||
-              cPass.value != profile.password ||
+              cPass.value != password ||
               pass1.value?.length < 6
             "
             [disabled]="
@@ -180,7 +180,7 @@
               pass1.value == '' ||
               pass2.value == '' ||
               pass1.value != pass2.value ||
-              cPass.value != profile.password ||
+              cPass.value != password ||
               pass1.value?.length < 6
             "
           >
@@ -225,7 +225,7 @@
             <div class="row py-5 pl-3">
               <div class="col-sm-6">
                 <p class="title3 py-2">Profile completed</p>
-                {{ emailVerified }}
+                {{ profileCompleted }}
               </div>
               <div class="col-sm-6">
                 <p class="title3 py-2">Certified hirer</p>
