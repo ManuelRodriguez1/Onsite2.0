@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
 import { NgForm } from '@angular/forms';
-import { AngularFireAuth } from "angularfire2/auth";
-import { Router } from "@angular/router";
-import { AngularFirestore } from "angularfire2/firestore";
-import { AngularFireStorage } from "angularfire2/storage";
 import * as crypto from "crypto-js";
+import { ProuserService } from 'src/app/services/prouser.service';
 declare var $: any
 
 @Component({
@@ -33,29 +29,23 @@ export class ProfileProComponent implements OnInit {
   // Datos usuario
   cust: number = 0
   imageP: any = ''
-  user = firebase.auth().currentUser
   profile: any = ''
   credential: any
-  user_pro: any = this.af.collection("users_pro").doc(this.user.uid)
   password: string = ''
   //Validar correo
   emailVal: boolean = true
 
   constructor(
-    public afAuth: AngularFireAuth,
-    private af: AngularFirestore,
-    private afs: AngularFireStorage,
-    private router: Router
+    private prouser: ProuserService
   ) { }
   //Show data of User
   ngOnInit() {
-    var data = this.user_pro.snapshotChanges()
-    data.subscribe((d) => {
+    this.prouser.getInfo().snapshotChanges().subscribe((d) => {
       this.profile = d.payload.data()
       this.selectskills = this.profile.skills
       this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
       setTimeout(() => {
-        this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.password)
+        this.credential = this.prouser.credential(this.profile.email, this.password)
       }, 100);
 
       if (this.profile.certificate != null && this.profile.certificate.length != 0) {
@@ -82,79 +72,45 @@ export class ProfileProComponent implements OnInit {
   }
   // Update account information
   accountForm(f: NgForm) {
-    var col = this.user_pro
-    if (f.value.name != '') { col.update({ "name": f.value.name }); $("#name").val(''); }
-    if (f.value.lastname != '') { col.update({ "lastname": f.value.lastname }); $("#lastname").val('') }
+    if (this.prouser.updateAccount(f, this.profile.name, this.profile.lastname, this.profile.description)) {
+      $("#name").val('')
+      $("#lastname").val('')
+      $("#description").val('')
+    }
+
     if (f.value.email.trim() != '') {
-      if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(f.value.email)) {
-        this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
-          this.user.updateEmail(f.value.email)
-            .then(() => {
-              col.update({ "email": f.value.email })
-            }).then(() => {
-              this.user.sendEmailVerification()
-              $("#email").val('')
-            })
-        })
+      if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {
+        this.prouser.updateEmail(this.credential, f.value.email)
+        $("#email").val('')
       } else {
         this.emailVal = false
       }
     }
-    if (f.value.description != '') { col.update({ "description": f.value.description }); $("#description").val('') }
+
   }
   //Update Password
   passForm(f: NgForm) {
     if (f.value.pass1 == f.value.pass2) {
-      this.user.reauthenticateAndRetrieveDataWithCredential(this.credential).then(() => {
-        this.user.updatePassword(f.value.pass2)
-          .then(() => {
-            this.user_pro.update({
-              "password": crypto.AES.encrypt(f.value.pass2, 'N@!o').toString()
-            })
-            $("#cPass, #pass1, #pass2").val('')
-            setTimeout(() => {
-              $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
-              $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
-            }, 200);
-          })
-      })
+      this.prouser.updatePassword(this.credential, f.value.pass2)
+        .then(() => {
+          $("#cPass, #pass1, #pass2").val('')
+          setTimeout(() => {
+            $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
+            $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
+          }, 200);
+        })
     }
   }
   //Update Image Profile
-  imageProfile(e) {
-    this.afs.ref('Users_pro/' + this.user.uid + "/imageProfile").delete()
-    var image = this.afs.ref('Users_pro/' + this.user.uid + "/imageProfile").put(e.target.files[0])
-    image.then((url) => {
-      url.ref.getDownloadURL()
-        .then((url) => {
-          this.imageP = url
-          setTimeout(() => {
-            this.user_pro.update({
-              "photoUrl": this.imageP
-            })
-          }, 200);
-        })
-    })
+  imageProfile(e: any) {
+    this.prouser.updateProfileImg(e)
   }
   //Section CV
   uploadCV(e: any) {
-    var cv = this.afs.ref('Users_pro/' + this.user.uid + "/CV/" + e.target.files[0].name).put(e.target.files[0])
-    cv.then((url) => {
-      url.ref.getDownloadURL()
-        .then((url) => {
-          setTimeout(() => {
-            this.user_pro.update({
-              "cvUrl": [{ "name": e.target.files[0].name, "url": url }]
-            })
-          }, 200);
-        })
-    })
+    this.prouser.addCV(e)
   }
   deleteCV(e: any) {
-    this.afs.ref('Users_pro/' + this.user.uid + '/CV/' + e.name).delete()
-    this.user_pro.update({
-      "cvUrl": [{ "name": 'Add a file', "url": '' }]
-    })
+   this.prouser.deleteCv(e)
   }
   //Section Skills
   list() {
@@ -172,9 +128,7 @@ export class ProfileProComponent implements OnInit {
   }
 
   updateSkills() {
-    this.user_pro.update({
-      "skills": this.selectskills
-    })
+    this.prouser.updateSkill(this.selectskills)
   }
   //Section Certificate
   addcustomer() {
@@ -183,29 +137,16 @@ export class ProfileProComponent implements OnInit {
   }
 
   uploadCert(e) {
-    var fileDoc = this.afs.ref('Users_pro/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
-    fileDoc.then((url) => {
-      url.ref.getDownloadURL()
-        .then((url) => {
-          this.customers[this.cust] = { "name": e.target.files[0].name, "url": url }
-          setTimeout(() => {
-            this.af.collection('users_pro').doc(this.user.uid).update({
-              "certificate": this.customers
-            })
-          }, 200);
-        })
-    })
+    this.prouser.updateCert(e, this.cust, this.customers)
   }
 
   deleteCert(e: any) {
     var i = this.customers.indexOf(e);
     if (i !== -1) {
-      this.afs.ref('Users_pro/' + this.user.uid + "/" + e.name).delete()
+      this.prouser.deleteCert(e)
       this.customers.splice(i, 1)
       setTimeout(() => {
-        this.user_pro.update({
-          "certificate": this.customers
-        })
+        this.prouser.updateUrlCert(this.customers)
       }, 200);
     }
     if (this.customers.length == 0) {

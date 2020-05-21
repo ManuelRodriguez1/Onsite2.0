@@ -44,6 +44,7 @@ import { ChangeEmailComponent } from './components/hire/hire-principal/change-em
 import { LatestPipe } from './pipes/latest.pipe';
 import { SignoutComponent } from './components/pro/signout/signout.component';
 import { ProService } from './services/pro.service';
+import { ProuserService } from './services/prouser.service';
 
 
 @NgModule({
@@ -92,7 +93,7 @@ import { ProService } from './services/pro.service';
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [ServiceService, AuthGuard, ProjectService, ProService],
+  providers: [ServiceService, AuthGuard, ProjectService, ProService, ProuserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
