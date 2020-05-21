@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { FormGroup, FormControl } from "@angular/forms";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AppComponent } from "../../app.component";
+import * as crypto from "crypto-js";
 
 @Component({
   selector: "app-hire",
@@ -34,9 +35,7 @@ export class HireComponent implements OnInit {
   ngOnInit() {}
 
   SendVerificationMail() {
-    return this.af.auth.currentUser.sendEmailVerification().then(() => {
-      /* this.router.navigate(["/Hireprincipal"]); */
-    });
+    return this.af.auth.currentUser.sendEmailVerification();
   }
   next() {
     this.page++;
@@ -67,22 +66,14 @@ export class HireComponent implements OnInit {
             name: formData.value.FirstName,
             lastname: formData.value.LastName,
             phone: formData.value.PhoneNumber,
-            password: formData.value.Password,
+            password: crypto.AES.encrypt(formData.value.Password, 'N@!o').toString(),
             email: user.email,
             zipcode: formData.value.Entercityorzipcode,
             estado: "hire",
-            project: "false"
-
-
+            project: false
           }).then((success) => {
-               location.href="/Hireprincipal";
-
-            });
-    //  this.router.navigate(['Hireprincipal'])
-
-        
-
-         
+              location.href="/ProfileHire";
+          });
         })
         .catch((err) => {
           this.error = "* "+err.message;

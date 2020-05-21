@@ -46,7 +46,7 @@ export class MenuHomeComponent implements OnInit {
   projectsHireDeleted: any[] = [];
 
   section: number = 1;
-  text: any[] = ["Dashboard", "Projects","New Project"];
+  text: any[] = ["Project", "Projects","New Project"];
   righttv = 'text-dashboard';
 
   user = firebase.auth().currentUser
@@ -55,10 +55,13 @@ export class MenuHomeComponent implements OnInit {
 
   customers2: any[] = [];
 
+  viewP: any = ''
+
   profile: any = ''
   modal: number = 0
   confirm: number = 0
   confirm2 = ''
+  error = 0
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
@@ -133,7 +136,6 @@ export class MenuHomeComponent implements OnInit {
   4 = Delete */
 
   addProject(f: NgForm) {
-    this.modal = 1
     var currentDate = new Date();
     var idP = this.db.createId();
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).set({
@@ -169,11 +171,12 @@ export class MenuHomeComponent implements OnInit {
             })
         })
       }
+    }).then(()=>{
+      this.modal = 1
     })
     .catch((error) => {
       alert(error.message)
     })
-    this.HomeFormularioNw = 0;
   }
 
   reload(){
@@ -228,6 +231,7 @@ export class MenuHomeComponent implements OnInit {
   hideModal() {
     this.modal = 3
     this.select = 0
+    this.HomeFormularioNw = 0
   }
 
   deleteBriefMaterial(e: any) {
@@ -267,6 +271,16 @@ export class MenuHomeComponent implements OnInit {
     this.confirm = 1
     console.log(this.confirm)
     this.delete(this.confirm2)
+    this.error = 1
+  }
+
+  viewProject(idApply){
+    this.HomeFormularioNw = 2
+    this.section = 0;
+    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idApply).snapshotChanges()
+    data.subscribe((d) => {
+      this.viewP = d.payload.data()
+    })
   }
 
 }

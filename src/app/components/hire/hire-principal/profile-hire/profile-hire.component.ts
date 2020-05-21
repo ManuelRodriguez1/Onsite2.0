@@ -5,6 +5,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
+import * as crypto from "crypto-js";
 declare var $: any
 
 @Component({
@@ -24,6 +25,8 @@ export class ProfileHireComponent implements OnInit {
   email: string = ''
   currentPassword: string = ''
   profile: any = ''
+  password: string = ''
+  profileCompleted: boolean = false
   projects: any[] = []
   projectsCompleted: any[] = []
   credential: any
@@ -37,7 +40,7 @@ export class ProfileHireComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.emailVerified = this.user.emailVerified;
+    this.emailVerified = this.user.emailVerified
     this.af.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
     .onSnapshot({ includeMetadataChanges: true }, (d) => {
       d.docChanges().forEach((d) => {
@@ -56,8 +59,14 @@ export class ProfileHireComponent implements OnInit {
     var data = this.af.collection("users_hire").doc(this.user.uid).snapshotChanges()
     data.subscribe((d) => {
       this.profile = d.payload.data()
+      this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
+      setTimeout(() => {
+        this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.password)
+      }, 100);
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
-      this.credential = firebase.auth.EmailAuthProvider.credential(this.profile.email, this.profile.password)
+      if(this.profile.photoUrl != null && this.emailVerified != false){
+        this.profileCompleted = true
+      }
     })
   }
 
@@ -100,7 +109,7 @@ export class ProfileHireComponent implements OnInit {
         this.user.updatePassword(f.value.pass2)
           .then(() => {
             this.af.collection("users_hire").doc(this.user.uid).update({
-              "password": f.value.pass2
+              "password": crypto.AES.encrypt(f.value.pass2, 'N@!o').toString()
             })
             $("#cPass, #pass1, #pass2").val('')
             setTimeout(() => {
