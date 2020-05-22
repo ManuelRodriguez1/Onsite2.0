@@ -65,7 +65,9 @@
                 #email="ngModel"
                 ngModel
                 [placeholder]="profile.email"
+                [class.errorInput]="!emailVal"
               />
+              <span class="textError" [hidden]="emailVal">Wrong email</span>
             </div>
             <div class="input-group col-sm">
               <input type="text" hidden />

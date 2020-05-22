@@ -45,6 +45,8 @@ import { LatestPipe } from './pipes/latest.pipe';
 import { SignoutComponent } from './components/pro/signout/signout.component';
 import { ProService } from './services/pro.service';
 import { ProuserService } from './services/prouser.service';
+import { HireuserService } from './services/hireuser.service';
+import { HireService } from './services/hire.service';
 
 
 @NgModule({
@@ -93,7 +95,7 @@ import { ProuserService } from './services/prouser.service';
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [ServiceService, AuthGuard, ProjectService, ProService, ProuserService],
+  providers: [ServiceService, AuthGuard, ProjectService, ProService, ProuserService, HireuserService, HireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
