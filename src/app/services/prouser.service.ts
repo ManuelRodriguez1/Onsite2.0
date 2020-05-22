@@ -18,7 +18,10 @@ export class ProuserService {
     private af: AngularFirestore,
     private afs: AngularFireStorage
   ) { }
-
+  //Obtener datos hire
+  getInfoHire(){
+    return this.af.collection("users_hire")
+  }
   //Obtener datos de usuario
   getInfo() {
     return this.af.collection("users_pro").doc(this.user.uid)
