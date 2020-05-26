@@ -1,7 +1,5 @@
-<div class="container-fluid">
-  <div class="error" [class.errorh]="error == 1">
+<div class="error" [class.errorh]="error == 1">
     <p>The project has been deleted</p>
-  </div>
 </div>
 <form
   #formProject="ngForm"
@@ -46,29 +44,44 @@
                   </div>
                 </div>
                 <div class="col-sm-12 divcol" *ngIf="option == 2">
-                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHireActive">
-                    <div class="col-sm-5">
+                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
+                      <div class="col-sm-5" *ngIf="p[0].status==2">
+                        <li class="list-name">
+                          <span class="project-name">{{p[0].projectname}}</span>
+                        </li>
+                      </div>
+                      <div class="col-sm-3" *ngIf="p[0].status==2">{{p[0].statusname}}</div>
+                      <div class="col-sm-4 text-right" *ngIf="p[0].status==2">
+                        <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                        <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                        <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                      </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 divcol" *ngIf="option == 3">
+                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
+                    <div class="col-sm-5" *ngIf="p[0].status==1">
                       <li class="list-name">
-                        <span class="project-name">{{p.projectname}}</span>
+                        <span class="project-name">{{p[0].projectname}}</span>
                       </li>
                     </div>
-                    <div class="col-sm-3">{{p.statusname}}</div>
-                    <div class="col-sm-4 text-right">
+                    <div class="col-sm-3" *ngIf="p[0].status==1">{{p[0].statusname}}</div>
+                    <div class="col-sm-4 text-right" *ngIf="p[0].status==1">
                       <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
                       <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
                       <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-12 divcol" *ngIf="option == 3">
-                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHirePending">
-                    <div class="col-sm-5">
+                <div class="col-sm-12 divcol" *ngIf="option == 5">
+                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHireDeleted">
+                    <div class="col-sm-5" *ngIf="p[0].status==4">
                       <li class="list-name">
-                        <span class="project-name">{{p.projectname}}</span>
+                        <span class="project-name">{{p[0].projectname}}</span>
                       </li>
                     </div>
-                    <div class="col-sm-3">{{p.statusname}}</div>
-                    <div class="col-sm-4 text-right">
+                    <div class="col-sm-3" *ngIf="p[0].status==4">{{p[0].statusname}}</div>
+                    <div class="col-sm-4 text-right" *ngIf="p[0].status==4">
                       <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
                       <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
                       <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
@@ -141,6 +154,8 @@
             <div class="title2">
               <h1 class="changeColorBlue">Brief material</h1>
             </div>
+          </div>
+          <div class="row">
             <p class="description-form">
               Add any documents or images that might be helpful in explaining more
               about your project.
@@ -169,7 +184,7 @@
           </div>
           <div class="row">
             <div class="container skill m-0 pb-3">
-              <div class="col-sm input-group">
+              <div class="col-sm form-group">
                 <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
                   style="cursor: default;">
                 <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
@@ -266,7 +281,7 @@
                 ngModel #taketest="ngModel"
               />
               <label class="form-check-label" for="taketest">
-                <span>All workers must take a background test.</span>
+                <span class="check-text">All workers must take a background test.</span>
               </label>
             </div>
           </div>
@@ -280,7 +295,7 @@
                 ngModel #passtest="ngModel"
               />
               <label class="form-check-label" for="passtest">
-                <span>All workers must pass a background test.</span>
+                <span class="check-text">All workers must pass a background test.</span>
               </label>
             </div>
           </div>
@@ -291,102 +306,153 @@
 </section>
 </form>
 <div *ngIf="HomeFormularioNw == 2">
-  <div class="overall">
-    <div class="row mt-51 ml-48">
-      <div class="col-sm mx-4 mt-4">
-        <div class="title3">
-          <p>Project: <span class="viewproject">{{ viewP.projectname }}</span></p>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-51 ml-48">
-      <div class="col-sm mt-2 mx-4">
-        <span class="viewproject">Status: {{ viewP.statusname }}</span>
-      </div>
-    </div>
-    <div class="row mt-51 ml-48">
-      <div class="col-sm-8 my-4 mx-4">
-        <span class="viewproject">Project Description...</span><br>
-        {{ viewP.description }}
-      </div>
-    </div>
-    <hr class="hr mt-30" />
-    <div class="row mt-51 ml-48">
-      <div class="col-sm mx-4 my-3">
-        <div class="title3">
-          <p class="title3">Skills:</p>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-51 ml-48">
-      <div class="col-sm mx-4 my-2">
-        <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-          <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-            <p>{{so}}</p>
+  <div class="container">
+    <div class="overall">
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 mt-4">
+          <div class="title3">
+            <p>Project: <span class="viewproject">{{ viewP.projectname }}</span></p>
           </div>
         </div>
       </div>
-    </div>
-    <hr class="hr mt-30" />
-    <div class="row mt-51 ml-48">
-      <div class="col-sm mx-4 my-2">
-        <div class="title3">
-          <p class="title3">Location:</p>
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mt-2 mx-4">
+          <span class="viewproject">Status: {{ viewP.statusname }}</span>
         </div>
       </div>
-    </div>
-    <div class="row mt-51 ml-48">
-      <div class="col-sm mx-4 my-3">
-        <img src="../../../../../assets/iconos/Location_Icon.svg" alt="">
-        {{ viewP.location }}
-      </div>
-    </div>
-  </div>
-  <div class="overall mt-4">
-    <div class="row mt-51 ml-48">
-      <div class="col-sm mx-4 mt-4">
-        <div class="title3">
-          <p>Applicants:</p>
+      <div class="row mt-51 ml-48">
+        <div class="col-sm-8 my-4 mx-4">
+          <span class="viewproject">Project Description...</span><br>
+          {{ viewP.description }}
         </div>
       </div>
-    </div>
-    <hr class="hr mt-30" />
-    <div class="row py-3 ml-2 title-table">
-      <div class="col-sm-3">Name</div>
-      <div class="col-sm pl-4">Skills</div>
-    </div>
-    <div class="row mt-51 ml-48">
-      <div class="col-sm-3 ml-4 mt-2">
-        {{ viewP.projectname }}
-      </div>
-      <div class="col-sm-6">
-        <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-          <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-            <p>{{so}}</p>
+      <hr class="hr mt-30" />
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 my-3">
+          <div class="title3">
+            <p class="title3">Skills:</p>
           </div>
         </div>
       </div>
-      <div class="col-sm mx-4 mt-2">
-        <span class="vprofile">View profile</span>
-      </div>
-    </div>
-    <hr class="hr mt-30" />
-    <div class="row mt-51 ml-48">
-      <div class="col-sm-3 ml-4 mt-2">
-        {{ viewP.projectname }}
-      </div>
-      <div class="col-sm-6">
-        <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-          <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-            <p>{{so}}</p>
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 my-2">
+          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+              <p>{{so}}</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-sm mx-4 mt-2">
-        <span class="vprofile">View profile</span>
+      <hr class="hr mt-30" />
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 my-2">
+          <div class="title3">
+            <p class="title3">Location:</p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 my-3">
+          <img src="../../../../../assets/iconos/Location_Icon.svg" alt="">
+          {{ viewP.location }}
+        </div>
       </div>
     </div>
-    <hr class="hr mt-30" />
+    <div class="overall mt-4 overflow-auto">
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 mt-4">
+          <div class="title3">
+            <p>Applicants:</p>
+          </div>
+        </div>
+      </div>
+      <hr class="hr mt-30" />
+      <div class="row py-3 ml-2 title-table">
+        <div class="col-sm-3">Name</div>
+        <div class="col-sm pl-4">Skills</div>
+      </div>
+      <div class="aplicants">
+      <div class="row mt-51 ml-48">
+        <div class="col-sm-3 ml-4 mt-2">
+          {{ viewP.projectname }}
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mx-4 mt-2">
+          <span class="vprofile">View profile</span>
+        </div>
+      </div>
+      <hr class="hr mt-30" />
+      <div class="row mt-51 ml-48">
+        <div class="col-sm-3 ml-4 mt-2">
+          {{ viewP.projectname }}
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mx-4 mt-2">
+          <span class="vprofile">View profile</span>
+        </div>
+      </div>
+      <hr class="hr mt-30" />
+      <div class="row mt-51 ml-48">
+        <div class="col-sm-3 ml-4 mt-2">
+          {{ viewP.projectname }}
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mx-4 mt-2">
+          <span class="vprofile">View profile</span>
+        </div>
+      </div>
+      <hr class="hr mt-30" />
+      <div class="row mt-51 ml-48">
+        <div class="col-sm-3 ml-4 mt-2">
+          {{ viewP.projectname }}
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mx-4 mt-2">
+          <span class="vprofile">View profile</span>
+        </div>
+      </div>
+      <hr class="hr mt-30" />
+      <div class="row mt-51 ml-48">
+        <div class="col-sm-3 ml-4 mt-2">
+          {{ viewP.projectname }}
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mx-4 mt-2">
+          <span class="vprofile">View profile</span>
+        </div>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="textv" [ngClass]="righttv">
@@ -397,7 +463,7 @@
     <div class="title mt-5">
       <p>You have successfully <br>posted a project</p>
     </div>
-    <p class="my-3 smallText py-3">Soon you will receive applications from Pro users. 
+    <p class="my-3 smallText py-3">Soon you will receive applications from Pro users.
     <br>You can check them in the Projects section and make an <br>offer through the messages section.</p>
     <div class="my-3 pb-5">
       <button class="blueBtn large w360" (click)=hideModal()>Go to projects</button>
