@@ -28,9 +28,8 @@
       <div></div>
       <div></div>
     </div>
-    <!-- *ngIf="p[0].status == 1 || p[0].status == 2" -->
-    <ng-container *ngFor="let p of projects">
-      <div class="projects row" (click)="sendInfo(p)" >
+    <ng-container *ngFor="let p of projects; let i = index">
+      <div class="projects row" (click)="sendInfo(p)" *ngIf="i > start && i < end">
         <div class="col-sm-6 ml-48">
           <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
           <p class="mt-20">{{ p[0].description }}</p>
@@ -56,8 +55,8 @@
       <div class="prevPag">
         <p>Previous</p>
       </div>
-      <div class="numbers bgP">
-        <p>1</p>
+      <div class="numbers" [class.bgP]="start" (click)="changePag(page)" *ngFor="let page of pages">
+        <p>{{ page }}</p>
       </div>
       <div class="nextPag clickP">
         <p>Next</p>
@@ -145,6 +144,6 @@
       on payment terms.</p>
     <button class="blueBtn large mt-30 w360" (click)=hideModal()>Back to dashboard</button>
     <span class="mt-12 mb-12 orLines">or</span>
-    <button class="blueBtn large mb-45 w360" (click)=hideModal()>Back to explore</button>
+    <button class="blueBtn large mb-45 w360" (click)=backExplore()>Back to explore</button>
   </div>
 </div>
