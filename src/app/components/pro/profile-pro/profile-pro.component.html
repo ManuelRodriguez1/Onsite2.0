@@ -12,51 +12,7 @@
       </div>
     </div>
     <div class="col-sm-8 divcol" [class.projects]="select == 1">
-      <!-- <div class="home" *ngIf="select == 0">
-        <div class="proyects anyproyects">
-          <div class="message">
-            <div class="title">You don’t have any projects</div>
-            <div class="start">Get Started</div>
-          </div>
-        </div>
-        <div class="proyects thereis" *ngIf="project == true">
-          <div class="title2">Project: <span> Excavation at 280 S.</span></div>
-          <agm-map [latitude]="lat" [longitude]="lng" class="map">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          </agm-map>
-          <div class="textsmall">
-            <div class="titlesmall">
-              This is what Jimmy needs from you
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="titless2">
-              Tags
-            </div>
-            <div class="boxes">
-              <div class="box">
-                <p>Drywall</p>
-              </div>
-              <div class="line"></div>
-              <div class="box add">
-                <p>Drywall Hanger</p>
-              </div>
-            </div>
-            <div class="wheather">
-              <div class="imgw"></div>
-              <div class="textwe">Cloudy</div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="grades">78°</div>
-            <div class="time">
-              <div class="imgt"></div>
-              <div class="textt">Current Time</div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="hour">9:01 am</div>
-          </div>
-        </div>
-      </div> -->
-      <div *ngIf="select == 2">
+     <div *ngIf="select == 2">
         <div class="title2">
           <p class="changeColorBlue">Account Information</p>
         </div>
@@ -274,9 +230,9 @@
           <div class="row">
             <div class="col-sm input-group">
               <ng-container  *ngIf="customers.length != 0 && customers.length != null && customers[0].name != 'Add certificate file'">
-                <div *ngFor="let co of customers">
+                <div *ngFor="let co of customers" class="mr-30">
                   <div class="fileIcon certIcon"></div>
-                  <p>{{co.name}}</p>
+                  <p class="ellipsis">{{co.name}}</p>
                 </div>
               </ng-container>
             <div *ngIf="customers.length == 0 || customers.length == null || customers[0].name == 'Add certificate file'">

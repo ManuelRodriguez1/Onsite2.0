@@ -40,6 +40,10 @@ import { PlantillaComponent } from './components/plantilla/plantilla.component';
 import { ChangeEmailComponent } from './components/hire/hire-principal/change-email/change-email.component';
 import { LatestPipe } from './pipes/latest.pipe';
 import { SignoutComponent } from './components/pro/signout/signout.component';
+import { ProService } from './services/pro.service';
+import { ProuserService } from './services/prouser.service';
+import { HireuserService } from './services/hireuser.service';
+import { HireService } from './services/hire.service';
 
 
 @NgModule({
@@ -85,7 +89,7 @@ import { SignoutComponent } from './components/pro/signout/signout.component';
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [ServiceService, AuthGuard, ProjectService],
+  providers: [ServiceService, AuthGuard, ProjectService, ProService, ProuserService, HireuserService, HireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -194,6 +194,53 @@
 .w360{
     width: 360px;
 }
+.pagination{
+    overflow: hidden;
+}
+.buttonsPag{
+    display: inline-flex;
+    margin-top: 27px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 27px;
+    color: #9D9D9D;
+    font-size: 14px;
+    line-height: 43px;
+    border: 0.5px solid #9D9D9D;
+    text-align: center;
+    height: 42px;
+}
+.firstPag{
+    width: 92px;
+    border-right: 0.5px solid #9D9D9D;
+    cursor: pointer;
+}
+.prevPag{
+    width: 126px;
+    cursor: pointer;
+}
+.numbers{
+    width: 55px;
+    border-left: 0.5px solid #9D9D9D;
+    border-right: 0.5px solid #9D9D9D;
+    cursor: pointer;
+}
+.nextPag{
+    width: 87px;
+    cursor: pointer;
+}
+.lastPag{
+    width: 94px;
+    border-left: 0.5px solid #9D9D9D;
+    cursor: pointer;
+}
+.clickP{
+    color: #010973;
+}
+.bgP{
+    background: #ECECEC;
+    border-bottom: 0.5px solid #9D9D9D;
+}
 @media(min-width: 1045px){
     .container{
         max-width: 1044px !important;

@@ -9,7 +9,7 @@
 }
 .text-dashboard{
   font-size: 110px !important;
-  right: -130px !important;
+  right: -105px !important;
   top: 57% !important;
 }
 .text-project{
@@ -784,4 +784,36 @@ width: 100%;
 }
 .cDefault{
   cursor: default;
+}
+.viewproject{
+  color: #000000;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 200%;
+}
+.viewproject:hover{
+  color: #000000 !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+.overall{
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+}
+.vprofile{
+  color: #E76800;
+}
+.vprofile:hover{
+  text-decoration: underline;
+}
+.opProject:hover{
+  cursor: pointer;
+}
+.error::before {
+  background: url(../../../../../assets/iconos/Group.svg) no-repeat;
+}
+.opChat:hover{
+  cursor: not-allowed;
 }

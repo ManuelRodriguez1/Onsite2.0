@@ -1,11 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { ServiceService } from 'src/app/services/service.service';
-import * as firebase from "firebase/app";
-import { AngularFireAuth } from "angularfire2/auth";
-import { Router } from "@angular/router";
-import { FormGroup, FormControl } from "@angular/forms";
+import { Component, OnInit, NgModule } from "@angular/core";
+import { NgForm } from '@angular/forms';
+import { HireService }  from 'src/app/services/hire.service';
 import { AngularFirestore } from "angularfire2/firestore";
-import { AppComponent } from "../../app.component";
 
 @Component({
   selector: "app-hire",
@@ -13,31 +9,19 @@ import { AppComponent } from "../../app.component";
   styleUrls: ["./hire.component.css"],
 })
 export class HireComponent implements OnInit {
-  FirstName;
-  LastName;
-  PhoneNumber;
-  Entercityorzipcode;
-  Email;
-  Password;
   error;
   select = 0;
   page = 0;
   title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
-  appComponent = AppComponent;
+  verifyEmail: boolean = false
 
   constructor(
-    public af: AngularFireAuth,
-    private router: Router,
+    private serviceHire: HireService,
     private db: AngularFirestore
   ) {}
   ngOnInit() {}
 
-  SendVerificationMail() {
-    return this.af.auth.currentUser.sendEmailVerification().then(() => {
-      /* this.router.navigate(["/Hireprincipal"]); */
-    });
-  }
   next() {
     this.page++;
     this.select = this.page;
@@ -47,63 +31,18 @@ export class HireComponent implements OnInit {
     this.select = this.page;
   }
 
-  onSubmit(formData) {
-    console.log(formData);
-    if (formData.valid) {
-      this.af.auth
-        .createUserWithEmailAndPassword(
-          formData.value.Email,
-          formData.value.Password
-        )
-        .then((success) => {
-          var user = firebase.auth().currentUser;
-          this.SendVerificationMail();
-          user.updateProfile({
-            displayName: "hire",
-            photoURL: "",
-          });
-          this.db.collection("users_hire").doc(user.uid).set({
-            id: user.uid,
-            name: formData.value.FirstName,
-            lastname: formData.value.LastName,
-            phone: formData.value.PhoneNumber,
-            password: formData.value.Password,
-            email: user.email,
-            zipcode: formData.value.Entercityorzipcode,
-            estado: "hire",
-            project: "false"
-
-
-          }).then((success) => {
-               location.href="/Hireprincipal";
-
-            });
-    //  this.router.navigate(['Hireprincipal'])
-
-        
-
-         
-        })
-        .catch((err) => {
-          this.error = "* "+err.message;
-          console.log(err);
-        });
-    } else {
-      if (formData.control.controls.FirstName.status == "INVALID") {
-        this.error = "Require FirstName";
-      } else if (formData.control.controls.LastName.status == "INVALID") {
-        this.error = "Require LastName";
-      } else if (formData.control.controls.PhoneNumber.status == "INVALID") {
-        this.error = "Require PhoneNumber";
-      } else if (formData.control.controls.email.status == "INVALID") {
-        this.error = "Require email";
-      } else if (formData.control.controls.Password.status == "INVALID") {
-        this.error = "Require Password";
-      } else if (
-        formData.control.controls.Entercityorzipcode.status == "INVALID"
-      ) {
-        this.error = "Require Entercityorzipcode";
+  onSubmit(f: NgForm) {
+    var temp = false
+    this.db.collection('users_hire').get().subscribe((u) => {
+      u.forEach((e) => {
+        if (f.value.Email === e.data().email) {
+          temp = true
+        }
+        this.verifyEmail = temp
+      })
+      if (!this.verifyEmail) {
+        this.serviceHire.registerHire(f);
       }
-    }
+    })
   }
 }

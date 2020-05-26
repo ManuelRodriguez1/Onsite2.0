@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProuserService } from 'src/app/services/prouser.service';
 import * as firebase from "firebase/app";
-import { AngularFirestore } from "angularfire2/firestore";
 
 @Component({
   selector: 'app-explore',
@@ -13,43 +13,49 @@ export class ExploreComponent implements OnInit {
   modal: number = 0
   projects: any[] = []
   loading: boolean
-  user: any = firebase.auth().currentUser
   // Datos usuario
   name: string
   lastname: string
   photo: string
   //Informacion proyecto
-  infoProject: any[] = [] 
+  infoProject: any[] = []
   lat: number = 51.678418
   long: number = 7.809007
   //Filtro
   filter: any = 'desc'
 
-  constructor(private af: AngularFirestore) { firebase.firestore().enablePersistence() }
+  constructor(private prouser: ProuserService) { firebase.firestore().disableNetwork() }
 
   ngOnInit() {
     this.loading = true
-    this.af.collection("users_hire").ref.where("project", "==", true)
-      .onSnapshot((d) => {
-        d.docChanges().forEach((d) => {
-          this.name = d.doc.data().name
-          this.lastname = d.doc.data().lastname
-          this.photo = d.doc.data().photoUrl
-          d.doc.ref.collection("projects").orderBy("t", this.filter)
-            .onSnapshot({ includeMetadataChanges: true }, (d) => {
-              d.docChanges().forEach((d) => {                
-                this.projects.push([d.doc.data(), { "photo": this.photo, "name": this.name + ' ' + this.lastname }])
-                if(d.type === 'modified'){
-                  this.projects.forEach((data)=>{
-                    if(data[0].t == d.doc.data().t){
-                      this.projects.splice(data, 1)
+    this.prouser.getInfoHire().snapshotChanges()
+      .subscribe((d) => {
+        firebase.firestore().enableNetwork()
+        d.forEach((j) => {
+          if (j.payload.doc.data().project) {
+            this.name = j.payload.doc.data().name
+            this.lastname = j.payload.doc.data().lastname
+            this.photo = j.payload.doc.data().photoUrl
+            j.payload.doc.ref.collection("projects").orderBy("creationdate", this.filter)/* .where("creationdate", ">", "May 20, 2019 at 12:31:21 PM UTC-5") */
+              .onSnapshot((d) => {
+                d.docChanges().map((k) => {
+                  if (k.doc.data().status > 0 && k.doc.data().status < 3) {
+                    if (k.type === 'modified') {
+                      this.projects.map((m) => {
+                        if (m[0].creationdate === k.doc.data().creationdate) {
+                          m = [k.doc.data(), { "photo": this.photo, "name": this.name + ' ' + this.lastname }]
+                        }
+                      })
+                    } else {
+                      this.projects.push([k.doc.data(), { "photo": this.photo, "name": this.name + ' ' + this.lastname }])
                     }
-                  })
-                }
+                  }
+                })
               })
-            })
+          }
         })
       })
+    firebase.firestore().disableNetwork()
     this.loading = false
   }
   sendInfo(e) {

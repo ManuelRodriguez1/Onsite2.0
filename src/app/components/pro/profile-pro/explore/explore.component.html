@@ -28,8 +28,9 @@
       <div></div>
       <div></div>
     </div>
+    <!-- *ngIf="p[0].status == 1 || p[0].status == 2" -->
     <ng-container *ngFor="let p of projects">
-      <div class="projects row" (click)="sendInfo(p)" *ngIf="p[0].status != 0 && p[0].status != 3">
+      <div class="projects row" (click)="sendInfo(p)" >
         <div class="col-sm-6 ml-48">
           <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
           <p class="mt-20">{{ p[0].description }}</p>
@@ -41,11 +42,30 @@
         </div>
         <div class="col-sm-5">
           <div class="map mt-47">
-            <agm-map [latitude]="lat" [longitude]="long"></agm-map>
+            <!-- <agm-map [latitude]="lat" [longitude]="long"></agm-map> -->
           </div>
         </div>
       </div>
     </ng-container>
+  </div>
+  <div class="pagination">
+    <div class="buttonsPag">
+      <div class="firstPag">
+        <p>First</p>
+      </div>
+      <div class="prevPag">
+        <p>Previous</p>
+      </div>
+      <div class="numbers bgP">
+        <p>1</p>
+      </div>
+      <div class="nextPag clickP">
+        <p>Next</p>
+      </div>
+      <div class="lastPag clickP">
+        <p>Last</p>
+      </div>
+    </div>
   </div>
 </div>
 
