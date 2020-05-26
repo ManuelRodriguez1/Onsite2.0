@@ -14,7 +14,8 @@
                             <div class="fields container">
                                 <div class="row">
                                     <div class="col-sm input-group">
-                                        <input class='validate form-control  heigInput' id="exampleInputEmail1" type='email' (ngModel)="email" name='email' placeholder="E-mail" required/>
+                                        <input class='validate form-control  heigInput emailLogin' type="email" id="exampleInputEmail1" name='email' [(ngModel)]="email" placeholder="Email" required>
+
                                         <span class="textError">{{error}}</span>
 
                                     </div>
@@ -35,8 +36,8 @@
                                 <div class="row lineaFinalultimate">
                                     <div class="col-sm input-group">
                                         <div>
-                                            <label class="checkbox">
-                                                <input type="checkbox" class="checkbox__input"/>
+                                            <label class="checkbox" (click)="checkbox()">
+                                                <input type="checkbox" id="loginCheckbox" checked="{{vmactivo}}"  class="checkbox__input"/>
                                                 <span class="checkbox__checkmark"></span>
                                                 <span class="remember_me">Remember me</span>
                                             </label>
@@ -50,7 +51,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm memberSing">
-                                        Not a member yet? <a>Sign up</a>
+                                        Not a member yet? <a data-toggle="modal" data-target="#mi_modal" (click)="poppad2()">Sign up</a>
                                     </div>
                                 </div>
                             </div>
@@ -73,6 +74,8 @@
 
                                         <input class='validate form-control' id="exampleInputEmail1" type='email' (ngModel)="email" name='emailreset' placeholder="Enter email" required/>
                                         <span class="textError">{{error3}}</span>
+                                        <span class="ocultarForgot  "></span>
+
 
                                     </div>
                                 </div>
@@ -98,78 +101,77 @@
 
 <!-- Modal Sign UP-->
 
-<div class="container">
-    <br>
-    <div class="modal fade" id="mi_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
 
-                <div class="modal-body">
+<div class="modal fade" id="mi_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
 
 
-                    <div class="contenedorImagen">
-                        <div class="tituloContImg">
-                            Sign up to Onhive
+                <div class="contenedorImagen">
+                    <div class="tituloContImg">
+                        Sign up to Onhive
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm input-group textNormal margint30">
+                            Get started and choose the profile you want to join as.
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm input-group textNormal textnomarMargin">
+                            <div class="botonesOnsite margint30">
 
-                        <div class="row">
-                            <div class="col-sm input-group textNormal margint30">
-                                Get started and choose the profile you want to join as.
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm input-group textNormal textnomarMargin">
-                                <div class="botonesOnsite margint30">
+                                <div class="  ">
+                                    <button (click)="activarpro()" class="blueBtn small btnup">As a pro</button>
+                                </div>
 
-                                    <div class="  ">
-                                        <button (click)="activarpro()" class="blueBtn small btnup">As a pro</button>
-                                    </div>
+                                <div class=" ">
+                                    <button (click)="activarhire()" class="blueBtn small btnup">As a hirer</button>
+                                </div>
 
-                                    <div class=" ">
-                                        <button (click)="activarhire()" class="blueBtn small btnup">As a hirer</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div *ngIf="activar==true">
-                            <div class="row">
-                                <div class="col-sm input-group textNormal margint30 colorGris">
-                                    Join as a pro if you’re willing to find a project to work in.
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm input-group">
-                                    <button (click)="pro()" class="botonNaranja margint30">
-                                            Continue
-                                        </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div *ngIf="activar1==true">
-                            <div class="row">
-                                <div class="col-sm input-group textNormal margint30 colorGris">
-                                    Join as a hire if you’re willing to find a project to work in.
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm input-group">
-                                    <button (click)="hire()" class="botonNaranja margint30" (click)="activarhire()">
-                                            Continue
-                                        </button>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm memberSing margint30">
-                                Already a member? <a> Sign in </a>
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="activar==true">
+                        <div class="row">
+                            <div class="col-sm input-group textNormal margint30 colorGris">
+                                Join as a pro if you’re willing to find a project to work in.
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm input-group">
+                                <button (click)="pro()" class="botonNaranja margint30">
+                                            Continue
+                                        </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="activar1==true">
+                        <div class="row">
+                            <div class="col-sm input-group textNormal margint30 colorGris">
+                                Join as a hire if you’re willing to find a project to work in.
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm input-group">
+                                <button (click)="hire()" class="botonNaranja margint30" (click)="activarhire()">
+                                            Continue
+                                        </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm memberSing margint30">
+                            Already a member?
+                            <a data-toggle="modal" data-target="#exampleModal" (click)="poppad1()"> Sign in </a>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 </div>
