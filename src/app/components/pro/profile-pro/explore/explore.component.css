@@ -218,10 +218,10 @@
 .prevPag{
     width: 126px;
     cursor: pointer;
+    border-right: 0.5px solid #9D9D9D;
 }
 .numbers{
     width: 55px;
-    border-left: 0.5px solid #9D9D9D;
     border-right: 0.5px solid #9D9D9D;
     cursor: pointer;
 }

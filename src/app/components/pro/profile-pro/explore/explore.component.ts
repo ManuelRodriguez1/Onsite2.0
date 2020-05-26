@@ -24,7 +24,7 @@ export class ExploreComponent implements OnInit {
   filter: any = 'desc'
   //Paginación
   pages: number[] = []
-  start: number = -1
+  start: number = 1
   end: number = 5
 
   constructor(private prouser: ProuserService, public router: Router) { firebase.firestore().disableNetwork() }
@@ -80,8 +80,10 @@ export class ExploreComponent implements OnInit {
     page =  Math.ceil(this.projects.length / 5)
     for (let i = 1; i <= page; i++) {
       this.pages.push(i)
-    }
-    console.log(this.pages);
-    
+    }    
+  }
+  changePag(e: number){
+    this.start = ((e*5) - 5) == 0 ? 1 : (e*5) - 5
+    this.end = e*5
   }
 }

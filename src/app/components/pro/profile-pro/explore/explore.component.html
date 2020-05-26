@@ -29,9 +29,9 @@
       <div></div>
     </div>
     <ng-container *ngFor="let p of projects; let i = index">
-      <div class="projects row" (click)="sendInfo(p)" *ngIf="i > start && i < end">
+      <div class="projects row" (click)="sendInfo(p)" *ngIf="(i+1) >= start && (i+1) <= end">
         <div class="col-sm-6 ml-48">
-          <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
+          <p class="mt-47"><span class="title2">Project:</span>{{ p[0].projectname }}</p>
           <p class="mt-20">{{ p[0].description }}</p>
           <p class="mt-20">Status: {{ p[0].statusname }}</p>
           <div class="mt-49 mb-42">
@@ -55,7 +55,7 @@
       <div class="prevPag">
         <p>Previous</p>
       </div>
-      <div class="numbers" [class.bgP]="start" (click)="changePag(page)" *ngFor="let page of pages">
+      <div class="numbers" [class.bgP]="start >= ((page*5)-5) && end <= (page*5) " (click)="changePag(page)" *ngFor="let page of pages">
         <p>{{ page }}</p>
       </div>
       <div class="nextPag clickP">
