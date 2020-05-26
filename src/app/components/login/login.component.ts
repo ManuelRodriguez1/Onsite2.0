@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as $ from 'jquery';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,10 @@ import * as $ from 'jquery';
 export class LoginComponent implements OnInit {
   error: any[];
   error2: any[];
-  error3: any[];
+  error3:any[]=[];
   password;
   email;
+  ocultarForgot=false;
   cerrarAbrir = "";
   abrir = false;
   activar=true;
@@ -25,8 +27,10 @@ export class LoginComponent implements OnInit {
   Forgot = 0;
   list = "";
 rtrespuesta="";
+vmactivo;
+modal : NgbModalRef;
 
-  constructor(public af: AngularFireAuth, private router: Router) {
+  constructor(public af: AngularFireAuth, private router: Router,private modalService: NgbModal) {
 
 
 
@@ -61,25 +65,31 @@ Forgot1(){
 Forgot2(){
   this.Forgot = 0;
 }
+checkbox(){
+  if ($("#loginCheckbox").length == $("#loginCheckbox:checked").length) {  
+      localStorage.setItem('checked', $('#loginCheckbox').prop('checked'));
+      localStorage.setItem('email', $(".emailLogin").val());
+  } else {  
+    localStorage.removeItem('email');
+    localStorage.removeItem('checked');
+    this.vmactivo=false;
+  }  
+}
 onRecuperation(formData) {
 var array=[];
+
+
   if(formData.valid) {
     var auth = firebase.auth();
     var emailAddress = formData.value.emailreset;
+
     auth.sendPasswordResetEmail(emailAddress).then(function() {
+   
+      
   
-      //  array.push("Check mail");
         $("#exampleInputEmail1").val("");
         $("#exampleInputEmail1").removeClass("errorInput");
-        this.error3 = "Check mail";
-
-    }).catch(
-      (err) => {
-
-      //array.push();
-      $("#exampleInputEmail1").addClass("errorInput");
-      this.error3 = err.message;
-       
+        $(".ocultarForgot").html("Check email");
     })
 
   }
@@ -87,21 +97,41 @@ var array=[];
 }
 
   ngOnInit() {
+
+ 
+
+    if(localStorage.getItem('checked')){
+      
+      this.email=localStorage.getItem('email');
+      this.vmactivo=true;
+
+
+    }
+ 
+
   }
+
+  poppad2() {
+    
+    $('#exampleModal').removeClass('show');
+    $('#exampleModal').addClass('hide');
+    $('#exampleModal').css('display','none');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+
+}
+
+poppad1() {
+  $('#mi_modal').removeClass('show');
+  $('#mi_modal').addClass('hide');
+  $('#mi_modal').css('display','none');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+
+}
   onSubmit(formData) {
     if (formData.valid) {
-
-     /* if (isRemberMeChecked) {
-       
-        localStorage.setItem('Name', formData.value.email);
-        localStorage.setItem('token',  formData.value.password);
-     
-    } else {
-      
-        sessionStorage.setItem('Name', formData.value.email);
-        sessionStorage.setItem('token', formData.value.password);
-     
-    }*/
+  
       this.af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password).then((resolve) => {
         formData.reset();
        this.abrir = true;
@@ -116,7 +146,6 @@ var array=[];
              location.href = "/Hireprincipal";
             } else if (authState.displayName == "pro") {
               location.href = '/ProfilePro';
-              console.log('pro')
             }
           }
         })

@@ -21,25 +21,22 @@
         <div class="title">
             <p>Reset your password for OnHive</p>
         </div>
-        <div class="error" [class.errorh]="error">
-            <!--<p>You can't change your email to the same address</p-->
-        </div>
+
         <div class="fields2">
             <div class="row">
                 <div class="col-sm input-group">
-                    <input type="password" #email="ngModel" name="pass1" placeholder="Password" class="form-control" ngModel>
+                    <input type="password" #email="ngModel" name="pass1" id="pass1" placeholder="Password" class=" validate form-control" required ngModel>
+                    <span class="textError">{{messageerror}}</span>
                 </div>
                 <div class="col-sm input-group">
-                    <input type="password" #pass="ngModel" name="pass2" placeholder="check Password" class="form-control" ngModel>
+                    <input class="validate form-control" type="password" #pass="ngModel" name="pass2" placeholder="check Password" required ngModel>
                 </div>
             </div>
         </div>
         <div class="buttons">
-            <button type="submit" class="btn btn-outline-warning next large">Reset your password</button>
+            <button type="submit" [disabled]="!updateForm.valid" class="btn btn-outline-warning next large">Reset your password</button>
         </div>
     </form>
-    <div class="textv">
-        <p>{{text[section]}}</p>
-    </div>
+
 
 </section>
