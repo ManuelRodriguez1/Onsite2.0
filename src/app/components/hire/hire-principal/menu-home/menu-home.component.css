@@ -5,16 +5,16 @@
   box-shadow: 0px 0px 8px -3px rgba(0,0,0,0.75);  
 }
 .form-Project{
-  margin: 10%;
+  margin: 7%;
 }
 .text-dashboard{
-  font-size: 110px !important;
-  right: -105px !important;
-  top: 57% !important;
+  font-size: 100px !important;
+  right: -120px !important;
+  top: 49% !important;
 }
 .text-project{
-  font-size: 110px !important;
-  right: -150px !important;
+  font-size: 100px !important;
+  right: -95px !important;
   top: 57% !important;
 }
 .text-new-project{
@@ -115,6 +115,11 @@ span:hover{
   text-decoration: underline;
   cursor: pointer;
 }
+.check-text:hover{
+  text-decoration: none !important;
+  color: #5B5B5B !important;
+  cursor: default;
+}
 .active{
   color: #FF8600 !important;
   text-decoration: underline;
@@ -148,7 +153,6 @@ span:hover{
 }
 .new-project:hover{
   color: #010973 !important;
-  font-weight: bold;
 }
 .activeOption{
   color: #E76800 !important;
@@ -797,7 +801,7 @@ width: 100%;
 .viewproject:hover{
   color: #000000 !important;
   text-decoration: none !important;
-  cursor: pointer;
+  cursor: default;
 }
 .overall{
   box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
@@ -811,9 +815,37 @@ width: 100%;
 .opProject:hover{
   cursor: pointer;
 }
+.error{
+  border-radius: 0%;
+  margin-top: 6% !important;
+}
 .error::before {
   background: url(../../../../../assets/iconos/Group.svg) no-repeat;
 }
 .opChat:hover{
   cursor: not-allowed;
+}
+.aplicants{
+  width: 100%;
+  height: 220px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.aplicants::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+.aplicants::-webkit-scrollbar-thumb {
+  background-color: rgba(3, 3, 3, 0.3);
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.aplicants::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+.aplicants::-webkit-scrollbar:vertical {
+  width:10px;
+}
+.aplicants::-webkit-scrollbar:horizontal {
+  height: 10px;
 }

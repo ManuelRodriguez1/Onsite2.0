@@ -62,6 +62,7 @@ export class MenuHomeComponent implements OnInit {
   confirm: number = 0
   confirm2 = ''
   error = 0
+  cities = []
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
@@ -86,40 +87,41 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
-    .onSnapshot({ includeMetadataChanges: true }, (d) => {
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
+    .onSnapshot((d) => {
       d.docChanges().forEach((d) => {
-        this.projectsHire.push([d.doc.data()])
-        if(d.doc.data().status === 2){
-          this.projectsHireActive.push(d.doc.data())
-        }if(d.doc.data().status == 1){
-          this.projectsHirePending.push(d.doc.data())
-        }if(d.doc.data().status == 3){
-          this.projectsHireArchived.push(d.doc.data())
+        if (d.type === "added") {
+          console.log("New project: ", d.doc.data())
+          this.projectsHire.push([d.doc.data()])
         }
-        if(d.type === 'modified'){
+        if (d.type === "modified") {
+          console.log("Modified project: ", d.doc.data())
           this.projectsHire.forEach((data)=>{
-            if(data[0].t == d.doc.data().t){
-              this.projectsHire.splice(data, 1)
+            if(data[0].id === d.doc.data().id){
+              this.projectsHire.splice(data[0],1,d.doc.data())
+              console.log(this.projectsHire)
             }
           })
-        }/* else if(d.type === 'added'){
-          this.projectsHire.forEach((data)=>{
-            if(data[0].status === 2){
-              this.projectsHireActive.push(data)
-            }if(data[0].status == 1){
-              this.projectsHireDeleted.push(data)
-            }if(data.status == 3){
-              this.projectsHireArchived.push(data)
+        }
+        if (d.type === "removed") {
+          console.log("Removed project: ", d.doc.data())
+          var elim = d.doc.data().id
+          console.log(elim)
+          for (var i = 0; i < this.projectsHire.length; i++) {
+            if (this.projectsHire[i][0].id === elim) {
+              console.log(i)
+              this.projectsHire.splice(i, 1);
             }
-          })
-        } */else if(d.type === 'removed'){
-          this.projectsHire.forEach((data)=>{
-            if(data[0].t == d.doc.data().t){
-              this.projectsHire.pop()
-              this.projectsHire.splice(this.projectsHire.indexOf(data),1)
+          }
+          console.log(this.projectsHire);
+          /* var t = this.projectsHire.map(item => item.id).indexOf(d.doc.data().id)
+          console.log(t) */
+          /* this.projectsHire.forEach((data)=>{
+            if(data[0].id === d.doc.data().id){
+              this.projectsHire.splice(data[0],1)
+              console.log(this.projectsHire)
             }
-          })
+          }) */
         }
       })
     })
@@ -136,6 +138,7 @@ export class MenuHomeComponent implements OnInit {
   4 = Delete */
 
   addProject(f: NgForm) {
+    this.error = 2
     var currentDate = new Date();
     var idP = this.db.createId();
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).set({
@@ -187,6 +190,7 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw = 1;
   }
   next() {
+    this.error = 2
     this.page++;
     this.HomeFormularioNw++;
     this.section = 2;
@@ -252,9 +256,7 @@ export class MenuHomeComponent implements OnInit {
   }
 
   delete(idP){
-    this.showModalDelete()
-    console.log(this.confirm)
-    console.log(idP)
+    this.modal = 2
     this.confirm2 = idP
     if( this.confirm == 1){
       this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
@@ -262,19 +264,19 @@ export class MenuHomeComponent implements OnInit {
         statusname: 'Deleted',
       })
       this.modal = 3
-    }else{
       this.confirm = 0
     }
   }
 
   confirmDelete(){
     this.confirm = 1
-    console.log(this.confirm)
     this.delete(this.confirm2)
     this.error = 1
   }
 
   viewProject(idApply){
+    this.righttv='text-project'
+    this.error = 2
     this.HomeFormularioNw = 2
     this.section = 0;
     var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idApply).snapshotChanges()
