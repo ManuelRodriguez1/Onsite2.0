@@ -37,7 +37,7 @@ export class ExploreComponent implements OnInit {
             this.lastname = j.payload.doc.data().lastname
             this.photo = j.payload.doc.data().photoUrl
             j.payload.doc.ref.collection("projects").orderBy("creationdate", this.filter)/* .where("creationdate", ">", "May 20, 2019 at 12:31:21 PM UTC-5") */
-              .onSnapshot((d) => {
+             .onSnapshot((d) => {
                 d.docChanges().map((k) => {
                   if (k.doc.data().status > 0 && k.doc.data().status < 3) {
                     if (k.type === 'modified') {
@@ -56,7 +56,7 @@ export class ExploreComponent implements OnInit {
         })
       })
     firebase.firestore().disableNetwork()
-    this.loading = false
+    this.loading = false;
   }
   sendInfo(e) {
     this.infoProject = e

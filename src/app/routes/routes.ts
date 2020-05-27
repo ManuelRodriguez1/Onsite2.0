@@ -12,6 +12,7 @@ import { HirePrincipalComponent } from "../components/hire/hire-principal/hire-p
 import { AuthGuard } from '../services/auth.service';
 import { PlantillaComponent } from '../components/plantilla/plantilla.component';
 import { ExploreComponent } from '../components/pro/profile-pro/explore/explore.component';
+import { ChatComponent } from '../components/chat/chat.component';
 
 
 export const router: Routes = [
@@ -26,7 +27,8 @@ export const router: Routes = [
 { path: 'VerificationEmail', component: EmailVerificationComponent},
 {path: 'ProfileHire', component: ProfileHireComponent , data: { role: "hire" }, canActivate:[AuthGuard]},
 {path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate:[AuthGuard]},
-    { path: 'ExplorePro', component: ExploreComponent, data: { role: "pro" }, canActivate: [AuthGuard]},
+{ path: 'ExplorePro', component: ExploreComponent, data: { role: "pro" }, canActivate: [AuthGuard]},
+{ path: 'Chat', component: ChatComponent},
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
 
