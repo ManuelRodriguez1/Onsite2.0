@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { NgForm } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
+import { HireuserService } from 'src/app/services/hireuser.service';
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFireStorage } from "angularfire2/storage";
@@ -62,12 +63,14 @@ export class MenuHomeComponent implements OnInit {
   confirm: number = 0
   confirm2 = ''
   error = 0
-  cities = []
+  apply: any[] = [];
+  dataApply:any[] = [];
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
-    private afs: AngularFireStorage) {
+    private afs: AngularFireStorage,
+    private hireuser: HireuserService) {
   }
 
   list(e) {
@@ -283,6 +286,19 @@ export class MenuHomeComponent implements OnInit {
     data.subscribe((d) => {
       this.viewP = d.payload.data()
     })
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idApply).snapshotChanges()
+      .subscribe((d) => {
+        this.viewP = d.payload.data()
+        this.apply = this.viewP.applyUsers
+        console.log(this.apply)
+        for (var i = 0; i < this.apply.length; i++) {
+          this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
+            .subscribe((data)=>{
+              this.dataApply.push(data.payload.data())
+              console.log(this.dataApply)
+            })
+        }
+      })
   }
 
 }

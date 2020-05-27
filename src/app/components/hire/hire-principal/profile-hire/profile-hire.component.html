@@ -229,9 +229,10 @@
                 <p class="title3 py-2">Profile completed</p>
                 {{ profileCompleted }}
               </div>
-              <div class="col-sm-6">
-                <p class="title3 py-2">Certified hirer</p>
-                {{ emailVerified }}
+              <div class="col-sm-6 mt-2">
+                <span class="py-2" [class]="emailVerified ? 'verifiedU':'notVerified'">
+                <img [src]="emailVerified ? '../../../../../assets/iconos/verified.svg' : ''" />
+                {{emailVerified == true ? 'Verified user':'User not verified'}}</span>
               </div>
             </div>
           </div>

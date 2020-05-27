@@ -372,85 +372,22 @@
         <div class="col-sm pl-4">Skills</div>
       </div>
       <div class="aplicants">
-      <div class="row mt-51 ml-48">
-        <div class="col-sm-3 ml-4 mt-2">
-          {{ viewP.projectname }}
-        </div>
-        <div class="col-sm-6">
-          <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
-            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-              <p>{{so}}</p>
+        <div class="row mt-51 ml-48 hr pt-2" *ngFor="let da of dataApply">
+          <div class="col-sm-3 ml-4 mt-2">
+            {{ da.name}}
+          </div>
+          <div class="col-sm-6">
+            <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
+              <div class="skillsel onlySkill" *ngFor="let so of da.skills">
+                <p>{{so}}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm mx-4 mt-2">
-          <span class="vprofile">View profile</span>
-        </div>
-      </div>
-      <hr class="hr mt-30" />
-      <div class="row mt-51 ml-48">
-        <div class="col-sm-3 ml-4 mt-2">
-          {{ viewP.projectname }}
-        </div>
-        <div class="col-sm-6">
-          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-              <p>{{so}}</p>
-            </div>
+          <div class="col-sm mx-4 mt-2">
+            <span class="vprofile">View profile</span>
           </div>
         </div>
-        <div class="col-sm mx-4 mt-2">
-          <span class="vprofile">View profile</span>
-        </div>
-      </div>
-      <hr class="hr mt-30" />
-      <div class="row mt-51 ml-48">
-        <div class="col-sm-3 ml-4 mt-2">
-          {{ viewP.projectname }}
-        </div>
-        <div class="col-sm-6">
-          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-              <p>{{so}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm mx-4 mt-2">
-          <span class="vprofile">View profile</span>
-        </div>
-      </div>
-      <hr class="hr mt-30" />
-      <div class="row mt-51 ml-48">
-        <div class="col-sm-3 ml-4 mt-2">
-          {{ viewP.projectname }}
-        </div>
-        <div class="col-sm-6">
-          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-              <p>{{so}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm mx-4 mt-2">
-          <span class="vprofile">View profile</span>
-        </div>
-      </div>
-      <hr class="hr mt-30" />
-      <div class="row mt-51 ml-48">
-        <div class="col-sm-3 ml-4 mt-2">
-          {{ viewP.projectname }}
-        </div>
-        <div class="col-sm-6">
-          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-              <p>{{so}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm mx-4 mt-2">
-          <span class="vprofile">View profile</span>
-        </div>
-      </div>
+        <hr class="hr mt-30" />
       </div>
     </div>
   </div>

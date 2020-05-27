@@ -5,7 +5,7 @@
   border: 0;
 }
 .container{
-  margin-top: 95px;
+  margin-top: 120px;
   margin-bottom: 74px;
   padding: 0;
 }
@@ -215,4 +215,26 @@
 .labelButton{
   text-align: center;
   line-height: 47px;
+}
+.notVerified{
+  background-color: #9D9D9D;
+  color: #ffffff;
+  padding: 3% 6%;
+  border-radius: 2px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+}
+.verifiedU{
+  background-color: #21D8C6;
+  color: #ffffff;
+  padding: 3% 6%;
+  border-radius: 2px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
 }
