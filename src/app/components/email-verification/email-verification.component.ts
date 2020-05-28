@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase/app';
 import { NgForm } from '@angular/forms';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from "angularfire2/firestore";
+
+import * as crypto from "crypto-js";
+
+
 
 @Component({
   selector: 'app-email-verification',
@@ -15,11 +21,9 @@ export class EmailVerificationComponent implements OnInit {
   error1;
   estadoEmail;
   messageerror = "";
- // user_pro: any = this.af.collection("users_pro").doc(this.user.uid)
- // user_hire: any = this.af.collection("users_pro").doc(this.user.uid)
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,public aff: AngularFireAuth,private af: AngularFirestore) { }
 
   ngOnInit() {
 
@@ -56,7 +60,6 @@ export class EmailVerificationComponent implements OnInit {
     name = name.replace(/[[]]/g, "\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
       results = regex.exec(url);
-    console.log(results);
     if (!results) {
       return null;
     }
@@ -83,20 +86,47 @@ export class EmailVerificationComponent implements OnInit {
 
 
   updatepass(f: NgForm) {
-
     var actionCode = this.getParameterByName('oobCode');
     var auth = firebase.auth();
     var accountEmail;
+ 
+ 
     if (f.value.pass2 == f.value.pass1) {
-      auth.verifyPasswordResetCode(actionCode).then(function (email) {
+   
+     auth.verifyPasswordResetCode(actionCode).then(function (email) {
         var accountEmail = email;
-        auth.confirmPasswordReset(actionCode, f.value.pass2).then(function (resp) {
-          console.log(resp);
+        auth.confirmPasswordReset(actionCode, f.value.pass2).then(function(resp) {
+          console.log("succes *------*");
+      firebase.auth().signInWithEmailAndPassword(accountEmail, f.value.pass2)
+      .then(function(firebaseUser) {
+          // Success 
+          console.log(firebaseUser);
+          console.log(firebaseUser.user.uid);
+          if (firebaseUser.user.displayName == "hire") {
+            console.log("hireeeeee");
+            firebase.firestore().collection("users_hire").doc(firebaseUser.user.uid).update({
+              "password": crypto.AES.encrypt(f.value.pass2, 'N@!o').toString()
+           //   "password": "modifico"
+            }).then(() => {
+              location.href = "/Hireprincipal";
 
-          console.log("Success");
-         // location.href = "/Home";
+            })
+           } else if (firebaseUser.user.displayName == "pro") {
+             console.log("prooooooo");
+             firebase.firestore().collection("users_pro").doc(firebaseUser.user.uid).update({
+              "password": crypto.AES.encrypt(f.value.pass2, 'N@!o').toString()
+            }).then(() => {
+              location.href = '/ProfilePro';
+            })  .catch(function(error) {
+              this.messageerror = error.message;
+             });
+            
+           }
+      })
+     .catch(function(error) {
+      this.messageerror = error.message;
+     });
         }).catch((err1) => {
-          console.log(err1.message);
           this.messageerror = err1.message;
 
         })
@@ -107,7 +137,6 @@ export class EmailVerificationComponent implements OnInit {
     } else {
       this.messageerror = "Passwords do not match";
     }
-
 
   }
 

@@ -37,7 +37,7 @@ export class ExploreComponent implements OnInit {
           var profile: any = j.payload.doc.data()
           if (profile.project) {
             j.payload.doc.ref.collection("projects").orderBy("creationdate", this.filter)/* .where("creationdate", ">", "May 20, 2019 at 12:31:21 PM UTC-5") */
-              .onSnapshot((d) => {
+             .onSnapshot((d) => {
                 d.docChanges().map((k) => {
                   if (k.doc.data().status > 0 && k.doc.data().status < 3) {
                     if (k.type === 'modified') {

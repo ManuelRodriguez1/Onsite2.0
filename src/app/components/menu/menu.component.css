@@ -31,6 +31,31 @@
          margin-left: 10px;
      }
      
+     .bgpodpad {
+         background-color: white;
+         width: 254px;
+         position: absolute;
+         right: 0;
+         margin-right: 10px;
+         margin-top: 20px;
+     }
+     
+     .bgpodpad li {
+         display: block !important;
+         line-height: 50px !important;
+     }
+     
+     .bgpodpad::before {
+         content: "";
+         border-bottom: 10px solid white;
+         border-right: 10px solid transparent;
+         border-left: 10px solid transparent;
+         position: absolute;
+         right: 0;
+         margin-top: -10px;
+         margin-right: 10px;
+     }
+     
      .imagenUserMenu {
          width: 50px;
          height: 50px;

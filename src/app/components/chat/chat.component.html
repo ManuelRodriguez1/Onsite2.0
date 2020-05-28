@@ -1,0 +1,44 @@
+<div class="container shadow">
+    <div class="divcol ">
+        <div class="row">
+            <div class="col-5">
+                <div class="h--155 backBlue">
+                    <div _ngcontent-c4="" class="input-group divinputsearch">
+                        <div _ngcontent-c4="" class="searchGray absoluteSearch"></div>
+                        <input _ngcontent-c4="" class="form-control inputbusquechat" placeholder="Search by name or project" type="text">
+
+                    </div>
+                    <div class="menuOptionFilter">
+                        <span>All</span>
+                        <span>Unread <b>(5)</b></span>
+                        <span>Archived</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="containerH155">
+                    <div class="h--155   " *ngFor="let num of users">
+                        <p>{{num.photoUrl}}</p>
+                        <p>Step {{num.nombre}}</p>
+                        <p>{{num.projectName}}</p>
+                        <p>{{num.ojo}}</p>
+                        <p>{{num.carpeta}}</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-7">
+                <div class="h--155 backBlue">
+                    <div class="divCabezera ">
+                        <div class="imagenChatPerson"></div>
+                        <div class="nombrechatazul">Gordon Freeman</div>
+                        <div class="nombrechatNaranja">Project name</div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+
+</div>

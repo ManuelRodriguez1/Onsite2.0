@@ -21,6 +21,10 @@ export class HireuserService {
       return this.af.collection("users_hire").doc(this.user.uid)
     }
 
+    getDataPro(idP:any){
+      this.af.collection("users_hire").doc(idP)
+    }
+
     getCredential(user: string, password: string) {
       return firebase.auth.EmailAuthProvider.credential(user, password)
     }
