@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProuserService } from 'src/app/services/prouser.service';
 import * as firebase from "firebase/app";
 import { Router } from "@angular/router";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.css']
 })
-export class ExploreComponent implements OnInit {
+export class ExploreComponent implements OnInit, OnDestroy {
 
   select: number = 0
   modal: number = 0
   projects: any[] = []
-  loading: boolean = true
+  loading: boolean
   users: any[] = []
   //Informacion proyecto
   infoProject: any[] = []
@@ -28,16 +29,19 @@ export class ExploreComponent implements OnInit {
   end: number = 5
   cantResul: number = 5
 
-  constructor(private prouser: ProuserService, public router: Router) { firebase.firestore().disableNetwork() }
+  suscription: Subscription
+
+  constructor(private prouser: ProuserService, public router: Router) { 
+    this.loading = true }
 
   ngOnInit() {
     this.prouser.getInfoHire().snapshotChanges()
       .subscribe((d) => {
-        firebase.firestore().enableNetwork()
+        var tempProjects: any[] = []
         d.forEach((j) => {
           var profile: any = j.payload.doc.data()
           if (profile.project) {
-            j.payload.doc.ref.collection("projects").orderBy("creationdate", this.filter)/* .where("creationdate", ">", "May 20, 2019 at 12:31:21 PM UTC-5") */
+            j.payload.doc.ref.collection("projects").orderBy("creationdate", this.filter)
               .onSnapshot((d) => {
                 d.docChanges().map((k) => {
                   if (k.doc.data().status > 0 && k.doc.data().status < 3) {
@@ -53,7 +57,7 @@ export class ExploreComponent implements OnInit {
                         }
                       })
                     } else {
-                      this.projects.push([k.doc.data(), {
+                      tempProjects.push([k.doc.data(), {
                         "idProject": k.doc.id,
                         "idUser": profile.id,
                         "photo": profile.photoUrl,
@@ -65,12 +69,16 @@ export class ExploreComponent implements OnInit {
               })
           }
         })
+        this.prouser.pagination.emit(tempProjects)
+        this.loading = false
       })
-    firebase.firestore().disableNetwork()
-    setTimeout(() => {
-      this.pagination()
-    }, 2000);
-    this.loading = false
+
+    this.suscription = this.prouser.pagination.subscribe((res) => {
+      this.projects = res
+      setTimeout(() => {
+        this.pagination()
+      }, 1000);
+    })
     this.prouser.users.subscribe((res) => {
       switch (res) {
         case 1:
@@ -134,5 +142,17 @@ export class ExploreComponent implements OnInit {
       this.start -= this.cantResul
       this.end -= this.cantResul
     }
+  }
+  firstPage() {
+    this.start = 1
+    this.end = this.cantResul
+  }
+  lastPage() {
+    var i = this.pages[this.pages.length - 1]
+    this.changePag(i)
+  }
+
+  ngOnDestroy(){
+    this.suscription.unsubscribe()
   }
 }

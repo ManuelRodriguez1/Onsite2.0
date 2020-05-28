@@ -49,7 +49,7 @@
   </div>
   <div class="pagination">
     <div class="buttonsPag">
-      <div class="firstPag" [class.clickP]="start > 1">
+      <div class="firstPag" [class.clickP]="start > 1" (click)="firstPage()">
         <p>First</p>
       </div>
       <div class="prevPag" [class.clickP]="start > 1" (click)="prevPage()">
@@ -61,7 +61,7 @@
       <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects.length">
         <p>Next</p>
       </div>
-      <div class="lastPag" [class.clickP]="end < projects.length">
+      <div class="lastPag" [class.clickP]="end < projects.length" (click)="lastPage()">
         <p>Last</p>
       </div>
     </div>

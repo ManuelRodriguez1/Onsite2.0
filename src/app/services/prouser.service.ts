@@ -14,6 +14,7 @@ export class ProuserService {
   user = firebase.auth().currentUser
   users = new EventEmitter<number>()
   similar = new EventEmitter<string>()
+  pagination = new EventEmitter<any[]>()
 
   constructor(
     public afA: AngularFireAuth,
