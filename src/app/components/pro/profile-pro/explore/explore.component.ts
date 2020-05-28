@@ -26,6 +26,7 @@ export class ExploreComponent implements OnInit {
   pages: number[] = []
   start: number = 1
   end: number = 5
+  cantResul: number = 5
 
   constructor(private prouser: ProuserService, public router: Router) { firebase.firestore().disableNetwork() }
 
@@ -37,7 +38,7 @@ export class ExploreComponent implements OnInit {
           var profile: any = j.payload.doc.data()
           if (profile.project) {
             j.payload.doc.ref.collection("projects").orderBy("creationdate", this.filter)/* .where("creationdate", ">", "May 20, 2019 at 12:31:21 PM UTC-5") */
-             .onSnapshot((d) => {
+              .onSnapshot((d) => {
                 d.docChanges().map((k) => {
                   if (k.doc.data().status > 0 && k.doc.data().status < 3) {
                     if (k.type === 'modified') {
@@ -76,13 +77,13 @@ export class ExploreComponent implements OnInit {
           this.users.push(this.prouser.user.uid)
           this.prouser.users.emit(2)
           break;
-        case 2:          
+        case 2:
           this.prouser.applyProject(this.infoProject[1].idUser, this.infoProject[1].idProject, this.users)
           break;
       }
     })
-    this.prouser.similar.subscribe(res => {      
-      if(this.users.includes(res)){       
+    this.prouser.similar.subscribe(res => {
+      if (this.users.includes(res)) {
         this.buttonApply = false
       }
     })
@@ -113,13 +114,25 @@ export class ExploreComponent implements OnInit {
   }
   pagination() {
     var page: number
-    page = Math.ceil(this.projects.length / 5)
+    page = Math.ceil(this.projects.length / this.cantResul)
     for (let i = 1; i <= page; i++) {
       this.pages.push(i)
     }
   }
   changePag(e: number) {
-    this.start = ((e * 5) - 5) == 0 ? 1 : (e * 5) - 5
-    this.end = e * 5
+    this.start = ((e * this.cantResul) - this.cantResul) == 0 ? 1 : (e * this.cantResul) - this.cantResul
+    this.end = e * this.cantResul
+  }
+  nextPage() {
+    if (this.end < this.projects.length) {
+      this.start += this.cantResul
+      this.end += this.cantResul
+    }
+  }
+  prevPage() {
+    if (this.start > 1) {
+      this.start -= this.cantResul
+      this.end -= this.cantResul
+    }
   }
 }
