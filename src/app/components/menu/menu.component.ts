@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from "angularfire2/firestore";
 import { getAllRouteGuards } from '@angular/router/src/utils/preactivation';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-menu',
@@ -19,6 +20,7 @@ error: any[];
     estado="";
     imageP: any = ''
     profile: any = ''
+    popad=false;
 
     UserName="";
 
@@ -62,6 +64,22 @@ error: any[];
         }); 
     }
   ngOnInit() {
+
+  }
+
+  flechaUsuario(){
+
+    if(this.popad==false){
+
+      this.popad = true;
+   
+    }else if(this.popad==true){
+      this.popad = false;
+    }
+    
+
+
+  
   }
   paginaMensajeMenu(user) {
     console.log(user);
@@ -120,7 +138,8 @@ error: any[];
    logout() {
         this.af.auth.signOut();
         console.log('logged out');
-        this.router.navigateByUrl("/Home");
+      //  this.router.navigateByUrl("/Home");
+      location.href="/Home"
 
     }
 }

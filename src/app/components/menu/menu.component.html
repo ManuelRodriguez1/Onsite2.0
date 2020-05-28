@@ -25,34 +25,53 @@
             <li><a href="#">Explore</a></li>
             <li><a href="#">Projects</a></li>
             <li><a href="#">Messages</a></li>
-            <li><a href="#">Updates</a></li>
             <li>
                 <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span>
-                <a (click)="logout()" href="#">{{UserName}}</a>
-                <span class="flechaUsuario">
+                <a href="#">{{UserName}}</a>
+
+                <span class="flechaUsuario" (click)="flechaUsuario()">
+              
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
                   <path d="M1 1L8 8L15 1" stroke="black"/>
                   </svg>
+                  
+                    <div *ngIf="popad==true"   class="bgpodpad menu" >
+                       <li><a href="#">My account</a></li>
+                        <li><a (click)="logout()"  >Sign out</a></li>
+                         </div>
+
+                 
             </span>
             </li>
         </ul>
 
         <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
-            <li><a href="#">Dashboard</a></li>
             <li><a href="#">Projects</a></li>
-            <li><a href="#">Messages</a></li>
-            <li><a href="#">Updates</a></li>
+            <li><a href="/Chat">Messages</a></li>
             <li>
                 <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span>
                 <a (click)="logout()" href="#">{{UserName}}</a>
-                <span class="flechaUsuario">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
-                <path d="M1 1L8 8L15 1" stroke="black"/>
-                </svg>
-          </span>
+
+                <span class="flechaUsuario" (click)="flechaUsuario()">
+              
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
+                      <path d="M1 1L8 8L15 1" stroke="black"/>
+                      </svg>
+                      
+                        <div *ngIf="popad==true"   class="bgpodpad menu" >
+                           <li><a href="#">My account</a></li>
+                            <li><a (click)="logout()"  >Sign out</a></li>
+                             </div>
+    
+                     
+                </span>
             </li>
         </ul>
     </div>
 </nav>
+
+<div class="appendnegrocss" *ngIf="popad==true"> </div>
+
+
 
 <app-login></app-login>

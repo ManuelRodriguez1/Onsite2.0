@@ -23,6 +23,7 @@ export class ProfileHireComponent implements OnInit {
   email: string = ''
   currentPassword: string = ''
   profile: any = ''
+  profileStatus: any = ''
   password: string = ''
   profileCompleted: boolean = false
   projects: any[] = []

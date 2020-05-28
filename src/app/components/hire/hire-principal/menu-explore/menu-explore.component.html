@@ -1,115 +1,144 @@
-<div class="">
-  <div class="row">
-    <div class="title2 t2mar0">
-      See who’s out there.
+<div class="container pt-50">
+  <div class="row mt-44">
+    <div class="col-sm-3">
+      <div class="cont">
+        <div class="profile" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
+        <div class="title3  pt-4 pb-3">
+          <p>Mauro Poche</p>
+        </div>
+        <button type="submit" class="blueBtn small mt-12" id="btmessage">Message</button>
+      </div>
     </div>
-  </div>
-  <div class="row">
-
-    <div class="col-sm input-group margintop10ex">
-      <input type="text" readonly class="form-control" placeholder="What type of job do you need help with?" id="Selectjobcategory">
-      <div class="down" [ngClass]="{'upf': upf == true}" (click)='list3(1)'></div>
-    </div>
-  </div>
-  <div class="list-group listexplore" [hidden]='upf == false'>
-    <div class="list-group-item" *ngFor="let s of skills1" >
-      <p>{{s}}</p>
-    </div>
-  </div>
-</div>
-
-<div>
-  <div class="container skill">
-
-
-    <div class="fields20 container">
-
+    <div class="col-sm-9">
+      <div class="row mt-51">
+        <div class="col-sm">
+          <div class="title3 my-2">
+            <p>Rating</p>
+          </div>
+          <div class="stars mt-23">
+            <div class="rating">
+              <p>n/a</p>
+            </div>
+            <div class="starG"></div>
+            <div class="starG"></div>
+            <div class="starG"></div>
+            <div class="starG"></div>
+            <div class="starG mr-13"></div>
+            <p class="smallText">(no reviews)</p>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="title3 my-2">
+            <p>Jobs completed</p>
+          </div>
+          <p class="mt-23 smallText">0</p>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-sm">
+          <div class="title3">
+            <p>Certificates</p>
+          </div>
+          <p class="my-2 smallText">3</p>
+        </div>
+      </div>
+      <hr class="hr">
       <div class="row">
-
-        <div class="col-sm submensajeshire">
-          Where is the job’s location?
-        </div>
-
-        <div class="col-sm submensajeshire">
-Enter timeframe
+        <div class="col-sm">
+          <div class="title2">
+            <p>Profile description</p>
+          </div>
+          <p class="mt-2"><span *ngIf="profile.description == null">Profile Description...</span>{{profile.description}}</p>
         </div>
       </div>
+      <hr class="hr">
+      <div class="row my-2">
+        <div class="col-sm">
+          <div class="title2">
+            <p>CV</p>
+          </div>
+          <div *ngIf="cv[0].name != 'Add a file' && cv[0].name != null">
+            <div class="fileIcon"></div>
+            <p>{{cv[0].name}}</p>
+          </div>
+          <div *ngIf="cv[0].name == 'Add a file' || cv[0].name == null">
+            <p>No files have been uploaded.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="hr">
+      <div class="row my-2">
+        <div class="col-sm">
+          <div class="title2">
+            <p>Skills</p>
+          </div>
+          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of selectskills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="hr">
       <div class="row">
-
-        <div class="col-sm input-group">
-          <input type="text" class="form-control" id="EnterAddress1" name="EnterAddress1" ngModel #name="ngModel" placeholder="Enter Address">
-        </div>
-        <div class="col-sm input-group">
-          <input class="form-control" id="date" name="date" placeholder="Date" type="text" />
-
-          <span class="tospan">to</span>
-          <input class="form-control" id="date1" name="date1" placeholder="Date" type="text" />
+        <div class="col-sm">
+          <div class="title2">
+            <p>Certificates</p>
+          </div>
+          <div class="row">
+            <div class="col-sm input-group">
+              <ng-container  *ngIf="customers.length != 0 && customers.length != null && customers[0].name != 'Add certificate file'">
+                <div *ngFor="let co of customers" class="mr-30">
+                  <div class="fileIcon certIcon"></div>
+                  <p class="ellipsis">{{co.name}}</p>
+                </div>
+              </ng-container>
+            <div *ngIf="customers.length == 0 || customers.length == null || customers[0].name == 'Add certificate file'">
+              <p>No files have been uploaded.</p>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
-
-      <br>
+      <hr class="hr">
       <div class="row">
-
-        <div class="col-sm submensajeshire">
-Set hiring radius
+        <div class="col-sm">
+          <div class="title2 mb-4">
+            <p>Reviews</p>
+          </div>
+          <div class="row mb-4">
+            <div class="col-sm">
+              <div class="media">
+                <div class="profile mini"></div>
+                <div class="media-body">
+                  <div class="title3 mt-3 pl-2">
+                    <p>Gordon Freeman</p>
+                    <div class="stars mt-23">
+                      <div class="rating">
+                        <p>n/a</p>
+                      </div>
+                      <div class="starG"></div>
+                      <div class="starG"></div>
+                      <div class="starG"></div>
+                      <div class="starG"></div>
+                      <div class="starG mr-13"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="media">
+                <div class="profile mini"></div>
+                <div class="media-body">
+                  <div class="title3 mt-3 pl-2">
+                    <p>John Doe</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row skill2Howmany">
-        <div class="col-sm-6 input-group">
-          <input type="text" readonly class="form-control" [placeholder]="Enterradiusinmiles" id="Enterradiusinmiles">
-          <div class="down"  (click)='list5()'></div>
-        </div>
-      </div>
-      <div class="col-sm-6 list-group listexplore" [hidden]='up6 == false'>
-        <div class="list-group-item" *ngFor="let s of skills2Howmany" (click)='selectskill2up6(s)'>
-          <p>{{s}}</p>
-        </div>
-      </div>
-<hr>
-    </div>
-    <div class="info container">
-      <p>Are you willing to hire outside of your hiring radius?</p>
-    </div>
-    <div class="fields2 container">
-      <div class="row">
-        <div class="btnHome">
-          Yes
-        </div>
-
-        <div class="btnHome">
-          No
-        </div>
-
-      </div>
-    </div>
-    <div class="title2 container">
-      <p>Please enter extra hourly rate you’d pay for outside
-        <br>your hiring radius.</p>
-    </div>
-<div class="row">
-<div class="col-sm ">
-<div class="custom-slider" style="margin-top:30px">
-  <ng5-slider [(value)]="value" class="inputrangenaranja" [options]="options"></ng5-slider>
-</div>
-</div>
-</div>
-
-<div class="row">
-  <div class="form-check checkbox">
-      <input type="checkbox" class="form-check-input input-assumpte" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1"><span>All workers must take a background test.</span></label>
-    </div>
-
   </div>
-  <div class="row">
-    <div class="form-check checkbox">
-      <input type="checkbox" class="form-check-input input-assumpte" id="exampleCheck2">
-      <label class="form-check-label" for="exampleCheck2"><span>All workers must pass a background test.</span></label>
-    </div>
-</div>
-
-  </div>
-
-
-
 </div>
