@@ -6,7 +6,7 @@
           <div class="searchGray absoluteSearch"></div>
           <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects">
           <div class="normalText fl ml-48">
-            <p><strong>{{ projects.length }} Results</strong></p>
+            <p><strong>{{ projects.length + 1 }} Results</strong></p>
           </div>
           <div class="normalText fr ml-137">
             <p>Sort by: <a class="orange" href="#"><strong>Latest</strong></a></p>
@@ -31,7 +31,7 @@
     <ng-container *ngFor="let p of projects; let i = index">
       <div class="projects row" (click)="sendInfo(p)" *ngIf="(i+1) >= start && (i+1) <= end">
         <div class="col-sm-6 ml-48">
-          <p class="mt-47"><span class="title2">Project:</span>{{ p[0].projectname }}</p>
+          <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
           <p class="mt-20">{{ p[0].description }}</p>
           <p class="mt-20">Status: {{ p[0].statusname }}</p>
           <div class="mt-49 mb-42">
@@ -49,10 +49,10 @@
   </div>
   <div class="pagination">
     <div class="buttonsPag">
-      <div class="firstPag">
+      <div class="firstPag" [class.clickP]="start > 1">
         <p>First</p>
       </div>
-      <div class="prevPag">
+      <div class="prevPag" [class.clickP]="start > 1">
         <p>Previous</p>
       </div>
       <div class="numbers" [class.bgP]="start >= ((page*5)-5) && end <= (page*5) " (click)="changePag(page)" *ngFor="let page of pages">
@@ -76,9 +76,10 @@
       <p class="mt-44">{{infoProject[0].description}}</p>
     </div>
     <div class="col-sm mr-48">
-      <button class="blueBtn small fr" (click)="apply()" [disabled]="modal != 0" [class.disabled]="modal != 0"
-        [class.grayBtn]="modal != 0"><span *ngIf="modal == 0">Apply</span> <span
-          *ngIf="modal != 0">Applied</span></button>
+      <button class="blueBtn small fr" (click)="apply()" *ngIf="buttonApply; else aplicado"><span>Apply</span></button>
+        <ng-template #aplicado>
+          <button class="blueBtn small fr disabled grayBtn" disabled><span>Applied</span></button>
+        </ng-template>
     </div>
   </div>
   <hr class="hr">

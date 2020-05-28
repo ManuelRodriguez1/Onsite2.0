@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import * as firebase from "firebase/app";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFirestore } from "angularfire2/firestore";
@@ -12,6 +12,8 @@ import * as crypto from "crypto-js";
 export class ProuserService {
 
   user = firebase.auth().currentUser
+  users = new EventEmitter<number>()
+  similar = new EventEmitter<string>()
 
   constructor(
     public afA: AngularFireAuth,
@@ -26,6 +28,10 @@ export class ProuserService {
   getInfo() {
     return this.af.collection("users_pro").doc(this.user.uid)
   }
+  //Obtener proyectos aplicados
+  getProject(idUser: string, idProject: string){
+    return this.getInfoHire().doc(idUser).collection('projects').doc(idProject)
+  }
   //MANEJO DE CREDENCIALES USUARIO
   //Credenciales del usuario
   credential(user: string, password: string) {
@@ -35,6 +41,7 @@ export class ProuserService {
   reautenticate(credential: any) {
     return this.user.reauthenticateAndRetrieveDataWithCredential(credential)
   }
+  //AGREGAR INFORMACION
   //Subir CV del usuario
   addCV(cv: any) {
     this.afs.ref('Users_pro/' + this.user.uid + "/CV/" + cv.target.files[0].name).put(cv.target.files[0])
@@ -44,6 +51,12 @@ export class ProuserService {
             this.updateUrlCv(cv.target.files[0].name, url)
           })
       })
+  }
+  //Aplicar un proyecto agregando ID del usuario
+  applyProject(idUser: string, idProject: string, users: any[]){
+    this.getInfoHire().doc(idUser).collection('projects').doc(idProject).update({
+      applyUsers: users
+    })
   }
   //ACTUALIZACIÓN DE INFORMACIÓN USUARIO
   //Actualizar informacion de usuario
