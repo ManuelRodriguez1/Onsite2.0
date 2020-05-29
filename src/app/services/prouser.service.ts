@@ -15,6 +15,8 @@ export class ProuserService {
   users = new EventEmitter<number>()
   similar = new EventEmitter<string>()
   pagination = new EventEmitter<any[]>()
+  filterPag = new EventEmitter<any[]>()
+  projects = new EventEmitter<any>()
 
   constructor(
     public afA: AngularFireAuth,

@@ -1,36 +1,31 @@
-<div class="sec1">
-  <p>Project: <span>Excavation at 280 S.</span></p>
-  <input type="text" placeholder="Excavation at 280 S.">
-  <div class="arrowd"></div>
-</div>
-<div class="maps">
-  <agm-map [latitude]="lat" [longitude]="lng" class="map">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-  </agm-map>
-</div>
-<div class="info2">
-  <p class="p1">This is what Jimmy needs from you</p>
-  <div class="dropdown-divider div"></div>
-  <p class="p2">Tags</p>
-  <div class="box" (click)="saludo(5)">
-    <div class="box1">
-      <p>Drywall</p>
+<div class="container shadow">
+  <div class="project">
+    <div class="lds-roller" *ngIf="loading == true">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-    <div class="line"></div>
-    <div class="box2">
-      <p>Drywall Hanger</p>
-    </div>
+    <ng-container *ngFor="let p of projects">
+      <div class="projects row">
+        <div class="col-sm-6 ml-48">
+          <p class="mt-44"><span class="title2">Project:</span> {{p.projectname}} </p>
+          <p class="mt-33">Status: {{p.statusname}} </p>
+          <p class="mt-23">Location: {{p.location}} </p>
+          <div class="mt-23 mb-32">
+            <div class="iconSkills fl mt-mr2"></div>
+            <p class="purple normalText"><span *ngFor="let s of p.skills"> {{s}}, </span> </p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
-  <div class="seccion">
-    <div class="img"></div>
-    <p>Location</p>
-  </div>
-  <div class="dropdown-divider div"></div>
-  <p class="p3">1234 Meadow Dr. Unit 123 Wynwood, FL 33127</p>
-  <div class="seccion2">
-    <div class="img2"></div>
-    <p>Additional Comments</p>
-  </div>
-  <div class="dropdown-divider div"></div>
-  <p class="p4">My whole front driveway is disgusting and I need help installing a new one. I think there are some utility lines; not sure so please help.</p>
+</div>
+
+<div class="textv mr-10">
+  <p>Dashboard</p>
 </div>

@@ -14,6 +14,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   select: number = 0
   modal: number = 0
   projects: any[] = []
+  projects2: any[] = []
   loading: boolean
   users: any[] = []
   //Informacion proyecto
@@ -23,19 +24,25 @@ export class ExploreComponent implements OnInit, OnDestroy {
   buttonApply: boolean = true
   //Filtro
   filter: any = 'desc'
+  searchProject: string = ''
   //Paginación
   pages: number[] = []
   start: number = 1
   end: number = 5
   cantResul: number = 5
 
+  suscription0: Subscription
   suscription: Subscription
+  suscription2: Subscription
+  suscription3: Subscription
+  suscription4: Subscription
 
-  constructor(private prouser: ProuserService, public router: Router) { 
-    this.loading = true }
+  constructor(private prouser: ProuserService, public router: Router) {
+    this.loading = true
+  }
 
   ngOnInit() {
-    this.prouser.getInfoHire().snapshotChanges()
+    this.suscription0 = this.prouser.getInfoHire().snapshotChanges()
       .subscribe((d) => {
         var tempProjects: any[] = []
         d.forEach((j) => {
@@ -70,16 +77,25 @@ export class ExploreComponent implements OnInit, OnDestroy {
           }
         })
         this.prouser.pagination.emit(tempProjects)
+        this.prouser.filterPag.emit(tempProjects)
         this.loading = false
       })
 
     this.suscription = this.prouser.pagination.subscribe((res) => {
       this.projects = res
+    })
+
+    this.suscription2 = this.prouser.filterPag.subscribe((res) => {
+      this.projects2 = res
       setTimeout(() => {
         this.pagination()
-      }, 1000);
+        this.start = 1
+        this.end = this.cantResul
+      }, 1000)
     })
-    this.prouser.users.subscribe((res) => {
+
+
+    this.suscription3 = this.prouser.users.subscribe((res) => {
       switch (res) {
         case 1:
           this.users.push(this.prouser.user.uid)
@@ -90,7 +106,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
           break;
       }
     })
-    this.prouser.similar.subscribe(res => {
+    this.suscription4 = this.prouser.similar.subscribe(res => {
       if (this.users.includes(res)) {
         this.buttonApply = false
       }
@@ -120,9 +136,13 @@ export class ExploreComponent implements OnInit, OnDestroy {
   backExplore() {
     location.reload()
   }
+  backDash(){
+    this.router.navigateByUrl('/Dashboard')
+  }
   pagination() {
+    this.pages = []
     var page: number
-    page = Math.ceil(this.projects.length / this.cantResul)
+    page = Math.ceil(this.projects2.length / this.cantResul)
     for (let i = 1; i <= page; i++) {
       this.pages.push(i)
     }
@@ -132,7 +152,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.end = e * this.cantResul
   }
   nextPage() {
-    if (this.end < this.projects.length) {
+    if (this.end < this.projects2.length) {
       this.start += this.cantResul
       this.end += this.cantResul
     }
@@ -152,7 +172,11 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.changePag(i)
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
+    this.suscription0.unsubscribe()
     this.suscription.unsubscribe()
+    this.suscription2.unsubscribe()
+    this.suscription3.unsubscribe()
+    this.suscription4.unsubscribe()
   }
 }

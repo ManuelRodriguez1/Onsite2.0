@@ -4,9 +4,9 @@
       <div class="row fields">
         <div class="input-group">
           <div class="searchGray absoluteSearch"></div>
-          <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects">
+          <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects" [(ngModel)]="searchProject" name="searchProject" >
           <div class="normalText fl ml-48">
-            <p><strong>{{ projects.length + 1 }} Results</strong></p>
+            <p><strong>{{ projects2.length + 0 }} Results</strong></p>
           </div>
           <div class="normalText fr ml-137">
             <p>Sort by: <a class="orange" href="#"><strong>Latest</strong></a></p>
@@ -28,7 +28,7 @@
       <div></div>
       <div></div>
     </div>
-    <ng-container *ngFor="let p of projects; let i = index">
+    <ng-container *ngFor="let p of projects | search: searchProject; let i = index">
       <div class="projects row" (click)="sendInfo(p)" *ngIf="(i+1) >= start && (i+1) <= end">
         <div class="col-sm-6 ml-48">
           <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
@@ -58,10 +58,10 @@
       <div class="numbers clickP" [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) " (click)="changePag(page)" *ngFor="let page of pages">
         <p>{{ page }}</p>
       </div>
-      <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects.length">
+      <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects2.length">
         <p>Next</p>
       </div>
-      <div class="lastPag" [class.clickP]="end < projects.length" (click)="lastPage()">
+      <div class="lastPag" [class.clickP]="end < projects2.length" (click)="lastPage()">
         <p>Last</p>
       </div>
     </div>
@@ -143,7 +143,7 @@
     </div>
     <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and agree
       on payment terms.</p>
-    <button class="blueBtn large mt-30 w360" (click)=hideModal()>Back to dashboard</button>
+    <button class="blueBtn large mt-30 w360" (click)=backDash()>Back to dashboard</button>
     <span class="mt-12 mb-12 orLines">or</span>
     <button class="blueBtn large mb-45 w360" (click)=backExplore()>Back to explore</button>
   </div>
