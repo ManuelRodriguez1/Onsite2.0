@@ -1,45 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { Options,LabelType } from 'ng5-slider';
-
+import { ActivatedRoute } from '@angular/router';
+import { AngularFirestore } from 'angularfire2/firestore';
+import {FormControl, Validators} from '@angular/forms';
+import { HireuserService } from 'src/app/services/hireuser.service';
+import firebase = require('firebase');
 
 @Component({
   selector: 'app-menu-explore',
   templateUrl: './menu-explore.component.html',
   styleUrls: ['./menu-explore.component.css']
 })
+
 export class MenuExploreComponent implements OnInit {
-upf=false;
-up6=false;
-  Enterradiusinmiles = "Enter radius in miles";
-  skills2Howmany: any = ["1", "2", "3", "4", "5"];
-  value: number =1;
-   options: Options = {
-     floor: 1.00,
-     ceil: 100.00,
-     translate: (value: number, label: LabelType): string => {
-
-           return '$' + value+".00";
-
-     }
-   };
-  constructor() { }
+  idhhh = '';
+  profile: any = ''
+  LeaveForm = 0
+  ctrl = new FormControl(null, Validators.required)
+  user = firebase.auth().currentUser
+  reviews: any[] = []
+  constructor(
+    private route: ActivatedRoute,
+    private af: AngularFirestore,
+    private hireUser: HireuserService
+    ) { }
 
   ngOnInit() {
+    this.idhhh = this.route.snapshot.paramMap.get('id');
+    console.log(this.route.snapshot.paramMap.get('id'))
+    this.af.collection("users_pro").doc(this.route.snapshot.paramMap.get('id')).snapshotChanges().subscribe((d) => {
+      this.profile = d.payload.data()
+      console.log(this.profile)
+    })
+    console.log(this.user.uid)
   }
-
-    skills1 = ['Concrete', 'Decorator', 'Drywall',
-      'Electrical', 'Excavation', 'Flooring',
-      'General Labor', 'Insulation', 'Interior Fishing Carpentry',
-      'Iron Worker', 'Landscaper', 'Mason',
-      'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
-
-
-list3(){
-    this.upf= !this.upf;
-}
-list5() {
-  this.up6 = !this.up6;
-}
-
-
+  leave(){
+    this.LeaveForm = 1
+  }
+  cancelRate(){
+    this.LeaveForm = 0
+  }
+  postReview(currentRate, review){
+    this.reviews.push({"hire":this.user.uid,"rating":currentRate,"review":review})
+    console.log(this.reviews)
+    this.hireUser.applyRating(this.route.snapshot.paramMap.get('id'),this.reviews)
+    this.LeaveForm = 0
+  }
 }

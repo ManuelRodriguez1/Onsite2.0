@@ -32,13 +32,13 @@
                   <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
                     <div class="col-sm-5">
                       <li class="list-name">
-                        <span class="project-name">{{p[0].projectname}}</span>
+                        <span class="project-name" (click)="viewProject(p[0].id)">{{p[0].projectname}}</span>
                       </li>
                     </div>
                     <div class="col-sm-3">{{p[0].statusname}}</div>
                     <div class="col-sm-4 text-right">
                       <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3 opChat">
-                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opProject" (click)="viewProject(p[0].id)">
+                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opChat">
                       <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p[0].id)">
                     </div>
                   </div>
@@ -141,6 +141,7 @@
                 name="description"
                 placeholder="Describe your project here..."
                 ngModel #description="ngModel"
+                [value]="profile.projectname"
               ></textarea>
               <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
             </div>
@@ -314,6 +315,11 @@
             <p>Project: <span class="viewproject">{{ viewP.projectname }}</span></p>
           </div>
         </div>
+        <div class="col-sm mx-4 mt-4">
+          <div class="vprofile text-right">
+            <span (click)="goToEditProject(viewP.id)">Edit</span>
+          </div>
+        </div>
       </div>
       <div class="row mt-51 ml-48">
         <div class="col-sm mt-2 mx-4">
@@ -367,12 +373,46 @@
         </div>
       </div>
       <hr class="hr mt-30" />
-      <div class="row py-3 ml-2 title-table">
-        <div class="col-sm-3">Name</div>
-        <div class="col-sm pl-4">Skills</div>
+      <div class="row py-2 ml-2 title-table">
+        <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+        <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
       </div>
       <div class="aplicants">
-        <div class="row mt-51 ml-48 hr pt-2" *ngFor="let da of dataApply">
+        <div *ngFor="let da of dataApply">
+          <div class="row py-2">
+            <div class="col-sm-3 ml-4 pt-3">
+              {{ da.name}}
+            </div>
+            <div class="col-sm-6 pt-2">
+              <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
+                <div class="skillsel onlySkill" *ngFor="let so of da.skills">
+                  <p>{{so}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm mx-4 pt-3">
+              <span class="vprofile" (click)="goToProfile(da.id)">View profile</span>
+            </div>
+          </div>
+          <hr class="hr m-0" />
+        </div>
+      </div>
+    </div>
+    <div class="overall mt-4 overflow-auto" *ngFor="let so of viewP.skills">
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 mt-4">
+          <div class="title3">
+            <p>{{so}} team</p>
+          </div>
+        </div>
+      </div>
+      <hr class="hr mt-30" />
+      <div class="row py-2 ml-2 title-table">
+        <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+        <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+      </div>
+      <div class="" *ngFor="let da of dataApply">
+        <div class="row mt-51 ml-48 py-2" *ngIf="da.skills == so">
           <div class="col-sm-3 ml-4 mt-2">
             {{ da.name}}
           </div>
@@ -384,10 +424,12 @@
             </div>
           </div>
           <div class="col-sm mx-4 mt-2">
-            <span class="vprofile">View profile</span>
+            <img src="../../../../../assets/iconos/sendM.svg" alt="">
+            <img src="../../../../../assets/iconos/error-icon-p.svg" alt="" class="pl-3">
           </div>
+          <hr class="hr my-1" />
         </div>
-        <hr class="hr mt-30" />
+        <hr class="hr my-1" />
       </div>
     </div>
   </div>

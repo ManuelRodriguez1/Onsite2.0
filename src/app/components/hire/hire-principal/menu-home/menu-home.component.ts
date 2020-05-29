@@ -70,7 +70,8 @@ export class MenuHomeComponent implements OnInit {
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
     private afs: AngularFireStorage,
-    private hireuser: HireuserService) {
+    private hireuser: HireuserService,
+    private routerr: Router) {
   }
 
   list(e) {
@@ -299,6 +300,16 @@ export class MenuHomeComponent implements OnInit {
             })
         }
       })
+  }
+
+  goToProfile(id: number){
+    this.routerr.navigate(['/ProfileApply',id])
+    console.log("ok")
+  }
+
+  goToEditProject(idP: number){
+    this.routerr.navigate(['/ProjectEdit',idP])
+    console.log("ok")
   }
 
 }

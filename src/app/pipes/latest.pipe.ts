@@ -1,28 +1,24 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { ProuserService } from '../services/prouser.service';
 
 @Pipe({
-  name: 'latest'
+  name: 'search'
 })
 export class LatestPipe implements PipeTransform {
 
-  transform(value: any[], args?: string): any {
-   
-    // for (let i = 0; i < value.length; i++) {
-    //   if(value[i][0].t < value[i+1][0].t){
-    //     if(args == 'first'){
-    //       let temp = value[i+1]
-    //       value[i+1] = value[i]
-    //       value[i] = temp
-    //       console.warn(temp);   
-    //     }else{
-    //       let temp = value[i]
-    //       value[i] = value[i+1]
-    //       value[i+1] = temp
-    //       console.info(temp)
-    //     }
-    //   }
-    // }  
-    return value
-  }
+  constructor(private userP: ProuserService) { }
 
+  transform(value: any, args?: any): any {
+    var projects: any[] = []
+    setTimeout(() => {
+      for (let i of value) {
+        if (i[0].projectname.toLowerCase().includes(args.toLowerCase())) {
+          projects.push(i)
+        }
+      }
+    }, 300);
+    this.userP.filterPag.emit(projects)
+
+    return projects
+  }
 }

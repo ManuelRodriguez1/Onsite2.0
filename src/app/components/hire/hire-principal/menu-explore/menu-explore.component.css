@@ -15,3 +15,22 @@
 .title2{
   margin: 0;
 }
+#btmessage:hover{
+  cursor: not-allowed;
+}
+.cancelRate{
+  background-color: #ffffff;
+  color: #010973;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 200%;
+}
+.ngb-rating{
+  font-size: 26px;
+  color: #9D9D9D;
+}
+.ngb-rating:hover{
+  color: #010973;
+}

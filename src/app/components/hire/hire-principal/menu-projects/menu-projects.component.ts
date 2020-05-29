@@ -1,9 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { ServiceService } from 'src/app/services/service.service';
 import { AngularFirestore } from "angularfire2/firestore";
-import { Observable } from 'rxjs';
-
+import { ActivatedRoute } from '@angular/router';
+import { Router } from "@angular/router";
+import firebase = require('firebase');
 
 @Component({
   selector: 'app-menu-projects',
@@ -11,117 +10,48 @@ import { Observable } from 'rxjs';
   styleUrls: ['./menu-projects.component.css']
 })
 export class MenuProjectsComponent implements OnInit {
+
+  project: any = ''
+  user = firebase.auth().currentUser
+  HomeFormularioNw = 1
+  selectskills: any[] = [];
   up = false;
-  selectskills = [];
-  up2 = false;
-  page = 1;
-  select = 0;
-  Homeprojects = 1;
-  childData : Observable<any>;
-  perfilIndividuals = [];
-  selectsproject = [];
-  ProfilesResena1 = 0;
-  childDatarese = 0;
-
-  projects : Observable<any>
+  option = 1;
+  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
 
 
 
-  ProfilesResena() {
-    this.childDatarese = 1;
-    this.ProfilesResena1 = 1;
+  constructor(
+    private route: ActivatedRoute,
+    private af: AngularFirestore,
+    private routerr: Router) { }
+
+    ngOnInit() {
+    this.af.collection("users_hire").doc(this.user.uid).collection("projects").doc(this.route.snapshot.paramMap.get('id')).snapshotChanges().subscribe((d) => {
+      this.project = d.payload.data()
+      this.selectskills = this.project.skills
+      console.log(this.project)
+    })
   }
-  database = firebase.database();
-  datos: any[]
-  user = firebase.auth().currentUser.email
-  constructor(private service: ServiceService, private db : AngularFirestore) { }
-  ngOnInit() {
-
-    this.projects =  this.db.collection('/users_pro').valueChanges();
-this.childData=this.db.collection('/projectsHire').valueChanges();
-
-    // this.datos = []
-    // this.database.ref('users_pro/')
-    //   .on('value', e => {
-    //     e.forEach(i => {
-    //       this.datos.push(i.val())
-    //     })
-    //   })
-    // this.childData = this.VerDatosTiempoReal();
-  }
-  messageboton(email) {
-    var newuserdestinatario = email
-    this.service.GuardarDatos(newuserdestinatario)
-  }
-  perfilPro(x) {
-    this.Homeprojects = 2;
-    this.perfilIndividuals = x;
-  }
-  // VerDatosTiempoReal() {
-  //   var returnArr = [];
-  //   //console.log(childKey);
-
-
-
-
-
-
-  //   firebase.database().ref("projectsHire/").once('value', function(snapshot) {
-  //     snapshot.forEach(function(childSnapshot) {
-  //       var childKey = childSnapshot.key;
-  //       var childData = childSnapshot.val();
-  //       returnArr.push(childData);
-  //     });
-  //   });
-  //   return returnArr;
-  // }
-  selectskill(e) {
-    this.up = !this.up;
-    var add = true;
-    if (this.selectskills.length == 0) {
-      this.selectskills.push(e);
-    }
-    for (let i = 0; i < this.selectskills.length; i++) {
-      if (this.selectskills[i] == e) {
-        add = false;
-      }
-    }
-    if (add) {
-      this.selectskills.push(e);
-    }
-  }
-  projectsinforma = [
-    { nombre: "Excavation at 280 S", staus: "Active" },
-    { nombre: "Fireside Lodge", staus: "Active" },
-    { nombre: "Gallaria", staus: "Active" },
-    { nombre: "Haute Corner", staus: "Active", },
-    { nombre: "prueba4", staus: "Active", }
-  ];
-  perfilprojects = [
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-    { fotoperfil: "../../../../assets/imagenes/profileproject/profile1.svg", nombre: "Jimmy is helping with", subtitulo: "Drywall", estrellas: "../../../../assets/imagenes/profileproject/estrellas.svg" },
-  ];
-  Projectsworkers = [
-    { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
-    { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
-    { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
-    { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
-    { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
-    { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" },
-    { status: "Active", category: "Drywall", Specialized: "Drywall Apprentice", people: "4" }
-  ];
   list(e) {
     if (e == 1) {
       this.up = !this.up;
-    } else {
-      this.up2 = !this.up2;
     }
   }
+
+  selectskill(e) {
+    var i = this.selectskills.indexOf(e)
+    i === -1 && this.selectskills.push(e);
+  }
+
+  close(e) {
+    var i = this.selectskills.indexOf(e)
+    i !== -1 && this.selectskills.splice(i, 1)
+  }
+
+  selectOption(e) {
+    this.option = e
+  }
+
+  
 }

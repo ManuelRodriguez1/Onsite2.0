@@ -22,7 +22,7 @@ export class HireuserService {
     }
 
     getDataPro(idP:any){
-      this.af.collection("users_hire").doc(idP)
+      return this.af.collection("users_pro").doc(idP)
     }
 
     getCredential(user: string, password: string) {
@@ -79,6 +79,12 @@ export class HireuserService {
     updateUrlImg(img: string) {
       this.getInfoUser().update({
         "photoUrl": img
+      })
+    }
+
+    applyRating(idPro: string, userreviews: any[]){
+      this.getDataPro(idPro).update({
+        reviews: userreviews
       })
     }
 }
