@@ -117,15 +117,19 @@ error: any[];
             })
           
           }else if(this.estado=="pro"){
+            alert("pro");
             this.userMenu="Pro";  
             var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
               this.profile = d.payload.data()
-              if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
-              if (this.profile.name != null) { this.UserName = this.profile.name }
+              console.log(this.profile );
+             if(d){
+              if (this.profile.photoUrl!="") { this.imageP = this.profile.photoUrl }
+              if (this.profile.name!="") { this.UserName = this.profile.name }
 
+             }
+             
             })
-          
         
           
          }
