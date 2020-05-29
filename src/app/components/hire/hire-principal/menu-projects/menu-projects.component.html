@@ -1,182 +1,304 @@
-<section class="projectsmenu">
-  <div *ngIf="Homeprojects == 1">
-    <div class="container skill">
-      <div class="row">
-        <div class="title2 t2mar0">
-          See who you hired.
+<form #formProject="ngForm" (ngSubmit)="updateProject(formProject)" class="form-Project pt-5">
+  <div class="container mt-4">
+    <div *ngIf="HomeFormularioNw == 1">
+    <div class="container">
+      <div class="row py-2 pl-3">
+        <div class="title2">
+          <h1 class="changeColorBlue">Project's name</h1>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 input-group">
+          <input
+            required
+            type="text"
+            class="form-control"
+            placeholder=""
+            name="projectname"
+            id="projectname"
+            ngModel
+            #projectname="ngModel"
+            [value]="project.projectname"
+          />
+          <!-- <span class="textError" [hidden]="projectname.value != ''">* this field is required</span> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="title2 pl-3">
+          <h1 class="changeColorBlue">Project description</h1>
+        </div>
+      </div>
+      <div class="row py-2 pl-3">
+        <p class="description-form">
+          Type what the project is about and the estimated time you expect it to
+          be completed. Include an overview of what you need done.
+        </p>
       </div>
       <div class="row">
         <div class="col-sm input-group">
-          <input type="text" readonly class="form-control mosnserat" placeholder="Search projects" id="nombreProjects">
-          <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="4"
+            name="description"
+            placeholder="Describe your project here..."
+            ngModel
+            #description="ngModel"
+            [value]="project.description"
+          ></textarea>
+          <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
         </div>
       </div>
-      <div class="list-group" *ngIf='up == true'>
-        <div class="list-group-item" *ngFor="let s of childData | async" (click)='selectskill(s)'>
-          <p>{{s.Project}}</p>
+      <div class="row text-right">
+        <div class="col-sm">
+          <span class="description-form">4000 characters remaining</span>
         </div>
       </div>
-    </div>
-
-    <div class="container projectsgeneral">
-      <div class="contenedorprojectdescription" *ngFor="let infoproject of projectsinforma">
-
-        <div class="contenedorinfoproject">
-          <p>{{ infoproject.nombre }}</p>
-          <div class="lineaprojectsinfo"></div>
-          <p>status: <span>{{ infoproject.staus}}</span></p>
+      <div class="row">
+        <div class="title2 pl-3">
+          <h1 class="changeColorBlue">Brief material</h1>
         </div>
-
       </div>
-    </div>
-    <div class="container lineaprojectssepa"></div>
-
-    <div class="container">
-      <div class="card-columns">
-        <div  class="card" *ngFor="let profileprojects of projects | async">
-          <div>
-              <div class="imagenperfilprojects" (click)="perfilPro(profileprojects.nombre);">
-                <img class="card-img-top" src="{{ profileprojects.fotoperfil }}" alt="Card image cap">
-              </div>
-              <div class="card-body">
-                <p class="nombreprojectperfil">{{ profileprojects.email }}</p>
-                <p class="colaboracioprojectperfil">{{ profileprojects.skills }}</p>
-                <div class="iconoestrellasperfil"><img src="{{ profileprojects.estrellas }}" alt="" width="100%"></div>
-                <div (click)="messageboton(profileprojects.email)" class="btnmessageproject">
-                  <div class="iconoinboxprofile"></div>
-                  <p>Message </p>
-                </div>
-              </div>
-              <div class="lineaderechacards"> </div>
-              <div class="lineaabajocards">
-              </div>
+      <div class="row">
+        <p class="description-form pl-3">
+          Add any documents or images that might be helpful in explaining more
+          about your project.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-sm input-group m-0">
+          <!-- <div
+            class="input-group custom-file"
+            *ngFor="let f of project.files; let i = index"
+          >
+            <input
+              type="file"
+              *ngIf="f.name == 'Add material file'"
+              class="custom-file-input customFile"
+              id="customFileCert{{ i }}"
+              accept=".pdf, .jpg, .jpeg"
+              name="material"
+              #material="ngModel"
+              ngModel
+              (change)="uploadDoc($event)"
+            />
+            <label for="customFileCert{{ i }}" class="custom-file-label">
+              <div class="afterFile">{{ f.name }}</div>
+            </label>
+            <div
+              class="deleteCert"
+              title="Delete Material"
+              *ngIf="f.name != 'Add material file'"
+              (click)="deleteBriefMaterial(f)"
+            ></div>
+          </div>
+          <div class="input-group-prepend iconAdd" (click)="addfiles()">
+            <img
+              src="../../../../../assets/iconos/plus-button.svg"
+              alt=""
+              class="plus-button"
+              title="Add material"
+            />
+          </div> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="title2 m-0 pb-3 pl-3">
+          <h1 class="changeColorBlue">Skills</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container skill m-0 pb-3">
+          <div class="col-sm form-group">
+            <input
+              type="text"
+              readonly
+              class="form-control"
+              placeholder="Select Skills"
+              onfocus="this.blur()"
+              style="cursor: default;"
+            />
+            <div
+              class="down"
+              [ngClass]="{ up: up == true }"
+              (click)="list(1)"
+            ></div>
+          </div>
+          <div class="list-group" [hidden]="up == false">
+            <div
+              class="list-group-item"
+              *ngFor="let s of project.skills"
+              (click)="selectskill(s)"
+            >
+              <p>{{ s }}</p>
             </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-  <div *ngIf="Homeprojects == 2">
-
-    <div class="container profileprojectsworkers">
-      <div class="row" *ngIf="perfilIndividuals">
-        <div class="col-sm-4">
-          <div class="perfilworkers">
-            <img src="../../../../assets/imagenes/profileproject/profileprojects.svg" alt="" width="100%">
           </div>
-          <p class="nombreworkers">{{perfilIndividuals.nombre}}</p>
-          <div class="contenedorestrellasworkers"><img src="../../../../assets/imagenes/profileproject/estrellasprofileworkers.svg" alt="" width="100%"></div>
-        </div>
-        <div class="col-sm">
-          <div class="contenedorinfoprofileworkes">
-            <p>46</p>
-            <p>Projects</p>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="contenedorinfoprofileworkes">
-            <p>160</p>
-            <p>Hours</p>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="contenedorinfoprofileworkes">
-            <p>31</p>
-            <p>Reviews</p>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="contenedorinfoprofileworkes">
-            <p>81</p>
-            <p>Referrals</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container contenedorprojectsworkers">
-      <p class="tituloprojectsworkres">Projects</p>
-      <div class="lineaprojectssepa"></div>
-
-      <div class="container contenprojectworkersprofile">
-        <div class="infoprofileprojects" *ngFor="let projectwork of Projectsworkers">
-          <div class="superiorinfoprofileprojects">
-            <p>Excavation at 280 S</p>
-          </div>
-          <div class="inferiorinfoprofileprojects">
-            <p>Status:</p>
-            <p>{{projectwork.status}}</p>
-            <p>Category:</p>
-            <p>{{projectwork.category}}</p>
-            <p>Specialized:</p>
-            <p>{{projectwork.Specialized}}</p>
-            <p>How many people?:</p>
-            <p>{{projectwork.people}}</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="container">
-      <p class="tituloprojectsworkres">Reviews</p>
-      <div class="lineaprojectssepa"></div>
-
-      <div class="col-sm input-group contenedorproyectos" *ngIf="childDatarese == 0">
-        <div class="centradoFill">
-          <div class="title2">Jimmy has no reviews </div>
-          <div (click)='ProfilesResena()' class="btnNegro">Leave Review</div>
-        </div>
-      </div>
-
-
-      <div *ngIf="ProfilesResena1 == 1">
-        <div class="col-sm-12 overrese" *ngFor="let perfilprojects of perfilprojects ">
-          <div class="heightresea">
-            <div class="perfilworkersresea">
-              <img src="../../../../assets/imagenes/profileproject/profileprojects.svg" alt="" width="100%">
+          <div class="skillselct" [hidden]="selectskills == null">
+            <div class="skillsel" *ngFor="let s of selectskills">
+              <p>{{ s }}</p>
+              <div class="close" (click)="close(s)"></div>
             </div>
-  </div>
-  <div class="leftresenaprim">
-    <p class="nombreworkersre">{{perfilprojects.nombre}}</p>
-    <div class="contenedorestrellasworkersres"><img src="../../../../assets/imagenes/profileproject/estrellasprofileworkers.svg" alt="" width="100%"></div>
-
-
-  <div class="clasrestext">
-    Jimmy was exceptional at getting his job done. orem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a accumsan ex. Nunc nec purus at erat placerat dapibus in sed purus. Cras in diam euismod, dapibus purus quis, interdum dui. Praesent gravida
-    consequat turpis egestas gravida. The only issue I had was that he was not on time.
-  </div>
-  </div>
-
-
-
-        </div>
-
-      </div>
-
-
-    </div>
-    <div class="container">
-      <p class="tituloprojectsworkres margin30si">Skills</p>
-      <div class="lineaprojectssepa"></div>
-      <div>
-        <div class="skillselct">
-          <div class="skillsel ss2">
-            <p>Drywall</p>
           </div>
-          <div class="skillsel ss3">
-            <p>Drywall Hanger</p>
-          </div>
-          <input type="hidden" name="skills" [value]="selectskills2" id="selectskills2">
-          <br>
-          <br>
         </div>
       </div>
+      <div class="row">
+        <div class="col-sm-6 form-group" *ngFor="let p of project.selectskills">
+          <p class="description-form pb-2">{{ p }}</p>
+          <input
+            required
+            type="text"
+            class="form-control"
+            placeholder=""
+            name="people"
+            id="people"
+            ngModel
+            #people="ngModel"
+            (keyup)="addPeople(p)"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="title2 pb-3 pl-3">
+          <h1 class="changeColorBlue">Location</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 input-group">
+          <input
+            required
+            type="text"
+            class="form-control"
+            placeholder="Street name, City, State ZIP"
+            name="location"
+            id="location"
+            ngModel
+            #location="ngModel"
+            [value]="project.location"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="title2 pb-3 pl-3">
+          <h1 class="changeColorBlue">Estimated budget</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 input-group">
+          <input
+            required
+            type="text"
+            class="form-control"
+            placeholder="$10,000 - $20,000"
+            name="estimated"
+            id="estimated"
+            ngModel
+            #estimated="ngModel"
+            [value]="project.estimated"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="title2 pl-3">
+          <h1 class="changeColorBlue">Number of people per skills</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <p class="description-form py-3">Start date</p>
+          <input
+            type="date"
+            name="startdate"
+            max="3000-12-31"
+            min="1000-01-01"
+            class="form-control py-2"
+            ngModel
+            #startdate="ngModel"
+            [class.correctInput]="startdate.value != ''"
+            [value]="project.startdate"
+          />
+        </div>
+        <div class="col-sm-6 form-group">
+          <p class="description-form py-3">End date</p>
+          <input
+            type="date"
+            name="enddate"
+            max="3000-12-31"
+            min="1000-01-01"
+            class="form-control py-2"
+            ngModel
+            #enddate="ngModel"
+            [class.errorInput]="startdate.value > enddate.value"
+            [class.correctInput]="
+              enddate.value != '' && startdate.value < enddate.value
+            "
+            [value]="project.enddate"
+          />
+          <span class="textError" [hidden]="startdate.value <= enddate.value"
+            >dates do not match</span
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-check checkbox form-group">
+          <input
+            type="checkbox"
+            class="form-check-input input-assumpte"
+            id="taketest"
+            name="taketest"
+            ngModel
+            #taketest="ngModel"
+            [checked]="taketest"
+          />
+          <label class="form-check-label" for="taketest">
+            <span class="check-text"
+              >All workers must take a background test.</span
+            >
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-check checkbox form-group">
+          <input
+            type="checkbox"
+            class="form-check-input input-assumpte"
+            id="passtest"
+            name="passtest"
+            ngModel
+            #passtest="ngModel"
+            [checked]="project.passtest"
+          />
+          <label class="form-check-label" for="passtest">
+            <span class="check-text"
+              >All workers must pass a background test.</span
+            >
+          </label>
+        </div>
+      </div>
+      <button
+        class="blueBtn small my-5 float-right"
+        type="submit"
+        [class.disabled]="
+          projectname.value == '' ||
+          description.value == '' ||
+          location.value == '' ||
+          estimated.value == '' ||
+          startdate.value == '' ||
+          enddate.value == '' ||
+          startdate.value > enddate.value
+        "
+        [disabled]="
+          projectname.value == '' ||
+          description.value == '' ||
+          location.value == '' ||
+          estimated.value == '' ||
+          startdate.value == '' ||
+          enddate.value == '' ||
+          startdate.value > enddate.value
+        "
+      >
+        Update
+      </button>
     </div>
   </div>
-
-
-
-</section>
+  </div>
+</form>

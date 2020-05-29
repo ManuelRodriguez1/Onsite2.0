@@ -307,4 +307,9 @@ export class MenuHomeComponent implements OnInit {
     console.log("ok")
   }
 
+  goToEditProject(idP: number){
+    this.routerr.navigate(['/ProjectEdit',idP])
+    console.log("ok")
+  }
+
 }

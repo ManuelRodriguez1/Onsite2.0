@@ -166,18 +166,18 @@
             <div class="col-sm input-group">
               <textarea
                 class="form-control"
-                id="review"
+                id="reviewR"
                 rows="4"
-                name="review"
+                name="reviewR"
                 placeholder="Leave your review here. (400 characters left)"
-                ngModel #description="ngModel"
+                [(ngModel)]="reviewR"
               ></textarea>
               <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
             </div>
           </div>
         <div class="row mt-3 float-right">
           <button class="blueBtn small w360 mr-3 cancelRate" (click)="ctrl.setValue(null);cancelRate()">Cancel</button>
-          <button class="blueBtn small w360 mr-3" (click)="post(currentRate)">Post</button>
+          <button class="blueBtn small w360 mr-3" (click)="postReview(currentRate, reviewR)">Post</button>
         </div>
       </div>
   </div>
