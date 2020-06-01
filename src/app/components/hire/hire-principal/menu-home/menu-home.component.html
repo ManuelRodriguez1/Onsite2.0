@@ -113,6 +113,7 @@
                 name="projectname"
                 id="projectname"
                 ngModel #projectname="ngModel"
+                [(ngModel)]="viewP.projectname" 
               />
               <!-- <span class="textError" [hidden]="projectname.value != ''">* this field is required</span> -->
             </div>
@@ -137,7 +138,7 @@
                 name="description"
                 placeholder="Describe your project here..."
                 ngModel #description="ngModel"
-                [value]="profile.projectname"
+                [(ngModel)]="viewP.description" 
               ></textarea>
               <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
             </div>

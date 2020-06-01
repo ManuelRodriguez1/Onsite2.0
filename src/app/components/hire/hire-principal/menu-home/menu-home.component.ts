@@ -238,6 +238,7 @@ export class MenuHomeComponent implements OnInit {
   }
 
   viewProject(idApply){
+
     this.righttv='text-project'
     this.error = 2
     this.HomeFormularioNw = 2
@@ -271,7 +272,18 @@ export class MenuHomeComponent implements OnInit {
   }
 
   goToEditProject(idP: number){
-    this.routerr.navigate(['/ProjectEdit',idP])
+    alert("edit");
+    //this.routerr.navigate(['/ProjectEdit',idP])
+  
+    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).snapshotChanges()
+    data.subscribe((d) => {
+      this.viewP = d.payload.data()
+      console.log("belxy");
+      console.log(this.viewP);
+      this.projectname="belxy";
+      
+    })
+    this.HomeFormularioNw =1;
     console.log("ok")
   }
 
