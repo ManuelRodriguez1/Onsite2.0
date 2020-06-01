@@ -4,20 +4,19 @@ import * as firebase from "firebase";
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['../explore/explore.component.css', './projects.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['../explore/explore.component.css', './dashboard.component.css']
 })
-export class ProjectsComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   //List projects
   projects: any[] = []
-  //loading
+  //Loading
   loading: boolean = true
   //Subscripciones
   sub1: Subscription
   sub2: Subscription
-
   constructor(private proU: ProuserService) { firebase.firestore().enablePersistence() }
 
   ngOnInit() {
@@ -47,7 +46,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(){
     this.sub1.unsubscribe()
     this.sub2.unsubscribe()
   }

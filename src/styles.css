@@ -1188,8 +1188,20 @@ h4,
     width: 100%;
     height: 100%;
 }
-
-
+.messageIcon{
+    width: 36px;
+    height: 18px;
+    background: url('./assets/iconos/message.svg') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+}
+.trash{
+    width: 20px;
+    height: 23px;
+    background: url('./assets/iconos/trash.svg') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+}
 /* loading temporal */
 
 .lds-roller {

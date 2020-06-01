@@ -44,6 +44,7 @@ import { ProuserService } from './services/prouser.service';
 import { HireuserService } from './services/hireuser.service';
 import { HireService } from './services/hire.service';
 import { ChatComponent } from './components/chat/chat.component';
+import { DashboardComponent } from './components/pro/profile-pro/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ChatComponent } from './components/chat/chat.component';
     PlantillaComponent,
     ChangeEmailComponent,
     LatestPipe,
-    ChatComponent
+    ChatComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

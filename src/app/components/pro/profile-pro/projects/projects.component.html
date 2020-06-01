@@ -1,31 +1,56 @@
 <div class="container shadow">
-  <div class="project">
-    <div class="lds-roller" *ngIf="loading == true">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="title2 ml-48">
+        <p>Projects</p>
+      </div>
     </div>
+    <div class="col-sm">
+      <div class="options mr-48">
+        <div class="option optionActive">
+          <p>All</p>
+        </div>
+        <div class="option">
+          <p>Active</p>
+        </div>
+        <div class="option">
+          <p>Pending</p>
+        </div>
+        <div class="option">
+          <p>Deleted</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="hr mt-30">
+  <div class="row ml-48 mt-17 p-0">
+    <div class="col-sm gray">
+      <p>Name</p>
+      <div class="arrowDownGray"></div>
+    </div>
+    <div class="col-sm gray">
+      <p>Status</p>
+      <div class="arrowDownGray"></div>
+    </div>
+    <div class="col-sm"></div>
+  </div>
+  <div class="mt-17">
     <ng-container *ngFor="let p of projects">
-      <div class="projects row">
-        <div class="col-sm-6 ml-48">
-          <p class="mt-44"><span class="title2">Project:</span> {{p.projectname}} </p>
-          <p class="mt-33">Status: {{p.statusname}} </p>
-          <p class="mt-23">Location: {{p.location}} </p>
-          <div class="mt-23 mb-32">
-            <div class="iconSkills fl mt-mr2"></div>
-            <p class="purple normalText"><span *ngFor="let s of p.skills"> {{s}}, </span> </p>
+      <div class="row ml-48 mt-22 p-0">
+        <div class="col-sm">
+          <p>{{p.projectname}}</p>
+        </div>
+        <div class="col-sm">
+          <p>{{p.statusname}}</p>
+        </div>
+        <div class="col-sm">
+          <div class="webkit">
+            <div class="messageIcon"></div>
+            <div class="trash"></div>
           </div>
         </div>
       </div>
+      <hr class="hr mt-22">
     </ng-container>
   </div>
-</div>
-
-<div class="textv mr-10">
-  <p>Dashboard</p>
 </div>

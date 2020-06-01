@@ -15,6 +15,7 @@ import { ExploreComponent } from '../components/pro/profile-pro/explore/explore.
 import { ChatComponent } from '../components/chat/chat.component';
 import { MenuExploreComponent } from '../components/hire/hire-principal/menu-explore/menu-explore.component';
 import { ProjectsComponent } from '../components/pro/profile-pro/projects/projects.component';
+import { DashboardComponent } from '../components/pro/profile-pro/dashboard/dashboard.component';
 
 
 export const router: Routes = [
@@ -30,7 +31,8 @@ export const router: Routes = [
     { path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
     { path: 'ProfileApply/:id', component: MenuExploreComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
     { path: 'ExplorePro', component: ExploreComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
-    { path: 'Dashboard', component: ProjectsComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
+    { path: 'Dashboard', component: DashboardComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
+    { path: 'Projects', component: ProjectsComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
     { path: 'Chat', component: ChatComponent },
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

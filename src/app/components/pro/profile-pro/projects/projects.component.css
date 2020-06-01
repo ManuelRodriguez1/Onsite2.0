@@ -1,17 +1,63 @@
-.project{
-    height: auto;
-    overflow: initial;
+.options{
+    display: -webkit-box;
+    float: right;
 }
-.projects{
-    height: 267px;
-    cursor: initial;
-}
-.projects::before{
+.option::before{
     display: none;
 }
-.mt-23{
-    margin-top: 23px;
+.option{
+    margin: 0;
+    margin-top: 40px;
+    margin-right: 20px;
+    color: #9D9D9D;
+    cursor: pointer;
 }
-.mr-10{
-    margin-right: 10px;
+.option:hover{
+    color: #010973;
+    text-decoration: underline;
+}
+.optionActive{
+    color: #010973;
+    text-decoration: underline;
+}
+.mt-17{
+    margin-top: 17px;
+}
+.mt-22{
+    margin-top: 22px;
+}
+.mt-30{
+    margin-top: 30px;
+}
+.ml-48{
+    margin-left: 48px;
+}
+.mr-48{
+    margin-right: 48px;
+}
+.gray{
+    color: #9D9D9D;
+    font-size: 14px;
+    display: -webkit-box;
+}
+.arrowDownGray{
+    margin-left: 3px;
+    margin-top: 4px;
+}
+.webkit{
+    display: -webkit-box;
+    float: right;
+    margin-right: 62px;
+}
+.options .option:last-child{
+    margin-right: 0;
+}
+.messageIcon{
+    margin-right: 25px;
+}
+.trash{
+    margin-top: -5px;
+}
+.p-0 .col-sm{
+    padding: 0;
 }
