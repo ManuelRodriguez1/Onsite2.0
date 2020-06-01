@@ -7,8 +7,6 @@ import { HireuserService } from 'src/app/services/hireuser.service';
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFireStorage } from "angularfire2/storage";
-import {formatDate} from '@angular/common';
-import { last } from '@angular/router/src/utils/collection';
 import {FormControl, Validators} from '@angular/forms';
 
 
@@ -154,21 +152,12 @@ export class MenuHomeComponent implements OnInit {
     this.righttv='text-new-project';
   }
 
-  back() {
-    this.page--;
-    this.HomeFormularioNw = this.page;
-  }
-
   addfiles() {
     this.files.push({ 'name': 'Add material file', 'url': '' });
     this.cust = this.files.length - 1;
   }
 
-  /* uploadDoc(e){
-    /* var i = this.cust
-    this.file.push(e.target.files[0])
-    this.files[i] = e.target.files[0].name
-    this.files[i] = {"name": e.target.files[0].name,"url":e.target.files[0].name}
+  uploadDoc(e) {
     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
     fileDoc.then((url) => {
       url.ref.getDownloadURL()
@@ -176,12 +165,6 @@ export class MenuHomeComponent implements OnInit {
           this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
         })
     })
-  } */
-
-  uploadDoc(e) {
-    var i = this.cust
-    this.file.push(e.target.files[0])
-    this.files[i] = e.target.files[0].name
   }
   selectOption(e) {
     this.option = e
