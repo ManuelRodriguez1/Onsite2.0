@@ -23,8 +23,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
 import {MenuHomeComponent} from './components/hire/hire-principal/menu-home/menu-home.component';
-import {MenuExploreComponent} from './components/hire/hire-principal/menu-explore/menu-explore.component';
-import {MenuProjectsComponent} from './components/hire/hire-principal/menu-projects/menu-projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServiceService } from './services/service.service';
 import { ProjectService } from './services/project.service';
@@ -58,12 +56,10 @@ import { DashboardComponent } from './components/pro/profile-pro/dashboard/dashb
     ProfileProComponent,
     HirePrincipalComponent,
     MenuHomeComponent,
-    MenuProjectsComponent,
     LoginComponent,
     InboxComponent,
     ExploreComponent,
     ProjectsComponent,
-    MenuExploreComponent,
     MenuInboxComponent,
     ProfileHireComponent,
     EmailVerificationComponent,

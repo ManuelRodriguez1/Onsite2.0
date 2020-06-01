@@ -1,11 +1,7 @@
 <div class="error" [class.errorh]="error == 1">
     <p>The project has been deleted</p>
 </div>
-<form
-  #formProject="ngForm"
-  (ngSubmit)="addProject(formProject)"
-  class="form-Project"
->
+<form #formProject="ngForm" (ngSubmit)="addProject(formProject)" class="form-Project">
   <section class="container">
     <div class="home" *ngIf="select == 0">
       <div *ngIf="HomeFormularioNw == 0">
@@ -32,13 +28,13 @@
                   <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
                     <div class="col-sm-5">
                       <li class="list-name">
-                        <span class="project-name">{{p[0].projectname}}</span>
+                        <span class="project-name" (click)="viewProject(p[0].id)">{{p[0].projectname}}</span>
                       </li>
                     </div>
                     <div class="col-sm-3">{{p[0].statusname}}</div>
                     <div class="col-sm-4 text-right">
                       <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3 opChat">
-                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opProject" (click)="viewProject(p[0].id)">
+                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opChat">
                       <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p[0].id)">
                     </div>
                   </div>
@@ -101,7 +97,7 @@
         </div>
       </div>
       <div *ngIf="HomeFormularioNw == 1">
-        <div class="container">
+        <div class="container m-2">
           <div class="row py-2">
             <div class="title2">
               <h1 class="changeColorBlue">Account Information</h1>
@@ -117,8 +113,8 @@
                 name="projectname"
                 id="projectname"
                 ngModel #projectname="ngModel"
+                [(ngModel)]="viewP.projectname" 
               />
-              <!-- <span class="textError" [hidden]="projectname.value != ''">* this field is required</span> -->
             </div>
           </div>
           <div class="row">
@@ -141,8 +137,8 @@
                 name="description"
                 placeholder="Describe your project here..."
                 ngModel #description="ngModel"
+                [(ngModel)]="viewP.description" 
               ></textarea>
-              <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
             </div>
           </div>
           <div class="row text-right">
@@ -184,7 +180,7 @@
           </div>
           <div class="row">
             <div class="container skill m-0 pb-3">
-              <div class="col-sm form-group">
+              <div class="col-sm input-group">
                 <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
                   style="cursor: default;">
                 <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
@@ -306,12 +302,17 @@
 </section>
 </form>
 <div *ngIf="HomeFormularioNw == 2">
-  <div class="container">
+  <div class="container m-28">
     <div class="overall">
       <div class="row mt-51 ml-48">
         <div class="col-sm mx-4 mt-4">
           <div class="title3">
             <p>Project: <span class="viewproject">{{ viewP.projectname }}</span></p>
+          </div>
+        </div>
+        <div class="col-sm mx-4 mt-4">
+          <div class="vprofile text-right">
+            <span (click)="goToEditProject(viewP.id)">Edit</span>
           </div>
         </div>
       </div>
@@ -367,12 +368,46 @@
         </div>
       </div>
       <hr class="hr mt-30" />
-      <div class="row py-3 ml-2 title-table">
-        <div class="col-sm-3">Name</div>
-        <div class="col-sm pl-4">Skills</div>
+      <div class="row py-2 ml-2 title-table">
+        <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+        <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
       </div>
       <div class="aplicants">
-        <div class="row mt-51 ml-48 hr pt-2" *ngFor="let da of dataApply">
+        <div *ngFor="let da of dataApply">
+          <div class="row py-2">
+            <div class="col-sm-3 ml-4 pt-3">
+              {{ da.name}}
+            </div>
+            <div class="col-sm-6 pt-2">
+              <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
+                <div class="skillsel onlySkill" *ngFor="let so of da.skills">
+                  <p>{{so}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm mx-4 pt-3">
+              <span class="vprofile" (click)="goToProfile(da.id)">View profile</span>
+            </div>
+          </div>
+          <hr class="hr m-0" />
+        </div>
+      </div>
+    </div>
+    <div class="overall mt-4 overflow-auto" *ngFor="let so of viewP.skills">
+      <div class="row mt-51 ml-48">
+        <div class="col-sm mx-4 mt-4">
+          <div class="title3">
+            <p>{{so}} team</p>
+          </div>
+        </div>
+      </div>
+      <hr class="hr mt-30" />
+      <div class="row py-2 ml-2 title-table">
+        <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+        <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+      </div>
+      <div class="" *ngFor="let da of dataApply">
+        <div class="row mt-51 ml-48 py-2" *ngIf="da.skills == so">
           <div class="col-sm-3 ml-4 mt-2">
             {{ da.name}}
           </div>
@@ -384,10 +419,12 @@
             </div>
           </div>
           <div class="col-sm mx-4 mt-2">
-            <span class="vprofile" (click)="goToProfile(da.id)">View profile</span>
+            <img src="../../../../../assets/iconos/sendM.svg" alt="">
+            <img src="../../../../../assets/iconos/error-icon-p.svg" alt="" class="pl-3">
           </div>
+          <hr class="hr my-1" />
         </div>
-        <hr class="hr mt-30" />
+        <hr class="hr my-1" />
       </div>
     </div>
   </div>
@@ -409,6 +446,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal" [class.showModal]="modal == 2">
   <div class="message">
     <div class="title mt-5">
@@ -417,6 +455,192 @@
     <div class="my-3 pb-5 d-flex justify-content-center">
         <button class="blueBtn small w360 pl-3 mr-3" (click)="confirmDelete()">Yes</button>
         <button class="blueBtn small mb-45 w360" (click)=hideModal()>No</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="HomeFormularioNw == 3">
+  <div class="container">
+    <div class="row m-28">
+      <div class="col-sm-3">
+        <div class="container">
+          <div class="profile" [ngStyle]="{'background-image' : 'url('+profileP.photoUrl+')'}"></div>
+          <div class="title3  pt-4 pb-3">
+            <p>{{ profileP.name }} {{ profileP.lastname }} </p>
+          </div>
+          <button type="submit" class="blueBtn small mt-12" id="btmessage">Message</button>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="row mt-51">
+          <div class="col-sm">
+            <div class="title3 my-2">
+              <p>Rating</p>
+            </div>
+            <div class="stars mt-23">
+              <div class="rating">
+                <p>n/a</p>
+              </div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG"></div>
+              <div class="starG mr-13"></div>
+              <p class="smallText">(no reviews)</p>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="title3 my-2">
+              <p>Jobs completed</p>
+            </div>
+            <p class="mt-23 smallText">0</p>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-sm" *ngFor="let ce of profileP.certificate">
+            <div class="title3">
+              <p>Certificates</p>
+            </div>
+            <p class="mt-2 smallText">{{profileP.certificate?.length}}</p>
+          </div>
+        </div>
+        <hr class="hr">
+        <div class="row">
+          <div class="col-sm">
+            <div class="title3">
+              <p>Profile description</p>
+            </div>
+            <p class="mt-2"><span *ngIf="profileP.description == null">Profile Description...</span>{{ profileP.description }}</p>
+          </div>
+        </div>
+        <hr class="hr">
+        <div class="row my-2">
+          <div class="col-sm">
+            <div class="title3">
+              <p>CV</p>
+            </div>
+            <div *ngFor="let cv of profileP.cvUrl" class="mr-30">
+              <div *ngIf="profileP.cvUrl.name != 'Add a file' && profileP.cvUrl.name != null">
+                <div class="fileIcon"></div>
+                <p>{{cv.name}}</p>
+              </div>
+              <div *ngIf="profileP.cvUrl.name == 'Add a file' || profileP.cvUrl.name == null || profileP.cvUrl.length == null || cv.length == null">
+                <p>No files have been uploaded.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="hr">
+        <div class="row my-2">
+          <div class="col-sm">
+            <div class="title3">
+              <p>Skills</p>
+            </div>
+            <!-- <div class="mt-2" style="overflow: hidden;" [hidden]="profile.skills == null"> -->
+              <div class="skillsel onlySkill mt-2" *ngFor="let so of profileP.skills">
+                <p>{{so}}</p>
+              </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <hr class="hr">
+        <div class="row">
+          <div class="col-sm">
+            <div class="title3">
+              <p>Certificates</p>
+            </div>
+            <div class="row">
+              <div class="col-sm input-group pl-3">
+                <div *ngFor="let ce of profileP.certificate" class="mr-30">
+                  <ng-container  *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
+                    <!-- <div *ngFor="let co of profile.certificate" class="mr-30"> -->
+                      <div class="fileIcon certIcon"></div>
+                      <p class="ellipsis pt-2">{{ce.name}}</p>
+                    <!-- </div> -->
+                  </ng-container>
+                  <div *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || profileP.certificate.name == 'Add certificate file'">
+                    <p>No files have been uploaded.</p>
+                  </div>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <hr class="hr">
+        <div class="row">
+          <div class="col-sm">
+            <div class="title3 mb-4">
+              <p>Reviews</p>
+            </div>
+            <div class="row mb-4">
+              <div class="col-sm">
+                <div class="media">
+                  <div class="profile-mini"></div>
+                  <div class="media-body">
+                    <div class="title3 mt-3 pl-2">
+                      <p>Gordon Freeman</p>
+                      <div class="stars mt-23">
+                        <div class="rating">
+                          <p>n/a</p>
+                        </div>
+                        <div class="starG"></div>
+                        <div class="starG"></div>
+                        <div class="starG"></div>
+                        <div class="starG"></div>
+                        <div class="starG mr-13"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="media">
+                  <div class="profile-mini"></div>
+                  <div class="media-body">
+                    <div class="title3 mt-3 pl-2">
+                      <p>John Doe</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="LeaveForm == 0">
+          <div class="row">
+            <div class="col-sm">
+              <button class="blueBtn medium w360 pl-3 mr-3" (click)="leave()">Leave a review</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="LeaveForm == 1">
+          <div class="row mt-4 pl-3">
+            <div class="title3 mb-2">
+              <p>Rating</p>
+            </div>
+          </div>
+          <div class="row mt-1 pl-3">
+            <div class="form-group">
+              <ngb-rating [formControl]="ctrl" [(rate)]="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
+            </div>
+          </div>
+          <div class="row pl-3">
+              <div class="col-sm input-group">
+                <textarea
+                  class="form-control"
+                  id="reviewR"
+                  rows="4"
+                  name="reviewR"
+                  placeholder="Leave your review here. (400 characters left)"
+                  [(ngModel)]="reviewR"
+                ></textarea>
+                <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
+              </div>
+            </div>
+          <div class="row mt-3 float-right">
+            <button class="blueBtn small w360 mr-3 cancelRate" (click)="ctrl.setValue(null);cancelRate()">Cancel</button>
+            <button class="blueBtn small w360 mr-3" (click)="postReview(currentRate, reviewR)">Post</button>
+          </div>
+        </div>
     </div>
   </div>
 </div>

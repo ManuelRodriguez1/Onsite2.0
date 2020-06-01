@@ -13,35 +13,37 @@ export class ChatComponent implements OnInit {
       'photoUrl': 'none', 
       'nombre': 'Lorem ipsum 1.',
       'projectName': 'project name1',
-      'ojo': '1',
-      'carpeta': '2',
-
+      'ojo':true,
+      'carpeta': true,
+      "puntoMessage":true
     },
     {
       'photoUrl': 'none',
       'nombre': 'Lorem ipsum 2.',
       'projectName': 'project name2',
-      'ojo': '1',
-      'carpeta': '2',
-
+      'ojo': true,
+      'carpeta': true,
+      "puntoMessage":true
         },
     {
       'photoUrl': 'none',
       'nombre': 'Lorem ipsum 3.',
       'projectName': 'project name3',
-      'ojo': '1',
-      'carpeta': '2',
+      'ojo': true,
+      'carpeta': false,
+      "puntoMessage":false
 
         },
     {
       'photoUrl': 'none',
       'nombre': 'Lorem ipsum 4.',
       'projectName': 'project name4',
-      'ojo': '1',
-      'carpeta': '2',
-
-        }];
-
+      'ojo': false,
+      'carpeta':false,
+      "puntoMessage":false
+     }
+    ];
+  
   ngOnInit() {
   }
 

@@ -57,7 +57,7 @@
   border-radius: 2px;
   font-size: 10px;
   font-weight: bold;
-  cursor: pointer;
+  cursor: project-name;
 }
 
 .upload-btn-wrapper input[type=file] {
@@ -108,7 +108,7 @@
 .project-name:hover{
   text-decoration: none;
   color: #000000 !important;
-  cursor: text !important;
+  cursor: pointer !important;
 }
 span:hover{
   color: #FF8600 !important;
@@ -127,6 +127,9 @@ span:hover{
 .list-name{
   color: #E76800;
 }
+.list-name:hover{
+  cursor: pointer;
+}
 .title-table{
   font-family: Open Sans;
   font-style: normal;
@@ -142,6 +145,9 @@ span:hover{
   font-size: 16px;
   line-height: 100%;
   color: #000000;
+}
+.project-name:hover{
+  cursor: pointer;
 }
 .new-project{
   font-family: Open Sans;
@@ -510,10 +516,6 @@ width: 100%;
     left: 0;
     border-bottom: 0.5px solid rgba(196,196,196,0.5);
 }
-.container{
-  margin-bottom: 74px;
-  padding: 0;
-}
 .divcol{
   padding: 0;
 }
@@ -547,10 +549,20 @@ width: 100%;
   display: -webkit-box;
 }
 .profile{
-  width: 99px;
-  height: 99px;
-  background: black;
+  width: 150px;
+  height: 150px;
+  background: #9D9D9D;
   border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+.profile-mini{
+  width: 80px;
+  height: 80px;
+  background: #9D9D9D;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
 }
 .textw{
   margin-left: 20px;
@@ -848,4 +860,43 @@ width: 100%;
 }
 .aplicants::-webkit-scrollbar:horizontal {
   height: 10px;
+}
+.mt-44{
+  margin-top: 14%;
+}
+.pt-50{
+  padding-top: 30%;
+}
+.container{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  padding: 0;
+}
+.divcol{
+  padding: 0;
+}
+.title2{
+  margin: 0;
+}
+#btmessage:hover{
+  cursor: not-allowed;
+}
+.cancelRate{
+  background-color: #ffffff;
+  color: #010973;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 200%;
+}
+.ngb-rating{
+  font-size: 26px;
+  color: #9D9D9D;
+}
+.ngb-rating:hover{
+  color: #010973;
+}
+.m-28{
+  margin-top: -5%;
 }

@@ -22,7 +22,7 @@ export class HireuserService {
     }
 
     getDataPro(idP:any){
-      this.af.collection("users_hire").doc(idP)
+      return this.af.collection("users_pro").doc(idP)
     }
 
     getCredential(user: string, password: string) {
@@ -81,4 +81,5 @@ export class HireuserService {
         "photoUrl": img
       })
     }
+
 }

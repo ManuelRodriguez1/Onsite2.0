@@ -24,33 +24,21 @@ error: any[];
 
     UserName="";
 
-
-
     constructor(public af: AngularFireAuth, private router: Router,private afstore: AngularFirestore) 
     {
       if(location.pathname=="/Home" || location.pathname=="/Pro" || location.pathname=="/Hire"){
-              
-  
         this.userMenu="Home";
                 this.af.authState.subscribe(auth => {
-                 
                   if(auth){
                     if(auth.displayName=="hire"){
                       this.router.navigate(['/Hireprincipal']);
                     }else if(auth.displayName=="pro"){
                       this.router.navigate(['/ProfilePro']);
-  
                     }
                   }
-              
-                });
-                      
-                    
-                }
-        
-        
+                });           
+                }      
       this.af.authState.subscribe(auth => {
-        console.log(auth);
           if (auth) {
               this.Sesion = true;            
           } else {
@@ -64,29 +52,21 @@ error: any[];
         }); 
     }
   ngOnInit() {
-
   }
 
   flechaUsuario(){
 
     if(this.popad==false){
-
       this.popad = true;
-   
     }else if(this.popad==true){
       this.popad = false;
     }
-    
-
-
-  
   }
   paginaMensajeMenu(user) {
     console.log(user);
     if(user){
       this.estado=user.displayName;
     }
-
     if(location.pathname=="/Hire" || this.estado=="hire"){
       this.m="Hirer";
       }else if(location.pathname=="/Pro" || this.estado=="pro"){
@@ -98,9 +78,6 @@ error: any[];
       this.m="Home";
       this.userMenu="Home";
      }
-        
-  
-
           if(this.estado=="hire"){
             this.userMenu="Hirer";
             console.log(user.uid)
@@ -111,30 +88,22 @@ error: any[];
              if(d){
               if (this.profile.photoUrl!="") { this.imageP = this.profile.photoUrl }
               if (this.profile.name!="") { this.UserName = this.profile.name }
-
              }
-             
             })
-          
           }else if(this.estado=="pro"){
+            alert("pro");
             this.userMenu="Pro";  
             var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
               this.profile = d.payload.data()
-              if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
-              if (this.profile.name != null) { this.UserName = this.profile.name }
-
-            })
-          
-        
-          
-         }
-
- 
-
-      
+              console.log(this.profile );
+             if(d){
+              if (this.profile.photoUrl!="") { this.imageP = this.profile.photoUrl }
+              if (this.profile.name!="") { this.UserName = this.profile.name }
+             }
+            })          
+         } 
   }
-
    logout() {
         this.af.auth.signOut();
         console.log('logged out');
