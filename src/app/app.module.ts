@@ -43,6 +43,7 @@ import { HireuserService } from './services/hireuser.service';
 import { HireService } from './services/hire.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { DashboardComponent } from './components/pro/profile-pro/dashboard/dashboard.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { DashboardComponent } from './components/pro/profile-pro/dashboard/dashb
     ChangeEmailComponent,
     LatestPipe,
     ChatComponent,
-    DashboardComponent
+    DashboardComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
