@@ -82,9 +82,4 @@ export class HireuserService {
       })
     }
 
-    applyRating(idPro: string, userreviews: any[]){
-      this.getDataPro(idPro).update({
-        reviews: userreviews
-      })
-    }
 }

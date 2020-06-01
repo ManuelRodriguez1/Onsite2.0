@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { AngularFireStorage } from "angularfire2/storage";
 import {formatDate} from '@angular/common';
 import { last } from '@angular/router/src/utils/collection';
+import {FormControl, Validators} from '@angular/forms';
 
 
 @Component({
@@ -17,6 +18,8 @@ import { last } from '@angular/router/src/utils/collection';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
+  ctrl = new FormControl(null, Validators.required)
+  reviews: any[] = []
   up = false;
   selectskills: any[] = [];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
@@ -41,9 +44,6 @@ export class MenuHomeComponent implements OnInit {
 
   projects=[];
   projectsHire: any[] = [];
-  projectsHirePending: any[] = [];
-  projectsHireActive: any[] = [];
-  projectsHireArchived: any[] = [];
   projectsHireDeleted: any[] = [];
 
   section: number = 1;
@@ -59,12 +59,15 @@ export class MenuHomeComponent implements OnInit {
   viewP: any = ''
 
   profile: any = ''
+  profileP: any = ''
   modal: number = 0
   confirm: number = 0
   confirm2 = ''
   error = 0
   apply: any[] = [];
   dataApply:any[] = [];
+
+  LeaveForm = 0
 
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
@@ -118,14 +121,6 @@ export class MenuHomeComponent implements OnInit {
             }
           }
           console.log(this.projectsHire);
-          /* var t = this.projectsHire.map(item => item.id).indexOf(d.doc.data().id)
-          console.log(t) */
-          /* this.projectsHire.forEach((data)=>{
-            if(data[0].id === d.doc.data().id){
-              this.projectsHire.splice(data[0],1)
-              console.log(this.projectsHire)
-            }
-          }) */
         }
       })
     })
@@ -136,63 +131,21 @@ export class MenuHomeComponent implements OnInit {
   }
 
   /* Status Project
-  1 = Pending
-  2 = Active
-  3 = Archived
-  4 = Delete */
-
+  1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
   addProject(f: NgForm) {
     this.error = 2
-    var currentDate = new Date();
-    var idP = this.db.createId();
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).set({
-      id: idP,
-      projectname: f.value.projectname,
-      creationdate: currentDate,
-      description: f.value.description,
-      location: f.value.location,
-      estimated: f.value.estimated,
-      startdate: f.value.startdate,
-      enddate: f.value.enddate,
-      taketest: f.value.taketest,
-      passtest: f.value.passtest,
-      skills: this.selectskills,
-      status: 1,
-      statusname: 'Pending',
-      briefmaterial: this.files
-    }).then(()=>{
-      for (let i = 0; i < this.file.length; i++) {
-        var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/"+this.file[i].name).put(this.file[i])
-        fileDoc.then((url) => {
-          url.ref.getDownloadURL()
-            .then((url) => {
-              this.customers2.push({"name": this.file[i].name, "url": url})
-              setTimeout(() => {
-                this.db.collection('users_hire').doc(this.user.uid).update({
-                  "project": true
-                })
-                this.db.collection('users_hire').doc(this.user.uid).collection("projects").doc(idP).update({
-                  'briefmaterial': this.customers2
-                })
-              }, 200);
-            })
-        })
-      }
-    }).then(()=>{
-      this.modal = 1
-    })
-    .catch((error) => {
-      alert(error.message)
+    this.projectService.newProject(f, this.file, this.files, this.selectskills)
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
+    .onSnapshot((d) => {
+      d.docChanges().forEach((d) => {
+        if (d.type === "added") {
+          this.modal = 1
+          this.section = 1
+        }
+      })
     })
   }
 
-  reload(){
-    location.reload();
-  }
-
-  getStarted() {
-    this.HomeFormularioNw = 1;
-  }
   next() {
     this.error = 2
     this.page++;
@@ -211,12 +164,11 @@ export class MenuHomeComponent implements OnInit {
     this.cust = this.files.length - 1;
   }
 
-  uploadDoc(e){
+  /* uploadDoc(e){
     /* var i = this.cust
     this.file.push(e.target.files[0])
     this.files[i] = e.target.files[0].name
     this.files[i] = {"name": e.target.files[0].name,"url":e.target.files[0].name}
-     */
     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
     fileDoc.then((url) => {
       url.ref.getDownloadURL()
@@ -224,6 +176,12 @@ export class MenuHomeComponent implements OnInit {
           this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
         })
     })
+  } */
+
+  uploadDoc(e) {
+    var i = this.cust
+    this.file.push(e.target.files[0])
+    this.files[i] = e.target.files[0].name
   }
   selectOption(e) {
     this.option = e
@@ -237,9 +195,10 @@ export class MenuHomeComponent implements OnInit {
   }
 
   hideModal() {
-    this.modal = 3
     this.select = 0
     this.HomeFormularioNw = 0
+    this.modal = 3
+    console.log(this.modal)
   }
 
   deleteBriefMaterial(e: any) {
@@ -302,14 +261,32 @@ export class MenuHomeComponent implements OnInit {
       })
   }
 
-  goToProfile(id: number){
-    this.routerr.navigate(['/ProfileApply',id])
-    console.log("ok")
+  goToProfile(id){
+    this.HomeFormularioNw = 3
+    this.section = 4
+    this.db.collection("users_pro").doc(id).snapshotChanges().subscribe((d) => {
+      this.profileP = d.payload.data()
+      console.log(this.profileP)
+    })
   }
 
   goToEditProject(idP: number){
     this.routerr.navigate(['/ProjectEdit',idP])
     console.log("ok")
+  }
+
+  leave(){
+    this.LeaveForm = 1
+  }
+  cancelRate(){
+    this.LeaveForm = 0
+  }
+
+  postReview(currentRate, review){
+    this.reviews.push({"hire":this.user.uid,"rating":currentRate,"review":review})
+    console.log(this.reviews)
+    //this.hireUser.applyRating(this.route.snapshot.paramMap.get('id'),this.reviews)
+    this.LeaveForm = 0
   }
 
 }

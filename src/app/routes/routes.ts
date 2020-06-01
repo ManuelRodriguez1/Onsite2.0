@@ -13,7 +13,6 @@ import { AuthGuard } from '../services/auth.service';
 import { PlantillaComponent } from '../components/plantilla/plantilla.component';
 import { ExploreComponent } from '../components/pro/profile-pro/explore/explore.component';
 import { ChatComponent } from '../components/chat/chat.component';
-import { MenuExploreComponent } from '../components/hire/hire-principal/menu-explore/menu-explore.component';
 import { ProjectsComponent } from '../components/pro/profile-pro/projects/projects.component';
 
 
@@ -28,7 +27,6 @@ export const router: Routes = [
     { path: 'VerificationEmail', component: EmailVerificationComponent },
     { path: 'ProfileHire', component: ProfileHireComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
     { path: 'Hireprincipal', component: HirePrincipalComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
-    { path: 'ProfileApply/:id', component: MenuExploreComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
     { path: 'ExplorePro', component: ExploreComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
     { path: 'Dashboard', component: ProjectsComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
     { path: 'Chat', component: ChatComponent },
