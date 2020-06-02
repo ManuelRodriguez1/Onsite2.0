@@ -12,6 +12,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   //List projects
   projects: any[] = []
+  f: number = 5
   //loading
   loading: boolean = true
   //Subscripciones
@@ -50,6 +51,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub1.unsubscribe()
     this.sub2.unsubscribe()
+  }
+
+  filterStatus(e: number){
+    this.f = e
   }
 
 }

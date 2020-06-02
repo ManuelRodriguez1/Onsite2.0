@@ -7,18 +7,18 @@
     </div>
     <div class="col-sm">
       <div class="options mr-48">
-        <div class="option optionActive">
+        <div class="option" [class.optionActive]="f == 5" (click)="filterStatus(5)">
           <p>All</p>
         </div>
-        <div class="option">
+        <div class="option" [class.optionActive]="f == 2" (click)="filterStatus(2)">
           <p>Active</p>
         </div>
-        <div class="option">
+        <div class="option" [class.optionActive]="f == 1" (click)="filterStatus(1)">
           <p>Pending</p>
         </div>
-        <div class="option">
+        <!-- <div class="option">
           <p>Deleted</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -35,22 +35,24 @@
     <div class="col-sm"></div>
   </div>
   <div class="mt-17">
-    <ng-container *ngFor="let p of projects">
-      <div class="row ml-48 mt-22 p-0">
-        <div class="col-sm">
-          <p>{{p.projectname}}</p>
-        </div>
-        <div class="col-sm">
-          <p>{{p.statusname}}</p>
-        </div>
-        <div class="col-sm">
-          <div class="webkit">
-            <div class="messageIcon"></div>
-            <div class="trash"></div>
+    <ng-container *ngFor="let p of projects | filter: f">
+      <ng-container>
+        <div class="row ml-48 mt-22 p-0">
+          <div class="col-sm">
+            <p>{{p.projectname}}</p>
+          </div>
+          <div class="col-sm">
+            <p>{{p.statusname}}</p>
+          </div>
+          <div class="col-sm">
+            <div class="webkit">
+              <div class="messageIcon"></div>
+              <div class="trash"></div>
+            </div>
           </div>
         </div>
-      </div>
-      <hr class="hr mt-22">
+        <hr class="hr mt-22">
+      </ng-container>
     </ng-container>
   </div>
 </div>
