@@ -257,7 +257,7 @@ export class MenuHomeComponent implements OnInit {
   goToEditProject(idP: number){
     alert("edit");
     //this.routerr.navigate(['/ProjectEdit',idP])
-  
+  /*
     var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).snapshotChanges()
     data.subscribe((d) => {
       this.viewP = d.payload.data()
@@ -265,7 +265,7 @@ export class MenuHomeComponent implements OnInit {
       console.log(this.viewP);
       this.projectname="belxy";
       
-    })
+    })*/
     this.HomeFormularioNw =1;
     console.log("ok")
   }

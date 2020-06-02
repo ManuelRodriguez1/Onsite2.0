@@ -21,13 +21,13 @@
 
         </ul>
         <ul *ngIf="Sesion==true && userMenu=='Pro'" class="menu">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="/Dashboard">Dashboard</a></li>
             <li><a href="/ExplorePro">Explore</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Messages</a></li>
+            <li><a href="/Projects">Projects</a></li>
+            <li><a href="/Chat">Messages</a></li>
             <li>
                 <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span>
-                <a href="#">{{UserName}}</a>
+                {{UserName}}
 
                 <span class="flechaUsuario" (click)="flechaUsuario()">
               
@@ -36,7 +36,7 @@
                   </svg>
                   
                     <div *ngIf="popad==true"   class="bgpodpad menu" >
-                       <li><a href="#">My account</a></li>
+                       <li><a href="/ProfilePro">My account</a></li>
                         <li><a (click)="logout()"  >Sign out</a></li>
                          </div>
 
@@ -46,11 +46,11 @@
         </ul>
 
         <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
-            <li><a href="#">Projects</a></li>
+            <li><a href="/Hireprincipal">Projects</a></li>
             <li><a href="/Chat">Messages</a></li>
             <li>
                 <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span>
-                <a (click)="logout()" href="#">{{UserName}}</a>
+               {{UserName}}
 
                 <span class="flechaUsuario" (click)="flechaUsuario()">
               
@@ -59,7 +59,7 @@
                       </svg>
                       
                         <div *ngIf="popad==true"   class="bgpodpad menu" >
-                           <li><a href="#">My account</a></li>
+                           <li><a href="/ProfileHire">My account</a></li>
                             <li><a (click)="logout()"  >Sign out</a></li>
                              </div>
     
