@@ -5,7 +5,7 @@
   <section [hidden]='page > 0'>
     <div class="fields container">
       <div class="row">
-        <div class="col-sm input-group">
+        <div class="col-sm input-group" >
           <input required type="text" class="form-control" id="FirstName" name="FirstName" (ngModel)="FirstName"
             placeholder="First Name" #name="ngModel" ngModel>
         </div>
@@ -17,9 +17,10 @@
         <div class="col-sm input-group">
           <input required type="text" class="form-control" [class.errorInput]="verifyEmail == true" placeholder="E-mail" (ngModel)="Email" name="Email" id="Email" #email="ngModel" ngModel [ngClass]="{'errorInput': error!=null}">
           <span [hidden]="verifyEmail == false" class="textError">Email already exists!</span>
+          <!-- <span [hidden]="validEmail == false" class="textError">Email is not valid!</span> -->
         </div>
         <div class="col-sm input-group">
-          <input type="text" class="form-control" placeholder="Phone Number" name="PhoneNumber" #phone="ngModel" ngModel>
+          <input type="Number" class="form-control" placeholder="Phone Number" name="PhoneNumber" #phone="ngModel" ngModel>
         </div>
       </div>
     </div>
@@ -41,11 +42,13 @@
         </div>
         <div class="col-sm input-group">
           <input type="password" class="form-control"
-            [class.errorInput]="user.value != password.value && password.value != ''"
-            [class.correctInput]="user.value == password.value && password.value != ''"
+            [class.errorInput]="password.value?.length < 6 && user.value != password.value && password.value != ''"
+            [class.correctInput]="user.value == password.value && password.value != '' && password.value?.length > 5"
             placeholder="Password confirmation" name="Password" #password="ngModel" ngModel>
           <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password doesn’t
             match.</span>
+          <span [hidden]="password.value?.length > 5 || password.value == ''" class="textError">Password must be at leat 6
+            characters.</span>
         </div>
       </div>
     </div>
@@ -55,7 +58,7 @@
     <div class="field3 container">
       <div class="row">
         <div class="col-sm input-group">
-          <input required type="text" class="validate form-control" placeholder="Enter city or zipcode." name="Entercityorzipcode"(ngModel)="Entercityorzipcode" id="Entercityorzipcode" #zipcode="ngModel" ngModel>
+          <input required type="number" class="validate form-control" placeholder="Enter city or zipcode." name="Entercityorzipcode"(ngModel)="Entercityorzipcode" id="Entercityorzipcode" #zipcode="ngModel" ngModel>
         </div>
         <div class="col-sm input-group" style="visibility: hidden;">
           <input type="text" class="form-control" disabled placeholder="" name="">

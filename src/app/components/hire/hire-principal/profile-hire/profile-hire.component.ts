@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import * as crypto from "crypto-js";
 import { HireuserService } from 'src/app/services/hireuser.service';
 import { AngularFirestore } from 'angularfire2/firestore';
-import firebase = require('firebase');
+import * as firebase from 'firebase';
 declare var $: any
 
 @Component({
@@ -32,6 +32,8 @@ export class ProfileHireComponent implements OnInit {
   emailVerified: any
   countProject= 0
   emailVal: boolean = true
+  infoa: boolean = true
+  passu: boolean = true
   constructor(
     private af: AngularFirestore,
     private hireuser: HireuserService
@@ -59,7 +61,7 @@ export class ProfileHireComponent implements OnInit {
       this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
       setTimeout(() => {
         this.credential = this.hireuser.getCredential(this.profile.email, this.password)
-      }, 100);
+      }, 800);
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
       if(this.profile.photoUrl != null && this.emailVerified != false){
         this.profileCompleted = true
@@ -73,13 +75,18 @@ export class ProfileHireComponent implements OnInit {
 
   accountForm(f: NgForm) {
     if (this.hireuser.updateAccount(f, this.profile.name, this.profile.lastname)) {
-      $("#name").val('')
-      $("#lastname").val('')
+      this.infoa = false
+      setTimeout(() => {
+        this.infoa = true
+      }, 3000);
     }
     if (f.value.email.trim() != '') {
       if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {
         this.hireuser.updateEmail(this.credential, f.value.email)
-        $("#email").val('')
+        this.infoa = false
+        setTimeout(() => {
+          this.infoa = true
+        }, 3000);
       } else {
         this.emailVal = false
       }
@@ -91,6 +98,10 @@ export class ProfileHireComponent implements OnInit {
       this.hireuser.updatePassword(this.credential, f.value.pass2)
         .then(() => {
           $("#cPass, #pass1, #pass2").val('')
+          this.passu = false
+          setTimeout(() => {
+            this.passu = true
+          }, 3000);
           setTimeout(() => {
             $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
             $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class HireService {
-
+  error : ''
   constructor(
     public af: AngularFireAuth,
     private db: AngularFirestore,
@@ -41,6 +41,7 @@ export class HireService {
         }).then(() => this.router.navigate(['/ProfileHire']))
       }).catch((err) => {
         console.log(err);
+        return this.error = err
       });
     }
   }

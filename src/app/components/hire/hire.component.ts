@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from "@angular/core";
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HireService }  from 'src/app/services/hire.service';
 import { AngularFirestore } from "angularfire2/firestore";
 
@@ -15,6 +15,19 @@ export class HireComponent implements OnInit {
   title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
   verifyEmail: boolean = false
+
+  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  formData: FormGroup;
+
+  createFormGroup(){
+    return new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.minLength(5),Validators.pattern(this.emailPattern)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(5),]),
+      lastname: new FormControl('', [Validators.required, Validators.minLength(5),]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(5),])
+    })
+  }
+
 
   constructor(
     private serviceHire: HireService,
@@ -45,4 +58,5 @@ export class HireComponent implements OnInit {
       }
     })
   }
+
 }
