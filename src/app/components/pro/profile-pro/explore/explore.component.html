@@ -4,13 +4,15 @@
       <div class="row fields">
         <div class="input-group">
           <div class="searchGray absoluteSearch"></div>
-          <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects" [(ngModel)]="searchProject" name="searchProject" >
+          <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects"
+            [(ngModel)]="searchProject" name="searchProject">
           <div class="normalText fl ml-48">
-            <p><strong>{{ projects2.length + 0 }} Results</strong></p>
+            <p><strong>{{ projects2.length }} Results</strong></p>
           </div>
           <div class="normalText fr ml-137">
-            <p>Sort by: <a class="orange" href="#"><strong>Latest</strong></a></p>
-            <div class="arrowDownGray fr mt-mr"></div>
+            <p>Sort by: <span style="cursor: pointer;" class="orange" (click)="filterChange()"><strong *ngIf="changeFilter">Latest</strong>
+            <strong *ngIf="!changeFilter">First</strong></span></p>
+            <div class="arrowDownGray fr mt-mr" (click)="filterChange()"></div>
           </div>
         </div>
       </div>
@@ -28,7 +30,7 @@
       <div></div>
       <div></div>
     </div>
-    <ng-container *ngFor="let p of projects | search: searchProject; let i = index">
+    <ng-container *ngFor="let p of projects | search: searchProject | order; let i = index">
       <div class="projects row" (click)="sendInfo(p)" *ngIf="(i+1) >= start && (i+1) <= end">
         <div class="col-sm-6 ml-48">
           <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
@@ -55,7 +57,8 @@
       <div class="prevPag" [class.clickP]="start > 1" (click)="prevPage()">
         <p>Previous</p>
       </div>
-      <div class="numbers clickP" [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) " (click)="changePag(page)" *ngFor="let page of pages">
+      <div class="numbers clickP" [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) "
+        (click)="changePag(page)" *ngFor="let page of pages">
         <p>{{ page }}</p>
       </div>
       <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects2.length">
@@ -77,9 +80,9 @@
     </div>
     <div class="col-sm mr-48">
       <button class="blueBtn small fr" (click)="apply()" *ngIf="buttonApply; else aplicado"><span>Apply</span></button>
-        <ng-template #aplicado>
-          <button class="blueBtn small fr disabled grayBtn" disabled><span>Applied</span></button>
-        </ng-template>
+      <ng-template #aplicado>
+        <button class="blueBtn small fr disabled grayBtn" disabled><span>Applied</span></button>
+      </ng-template>
     </div>
   </div>
   <hr class="hr">

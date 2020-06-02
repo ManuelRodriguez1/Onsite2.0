@@ -1145,9 +1145,9 @@ h4,
 .profile {
     width: 150px;
     height: 150px;
-    background: #9D9D9D;
+    background: #9D9D9D no-repeat;
     border-radius: 50%;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
 }
 

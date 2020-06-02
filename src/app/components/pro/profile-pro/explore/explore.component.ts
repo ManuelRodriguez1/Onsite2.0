@@ -25,6 +25,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   //Filtro
   filter: any = 'desc'
   searchProject: string = ''
+  changeFilter: boolean = true
   //Paginación
   pages: number[] = []
   start: number = 1
@@ -39,16 +40,19 @@ export class ExploreComponent implements OnInit, OnDestroy {
 
   constructor(private prouser: ProuserService, public router: Router) {
     this.loading = true
+    firebase.firestore().enablePersistence()
   }
 
   ngOnInit() {
     this.suscription0 = this.prouser.getInfoHire().snapshotChanges()
       .subscribe((d) => {
         var tempProjects: any[] = []
+        this.projects = []
+        this.projects2 = []
         d.forEach((j) => {
           var profile: any = j.payload.doc.data()
           if (profile.project) {
-            j.payload.doc.ref.collection("projects").orderBy("creationdate", this.filter)
+            j.payload.doc.ref.collection("projects")
               .onSnapshot((d) => {
                 d.docChanges().map((k) => {
                   if (k.doc.data().status > 0 && k.doc.data().status < 3) {
@@ -170,6 +174,15 @@ export class ExploreComponent implements OnInit, OnDestroy {
   lastPage() {
     var i = this.pages[this.pages.length - 1]
     this.changePag(i)
+  }
+
+  filterChange(){
+    this.changeFilter = !this.changeFilter
+    if(this.filter == 'desc'){
+      this.filter = 'asc'
+    }else{
+      this.filter = 'desc'
+    }
   }
 
   ngOnDestroy() {

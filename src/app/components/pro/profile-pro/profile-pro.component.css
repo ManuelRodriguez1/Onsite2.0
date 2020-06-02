@@ -1,5 +1,5 @@
 .container{
-    margin-top: 85px;
+    margin-top: 120px;
     margin-bottom: 74px;
     padding: 0;
 }
@@ -278,6 +278,15 @@ iframe{
 }
 .cDefault{
     cursor: default;
+}
+.alertInitial{
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+}
+.alert{
+    transition: .5s;
 }
 /* Estilos overall */
 .projects{

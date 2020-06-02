@@ -16,8 +16,9 @@ export class ProfileProComponent implements OnInit {
   select = 2
   lat: number = 51.678418;
   lng: number = 7.809007;
-  menushow = false
-  project = false
+  menushow:boolean = false
+  project: boolean = false
+  alert: number = 1
   // Variables eventos
   up: boolean = false
   skills: any[] = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
@@ -97,6 +98,10 @@ export class ProfileProComponent implements OnInit {
           setTimeout(() => {
             $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
             $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
+            this.alert = 0
+            setTimeout(() => {
+              this.alert = 1
+            }, 3000);
           }, 200);
         })
     }

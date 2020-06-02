@@ -15,3 +15,6 @@
 .mr-10{
     margin-right: 10px;
 }
+.heightTemp{
+    height: calc(100vh - 606px);
+}

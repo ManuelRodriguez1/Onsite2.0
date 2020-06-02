@@ -112,14 +112,6 @@
       <span class="form-check-input form-checked" (click)="check()"></span>
       <p class="form-check-label" for="check1">I accept and agree to the <a href="#">Terms of Use.</a></p>
     </label>
-    <!-- <div class="row customers2">
-    <div class="col-sm input-group">
-      <div class="input-group-prepend">
-        <div class="icon_img airplane"></div>
-      </div>
-      <input type="text" class="form-control" placeholder="Say hello!" ngModel name="description" #description="ngModel">
-    </div>
-  </div> -->
   </section>
   <div class="buttons container">
     <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 3' (click)='back()'>
@@ -130,7 +122,7 @@
       Next
     </button>
     <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2'
-      [disabled]="selectskills == null">
+      [disabled]="selectskills.length == 0">
       Next
     </button>
     <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 2"

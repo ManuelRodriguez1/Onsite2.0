@@ -254,7 +254,7 @@ export class MenuHomeComponent implements OnInit {
     })
   }
 
-  goToEditProject(idP: number){
+  goToEditProject(idP: any){
     alert("edit");
     //this.routerr.navigate(['/ProjectEdit',idP])
   

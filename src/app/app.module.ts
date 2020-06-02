@@ -44,6 +44,7 @@ import { HireService } from './services/hire.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { DashboardComponent } from './components/pro/profile-pro/dashboard/dashboard.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { OrderPipe } from './pipes/order.pipe';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     LatestPipe,
     ChatComponent,
     DashboardComponent,
-    FilterPipe
+    FilterPipe,
+    OrderPipe
   ],
   imports: [
     BrowserModule,

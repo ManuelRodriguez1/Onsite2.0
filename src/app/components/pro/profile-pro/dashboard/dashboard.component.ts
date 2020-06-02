@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   projects: any[] = []
   //Loading
   loading: boolean = true
+  applyPro: number = 0
   //Subscripciones
   sub1: Subscription
   sub2: Subscription
@@ -32,6 +33,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                   if (info.doc.data().applyUsers) {
                     if (info.doc.data().applyUsers.includes(this.proU.user.uid)) {
                       this.proU.projects.emit(info.doc.data())
+                    }else{
+                      this.proU.projects.emit(null)
                     }
                   }
                 })
@@ -41,7 +44,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       })
 
     this.sub2 = this.proU.projects.subscribe((res) => {
-      this.projects.push(res)
+      if(res != null){
+        this.projects.push(res)
+      }else{
+        this.applyPro = 1
+      }
       this.loading = false
     })
   }
