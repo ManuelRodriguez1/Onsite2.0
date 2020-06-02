@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
-
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireModule } from "angularfire2";
@@ -24,7 +23,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProfileProComponent } from './components/pro/profile-pro/profile-pro.component';
 import {MenuHomeComponent} from './components/hire/hire-principal/menu-home/menu-home.component';
 import { LoginComponent } from './components/login/login.component';
-import { ServiceService } from './services/service.service';
 import { ProjectService } from './services/project.service';
 import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.component';
 import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
@@ -91,7 +89,7 @@ import { OrderPipe } from './pipes/order.pipe';
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [ServiceService, AuthGuard, ProjectService, ProService, ProuserService, HireuserService, HireService],
+  providers: [ AuthGuard, ProjectService, ProService, ProuserService, HireuserService, HireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { ServiceService } from 'src/app/services/service.service';
+//import { ServiceService } from 'src/app/services/service.service';
 import * as $ from 'jquery';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
@@ -21,7 +21,9 @@ export class InboxComponent implements OnInit {
   contador = 0
   other = ''
   me = ''
-  constructor(private service: ServiceService, private db: AngularFirestore) {
+  //constructor(private service: ServiceService, private db: AngularFirestore) {
+
+  constructor( private db: AngularFirestore) {
     this.me = this.user.email.replace('.', '-')
     this.datos = this.db.collection('/Chat/ListaChat/' + this.me).valueChanges()
   }

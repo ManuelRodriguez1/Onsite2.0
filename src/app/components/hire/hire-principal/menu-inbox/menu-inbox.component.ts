@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { ServiceService } from 'src/app/services/service.service';
+//import { ServiceService } from 'src/app/services/service.service';
 import { AngularFirestore } from "angularfire2/firestore";
 import * as $ from 'jquery';
 import { Observable } from 'rxjs';
@@ -25,8 +25,8 @@ export class MenuInboxComponent implements OnInit {
   contador2 = 0
   intervalo
 
-  constructor(private service: ServiceService, private db: AngularFirestore) {
-    this.email = this.service.DevolverDatos();
+  constructor( private db: AngularFirestore) {
+    //this.email = this.service.DevolverDatos();
     this.me = this.user.email.replace('.', '-')
     //Ver items a la izquierda
     this.datos = this.db.collection('Chat/ListaChat/' + this.me).valueChanges()

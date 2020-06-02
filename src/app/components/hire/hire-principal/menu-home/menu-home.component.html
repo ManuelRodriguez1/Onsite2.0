@@ -1,646 +1,689 @@
 <div class="error" [class.errorh]="error == 1">
-    <p>The project has been deleted</p>
+  <p>The project has been deleted</p>
 </div>
 <form #formProject="ngForm" (ngSubmit)="addProject(formProject)" class="form-Project">
-  <section class="container">
-    <div class="home" *ngIf="select == 0">
-      <div *ngIf="HomeFormularioNw == 0">
-        <div class="list-project">
-          <div class="started">
-            <div class="m-0">
-              <div class="row py-3 px-5">
-                <div class="col-sm-2 title-list">Projects</div>
-                <div class="col-sm-10 list-options">
-                  <span (click)="selectOption(1)" [class.activeOption]="option == 1">All</span>
-                  <span (click)="selectOption(2)" [class.activeOption]="option == 2">Active</span>
-                  <span (click)="selectOption(3)" [class.activeOption]="option == 3">Pending</span>
-                  <span (click)="selectOption(4)" [class.activeOption]="option == 4">Archived</span>
-                  <span (click)="selectOption(5)" [class.activeOption]="option == 5">Deleted</span>
+<section class="container">
+  <div class="home" *ngIf="select == 0">
+    <div *ngIf="HomeFormularioNw == 0">
+      <div class="list-project">
+        <div class="started">
+          <div class="m-0">
+            <div class="row py-3 px-5">
+              <div class="col-sm-2 title-list">Projects</div>
+              <div class="col-sm-10 list-options">
+                <span (click)="selectOption(5)" [class.activeOption]="option == 5">All</span>
+                <span (click)="selectOption(2)" [class.activeOption]="option == 2">Active</span>
+                <span (click)="selectOption(1)" [class.activeOption]="option == 1">Pending</span>
+                <span (click)="selectOption(3)" [class.activeOption]="option == 3">Archived</span>
+                <span (click)="selectOption(4)" [class.activeOption]="option == 4">Deleted</span>
+              </div>
+            </div>
+            <hr class="m-0">
+            <div class="row py-3 px-5 title-table">
+              <div class="col-sm-5">Name</div>
+              <div class="col-sm-5">Status</div>
+            </div>
+            <div class="col-sm-12 divcol" [class.projects]="option == 1">
+              <div class="col-sm-12 divcol" >
+              <ng-container *ngFor="let p of projects | filter: option">
+                
+                <div class="row py-2 px-4 pb-3"  *ngIf="  p.status !=4  ;else second">
+                  <div class="col-sm-5">
+                    <li class="list-name">
+                      <span class="project-name" (click)="viewProject(p)">{{p.projectname}}</span>
+                    </li>
+                  </div>
+                  <div class="col-sm-3">{{p.statusname}}</div>
+                  <div class="col-sm-4 text-right">
+                    <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3 opChat">
+                    <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opChat">
+                    <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p.id)">
+                  </div>
                 </div>
-              </div>
-              <hr class="m-0">
-              <div class="row py-3 px-5 title-table">
-                <div class="col-sm-5">Name</div>
-                <div class="col-sm-5">Status</div>
-              </div>
-              <div class="col-sm-12 divcol" [class.projects]="option == 1">
-                <div class="col-sm-12 divcol" *ngIf="option == 1">
-                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
+
+                <ng-template #second >
+                  <div class="row py-2 px-4 pb-3" *ngIf="option == 4 " >
                     <div class="col-sm-5">
                       <li class="list-name">
-                        <span class="project-name" (click)="viewProject(p[0].id)">{{p[0].projectname}}</span>
+                        <span class="project-name" (click)="viewProject(p)">{{p.projectname}}</span>
                       </li>
                     </div>
-                    <div class="col-sm-3">{{p[0].statusname}}</div>
+                    <div class="col-sm-3">{{p.statusname}}</div>
                     <div class="col-sm-4 text-right">
                       <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3 opChat">
                       <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opChat">
-                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p[0].id)">
+                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p.id)">
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-12 divcol" *ngIf="option == 2">
-                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
-                      <div class="col-sm-5" *ngIf="p[0].status==2">
-                        <li class="list-name">
-                          <span class="project-name">{{p[0].projectname}}</span>
-                        </li>
-                      </div>
-                      <div class="col-sm-3" *ngIf="p[0].status==2">{{p[0].statusname}}</div>
-                      <div class="col-sm-4 text-right" *ngIf="p[0].status==2">
-                        <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
-                        <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
-                        <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
-                      </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 divcol" *ngIf="option == 3">
-                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
-                    <div class="col-sm-5" *ngIf="p[0].status==1">
+                  </ng-template>
+              </ng-container>
+
+
+              <div>
+
+              </div>
+
+              </div>
+            </div>
+              <!--div class="col-sm-12 divcol" *ngIf="option == 2">
+                <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
+                    <div class="col-sm-5" *ngIf="p[0].status==2">
                       <li class="list-name">
                         <span class="project-name">{{p[0].projectname}}</span>
                       </li>
                     </div>
-                    <div class="col-sm-3" *ngIf="p[0].status==1">{{p[0].statusname}}</div>
-                    <div class="col-sm-4 text-right" *ngIf="p[0].status==1">
+                    <div class="col-sm-3" *ngIf="p[0].status==2">{{p[0].statusname}}</div>
+                    <div class="col-sm-4 text-right" *ngIf="p[0].status==2">
                       <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
                       <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
                       <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
                     </div>
-                  </div>
                 </div>
-                <div class="col-sm-12 divcol" *ngIf="option == 5">
-                  <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHireDeleted">
-                    <div class="col-sm-5" *ngIf="p[0].status==4">
-                      <li class="list-name">
-                        <span class="project-name">{{p[0].projectname}}</span>
-                      </li>
-                    </div>
-                    <div class="col-sm-3" *ngIf="p[0].status==4">{{p[0].statusname}}</div>
-                    <div class="col-sm-4 text-right" *ngIf="p[0].status==4">
-                      <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
-                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
-                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
-                    </div>
+              </div>
+              <div class="col-sm-12 divcol" *ngIf="option == 3">
+                <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHire">
+                  <div class="col-sm-5" *ngIf="p[0].status==1">
+                    <li class="list-name">
+                      <span class="project-name">{{p[0].projectname}}</span>
+                    </li>
+                  </div>
+                  <div class="col-sm-3" *ngIf="p[0].status==1">{{p[0].statusname}}</div>
+                  <div class="col-sm-4 text-right" *ngIf="p[0].status==1">
+                    <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                    <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                    <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
                   </div>
                 </div>
               </div>
-              <hr class="m-0">
-              <div class="row py-3 px-5">
-                <div class="col-sm-6 input-group pl-3" (click)="next()">
-                  <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
-                  <span class="mt-2 new-project">Create new project</span>
+              <div class="col-sm-12 divcol" *ngIf="option == 5">
+                <div class="row py-2 px-4 pb-3" *ngFor="let p of projectsHireDeleted">
+                  <div class="col-sm-5" *ngIf="p[0].status==4">
+                    <li class="list-name">
+                      <span class="project-name">{{p[0].projectname}}</span>
+                    </li>
+                  </div>
+                  <div class="col-sm-3" *ngIf="p[0].status==4">{{p[0].statusname}}</div>
+                  <div class="col-sm-4 text-right" *ngIf="p[0].status==4">
+                    <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3">
+                    <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3">
+                    <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3">
+                  </div>
                 </div>
+              </div-->
+           
+            <hr class="m-0">
+            <div class="row py-3 px-5">
+              <div class="col-sm-6 input-group pl-3" (click)="next()">
+                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
+                <span class="mt-2 new-project">Create new project</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="HomeFormularioNw == 1">
-        <div class="container m-2">
-          <div class="row py-2">
-            <div class="title2">
-              <h1 class="changeColorBlue">Account Information</h1>
+    </div>
+    <div *ngIf="HomeFormularioNw == 1">
+      <div class="container m-2">
+        <input
+        type="hidden"
+        class="form-control"
+        name="id"
+        id="id"
+        ngModel #id="ngModel"
+        [(ngModel)]="viewP.id" 
+
+      />          
+        <div class="row py-2">
+          <div class="title2">
+            <h1 class="changeColorBlue">Account Information</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 input-group">
+            <input
+              required
+              type="text"
+              class="form-control"
+              placeholder="e.g. Excavation at 280 S."
+              name="projectname"
+              id="projectname"
+              ngModel #projectname="ngModel"
+              [(ngModel)]="viewP.projectname" 
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="title2">
+            <h1 class="changeColorBlue">Project description</h1>
+          </div>
+        </div>
+        <div class="row py-2">
+          <p class="description-form">
+            Type what the project is about and the estimated time you expect it
+            to be completed. Include an overview of what you need done.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-sm input-group">
+            <textarea
+              class="form-control"
+              id="description"
+              rows="4"
+              name="description"
+              placeholder="Describe your project here..."
+              ngModel #description="ngModel"
+              [(ngModel)]="viewP.description" 
+            ></textarea>
+          </div>
+        </div>
+        <div class="row text-right">
+          <div class="col-sm">
+            <span class="description-form">4000 characters remaining</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="title2">
+            <h1 class="changeColorBlue">Brief material</h1>
+          </div>
+        </div>
+        <div class="row">
+          <p class="description-form">
+            Add any documents or images that might be helpful in explaining more
+            about your project.
+          </p>
+        </div>
+   
+     
+        <div class="row" >
+          <div class="col-sm input-group m-0">
+            <div class="input-group custom-file"      *ngFor="let f of files; let i = index">
+              <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg"
+                name="material"    #material="ngModel" ngModel (change)="uploadDoc($event)">
+              <label for="customFileCert{{i}}" class="custom-file-label" >
+                <div class="afterFile">{{f.name}}</div>
+              </label>
+              <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'"
+              (click)="deleteBriefMaterial(f)"></div>
+            </div>
+            <div class="input-group-prepend iconAdd" (click)="addfiles()">
+              <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" title="Add material" />
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6 input-group">
-              <input
-                required
-                type="text"
-                class="form-control"
-                placeholder="e.g. Excavation at 280 S."
-                name="projectname"
-                id="projectname"
-                ngModel #projectname="ngModel"
-                [(ngModel)]="viewP.projectname" 
-              />
-            </div>
+        </div>
+
+
+        <div class="row">
+          <div class="title2 m-0 pb-3">
+            <h1 class="changeColorBlue">Skills</h1>
           </div>
-          <div class="row">
-            <div class="title2">
-              <h1 class="changeColorBlue">Project description</h1>
-            </div>
-          </div>
-          <div class="row py-2">
-            <p class="description-form">
-              Type what the project is about and the estimated time you expect it
-              to be completed. Include an overview of what you need done.
-            </p>
-          </div>
-          <div class="row">
+        </div>
+        <div class="row">
+          <div class="container skill m-0 pb-3">
             <div class="col-sm input-group">
-              <textarea
-                class="form-control"
-                id="description"
-                rows="4"
-                name="description"
-                placeholder="Describe your project here..."
-                ngModel #description="ngModel"
-                [(ngModel)]="viewP.description" 
-              ></textarea>
+              <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
+                style="cursor: default;">
+              <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
             </div>
-          </div>
-          <div class="row text-right">
-            <div class="col-sm">
-              <span class="description-form">4000 characters remaining</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="title2">
-              <h1 class="changeColorBlue">Brief material</h1>
-            </div>
-          </div>
-          <div class="row">
-            <p class="description-form">
-              Add any documents or images that might be helpful in explaining more
-              about your project.
-            </p>
-          </div>
-          <div class="row">
-            <div class="col-sm input-group m-0">
-              <div class="input-group custom-file" *ngFor="let f of files; let i = index">
-                <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg"
-                  name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
-                <label for="customFileCert{{i}}" class="custom-file-label" >
-                  <div class="afterFile">{{f.name}}</div>
-                </label>
-                <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'"
-                (click)="deleteBriefMaterial(f)"></div>
+            <div class="list-group" [hidden]='up == false'>
+              <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
+                <p>{{s}}</p>
               </div>
-              <div class="input-group-prepend iconAdd" (click)="addfiles()">
-                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" title="Add material" />
+            </div>
+            <div class="skillselct" [hidden]="selectskills == null">
+              <div class="skillsel" *ngFor="let s of selectskills">
+                <p>{{s}}</p>
+                <div class="close" (click)='close(s)'></div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="title2 m-0 pb-3">
-              <h1 class="changeColorBlue">Skills</h1>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group" *ngFor="let p of selectskills">
+          <p class="description-form pb-2">{{p}}</p>
+            <input
+              required
+              type="text"
+              class="form-control"
+              placeholder=""
+              name="people"
+              id="people"
+              ngModel #people="ngModel"
+              (keyup)="addPeople(p)"
+            />
           </div>
-          <div class="row">
-            <div class="container skill m-0 pb-3">
-              <div class="col-sm input-group">
-                <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
-                  style="cursor: default;">
-                <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
-              </div>
-              <div class="list-group" [hidden]='up == false'>
-                <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
-                  <p>{{s}}</p>
-                </div>
-              </div>
-              <div class="skillselct" [hidden]="selectskills == null">
-                <div class="skillsel" *ngFor="let s of selectskills">
-                  <p>{{s}}</p>
-                  <div class="close" (click)='close(s)'></div>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="row">
+          <div class="title2 pb-3">
+            <h1 class="changeColorBlue">Location</h1>
           </div>
-          <div class="row">
-            <div class="col-sm-6 form-group" *ngFor="let p of selectskills">
-            <p class="description-form pb-2">{{p}}</p>
-              <input
-                required
-                type="text"
-                class="form-control"
-                placeholder=""
-                name="people"
-                id="people"
-                ngModel #people="ngModel"
-                (keyup)="addPeople(p)"
-              />
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 input-group">
+            <input
+              required
+              type="text"
+              class="form-control"
+              placeholder="Street name, City, State ZIP"
+              name="location"
+              id="location"
+              [(ngModel)]="viewP.location" 
+              ngModel #location="ngModel"
+            />
           </div>
-          <div class="row">
-            <div class="title2 pb-3">
-              <h1 class="changeColorBlue">Location</h1>
-            </div>
+        </div>
+        <div class="row">
+          <div class="title2 pb-3">
+            <h1 class="changeColorBlue">Estimated budget</h1>
           </div>
-          <div class="row">
-            <div class="col-sm-6 input-group">
-              <input
-                required
-                type="text"
-                class="form-control"
-                placeholder="Street name, City, State ZIP"
-                name="location"
-                id="location"
-                ngModel #location="ngModel"
-              />
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 input-group">
+            <input
+              required
+              type="text"
+              class="form-control"
+              placeholder="$10,000 - $20,000"
+              name="estimated"
+              id="estimated"
+              [(ngModel)]="viewP.estimated" 
+              ngModel #estimated="ngModel"
+            />
           </div>
-          <div class="row">
-            <div class="title2 pb-3">
-              <h1 class="changeColorBlue">Estimated budget</h1>
-            </div>
+        </div>
+        <div class="row">
+          <div class="title2">
+            <h1 class="changeColorBlue">Number of people per skills</h1>
           </div>
-          <div class="row">
-            <div class="col-sm-6 input-group">
-              <input
-                required
-                type="text"
-                class="form-control"
-                placeholder="$10,000 - $20,000"
-                name="estimated"
-                id="estimated"
-                ngModel #estimated="ngModel"
-              />
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <p class="description-form py-3">Start date</p>
+            <input type="date" name="startdate" max="3000-12-31" [(ngModel)]="viewP.startdate" 
+                      min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel"  [class.correctInput]="startdate.value != ''">
           </div>
-          <div class="row">
-            <div class="title2">
-              <h1 class="changeColorBlue">Number of people per skills</h1>
-            </div>
+          <div class="col-sm-6 form-group">
+            <p class="description-form py-3">End date</p>
+            <input type="date" name="enddate" max="3000-12-31"
+                      min="1000-01-01" class="form-control py-2" ngModel  [(ngModel)]="viewP.enddate"  #enddate="ngModel" [class.errorInput]="startdate.value > enddate.value" [class.correctInput]="enddate.value != '' && startdate.value < enddate.value">
+                      <span class="textError" [hidden]="startdate.value <= enddate.value">dates do not match</span>
           </div>
-          <div class="row">
-            <div class="col-sm-6 form-group">
-              <p class="description-form py-3">Start date</p>
-              <input type="date" name="startdate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel" [class.correctInput]="startdate.value != ''">
-            </div>
-            <div class="col-sm-6 form-group">
-              <p class="description-form py-3">End date</p>
-              <input type="date" name="enddate" max="3000-12-31"
-                        min="1000-01-01" class="form-control py-2" ngModel #enddate="ngModel" [class.errorInput]="startdate.value > enddate.value" [class.correctInput]="enddate.value != '' && startdate.value < enddate.value">
-                        <span class="textError" [hidden]="startdate.value <= enddate.value">dates do not match</span>
-            </div>
+        </div>
+        <div class="row">
+          <div class="form-check checkbox form-group">
+            <input
+              type="checkbox"
+              class="form-check-input input-assumpte"
+              id="taketest"
+              name="taketest"
+              ngModel #taketest="ngModel"
+              [(ngModel)]="viewP.taketest"  
+            />
+            <label class="form-check-label" for="taketest">
+              <span class="check-text">All workers must take a background test.</span>
+            </label>
           </div>
-          <div class="row">
-            <div class="form-check checkbox form-group">
-              <input
-                type="checkbox"
-                class="form-check-input input-assumpte"
-                id="taketest"
-                name="taketest"
-                ngModel #taketest="ngModel"
-              />
-              <label class="form-check-label" for="taketest">
-                <span class="check-text">All workers must take a background test.</span>
-              </label>
-            </div>
+        </div>
+        <div class="row">
+          <div class="form-check checkbox form-group">
+            <input
+              type="checkbox"
+              class="form-check-input input-assumpte"
+              id="passtest"
+              name="passtest"
+              ngModel #passtest="ngModel"
+              [(ngModel)]="viewP.passtest"  
+            />
+            <label class="form-check-label" for="passtest">
+              <span class="check-text">All workers must pass a background test.</span>
+            </label>
           </div>
-          <div class="row">
-            <div class="form-check checkbox form-group">
-              <input
-                type="checkbox"
-                class="form-check-input input-assumpte"
-                id="passtest"
-                name="passtest"
-                ngModel #passtest="ngModel"
-              />
-              <label class="form-check-label" for="passtest">
-                <span class="check-text">All workers must pass a background test.</span>
-              </label>
-            </div>
-          </div>
-        <button class="blueBtn small my-5 float-right" type="submit" [class.disabled]="projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value" [disabled]=" projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value">Post</button>
-      </div>
+        </div>
+      <button class="blueBtn small my-5 float-right" type="submit" [class.disabled]="projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value" [disabled]=" projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value">Post</button>
     </div>
   </div>
+</div>
 </section>
 </form>
 <div *ngIf="HomeFormularioNw == 2">
-  <div class="container m-28">
-    <div class="overall">
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mx-4 mt-4">
-          <div class="title3">
-            <p>Project: <span class="viewproject">{{ viewP.projectname }}</span></p>
-          </div>
-        </div>
-        <div class="col-sm mx-4 mt-4">
-          <div class="vprofile text-right">
-            <span (click)="goToEditProject(viewP.id)">Edit</span>
-          </div>
+<div class="container m-28">
+  <div class="overall">
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mx-4 mt-4">
+        <div class="title3">
+          <p>Project: <span class="viewproject">{{ viewP.projectname }}</span></p>
         </div>
       </div>
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mt-2 mx-4">
-          <span class="viewproject">Status: {{ viewP.statusname }}</span>
-        </div>
-      </div>
-      <div class="row mt-51 ml-48">
-        <div class="col-sm-8 my-4 mx-4">
-          <span class="viewproject">Project Description...</span><br>
-          {{ viewP.description }}
-        </div>
-      </div>
-      <hr class="hr mt-30" />
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mx-4 my-3">
-          <div class="title3">
-            <p class="title3">Skills:</p>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mx-4 my-2">
-          <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
-            <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-              <p>{{so}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr class="hr mt-30" />
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mx-4 my-2">
-          <div class="title3">
-            <p class="title3">Location:</p>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mx-4 my-3">
-          <img src="../../../../../assets/iconos/Location_Icon.svg" alt="">
-          {{ viewP.location }}
+      <div class="col-sm mx-4 mt-4">
+        <div class="vprofile text-right">
+          <span (click)="goToEditProject(viewP.id)">Edit</span>
         </div>
       </div>
     </div>
-    <div class="overall mt-4 overflow-auto">
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mx-4 mt-4">
-          <div class="title3">
-            <p>Applicants:</p>
-          </div>
-        </div>
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mt-2 mx-4">
+        <span class="viewproject">Status: {{ viewP.statusname }}</span>
       </div>
-      <hr class="hr mt-30" />
-      <div class="row py-2 ml-2 title-table">
-        <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
-        <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+    </div>
+    <div class="row mt-51 ml-48">
+      <div class="col-sm-8 my-4 mx-4">
+        <span class="viewproject">Project Description...</span><br>
+        {{ viewP.description }}
       </div>
-      <div class="aplicants">
-        <div *ngFor="let da of dataApply">
-          <div class="row py-2">
-            <div class="col-sm-3 ml-4 pt-3">
-              {{ da.name}}
-            </div>
-            <div class="col-sm-6 pt-2">
-              <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
-                <div class="skillsel onlySkill" *ngFor="let so of da.skills">
-                  <p>{{so}}</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm mx-4 pt-3">
-              <span class="vprofile" (click)="goToProfile(da.id)">View profile</span>
-            </div>
-          </div>
-          <hr class="hr m-0" />
+    </div>
+    <hr class="hr mt-30" />
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mx-4 my-3">
+        <div class="title3">
+          <p class="title3">Skills:</p>
         </div>
       </div>
     </div>
-    <div class="overall mt-4 overflow-auto" *ngFor="let so of viewP.skills">
-      <div class="row mt-51 ml-48">
-        <div class="col-sm mx-4 mt-4">
-          <div class="title3">
-            <p>{{so}} team</p>
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mx-4 my-2">
+        <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
+          <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+            <p>{{so}}</p>
           </div>
         </div>
       </div>
-      <hr class="hr mt-30" />
-      <div class="row py-2 ml-2 title-table">
-        <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
-        <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+    </div>
+    <hr class="hr mt-30" />
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mx-4 my-2">
+        <div class="title3">
+          <p class="title3">Location:</p>
+        </div>
       </div>
-      <div class="" *ngFor="let da of dataApply">
-        <div class="row mt-51 ml-48 py-2" *ngIf="da.skills == so">
-          <div class="col-sm-3 ml-4 mt-2">
+    </div>
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mx-4 my-3">
+        <img src="../../../../../assets/iconos/Location_Icon.svg" alt="">
+        {{ viewP.location }}
+      </div>
+    </div>
+  </div>
+  <div class="overall mt-4 overflow-auto">
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mx-4 mt-4">
+        <div class="title3">
+          <p>Applicants:</p>
+        </div>
+      </div>
+    </div>
+    <hr class="hr mt-30" />
+    <div class="row py-2 ml-2 title-table">
+      <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+      <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+    </div>
+    <div class="aplicants">
+      <div *ngFor="let da of dataApply">
+        <div class="row py-2">
+          <div class="col-sm-3 ml-4 pt-3">
             {{ da.name}}
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-6 pt-2">
             <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
               <div class="skillsel onlySkill" *ngFor="let so of da.skills">
                 <p>{{so}}</p>
               </div>
             </div>
           </div>
-          <div class="col-sm mx-4 mt-2">
-            <img src="../../../../../assets/iconos/sendM.svg" alt="">
-            <img src="../../../../../assets/iconos/error-icon-p.svg" alt="" class="pl-3">
+          <div class="col-sm mx-4 pt-3">
+            <span class="vprofile" (click)="goToProfile(da.id)">View profile</span>
           </div>
-          <hr class="hr my-1" />
+        </div>
+        <hr class="hr m-0" />
+      </div>
+    </div>
+  </div>
+  <div class="overall mt-4 overflow-auto" *ngFor="let so of viewP.skills">
+    <div class="row mt-51 ml-48">
+      <div class="col-sm mx-4 mt-4">
+        <div class="title3">
+          <p>{{so}} team</p>
+        </div>
+      </div>
+    </div>
+    <hr class="hr mt-30" />
+    <div class="row py-2 ml-2 title-table">
+      <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+      <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
+    </div>
+    <div class="" *ngFor="let da of dataApply">
+      <div class="row mt-51 ml-48 py-2" *ngIf="da.skills == so">
+        <div class="col-sm-3 ml-4 mt-2">
+          {{ da.name}}
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let so of da.skills">
+              <p>{{so}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mx-4 mt-2">
+          <img src="../../../../../assets/iconos/sendM.svg" alt="">
+          <img src="../../../../../assets/iconos/error-icon-p.svg" alt="" class="pl-3">
         </div>
         <hr class="hr my-1" />
       </div>
+      <hr class="hr my-1" />
     </div>
   </div>
+</div>
 </div>
 <div class="textv" [ngClass]="righttv">
-  <p>{{text[section]}}</p>
+<p>{{text[section]}}</p>
 </div>
 <div class="modal" [class.showModal]="modal == 1">
-  <div class="message">
-    <div class="title mt-5">
-      <p>You have successfully <br>posted a project</p>
-    </div>
-    <p class="my-3 smallText py-3">Soon you will receive applications from Pro users.
-    <br>You can check them in the Projects section and make an <br>offer through the messages section.</p>
-    <div class="my-3 pb-5">
-      <button class="blueBtn large w360" (click)=hideModal()>Go to projects</button>
-      <!-- <span class="mt-12 mb-12 orLines">or</span>
-      <button class="blueBtn large mb-45 w360" (click)=hideModal()>Back to dashboard</button> -->
-    </div>
+<div class="message">
+  <div class="title mt-5">
+    <p>You have successfully <br>posted a project</p>
   </div>
+  <p class="my-3 smallText py-3">Soon you will receive applications from Pro users.
+  <br>You can check them in the Projects section and make an <br>offer through the messages section.</p>
+  <div class="my-3 pb-5">
+    <button class="blueBtn large w360" (click)=hideModal()>Go to projects</button>
+    <!-- <span class="mt-12 mb-12 orLines">or</span>
+    <button class="blueBtn large mb-45 w360" (click)=hideModal()>Back to dashboard</button> -->
+  </div>
+</div>
 </div>
 
 <div class="modal" [class.showModal]="modal == 2">
-  <div class="message">
-    <div class="title mt-5">
-      <p>Are you sure <br>want to delete this<br>project</p>
-    </div>
-    <div class="my-3 pb-5 d-flex justify-content-center">
-        <button class="blueBtn small w360 pl-3 mr-3" (click)="confirmDelete()">Yes</button>
-        <button class="blueBtn small mb-45 w360" (click)=hideModal()>No</button>
-    </div>
+<div class="message">
+  <div class="title mt-5">
+    <p>Are you sure <br>want to delete this<br>project</p>
+  </div>
+  <div class="my-3 pb-5 d-flex justify-content-center">
+      <button class="blueBtn small w360 pl-3 mr-3" (click)="confirmDelete()">Yes</button>
+      <button class="blueBtn small mb-45 w360" (click)=hideModal()>No</button>
   </div>
 </div>
+</div>
 <div *ngIf="HomeFormularioNw == 3">
-  <div class="container">
-    <div class="row m-28">
-      <div class="col-sm-3">
-        <div class="container">
-          <div class="profile" [ngStyle]="{'background-image' : 'url('+profileP.photoUrl+')'}"></div>
-          <div class="title3  pt-4 pb-3">
-            <p>{{ profileP.name }} {{ profileP.lastname }} </p>
+<div class="container">
+  <div class="row m-28">
+    <div class="col-sm-3">
+      <div class="container">
+        <div class="profile" [ngStyle]="{'background-image' : 'url('+profileP.photoUrl+')'}"></div>
+        <div class="title3  pt-4 pb-3">
+          <p>{{ profileP.name }} {{ profileP.lastname }} </p>
+        </div>
+        <button type="submit" class="blueBtn small mt-12" id="btmessage">Message</button>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="row mt-51">
+        <div class="col-sm">
+          <div class="title3 my-2">
+            <p>Rating</p>
           </div>
-          <button type="submit" class="blueBtn small mt-12" id="btmessage">Message</button>
+          <div class="stars mt-23">
+            <div class="rating">
+              <p>n/a</p>
+            </div>
+            <div class="starG"></div>
+            <div class="starG"></div>
+            <div class="starG"></div>
+            <div class="starG"></div>
+            <div class="starG mr-13"></div>
+            <p class="smallText">(no reviews)</p>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="title3 my-2">
+            <p>Jobs completed</p>
+          </div>
+          <p class="mt-23 smallText">0</p>
         </div>
       </div>
-      <div class="col-sm-9">
-        <div class="row mt-51">
-          <div class="col-sm">
-            <div class="title3 my-2">
-              <p>Rating</p>
-            </div>
-            <div class="stars mt-23">
-              <div class="rating">
-                <p>n/a</p>
-              </div>
-              <div class="starG"></div>
-              <div class="starG"></div>
-              <div class="starG"></div>
-              <div class="starG"></div>
-              <div class="starG mr-13"></div>
-              <p class="smallText">(no reviews)</p>
-            </div>
+      <div class="row mt-4">
+        <div class="col-sm" *ngFor="let ce of profileP.certificate">
+          <div class="title3">
+            <p>Certificates</p>
           </div>
-          <div class="col-sm">
-            <div class="title3 my-2">
-              <p>Jobs completed</p>
-            </div>
-            <p class="mt-23 smallText">0</p>
-          </div>
+          <p class="mt-2 smallText">{{profileP.certificate?.length}}</p>
         </div>
-        <div class="row mt-4">
-          <div class="col-sm" *ngFor="let ce of profileP.certificate">
-            <div class="title3">
-              <p>Certificates</p>
-            </div>
-            <p class="mt-2 smallText">{{profileP.certificate?.length}}</p>
+      </div>
+      <hr class="hr">
+      <div class="row">
+        <div class="col-sm">
+          <div class="title3">
+            <p>Profile description</p>
           </div>
+          <p class="mt-2"><span *ngIf="profileP.description == null">Profile Description...</span>{{ profileP.description }}</p>
         </div>
-        <hr class="hr">
-        <div class="row">
-          <div class="col-sm">
-            <div class="title3">
-              <p>Profile description</p>
-            </div>
-            <p class="mt-2"><span *ngIf="profileP.description == null">Profile Description...</span>{{ profileP.description }}</p>
+      </div>
+      <hr class="hr">
+      <div class="row my-2">
+        <div class="col-sm">
+          <div class="title3">
+            <p>CV</p>
           </div>
-        </div>
-        <hr class="hr">
-        <div class="row my-2">
-          <div class="col-sm">
-            <div class="title3">
-              <p>CV</p>
+          <div *ngFor="let cv of profileP.cvUrl" class="mr-30">
+            <div *ngIf="profileP.cvUrl.name != 'Add a file' && profileP.cvUrl.name != null">
+              <div class="fileIcon"></div>
+              <p>{{cv.name}}</p>
             </div>
-            <div *ngFor="let cv of profileP.cvUrl" class="mr-30">
-              <div *ngIf="profileP.cvUrl.name != 'Add a file' && profileP.cvUrl.name != null">
-                <div class="fileIcon"></div>
-                <p>{{cv.name}}</p>
-              </div>
-              <div *ngIf="profileP.cvUrl.name == 'Add a file' || profileP.cvUrl.name == null || profileP.cvUrl.length == null || cv.length == null">
-                <p>No files have been uploaded.</p>
-              </div>
+            <div *ngIf="profileP.cvUrl.name == 'Add a file' || profileP.cvUrl.name == null || profileP.cvUrl.length == null || cv.length == null">
+              <p>No files have been uploaded.</p>
             </div>
           </div>
         </div>
-        <hr class="hr">
-        <div class="row my-2">
-          <div class="col-sm">
-            <div class="title3">
-              <p>Skills</p>
-            </div>
-            <!-- <div class="mt-2" style="overflow: hidden;" [hidden]="profile.skills == null"> -->
-              <div class="skillsel onlySkill mt-2" *ngFor="let so of profileP.skills">
-                <p>{{so}}</p>
-              </div>
-            <!-- </div> -->
+      </div>
+      <hr class="hr">
+      <div class="row my-2">
+        <div class="col-sm">
+          <div class="title3">
+            <p>Skills</p>
           </div>
+          <!-- <div class="mt-2" style="overflow: hidden;" [hidden]="profile.skills == null"> -->
+            <div class="skillsel onlySkill mt-2" *ngFor="let so of profileP.skills">
+              <p>{{so}}</p>
+            </div>
+          <!-- </div> -->
         </div>
-        <hr class="hr">
-        <div class="row">
-          <div class="col-sm">
-            <div class="title3">
-              <p>Certificates</p>
-            </div>
-            <div class="row">
-              <div class="col-sm input-group pl-3">
-                <div *ngFor="let ce of profileP.certificate" class="mr-30">
-                  <ng-container  *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
-                    <!-- <div *ngFor="let co of profile.certificate" class="mr-30"> -->
-                      <div class="fileIcon certIcon"></div>
-                      <p class="ellipsis pt-2">{{ce.name}}</p>
-                    <!-- </div> -->
-                  </ng-container>
-                  <div *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || profileP.certificate.name == 'Add certificate file'">
-                    <p>No files have been uploaded.</p>
-                  </div>
-                </div>
-            </div>
-            </div>
+      </div>
+      <hr class="hr">
+      <div class="row">
+        <div class="col-sm">
+          <div class="title3">
+            <p>Certificates</p>
           </div>
-        </div>
-        <hr class="hr">
-        <div class="row">
-          <div class="col-sm">
-            <div class="title3 mb-4">
-              <p>Reviews</p>
-            </div>
-            <div class="row mb-4">
-              <div class="col-sm">
-                <div class="media">
-                  <div class="profile-mini"></div>
-                  <div class="media-body">
-                    <div class="title3 mt-3 pl-2">
-                      <p>Gordon Freeman</p>
-                      <div class="stars mt-23">
-                        <div class="rating">
-                          <p>n/a</p>
-                        </div>
-                        <div class="starG"></div>
-                        <div class="starG"></div>
-                        <div class="starG"></div>
-                        <div class="starG"></div>
-                        <div class="starG mr-13"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm">
-                <div class="media">
-                  <div class="profile-mini"></div>
-                  <div class="media-body">
-                    <div class="title3 mt-3 pl-2">
-                      <p>John Doe</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="LeaveForm == 0">
           <div class="row">
-            <div class="col-sm">
-              <button class="blueBtn medium w360 pl-3 mr-3" (click)="leave()">Leave a review</button>
-            </div>
+            <div class="col-sm input-group pl-3">
+              <div *ngFor="let ce of profileP.certificate" class="mr-30">
+                <ng-container  *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
+                  <!-- <div *ngFor="let co of profile.certificate" class="mr-30"> -->
+                    <div class="fileIcon certIcon"></div>
+                    <p class="ellipsis pt-2">{{ce.name}}</p>
+                  <!-- </div> -->
+                </ng-container>
+                <div *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || profileP.certificate.name == 'Add certificate file'">
+                  <p>No files have been uploaded.</p>
+                </div>
+              </div>
+          </div>
           </div>
         </div>
-        <div *ngIf="LeaveForm == 1">
-          <div class="row mt-4 pl-3">
-            <div class="title3 mb-2">
-              <p>Rating</p>
-            </div>
+      </div>
+      <hr class="hr">
+      <div class="row">
+        <div class="col-sm">
+          <div class="title3 mb-4">
+            <p>Reviews</p>
           </div>
-          <div class="row mt-1 pl-3">
-            <div class="form-group">
-              <ngb-rating [formControl]="ctrl" [(rate)]="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
-            </div>
-          </div>
-          <div class="row pl-3">
-              <div class="col-sm input-group">
-                <textarea
-                  class="form-control"
-                  id="reviewR"
-                  rows="4"
-                  name="reviewR"
-                  placeholder="Leave your review here. (400 characters left)"
-                  [(ngModel)]="reviewR"
-                ></textarea>
-                <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
+          <div class="row mb-4">
+            <div class="col-sm">
+              <div class="media">
+                <div class="profile-mini"></div>
+                <div class="media-body">
+                  <div class="title3 mt-3 pl-2">
+                    <p>Gordon Freeman</p>
+                    <div class="stars mt-23">
+                      <div class="rating">
+                        <p>n/a</p>
+                      </div>
+                      <div class="starG"></div>
+                      <div class="starG"></div>
+                      <div class="starG"></div>
+                      <div class="starG"></div>
+                      <div class="starG mr-13"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          <div class="row mt-3 float-right">
-            <button class="blueBtn small w360 mr-3 cancelRate" (click)="ctrl.setValue(null);cancelRate()">Cancel</button>
-            <button class="blueBtn small w360 mr-3" (click)="postReview(currentRate, reviewR)">Post</button>
+            <div class="col-sm">
+              <div class="media">
+                <div class="profile-mini"></div>
+                <div class="media-body">
+                  <div class="title3 mt-3 pl-2">
+                    <p>John Doe</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-    </div>
+      </div>
+      <div *ngIf="LeaveForm == 0">
+        <div class="row">
+          <div class="col-sm">
+            <button class="blueBtn medium w360 pl-3 mr-3" (click)="leave()">Leave a review</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="LeaveForm == 1">
+        <div class="row mt-4 pl-3">
+          <div class="title3 mb-2">
+            <p>Rating</p>
+          </div>
+        </div>
+        <div class="row mt-1 pl-3">
+          <div class="form-group">
+            <ngb-rating [formControl]="ctrl" [(rate)]="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
+          </div>
+        </div>
+        <div class="row pl-3">
+            <div class="col-sm input-group">
+              <textarea
+                class="form-control"
+                id="reviewR"
+                rows="4"
+                name="reviewR"
+                placeholder="Leave your review here. (400 characters left)"
+                [(ngModel)]="reviewR"
+              ></textarea>
+              <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
+            </div>
+          </div>
+        <div class="row mt-3 float-right">
+          <button class="blueBtn small w360 mr-3 cancelRate" (click)="ctrl.setValue(null);cancelRate()">Cancel</button>
+          <button class="blueBtn small w360 mr-3" (click)="postReview(currentRate, reviewR)">Post</button>
+        </div>
+      </div>
   </div>
+</div>
 </div>

@@ -40,7 +40,8 @@ export class MenuHomeComponent implements OnInit {
   cust = 0;
   router: any;
 
-  projects=[];
+  projects: any[] = []
+
   projectsHire: any[] = [];
   projectsHireDeleted: any[] = [];
 
@@ -50,7 +51,7 @@ export class MenuHomeComponent implements OnInit {
 
   user = firebase.auth().currentUser
   user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
-  option = 1;
+  option = 5;
 
   customers2: any[] = [];
 
@@ -73,6 +74,7 @@ export class MenuHomeComponent implements OnInit {
     private afs: AngularFireStorage,
     private hireuser: HireuserService,
     private routerr: Router) {
+
   }
 
   list(e) {
@@ -92,10 +94,17 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
-    .onSnapshot((d) => {
-      d.docChanges().forEach((d) => {
-        if (d.type === "added") {
+    this.projects = []
+
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
+    .subscribe((d) => {
+      d.forEach((d) => {
+        this.projects.push(d.payload.doc.data())
+
+        //this.projectService.projects.emit(d.doc.data()
+       
+/*
+       if (d.type === "added") {
           console.log("New project: ", d.doc.data())
           this.projectsHire.push([d.doc.data()])
         }
@@ -119,8 +128,10 @@ export class MenuHomeComponent implements OnInit {
             }
           }
           console.log(this.projectsHire);
-        }
+        }*/
       })
+
+      console.log(this.projects)
     })
   }
 
@@ -131,9 +142,14 @@ export class MenuHomeComponent implements OnInit {
   /* Status Project
   1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
   addProject(f: NgForm) {
+    this.projects = []
     this.error = 2
     this.projectService.newProject(f, this.file, this.files, this.selectskills)
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
+
+    this.modal = 1
+    this.section = 1
+
+    /*this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
     .onSnapshot((d) => {
       d.docChanges().forEach((d) => {
         if (d.type === "added") {
@@ -141,7 +157,7 @@ export class MenuHomeComponent implements OnInit {
           this.section = 1
         }
       })
-    })
+    })*/
   }
 
   next() {
@@ -181,6 +197,7 @@ export class MenuHomeComponent implements OnInit {
     this.select = 0
     this.HomeFormularioNw = 0
     this.modal = 3
+    //location.href="/Hireprincipal"
     console.log(this.modal)
   }
 
@@ -202,6 +219,7 @@ export class MenuHomeComponent implements OnInit {
   }
 
   delete(idP){
+    this.projects = []
     this.modal = 2
     this.confirm2 = idP
     if( this.confirm == 1){
@@ -220,13 +238,23 @@ export class MenuHomeComponent implements OnInit {
     this.error = 1
   }
 
-  viewProject(idApply){
-
+  viewProject(p){
+   this.selectskills = p.skills;
+   this.files=p.briefmaterial;
     this.righttv='text-project'
     this.error = 2
     this.HomeFormularioNw = 2
     this.section = 0;
-    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idApply).snapshotChanges()
+    this.viewP = p;
+    this.apply=this.viewP.applyUsers;
+    for (var i = 1; i < this.apply.length; i++) {
+      this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
+        .subscribe((data)=>{
+          this.dataApply.push(data.payload.data())
+          console.log(this.dataApply)
+        })
+    }
+  /*  var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idApply).snapshotChanges()
     data.subscribe((d) => {
       this.viewP = d.payload.data()
     })
@@ -242,7 +270,14 @@ export class MenuHomeComponent implements OnInit {
               console.log(this.dataApply)
             })
         }
-      })
+      })*/
+
+/*
+      this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
+      .subscribe((data)=>{
+        this.dataApply.push(data.payload.data())
+        console.log(this.dataApply)
+      })*/
   }
 
   goToProfile(id){
