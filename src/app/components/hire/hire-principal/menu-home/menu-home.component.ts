@@ -67,6 +67,8 @@ export class MenuHomeComponent implements OnInit {
 
   LeaveForm = 0
 
+  sProject: string = ''
+
   constructor(private db: AngularFirestore, 
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
@@ -95,7 +97,8 @@ export class MenuHomeComponent implements OnInit {
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
     .onSnapshot((d) => {
       d.docChanges().forEach((d) => {
-        if (d.type === "added") {
+        this.projectsHire.push([d.doc.data()])
+        /* if (d.type === "added") {
           console.log("New project: ", d.doc.data())
           this.projectsHire.push([d.doc.data()])
         }
@@ -119,7 +122,7 @@ export class MenuHomeComponent implements OnInit {
             }
           }
           console.log(this.projectsHire);
-        }
+        } */
       })
     })
   }
@@ -254,7 +257,7 @@ export class MenuHomeComponent implements OnInit {
     })
   }
 
-  goToEditProject(idP: any){
+  goToEditProject(idP){
     alert("edit");
     //this.routerr.navigate(['/ProjectEdit',idP])
   /*
