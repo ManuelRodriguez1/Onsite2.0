@@ -91,7 +91,7 @@ error: any[];
              }
             })
           }else if(this.estado=="pro"){
-            // alert("pro");
+           
             this.userMenu="Pro";  
             var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
             data.subscribe((d) => {
