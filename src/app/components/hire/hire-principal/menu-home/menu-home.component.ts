@@ -3,9 +3,7 @@ import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { NgForm } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
-import { HireuserService } from 'src/app/services/hireuser.service';
 import { AngularFireAuth } from "angularfire2/auth";
-import { Router } from "@angular/router";
 import { AngularFireStorage } from "angularfire2/storage";
 import {FormControl, Validators} from '@angular/forms';
 
@@ -70,12 +68,12 @@ export class MenuHomeComponent implements OnInit {
 
   sProject: string = ''
 
-  constructor(private db: AngularFirestore, 
+  visiblePeople = false
+
+  constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
-    private afs: AngularFireStorage,
-    private hireuser: HireuserService,
-    private routerr: Router) {
+    private afs: AngularFireStorage) {
 
   }
 
@@ -88,11 +86,13 @@ export class MenuHomeComponent implements OnInit {
   selectskill(e) {
     var i = this.selectskills.indexOf(e)
     i === -1 && this.selectskills.push(e);
+    this.visiblePeople = true
   }
 
   close(e) {
     var i = this.selectskills.indexOf(e)
     i !== -1 && this.selectskills.splice(i, 1)
+    this.visiblePeople = false
   }
 
   ngOnInit() {

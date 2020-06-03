@@ -31,9 +31,6 @@
           <p class="changeColorBlue">Account Information</p>
         </div>
         <form #aF="ngForm" (ngSubmit)="accountForm(aF)" action="">
-          <div class="alert alert-success" role="alert" [hidden]="infoa">
-            Updated information
-          </div>
           <div class="row fields">
             <div class="input-group col-sm">
               <input
@@ -95,9 +92,6 @@
           <p class="changeColorBlue">Update password</p>
         </div>
         <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
-          <div class="alert alert-success" role="alert" [hidden]="passu">
-            Updated password
-          </div>
           <div class="row fields">
             <div class="input-group col-sm">
               <input
@@ -196,6 +190,9 @@
           >
             Update
           </button>
+          <div class="alert alert-success" [class.alertInitial]="alert == 1" role="alert" style="margin-top: 20px;">
+            Password updated correctly!
+          </div>
         </form>
         <hr class="hr mt-30" />
         <div class="title2">

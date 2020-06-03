@@ -238,3 +238,12 @@
   font-size: 14px;
   line-height: 160%;
 }
+.alertInitial{
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+}
+.alert{
+  transition: .5s;
+}

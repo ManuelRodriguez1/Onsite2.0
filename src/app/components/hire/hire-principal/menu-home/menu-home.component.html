@@ -26,7 +26,6 @@
             <div class="col-sm-12 divcol" [class.projects]="option == 1">
               <div class="col-sm-12 divcol" >
               <ng-container *ngFor="let p of projects | filter: option">
-                
                 <div class="row py-2 px-4 pb-3"  *ngIf="  p.status !=4  ;else second">
                   <div class="col-sm-5">
                     <li class="list-name">
@@ -40,45 +39,37 @@
                     <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p.id)">
                   </div>
                 </div>
-
                 <ng-template #second >
                   <div class="row py-2 px-4 pb-3" *ngIf="option == 4 " >
-                  <div class="col-sm-5">
-                    <li class="list-name">
-                      <span class="project-name" (click)="viewProject(p)">{{p.projectname}}</span>
-                    </li>
+                    <div class="col-sm-5">
+                      <li class="list-name">
+                        <span class="project-name" (click)="viewProject(p)">{{p.projectname}}</span>
+                      </li>
+                    </div>
+                    <div class="col-sm-3">{{p.statusname}}</div>
+                    <div class="col-sm-4 text-right">
+                      <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3 opChat">
+                      <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opChat">
+                      <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p.id)">
+                    </div>
                   </div>
-                  <div class="col-sm-3">{{p.statusname}}</div>
-                  <div class="col-sm-4 text-right">
-                    <img src="../../../../../assets/iconos/Frame.svg" alt="" class="pr-3 opChat">
-                    <img src="../../../../../assets/iconos/Frame (1).svg" alt="" class="pr-3 opChat">
-                    <img src="../../../../../assets/iconos/Frame (2).svg" alt="" class="pr-3 opProject" (click)="delete(p.id)">
-                  </div>
-                </div>
-
-                  </ng-template>
+                </ng-template>
               </ng-container>
-
-
               <div>
-
-              </div>
-
-              </div>
             </div>
-         
-           
-            <hr class="m-0">
-            <div class="row py-3 px-5">
-              <div class="col-sm-6 input-group pl-3" (click)="next()">
-                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
-                <span class="mt-2 new-project">Create new project</span>
-              </div>
-            </div>
+          </div>
+        </div>
+        <hr class="m-0">
+        <div class="row py-3 px-5">
+          <div class="col-sm-6 input-group pl-3" (click)="next()">
+            <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
+            <span class="mt-2 new-project">Create new project</span>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  </div>
     <div *ngIf="HomeFormularioNw == 1">
       <div class="container m-2">
         <input
@@ -87,9 +78,8 @@
         name="id"
         id="id"
         ngModel #id="ngModel"
-        [(ngModel)]="viewP.id" 
-
-      />          
+        [(ngModel)]="viewP.id"
+      />
         <div class="row py-2">
           <div class="title2">
             <h1 class="changeColorBlue">Account Information</h1>
@@ -109,7 +99,7 @@
             />
           </div>
         </div>
-        <div class="row">
+        <div class="row pt-3">
           <div class="title2">
             <h1 class="changeColorBlue">Project description</h1>
           </div>
@@ -149,8 +139,6 @@
             about your project.
           </p>
         </div>
-   
-     
         <div class="row" >
           <div class="col-sm input-group m-0">
             <div class="input-group custom-file"      *ngFor="let f of files; let i = index">
@@ -167,15 +155,13 @@
             </div>
           </div>
         </div>
-
-
         <div class="row">
           <div class="title2 m-0 pb-3">
             <h1 class="changeColorBlue">Skills</h1>
           </div>
         </div>
         <div class="row">
-          <div class="container skill m-0 pb-3">
+          <div class="container skill m-0 pb-3 pl-0">
             <div class="col-sm input-group">
               <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
                 style="cursor: default;">
@@ -194,12 +180,17 @@
             </div>
           </div>
         </div>
+        <div class="row py-3" *ngIf="visiblePeople">
+          <div class="title2">
+            <h1 class="changeColorBlue">Number of people per skills</h1>
+          </div>
+        </div>
         <div class="row">
           <div class="col-sm-6 form-group" *ngFor="let p of selectskills">
           <p class="description-form pb-2">{{p}}</p>
             <input
               required
-              type="text"
+              type="Number"
               class="form-control"
               placeholder=""
               name="people"
@@ -229,7 +220,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="title2 pb-3">
+          <div class="title2 pb-3 pt-4">
             <h1 class="changeColorBlue">Estimated budget</h1>
           </div>
         </div>
@@ -242,38 +233,39 @@
               placeholder="$10,000 - $20,000"
               name="estimated"
               id="estimated"
-              [(ngModel)]="viewP.estimated" 
+              [(ngModel)]="viewP.estimated"
               ngModel #estimated="ngModel"
             />
+            {{a | currency}}
           </div>
         </div>
-        <div class="row">
+        <div class="row pt-5">
           <div class="title2">
-            <h1 class="changeColorBlue">Number of people per skills</h1>
+            <h1 class="changeColorBlue">Estimated time for the project</h1>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 form-group">
             <p class="description-form py-3">Start date</p>
             <input type="date" name="startdate" max="3000-12-31" [(ngModel)]="viewP.startdate" 
-                      min="1000-01-01" class="form-control py-2" ngModel #startdate="ngModel"  [class.correctInput]="startdate.value != ''">
+                      min="1000-01-01" class="form-control" ngModel #startdate="ngModel"  [class.correctInput]="startdate.value != ''">
           </div>
           <div class="col-sm-6 form-group">
             <p class="description-form py-3">End date</p>
             <input type="date" name="enddate" max="3000-12-31"
-                      min="1000-01-01" class="form-control py-2" ngModel  [(ngModel)]="viewP.enddate"  #enddate="ngModel" [class.errorInput]="startdate.value > enddate.value" [class.correctInput]="enddate.value != '' && startdate.value < enddate.value">
+                      min="1000-01-01" class="form-control" ngModel  [(ngModel)]="viewP.enddate"  #enddate="ngModel" [class.errorInput]="startdate.value > enddate.value" [class.correctInput]="enddate.value != '' && startdate.value < enddate.value">
                       <span class="textError" [hidden]="startdate.value <= enddate.value">dates do not match</span>
           </div>
         </div>
         <div class="row">
-          <div class="form-check checkbox form-group">
+          <div class="form-check checkbox form-group m-2">
             <input
               type="checkbox"
               class="form-check-input input-assumpte"
               id="taketest"
               name="taketest"
               ngModel #taketest="ngModel"
-              [(ngModel)]="viewP.taketest"  
+              [(ngModel)]="viewP.taketest"
             />
             <label class="form-check-label" for="taketest">
               <span class="check-text">All workers must take a background test.</span>
@@ -281,7 +273,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-check checkbox form-group">
+          <div class="form-check checkbox form-group m-2">
             <input
               type="checkbox"
               class="form-check-input input-assumpte"
