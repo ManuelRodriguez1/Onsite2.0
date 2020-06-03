@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireStorage } from "angularfire2/storage";
-import {FormControl, Validators} from '@angular/forms';
-
 
 @Component({
   selector: 'app-menu-home',
@@ -70,10 +68,15 @@ export class MenuHomeComponent implements OnInit {
 
   visiblePeople = false
 
+  formProject: FormGroup;
+  submitted = false;
+  pattern: ""
+
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
-    private afs: AngularFireStorage) {
+    private afs: AngularFireStorage,
+    private formBuilder: FormBuilder) {
 
   }
 
@@ -96,21 +99,25 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.formProject = this.formBuilder.group({
+      projectname: ['', Validators.required],
+      description: ['', [Validators.required,Validators.maxLength(4000)]],
+      location: ['', Validators.required],
+      estimated: ['',[Validators.required, Validators.pattern('^[0-9]*$')]],
+      startdate: ['', Validators.required],
+      enddate: ['', Validators.required]
+    });
     this.projects = []
-
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
     .subscribe((d) => {
       d.forEach((d) => {
         this.projects.push(d.payload.doc.data())
-
-   
-
       })
-
       console.log(this.projects)
     })
   }
+
+  get f() { return this.formProject.controls; }
 
   addPeople(e){
     this.skills2Howmany.push(e)
@@ -121,12 +128,20 @@ export class MenuHomeComponent implements OnInit {
   addProject(f: NgForm) {
     this.projects = []
     this.error = 2
-    this.projectService.newProject(f, this.file, this.files, this.selectskills)
-
-    this.modal = 1
-    this.section = 1
-
-  
+    this.submitted = true
+    if(this.formProject.invalid){
+      console.log("Ivalid")
+    }else{
+      console.log("ok")
+      console.log(this.formProject.value)
+      var temp = false
+      this.projectService.newProject(f, this.file, this.files, this.selectskills)
+      this.modal = 1
+      this.section = 1
+    }
+    //this.projectService.newProject(f, this.file, this.files, this.selectskills)
+    //this.modal = 1
+    //this.section = 1
   }
 
   next() {

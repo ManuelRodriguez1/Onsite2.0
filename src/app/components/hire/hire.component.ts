@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from "@angular/core";
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { HireService }  from 'src/app/services/hire.service';
 import { AngularFirestore } from "angularfire2/firestore";
 
@@ -15,25 +15,25 @@ export class HireComponent implements OnInit {
   title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
   verifyEmail: boolean = false
-
-  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   formData: FormGroup;
-
-  createFormGroup(){
-    return new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.minLength(5),Validators.pattern(this.emailPattern)]),
-      name: new FormControl('', [Validators.required, Validators.minLength(5),]),
-      lastname: new FormControl('', [Validators.required, Validators.minLength(5),]),
-      phone: new FormControl('', [Validators.required, Validators.minLength(5),])
-    })
-  }
-
+  submitted = false;
 
   constructor(
     private serviceHire: HireService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private formBuilder: FormBuilder
   ) {}
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.formData = this.formBuilder.group({
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: ['',Validators.required],
+      Zipcode: ['',Validators.required],
+      Password: ['',[Validators.required,Validators.minLength(6)]]
+    });
+  }
 
   next() {
     this.page++;
@@ -44,19 +44,28 @@ export class HireComponent implements OnInit {
     this.select = this.page;
   }
 
+  get f() { return this.formData.controls; }
+
   onSubmit(f: NgForm) {
-    var temp = false
-    this.db.collection('users_hire').get().subscribe((u) => {
-      u.forEach((e) => {
-        if (f.value.Email === e.data().email) {
-          temp = true
+    this.submitted = true;
+    if (this.formData.invalid) {
+      console.log("Invalid")
+    }if(this.formData.valid){
+      console.log("ok")
+      console.log(this.formData.value)
+      var temp = false
+      this.db.collection('users_hire').get().subscribe((u) => {
+        u.forEach((e) => {
+          if (f.value.Email === e.data().email) {
+            temp = true
+          }
+          this.verifyEmail = temp
+        })
+        if (!this.verifyEmail) {
+          this.serviceHire.registerHire(f);
         }
-        this.verifyEmail = temp
       })
-      if (!this.verifyEmail) {
-        this.serviceHire.registerHire(f);
-      }
-    })
+    }
   }
 
 }
