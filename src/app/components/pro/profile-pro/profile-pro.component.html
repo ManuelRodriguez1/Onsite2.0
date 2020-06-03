@@ -39,6 +39,9 @@
                         </div>
                     </div>
                     <button type="submit" class="blueBtn small mt-12" id="btnAccount" [class.disabled]="name.value == '' && lastname.value == '' && email.value == '' && description.value == ''" [disabled]="name.value == '' && lastname.value == '' && email.value == '' && description.value == ''">Update</button>
+                    <div class="alert alert-success" [class.alertInitial]="alert1 == 1" role="alert" style="margin-top: 20px;">
+                        Account information updated correctly!
+                      </div>
                 </form>
                 <hr class="hr mt-30">
                 <div class="title2">

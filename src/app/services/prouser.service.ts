@@ -80,6 +80,8 @@ export class ProuserService {
             this.getInfo()
               .update({
                 "email": email
+              }).then(()=>{
+                this.user.sendEmailVerification()
               })
           })
       })

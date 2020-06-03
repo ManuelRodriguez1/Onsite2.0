@@ -1204,6 +1204,11 @@ h4,
     background-size: contain;
     cursor: pointer;
 }
+.verifyUser{
+    position: absolute;
+    top: 92px;
+    right: 0;
+}
 /* loading temporal */
 
 .lds-roller {

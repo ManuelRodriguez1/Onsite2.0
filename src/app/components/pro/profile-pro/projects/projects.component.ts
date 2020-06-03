@@ -53,8 +53,23 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.sub2.unsubscribe()
   }
 
-  filterStatus(e: number){
+  filterStatus(e: number) {
     this.f = e
+  }
+
+  trash(e: any) {
+    var users: any[] = e.applyUsers
+    var i = users.indexOf(this.proU.user.uid)
+    i !== -1 && users.splice(i, 1)
+    this.proU.getInfoHire().snapshotChanges().subscribe((j) => {
+      j.forEach((k) => {
+        k.payload.doc.ref.collection("projects").doc(e.id).update({
+          "applyUsers": users
+        })
+      })
+    })
+    var j = this.projects.indexOf(e)
+    this.projects.splice(j, 1)
   }
 
 }
