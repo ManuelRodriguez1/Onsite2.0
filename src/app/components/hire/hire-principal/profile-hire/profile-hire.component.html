@@ -40,7 +40,7 @@
                 name="name"
                 #name="ngModel"
                 ngModel
-                [placeholder]="profile.name"
+                [(ngModel)]="profile.name"
               />
             </div>
             <div class="input-group col-sm">
@@ -51,7 +51,7 @@
                 name="lastname"
                 #lastname="ngModel"
                 ngModel
-                [placeholder]="profile.lastname"
+                [(ngModel)]="profile.lastname"
               />
             </div>
           </div>
@@ -64,7 +64,7 @@
                 name="email"
                 #email="ngModel"
                 ngModel
-                [placeholder]="profile.email"
+                [(ngModel)]="profile.email"
                 [class.errorInput]="!emailVal"
               />
               <span class="textError" [hidden]="emailVal">Wrong email</span>
@@ -145,11 +145,11 @@
             <div class="input-group col-sm">
               <input
                 type="password"
-                [class.correctInput]="
+                [class.correctInput]="pass1.value?.length > 5  &&
                   pass2.value == pass1.value && pass2.value != ''
                 "
                 [class.errorInput]="
-                  pass2.value != pass1.value && pass2.value != ''
+                  pass2.value != pass1.value && pass2.value != '' && pass1.value?.length < 6
                 "
                 class="form-control"
                 placeholder="Confirm new password"
@@ -163,6 +163,8 @@
                 [hidden]="pass2.value == pass1.value || pass2.value == ''"
                 >Password doesn’t match.</span
               >
+              <span [hidden]="pass2.value?.length > 5 || pass2.value == ''" class="textError">Password must be at leat 6
+            characters.</span>
             </div>
           </div>
           <button
@@ -188,6 +190,9 @@
           >
             Update
           </button>
+          <div class="alert alert-success" [class.alertInitial]="alert == 1" role="alert" style="margin-top: 20px;">
+            Password updated correctly!
+          </div>
         </form>
         <hr class="hr mt-30" />
         <div class="title2">

@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
-import { HireuserService } from 'src/app/services/hireuser.service';
 import { AngularFireAuth } from "angularfire2/auth";
-import { Router } from "@angular/router";
 import { AngularFireStorage } from "angularfire2/storage";
-import {FormControl, Validators} from '@angular/forms';
-
 
 @Component({
   selector: 'app-menu-home',
@@ -40,7 +36,8 @@ export class MenuHomeComponent implements OnInit {
   cust = 0;
   router: any;
 
-  projects=[];
+  projects: any[] = []
+
   projectsHire: any[] = [];
   projectsHireDeleted: any[] = [];
 
@@ -50,7 +47,7 @@ export class MenuHomeComponent implements OnInit {
 
   user = firebase.auth().currentUser
   user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
-  option = 1;
+  option = 5;
 
   customers2: any[] = [];
 
@@ -67,12 +64,20 @@ export class MenuHomeComponent implements OnInit {
 
   LeaveForm = 0
 
-  constructor(private db: AngularFirestore, 
+  sProject: string = ''
+
+  visiblePeople = false
+
+  formProject: FormGroup;
+  submitted = false;
+  pattern: ""
+
+  constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
     private afs: AngularFireStorage,
-    private hireuser: HireuserService,
-    private routerr: Router) {
+    private formBuilder: FormBuilder) {
+
   }
 
   list(e) {
@@ -84,45 +89,35 @@ export class MenuHomeComponent implements OnInit {
   selectskill(e) {
     var i = this.selectskills.indexOf(e)
     i === -1 && this.selectskills.push(e);
+    this.visiblePeople = true
   }
 
   close(e) {
     var i = this.selectskills.indexOf(e)
     i !== -1 && this.selectskills.splice(i, 1)
+    this.visiblePeople = false
   }
 
   ngOnInit() {
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
-    .onSnapshot((d) => {
-      d.docChanges().forEach((d) => {
-        if (d.type === "added") {
-          console.log("New project: ", d.doc.data())
-          this.projectsHire.push([d.doc.data()])
-        }
-        if (d.type === "modified") {
-          console.log("Modified project: ", d.doc.data())
-          this.projectsHire.forEach((data)=>{
-            if(data[0].id === d.doc.data().id){
-              this.projectsHire.splice(data[0],1,d.doc.data())
-              console.log(this.projectsHire)
-            }
-          })
-        }
-        if (d.type === "removed") {
-          console.log("Removed project: ", d.doc.data())
-          var elim = d.doc.data().id
-          console.log(elim)
-          for (var i = 0; i < this.projectsHire.length; i++) {
-            if (this.projectsHire[i][0].id === elim) {
-              console.log(i)
-              this.projectsHire.splice(i, 1);
-            }
-          }
-          console.log(this.projectsHire);
-        }
+    this.formProject = this.formBuilder.group({
+      projectname: ['', Validators.required],
+      description: ['', [Validators.required,Validators.maxLength(4000)]],
+      location: ['', Validators.required],
+      estimated: ['',[Validators.required, Validators.pattern('^[0-9]*$')]],
+      startdate: ['', Validators.required],
+      enddate: ['', Validators.required]
+    });
+    this.projects = []
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
+    .subscribe((d) => {
+      d.forEach((d) => {
+        this.projects.push(d.payload.doc.data())
       })
+      console.log(this.projects)
     })
   }
+
+  get f() { return this.formProject.controls; }
 
   addPeople(e){
     this.skills2Howmany.push(e)
@@ -131,17 +126,22 @@ export class MenuHomeComponent implements OnInit {
   /* Status Project
   1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
   addProject(f: NgForm) {
+    this.projects = []
     this.error = 2
-    this.projectService.newProject(f, this.file, this.files, this.selectskills)
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 4)
-    .onSnapshot((d) => {
-      d.docChanges().forEach((d) => {
-        if (d.type === "added") {
-          this.modal = 1
-          this.section = 1
-        }
-      })
-    })
+    this.submitted = true
+    if(this.formProject.invalid){
+      console.log("Ivalid")
+    }else{
+      console.log("ok")
+      console.log(this.formProject.value)
+      var temp = false
+      this.projectService.newProject(f, this.file, this.files, this.selectskills)
+      this.modal = 1
+      this.section = 1
+    }
+    //this.projectService.newProject(f, this.file, this.files, this.selectskills)
+    //this.modal = 1
+    //this.section = 1
   }
 
   next() {
@@ -181,6 +181,7 @@ export class MenuHomeComponent implements OnInit {
     this.select = 0
     this.HomeFormularioNw = 0
     this.modal = 3
+    //location.href="/Hireprincipal"
     console.log(this.modal)
   }
 
@@ -202,6 +203,7 @@ export class MenuHomeComponent implements OnInit {
   }
 
   delete(idP){
+    this.projects = []
     this.modal = 2
     this.confirm2 = idP
     if( this.confirm == 1){
@@ -220,29 +222,23 @@ export class MenuHomeComponent implements OnInit {
     this.error = 1
   }
 
-  viewProject(idApply){
-
+  viewProject(p){
+   this.selectskills = p.skills;
+   this.files=p.briefmaterial;
     this.righttv='text-project'
     this.error = 2
     this.HomeFormularioNw = 2
     this.section = 0;
-    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idApply).snapshotChanges()
-    data.subscribe((d) => {
-      this.viewP = d.payload.data()
-    })
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idApply).snapshotChanges()
-      .subscribe((d) => {
-        this.viewP = d.payload.data()
-        this.apply = this.viewP.applyUsers
-        console.log(this.apply)
-        for (var i = 0; i < this.apply.length; i++) {
-          this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
-            .subscribe((data)=>{
-              this.dataApply.push(data.payload.data())
-              console.log(this.dataApply)
-            })
-        }
-      })
+    this.viewP = p;
+    this.apply=this.viewP.applyUsers;
+    for (var i = 1; i < this.apply.length; i++) {
+      this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
+        .subscribe((data)=>{
+          this.dataApply.push(data.payload.data())
+          console.log(this.dataApply)
+        })
+    }
+ 
   }
 
   goToProfile(id){
@@ -254,18 +250,8 @@ export class MenuHomeComponent implements OnInit {
     })
   }
 
-  goToEditProject(idP: any){
-    alert("edit");
-    //this.routerr.navigate(['/ProjectEdit',idP])
-  /*
-    var data = this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).snapshotChanges()
-    data.subscribe((d) => {
-      this.viewP = d.payload.data()
-      console.log("belxy");
-      console.log(this.viewP);
-      this.projectname="belxy";
-      
-    })*/
+  goToEditProject(idP){
+
     this.HomeFormularioNw =1;
     console.log("ok")
   }
@@ -280,7 +266,6 @@ export class MenuHomeComponent implements OnInit {
   postReview(currentRate, review){
     this.reviews.push({"hire":this.user.uid,"rating":currentRate,"review":review})
     console.log(this.reviews)
-    //this.hireUser.applyRating(this.route.snapshot.paramMap.get('id'),this.reviews)
     this.LeaveForm = 0
   }
 

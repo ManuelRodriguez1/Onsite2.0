@@ -32,6 +32,8 @@ export class ProfileHireComponent implements OnInit {
   emailVerified: any
   countProject= 0
   emailVal: boolean = true
+  alert: number = 1
+
   constructor(
     private af: AngularFirestore,
     private hireuser: HireuserService
@@ -59,7 +61,7 @@ export class ProfileHireComponent implements OnInit {
       this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
       setTimeout(() => {
         this.credential = this.hireuser.getCredential(this.profile.email, this.password)
-      }, 100);
+      }, 800);
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
       if(this.profile.photoUrl != null && this.emailVerified != false){
         this.profileCompleted = true
@@ -73,13 +75,10 @@ export class ProfileHireComponent implements OnInit {
 
   accountForm(f: NgForm) {
     if (this.hireuser.updateAccount(f, this.profile.name, this.profile.lastname)) {
-      $("#name").val('')
-      $("#lastname").val('')
     }
     if (f.value.email.trim() != '') {
       if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {
         this.hireuser.updateEmail(this.credential, f.value.email)
-        $("#email").val('')
       } else {
         this.emailVal = false
       }
@@ -94,10 +93,14 @@ export class ProfileHireComponent implements OnInit {
           setTimeout(() => {
             $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
             $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
+            this.alert = 0
+            setTimeout(() => {
+              this.alert = 1
+            }, 3000);
           }, 200);
         })
-    }
   }
+}
 
   selectOption(e) {
     this.select = e

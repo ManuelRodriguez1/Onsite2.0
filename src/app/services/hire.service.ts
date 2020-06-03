@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class HireService {
-
+  error : ''
   constructor(
     public af: AngularFireAuth,
     private db: AngularFirestore,
@@ -34,13 +34,14 @@ export class HireService {
             phone: f.value.PhoneNumber,
             password: crypto.AES.encrypt(f.value.Password, 'N@!o').toString(),
             email: user.email,
-            zipcode: f.value.Entercityorzipcode,
+            zipcode: f.value.Zipcode,
             estado: "hire",
             project: false
           })
         }).then(() => this.router.navigate(['/ProfileHire']))
       }).catch((err) => {
         console.log(err);
+        return this.error = err
       });
     }
   }
