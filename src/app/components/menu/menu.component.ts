@@ -24,7 +24,7 @@ error: any[];
     imageP: any = ''
     profile: any = ''
     popad=false;
-    user = firebase.auth().currentUser
+    user: any  
     UserName="";
 
     message: string;

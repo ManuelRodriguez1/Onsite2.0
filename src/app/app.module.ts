@@ -43,7 +43,8 @@ import { ChatComponent } from './components/chat/chat.component';
 import { DashboardComponent } from './components/pro/profile-pro/dashboard/dashboard.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderPipe } from './pipes/order.pipe';
-//import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AzPipe } from './pipes/az.pipe';
+import { AzStatusPipe } from './pipes/az-status.pipe';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,9 @@ import { OrderPipe } from './pipes/order.pipe';
     ChatComponent,
     DashboardComponent,
     FilterPipe,
-    OrderPipe
+    OrderPipe,
+    AzPipe,
+    AzStatusPipe
   ],
   imports: [
     BrowserModule,

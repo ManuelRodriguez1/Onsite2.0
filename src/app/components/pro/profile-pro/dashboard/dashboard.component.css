@@ -18,3 +18,10 @@
 .heightTemp{
     height: calc(100vh - 606px);
 }
+.moreInfo{
+    position: absolute;
+    right: 48px;
+    top: 44px;
+    text-decoration: underline;
+    cursor: pointer;
+}
