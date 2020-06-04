@@ -38,6 +38,11 @@ export class HireComponent implements OnInit {
       Zipcode: ['',Validators.required],
       Password: ['',[Validators.required,Validators.minLength(6)]]
     });
+
+    this.serviceHire.error.subscribe((respError)=>{
+      this.error=respError;
+
+    })
   }
 
   next() {
@@ -67,7 +72,12 @@ export class HireComponent implements OnInit {
           this.verifyEmail = temp
         })
         if (!this.verifyEmail) {
-          this.serviceHire.registerHire(f);
+      
+         this.serviceHire.registerHire(f);
+        
+            console.log(this.error);
+   
+       
         }
       })
     }

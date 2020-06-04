@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
@@ -11,12 +11,15 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class HireService {
-  error : ''
+  error =new EventEmitter<any> ();
+
   constructor(
     public af: AngularFireAuth,
     private db: AngularFirestore,
     private afs: AngularFireStorage,
-    private router: Router) { }
+    private router: Router) {
+      
+    }
 
     registerHire(f: NgForm){
       this.af.auth.createUserWithEmailAndPassword(f.value.Email, f.value.Password)
@@ -41,7 +44,8 @@ export class HireService {
         }).then(() => this.router.navigate(['/ProfileHire']))
       }).catch((err) => {
         console.log(err);
-        return this.error = err
+        this.error.emit(err.message);
+       
       });
     }
   }
