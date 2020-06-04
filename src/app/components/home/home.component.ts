@@ -33,14 +33,16 @@ export class HomeComponent implements OnInit {
       'img': '../../../assets/imagenes/Home/Step3.png',  'paso': 'Apply or post', 'text': 'Apply or post a project based on the skills you have or the skills you are looking for.'
     },
     {
-      'img': '../../../assets/imagenes/Home/Step1.png',  'paso': 'Start working', 'text': 'Message a Pro or a Hirer to agree on payments and hourly wage.'
+      'img': '../../../assets/imagenes/Home/Step4.png',  'paso': 'Start working', 'text': 'Message a Pro or a Hirer to agree on payments and hourly wage.'
     }];
 
   hire() {
-    this.router.navigateByUrl("/Hire");
+
+    this.router.navigate(['/Hire']);
+    
   }
   pro() {
-    this.router.navigateByUrl("/Pro");
+    this.router.navigate(['/Pro']);
   }
   prev() {
     this.carousel.prev();
