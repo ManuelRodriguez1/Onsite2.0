@@ -15,6 +15,11 @@ export class HireComponent implements OnInit {
   title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
   verifyEmail: boolean = false
+  FirstName;
+  LastName;
+  Email;
+  Entercityorzipcode;
+  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   formData: FormGroup;
   submitted = false;
 
@@ -33,6 +38,11 @@ export class HireComponent implements OnInit {
       Zipcode: ['',Validators.required],
       Password: ['',[Validators.required,Validators.minLength(6)]]
     });
+
+    this.serviceHire.error.subscribe((respError)=>{
+      this.error=respError;
+
+    })
   }
 
   next() {
@@ -62,7 +72,12 @@ export class HireComponent implements OnInit {
           this.verifyEmail = temp
         })
         if (!this.verifyEmail) {
-          this.serviceHire.registerHire(f);
+      
+         this.serviceHire.registerHire(f);
+        
+            console.log(this.error);
+   
+       
         }
       })
     }

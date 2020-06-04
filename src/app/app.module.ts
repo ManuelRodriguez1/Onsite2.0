@@ -46,7 +46,6 @@ import { OrderPipe } from './pipes/order.pipe';
 import { AzPipe } from './pipes/az.pipe';
 import { AzStatusPipe } from './pipes/az-status.pipe';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,6 +92,8 @@ import { AzStatusPipe } from './pipes/az-status.pipe';
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
+  //  providers: [ { provide: LocationStrategy, useClass: HashLocationStrategy },AuthGuard, ProjectService, ProService, ProuserService, HireuserService, HireService],
+
   providers: [ AuthGuard, ProjectService, ProService, ProuserService, HireuserService, HireService],
   bootstrap: [AppComponent]
 })

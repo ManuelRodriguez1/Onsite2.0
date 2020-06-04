@@ -15,9 +15,9 @@ export class InboxComponent implements OnInit {
   emailUser: any
   database = firebase.database();
   user = firebase.auth().currentUser
-  public datos: Observable<any>
+  public datos;
   email = ''
-  datosChat: Observable<any>
+  datosChat: any[] = [];
   contador = 0
   other = ''
   me = ''
@@ -27,7 +27,9 @@ export class InboxComponent implements OnInit {
     this.me = this.user.email.replace('.', '-')
     this.datos = this.db.collection('/Chat/ListaChat/' + this.me).valueChanges()
   }
-
+  ngOnInit() {
+  }
+/*
   ngOnInit() {
     this.other = this.email.replace('.', '-')
     this.datosChat = this.db.collection('/Chat/Chateando/' + this.other + '|' + this.me,
@@ -38,7 +40,7 @@ export class InboxComponent implements OnInit {
       }, 20);
     })
   }
-
+*/
   otroInit() {
 
   }
@@ -50,10 +52,10 @@ export class InboxComponent implements OnInit {
       message: $('.msginput').val()
     })
   }
-
+/*
   changeEmail(e) {
     this.email = e
     this.ngOnInit()
   }
-
+*/
 }

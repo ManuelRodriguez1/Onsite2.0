@@ -1,10 +1,11 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input,OnChanges} from '@angular/core';
 import { Router,ActivatedRoute , Event, NavigationEnd} from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from "angularfire2/firestore";
 import { getAllRouteGuards } from '@angular/router/src/utils/preactivation';
+
 import * as $ from 'jquery';
 
 @Component({
@@ -13,6 +14,8 @@ import * as $ from 'jquery';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  @Input() nombreMenu:string ="belxy";
+
 error: any[];
     m = "";
     userMenu="Home";
@@ -24,20 +27,13 @@ error: any[];
     user: any  
     UserName="";
 
-    constructor(public af: AngularFireAuth, private router: Router,private afstore: AngularFirestore) 
+    message: string;
+    editMessage: string;
+
+    constructor(public af: AngularFireAuth, private router: Router,private afstore: AngularFirestore)     
     {
-      if(location.pathname=="/Home" || location.pathname=="/Pro" || location.pathname=="/Hire"){
-        this.userMenu="Home";
-                this.af.authState.subscribe(auth => {
-                  if(auth){
-                    if(auth.displayName=="hire"){
-                      this.router.navigate(['/Hireprincipal']);
-                    }else if(auth.displayName=="pro"){
-                      this.router.navigate(['/ProfilePro']);
-                    }
-                  }
-                });           
-                }      
+   
+
       this.af.authState.subscribe(auth => {
           if (auth) {
               this.Sesion = true;            
@@ -45,13 +41,19 @@ error: any[];
               this.Sesion = false;
           }
       });
-        this.router.events.subscribe((event: Event) => {
-          if (event instanceof NavigationEnd) {
-              this.paginaMensajeMenu(firebase.auth().currentUser);
-          }
-        }); 
+ 
+  
+        this.router.events.subscribe(path => {
+          if (path instanceof NavigationEnd) {
+            this.paginaMensajeMenu(firebase.auth().currentUser, path.url);
+        }
+        
+        });
     }
-  ngOnInit() {
+    ngOnInit() {
+
+
+
   }
 
   flechaUsuario(){
@@ -62,22 +64,41 @@ error: any[];
       this.popad = false;
     }
   }
-  paginaMensajeMenu(user) {
-    this.user = user.emailVerified
-    if(user){
-      this.estado=user.displayName;
-    }
-    if(location.pathname=="/Hire" || this.estado=="hire"){
-      this.m="Hirer";
-      }else if(location.pathname=="/Pro" || this.estado=="pro"){
-        this.m="Pro";
-     }else if(location.pathname=="/Home"){
-      this.m="Home";
+
+  paginaMensajeMenu(user,url) {
+
+ 
+
+    if(url=="/Home" || url=="/Pro" || url=="/Hire"){
+
       this.userMenu="Home";
-     }else{
-      this.m="Home";
-      this.userMenu="Home";
-     }
+              this.af.authState.subscribe(auth => {
+                if(auth){
+                  if(auth.displayName=="hire"){
+                    this.router.navigate(['/Hireprincipal']);
+                  }else if(auth.displayName=="pro"){
+                    this.router.navigate(['/ProfilePro']);
+                  }
+                }
+              });           
+              }      
+
+       
+            if(user){
+              this.estado=user.displayName;
+              this.user = user.emailVerified
+            }
+            if(url=="/Hire" || url=="hire"){
+              this.m="Hirer";
+              }else if(url=="/Pro" || url=="pro"){
+                this.m="Pro";
+            }else if(url=="/Home"){
+              this.m="Home";
+              this.userMenu="Home";
+            }else{
+              this.m="Home";
+              this.userMenu="Home";
+            }
           if(this.estado=="hire"){
             this.userMenu="Hirer";
             console.log(user.uid)

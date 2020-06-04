@@ -143,10 +143,10 @@ poppad1() {
             console.log(authState.displayName);
             console.log(authState.email);
             if (authState.displayName == "hire") {
-             location.href = "/Hireprincipal";
-            } else if (authState.displayName == "pro") {
-              location.href = '/ProfilePro';
-            }
+              location.href = "/Hireprincipal";
+             } else if (authState.displayName == "pro") {
+               location.href = '/ProfilePro';
+             }
           }
         })
       }).catch(

@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
-
-  // Initialize Firebase
-  /*firebase: {
-    apiKey: "AIzaSyACtHB8NrW_kXD2oX1DZ3l7bvUrvJCJXQk",
-    authDomain: "onsite-92699.firebaseapp.com",
-    databaseURL: "https://onsite-92699.firebaseio.com",
-    projectId: "onsite-92699",
-    storageBucket: "onsite-92699.appspot.com",
-    messagingSenderId: "1041762411923"
-  }*/
-  };
+  firebase: {
+    apiKey: "AIzaSyCxP7O8u14qaBO4cXZBNZ0w2QgCdymz1OE",
+    authDomain: "onhive-213de.firebaseapp.com",
+    databaseURL: "https://onhive-213de.firebaseio.com",
+    projectId: "onhive-213de",
+    storageBucket: "onhive-213de.appspot.com",
+    messagingSenderId: "268077099880",
+    appId: "1:268077099880:web:1a74e5f916f329305e04dd",
+    measurementId: "G-E19EF90EQ2"
+  }
+};
