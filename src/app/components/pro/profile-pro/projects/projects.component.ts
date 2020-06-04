@@ -13,6 +13,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   //List projects
   projects: any[] = []
   f: number = 5
+  az: boolean 
+  azStatus: boolean 
   //loading
   loading: boolean = true
   //Subscripciones
@@ -72,4 +74,11 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.projects.splice(j, 1)
   }
 
+  azOrder(){
+    this.az = !this.az
+  }
+
+  azStat(){
+    this.azStatus = !this.azStatus
+  }
 }

@@ -15,8 +15,13 @@
       </div>
       <div class="row mt-3">
         <div class="col-sm input-group">
-          <input type="email" class="form-control" [class.errorInput]="verifyEmail == true" placeholder="E-mail" name="email" #email="ngModel" ngModel>
-          <span [hidden]="verifyEmail == false" class="textError">Email already exists!</span>
+          <input type="email" class="form-control"
+            [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')"
+            [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail" placeholder="E-mail"
+            name="email" #email="ngModel" ngModel>
+          <span [hidden]="!verifyEmail" class="textError">Email already exists!</span>
+          <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must be a valid
+            email address</span>
         </div>
         <div class="col-sm input-group">
           <input type="text" class="form-control" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
@@ -117,8 +122,9 @@
     <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 3' (click)='back()'>
       <p>Back</p>
     </div>
-    <button type="button" class="btn btn-outline-warning next" (click)='next(email.value)' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
-    || email.value == '' || phone.value == '' || password.value == '' || zipcode.value == '' || user.value.length < 6 || user.value != password.value">
+    <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0'
+      [disabled]="name.value == '' || lastname.value == ''
+    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || user.value.length < 6 || user.value != password.value">
       Next
     </button>
     <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2'

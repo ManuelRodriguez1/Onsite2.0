@@ -1,7 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProService } from 'src/app/services/pro.service';
-import { AngularFirestore } from "angularfire2/firestore";
+import  * as zipcode from "../../../assets/files/zipcode.json";
 
 @Component({
   selector: 'app-pro',
@@ -28,15 +28,25 @@ export class ProComponent implements OnInit {
   checkbox: boolean = false
   verifyEmail: boolean = false
   emailText: string[] = []
+  error: string = ''
+  correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
+  zipCodeCity: any = zipcode
 
-  constructor(
-    private servicePro: ProService,
-    private db: AngularFirestore
-  ) { }
+  constructor(private servicePro: ProService) { }
 
   ngOnInit() {
-
+    this.servicePro.error.subscribe((res) => {
+      this.error = res
+      if (this.error != '') {
+        this.page = 0
+        this.select = 0
+        this.verifyEmail = true
+      }
+    })  
+    console.log(this.zipCodeCity);
+    
   }
+
   list(e) {
     if (e == 1) {
       this.up = !this.up;
@@ -44,20 +54,9 @@ export class ProComponent implements OnInit {
       this.up2 = !this.up2;
     }
   }
-  next(email) {
-    var temp = false
-    this.db.collection('users_pro').get().subscribe((u) => {
-      u.forEach((e) => {
-        if (email === e.data().email) {
-          temp = true
-        }
-        this.verifyEmail = temp
-      })
-      if (!this.verifyEmail) {
-        this.page++;
-        this.select = this.page;
-      }
-    })
+  next() {
+    this.page++
+    this.select = this.page
   }
   back() {
     this.page--;
@@ -77,9 +76,7 @@ export class ProComponent implements OnInit {
   close(e) {
     var i = this.selectskills.indexOf(e)
     i !== -1 && this.selectskills.splice(i, 1)
-    if (e == 2) {
-      this.selectskills2 = null
-    }
+    e == 2 && this.selectskills2 == null
   }
   addcustomer() {
     this.customers.push('Add certificate file');

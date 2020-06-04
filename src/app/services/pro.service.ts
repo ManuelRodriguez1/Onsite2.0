@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ProService {
+
+  error = new EventEmitter<any>()
 
   constructor(
     public af: AngularFireAuth,
@@ -61,6 +63,10 @@ export class ProService {
         }
 
       }).then(() => this.router.navigate(['/ProfilePro']))
-    })
+    }).catch((error)=>{
+      console.log(error);
+      
+      this.error.emit(error.message)
+    }) 
   }
 }

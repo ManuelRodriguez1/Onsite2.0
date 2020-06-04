@@ -12,6 +12,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   //List projects
   projects: any[] = []
+  infoPro: any[] = []
+  select: number = 0
   //Loading
   loading: boolean = true
   applyPro: number = 0
@@ -56,6 +58,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         clearInterval(this.inter)
       }
     }, 1000)
+  }
+
+  infoProject(e: any){
+    this.select = 1
+    this.infoPro = e
   }
 
   ngOnDestroy() {

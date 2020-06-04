@@ -21,7 +21,7 @@ error: any[];
     imageP: any = ''
     profile: any = ''
     popad=false;
-    user = firebase.auth().currentUser
+    user: any  
     UserName="";
 
     constructor(public af: AngularFireAuth, private router: Router,private afstore: AngularFirestore) 
@@ -64,7 +64,6 @@ error: any[];
   }
   paginaMensajeMenu(user) {
     this.user = user.emailVerified
-    console.log(this.user);
     if(user){
       this.estado=user.displayName;
     }

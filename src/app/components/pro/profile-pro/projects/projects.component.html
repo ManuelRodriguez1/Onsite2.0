@@ -26,16 +26,16 @@
   <div class="row ml-48 mt-17 p-0">
     <div class="col-sm gray">
       <p>Name</p>
-      <div class="arrowDownGray"></div>
+      <div class="arrowDownGray" (click)="azOrder()"></div>
     </div>
     <div class="col-sm gray">
       <p>Status</p>
-      <div class="arrowDownGray"></div>
+      <div class="arrowDownGray" (click)="azStat()"></div>
     </div>
     <div class="col-sm"></div>
   </div>
   <div class="mt-17">
-    <ng-container *ngFor="let p of projects | filter: f">
+    <ng-container *ngFor="let p of projects | filter: f | az: az | azStatus: azStatus">
       <ng-container>
         <div class="row ml-48 mt-22 p-0">
           <div class="col-sm">
