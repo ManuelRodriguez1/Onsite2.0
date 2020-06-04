@@ -1,7 +1,7 @@
 <div class="error" [class.errorh]="error == 1">
   <p>The project has been deleted</p>
 </div>
-<form (ngSubmit)="addProject(formProject)" class="form-Project" name="formProject">
+<form (ngSubmit)="addProject(formProject)" class="form-Project">
 <section class="container">
   <div class="home" *ngIf="select == 0">
     <div *ngIf="HomeFormularioNw == 0">
@@ -202,12 +202,11 @@
             <input
               required
               type="Number"
-              class="form-control"
+              class="form-control addPeople"
               placeholder=""
               name="people"
-              id="people"
+              id="{{p}}"
               ngModel #people="ngModel"
-              (keyup)="addPeople(p)"
             />
           </div>
         </div>
@@ -288,12 +287,11 @@
         <div class="row">
           <div class="form-check checkbox form-group m-2">
             <input
+              class=""
               type="checkbox"
-              class="form-check-input input-assumpte"
               id="taketest"
               name="taketest"
-              ngModel #taketest="ngModel"
-              [(ngModel)]="viewP.taketest"
+              #taketest
             />
             <label class="form-check-label" for="taketest">
               <span class="check-text">All workers must take a background test.</span>
@@ -308,7 +306,7 @@
               id="passtest"
               name="passtest"
               ngModel #passtest="ngModel"
-              [(ngModel)]="viewP.passtest"  
+              [(ngModel)]="viewP.passtest"
             />
             <label class="form-check-label" for="passtest">
               <span class="check-text">All workers must pass a background test.</span>
