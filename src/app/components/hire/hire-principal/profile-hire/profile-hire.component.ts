@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import * as crypto from "crypto-js";
 import { HireuserService } from 'src/app/services/hireuser.service';
 import { AngularFirestore } from 'angularfire2/firestore';
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 declare var $: any
 
 @Component({

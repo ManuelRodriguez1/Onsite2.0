@@ -23,7 +23,6 @@ export class ExploreComponent implements OnInit, OnDestroy {
   long: number = 7.809007
   buttonApply: boolean = true
   //Filtro
-  filter: any = 'desc'
   searchProject: string = ''
   changeFilter: boolean = true
   //Paginación
@@ -52,7 +51,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
         d.forEach((j) => {
           var profile: any = j.payload.doc.data()
           if (profile.project) {
-            j.payload.doc.ref.collection("projects")
+            j.payload.doc.ref.collection("projects").orderBy("creationdate", "desc")
               .onSnapshot((d) => {
                 d.docChanges().map((k) => {
                   if (k.doc.data().status > 0 && k.doc.data().status < 3) {
@@ -140,9 +139,6 @@ export class ExploreComponent implements OnInit, OnDestroy {
   backExplore() {
     location.reload()
   }
-  backDash(){
-    this.router.navigateByUrl('/Dashboard')
-  }
   pagination() {
     this.pages = []
     var page: number
@@ -178,11 +174,6 @@ export class ExploreComponent implements OnInit, OnDestroy {
 
   filterChange(){
     this.changeFilter = !this.changeFilter
-    if(this.filter == 'desc'){
-      this.filter = 'asc'
-    }else{
-      this.filter = 'desc'
-    }
   }
 
   ngOnDestroy() {

@@ -17,49 +17,8 @@ export class ProjectService {
     private db: AngularFirestore,
     private afs: AngularFireStorage) {
   }
-  /*
-  newProject(f: NgForm, file: any[], briefMaterial: any[], selectskills: any[]){
-    var idProject = this.db.createId()
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProject).set({
-      id: idProject,
-      projectname: f.value.projectname,
-      creationdate: this.currentDate,
-      description: f.value.description,
-      location: f.value.location,
-      estimated: f.value.estimated,
-      startdate: f.value.startdate,
-      enddate: f.value.enddate,
-      taketest: f.value.taketest,
-      passtest: f.value.passtest,
-      skills: selectskills,
-      //people: selectpeople,
-      status: 1,
-      statusname: 'Pending',
-      briefmaterial: briefMaterial
-    }).then(()=>{
-      for (let i = 0; i < file.length; i++) {
-        var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + idProject + "/"+file[i].name).put(file[i])
-        fileDoc.then((url) => {
-          url.ref.getDownloadURL()
-            .then((url) => {
-              briefMaterial.push({"name": file[i].name, "url": url})
-              setTimeout(() => {
-                this.db.collection('users_hire').doc(this.user.uid).update({
-                  "project": true
-                })
-                this.db.collection('users_hire').doc(this.user.uid).collection('projects').doc(idProject).update({
-                  'briefmaterial': briefMaterial
-                })
-              }, 200);
-            })
-        })
-      }
-    })
-    .catch((error) => {
-      alert(error.message)
-    })
-  }*/
-  newProject(f: NgForm, file: any[], briefMaterial: any[], selectskills: any[]){
+
+  newProject(f: NgForm, file: any[], briefMaterial: any[], selectskills: any[], peoples: any[]){
     var idProject;
     if(f.value.id){
        idProject=f.value.id;
@@ -80,7 +39,7 @@ export class ProjectService {
       taketest: f.value.taketest,
       passtest: f.value.passtest,
       skills: selectskills,
-      //people: selectpeople,
+      people: peoples,
       status: 1,
       statusname: 'Pending',
       briefmaterial: briefMaterial

@@ -1,7 +1,7 @@
 <div class="error" [class.errorh]="error == 1">
   <p>The project has been deleted</p>
 </div>
-<form #formProject="ngForm" (ngSubmit)="addProject(formProject)" class="form-Project">
+<form (ngSubmit)="addProject(formProject)" class="form-Project">
 <section class="container">
   <div class="home" *ngIf="select == 0">
     <div *ngIf="HomeFormularioNw == 0">
@@ -86,7 +86,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6 input-group">
+          <div class="col-sm-6 input-group" [formGroup]="formProject">
             <input
               required
               type="text"
@@ -94,9 +94,14 @@
               placeholder="e.g. Excavation at 280 S."
               name="projectname"
               id="projectname"
-              ngModel #projectname="ngModel"
-              [(ngModel)]="viewP.projectname" 
+              formControlName="projectname" 
+              [ngClass]="{ 'is-invalid': submitted && f.projectname.errors }"
+              #projectname
+              [(ngModel)]="viewP.projectname"
             />
+            <div *ngIf="submitted && f.projectname.errors" class="invalid-feedback">
+              <div *ngIf="f.projectname.errors.required">Projectname is required</div>
+            </div>
           </div>
         </div>
         <div class="row pt-3">
@@ -111,16 +116,23 @@
           </p>
         </div>
         <div class="row">
-          <div class="col-sm input-group">
+          <div class="col-sm input-group" [formGroup]="formProject">
             <textarea
               class="form-control"
               id="description"
               rows="4"
               name="description"
+              id="description"
               placeholder="Describe your project here..."
-              ngModel #description="ngModel"
-              [(ngModel)]="viewP.description" 
+              formControlName="description"
+              [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+              #description
+              [(ngModel)]="viewP.description"
             ></textarea>
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">Description of the projec is required</div>
+              <div *ngIf="f.description.errors.maxlength">4000 characters remaining</div>
+            </div>
           </div>
         </div>
         <div class="row text-right">
@@ -141,9 +153,8 @@
         </div>
         <div class="row" >
           <div class="col-sm input-group m-0">
-            <div class="input-group custom-file"      *ngFor="let f of files; let i = index">
-              <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg"
-                name="material"    #material="ngModel" ngModel (change)="uploadDoc($event)">
+            <div class="input-group custom-file" *ngFor="let f of files; let i = index">
+              <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
               <label for="customFileCert{{i}}" class="custom-file-label" >
                 <div class="afterFile">{{f.name}}</div>
               </label>
@@ -191,12 +202,11 @@
             <input
               required
               type="Number"
-              class="form-control"
+              class="form-control addPeople"
               placeholder=""
               name="people"
-              id="people"
+              id="{{p}}"
               ngModel #people="ngModel"
-              (keyup)="addPeople(p)"
             />
           </div>
         </div>
@@ -206,7 +216,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6 input-group">
+          <div class="col-sm-6 input-group" [formGroup]="formProject">
             <input
               required
               type="text"
@@ -214,9 +224,14 @@
               placeholder="Street name, City, State ZIP"
               name="location"
               id="location"
-              [(ngModel)]="viewP.location" 
-              ngModel #location="ngModel"
+              formControlName="location"
+              [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+              #location
+              [(ngModel)]="viewP.location"
             />
+            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+              <div *ngIf="f.location.errors.required">Please enter a location.</div>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -225,7 +240,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6 input-group">
+          <div class="col-sm-6 input-group" [formGroup]="formProject">
             <input
               required
               type="text"
@@ -233,10 +248,15 @@
               placeholder="$10,000 - $20,000"
               name="estimated"
               id="estimated"
+              formControlName="estimated"
+              [ngClass]="{ 'is-invalid': submitted && f.estimated.errors }"
+              #estimated
               [(ngModel)]="viewP.estimated"
-              ngModel #estimated="ngModel"
             />
-            {{a | currency}}
+            <div *ngIf="submitted && f.estimated.errors" class="invalid-feedback">
+              <div *ngIf="f.estimated.errors.required">Estimated is required.</div>
+              <div *ngIf="f.estimated.errors.pattern">Invalid format.</div>
+            </div>
           </div>
         </div>
         <div class="row pt-5">
@@ -245,27 +265,33 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-6 form-group" [formGroup]="formProject">
             <p class="description-form py-3">Start date</p>
-            <input type="date" name="startdate" max="3000-12-31" [(ngModel)]="viewP.startdate" 
-                      min="1000-01-01" class="form-control" ngModel #startdate="ngModel"  [class.correctInput]="startdate.value != ''">
+            <input type="date" name="startdate" max="3000-12-31" formControlName="startdate"
+              [ngClass]="{ 'is-invalid': submitted && f.startdate.errors }" [(ngModel)]="viewP.startdate" 
+                      min="1000-01-01" class="form-control" #startdate>
+                      <div *ngIf="submitted && f.startdate.errors" class="invalid-feedback">
+                        <div *ngIf="f.startdate.errors.required">Start date is required.</div>
+                      </div>
           </div>
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-6 form-group" [formGroup]="formProject">
             <p class="description-form py-3">End date</p>
-            <input type="date" name="enddate" max="3000-12-31"
-                      min="1000-01-01" class="form-control" ngModel  [(ngModel)]="viewP.enddate"  #enddate="ngModel" [class.errorInput]="startdate.value > enddate.value" [class.correctInput]="enddate.value != '' && startdate.value < enddate.value">
+            <input type="date" name="enddate" max="3000-12-31" formControlName="enddate"
+                      min="1000-01-01" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.enddate.errors }" [(ngModel)]="viewP.enddate"  #enddate [class.errorInput]="startdate.value > enddate.value">
                       <span class="textError" [hidden]="startdate.value <= enddate.value">dates do not match</span>
+                      <div *ngIf="submitted && f.enddate.errors" class="invalid-feedback">
+                        <div *ngIf="f.enddate.errors.required">End date is required.</div>
+                      </div>
           </div>
         </div>
         <div class="row">
           <div class="form-check checkbox form-group m-2">
             <input
+              class=""
               type="checkbox"
-              class="form-check-input input-assumpte"
               id="taketest"
               name="taketest"
-              ngModel #taketest="ngModel"
-              [(ngModel)]="viewP.taketest"
+              #taketest
             />
             <label class="form-check-label" for="taketest">
               <span class="check-text">All workers must take a background test.</span>
@@ -280,14 +306,14 @@
               id="passtest"
               name="passtest"
               ngModel #passtest="ngModel"
-              [(ngModel)]="viewP.passtest"  
+              [(ngModel)]="viewP.passtest"
             />
             <label class="form-check-label" for="passtest">
               <span class="check-text">All workers must pass a background test.</span>
             </label>
           </div>
         </div>
-      <button class="blueBtn small my-5 float-right" type="submit" [class.disabled]="projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value" [disabled]=" projectname.value == '' || description.value == '' || location.value == '' || estimated.value == '' || startdate.value == '' || enddate.value == '' || startdate.value > enddate.value">Post</button>
+      <button class="blueBtn small my-5 float-right" type="submit" >Post</button>
     </div>
   </div>
 </div>

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireStorage } from "angularfire2/storage";
-import {FormControl, Validators} from '@angular/forms';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-menu-home',
@@ -21,7 +20,7 @@ export class MenuHomeComponent implements OnInit {
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
 
   projectname;
-  peoples = [];
+  peoples: any[] = [];
   people = 0;
 
   howmany = "Select";
@@ -70,10 +69,15 @@ export class MenuHomeComponent implements OnInit {
 
   visiblePeople = false
 
+  formProject: FormGroup;
+  submitted = false;
+  pattern: ""
+
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
-    private afs: AngularFireStorage) {
+    private afs: AngularFireStorage,
+    private formBuilder: FormBuilder) {
 
   }
 
@@ -96,38 +100,60 @@ export class MenuHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.formProject = this.formBuilder.group({
+      projectname: ['', Validators.required],
+      description: ['', [Validators.required,Validators.maxLength(4000)]],
+      location: ['', Validators.required],
+      estimated: ['',[Validators.required, Validators.pattern('^[0-9]*$')]],
+      startdate: ['', Validators.required],
+      enddate: ['', Validators.required],
+      id: [''],
+      taketest:[''],
+      passtest:['']
+    });
     this.projects = []
-
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
     .subscribe((d) => {
       d.forEach((d) => {
         this.projects.push(d.payload.doc.data())
-
-   
-
       })
-
       console.log(this.projects)
     })
   }
 
-  addPeople(e){
-    this.skills2Howmany.push(e)
-  }
+  get f() { return this.formProject.controls; }
+
+  
 
   /* Status Project
   1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
   addProject(f: NgForm) {
     this.projects = []
     this.error = 2
-    this.projectService.newProject(f, this.file, this.files, this.selectskills)
+    this.submitted = true
+    var aux = []
+    if(this.formProject.invalid){
+      console.log("Ivalid")
+    }else{
+      console.log("ok")
+      console.log(this.formProject.value)
+      var temp = false
+      $( ".addPeople" ).each(function( index ) {
+        var skill = $( this ).attr("id");
+        var quantity = $( this ).val();
+        console.log(skill+quantity)
+        aux.push({"skill":skill,"quantity":quantity})
+      });
+      f.value.taketest = true;
+      f.value.passtest = true;
+      console.log(f.value)
+      this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
+      this.modal = 1
+      this.section = 1
+    }
 
-    this.modal = 1
-    this.section = 1
-
-  
   }
+  
 
   next() {
     this.error = 2

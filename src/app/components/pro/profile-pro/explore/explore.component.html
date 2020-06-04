@@ -10,8 +10,9 @@
             <p><strong>{{ projects2.length }} Results</strong></p>
           </div>
           <div class="normalText fr ml-137">
-            <p>Sort by: <span style="cursor: pointer;" class="orange" (click)="filterChange()"><strong *ngIf="changeFilter">Latest</strong>
-            <strong *ngIf="!changeFilter">First</strong></span></p>
+            <p>Sort by: <span style="cursor: pointer;" class="orange" (click)="filterChange()"><strong
+                  *ngIf="changeFilter">Latest</strong>
+                <strong *ngIf="!changeFilter">First</strong></span></p>
             <div class="arrowDownGray fr mt-mr" (click)="filterChange()"></div>
           </div>
         </div>
@@ -30,7 +31,7 @@
       <div></div>
       <div></div>
     </div>
-    <ng-container *ngFor="let p of projects | search: searchProject | order; let i = index">
+    <ng-container *ngFor="let p of projects | search: searchProject | order: changeFilter; let i = index">
       <div class="projects row" (click)="sendInfo(p)" *ngIf="(i+1) >= start && (i+1) <= end">
         <div class="col-sm-6 ml-48">
           <p class="mt-47"><span class="title2">Project:</span> {{ p[0].projectname }}</p>
@@ -43,7 +44,7 @@
         </div>
         <div class="col-sm-5">
           <div class="map mt-47">
-            <!-- <agm-map [latitude]="lat" [longitude]="long"></agm-map> -->
+            <agm-map [latitude]="lat" [longitude]="long"></agm-map>
           </div>
         </div>
       </div>
@@ -146,7 +147,9 @@
     </div>
     <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and agree
       on payment terms.</p>
-    <button class="blueBtn large mt-30 w360" (click)=backDash()>Back to dashboard</button>
+    <a href="/Dashboard">
+      <button class="blueBtn large mt-30 w360">Back to dashboard</button>
+    </a>
     <span class="mt-12 mb-12 orLines">or</span>
     <button class="blueBtn large mb-45 w360" (click)=backExplore()>Back to explore</button>
   </div>

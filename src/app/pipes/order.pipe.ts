@@ -5,17 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class OrderPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    var projects: any[] = []
-    setTimeout(() => {
-      for(let i of value){
-        // var temp = value[i][0].creationdate
-        // console.log(temp);
-        console.log(i[0].creationdate);
-        
+  transform(value: any[], args?: boolean): any {
+      if(args){
+        return value.reverse()
+      }else{
+        return value.reverse()
       }
-    }, 300);
-    return value;
   }
 
 }
