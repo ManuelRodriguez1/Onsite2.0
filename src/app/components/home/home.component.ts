@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router  } from '@angular/router';
+import { AuthGuard} from '../../services/auth.service'
 
 declare var $: any;
 @Component({
@@ -11,44 +12,35 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
 
-  constructor(config: NgbCarouselConfig, private router: Router) {
+  constructor(config: NgbCarouselConfig, private router: Router,public menuPrincipal:AuthGuard) {
 
-
-    // customize default values of carousels used by this component tree
-    config.interval = 8000;
-    config.wrap = true;
-    config.showNavigationArrows = false;
 
 
 
   }
   //array de imagenes home hero slider
-  images = ['./assets/imagenes/Fondobanner.png', './assets/imagenes/Fondobanner.png'];
   @ViewChild('carousel') carousel: any;
 
   //array paso 3 home 
   Steps = [
     {
-      'paso': '1', 'text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef.'
+      'img': '../../../assets/imagenes/Home/Step1.png', 'paso': 'Sign up to Onhive', 'text': 'Sign up as a Pro or as a Hirer. '
     },
     {
-      'paso': '2', 'text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef.'
+      'img': '../../../assets/imagenes/Home/Step2.png',  'paso': 'Set up your profile', 'text': 'Complete your profile with your personal information.'
     },
     {
-      'paso': '3', 'text': '3Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef.'
+      'img': '../../../assets/imagenes/Home/Step3.png',  'paso': 'Apply or post', 'text': 'Apply or post a project based on the skills you have or the skills you are looking for.'
     },
     {
-      'paso': '4', 'text': '4Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent acfefefefefefef.'
+      'img': '../../../assets/imagenes/Home/Step1.png',  'paso': 'Start working', 'text': 'Message a Pro or a Hirer to agree on payments and hourly wage.'
     }];
 
   hire() {
     this.router.navigateByUrl("/Hire");
   }
-
   pro() {
     this.router.navigateByUrl("/Pro");
-
-
   }
   prev() {
     this.carousel.prev();
@@ -62,6 +54,7 @@ export class HomeComponent implements OnInit {
   }
 
   // array paso 4 slider home 
+  /*
   slides = [
     { img: "0", imagensuperior: "../../../assets/imagenes/img1seccion4Home.png", subtitulo: "1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.", name: "Name - Name." },
     { img: "1", imagensuperior: "../../../assets/imagenes/img2seccion4Home.png", subtitulo: "2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.", name: "Name - Name." },
@@ -109,7 +102,7 @@ export class HomeComponent implements OnInit {
     "nextArrow": "<div class='slick-nextsig '></div>",
   };
 
-
+*/
 
 
 }

@@ -65,8 +65,9 @@
                         <div class="tituloContImg">
 
                             Reset your password </div>
-                        <p>Enter your Onhive.com email address so we can reset your password.</p>
-
+                            <div class="col-sm input-group textNormal margint30 textNormalmsm">
+                                Enter your Onhive.com email address so we can reset your password.
+                            </div>
                         <div class="z-depth-1 grey lighten-4 row" style="margin-top:50px; height: 150px;">
                             <form #formData='ngForm' (ngSubmit)="onRecuperation(formData)" class="col s12" method="post">
                                 <div class="row ">
@@ -115,7 +116,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm input-group textNormal margint30">
+                        <div class="col-sm input-group textNormal margint30 textNormalmsm">
                             Get started and choose the profile you want to join as.
                         </div>
                     </div>
@@ -123,20 +124,20 @@
                         <div class="col-sm input-group textNormal textnomarMargin">
                             <div class="botonesOnsite margint30">
 
-                                <div class="  ">
+                           
                                     <button (click)="activarpro()" class="blueBtn small btnup">As a pro</button>
-                                </div>
+                           
 
-                                <div class=" ">
+                           
                                     <button (click)="activarhire()" class="blueBtn small btnup">As a hirer</button>
-                                </div>
+                           
 
                             </div>
                         </div>
                     </div>
                     <div *ngIf="activar==true">
                         <div class="row">
-                            <div class="col-sm input-group textNormal margint30 colorGris">
+                            <div class="col-sm input-group textNormal textNormalmsm margint30 colorGris">
                                 Join as a pro if you’re willing to find a project to work in.
                             </div>
                         </div>
@@ -150,7 +151,7 @@
                     </div>
                     <div *ngIf="activar1==true">
                         <div class="row">
-                            <div class="col-sm input-group textNormal margint30 colorGris">
+                            <div class="col-sm input-group textNormal textNormalmsm  margint30 colorGris">
                                 Join as a hire if you’re willing to find a project to work in.
                             </div>
                         </div>

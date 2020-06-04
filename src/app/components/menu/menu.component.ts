@@ -24,8 +24,9 @@ error: any[];
 
     UserName="";
 
-    constructor(public af: AngularFireAuth, private router: Router,private afstore: AngularFirestore) 
+    constructor(public af: AngularFireAuth, private router: Router,private afstore: AngularFirestore)     
     {
+
       if(location.pathname=="/Home" || location.pathname=="/Pro" || location.pathname=="/Hire"){
         this.userMenu="Home";
                 this.af.authState.subscribe(auth => {

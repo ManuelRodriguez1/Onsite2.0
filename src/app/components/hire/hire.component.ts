@@ -15,7 +15,10 @@ export class HireComponent implements OnInit {
   title = ['Enter your information:', 'Select skills'];
   text = ['About You', 'Your Skills'];
   verifyEmail: boolean = false
-
+  FirstName;
+  LastName;
+  Email;
+  Entercityorzipcode;
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   formData: FormGroup;
 

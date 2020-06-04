@@ -1,37 +1,53 @@
-<div id="ContenedorBannerHome">
+
+    <div class="contenedorseccionbanner container1280Final ">
+        <div class="row sectionHome1" >
+            <div class="col-12 col-md-6 izquierdaseccion2home">
+                <div class="tituloseccionbannerhome">
+                    <h4> Find the best in construction</h4>
+                </div>
+                <div class="subtituloseccionbannerhome">
+                    <h2>Some cool copy about our services and why you should join Onhive</h2>
+                </div>
+                <div class="btnHomeSection">
+                    <button (click)="hire()"  class="orangeBtn medium">Join as a hirer</button>
+                    <button (click)="pro()"  class="orangeBtn medium btnPro">Join as a pro</button>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 derechaseccion2home">
+                <img class="imgSliderHome" src="../../../assets/imagenes/Home/Home1.png">
+            </div>
+        </div>
+
+     
+    <div class="sectionHome1 row ">
 
 
-    <div class="contenedorseccionbanner container1280Final">
-        <div class="tituloseccionbannerhome">
-            <p>Join as a Pro</p>
+
+        <div class="col-12 col-md-6 izquierdaseccion2home">
+            <img class="imgAbout" src="../../../assets/imagenes/Home/aboutUs.png">
         </div>
-        <div class="subtituloseccionbannerhome">
-            <p>Some cool copy about our services and why you should join Onhive</p>
+        <div class="col-12 col-md-6 derechaseccion2home">
+            <div class="contenedorderechaseccion2Home ">
+                <h4>About us</h4>
+                <p class="text2seccion2home">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus. Etiam suscipit mauris quis turpis vehicula tincidunt. Mauris vitae sapien eu nulla pharetra vehicula. Nam porta enim id vestibulum. 
+                </p>
+
+                <button class="blueBtn medium btnseccion2home">Learn more</button>
+            </div>
         </div>
-        <div (click)="pro()" class="btnseccionbannerhome">
-            <p>Join as a pro </p>
-        </div>
-        <div (click)="hire()" class="btnseccionbannerhome">
-            <p>Join as a hirer</p>
-        </div>
+
+
 
 
 
     </div>
-
-
-
-    <!--<div class="flechaizquierdabannerHome" (click)="prev()">
-
+      
     </div>
-    <div class="flechaderechabannerHome" (click)="next()">
-
-    </div>-->
-
-</div>
 
 
-<div id="seccion2Home">
+
+<!--div id="seccion2Home">
 
     <div class="contenedorseccion2home row ">
 
@@ -59,22 +75,24 @@
     </div>
 </div>
 
-
+-->
 
 
 
 <div id="seccion3Home">
-    <p class="contenedortituloseccion3home container1280Final">How it works</p>
+    <div class="row container1280Final">
+        <h4 class="contenedortituloseccion3home" >How it works</h4>
+    </div>
     <div class="row contenedorseccion3Home container1280Final ">
-
+     
         <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home " *ngFor="let num of Steps">
             <div class="cuadroinfoseccion3home">
-                <div class="cuadrosecundseccion3home"></div>
-                <p>{{num.paso}}</p>
+              <img src="{{num.img}}">
+           
             </div>
-            <div class="tituloseccion3home">
-                <p>Step {{num.paso}} </p>
-            </div>
+            <h1 class="tituloseccion3home">
+                {{num.paso}}
+            </h1>
 
             <div class="subtituloseccion3home">
                 <p>{{num.text}}</p>
@@ -85,7 +103,7 @@
     </div>
 </div>
 
-<div class="container-carousel container1280Final">
+<!--div class="container-carousel container1280Final">
     <div id="seccion4Home">
         <div class="contenedorinformacionseccion4">
             <div class="tituloseccion4home">
@@ -107,4 +125,4 @@
             </ngx-slick-carousel>
         </div>
     </div>
-</div>
+</div-->

@@ -32,7 +32,7 @@ export class FooterComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-  test(f: NgForm){
+  test(){
 
     this.submitted = true;
 

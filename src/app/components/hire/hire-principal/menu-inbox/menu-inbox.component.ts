@@ -17,9 +17,9 @@ export class MenuInboxComponent implements OnInit {
   emailUser: any
   database = firebase.database();
   user = firebase.auth().currentUser
-  datos: Observable<any>
+  //datos: Observable<any>
   email = ''
-  datosChat: Observable<any>
+  //datosChat: Observable<any>
   contador = 0
   me = ''
   contador2 = 0
@@ -29,9 +29,11 @@ export class MenuInboxComponent implements OnInit {
     //this.email = this.service.DevolverDatos();
     this.me = this.user.email.replace('.', '-')
     //Ver items a la izquierda
-    this.datos = this.db.collection('Chat/ListaChat/' + this.me).valueChanges()
+    //this.datos = this.db.collection('Chat/ListaChat/' + this.me).valueChanges()
   }
-
+  ngOnInit() {
+  }
+  /*
   ngOnInit() {
     var other = this.email.replace('.', '-')
     //Ver mensajes del chat
@@ -47,7 +49,7 @@ export class MenuInboxComponent implements OnInit {
   changeEmail(e) {
     this.email = e
     this.ngOnInit()
-  }
+  }*/
 
   initChat() {
     var other = this.email.replace('.', '-')
