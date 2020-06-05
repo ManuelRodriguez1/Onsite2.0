@@ -88,9 +88,9 @@ error: any[];
               this.estado=user.displayName;
               this.user = user.emailVerified
             }
-            if(url=="/Hire" || url=="hire"){
+            if(url=="/Hire" || this.estado=="hire" ){
               this.m="Hirer";
-              }else if(url=="/Pro" || url=="pro"){
+              }else if(url=="/Pro" || this.estado=="pro" ){
                 this.m="Pro";
             }else if(url=="/Home"){
               this.m="Home";
@@ -99,7 +99,7 @@ error: any[];
               this.m="Home";
               this.userMenu="Home";
             }
-          if(this.estado=="hire"){
+          if(this.estado=="hire" ){
             this.userMenu="Hirer";
             console.log(user.uid)
            var data = this.afstore.collection("users_hire").doc(user.uid).snapshotChanges()
