@@ -17,8 +17,8 @@
         <div class="col-sm input-group">
           <input type="email" class="form-control"
             [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')"
-            [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail" placeholder="E-mail"
-            name="email" #email="ngModel" ngModel>
+            [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail"
+            placeholder="E-mail" name="email" #email="ngModel" ngModel>
           <span [hidden]="!verifyEmail" class="textError">Email already exists!</span>
           <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must be a valid
             email address</span>
@@ -58,7 +58,15 @@
       <div class="row">
         <div class="col-sm input-group">
           <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel"
-            ngModel>
+            ngModel [(ngModel)]="zipcodeSelect">
+          <ul class="list-group" *ngIf="!zipcodeSelectActive">
+            <ng-container *ngFor="let z of zipCodeCity | searchZip: zipcode.value">
+              <li class="list-group-item d-flex justify-content-between align-items-center" (click)="selecZip(z.city)">
+                {{z.city}}
+                <span class="badge badge-primary">{{z.zip}}</span>
+              </li>
+            </ng-container>
+          </ul>
         </div>
         <div class="col-sm input-group" style="visibility: hidden;">
           <input type="text" class="form-control" disabled placeholder="" name="">

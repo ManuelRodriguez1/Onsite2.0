@@ -36,6 +36,9 @@ export class ProfileProComponent implements OnInit {
   password: string = ''
   //Validar correo
   emailVal: boolean = true
+  //Rating
+  rate: number = 0
+  rating: any[] = []
 
   constructor(
     private prouser: ProuserService
@@ -66,6 +69,15 @@ export class ProfileProComponent implements OnInit {
         if (this.profile.cvUrl[0].name == 'Add a file') { this.cvClose = false }
         else { this.cvClose = true }
       }
+      
+      if(this.profile.reviews.length > 0){
+        var temp: number = 0
+        this.profile.reviews.forEach((r)=>{
+          temp += r.rating 
+        })
+        this.rate = Math.round(temp / this.profile.reviews.length)        
+      }
+
     })
   }
   //Show Option

@@ -45,6 +45,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { OrderPipe } from './pipes/order.pipe';
 import { AzPipe } from './pipes/az.pipe';
 import { AzStatusPipe } from './pipes/az-status.pipe';
+import { SearchZipPipe } from './pipes/search-zip.pipe';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AzStatusPipe } from './pipes/az-status.pipe';
     FilterPipe,
     OrderPipe,
     AzPipe,
-    AzStatusPipe
+    AzStatusPipe,
+    SearchZipPipe
   ],
   imports: [
     BrowserModule,

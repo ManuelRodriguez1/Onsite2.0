@@ -60,6 +60,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   trash(e: any) {
+    this.f = this.f + 5
+    setTimeout(() => {
+      this.f = this.f - 5
+    }, 300);
     var users: any[] = e.applyUsers
     var i = users.indexOf(this.proU.user.uid)
     i !== -1 && users.splice(i, 1)
@@ -72,6 +76,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     })
     var j = this.projects.indexOf(e)
     this.projects.splice(j, 1)
+    
   }
 
   azOrder(){

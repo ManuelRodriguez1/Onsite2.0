@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { ProuserService } from '../services/prouser.service';
 
 @Pipe({
   name: 'filter'
@@ -17,6 +18,7 @@ export class FilterPipe implements PipeTransform {
     }else{
       return pro
     }
+    
   }
 
 }
