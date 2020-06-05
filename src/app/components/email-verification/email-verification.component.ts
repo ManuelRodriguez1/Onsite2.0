@@ -143,6 +143,6 @@ export class EmailVerificationComponent implements OnInit {
 
 
   Continue() {
-    this.router.navigate(["/Hireprincipal"]);
+    this.router.navigate(["/Home"]);
   }
 }

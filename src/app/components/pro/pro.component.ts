@@ -1,7 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProService } from 'src/app/services/pro.service';
-import  * as zipcode from "../../../assets/files/zipcode.json";
+//import  * as zipcode from "../../../assets/files/zipcode.json";
 
 @Component({
   selector: 'app-pro',
@@ -30,7 +30,7 @@ export class ProComponent implements OnInit {
   emailText: string[] = []
   error: string = ''
   correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
-  zipCodeCity: any = zipcode
+ // zipCodeCity: any = zipcode
 
   constructor(private servicePro: ProService) { }
 
@@ -43,7 +43,7 @@ export class ProComponent implements OnInit {
         this.verifyEmail = true
       }
     })  
-    console.log(this.zipCodeCity);
+   // console.log(this.zipCodeCity);
     
   }
 
