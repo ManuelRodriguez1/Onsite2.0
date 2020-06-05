@@ -62,10 +62,15 @@ export class ProfileHireComponent implements OnInit {
       setTimeout(() => {
         this.credential = this.hireuser.getCredential(this.profile.email, this.password)
       }, 800);
-      if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
-      if(this.profile.photoUrl != null && this.emailVerified != false){
-        this.profileCompleted = true
+      if(d){
+        if (this.profile.photoUrl != null) {
+          this.imageP = this.profile.photoUrl
+          }
+       if(this.profile.photoUrl != null && this.emailVerified != false){
+         this.profileCompleted = true
+       }
       }
+   
     })
   }
 

@@ -19,6 +19,7 @@ export class HireComponent implements OnInit {
   LastName;
   Email;
   Entercityorzipcode;
+  PhoneNumber;
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   formData: FormGroup;
   submitted = false;
@@ -56,7 +57,7 @@ export class HireComponent implements OnInit {
 
   get f() { return this.formData.controls; }
 
-  onSubmit(f: NgForm) {
+  onSubmit(f) {
     this.submitted = true;
     if (this.formData.invalid) {
       console.log("Invalid")

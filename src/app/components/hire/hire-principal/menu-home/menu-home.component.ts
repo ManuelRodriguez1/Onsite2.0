@@ -127,7 +127,7 @@ export class MenuHomeComponent implements OnInit {
 
   /* Status Project
   1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
-  addProject(f: NgForm) {
+  addProject(f) {
     this.projects = []
     this.error = 2
     this.submitted = true
