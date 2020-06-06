@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
@@ -7,21 +7,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./hire-principal.component.css']
 })
 export class HirePrincipalComponent implements OnInit {
-  text = ['','Your Inbox', 'Projects', 'Explore'];
-  righttv = '' 
-  select = 0
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-  menushow = false
-  project = false
-  upf = false;
-  HomeFormularioNw = 0;
-  page = 1;
-  constructor(public af: AngularFireAuth) { }
-
+  /* text = ['','Your Inbox', 'Projects', 'Explore'];
+   righttv = '' 
+   select = 0
+   lat: number = 51.678418;
+   lng: number = 7.809007;
+   menushow = false
+   project = false
+   upf = false;
+   HomeFormularioNw = 0;
+   page = 1;
+   constructor(public af: AngularFireAuth) { }
+ */
   ngOnInit() {
 
   }
+  /*
   logout() {
        this.af.auth.signOut();
        console.log('logged out');
@@ -30,7 +31,7 @@ export class HirePrincipalComponent implements OnInit {
    menu(e) {
     switch (e) {
       case 0:
-        this.select = 0;
+        this.select = 1;
         this.righttv = ''
         break;
       case 1:
@@ -48,6 +49,7 @@ export class HirePrincipalComponent implements OnInit {
         break;
     }
   }
+
   next() {
     this.page++;
     this.HomeFormularioNw++;
@@ -55,6 +57,6 @@ export class HirePrincipalComponent implements OnInit {
   back() {
     this.page--;
     this.HomeFormularioNw = this.page;
-  } 
-  
+  } */
+
 }

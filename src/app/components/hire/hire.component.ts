@@ -1,6 +1,6 @@
-import { Component, OnInit, NgModule } from "@angular/core";
-import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { HireService }  from 'src/app/services/hire.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { HireService } from 'src/app/services/hire.service';
 import { AngularFirestore } from "angularfire2/firestore";
 
 @Component({
@@ -20,7 +20,7 @@ export class HireComponent implements OnInit {
   Email;
   Entercityorzipcode;
   PhoneNumber;
-  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  // private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   formData: FormGroup;
   submitted = false;
 
@@ -28,40 +28,40 @@ export class HireComponent implements OnInit {
     private serviceHire: HireService,
     private db: AngularFirestore,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formData = this.formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
-      PhoneNumber: ['',Validators.required],
-      Zipcode: ['',Validators.required],
-      Password: ['',[Validators.required,Validators.minLength(6)]]
+      PhoneNumber: ['', Validators.required],
+      Zipcode: ['', Validators.required],
+      Password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-    this.serviceHire.error.subscribe((respError)=>{
-      this.error=respError;
+    this.serviceHire.error.subscribe((respError) => {
+      this.error = respError;
 
     })
   }
-
-  next() {
-    this.page++;
-    this.select = this.page;
-  }
-  back() {
-    this.page--;
-    this.select = this.page;
-  }
-
+  /*
+    next() {
+      this.page++;
+      this.select = this.page;
+    }
+    back() {
+      this.page--;
+      this.select = this.page;
+    }
+  */
   get f() { return this.formData.controls; }
 
   onSubmit(f) {
     this.submitted = true;
     if (this.formData.invalid) {
       console.log("Invalid")
-    }if(this.formData.valid){
+    } if (this.formData.valid) {
       console.log("ok")
       console.log(this.formData.value)
       var temp = false
@@ -73,12 +73,12 @@ export class HireComponent implements OnInit {
           this.verifyEmail = temp
         })
         if (!this.verifyEmail) {
-      
-         this.serviceHire.registerHire(f);
-        
-            console.log(this.error);
-   
-       
+
+          this.serviceHire.registerHire(f);
+
+          console.log(this.error);
+
+
         }
       })
     }

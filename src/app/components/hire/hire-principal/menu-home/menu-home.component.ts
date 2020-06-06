@@ -248,7 +248,7 @@ export class MenuHomeComponent implements OnInit {
         status: 3,
         statusname: 'Archived',
       }).then((url) => {
-        this.option = this.option - 5
+       this.option = this.option - 5
       })
     
       //this.confirm = 0
