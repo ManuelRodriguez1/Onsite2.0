@@ -184,15 +184,15 @@ export class MenuHomeComponent implements OnInit {
   showModal(){
     this.modal = 1
   }
+  /*
   showModalDelete(){
     this.modal = 2
-  }
+  }*/
 
   hideModal() {
     this.select = 0
     this.HomeFormularioNw = 0
     this.modal = 3
-    //location.href="/Hireprincipal"
     console.log(this.modal)
   }
 
@@ -214,17 +214,45 @@ export class MenuHomeComponent implements OnInit {
   }
 
   delete(idP){
-    this.projects = []
+
     this.modal = 2
     this.confirm2 = idP
+
     if( this.confirm == 1){
+      this.option = this.option + 5
+
+
+     this.projects = []
       this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
         status: 4,
         statusname: 'Deleted',
+      }).then((url) => {
+        this.option = this.option - 5
       })
+      
       this.modal = 3
       this.confirm = 0
     }
+  }
+  archivedStatus(idP){
+    this.option = this.option + 5
+ 
+
+    //this.option = e
+/*
+    this.modal = 2
+    this.confirm2 = idP
+    if( this.confirm == 1){*/
+      this.projects = []
+      this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
+        status: 3,
+        statusname: 'Archived',
+      }).then((url) => {
+        this.option = this.option - 5
+      })
+    
+      //this.confirm = 0
+   // }
   }
 
   confirmDelete(){

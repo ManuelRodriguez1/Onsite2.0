@@ -33,7 +33,7 @@
                   </svg>
                   
                     <div *ngIf="popad==true"   class="bgpodpad menu" >
-                       <li><a href="/ProfilePro">My account</a></li>
+                       <li><a routerLink="/ProfilePro">My account</a></li>
                         <li><a (click)="logout()"  >Sign out</a></li>
                          </div>
 
@@ -44,7 +44,7 @@
 
         <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
             <li><a href="/Hireprincipal">Projects</a></li>
-            <li><a href="/Chat">Messages</a></li>
+            <li><a routerLink="/Chat">Messages</a></li>
             <li>
                 <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span>
                {{UserName}}
@@ -56,7 +56,7 @@
                       </svg>
                       
                         <div *ngIf="popad==true"   class="bgpodpad menu" >
-                           <li><a href="/ProfileHire">My account</a></li>
+                           <li><a routerLink="/ProfileHire">My account</a></li>
                             <li><a (click)="logout()"  >Sign out</a></li>
                              </div>
     

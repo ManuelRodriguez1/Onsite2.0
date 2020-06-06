@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="row fields">
-            <div class="input-group col-sm">
+            <!--div class="input-group col-sm">
               <input
                 type="email"
                 class="form-control"
@@ -67,22 +67,25 @@
                 [(ngModel)]="profile.email"
                 [class.errorInput]="!emailVal"
               />
-              <span class="textError" [hidden]="emailVal">Wrong email</span>
-            </div>
+            </div-->
             <div class="input-group col-sm">
-              <input type="text" hidden />
-            </div>
+              <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel
+                  [(ngModel)]="profile.email" [placeholder]="profile.email"
+                  [class.errorInput]="!emailVal">
+              <span class="textError" [hidden]="emailVal">Wrong email</span>
+          </div>
+          <div class="input-group col-sm">
+              <input type="text" hidden>
+          </div>
+         
           </div>
           <button
             type="submit"
             class="blueBtn small mt-12"
             id="btnAccount"
-            [class.disabled]="
-              name.value == '' && lastname.value == '' && email.value == ''
-            "
-            [disabled]="
-              name.value == '' && lastname.value == '' && email.value == ''
-            "
+            [class.disabled]="name.value == '' || lastname.value == '' || email.value == '' "
+       
+            [disabled]=" name.value == '' && lastname.value == '' && email.value == '' "
           >
             Update
           </button>
@@ -94,26 +97,10 @@
         <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
           <div class="row fields">
             <div class="input-group col-sm">
-              <input
-                type="password"
-                [class.errorInput]="
-                  cPass.value != profile.password && cPass.value != ''
-                "
-                [class.correctInput]="
-                  cPass.value == password && cPass.value != ''
-                "
-                class="form-control"
-                placeholder="Current password"
-                name="cPass"
-                id="cPass"
-                #cPass="ngModel"
-                ngModel
-              />
-              <span
-                class="textError"
-                [hidden]="cPass.value == password || cPass.value == ''"
-                >It isn't the current password</span
-              >
+              <input type="password" [class.errorInput]="cPass.value != profile.password && cPass.value != '' "
+                [class.correctInput]=" cPass.value == password && cPass.value != ''" class="form-control"
+                placeholder="Current password" name="cPass" id="cPass" #cPass="ngModel" ngModel />
+              <span class="textError" [hidden]="cPass.value == password || cPass.value == ''"  >It isn't the current password</span>
             </div>
             <div class="input-group col-sm">
               <input type="text" class="form-control" hidden />
@@ -121,26 +108,9 @@
           </div>
           <div class="row fields">
             <div class="input-group col-sm">
-              <input
-                type="password"
-                [class.errorInput]="
-                  pass1.value?.length < 6 && pass1.value != ''
-                "
-                [class.correctInput]="
-                  pass1.value?.length > 5 && pass1.value != ''
-                "
-                class="form-control"
-                placeholder="New password"
-                name="pass1"
-                id="pass1"
-                ngModel
-                #pass1="ngModel"
-              />
-              <span
-                class="textError"
-                [hidden]="pass1.value?.length > 5 || pass1.value == ''"
-                >Password must be at leat 6 characters.</span
-              >
+              <input type="password" [class.errorInput]=" pass1.value.length < 6 && pass1.value != '' "  [class.correctInput]=" pass1.value.length > 5 && pass1.value != ''"
+                class="form-control"  placeholder="New password"  name="pass1" id="pass1"  ngModel  #pass1="ngModel" />
+              <span class="textError" [hidden]="pass1.value.length > 5 || pass1.value == ''"   >Password must be at leat 6 characters.</span>
             </div>
             <div class="input-group col-sm">
               <input

@@ -1202,11 +1202,46 @@ h4,
 }
 .trash{
     width: 20px;
-    height: 23px;
+  height: 23px;
     background: url('./assets/iconos/trash.svg') no-repeat center;
     background-size: contain;
     cursor: pointer;
 }
+.carpeta{
+    width: 27px;
+    height: 27px;
+    background: url('./assets/iconos/carpeta.svg') no-repeat center;
+    background-size: contain;
+    cursor: pointer !important;
+
+}
+
+.messageDesactive{
+    width: 36px;
+    height: 18px;
+    background: url('./assets/iconos/messageDesactive.svg') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    pointer-events:none
+
+}
+.trashDesactive{
+    width: 20px;
+    height: 23px;
+    background: url('./assets/iconos/trashDesactive.svg') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    pointer-events:none
+}
+.carpetaDesactive{
+    width: 27px;
+    height: 27px;
+    background: url('./assets/iconos/carpetaDesactive.svg') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    pointer-events:none
+}
+.veri
 .verifyUser{
     position: absolute;
     top: 92px;
@@ -1323,6 +1358,9 @@ h4,
     line-height:22px;
     font-family: 'Open Sans', sans-serif;
 
+}
+.menu  a{
+    cursor: pointer;
 }
 @keyframes lds-roller {
     0% {

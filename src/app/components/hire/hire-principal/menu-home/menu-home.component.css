@@ -7,6 +7,11 @@
 .form-Project{
   margin: 7%;
 }
+.webkit {
+  display: -webkit-box;
+  float: right;
+  margin-right: 62px;
+  }
 .text-dashboard{
   font-size: 100px !important;
   right: -120px !important;
@@ -49,7 +54,9 @@
   overflow: hidden;
   display: inline-block;  
 }
-
+.webkit button {
+  border: none;
+}
 .btn {
   border: 1px solid #C4C4C4;
   color: #000000;
@@ -58,6 +65,13 @@
   font-size: 10px;
   font-weight: bold;
   cursor: project-name;
+}
+.messageDesactive,.carpeta
+{
+  margin-right: 27px;
+}
+.messageDesactive{
+  margin-top: 6px;
 }
 
 .upload-btn-wrapper input[type=file] {
