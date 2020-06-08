@@ -70,7 +70,7 @@ export class ProfileProComponent implements OnInit {
         else { this.cvClose = true }
       }
       
-      if(this.profile.reviews.length > 0){
+      if(this.profile.reviews){
         var temp: number = 0
         this.profile.reviews.forEach((r)=>{
           temp += r.rating 
@@ -94,7 +94,7 @@ export class ProfileProComponent implements OnInit {
     }
 
     if (f.value.email.trim() != '') {
-      if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {
+      if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email) && f.value.email != this.prouser.user.email) {
         this.prouser.updateEmail(this.credential, f.value.email)
       } else {
         this.emailVal = false
