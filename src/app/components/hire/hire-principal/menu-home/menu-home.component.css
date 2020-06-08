@@ -265,8 +265,8 @@ span:hover{
 }
 
 .form-control:focus {
-  box-shadow: none;
-  border-color: #ced4da;
+  /*box-shadow: none;
+  border-color: #ced4da;*/
 }
 
 .skill .list-group {
@@ -921,4 +921,12 @@ width: 100%;
 }
 .m-28{
   margin-top: -5%;
+}
+.bloquiadobtn {
+  background: #373C7D;
+  color: white;
+}
+.errordescriptexarea{
+  position: relative;
+  width: 100%;
 }

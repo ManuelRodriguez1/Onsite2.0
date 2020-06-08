@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { NgForm, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireStorage } from "angularfire2/storage";
@@ -13,12 +13,12 @@ import * as $ from 'jquery';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
-  ctrl = new FormControl(null, Validators.required)
   reviews: any[] = []
   up = false;
+  description;
   selectskills: any[] = [];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
-
+  private contador = 4000 //Agreg
   projectname;
   peoples: any[] = [];
   people = 0;
@@ -69,15 +69,14 @@ export class MenuHomeComponent implements OnInit {
 
   visiblePeople = false
 
-  formProject: FormGroup;
+  //formProject: FormGroup;
   submitted = false;
   pattern: ""
 
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
-    private afs: AngularFireStorage,
-    private formBuilder: FormBuilder) {
+    private afs: AngularFireStorage) {
 
   }
 
@@ -99,18 +98,10 @@ export class MenuHomeComponent implements OnInit {
     this.visiblePeople = false
   }
 
+
   ngOnInit() {
-    this.formProject = this.formBuilder.group({
-      projectname: ['', Validators.required],
-      description: ['', [Validators.required,Validators.maxLength(4000)]],
-      location: ['', Validators.required],
-      estimated: ['',[Validators.required, Validators.pattern('^[0-9]*$')]],
-      startdate: ['', Validators.required],
-      enddate: ['', Validators.required],
-      id: [''],
-      taketest:[''],
-      passtest:['']
-    });
+ 
+
     this.projects = []
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
     .subscribe((d) => {
@@ -119,24 +110,30 @@ export class MenuHomeComponent implements OnInit {
       })
       console.log(this.projects)
     })
+
+
+
+
   }
 
-  get f() { return this.formProject.controls; }
+  onKey2(event){
+    console.log(event.target.value.length) 
+   }
 
-  
+  onKey(event){
+    this.contador = 4000 - event.target.value.length 
+   }
 
   /* Status Project
   1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
-  addProject(f) {
-    this.projects = []
+  addProject(f: NgForm) {
+    console.log(f);
+   this.projects = []
     this.error = 2
     this.submitted = true
     var aux = []
-    if(this.formProject.invalid){
-      console.log("Ivalid")
-    }else{
-      console.log("ok")
-      console.log(this.formProject.value)
+    if(f.value){
+
       var temp = false
       $( ".addPeople" ).each(function( index ) {
         var skill = $( this ).attr("id");
@@ -144,9 +141,8 @@ export class MenuHomeComponent implements OnInit {
         console.log(skill+quantity)
         aux.push({"skill":skill,"quantity":quantity})
       });
-      f.value.taketest = true;
-      f.value.passtest = true;
-      console.log(f.value)
+
+   
       this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
       this.modal = 1
       this.section = 1
@@ -270,13 +266,16 @@ export class MenuHomeComponent implements OnInit {
     this.section = 0;
     this.viewP = p;
     this.apply=this.viewP.applyUsers;
-    for (var i = 1; i < this.apply.length; i++) {
-      this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
-        .subscribe((data)=>{
-          this.dataApply.push(data.payload.data())
-          console.log(this.dataApply)
-        })
+    if(this.apply){
+      for (var i = 0; i < this.apply.length; i++) {
+        this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
+          .subscribe((data)=>{
+            this.dataApply.push(data.payload.data())
+            console.log(this.dataApply)
+          })
+      }
     }
+  
  
   }
 
