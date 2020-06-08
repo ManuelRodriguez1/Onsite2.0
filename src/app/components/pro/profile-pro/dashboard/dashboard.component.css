@@ -25,3 +25,6 @@
     text-decoration: underline;
     cursor: pointer;
 }
+.containerMin{
+    min-height: 600px;;
+}

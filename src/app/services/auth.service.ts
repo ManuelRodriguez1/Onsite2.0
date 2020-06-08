@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
         .do(authenticated => {
       if(!authenticated){
         this.auth.auth.signOut();
-        location.href="/Home";
+        this.router.navigate(['/Home'])
         
       }else{
         const role = route.data.role;
@@ -30,14 +30,16 @@ export class AuthGuard implements CanActivate {
             console.log(authState.displayName+"============"+role);
             if (authState.displayName !== role  ) {
               if(authState.displayName=="hire"){
-                location.href="/Hireprincipal";
+                //location.href="/Hireprincipal";
+                this.router.navigate(['/Hireprincipal'])
 
               }else if(authState.displayName=="pro"){
-                location.href="/Profilepro";
+                this.router.navigate(['/Profilepro'])
+                //location.href="/Profilepro";
 
               }else{
-            
-                location.href="/Home";
+                this.router.navigate(['/Home'])
+               // location.href="/Home";
               }
               
 

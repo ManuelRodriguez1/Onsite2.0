@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "onsite-92699",
-    "onhive": "onhive-213de"
+    "default": "onhive-213de",
+    "onHive": "onhive-213de"
   }
 }

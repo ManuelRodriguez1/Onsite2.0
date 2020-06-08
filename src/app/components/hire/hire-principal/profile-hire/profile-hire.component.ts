@@ -30,47 +30,47 @@ export class ProfileHireComponent implements OnInit {
   projectsCompleted: any[] = []
   credential: any
   emailVerified: any
-  countProject= 0
+  countProject = 0
   emailVal: boolean = true
   alert: number = 1
 
   constructor(
     private af: AngularFirestore,
     private hireuser: HireuserService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.emailVerified = this.user.emailVerified
     this.af.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
-    .onSnapshot({ includeMetadataChanges: true }, (d) => {
-      d.docChanges().forEach((d) => {
-        this.projects.push([d.doc.data()])
-        if(d.doc.data().status === 3){
-          this.projectsCompleted.push(d.doc.data())
-        }else if(d.type === 'removed'){
-          this.projects.forEach((data)=>{
-            if(data[0].t == d.doc.data().t){
-              this.projects.splice(this.projects.indexOf(data),1)
-            }
-          })
-        }
+      .onSnapshot({ includeMetadataChanges: true }, (d) => {
+        d.docChanges().forEach((d) => {
+          this.projects.push([d.doc.data()])
+          if (d.doc.data().status === 3) {
+            this.projectsCompleted.push(d.doc.data())
+          } else if (d.type === 'removed') {
+            this.projects.forEach((data) => {
+              if (data[0].t == d.doc.data().t) {
+                this.projects.splice(this.projects.indexOf(data), 1)
+              }
+            })
+          }
+        })
       })
-    })
     this.hireuser.getInfoUser().snapshotChanges().subscribe((d) => {
       this.profile = d.payload.data()
       this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
       setTimeout(() => {
         this.credential = this.hireuser.getCredential(this.profile.email, this.password)
       }, 800);
-      if(d){
+      if (d) {
         if (this.profile.photoUrl != null) {
           this.imageP = this.profile.photoUrl
-          }
-       if(this.profile.photoUrl != null && this.emailVerified != false){
-         this.profileCompleted = true
-       }
+        }
+        if (this.profile.photoUrl != null && this.emailVerified != false) {
+          this.profileCompleted = true
+        }
       }
-   
+
     })
   }
 
@@ -104,8 +104,8 @@ export class ProfileHireComponent implements OnInit {
             }, 3000);
           }, 200);
         })
+    }
   }
-}
 
   selectOption(e) {
     this.select = e
