@@ -22,7 +22,7 @@ export class MenuHomeComponent implements OnInit {
   projectname;
   peoples: any[] = [];
   people = 0;
-
+  alerta=false;
   howmany = "Select";
 
   page = 1;
@@ -77,7 +77,7 @@ export class MenuHomeComponent implements OnInit {
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
     private afs: AngularFireStorage) {
-
+    
   }
 
   list(e) {
@@ -87,15 +87,31 @@ export class MenuHomeComponent implements OnInit {
   }
 
   selectskill(e) {
+
     var i = this.selectskills.indexOf(e)
-    i === -1 && this.selectskills.push(e);
+  
+    if(i === -1){
+      this.selectskills.push(e);
+      this.peoples.push({"skill":e ,"quantity":""});
+      console.log(this.peoples);
+    }
+   
+    
     this.visiblePeople = true
   }
 
   close(e) {
     var i = this.selectskills.indexOf(e)
-    i !== -1 && this.selectskills.splice(i, 1)
+    
+
+    if(i !== -1){
+      this.selectskills.splice(i, 1)
+      this.peoples.splice(i, 1)
+    
+      console.log(this.peoples);
+    }
     this.visiblePeople = false
+    
   }
 
 
@@ -127,20 +143,48 @@ export class MenuHomeComponent implements OnInit {
   /* Status Project
   1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
   addProject(f: NgForm) {
+
+    
     console.log(f);
+    console.log(f.status);
    this.projects = []
     this.error = 2
     this.submitted = true
     var aux = []
-    if(f.value){
 
-      var temp = false
-      $( ".addPeople" ).each(function( index ) {
+
+      $(".addPeople" ).each(function( index ) {
         var skill = $( this ).attr("id");
         var quantity = $( this ).val();
-        console.log(skill+quantity)
+        if(quantity ==""){
+          $("#"+quantity).removeClass("correctInput");
+          $(".a"+skill).html("people is required");
+          $("#"+quantity).addClass("errorInput");
+        }else{
+          $(".a"+skill).html("");
+          $("#"+quantity).removeClass("errorInput");
+          $("#"+quantity).addClass("correctInput");
+        }
+
         aux.push({"skill":skill,"quantity":quantity})
       });
+
+    if(f.status=="INVALID"  || f.value.passtest==false  || f.value.taketest==false || f.value.passtest===undefined  || f.value.taketest===undefined || this.selectskills == []){   
+
+
+      if(f.value.projectname===undefined || f.value.projectname=="" || f.value.description===undefined || f.value.description==""
+      || f.value.location===undefined || f.value.location==""|| f.value.estimated===undefined || f.value.estimated=="" ||
+       this.selectskills.length==0  || f.value.enddate===undefined || f.value.enddate==""   || f.value.startdate===undefined || f.value.startdate==""
+       || f.value.passtest===undefined || f.value.passtest==false || f.value.taketest===undefined || f.value.taketest==false){
+        
+        this.alerta=true;
+      }
+    } else if(f.value){
+      var temp = false
+   
+      //this.peoples=aux;
+      //console.log("holaaaa");
+      //console.log(this.peoples)
 
    
       this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
@@ -259,24 +303,35 @@ export class MenuHomeComponent implements OnInit {
 
   viewProject(p){
    this.selectskills = p.skills;
+   this.peoples=p.people;
+ 
+
+
+
    this.files=p.briefmaterial;
     this.righttv='text-project'
     this.error = 2
     this.HomeFormularioNw = 2
     this.section = 0;
     this.viewP = p;
+    
     this.apply=this.viewP.applyUsers;
+    this.visiblePeople = true;
     if(this.apply){
       for (var i = 0; i < this.apply.length; i++) {
         this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
           .subscribe((data)=>{
-            this.dataApply.push(data.payload.data())
-            console.log(this.dataApply)
+            var i = this.dataApply.push(data.payload.data());
+           
+         
           })
       }
     }
+
+
+   
+
   
- 
   }
 
   goToProfile(id){
@@ -302,9 +357,22 @@ export class MenuHomeComponent implements OnInit {
   }
 
   postReview(currentRate, review){
-    this.reviews.push({"hire":this.user.uid,"rating":currentRate,"review":review})
+    this.reviews.push({"id":this.user.uid,"rating":currentRate,"descripcion":review})
     console.log(this.reviews)
     this.LeaveForm = 0
+
+
+    this.db.collection("users_pro").doc(this.profileP.id).set({
+      reviews: this.reviews,
+      
+    }, {merge: true}).then((res)=>{
+      alert(res);
+   
+    })
+    .catch((error) => {
+      alert(error.message)
+    })
+
   }
 
 }

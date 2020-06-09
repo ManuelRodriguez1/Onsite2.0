@@ -74,12 +74,11 @@
           <div class="row">
             <div class="col-sm-6 input-group">
               <input required type="text" class="form-control" placeholder="e.g. Excavation at 280 S."
-                [class.errorInput]="projectname.value == ' ' " name="projectname" id="projectname" #projectname="ngModel"
+                [class.errorInput]="projectname.value == '' ||  alerta "    [class.correctInput]="projectname.value != '' && projectname.value != undefined "  name="projectname" id="projectname" #projectname="ngModel"
                 [(ngModel)]="viewP.projectname" />
 
 
-              <span [hidden]=" projectname.value != ''" class="textError">Project name is required
-                characters.</span>
+              <span *ngIf="projectname.value =='' || projectname.value ==undefined &&   alerta " class="textError">Project name is required characters.</span>
 
             </div>
           </div>
@@ -97,14 +96,14 @@
           <div class="row fields">
             <div class="col-sm input-group">
               <textarea class="form-control" id="description" rows="4" name="description" id="description"
-                (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000"
-                [class.errorInput]=" description.value == '' || description.value > 4000" #description="ngModel"
+                (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000" #description="ngModel"
+                [class.errorInput]="description.value == '' ||  alerta || description.value > 4000 "    [class.correctInput]="description.value != '' && description.value != undefined "
                 [(ngModel)]="viewP.description" required></textarea>
            
 
             </div>
             <div class="errordescriptexarea"> 
-              <span [hidden]=" description.value != ''" class="textError" >Description of the projec is required</span>
+              <span *ngIf="description.value =='' || description.value == undefined &&   alerta " class="textError" >Description of the projec is required</span>
             </div>
           </div>
           <div class="row text-right">
@@ -167,8 +166,8 @@
                   <div class="close" (click)='close(s)'></div>
                 </div>
               </div>
-            </div>
-            <span [hidden]="selectskills.length != 0 " class="textError">  Skills is required.</span>
+            </div> 
+            <span *ngIf="selectskills.length == 0 &&   alerta " class="textError">  Skills is required.</span>
 
           </div>
           <div class="row py-3" *ngIf="visiblePeople">
@@ -177,11 +176,12 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6 form-group" *ngFor="let p of selectskills">
-              <p class="description-form pb-2">{{p}}</p>
-              <input (keyup)="onKey2($event)" required type="Number" class="form-control addPeople" placeholder="" name="people" id="{{p}}"
-                 [class.errorInput]= "people.value == 0 || people.value == ' '" #people="ngModel" [(ngModel)]="viewP.people " />
-                <span [hidden]="people.value != 0  || people.value != ' ' " class="textError">People is required.</span>
+            <div class="col-sm-6 form-group" *ngFor="let p of peoples">
+              <p class="description-form pb-2">{{p.skill}}</p>
+              <input required type="Number" class="form-control addPeople" placeholder="" value="{{p.quantity}}"  name="people" id="{{p.skill}}"
+                 [class.errorInput]= "people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta "    [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined " />
+                 <span  class="textError a{{p.skill}}" ></span>
+
 
             </div>
           </div>
@@ -193,10 +193,10 @@
           <div class="row">
             <div class="col-sm-6 input-group">
               <input required type="text" class="form-control" placeholder="Street name, City, State ZIP"
-                name="location" id="location"  #location
+                name="location" id="location"   #location="ngModel"  [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "    [class.correctInput]="location.value != '' && location.value != undefined " 
                 [(ngModel)]="viewP.location" />
             
-                <span [hidden]=" location.value != ''" class="textError" >Please enter a location.</span>
+                <span  *ngIf="location.value == '' || location.value == undefined &&   alerta "  class="textError" >Please enter a location.</span>
            
             </div>
           </div>
@@ -208,10 +208,10 @@
           <div class="row">
             <div class="col-sm-6 input-group">
               <input required type="text" class="form-control" placeholder="$10,000 - $20,000" name="estimated"
-                id="estimated"  #estimated
+                id="estimated"  #estimated="ngModel"  [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta"    [class.correctInput]="estimated.value != '' && estimated.value != undefined " 
                 [(ngModel)]="viewP.estimated" />
-                <div  [hidden]=" estimated.value != ''" class="textError" >Estimated is required.</div>
-                <!--div *ngIf="f.estimated.errors.pattern">Invalid format.</div-->
+                <span   *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta " class="textError" >Estimated is required.</span>
+             
      
             </div>
           </div>
@@ -224,42 +224,52 @@
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">Start date</p>
               <input type="date" name="startdate" max="3000-12-31"
-                 [(ngModel)]="viewP.startdate"
+                 [(ngModel)]="viewP.startdate"  [class.errorInput]="estimated.value == 'dd/mm/aaaa' || startdate.value == undefined &&   alerta"    [class.correctInput]="startdate.value != '' && startdate.value != undefined " 
                 min="1000-01-01" class="form-control" #startdate>
-            
-                <!--div *ngIf="f.startdate.errors.required">Start date is required.</div-->
+                <span   *ngIf="startdate.value == undefined &&   alerta " class="textError" >Start date is required</span>
+
         
             </div>
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">End date</p>
               <input type="date" name="enddate" max="3000-12-31" min="1000-01-01" class="form-control"
-              [(ngModel)]="viewP.enddate" #enddate
+              [(ngModel)]="viewP.enddate" #enddate  [class.errorInput]=" enddate.value == undefined &&   alerta"    [class.correctInput]="enddate.value != '' && enddate.value != undefined " 
                 [class.errorInput]="startdate.value > enddate.value">
-              <span class="textError" [hidden]="startdate.value <= enddate.value">dates do not match</span>
-                <!--div *ngIf="f.enddate.errors.required">End date is required.</div-->
+              <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
+              <span   *ngIf="  enddate.value == undefined &&   alerta " class="textError" >End date is required</span>
+
+             
        
             </div>
           </div>
           <div class="row">
             <div class="form-check checkbox form-group m-2">
               <input class="form-check-input input-assumpte" type="checkbox" id="taketest" name="taketest"
-                [(ngModel)]="viewP.taketest"  #taketest="ngModel" />
+                [(ngModel)]="viewP.taketest"  #taketest="ngModel" [class.errorInput]="taketest.value != true  &&  alerta "    [class.correctInput]="taketest.value == true" />
               <label class="form-check-label" for="taketest">
                 <span class="check-text">All workers must take a background test.</span>
               </label>
+              <div>
+                <span   *ngIf="taketest.value != true &&   alerta " class="textError" >All workers must take a background test</span>
+
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="form-check checkbox form-group m-2">
               <input type="checkbox" class="form-check-input input-assumpte" id="passtest" name="passtest" 
-                #passtest="ngModel" [(ngModel)]="viewP.passtest" />
+                #passtest="ngModel" [(ngModel)]="viewP.passtest" [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "    [class.correctInput]="location.value != '' && location.value != undefined " />
               <label class="form-check-label" for="passtest">
                 <span class="check-text">All workers must pass a background test.</span>
               </label>
+              <div>
+                <span   *ngIf="passtest.value != true &&   alerta " class="textError" >All workers must pass a background test</span>
+
+              </div>
             </div>
           </div>
-          <button class="blueBtn small my-5 float-right" [class.bloquiadobtn]="projectname.value == '' || description.value == ''  || selectskills.length == 0  || people.value == ''   " 
-            [disabled]="projectname.value == '' || description.value == ''  || selectskills.length == 0  || people.value == ''   " type="submit">Post</button>
+
+            <button class="blueBtn small my-5 float-right"  type="submit">Post</button>
         </div>
       </div>
     </div>
@@ -423,7 +433,7 @@
   </div>
 </div>
 <div *ngIf="HomeFormularioNw == 3">
-  <div class="container">
+  <div class="container containerMarginhrproperfil">
     <div class="row m-28">
       <div class="col-sm-3">
         <div class="container">
