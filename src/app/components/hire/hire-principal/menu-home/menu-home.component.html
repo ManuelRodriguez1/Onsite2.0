@@ -224,8 +224,8 @@
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">Start date</p>
               <input type="date" name="startdate" max="3000-12-31"
-                 [(ngModel)]="viewP.startdate"  [class.errorInput]="estimated.value == 'dd/mm/aaaa' || startdate.value == undefined &&   alerta"    [class.correctInput]="startdate.value != '' && startdate.value != undefined " 
-                min="1000-01-01" class="form-control" #startdate>
+                 [(ngModel)]="viewP.startdate"  [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta"    [class.correctInput]="startdate.value != '' && startdate.value != undefined " 
+                min="1000-01-01" class="form-control"  #startdate="ngModel" >
                 <span   *ngIf="startdate.value == undefined &&   alerta " class="textError" >Start date is required</span>
 
         
@@ -233,7 +233,7 @@
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">End date</p>
               <input type="date" name="enddate" max="3000-12-31" min="1000-01-01" class="form-control"
-              [(ngModel)]="viewP.enddate" #enddate  [class.errorInput]=" enddate.value == undefined &&   alerta"    [class.correctInput]="enddate.value != '' && enddate.value != undefined " 
+              [(ngModel)]="viewP.enddate"   #enddate="ngModel" [class.errorInput]=" enddate.value == undefined &&   alerta"    [class.correctInput]="enddate.value != '' && enddate.value != undefined " 
                 [class.errorInput]="startdate.value > enddate.value">
               <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
               <span   *ngIf="  enddate.value == undefined &&   alerta " class="textError" >End date is required</span>

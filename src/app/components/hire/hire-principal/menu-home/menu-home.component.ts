@@ -22,7 +22,7 @@ export class MenuHomeComponent implements OnInit {
   projectname;
   peoples: any[] = [];
   people = 0;
-  alerta=false;
+  alerta = false;
   howmany = "Select";
 
   page = 1;
@@ -43,7 +43,7 @@ export class MenuHomeComponent implements OnInit {
   projectsHireDeleted: any[] = [];
 
   section: number = 1;
-  text: any[] = ["Project", "Projects","New Project"];
+  text: any[] = ["Project", "Projects", "New Project"];
   righttv = 'text-dashboard';
 
   user = firebase.auth().currentUser
@@ -61,7 +61,7 @@ export class MenuHomeComponent implements OnInit {
   confirm2 = ''
   error = 0
   apply: any[] = [];
-  dataApply:any[] = [];
+  dataApply: any[] = [];
 
   LeaveForm = 0
 
@@ -77,7 +77,7 @@ export class MenuHomeComponent implements OnInit {
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
     private afs: AngularFireStorage) {
-    
+
   }
 
   list(e) {
@@ -89,118 +89,123 @@ export class MenuHomeComponent implements OnInit {
   selectskill(e) {
 
     var i = this.selectskills.indexOf(e)
-  
-    if(i === -1){
+
+    if (i === -1) {
       this.selectskills.push(e);
-      this.peoples.push({"skill":e ,"quantity":""});
+      this.peoples.push({ "skill": e, "quantity": "" });
       console.log(this.peoples);
     }
-   
-    
+
+
     this.visiblePeople = true
   }
 
   close(e) {
     var i = this.selectskills.indexOf(e)
-    
 
-    if(i !== -1){
+
+    if (i !== -1) {
       this.selectskills.splice(i, 1)
       this.peoples.splice(i, 1)
-    
+
       console.log(this.peoples);
     }
     this.visiblePeople = false
-    
+
   }
 
 
   ngOnInit() {
- 
 
-    this.projects = []
+
+
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
-    .subscribe((d) => {
-      d.forEach((d) => {
-        this.projects.push(d.payload.doc.data())
+      .subscribe((d) => {
+        d.forEach((d) => {
+          this.projects.push(d.payload.doc.data())
+        })
+        console.log(this.projects)
       })
-      console.log(this.projects)
-    })
 
 
 
 
   }
 
-  onKey2(event){
-    console.log(event.target.value.length) 
-   }
+  onKey2(event) {
+    console.log(event.target.value.length)
+  }
 
-  onKey(event){
-    this.contador = 4000 - event.target.value.length 
-   }
+  onKey(event) {
+    this.contador = 4000 - event.target.value.length
+  }
 
   /* Status Project
   1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
   addProject(f: NgForm) {
 
-    
-    console.log(f);
-    console.log(f.status);
-   this.projects = []
+
+
+
     this.error = 2
     this.submitted = true
     var aux = []
 
 
-      $(".addPeople" ).each(function( index ) {
-        var skill = $( this ).attr("id");
-        var quantity = $( this ).val();
-        if(quantity ==""){
-          $("#"+quantity).removeClass("correctInput");
-          $(".a"+skill).html("people is required");
-          $("#"+quantity).addClass("errorInput");
-        }else{
-          $(".a"+skill).html("");
-          $("#"+quantity).removeClass("errorInput");
-          $("#"+quantity).addClass("correctInput");
-        }
-
-        aux.push({"skill":skill,"quantity":quantity})
-      });
-
-    if(f.status=="INVALID"  || f.value.passtest==false  || f.value.taketest==false || f.value.passtest===undefined  || f.value.taketest===undefined || this.selectskills == []){   
-
-
-      if(f.value.projectname===undefined || f.value.projectname=="" || f.value.description===undefined || f.value.description==""
-      || f.value.location===undefined || f.value.location==""|| f.value.estimated===undefined || f.value.estimated=="" ||
-       this.selectskills.length==0  || f.value.enddate===undefined || f.value.enddate==""   || f.value.startdate===undefined || f.value.startdate==""
-       || f.value.passtest===undefined || f.value.passtest==false || f.value.taketest===undefined || f.value.taketest==false){
-        
-        this.alerta=true;
+    $(".addPeople").each(function (index) {
+      var skill = $(this).attr("id");
+      var quantity = $(this).val();
+      if (quantity == "" || quantity == 0) {
+        $("#" + skill).removeClass("correctInput");
+        $(".a" + skill).html("people is required");
+        $("#" + skill).addClass("errorInput");
+      } else {
+        $(".a" + skill).html("");
+        $("#" + skill).removeClass("errorInput");
+        $("#" + skill).addClass("correctInput");
       }
-    } else if(f.value){
+
+      aux.push({ "skill": skill, "quantity": quantity })
+    });
+
+    if (f.status == "INVALID" || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == []) {
+      alert("1111111");
+
+      if (f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
+        || f.value.location === undefined || f.value.location == "" || f.value.estimated === undefined || f.value.estimated == "" ||
+        this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
+        || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
+
+        this.alerta = true;
+      }
+    } else if (f.value) {
+
+      alert("222222");
       var temp = false
-   
+
       //this.peoples=aux;
       //console.log("holaaaa");
       //console.log(this.peoples)
 
-   
+
       this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
+
+      alert("33333");
       this.modal = 1
       this.section = 1
+
+      this.projects = []
     }
 
   }
-  
+
 
   next() {
     this.error = 2
     this.page++;
     this.HomeFormularioNw++;
     this.section = 2;
-    this.righttv='text-new-project';
+    this.righttv = 'text-new-project';
   }
 
   addfiles() {
@@ -221,7 +226,7 @@ export class MenuHomeComponent implements OnInit {
     this.option = e
   }
 
-  showModal(){
+  showModal() {
     this.modal = 1
   }
   /*
@@ -233,7 +238,7 @@ export class MenuHomeComponent implements OnInit {
     this.select = 0
     this.HomeFormularioNw = 0
     this.modal = 3
-    console.log(this.modal)
+
   }
 
   deleteBriefMaterial(e: any) {
@@ -253,88 +258,88 @@ export class MenuHomeComponent implements OnInit {
     }
   }
 
-  delete(idP){
+  delete(idP) {
 
     this.modal = 2
     this.confirm2 = idP
 
-    if( this.confirm == 1){
+    if (this.confirm == 1) {
       this.option = this.option + 5
 
 
-     this.projects = []
+      this.projects = []
       this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
         status: 4,
         statusname: 'Deleted',
       }).then((url) => {
         this.option = this.option - 5
       })
-      
+
       this.modal = 3
       this.confirm = 0
     }
   }
-  archivedStatus(idP){
+  archivedStatus(idP) {
     this.option = this.option + 5
- 
+
 
     //this.option = e
-/*
-    this.modal = 2
-    this.confirm2 = idP
-    if( this.confirm == 1){*/
-      this.projects = []
-      this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
-        status: 3,
-        statusname: 'Archived',
-      }).then((url) => {
-       this.option = this.option - 5
-      })
-    
-      //this.confirm = 0
-   // }
+    /*
+        this.modal = 2
+        this.confirm2 = idP
+        if( this.confirm == 1){*/
+    this.projects = []
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
+      status: 3,
+      statusname: 'Archived',
+    }).then((url) => {
+      this.option = this.option - 5
+    })
+
+    //this.confirm = 0
+    // }
   }
 
-  confirmDelete(){
+  confirmDelete() {
     this.confirm = 1
     this.delete(this.confirm2)
     this.error = 1
   }
 
-  viewProject(p){
-   this.selectskills = p.skills;
-   this.peoples=p.people;
- 
+  viewProject(p) {
+    this.selectskills = p.skills;
+    this.peoples = p.people;
+
+    this.dataApply = [];
 
 
-
-   this.files=p.briefmaterial;
-    this.righttv='text-project'
+    this.files = p.briefmaterial;
+    this.righttv = 'text-project'
     this.error = 2
     this.HomeFormularioNw = 2
     this.section = 0;
     this.viewP = p;
-    
-    this.apply=this.viewP.applyUsers;
+
+    this.apply = this.viewP.applyUsers;
     this.visiblePeople = true;
-    if(this.apply){
+    if (this.apply) {
       for (var i = 0; i < this.apply.length; i++) {
         this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
-          .subscribe((data)=>{
+          .subscribe((data) => {
             var i = this.dataApply.push(data.payload.data());
-           
-         
+
+
           })
       }
     }
 
 
-   
 
-  
+
+
   }
 
-  goToProfile(id){
+  goToProfile(id) {
     this.HomeFormularioNw = 3
     this.section = 4
     this.db.collection("users_pro").doc(id).snapshotChanges().subscribe((d) => {
@@ -343,35 +348,35 @@ export class MenuHomeComponent implements OnInit {
     })
   }
 
-  goToEditProject(idP){
+  goToEditProject(idP) {
 
-    this.HomeFormularioNw =1;
+    this.HomeFormularioNw = 1;
     console.log("ok")
   }
 
-  leave(){
+  leave() {
     this.LeaveForm = 1
   }
-  cancelRate(){
+  cancelRate() {
     this.LeaveForm = 0
   }
 
-  postReview(currentRate, review){
-    this.reviews.push({"id":this.user.uid,"rating":currentRate,"descripcion":review})
+  postReview(currentRate, review) {
+    this.reviews.push({ "id": this.user.uid, "rating": currentRate, "descripcion": review })
     console.log(this.reviews)
     this.LeaveForm = 0
 
 
-    this.db.collection("users_pro").doc(this.profileP.id).set({
+    this.db.collection("users_pro").doc(this.profileP.id).update({
       reviews: this.reviews,
-      
-    }, {merge: true}).then((res)=>{
+
+    }).then((res) => {
       alert(res);
-   
+
     })
-    .catch((error) => {
-      alert(error.message)
-    })
+      .catch((error) => {
+        alert(error.message)
+      })
 
   }
 
