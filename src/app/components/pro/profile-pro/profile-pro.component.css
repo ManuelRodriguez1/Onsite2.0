@@ -279,15 +279,7 @@ iframe{
 .cDefault{
     cursor: default;
 }
-.alertInitial{
-    height: 0;
-    overflow: hidden;
-    padding: 0;
-    border: 0;
-}
-.alert{
-    transition: .5s;
-}
+
 /* Estilos overall */
 .projects{
     box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);

@@ -16,7 +16,9 @@ export class ProuserService {
   similar = new EventEmitter<string>()
   pagination = new EventEmitter<any[]>()
   filterPag = new EventEmitter<any[]>()
+  usersChat = new EventEmitter<any>()
   projects = new EventEmitter<any>()
+  initChat = new EventEmitter<boolean>()
 
   constructor(
     public afA: AngularFireAuth,
@@ -24,15 +26,19 @@ export class ProuserService {
     private afs: AngularFireStorage
   ) { }
   //Obtener datos hire
-  getInfoHire(){
+  getInfoHire() {
     return this.af.collection("users_hire")
+  }
+  //Obtener datos pro para Chat
+  getInfoPro() {
+    return this.af.collection("users_pro")
   }
   //Obtener datos de usuario
   getInfo() {
     return this.af.collection("users_pro").doc(this.user.uid)
   }
   //Obtener proyectos aplicados
-  getProject(idUser: string, idProject: string){
+  getProject(idUser: string, idProject: string) {
     return this.getInfoHire().doc(idUser).collection('projects').doc(idProject)
   }
   //MANEJO DE CREDENCIALES USUARIO
@@ -56,7 +62,7 @@ export class ProuserService {
       })
   }
   //Aplicar un proyecto agregando ID del usuario
-  applyProject(idUser: string, idProject: string, users: any[]){
+  applyProject(idUser: string, idProject: string, users: any[]) {
     this.getInfoHire().doc(idUser).collection('projects').doc(idProject).update({
       applyUsers: users
     })
@@ -80,7 +86,7 @@ export class ProuserService {
             this.getInfo()
               .update({
                 "email": email
-              }).then(()=>{
+              }).then(() => {
                 this.user.sendEmailVerification()
               })
           })
@@ -121,26 +127,26 @@ export class ProuserService {
     })
   }
   //Actualizar skill del usuario
-  updateSkill(skill: any){
+  updateSkill(skill: any) {
     this.getInfo().update({
       "skills": skill
     })
   }
   //Actualizar certificados Usuario
-  updateCert(cert: any, pos: any, certs: any){
+  updateCert(cert: any, pos: any, certs: any) {
     this.afs.ref('Users_pro/' + this.user.uid + "/" + cert.target.files[0].name).put(cert.target.files[0])
-    .then((url) => {
-      url.ref.getDownloadURL()
-      .then((u) => {
-        certs[pos] = { "name": cert.target.files[0].name, "url": u }
+      .then((url) => {
+        url.ref.getDownloadURL()
+          .then((u) => {
+            certs[pos] = { "name": cert.target.files[0].name, "url": u }
+          })
+          .then(() => {
+            this.updateUrlCert(certs)
+          })
       })
-      .then(() => {
-        this.updateUrlCert(certs)
-      })
-    })
   }
   //Actualizar url certificados Usuario
-  updateUrlCert(cert: any){
+  updateUrlCert(cert: any) {
     this.getInfo().update({
       "certificate": cert
     })
@@ -152,7 +158,30 @@ export class ProuserService {
     this.updateUrlCv('Add a file')
   }
   //Eliminar certificados del usuario
-  deleteCert(cert: any){
+  deleteCert(cert: any) {
     this.afs.ref('Users_pro/' + this.user.uid + "/" + cert.name).delete()
+  }
+  //CHAT
+  //Añadir conversación
+  chatMsg(idHire: string, idPro: string, msg: string) {
+    var chatTemp: any = []
+    var temp: any = {
+      'fecha': new Date(),
+      'id': this.user.uid,
+      'message': msg
+    }
+    this.getChat(idHire, idPro).get().subscribe((res) => {
+      if (res.data()) {
+        chatTemp = res.data().chat
+        chatTemp.push(temp)
+        this.getChat(idHire, idPro).update({ chat: chatTemp })
+      } else {
+        this.getChat(idHire, idPro).set({ chat: [temp] })
+      }
+    })
+  }
+  //Obtener mensajes
+  getChat(idHire: string, idPro: string) {
+    return this.af.collection('Chat').doc(idHire + '|' + idPro)
   }
 }

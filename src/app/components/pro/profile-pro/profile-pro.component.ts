@@ -19,7 +19,6 @@ export class ProfileProComponent implements OnInit {
   menushow: boolean = false
   project: boolean = false
   alert: number = 1
-  alert1: number = 1
   // Variables eventos
   up: boolean = false
   skills: any[] = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
@@ -56,7 +55,7 @@ export class ProfileProComponent implements OnInit {
       if (this.profile.certificate != null && this.profile.certificate.length != 0) {
         this.countC = this.customers.length; this.customers = this.profile.certificate
       }
-      if (this.profile.certificate != null) {
+      if (this.profile.certificate != '') {
         if (this.profile.certificate[0].name == 'Add certificate file') {
           this.countC = 0
         }
@@ -69,13 +68,13 @@ export class ProfileProComponent implements OnInit {
         if (this.profile.cvUrl[0].name == 'Add a file') { this.cvClose = false }
         else { this.cvClose = true }
       }
-      
-      if(this.profile.reviews){
+
+      if (this.profile.reviews) {
         var temp: number = 0
-        this.profile.reviews.forEach((r)=>{
-          temp += r.rating 
+        this.profile.reviews.forEach((r) => {
+          temp += r.rating
         })
-        this.rate = Math.round(temp / this.profile.reviews.length)        
+        this.rate = Math.round(temp / this.profile.reviews.length)
       }
 
     })
@@ -86,15 +85,11 @@ export class ProfileProComponent implements OnInit {
   }
   // Update account information
   accountForm(f: NgForm) {
-    if (this.prouser.updateAccount(f, this.profile.name, this.profile.lastname, this.profile.description)) {
-      this.alert1 = 0
-      setTimeout(() => {
-        this.alert1 = 1
-      }, 3000);
-    }
 
-    if (f.value.email.trim() != '') {
-      if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email) && f.value.email != this.prouser.user.email) {
+    this.prouser.updateAccount(f, this.profile.name, this.profile.lastname, this.profile.description)
+
+    if (f.value.email.trim() != '' && f.value.email != this.prouser.user.email) {
+      if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {
         this.prouser.updateEmail(this.credential, f.value.email)
       } else {
         this.emailVal = false
