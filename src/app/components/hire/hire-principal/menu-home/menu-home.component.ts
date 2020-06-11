@@ -15,9 +15,11 @@ import * as $ from 'jquery';
 export class MenuHomeComponent implements OnInit {
   reviews: any[] = []
   up = false;
+  repro: any = ''
   description;
+  valStarts;
   selectskills: any[] = [];
-  usuariosReviwsTodos:any[] = [];
+  usuariosReviwsTodos: any[] = [];
   teamSkills: any[] = [];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   private contador = 4000 //Agreg
@@ -27,7 +29,7 @@ export class MenuHomeComponent implements OnInit {
   alerta = false;
   howmany = "Select";
   page = 1;
-  contadorreviw=0;
+  contadorreviw = 0;
   select = 0;
   HomeFormularioNw = 0;
   files = [{ 'name': 'Add material file', 'url': '' }];
@@ -55,12 +57,15 @@ export class MenuHomeComponent implements OnInit {
   error = 0
   apply: any[] = [];
   dataApply: any[] = [];
-  LeaveForm =1
+  LeaveForm = 1
   sProject: string = ''
   visiblePeople = false
   submitted = false;
   pattern: ""
+  reviewR;
   rate: number = 0
+  estrellitasreviws1=0;
+  reviewdescripcion="";
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
@@ -96,6 +101,8 @@ export class MenuHomeComponent implements OnInit {
 
 
   ngOnInit() {
+
+    
     //Consulta todos los proyecto apenas detecta un cambio 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
       .subscribe((d) => {
@@ -104,10 +111,98 @@ export class MenuHomeComponent implements OnInit {
         })
         console.log(this.projects)
       })
+      //Funcion reviews
+
+     
+    
+      
+      this.projectService.Buscador.subscribe((res)=>{
+
+        console.log("de->"+ this.reviewdescripcion);
+        console.log("est->"+ this.estrellitasreviws1);
+   
+        if(res){
+      
+          this.reviews = res
+          this.reviews.find((res1)=>{
+            if(res1.id==this.user.uid){
+              alert("11111111");
+            console.log(res1);
+              res1.descripcion= this.reviewdescripcion;
+              res1.rating= this.estrellitasreviws1;
+
+                console.log(this.reviews);
+    
+                this.updateReviews();
+
+                return false;
+           
+            }else{
+              alert("2222222");
+              this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
+              console.log(this.reviews);
+    
+    
+    
+              this.updateReviews();
+           
+            }
 
 
+          })
+         
+          console.log(this.reviews );
+        }
+      
+        
+        console.log(res);
+        console.log("kate");
+      /*  if (res == 2) {
+          alert("resulrreviw");
+          this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
+          console.log(this.reviews);
+
+
+
+          this.updateReviews();
+      
+        } else {
+          alert("else");
+          console.log(this.reviews);
+          var x = this.reviews.indexOf(this.user.uid)
+          console.log(x);
+ 
+          if (x !== -1) {
+            this.reviews[x].descripcion= this.reviewdescripcion;
+            this.reviews[x].rating= this.estrellitasreviws1;
+
+            this.updateReviews();
+          }
+          //  $("#reviewR").va;
+          //var currentRate = $("#currentRate").attr('aria-valuenow',this.reviews.rating)
+        }*/
+
+      
+      })
 
   }
+
+
+
+  //update this.reviews
+  updateReviews(){
+    console.log("manuel->"+this.profileP.id);
+    this.db.collection("users_pro").doc(this.profileP.id).update({
+      reviews: this.reviews,
+    }).then((res) => {
+      alert(res);
+    }).catch((error) => {
+      alert(error.message)
+    })
+
+  }
+
+
 
   //Consulta descripciòn Hire 
   onKey(event) {
@@ -149,12 +244,15 @@ export class MenuHomeComponent implements OnInit {
 
       //Crear o editar funcion 
       this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
+     
       this.modal = 1
       this.section = 1
       this.projects = []
     }
 
   }
+
+
 
   //Vista crear nuevo proyecto
 
@@ -281,64 +379,63 @@ export class MenuHomeComponent implements OnInit {
 
     }
 
- 
+
   }
 
   //Funcion para buscar team skill segun el proyecto 
   buscar_team_skill(userProSkill, dataApply) {
-
-
     if (this.viewP.skills) {
       var i = this.viewP.skills.indexOf(userProSkill)
-
       if (i === 0) {
-
         this.teamSkills.push({ "team": userProSkill, "dataApply": dataApply })
-
-
-   console.log(this.teamSkills);
+        console.log(this.teamSkills);
       }
-   
     }
-
+  }
+  //Numero de estrellas reviws
+  estrellitasreviws(e) {
+    this.estrellitasreviws1 = e;
+    this.valStarts = e;
   }
   //Ver el perfil del usuario pro 
   goToProfile(profile) {
     this.HomeFormularioNw = 3
     this.section = 4
     this.profileP = profile;
-  console.log(this.profileP.reviews);
-    if(this.profileP.reviews){
+    console.log(this.profileP.reviews);
+    if (this.profileP.reviews) {
       var temp: number = 0
-      this.profileP.reviews.forEach((r)=>{
-        temp += r.rating 
-
+      this.profileP.reviews.forEach((r) => {
+        temp += r.rating
         console.log(r.id);
 
+        this.db.collection("users_hire").doc(r.id).snapshotChanges()
+          .subscribe((data) => {
+           
+            this.repro = data.payload.data()
+            console.log(this.repro);
+            this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro .photoUrl });
 
-        this.db.collection("users_hire").doc(r.id).get()
-        .subscribe((data) => {
-          var repro: any = data.data()
-          console.log(repro);
-         // console.log(repro.name);
-
-
-          this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion,"name":data.data().name,"photoUrl":data.data().photoUrl });
-      
-
-        })
+            if (r.id == this.user.uid) {
+              this.reviewR = r.descripcion;
+              this.valStarts= r.rating
+              this.estrellitasreviws1 = r.rating
+            }
+          })
 
 
       })
       console.log(this.usuariosReviwsTodos);
-      this.rate = Math.round(temp / this.profileP.reviews.length)        
+      this.rate = Math.round(temp / this.profileP.reviews.length)
+
     }
 
 
-  
-    
 
-    console.log(this.profileP );
+
+
+    console.log(this.profileP);
+
   }
 
 
@@ -359,50 +456,37 @@ export class MenuHomeComponent implements OnInit {
 
 
   //Modificar Reviews
-  postReview(currentRate, review) {
-    console.log(currentRate);
-    console.log(review.viewModel);
-    this.LeaveForm = 0
-    var resulrreviw = this.buscar_item_por_id(this.user.uid);
-    console.log("111111");
-    console.log(resulrreviw);
-    this.reviews= this.profileP.reviews;
-    if (resulrreviw == 2 ) {
-alert("resulrreviw");
-   
-      this.reviews.push({ "id": this.user.uid, "rating": currentRate, "descripcion": review.viewModel })
-      console.log(this.reviews);
+  postReview() {
+    var review = $("#reviewR");
+    var valStarts=$("#valStarts");
 
-      this.db.collection("users_pro").doc(this.profileP.id).update({
-        reviews: this.reviews,
-      }).then((res) => {
-        alert(res);
-      }).catch((error) => {
-        alert(error.message)
-      })
 
-   
-    }
-  }
-
-  //Funcion para buscar si tiene id 
-  buscar_item_por_id(id) {
-    console.log(this.profileP.reviews);
-    if (this.profileP.reviews) {
-      this.profileP.reviews.find(function (item) {
-        if (item.id === id) {
-          alert("entro")
-          return 1;
-        } else {
-          alert("no entro")
-          return 2;
-        }
-      });
-    
+    if (valStarts.val() === 0 || valStarts.val() === undefined || valStarts.val() == "") {
+      alert("valStarts");
+      $("#currentRaterror").html("You must rate to post your review.");
+    } else if (review.val() == "" || review.val() === undefined) {
+      review.removeClass("correctInput");
+      review.addClass("errorInput");
+      $("#reviewRerror").html("Your review must be at least 100 characters long.");
     } else {
-      alert("no review")
-      return 2;
+      review.removeClass("errorInput");
+      review.addClass("correctInput");
+      $("#reviewRerror").html("");
+      $("#currentRaterror").html("");
+      // this.LeaveForm = 0
+   
+     
+     this.reviewdescripcion=review.val()
+     this.estrellitasreviws1=valStarts.val()
+     console.log(this.profileP);
+ 
+    /// alert(this.reviewdescripcion);
+ 
+
+    this.projectService.Buscador.emit(this.profileP.reviews) 
+
+  
+  
     }
   }
-
 }

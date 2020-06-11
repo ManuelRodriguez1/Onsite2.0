@@ -402,26 +402,26 @@
         <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
         <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
       </div>
-      
-        <div class="row mt-51 ml-48 py-2" >
-          <div class="col-sm-3 ml-4 mt-2">
-            {{ so.dataApply.name}}
-          </div>
-          <div class="col-sm-6">
-            <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
-              <div class="skillsel onlySkill" *ngFor="let da of  so.dataApply.skills">
-                <p>{{da}}</p>
-              </div>
+
+      <div class="row mt-51 ml-48 py-2">
+        <div class="col-sm-3 ml-4 mt-2">
+          {{ so.dataApply.name}}
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
+            <div class="skillsel onlySkill" *ngFor="let da of  so.dataApply.skills">
+              <p>{{da}}</p>
             </div>
           </div>
-          <div class="col-sm mx-4 mt-2">
-            <img src="../../../../../assets/iconos/sendM.svg" alt="">
-            <img src="../../../../../assets/iconos/error-icon-p.svg" alt="" class="pl-3">
-          </div>
-          <hr class="hr my-1" />
+        </div>
+        <div class="col-sm mx-4 mt-2">
+          <img src="../../../../../assets/iconos/sendM.svg" alt="">
+          <img src="../../../../../assets/iconos/error-icon-p.svg" alt="" class="pl-3">
         </div>
         <hr class="hr my-1" />
-   
+      </div>
+      <hr class="hr my-1" />
+
     </div>
   </div>
 </div>
@@ -474,8 +474,8 @@
             </div>
             <div class="stars mt-23">
               <div class="rating" [class.ratingO]="profileP.reviews">
-                  <p *ngIf="!profileP.reviews">n/a</p>
-                  <p *ngIf="profileP.reviews">{{rate}}.0</p>
+                <p *ngIf="!profileP.reviews">n/a</p>
+                <p *ngIf="profileP.reviews">{{rate}}.0</p>
               </div>
               <div class="starG" [class.starO]="rate >= 1"></div>
               <div class="starG" [class.starO]="rate >= 2"></div>
@@ -483,10 +483,10 @@
               <div class="starG" [class.starO]="rate >= 4"></div>
               <div class="starG mr-13" [class.starO]="rate == 5"></div>
               <p class="smallText">(<span *ngIf="!profileP.reviews">no</span><span
-                      *ngIf="profileP.reviews">{{profileP.reviews.length}}</span>
-                  reviews)
+                  *ngIf="profileP.reviews">{{profileP.reviews.length}}</span>
+                reviews)
               </p>
-          </div>
+            </div>
           </div>
           <div class="col-sm">
             <div class="title3 my-2">
@@ -520,15 +520,14 @@
             </div>
             <div *ngFor="let cv of profileP.cvUrl" class="mr-30">
               <div *ngIf="cv.name != 'Add a file' && cv.name != null">
-               <a target="_blank" href="{{cv.url}}">
-                <div class="fileIcon"></div>
-                <p>{{cv.name}}</p>
-               </a>
-             
-              
+                <a target="_blank" href="{{cv.url}}">
+                  <div class="fileIcon"></div>
+                  <p>{{cv.name}}</p>
+                </a>
+
+
               </div>
-              <div
-                *ngIf="cv.name == 'Add a file' || cv.name == null ">
+              <div *ngIf="cv.name == 'Add a file' || cv.name == null ">
                 <p>No files have been uploaded.</p>
               </div>
             </div>
@@ -580,7 +579,7 @@
             <div class="title3 mb-4">
               <p>Reviews</p>
             </div>
-        
+
             <div *ngFor="let reviews of usuariosReviwsTodos" class="row mb-4">
               <div class="col-sm">
                 <div class="media">
@@ -589,14 +588,14 @@
                     <div class="title3 mt-3 pl-2">
                       <p>{{reviews.name}}</p>
                       <div class="stars mt-23">
-                        
+
                         <div class="starG" [class.starO]="reviews.rating >= 1"></div>
                         <div class="starG" [class.starO]="reviews.rating >= 2"></div>
                         <div class="starG" [class.starO]="reviews.rating >= 3"></div>
                         <div class="starG" [class.starO]="reviews.rating >= 4"></div>
                         <div class="starG mr-13" [class.starO]="reviews.rating == 5"></div>
-                      
-                    </div>
+
+                      </div>
                       <div>
                         <p class="mt-21 smallText">{{reviews.descripcion}} </p>
                       </div>
@@ -604,7 +603,7 @@
                   </div>
                 </div>
               </div>
-          
+
             </div>
           </div>
         </div>
@@ -618,25 +617,36 @@
         <div *ngIf="LeaveForm == 1">
           <div class="row mt-4 pl-3">
             <div class="title3 mb-2">
-              <p>Rating   {{profileP.reviews.descripcion}}  {{profileP.reviews.rating}}</p>
+              <p>Rating </p>
             </div>
           </div>
           <div class="row mt-1 pl-3">
             <div class="form-group">
-              <ngb-rating [(rate)]="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
+              <!--ngb-rating [(rate)]="currentRate" aria-valuenow="3" id="currentRate" name="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
+              <div>
+             
+              </div-->
+              <div class="stars mt-23"  >
+                <input type="text" id="valStarts" value="{{valStarts}}">
+                <div class="starG" [class.starO]="estrellitasreviws1 >= 1" (click)="estrellitasreviws(1)"></div>
+                <div class="starG" [class.starO]="estrellitasreviws1 >= 2" (click)="estrellitasreviws(2)"></div>
+                <div class="starG" [class.starO]="estrellitasreviws1 >= 3" (click)="estrellitasreviws(3)"></div>
+                <div class="starG" [class.starO]="estrellitasreviws1 >= 4" (click)="estrellitasreviws(4)"></div>
+                <div class="starG mr-13" [class.starO]="estrellitasreviws1 == 5" (click)="estrellitasreviws(5)"></div>
+              </div>
+              <span class="textError" id="currentRaterror"></span> 
             </div>
           </div>
           <div class="row pl-3">
             <div class="col-sm input-group">
               <textarea class="form-control" id="reviewR" rows="4" name="reviewR"
-                placeholder="Leave your review here. (400 characters left)" ngModel #reviewR="ngModel" ></textarea>
-              <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
+                placeholder="Leave your review here. (400 characters left)" value="{{reviewR}}"></textarea>
+              <span class="textError" id="reviewRerror"></span>
             </div>
           </div>
           <div class="row mt-3 float-right">
-            <button class="blueBtn small w360 mr-3 cancelRate"
-              (click)="cancelRate()">Cancel</button>
-            <button class="blueBtn small w360 mr-3" (click)="postReview(currentRate, reviewR)">Post</button>
+            <button class="blueBtn small w360 mr-3 cancelRate" (click)="cancelRate()">Cancel</button>
+            <button class="blueBtn small w360 mr-3" (click)="postReview()">Post</button>
           </div>
         </div>
       </div>

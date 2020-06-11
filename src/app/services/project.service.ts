@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class ProjectService {
   currentDate = new Date();
   user = firebase.auth().currentUser
+  Buscador = new EventEmitter<any>()
   constructor(
     public af: AngularFireAuth,
     private db: AngularFirestore,
