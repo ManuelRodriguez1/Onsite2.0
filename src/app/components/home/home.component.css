@@ -69,16 +69,12 @@
     width: 480px;
     margin-top: 20px;
 }
+
 .btnPro {
-    background: white ;
-    color: #010973 ;
-    border: 1px solid #010973 ;
+    
     margin-left: 37px;
 }
-.btnPro:hover{
-    background: #010973;
-    color: white;
-}
+
 .btnHomeSection{
 margin-top: 40px;
 }
