@@ -64,8 +64,8 @@ export class MenuHomeComponent implements OnInit {
   pattern: ""
   reviewR;
   rate: number = 0
-  estrellitasreviws1=0;
-  reviewdescripcion="";
+  estrellitasreviws1 = 0;
+  reviewdescripcion = "";
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
@@ -102,7 +102,7 @@ export class MenuHomeComponent implements OnInit {
 
   ngOnInit() {
 
-    
+
     //Consulta todos los proyecto apenas detecta un cambio 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
       .subscribe((d) => {
@@ -111,93 +111,80 @@ export class MenuHomeComponent implements OnInit {
         })
         console.log(this.projects)
       })
-      //Funcion reviews
-
-     
-    
-      
-      this.projectService.Buscador.subscribe((res)=>{
-
-        console.log("de->"+ this.reviewdescripcion);
-        console.log("est->"+ this.estrellitasreviws1);
-   
-        if(res){
-      
-          this.reviews = res
-          this.reviews.find((res1)=>{
-            if(res1.id==this.user.uid){
-              alert("11111111");
-            console.log(res1);
-              res1.descripcion= this.reviewdescripcion;
-              res1.rating= this.estrellitasreviws1;
-
-                console.log(this.reviews);
-    
-                this.updateReviews();
-
-                return false;
-           
-            }else{
-              alert("2222222");
-              this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
-              console.log(this.reviews);
-    
-    
-    
-              this.updateReviews();
-           
-            }
-
-
-          })
-         
-          console.log(this.reviews );
-        }
-      
-        
-        console.log(res);
-        console.log("kate");
-      /*  if (res == 2) {
-          alert("resulrreviw");
-          this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
-          console.log(this.reviews);
+    //Funcion reviews
 
 
 
-          this.updateReviews();
-      
-        } else {
-          alert("else");
-          console.log(this.reviews);
-          var x = this.reviews.indexOf(this.user.uid)
-          console.log(x);
- 
-          if (x !== -1) {
-            this.reviews[x].descripcion= this.reviewdescripcion;
-            this.reviews[x].rating= this.estrellitasreviws1;
+
+    this.projectService.Buscador.subscribe((res) => {
+
+      console.log("de->" + this.reviewdescripcion);
+      console.log("est->" + this.estrellitasreviws1);
+
+      if (res) {
+
+        this.reviews = res
+        this.reviews.find((res1) => {
+          if (res1.id == this.user.uid) {
+
+            res1.descripcion = this.reviewdescripcion;
+            res1.rating = this.estrellitasreviws1;
+
+            console.log(this.reviews);
 
             this.updateReviews();
-          }
-          //  $("#reviewR").va;
-          //var currentRate = $("#currentRate").attr('aria-valuenow',this.reviews.rating)
-        }*/
 
-      
-      })
+
+
+          } else {
+
+
+            var contador = 1;
+            this.reviews.find((res1) => {
+              console.log(this.reviews.length + "====" + contador);
+              if (res1.id != this.user.uid && contador == this.reviews.length) {
+
+                this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
+                console.log(this.reviews);
+                this.updateReviews();
+              }
+              contador++;
+
+            })
+
+
+
+
+
+
+          }
+
+
+        })
+
+        console.log(this.reviews);
+      }
+
+      console.log(res);
+      console.log("kate");
+
+
+
+    })
 
   }
 
 
 
   //update this.reviews
-  updateReviews(){
-    console.log("manuel->"+this.profileP.id);
+  updateReviews() {
+    console.log("manuel->" + this.profileP.id);
     this.db.collection("users_pro").doc(this.profileP.id).update({
       reviews: this.reviews,
     }).then((res) => {
-      alert(res);
+      location.href = "/Hireprincipal";
     }).catch((error) => {
-      alert(error.message)
+
     })
 
   }
@@ -244,7 +231,7 @@ export class MenuHomeComponent implements OnInit {
 
       //Crear o editar funcion 
       this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
-     
+
       this.modal = 1
       this.section = 1
       this.projects = []
@@ -411,14 +398,14 @@ export class MenuHomeComponent implements OnInit {
 
         this.db.collection("users_hire").doc(r.id).snapshotChanges()
           .subscribe((data) => {
-           
+
             this.repro = data.payload.data()
             console.log(this.repro);
-            this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro .photoUrl });
+            this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
 
             if (r.id == this.user.uid) {
               this.reviewR = r.descripcion;
-              this.valStarts= r.rating
+              this.valStarts = r.rating
               this.estrellitasreviws1 = r.rating
             }
           })
@@ -458,11 +445,10 @@ export class MenuHomeComponent implements OnInit {
   //Modificar Reviews
   postReview() {
     var review = $("#reviewR");
-    var valStarts=$("#valStarts");
+    var valStarts = $("#valStarts");
 
 
     if (valStarts.val() === 0 || valStarts.val() === undefined || valStarts.val() == "") {
-      alert("valStarts");
       $("#currentRaterror").html("You must rate to post your review.");
     } else if (review.val() == "" || review.val() === undefined) {
       review.removeClass("correctInput");
@@ -474,19 +460,24 @@ export class MenuHomeComponent implements OnInit {
       $("#reviewRerror").html("");
       $("#currentRaterror").html("");
       // this.LeaveForm = 0
-   
-     
-     this.reviewdescripcion=review.val()
-     this.estrellitasreviws1=valStarts.val()
-     console.log(this.profileP);
- 
-    /// alert(this.reviewdescripcion);
- 
 
-    this.projectService.Buscador.emit(this.profileP.reviews) 
 
-  
-  
+      this.reviewdescripcion = review.val()
+      this.estrellitasreviws1 = valStarts.val()
+      console.log(this.profileP);
+
+      if (this.profileP.reviews) {
+        this.projectService.Buscador.emit(this.profileP.reviews)
+      } else {
+        this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
+        this.updateReviews()
+      }
+
+
+
+
+
+
     }
   }
 }
