@@ -184,4 +184,8 @@ export class ProuserService {
   getChat(idHire: string, idPro: string) {
     return this.af.collection('Chat').doc(idHire + '|' + idPro)
   }
+  //Comprobar mensajes
+  getChatExist(){
+    return this.af.collection('Chat')
+  }
 }

@@ -1,7 +1,7 @@
 <div class="container shadow">
     <div class="divcol ">
         <div class="row">
-            <div class="col-5 chatrightborder">
+            <div class="col-sm chatrightborder">
                 <div class="h--155 backBlue">
                     <div _ngcontent-c4="" class="input-group divinputsearch">
                         <div _ngcontent-c4="" class="searchGray absoluteSearch"></div>
@@ -15,7 +15,7 @@
                 </div>
                 <hr>
                 <div class="containerH155">
-                    <div class="person_user_chat" *ngFor="let u of usersPro">
+                    <div class="person_user_chat" *ngFor="let u of users">
                         <!-- <span *ngIf="num.puntoMessage"  class="puntoMessage"></span> -->
                         <div class="divcontainerChat" (click)="initChat(u)">
                             <div class="nombreschat">
@@ -34,7 +34,7 @@
 
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-8">
                 <ng-container *ngIf="chat">
                     <div class="containerChat">
                         <div class="h--155 backBlue">
@@ -46,7 +46,7 @@
                         </div>
                         <hr>
                     </div>
-                    <div class="containerChat">
+                    <div class="containerChat ml-0">
                         <p class="nomFecha">
                             Month, Day, Year
                         </p>
@@ -66,18 +66,22 @@
 
                             <div class="messagePro2 messagePro3">User Name has accepted the offer.</div> -->
                             <ng-container *ngFor="let m of messages">
-                                <div class="messagePro2" [class.messagePro3]="myId == m.id">
-                                    {{ m.message }}
+                                <div style="overflow: hidden;">
+                                    <div class="messageNormal" [class.messageMy]="myId == m.id">
+                                        {{ m.message }}
+                                    </div>
                                 </div>
                             </ng-container>
                         </div>
 
 
-                        <div class="containerChat">
+                        <div class="containerChat mr-0">
                             <div class="mensajescHat">
-                                <div class="btnEnviarMsj"><img src="../../../assets/iconos/enviarMsj.svg"></div>
-                                <input class="form-control inputChatFinally" id="msgChat" type="text" name="msg" #msg='ngModel' ngModel autocomplete="off">
-                                <button class="blueBtn small" (click)="chatMessage(idPro, msg.value)"> Send </button>
+                                <form action="" (ngSubmit)="chatMessage(idPro, mesg)">
+                                    <div class="btnEnviarMsj"><img src="../../../assets/iconos/enviarMsj.svg"></div>
+                                    <input class="form-control inputChatFinally" id="msgChat" type="text" name="mesg" placeholder="Write your message" ngModel [(ngModel)]="mesg" autocomplete="off">
+                                    <button type="submit" class="blueBtn small"> Send </button>
+                                </form>
                             </div>
                         </div>
 

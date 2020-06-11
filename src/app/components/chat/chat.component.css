@@ -2,6 +2,10 @@
     margin-top: 90px;
 }
 
+.container {
+    height: calc(100vh - 90px);
+}
+
 .h--155 {
     height: 155px;
     width: 100%;
@@ -85,8 +89,9 @@
 }
 
 .containerChat {
-    width: calc(100% - 80px);
     margin: 0 auto;
+    margin-left: 22px;
+    margin-right: 47px;
 }
 
 .divCabezera {
@@ -210,22 +215,24 @@ hr {
 }
 
 .mensajescHat {
-    width: 100%;
+    display: inline-flex;
     height: 47px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.ml-0 {
+    margin-left: 0;
+}
+
+.mr-0 {
+    margin-right: 0;
 }
 
 .chatContainerHeight {
-    height: 100%;
-    overflow: auto;
-    position: absolute;
-    width: inherit;
-    padding-left: 12px;
-    padding-bottom: 500px;
+    height: calc(100vh - 406px);
+    overflow-y: scroll;
+    width: 100%;
 }
 
 .containerH155 {
@@ -238,53 +245,77 @@ hr {
     top: 50%;
     position: relative;
     transform: translateY(-50%);
+    display: inline-flex;
 }
 
 .inputChatFinally {
-    width: calc(170px + (255 - 170) * ((100vw - 375px) / (1280 - 375)));
-    height: 47px;
+    width: 377px;
+    height: 44px;
     background-color: transparent;
     float: left;
-    font-size: 15px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
     border: 1px solid #9D9D9D;
     outline: none;
     border-right: none;
-    padding-left: 22px;
+    padding-left: 15px;
 }
 
-.messagePro2 {
+.inputChatFinally:focus {
+    outline: none;
+}
+
+.messageNormal {
     margin-top: 12px;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 25px;
     padding-right: 25px;
-    background-color: #010973;
-    color: white;
+    background-color: #C4C4C4;
+    color: black;
     position: relative;
     right: 0;
     margin-right: 16px;
-    width: 305px;
-    float: right;
+    width: auto;
+    float: left;
+    margin-left: 18px;
 }
 
-.messagePro2::after {
+.messageMy {
+    float: right;
+    margin-left: 0;
+    margin-right: 18px;
+}
+
+.messagePro2 {
+    background-color: #010973;
+    color: white;
+}
+
+.messageNormal::after {
     content: "";
     width: 0;
     height: 0;
     position: absolute;
-    border-bottom: 18px solid #010973;
+    border-bottom: 18px solid #C4C4C4;
     border-left: 18px solid transparent;
+    transform: rotate(-90deg);
+    left: -17px;
+    top: 0;
+}
+
+.messageMy::after {
+    left: auto;
+    right: -17px;
+    top: auto;
+    bottom: 0;
     transform: rotate(90deg);
-    margin-left: 30px;
-    margin-bottom: 0;
-    margin-top: 8px;
 }
 
 .messagePro3 {
     background-color: #FF8600;
-    width: 305px;
+    color: white;
 }
 
 .messagePro3::after {
