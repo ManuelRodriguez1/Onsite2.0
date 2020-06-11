@@ -23,8 +23,7 @@
             <li><a href="/Projects">Projects</a></li>
             <li><a href="/Chat">Messages</a></li>
             <li>
-                <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span>
-                {{UserName}}
+                <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span> {{UserName}}
 
                 <span class="flechaUsuario" (click)="flechaUsuario()">
               
@@ -46,8 +45,7 @@
             <li><a href="/Hireprincipal">Projects</a></li>
             <li><a routerLink="/Chat">Messages</a></li>
             <li>
-                <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span>
-               {{UserName}}
+                <span [ngStyle]="{'background-image': 'url('+imageP+')'}" class="imagenUserMenu"> </span> {{UserName}}
 
                 <span class="flechaUsuario" (click)="flechaUsuario()">
               
@@ -66,8 +64,8 @@
         </ul>
     </div>
 </nav>
-<div class="alert alert-danger verifyUser" role="alert" *ngIf="!this.user && this.Sesion">
-    User has not been verified!
+<div class="alert alert-warning verifyUser" role="alert" *ngIf="!this.user && this.Sesion">
+    Please verify your <strong>email</strong> to apply for projects and get full access to all the features in Onhive.
 </div>
 <div class="appendnegrocss" *ngIf="popad==true"> </div>
 

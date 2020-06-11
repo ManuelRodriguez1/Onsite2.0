@@ -17,6 +17,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   projects2: any[] = []
   loading: boolean
   users: any[] = []
+  emailV: boolean = false
   //Informacion proyecto
   infoProject: any[] = []
   lat: number = 51.678418
@@ -43,36 +44,38 @@ export class ExploreComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.emailV = this.prouser.user.emailVerified
     this.suscription0 = this.prouser.getInfoHire().snapshotChanges()
       .subscribe((d) => {
         var tempProjects: any[] = []
         this.projects = []
         this.projects2 = []
+        var cont: number = 0;
         d.forEach((j) => {
           var profile: any = j.payload.doc.data()
           if (profile.project) {
             j.payload.doc.ref.collection("projects").orderBy("creationdate", "desc")
               .onSnapshot((d) => {
                 d.docChanges().map((k) => {
-                  if (k.doc.data().status > 0 && k.doc.data().status < 3) {
+                  if (k.doc.data().status == 1) {
                     if (k.type === 'modified') {
-                      this.projects.map((m) => {
-                        if (m[0].creationdate === k.doc.data().creationdate) {
-                          m = [k.doc.data(), {
-                            "idProject": k.doc.id,
-                            "idUser": profile.id,
-                            "photo": profile.photoUrl,
-                            "name": profile.name + ' ' + profile.lastname
-                          }]
-                        }
-                      })
+                      // this.projects.map((m) => {
+                      //   if (m[0].creationdate === k.doc.data().creationdate) {
+                      //     m = [k.doc.data(), {
+                      //       "idProject": k.doc.id,
+                      //       "idUser": profile.id,
+                      //       "photo": profile.photoUrl,
+                      //       "name": profile.name + ' ' + profile.lastname
+                      //     }]
+                      //   }
+                      // })
                     } else {
-                      tempProjects.push([k.doc.data(), {
-                        "idProject": k.doc.id,
-                        "idUser": profile.id,
-                        "photo": profile.photoUrl,
-                        "name": profile.name + ' ' + profile.lastname
-                      }])
+                      tempProjects.push(k.doc.data())
+                      tempProjects[cont].idProject = k.doc.id
+                      tempProjects[cont].idUser = profile.id
+                      tempProjects[cont].photo = profile.photoUrl
+                      tempProjects[cont].name = profile.name+' '+profile.lastname
+                      cont++
                     }
                   }
                 })
@@ -105,7 +108,8 @@ export class ExploreComponent implements OnInit, OnDestroy {
           this.prouser.users.emit(2)
           break;
         case 2:
-          this.prouser.applyProject(this.infoProject[1].idUser, this.infoProject[1].idProject, this.users)
+          var infoPro: any = this.infoProject
+          this.prouser.applyProject(infoPro.idUser, infoPro.idProject, this.users)
           break;
       }
     })
@@ -118,7 +122,8 @@ export class ExploreComponent implements OnInit, OnDestroy {
   sendInfo(e) {
     this.infoProject = e
     this.select = 1
-    this.prouser.getProject(this.infoProject[1].idUser, this.infoProject[1].idProject).get()
+    var infoPro: any = this.infoProject
+    this.prouser.getProject(infoPro.idUser, infoPro.idProject).get()
       .subscribe((d) => {
         var info: any = d.data()
         if (info.applyUsers) {

@@ -1,3 +1,7 @@
+<div class="alert alert-primary" [class.alertInitial]="alert == 1" role="alert">
+    Your <strong>password</strong> has been updated.
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
@@ -47,10 +51,6 @@
                     <button type="submit" class="blueBtn small mt-12" id="btnAccount"
                         [class.disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == ''"
                         [disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == ''">Update</button>
-                    <div class="alert alert-success" [class.alertInitial]="alert1 == 1" role="alert"
-                        style="margin-top: 20px;">
-                        Account information updated correctly!
-                    </div>
                 </form>
                 <hr class="hr mt-30">
                 <div class="title2">
@@ -93,10 +93,6 @@
                     <button type="submit" class="blueBtn small mt-12" id="buttonPass"
                         [class.disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6"
                         [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6">Update</button>
-                    <div class="alert alert-success" [class.alertInitial]="alert == 1" role="alert"
-                        style="margin-top: 20px;">
-                        Password updated correctly!
-                    </div>
                 </form>
                 <hr class="hr mt-30">
                 <div class="title2">

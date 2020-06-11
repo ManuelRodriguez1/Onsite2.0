@@ -31,7 +31,8 @@ export const router: Routes = [
     { path: 'ExplorePro', component: ExploreComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
     { path: 'Dashboard', component: DashboardComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
     { path: 'Projects', component: ProjectsComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
-    { path: 'Chat', component: ChatComponent },
+    { path: 'Chat', component: ChatComponent, data: { role: "hire" }, canActivate: [AuthGuard] },
+    { path: 'Chat', component: ChatComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
 ]
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
 

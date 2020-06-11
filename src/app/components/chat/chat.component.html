@@ -15,66 +15,74 @@
                 </div>
                 <hr>
                 <div class="containerH155">
-                    <div class="person_user_chat" *ngFor="let num of users">
-                        <span *ngIf="num.puntoMessage"  class="puntoMessage"></span>
-                        <div class="divcontainerChat">
+                    <div class="person_user_chat" *ngFor="let u of usersPro">
+                        <!-- <span *ngIf="num.puntoMessage"  class="puntoMessage"></span> -->
+                        <div class="divcontainerChat" (click)="initChat(u)">
                             <div class="nombreschat">
-                                <div class="imagenChatPerson"><a href="{{num.photoUrl}}"></a></div>
-                                <div class="nombrechatazul title3">{{num.nombre}}</div>
-                                <div class="nombrechatNaranja">{{num.projectName}}</div>
+                                <div class="profile mini imagenChatPerson" [ngStyle]="{'background-image': 'url('+u.photo+')'}">
+                                    <a href="{{u.photo}}" target="_blank"></a>
+                                </div>
+                                <div class="nombrechatazul title3">{{u.name}}</div>
+                                <div class="nombrechatNaranja">{{u.projectname}}</div>
                             </div>
                             <div class="iconsChatUser">
-                                <div class="right100p" *ngIf="num.ojo" ><img src="../../../assets/iconos/ojoChat.svg"></div>
-                                <div *ngIf="num.carpeta" ><img src="../../../assets/iconos/carpetaChat.svg"></div>
+                                <!-- <div class="right100p" *ngIf="num.ojo"><img src="../../../assets/iconos/ojoChat.svg"></div> -->
+                                <!-- <div *ngIf="num.carpeta"><img src="../../../assets/iconos/carpetaChat.svg"></div> -->
                             </div>
-                        </div>
-                  </div>
-             
-             </div>
-            </div>
-            <div class="col-7">
-                <div class="containerChat">
-                    <div class="h--155 backBlue">
-                        <div class="divCabezera ">
-                            <div class="imagenChatPerson"></div>
-                            <div class="nombrechatazul title3">Gordon Freeman</div>
-                            <div class="nombrechatNaranja">Project name</div>
                         </div>
                     </div>
-                    <hr>
-                </div>
-                <div class="containerChat">
-                    <p class="nomFecha"> 
-                        Month, Day, Year
-                     </p>
 
-                     <div class="chatContainerHeight containerChat">
-    
-                         <div class="messagePro1">
-                            <div class="textNormal">
-                                <span >Gordon Freeman</span> wants to hire you as a <span>Drywall Hanger.</span>
-                                Will you accept <span>$12/hour</span>?
+                </div>
+            </div>
+            <div class="col-7">
+                <ng-container *ngIf="chat">
+                    <div class="containerChat">
+                        <div class="h--155 backBlue">
+                            <div class="divCabezera ">
+                                <div class="profile mini imagenChatPerson" [ngStyle]="{'background-image': 'url('+photo+')'}"></div>
+                                <div class="nombrechatazul title3">{{name}}</div>
+                                <div class="nombrechatNaranja">{{projectName}}</div>
                             </div>
-                            <button class="orangeBtn small">Yes</button>
-                            <button  class="orangeBtn small">No</button>
-                            <button  class="blueBtn medium">Negotiate</button>
-                         </div>
-
-                         <div class="messagePro2">User Name has declined the offer.</div>
-
-                         <div class="messagePro2 messagePro3">User Name has accepted the offer.</div>
-                     </div>
-                    
-
-                     <div class="containerChat">
-                        <div class="mensajescHat">
-                            <div class="btnEnviarMsj"><img src="../../../assets/iconos/enviarMsj.svg"></div>
-                                <input _ngcontent-c2="" class="form-control inputChatFinally" formcontrolname="email" id="emailFooter" type="text" ng-reflect-klass="form-control form-footer" ng-reflect-ng-class="[object Object]" ng-reflect-name="email">
-                                <button _ngcontent-c2="" class="blueBtn small"> Send </button>
                         </div>
-                     </div>
-                 
-                </div>
+                        <hr>
+                    </div>
+                    <div class="containerChat">
+                        <p class="nomFecha">
+                            Month, Day, Year
+                        </p>
+
+                        <div class="chatContainerHeight containerChat">
+
+                            <!-- <div class="messagePro1">
+                                <div class="textNormal">
+                                    <span>{{name}}</span> wants to hire you as a <span>Drywall Hanger.</span> Will you accept <span>$12/hour</span>?
+                                </div>
+                                <button class="orangeBtn small">Yes</button>
+                                <button class="orangeBtn small">No</button>
+                                <button class="blueBtn medium">Negotiate</button>
+                            </div>
+
+                            <div class="messagePro2">User Name has declined the offer.</div>
+
+                            <div class="messagePro2 messagePro3">User Name has accepted the offer.</div> -->
+                            <ng-container *ngFor="let m of messages">
+                                <div class="messagePro2" [class.messagePro3]="myId == m.id">
+                                    {{ m.message }}
+                                </div>
+                            </ng-container>
+                        </div>
+
+
+                        <div class="containerChat">
+                            <div class="mensajescHat">
+                                <div class="btnEnviarMsj"><img src="../../../assets/iconos/enviarMsj.svg"></div>
+                                <input class="form-control inputChatFinally" id="msgChat" type="text" name="msg" #msg='ngModel' ngModel autocomplete="off">
+                                <button class="blueBtn small" (click)="chatMessage(idPro, msg.value)"> Send </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
             </div>
         </div>
     </div>

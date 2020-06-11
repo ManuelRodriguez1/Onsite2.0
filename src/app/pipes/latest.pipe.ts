@@ -12,7 +12,7 @@ export class LatestPipe implements PipeTransform {
     var projects: any[] = []
     setTimeout(() => {
       for (let i of value) {
-        if (i[0].projectname.toLowerCase().includes(args.toLowerCase())) {
+        if (i.projectname.toLowerCase().includes(args.toLowerCase())) {
           projects.push(i)
         }
       }

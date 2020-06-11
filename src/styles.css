@@ -1099,10 +1099,12 @@ h4,
     margin-right: 7px;
     text-align: center;
 }
-.ratingO{
+
+.ratingO {
     background: #FF8600;
     color: white;
 }
+
 .starG {
     width: 18px;
     height: 18px;
@@ -1197,60 +1199,108 @@ h4,
     width: 100%;
     height: 100%;
 }
-.messageIcon{
+
+.messageIcon {
     width: 36px;
     height: 18px;
     background: url('./assets/iconos/message.svg') no-repeat center;
     background-size: contain;
     cursor: pointer;
 }
-.trash{
+
+.trash {
     width: 20px;
-  height: 23px;
+    height: 23px;
     background: url('./assets/iconos/trash.svg') no-repeat center;
     background-size: contain;
     cursor: pointer;
 }
-.carpeta{
+
+.carpeta {
     width: 27px;
     height: 27px;
     background: url('./assets/iconos/carpeta.svg') no-repeat center;
     background-size: contain;
     cursor: pointer !important;
-
 }
 
-.messageDesactive{
+.messageDesactive {
     width: 36px;
     height: 18px;
     background: url('./assets/iconos/messageDesactive.svg') no-repeat center;
     background-size: contain;
     cursor: pointer;
-    pointer-events:none
-
+    pointer-events: none
 }
-.trashDesactive{
+
+.trashDesactive {
     width: 20px;
     height: 23px;
     background: url('./assets/iconos/trashDesactive.svg') no-repeat center;
     background-size: contain;
     cursor: pointer;
-    pointer-events:none
+    pointer-events: none
 }
-.carpetaDesactive{
+
+.carpetaDesactive {
     width: 27px;
     height: 27px;
-    background: url('./assets/iconos/carpetaDesactive.svg') no-repeat center;
+    background: url('./assets/iconos/CarpetaDesactive.svg') no-repeat center;
     background-size: contain;
     cursor: pointer;
-    pointer-events:none
+    pointer-events: none;
 }
-.veri
-.verifyUser{
+
+.veri .verifyUser {
     position: absolute;
     top: 92px;
     right: 0;
 }
+
+.alert {
+    border: 0;
+    transition: .5s;
+    text-align: center;
+    margin: auto;
+    top: 91px;
+    height: 55px;
+    padding: 0;
+    position: fixed;
+    width: 100%;
+    line-height: 53px;
+    border-radius: 0;
+    z-index: 10;
+    color: white;
+    font-size: 14px;
+}
+
+.alert-primary {
+    background: #0D91FF;
+}
+
+.alert-warning {
+    background: #FF8600;
+    position: relative;
+}
+
+.alert-primary::before {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 15px;
+    background: url('./assets/iconos/check2.svg') no-repeat center;
+    background-size: contain;
+    top: 45%;
+    transform: translateY(-50%);
+    margin-left: -19px;
+}
+
+.alertInitial {
+    height: 0;
+    overflow: hidden;
+}
+
+
 /* loading temporal */
 
 .lds-roller {
@@ -1357,15 +1407,17 @@ h4,
     z-index: 11;
     top: 0;
 }
-.textNormal{
-    font-size: 14px;
-    line-height:22px;
-    font-family: 'Open Sans', sans-serif;
 
+.textNormal {
+    font-size: 14px;
+    line-height: 22px;
+    font-family: 'Open Sans', sans-serif;
 }
-.menu  a{
+
+.menu a {
     cursor: pointer;
 }
+
 @keyframes lds-roller {
     0% {
         transform: rotate(0deg);

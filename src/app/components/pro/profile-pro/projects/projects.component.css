@@ -1,63 +1,83 @@
-.options{
+.options {
     display: -webkit-box;
     float: right;
 }
-.option::before{
+
+.option::before {
     display: none;
 }
-.option{
+
+.option {
     margin: 0;
     margin-top: 40px;
     margin-right: 20px;
     color: #9D9D9D;
     cursor: pointer;
 }
-.option:hover{
+
+.option:hover {
     color: #010973;
     text-decoration: underline;
 }
-.optionActive{
+
+.optionActive {
     color: #010973;
     text-decoration: underline;
 }
-.mt-17{
+
+.mt-17 {
     margin-top: 17px;
 }
-.mt-22{
+
+.mt-22 {
     margin-top: 22px;
 }
-.mt-30{
+
+.mt-30 {
     margin-top: 30px;
 }
-.ml-48{
+
+.ml-48 {
     margin-left: 48px;
 }
-.mr-48{
+
+.mr-48 {
     margin-right: 48px;
 }
-.gray{
+
+.gray {
     color: #9D9D9D;
     font-size: 14px;
     display: -webkit-box;
 }
-.arrowDownGray{
+
+.arrowDownGray {
     margin-left: 3px;
     margin-top: 4px;
 }
-.webkit{
+
+.webkit {
     display: -webkit-box;
     float: right;
     margin-right: 62px;
 }
-.options .option:last-child{
+
+.options .option:last-child {
     margin-right: 0;
 }
-.messageIcon{
+
+.messageIcon {
     margin-right: 25px;
 }
-.trash{
+
+.trash {
     margin-top: -5px;
 }
-.p-0 .col-sm{
+
+.p-0 .col-sm {
     padding: 0;
+}
+
+.fixed {
+    position: fixed;
 }
