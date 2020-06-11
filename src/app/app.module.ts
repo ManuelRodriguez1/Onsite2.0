@@ -28,12 +28,12 @@ import { InboxComponent } from './components/pro/profile-pro/inbox/inbox.compone
 import { ExploreComponent } from './components/pro/profile-pro/explore/explore.component';
 import { ProjectsComponent } from './components/pro/profile-pro/projects/projects.component';
 import { Ng5SliderModule } from 'ng5-slider';
-import { MenuInboxComponent } from './components/hire/hire-principal/menu-inbox/menu-inbox.component';
+import { MenuInboxComponent } from './components/hire/hire-principal/menu-inbox---------/menu-inbox.component';
 import { ProfileHireComponent } from './components/hire/hire-principal/profile-hire/profile-hire.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { PlantillaComponent } from './components/plantilla/plantilla.component';
-import { ChangeEmailComponent } from './components/hire/hire-principal/change-email/change-email.component';
+import { ChangeEmailComponent } from './components/hire/hire-principal/change-email-------/change-email.component';
 import { LatestPipe } from './pipes/latest.pipe';
 import { ProService } from './services/pro.service';
 import { ProuserService } from './services/prouser.service';
@@ -74,7 +74,8 @@ import { SearchZipPipe } from './pipes/search-zip.pipe';
     OrderPipe,
     AzPipe,
     AzStatusPipe,
-    SearchZipPipe
+    SearchZipPipe,
+  
   ],
   imports: [
     BrowserModule,

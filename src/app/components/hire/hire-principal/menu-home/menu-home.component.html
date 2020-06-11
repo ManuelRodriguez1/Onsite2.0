@@ -74,11 +74,13 @@
           <div class="row">
             <div class="col-sm-6 input-group">
               <input required type="text" class="form-control" placeholder="e.g. Excavation at 280 S."
-                [class.errorInput]="projectname.value == '' ||  alerta "    [class.correctInput]="projectname.value != '' && projectname.value != undefined "  name="projectname" id="projectname" #projectname="ngModel"
-                [(ngModel)]="viewP.projectname" />
+                [class.errorInput]="projectname.value == '' ||  alerta "
+                [class.correctInput]="projectname.value != '' && projectname.value != undefined " name="projectname"
+                id="projectname" #projectname="ngModel" [(ngModel)]="viewP.projectname" />
 
 
-              <span *ngIf="projectname.value =='' || projectname.value ==undefined &&   alerta " class="textError">Project name is required characters.</span>
+              <span *ngIf="projectname.value =='' || projectname.value ==undefined &&   alerta "
+                class="textError">Project name is required characters.</span>
 
             </div>
           </div>
@@ -96,14 +98,17 @@
           <div class="row fields">
             <div class="col-sm input-group">
               <textarea class="form-control" id="description" rows="4" name="description" id="description"
-                (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000" #description="ngModel"
-                [class.errorInput]="description.value == '' ||  alerta || description.value > 4000 "    [class.correctInput]="description.value != '' && description.value != undefined "
+                (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000"
+                #description="ngModel"
+                [class.errorInput]="description.value == '' ||  alerta || description.value > 4000 "
+                [class.correctInput]="description.value != '' && description.value != undefined "
                 [(ngModel)]="viewP.description" required></textarea>
-           
+
 
             </div>
-            <div class="errordescriptexarea"> 
-              <span *ngIf="description.value =='' || description.value == undefined &&   alerta " class="textError" >Description of the projec is required</span>
+            <div class="errordescriptexarea">
+              <span *ngIf="description.value =='' || description.value == undefined &&   alerta "
+                class="textError">Description of the projec is required</span>
             </div>
           </div>
           <div class="row text-right">
@@ -128,7 +133,7 @@
                 <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile"
                   id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="material" #material="ngModel" ngModel
                   (change)="uploadDoc($event)">
-                  
+
                 <label for="customFileCert{{i}}" class="custom-file-label">
                   <div class="afterFile">{{f.name}}</div>
                 </label>
@@ -149,8 +154,8 @@
           <div class="row">
             <div class="container skill m-0 pb-3 pl-0">
               <div class="col-sm input-group">
-                <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"  [class.errorInput]="selectskills.value == '' "
-                  style="cursor: default;">
+                <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
+                  [class.errorInput]="selectskills.value == '' " style="cursor: default;">
 
                 <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
 
@@ -166,8 +171,8 @@
                   <div class="close" (click)='close(s)'></div>
                 </div>
               </div>
-            </div> 
-            <span *ngIf="selectskills.length == 0 &&   alerta " class="textError">  Skills is required.</span>
+            </div>
+            <span *ngIf="selectskills.length == 0 &&   alerta " class="textError"> Skills is required.</span>
 
           </div>
           <div class="row py-3" *ngIf="visiblePeople">
@@ -178,9 +183,11 @@
           <div class="row">
             <div class="col-sm-6 form-group" *ngFor="let p of peoples">
               <p class="description-form pb-2">{{p.skill}}</p>
-              <input required type="Number" class="form-control addPeople" placeholder="" value="{{p.quantity}}"  name="people" id="{{p.skill}}"
-                 [class.errorInput]= "people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta "    [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined " />
-                 <span  class="textError a{{p.skill}}" ></span>
+              <input required type="Number" class="form-control addPeople" placeholder="" value="{{p.quantity}}"
+                name="people" id="{{p.skill}}"
+                [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta "
+                [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined " />
+              <span class="textError a{{p.skill}}"></span>
 
 
             </div>
@@ -193,11 +200,14 @@
           <div class="row">
             <div class="col-sm-6 input-group">
               <input required type="text" class="form-control" placeholder="Street name, City, State ZIP"
-                name="location" id="location"   #location="ngModel"  [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "    [class.correctInput]="location.value != '' && location.value != undefined " 
+                name="location" id="location" #location="ngModel"
+                [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "
+                [class.correctInput]="location.value != '' && location.value != undefined "
                 [(ngModel)]="viewP.location" />
-            
-                <span  *ngIf="location.value == '' || location.value == undefined &&   alerta "  class="textError" >Please enter a location.</span>
-           
+
+              <span *ngIf="location.value == '' || location.value == undefined &&   alerta " class="textError">Please
+                enter a location.</span>
+
             </div>
           </div>
           <div class="row">
@@ -208,11 +218,14 @@
           <div class="row">
             <div class="col-sm-6 input-group">
               <input required type="text" class="form-control" placeholder="$10,000 - $20,000" name="estimated"
-                id="estimated"  #estimated="ngModel"  [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta"    [class.correctInput]="estimated.value != '' && estimated.value != undefined " 
+                id="estimated" #estimated="ngModel"
+                [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta"
+                [class.correctInput]="estimated.value != '' && estimated.value != undefined "
                 [(ngModel)]="viewP.estimated" />
-                <span   *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta " class="textError" >Estimated is required.</span>
-             
-     
+              <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta "
+                class="textError">Estimated is required.</span>
+
+
             </div>
           </div>
           <div class="row pt-5">
@@ -223,53 +236,62 @@
           <div class="row">
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">Start date</p>
-              <input type="date" name="startdate" max="3000-12-31"
-                 [(ngModel)]="viewP.startdate"  [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta"    [class.correctInput]="startdate.value != '' && startdate.value != undefined " 
-                min="1000-01-01" class="form-control"  #startdate="ngModel" >
-                <span   *ngIf="startdate.value == undefined &&   alerta " class="textError" >Start date is required</span>
+              <input type="date" name="startdate" max="3000-12-31" [(ngModel)]="viewP.startdate"
+                [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta"
+                [class.correctInput]="startdate.value != '' && startdate.value != undefined " min="1000-01-01"
+                class="form-control" #startdate="ngModel">
+              <span *ngIf="startdate.value == undefined &&   alerta " class="textError">Start date is required</span>
 
-        
+
             </div>
             <div class="col-sm-6 form-group">
               <p class="description-form py-3">End date</p>
               <input type="date" name="enddate" max="3000-12-31" min="1000-01-01" class="form-control"
-              [(ngModel)]="viewP.enddate"   #enddate="ngModel" [class.errorInput]=" enddate.value == undefined &&   alerta"    [class.correctInput]="enddate.value != '' && enddate.value != undefined " 
+                [(ngModel)]="viewP.enddate" #enddate="ngModel"
+                [class.errorInput]=" enddate.value == undefined &&   alerta"
+                [class.correctInput]="enddate.value != '' && enddate.value != undefined "
                 [class.errorInput]="startdate.value > enddate.value">
               <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
-              <span   *ngIf="  enddate.value == undefined &&   alerta " class="textError" >End date is required</span>
+              <span *ngIf="  enddate.value == undefined &&   alerta " class="textError">End date is required</span>
 
-             
-       
+
+
             </div>
           </div>
           <div class="row">
             <div class="form-check checkbox form-group m-2">
               <input class="form-check-input input-assumpte" type="checkbox" id="taketest" name="taketest"
-                [(ngModel)]="viewP.taketest"  #taketest="ngModel" [class.errorInput]="taketest.value != true  &&  alerta "    [class.correctInput]="taketest.value == true" />
+                [(ngModel)]="viewP.taketest" #taketest="ngModel"
+                [class.errorInput]="taketest.value != true  &&  alerta "
+                [class.correctInput]="taketest.value == true" />
               <label class="form-check-label" for="taketest">
                 <span class="check-text">All workers must take a background test.</span>
               </label>
               <div>
-                <span   *ngIf="taketest.value != true &&   alerta " class="textError" >All workers must take a background test</span>
+                <span *ngIf="taketest.value != true &&   alerta " class="textError">All workers must take a background
+                  test</span>
 
               </div>
             </div>
           </div>
           <div class="row">
             <div class="form-check checkbox form-group m-2">
-              <input type="checkbox" class="form-check-input input-assumpte" id="passtest" name="passtest" 
-                #passtest="ngModel" [(ngModel)]="viewP.passtest" [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "    [class.correctInput]="location.value != '' && location.value != undefined " />
+              <input type="checkbox" class="form-check-input input-assumpte" id="passtest" name="passtest"
+                #passtest="ngModel" [(ngModel)]="viewP.passtest"
+                [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "
+                [class.correctInput]="location.value != '' && location.value != undefined " />
               <label class="form-check-label" for="passtest">
                 <span class="check-text">All workers must pass a background test.</span>
               </label>
               <div>
-                <span   *ngIf="passtest.value != true &&   alerta " class="textError" >All workers must pass a background test</span>
+                <span *ngIf="passtest.value != true &&   alerta " class="textError">All workers must pass a background
+                  test</span>
 
               </div>
             </div>
           </div>
 
-            <button class="blueBtn small my-5 float-right"  type="submit">Post</button>
+          <button class="blueBtn small my-5 float-right" type="submit">Post</button>
         </div>
       </div>
     </div>
@@ -360,18 +382,18 @@
               </div>
             </div>
             <div class="col-sm mx-4 pt-3">
-              <span class="vprofile" (click)="goToProfile(da.id)">View profile</span>
+              <span class="vprofile" (click)="goToProfile(da)">View profile</span>
             </div>
           </div>
           <hr class="hr m-0" />
         </div>
       </div>
     </div>
-    <div class="overall mt-4 overflow-auto" *ngFor="let so of viewP.skills">
+    <div class="overall mt-4 overflow-auto" *ngFor="let so of teamSkills">
       <div class="row mt-51 ml-48">
         <div class="col-sm mx-4 mt-4">
           <div class="title3">
-            <p>{{so}} team</p>
+            <p>{{so.team}} team</p>
           </div>
         </div>
       </div>
@@ -380,15 +402,15 @@
         <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
         <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
       </div>
-      <div class="" *ngFor="let da of dataApply">
-        <div class="row mt-51 ml-48 py-2" *ngIf="da.skills == so">
+      
+        <div class="row mt-51 ml-48 py-2" >
           <div class="col-sm-3 ml-4 mt-2">
-            {{ da.name}}
+            {{ so.dataApply.name}}
           </div>
           <div class="col-sm-6">
             <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
-              <div class="skillsel onlySkill" *ngFor="let so of da.skills">
-                <p>{{so}}</p>
+              <div class="skillsel onlySkill" *ngFor="let da of  so.dataApply.skills">
+                <p>{{da}}</p>
               </div>
             </div>
           </div>
@@ -399,7 +421,7 @@
           <hr class="hr my-1" />
         </div>
         <hr class="hr my-1" />
-      </div>
+   
     </div>
   </div>
 </div>
@@ -451,16 +473,20 @@
               <p>Rating</p>
             </div>
             <div class="stars mt-23">
-              <div class="rating">
-                <p>n/a</p>
+              <div class="rating" [class.ratingO]="profileP.reviews">
+                  <p *ngIf="!profileP.reviews">n/a</p>
+                  <p *ngIf="profileP.reviews">{{rate}}.0</p>
               </div>
-              <div class="starG"></div>
-              <div class="starG"></div>
-              <div class="starG"></div>
-              <div class="starG"></div>
-              <div class="starG mr-13"></div>
-              <p class="smallText">(no reviews)</p>
-            </div>
+              <div class="starG" [class.starO]="rate >= 1"></div>
+              <div class="starG" [class.starO]="rate >= 2"></div>
+              <div class="starG" [class.starO]="rate >= 3"></div>
+              <div class="starG" [class.starO]="rate >= 4"></div>
+              <div class="starG mr-13" [class.starO]="rate == 5"></div>
+              <p class="smallText">(<span *ngIf="!profileP.reviews">no</span><span
+                      *ngIf="profileP.reviews">{{profileP.reviews.length}}</span>
+                  reviews)
+              </p>
+          </div>
           </div>
           <div class="col-sm">
             <div class="title3 my-2">
@@ -470,7 +496,7 @@
           </div>
         </div>
         <div class="row mt-4">
-          <div class="col-sm" *ngFor="let ce of profileP.certificate">
+          <div class="col-sm">
             <div class="title3">
               <p>Certificates</p>
             </div>
@@ -483,8 +509,7 @@
             <div class="title3">
               <p>Profile description</p>
             </div>
-            <p class="mt-2"><span *ngIf="profileP.description == null">Profile
-                Description...</span>{{ profileP.description }}</p>
+            <p class="mt-2">{{ profileP.description }}</p>
           </div>
         </div>
         <hr class="hr">
@@ -494,12 +519,16 @@
               <p>CV</p>
             </div>
             <div *ngFor="let cv of profileP.cvUrl" class="mr-30">
-              <div *ngIf="profileP.cvUrl.name != 'Add a file' && profileP.cvUrl.name != null">
+              <div *ngIf="cv.name != 'Add a file' && cv.name != null">
+               <a target="_blank" href="{{cv.url}}">
                 <div class="fileIcon"></div>
                 <p>{{cv.name}}</p>
+               </a>
+             
+              
               </div>
               <div
-                *ngIf="profileP.cvUrl.name == 'Add a file' || profileP.cvUrl.name == null || profileP.cvUrl.length == null || cv.length == null">
+                *ngIf="cv.name == 'Add a file' || cv.name == null ">
                 <p>No files have been uploaded.</p>
               </div>
             </div>
@@ -530,8 +559,10 @@
                   <ng-container
                     *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
                     <!-- <div *ngFor="let co of profile.certificate" class="mr-30"> -->
-                    <div class="fileIcon certIcon"></div>
-                    <p class="ellipsis pt-2">{{ce.name}}</p>
+                    <a target="_blank" href="{{ce.url}}">
+                      <div class="fileIcon certIcon"></div>
+                      <p class="ellipsis pt-2">{{ce.name}}</p>
+                    </a>
                     <!-- </div> -->
                   </ng-container>
                   <div
@@ -544,42 +575,36 @@
           </div>
         </div>
         <hr class="hr">
-        <div class="row">
+        <div class="row" *ngIf="profileP.reviews">
           <div class="col-sm">
             <div class="title3 mb-4">
               <p>Reviews</p>
             </div>
-            <div class="row mb-4">
+        
+            <div *ngFor="let reviews of usuariosReviwsTodos" class="row mb-4">
               <div class="col-sm">
                 <div class="media">
-                  <div class="profile-mini"></div>
+                  <div class="profile-mini" [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
                   <div class="media-body">
                     <div class="title3 mt-3 pl-2">
-                      <p>Gordon Freeman</p>
+                      <p>{{reviews.name}}</p>
                       <div class="stars mt-23">
-                        <div class="rating">
-                          <p>n/a</p>
-                        </div>
-                        <div class="starG"></div>
-                        <div class="starG"></div>
-                        <div class="starG"></div>
-                        <div class="starG"></div>
-                        <div class="starG mr-13"></div>
+                        
+                        <div class="starG" [class.starO]="reviews.rating >= 1"></div>
+                        <div class="starG" [class.starO]="reviews.rating >= 2"></div>
+                        <div class="starG" [class.starO]="reviews.rating >= 3"></div>
+                        <div class="starG" [class.starO]="reviews.rating >= 4"></div>
+                        <div class="starG mr-13" [class.starO]="reviews.rating == 5"></div>
+                      
+                    </div>
+                      <div>
+                        <p class="mt-21 smallText">{{reviews.descripcion}} </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-sm">
-                <div class="media">
-                  <div class="profile-mini"></div>
-                  <div class="media-body">
-                    <div class="title3 mt-3 pl-2">
-                      <p>John Doe</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          
             </div>
           </div>
         </div>
@@ -593,24 +618,24 @@
         <div *ngIf="LeaveForm == 1">
           <div class="row mt-4 pl-3">
             <div class="title3 mb-2">
-              <p>Rating</p>
+              <p>Rating   {{profileP.reviews.descripcion}}  {{profileP.reviews.rating}}</p>
             </div>
           </div>
           <div class="row mt-1 pl-3">
             <div class="form-group">
-              <ngb-rating [formControl]="ctrl" [(rate)]="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
+              <ngb-rating [(rate)]="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
             </div>
           </div>
           <div class="row pl-3">
             <div class="col-sm input-group">
               <textarea class="form-control" id="reviewR" rows="4" name="reviewR"
-                placeholder="Leave your review here. (400 characters left)" [(ngModel)]="reviewR"></textarea>
+                placeholder="Leave your review here. (400 characters left)" ngModel #reviewR="ngModel" ></textarea>
               <!-- <span class="textError" [hidden]="description.value != ''">* this field is required</span> -->
             </div>
           </div>
           <div class="row mt-3 float-right">
             <button class="blueBtn small w360 mr-3 cancelRate"
-              (click)="ctrl.setValue(null);cancelRate()">Cancel</button>
+              (click)="cancelRate()">Cancel</button>
             <button class="blueBtn small w360 mr-3" (click)="postReview(currentRate, reviewR)">Post</button>
           </div>
         </div>

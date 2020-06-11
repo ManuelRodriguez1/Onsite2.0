@@ -17,17 +17,14 @@ export class ProjectService {
     private db: AngularFirestore,
     private afs: AngularFireStorage) {
   }
-
+//Crear nuevo proyecto o modificar nuevo proyecto
   newProject(f: NgForm, file: any[], briefMaterial: any[], selectskills: any[], peoples: any[]) {
-    alert("pro0");
     var idProject;
     if (f.value.id) {
       idProject = f.value.id;
     } else {
       idProject = this.db.createId()
     }
-
-    alert("pro1");
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProject).set({
       id: idProject,
       projectname: f.value.projectname,
@@ -45,7 +42,6 @@ export class ProjectService {
       statusname: 'Pending',
       briefmaterial: briefMaterial
     }, { merge: true }).then(() => {
-      alert("pro2");
       this.db.collection('users_hire').doc(this.user.uid).set({
         "project": true
       }, { merge: true })
@@ -56,8 +52,6 @@ export class ProjectService {
             .then((url) => {
               briefMaterial.push({ "name": file[i].name, "url": url })
               setTimeout(() => {
-                alert("entro");
-
                 this.db.collection('users_hire').doc(this.user.uid).collection('projects').doc(idProject).set({
                   'briefmaterial': briefMaterial
                 }, { merge: true })
@@ -67,10 +61,9 @@ export class ProjectService {
       }
     })
       .catch((error) => {
-        alert("pro1");
         alert(error.message)
       })
-    alert("pro4");
+
   }
   /*
     getInfoPro(idPro: string) {

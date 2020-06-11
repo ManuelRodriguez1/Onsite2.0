@@ -17,6 +17,8 @@ export class MenuHomeComponent implements OnInit {
   up = false;
   description;
   selectskills: any[] = [];
+  usuariosReviwsTodos:any[] = [];
+  teamSkills: any[] = [];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   private contador = 4000 //Agreg
   projectname;
@@ -24,36 +26,27 @@ export class MenuHomeComponent implements OnInit {
   people = 0;
   alerta = false;
   howmany = "Select";
-
   page = 1;
+  contadorreviw=0;
   select = 0;
   HomeFormularioNw = 0;
-
   files = [{ 'name': 'Add material file', 'url': '' }];
   file: any[] = [];
   countC: number = 0
-
   skills2Howmany: any[] = [];
   cust = 0;
   router: any;
-
   projects: any[] = []
-
   projectsHire: any[] = [];
   projectsHireDeleted: any[] = [];
-
   section: number = 1;
   text: any[] = ["Project", "Projects", "New Project"];
   righttv = 'text-dashboard';
-
   user = firebase.auth().currentUser
   user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
   option = 5;
-
   customers2: any[] = [];
-
   viewP: any = ''
-
   profile: any = ''
   profileP: any = ''
   modal: number = 0
@@ -62,63 +55,48 @@ export class MenuHomeComponent implements OnInit {
   error = 0
   apply: any[] = [];
   dataApply: any[] = [];
-
-  LeaveForm = 0
-
+  LeaveForm =1
   sProject: string = ''
-
   visiblePeople = false
-
-  //formProject: FormGroup;
   submitted = false;
   pattern: ""
-
+  rate: number = 0
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
     private afs: AngularFireStorage) {
 
   }
-
+  //mostra lista de skill
   list(e) {
     if (e == 1) {
       this.up = !this.up;
     }
   }
-
+  //Agregar Skill
   selectskill(e) {
-
     var i = this.selectskills.indexOf(e)
-
     if (i === -1) {
       this.selectskills.push(e);
       this.peoples.push({ "skill": e, "quantity": "" });
       console.log(this.peoples);
     }
-
-
     this.visiblePeople = true
   }
-
+  //Eliminar Skill
   close(e) {
     var i = this.selectskills.indexOf(e)
-
-
     if (i !== -1) {
       this.selectskills.splice(i, 1)
       this.peoples.splice(i, 1)
-
       console.log(this.peoples);
     }
     this.visiblePeople = false
-
   }
 
 
   ngOnInit() {
-
-
-
+    //Consulta todos los proyecto apenas detecta un cambio 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
       .subscribe((d) => {
         d.forEach((d) => {
@@ -129,29 +107,20 @@ export class MenuHomeComponent implements OnInit {
 
 
 
-
   }
 
-  onKey2(event) {
-    console.log(event.target.value.length)
-  }
-
+  //Consulta descripciòn Hire 
   onKey(event) {
     this.contador = 4000 - event.target.value.length
   }
 
-  /* Status Project
-  1 = Pending, 2 = Active, 3 = Archived, 4 = Delete */
+  //Agregar Proyecto BD
   addProject(f: NgForm) {
-
-
-
-
     this.error = 2
     this.submitted = true
     var aux = []
 
-
+    //Campos dinamocos para agregar personas segun skill
     $(".addPeople").each(function (index) {
       var skill = $(this).attr("id");
       var quantity = $(this).val();
@@ -164,41 +133,30 @@ export class MenuHomeComponent implements OnInit {
         $("#" + skill).removeClass("errorInput");
         $("#" + skill).addClass("correctInput");
       }
-
       aux.push({ "skill": skill, "quantity": quantity })
     });
-
+    //Validacion campos 
     if (f.status == "INVALID" || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == []) {
-      alert("1111111");
-
       if (f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
         || f.value.location === undefined || f.value.location == "" || f.value.estimated === undefined || f.value.estimated == "" ||
         this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
         || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
-
         this.alerta = true;
       }
     } else if (f.value) {
 
-      alert("222222");
       var temp = false
 
-      //this.peoples=aux;
-      //console.log("holaaaa");
-      //console.log(this.peoples)
-
-
+      //Crear o editar funcion 
       this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
-
-      alert("33333");
       this.modal = 1
       this.section = 1
-
       this.projects = []
     }
 
   }
 
+  //Vista crear nuevo proyecto
 
   next() {
     this.error = 2
@@ -207,12 +165,12 @@ export class MenuHomeComponent implements OnInit {
     this.section = 2;
     this.righttv = 'text-new-project';
   }
-
+  //Add files material
   addfiles() {
     this.files.push({ 'name': 'Add material file', 'url': '' });
     this.cust = this.files.length - 1;
   }
-
+  //Modificar files material
   uploadDoc(e) {
     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
     fileDoc.then((url) => {
@@ -222,17 +180,15 @@ export class MenuHomeComponent implements OnInit {
         })
     })
   }
+  //opcion segun filtro vista 
   selectOption(e) {
     this.option = e
   }
-
-  showModal() {
-    this.modal = 1
-  }
   /*
-  showModalDelete(){
-    this.modal = 2
-  }*/
+    showModal() {
+      this.modal = 1
+    }
+  */
 
   hideModal() {
     this.select = 0
@@ -240,7 +196,7 @@ export class MenuHomeComponent implements OnInit {
     this.modal = 3
 
   }
-
+  //Eliminar material
   deleteBriefMaterial(e: any) {
     var i = this.files.indexOf(e);
     if (i !== -1) {
@@ -257,16 +213,12 @@ export class MenuHomeComponent implements OnInit {
       this.countC = 0
     }
   }
-
+  //Modificar estado del proyecto a eliminado 
   delete(idP) {
-
     this.modal = 2
     this.confirm2 = idP
-
     if (this.confirm == 1) {
       this.option = this.option + 5
-
-
       this.projects = []
       this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
         status: 4,
@@ -274,20 +226,15 @@ export class MenuHomeComponent implements OnInit {
       }).then((url) => {
         this.option = this.option - 5
       })
-
       this.modal = 3
       this.confirm = 0
     }
   }
+
+  //Modificar estado del proyecto a archivado 
   archivedStatus(idP) {
     this.option = this.option + 5
 
-
-    //this.option = e
-    /*
-        this.modal = 2
-        this.confirm2 = idP
-        if( this.confirm == 1){*/
     this.projects = []
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
       status: 3,
@@ -296,88 +243,166 @@ export class MenuHomeComponent implements OnInit {
       this.option = this.option - 5
     })
 
-    //this.confirm = 0
-    // }
-  }
 
+  }
+  //ventana emergente confirmar para cambiar estado del proyecto a eliminado 
   confirmDelete() {
     this.confirm = 1
     this.delete(this.confirm2)
     this.error = 1
   }
 
+  //Ver proyecto 
   viewProject(p) {
     this.selectskills = p.skills;
     this.peoples = p.people;
-
-    this.dataApply = [];
-
-
     this.files = p.briefmaterial;
     this.righttv = 'text-project'
     this.error = 2
     this.HomeFormularioNw = 2
     this.section = 0;
     this.viewP = p;
-
     this.apply = this.viewP.applyUsers;
     this.visiblePeople = true;
     if (this.apply) {
       for (var i = 0; i < this.apply.length; i++) {
-        this.db.collection("users_pro").doc(this.apply[i]).snapshotChanges()
+        this.db.collection("users_pro").doc(this.apply[i]).get()
           .subscribe((data) => {
-            var i = this.dataApply.push(data.payload.data());
+            this.dataApply.push(data.data());
+            console.log(this.dataApply);
+            data.data().skills.forEach(element => {
+              this.buscar_team_skill(element, data.data());
+            });
 
 
           })
       }
+
+
+    }
+
+ 
+  }
+
+  //Funcion para buscar team skill segun el proyecto 
+  buscar_team_skill(userProSkill, dataApply) {
+
+
+    if (this.viewP.skills) {
+      var i = this.viewP.skills.indexOf(userProSkill)
+
+      if (i === 0) {
+
+        this.teamSkills.push({ "team": userProSkill, "dataApply": dataApply })
+
+
+   console.log(this.teamSkills);
+      }
+   
+    }
+
+  }
+  //Ver el perfil del usuario pro 
+  goToProfile(profile) {
+    this.HomeFormularioNw = 3
+    this.section = 4
+    this.profileP = profile;
+  console.log(this.profileP.reviews);
+    if(this.profileP.reviews){
+      var temp: number = 0
+      this.profileP.reviews.forEach((r)=>{
+        temp += r.rating 
+
+        console.log(r.id);
+
+
+        this.db.collection("users_hire").doc(r.id).get()
+        .subscribe((data) => {
+          var repro: any = data.data()
+          console.log(repro);
+         // console.log(repro.name);
+
+
+          this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion,"name":data.data().name,"photoUrl":data.data().photoUrl });
+      
+
+        })
+
+
+      })
+      console.log(this.usuariosReviwsTodos);
+      this.rate = Math.round(temp / this.profileP.reviews.length)        
     }
 
 
+  
+    
 
-
-
+    console.log(this.profileP );
   }
 
-  goToProfile(id) {
-    this.HomeFormularioNw = 3
-    this.section = 4
-    this.db.collection("users_pro").doc(id).snapshotChanges().subscribe((d) => {
-      this.profileP = d.payload.data()
-      console.log(this.profileP)
-    })
-  }
 
+  //Ver el proyecto segun el id para editar 
   goToEditProject(idP) {
-
     this.HomeFormularioNw = 1;
     console.log("ok")
   }
-
+  //Mostrar los reviews
   leave() {
     this.LeaveForm = 1
   }
+  //Cerrar los reviews
   cancelRate() {
     this.LeaveForm = 0
   }
 
+
+
+  //Modificar Reviews
   postReview(currentRate, review) {
-    this.reviews.push({ "id": this.user.uid, "rating": currentRate, "descripcion": review })
-    console.log(this.reviews)
+    console.log(currentRate);
+    console.log(review.viewModel);
     this.LeaveForm = 0
+    var resulrreviw = this.buscar_item_por_id(this.user.uid);
+    console.log("111111");
+    console.log(resulrreviw);
+    this.reviews= this.profileP.reviews;
+    if (resulrreviw == 2 ) {
+alert("resulrreviw");
+   
+      this.reviews.push({ "id": this.user.uid, "rating": currentRate, "descripcion": review.viewModel })
+      console.log(this.reviews);
 
-
-    this.db.collection("users_pro").doc(this.profileP.id).update({
-      reviews: this.reviews,
-
-    }).then((res) => {
-      alert(res);
-
-    })
-      .catch((error) => {
+      this.db.collection("users_pro").doc(this.profileP.id).update({
+        reviews: this.reviews,
+      }).then((res) => {
+        alert(res);
+      }).catch((error) => {
         alert(error.message)
       })
 
+   
+    }
+  }
+
+  //Funcion para buscar si tiene id 
+  buscar_item_por_id(id) {
+    console.log(this.profileP.reviews);
+    if (this.profileP.reviews) {
+      this.profileP.reviews.find(function (item) {
+        if (item.id === id) {
+          alert("entro")
+          return 1;
+        } else {
+          alert("no entro")
+          return 2;
+        }
+      });
+    
+    } else {
+      alert("no review")
+      return 2;
+    }
   }
 
 }

@@ -7,7 +7,7 @@ import { HireComponent } from "../components/hire/hire.component";
 import { ProfileProComponent } from "../components/pro/profile-pro/profile-pro.component";
 import { ProfileHireComponent } from "../components/hire/hire-principal/profile-hire/profile-hire.component";
 import { EmailVerificationComponent } from "../components/email-verification/email-verification.component";
-import { ChangeEmailComponent } from "../components/hire/hire-principal/change-email/change-email.component";
+import { ChangeEmailComponent } from "../components/hire/hire-principal/change-email-------/change-email.component";
 import { HirePrincipalComponent } from "../components/hire/hire-principal/hire-principal.component";
 import { AuthGuard } from '../services/auth.service';
 import { PlantillaComponent } from '../components/plantilla/plantilla.component';
