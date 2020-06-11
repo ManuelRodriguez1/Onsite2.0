@@ -37,12 +37,15 @@ modal : NgbModalRef;
   }
 
   hire() {
+    this.poppad1();
     this.router.navigateByUrl("/Hire");
+    
     // location.href ="/Hire";
 
   }
 
   pro() {
+    this.poppad1();
     this.router.navigateByUrl("/Pro");
   }
   activarpro(){

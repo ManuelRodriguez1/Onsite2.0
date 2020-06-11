@@ -17,7 +17,6 @@ export class MenuHomeComponent implements OnInit {
   up = false;
   repro: any = ''
   description;
-  valStarts;
   selectskills: any[] = [];
   usuariosReviwsTodos: any[] = [];
   teamSkills: any[] = [];
@@ -64,8 +63,7 @@ export class MenuHomeComponent implements OnInit {
   pattern: ""
   reviewR;
   rate: number = 0
-  estrellitasreviws1 = 0;
-  reviewdescripcion = "";
+  estrellitasreviws1=0;
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
@@ -101,8 +99,6 @@ export class MenuHomeComponent implements OnInit {
 
 
   ngOnInit() {
-
-
     //Consulta todos los proyecto apenas detecta un cambio 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
       .subscribe((d) => {
@@ -111,85 +107,10 @@ export class MenuHomeComponent implements OnInit {
         })
         console.log(this.projects)
       })
-    //Funcion reviews
 
 
-
-
-    this.projectService.Buscador.subscribe((res) => {
-
-      console.log("de->" + this.reviewdescripcion);
-      console.log("est->" + this.estrellitasreviws1);
-
-      if (res) {
-
-        this.reviews = res
-        this.reviews.find((res1) => {
-          if (res1.id == this.user.uid) {
-
-            res1.descripcion = this.reviewdescripcion;
-            res1.rating = this.estrellitasreviws1;
-
-            console.log(this.reviews);
-
-            this.updateReviews();
-
-
-
-          } else {
-
-
-            var contador = 1;
-            this.reviews.find((res1) => {
-              console.log(this.reviews.length + "====" + contador);
-              if (res1.id != this.user.uid && contador == this.reviews.length) {
-
-                this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
-                console.log(this.reviews);
-                this.updateReviews();
-              }
-              contador++;
-
-            })
-
-
-
-
-
-
-          }
-
-
-        })
-
-        console.log(this.reviews);
-      }
-
-      console.log(res);
-      console.log("kate");
-
-
-
-    })
 
   }
-
-
-
-  //update this.reviews
-  updateReviews() {
-    console.log("manuel->" + this.profileP.id);
-    this.db.collection("users_pro").doc(this.profileP.id).update({
-      reviews: this.reviews,
-    }).then((res) => {
-      location.href = "/Hireprincipal";
-    }).catch((error) => {
-
-    })
-
-  }
-
-
 
   //Consulta descripciòn Hire 
   onKey(event) {
@@ -231,15 +152,12 @@ export class MenuHomeComponent implements OnInit {
 
       //Crear o editar funcion 
       this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
-
       this.modal = 1
       this.section = 1
       this.projects = []
     }
 
   }
-
-
 
   //Vista crear nuevo proyecto
 
@@ -382,7 +300,6 @@ export class MenuHomeComponent implements OnInit {
   //Numero de estrellas reviws
   estrellitasreviws(e) {
     this.estrellitasreviws1 = e;
-    this.valStarts = e;
   }
   //Ver el perfil del usuario pro 
   goToProfile(profile) {
@@ -395,17 +312,15 @@ export class MenuHomeComponent implements OnInit {
       this.profileP.reviews.forEach((r) => {
         temp += r.rating
         console.log(r.id);
-
         this.db.collection("users_hire").doc(r.id).snapshotChanges()
           .subscribe((data) => {
-
+           
             this.repro = data.payload.data()
             console.log(this.repro);
-            this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
+            this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro .photoUrl });
 
             if (r.id == this.user.uid) {
               this.reviewR = r.descripcion;
-              this.valStarts = r.rating
               this.estrellitasreviws1 = r.rating
             }
           })
@@ -445,10 +360,9 @@ export class MenuHomeComponent implements OnInit {
   //Modificar Reviews
   postReview() {
     var review = $("#reviewR");
-    var valStarts = $("#valStarts");
 
-
-    if (valStarts.val() === 0 || valStarts.val() === undefined || valStarts.val() == "") {
+    console.log(this.estrellitasreviws1);
+    if (this.estrellitasreviws1 === 0 || this.estrellitasreviws1 === undefined) {
       $("#currentRaterror").html("You must rate to post your review.");
     } else if (review.val() == "" || review.val() === undefined) {
       review.removeClass("correctInput");
@@ -460,24 +374,47 @@ export class MenuHomeComponent implements OnInit {
       $("#reviewRerror").html("");
       $("#currentRaterror").html("");
       // this.LeaveForm = 0
-
-
-      this.reviewdescripcion = review.val()
-      this.estrellitasreviws1 = valStarts.val()
-      console.log(this.profileP);
-
-      if (this.profileP.reviews) {
-        this.projectService.Buscador.emit(this.profileP.reviews)
+      var resulrreviw = this.buscar_item_por_id(this.user.uid);
+      console.log("111111");
+      console.log(review.val());
+      this.reviews = this.profileP.reviews;
+      if (resulrreviw == 2) {
+        alert("resulrreviw");
+        this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": review.val() })
+        console.log(this.reviews);
+        this.db.collection("users_pro").doc(this.profileP.id).update({
+          reviews: this.reviews,
+        }).then((res) => {
+          alert(res);
+        }).catch((error) => {
+          alert(error.message)
+        })
       } else {
-        this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
-        this.updateReviews()
+        alert("else");
+        //  $("#reviewR").va;
+        //var currentRate = $("#currentRate").attr('aria-valuenow',this.reviews.rating)
       }
-
-
-
-
-
-
     }
   }
+
+  //Funcion para buscar si tiene id 
+  buscar_item_por_id(id) {
+    console.log(this.profileP.reviews);
+    if (this.profileP.reviews) {
+      this.profileP.reviews.find(function (item) {
+        if (item.id === id) {
+          alert("entro")
+          return 1;
+        } else {
+          alert("no entro")
+          return 2;
+        }
+      });
+
+    } else {
+      alert("no review")
+      return 2;
+    }
+  }
+
 }

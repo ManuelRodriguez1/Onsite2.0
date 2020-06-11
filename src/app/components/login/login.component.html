@@ -125,11 +125,11 @@
                             <div class="botonesOnsite margint30">
 
                            
-                                    <button (click)="activarpro()" class="blueBtn small btnup">As a pro</button>
+                                    <button (click)="activarpro()" [class.activarbtn]="activar == true"   class="blueBtn small btnup">As a pro</button>
                            
 
                            
-                                    <button (click)="activarhire()" class="blueBtn small btnup">As a hirer</button>
+                                    <button (click)="activarhire()" [class.activarbtn]="activar1 == true" class="blueBtn small btnup">As a hirer</button>
                            
 
                             </div>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm input-group">
-                                <button (click)="pro()" class="botonNaranja margint30">
+                                <button (click)="pro()"  class="botonNaranja margint30">
                                             Continue
                                         </button>
                             </div>
@@ -152,12 +152,12 @@
                     <div *ngIf="activar1==true">
                         <div class="row">
                             <div class="col-sm input-group textNormal textNormalmsm  margint30 colorGris">
-                                Join as a hire if you’re willing to find a project to work in.
+                                Join as a hirer if you are looking for a Pro to help you in your project. 
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm input-group">
-                                <button (click)="hire()" class="botonNaranja margint30" (click)="activarhire()">
+                                <button (click)="hire()"  class="botonNaranja margint30" >
                                             Continue
                                         </button>
                             </div>
