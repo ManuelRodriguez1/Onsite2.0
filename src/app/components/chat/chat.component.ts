@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProuserService } from 'src/app/services/prouser.service';
 import { Subscription } from 'rxjs';
+import * as firebase from 'firebase';
 declare var $: any
 
 @Component({
@@ -11,8 +12,9 @@ declare var $: any
 export class ChatComponent implements OnInit, OnDestroy {
 
   //Info para Hire
-  usersPro: any[] = []
+  users: any[] = []
   cont: number = 0
+
   //Chat
   chat: boolean = false
   name: string = ''
@@ -21,12 +23,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   idPro: string = ''
   messages: any = []
   myId: string = ''
+  mesg: string = ''
   //Suscripciones
   sub1: Subscription
   sub2: Subscription
   sub3: Subscription
 
-  constructor(private info: ProuserService) { }
+  constructor(private info: ProuserService) { firebase.firestore().enablePersistence() }
 
 
   ngOnInit() {
@@ -45,41 +48,93 @@ export class ChatComponent implements OnInit, OnDestroy {
 
       this.sub2 = this.info.usersChat.subscribe((res) => {
         var temp: any = ''
-        this.usersPro.push({ 'projectname': res.projectname })
+        this.users.push({ 'projectname': res.projectname })
         res.applyUsers.forEach(e => {
           this.info.getInfoPro().doc(e).snapshotChanges().subscribe((inf) => {
             temp = inf.payload.data()
-            this.usersPro[this.cont].name = temp.name + ' ' + temp.lastname
-            this.usersPro[this.cont].photo = temp.photoUrl
-            this.usersPro[this.cont].idOther = e
+            this.users[this.cont].name = temp.name + ' ' + temp.lastname
+            this.users[this.cont].photo = temp.photoUrl
+            this.users[this.cont].idOther = e
             this.cont++
           })
         });
       })
-
+    }
+    if (this.info.user.displayName == 'pro') {
+      this.info.getChatExist().get().subscribe((c) => {
+        c.forEach((c) => {
+          if (c.id.includes(this.info.user.uid)) {
+            var temp: any[] = c.id.split('|')
+            this.info.getInfoHire().doc(temp[0]).snapshotChanges()
+              .subscribe((user) => {
+                var temp: any = user.payload.data()
+                this.users.push({
+                  'name': temp.name + ' ' + temp.lastname,
+                  'photo': temp.photoUrl,
+                  'idOther': user.payload.id
+                })
+                user.payload.ref.collection('projects')
+                  .onSnapshot((h) => {
+                    h.forEach((h) => {
+                      var temp: string = h.data().applyUsers
+                      if (temp.includes(this.info.user.uid)) {
+                        this.users[this.cont].projectname = h.data().projectname
+                        this.cont++
+                      }
+                    })
+                  })
+              })
+          }
+        })
+      })
     }
   }
 
   initChat(e: any) {
+    var hire: string = ''
+    var pro: string = ''
     this.name = e.name
     this.projectName = e.projectname
     this.photo = e.photo
     this.idPro = e.idOther
     this.chat = true
 
-    this.info.getChat(this.info.user.uid, this.idPro).snapshotChanges()
+    if (this.info.user.displayName == 'hire') {
+      hire = this.info.user.uid
+      pro = e.idOther
+    } else {
+      hire = e.idOther
+      pro = this.info.user.uid
+    }
+
+    this.info.getChat(hire, pro).snapshotChanges()
       .subscribe((res) => {
         if (res.payload.data()) {
           var i: any = res.payload.data()
           this.messages = i.chat
+          setTimeout(() => {
+            $('.chatContainerHeight').scrollTop($('.chatContainerHeight').prop('scrollHeight'));
+          }, 300);
         }
       })
   }
 
   chatMessage(e: string, msg: string) {
+    var hire: string = ''
+    var pro: string = ''
+
     if (msg != '') {
-      this.info.chatMsg(this.info.user.uid, e, msg)
-      $("#msgChat").val('')
+      if (this.info.user.displayName == 'hire') {
+        hire = this.info.user.uid
+        pro = e
+      } else {
+        hire = e
+        pro = this.info.user.uid
+      }
+
+      this.info.chatMsg(hire, pro, msg)
+      this.mesg = ''
+      $(".chatContainerHeight").animate({ scrollTop: $('.chatContainerHeight').prop("scrollHeight") }, 1000);
     }
   }
 
