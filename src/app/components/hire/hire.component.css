@@ -22,3 +22,6 @@
 .is-invalid{
   color: aqua;
 }
+.list-group{
+  width: 100%;
+}

@@ -58,11 +58,14 @@ export class ProfileHireComponent implements OnInit {
       })
     this.hireuser.getInfoUser().snapshotChanges().subscribe((d) => {
       this.profile = d.payload.data()
-      this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
-      setTimeout(() => {
-        this.credential = this.hireuser.getCredential(this.profile.email, this.password)
-      }, 800);
+    
+    
       if (this.profile) {
+        this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
+        setTimeout(() => {
+          this.credential = this.hireuser.getCredential(this.profile.email, this.password)
+        }, 800);
+
         if (this.profile.photoUrl != null) {
           this.imageP = this.profile.photoUrl
         }

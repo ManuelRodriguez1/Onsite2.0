@@ -287,9 +287,3 @@ iframe{
 .orange{
     color: #FF8600;
 }
-.ellipsis{
-    width: 81px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}

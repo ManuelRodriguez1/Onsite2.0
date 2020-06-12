@@ -7,15 +7,15 @@
 .list-project{
  /* margin: 7%;*/
  min-height: 600px;
- margin-top: 40px;
+ margin-top: 140px;
  margin-bottom: 74px;
 }
 .containerMarginhr{
-  margin-top: 35px !important;
+  margin-top: 135px !important;
   margin-bottom: 74px !important;;
 }
 .containerMarginhrproperfil{
-  margin-top: 90px !important;
+  margin-top: 200px !important;
   margin-bottom: 175px !important;
 }
 .webkit {
@@ -39,6 +39,7 @@
   right: -190px !important;
   top: 60% !important;
 }
+/*
 .description-form{
   font-family: Open Sans;
   font-style: normal;
@@ -46,12 +47,12 @@
   font-size: 16px;
   line-height: 160%;
   color: #000000;
-}
+}*/
 .btn-addfile{
   background-color: #C4C4C4;
   color: #000000;
   width: 120px;
-  font-family: Open Sans;
+
   font-style: normal;
   font-weight: 600;
   font-size: 10px;
@@ -98,7 +99,7 @@
   height: 47px;
   background-color: #010973;
   color: #FFFFFF;
-  font-family: Open Sans;
+
   font-style: normal;
   font-weight: 800;
   font-size: 18px;
@@ -111,7 +112,7 @@
   color: #010973;
 }
 .title-list{
-  font-family: Open Sans;
+
   font-style: normal;
   font-weight: bold;
   font-size: 30px;
@@ -123,7 +124,7 @@
   padding: 2%;
 }
 .list-options span{
-  font-family: Open Sans;
+
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -136,11 +137,12 @@
   color: #000000 !important;
   cursor: pointer !important;
 }
+/*
 span:hover{
   color: #FF8600 !important;
   text-decoration: underline;
   cursor: pointer;
-}
+}*/
 .check-text:hover{
   text-decoration: none !important;
   color: #5B5B5B !important;
@@ -157,7 +159,7 @@ span:hover{
   cursor: pointer;
 }
 .title-table{
-  font-family: Open Sans;
+
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -165,22 +167,19 @@ span:hover{
   color: #9D9D9D;
 }
 .project-name{
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 100%;
+  font-weight: normal  !important;
+  font-size: 18px ;
+  font-weight: 600;
+  line-height: 22px;
   color: #000000;
 }
 .project-name:hover{
   cursor: pointer;
 }
 .new-project{
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 150%;
+ 
   color: #010973;
 }
 .new-project:hover{
@@ -781,7 +780,7 @@ width: 100%;
   color: #5B5B5B;
 }
 .selected-skill{
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -827,15 +826,16 @@ width: 100%;
 .cDefault{
   cursor: default;
 }
+/*
 .viewproject{
   color: #000000;
   font-size: 15px;
   font-weight: normal;
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 200%;
-}
+}*/
 .viewproject:hover{
   color: #000000 !important;
   text-decoration: none !important;
@@ -847,6 +847,23 @@ width: 100%;
 .vprofile{
   color: #E76800;
 }
+.mrboton{
+  margin-bottom: 75px;
+
+}
+a{
+  color: #000000;
+  cursor: pointer !important;
+}
+.containerMarginhrproperfil .ml-48 {
+  margin-left: 48px;
+  }
+  .containerMarginhrproperfil .mr-48 {
+    margin-right: 48px;
+    }
+  .containerMarginhrproperfil .mt-51 {
+  margin-top: 51px;
+  }
 .vprofile:hover{
   text-decoration: underline;
 }
@@ -910,7 +927,7 @@ width: 100%;
 .cancelRate{
   background-color: #ffffff;
   color: #010973;
-  font-family: Open Sans;
+
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
