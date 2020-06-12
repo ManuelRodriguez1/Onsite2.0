@@ -27,6 +27,7 @@ export class MenuHomeComponent implements OnInit {
   peoples: any[] = [];
   people = 0;
   alerta = false;
+  aleratEliminar=0;
   howmany = "Select";
   page = 1;
   contadorreviw = 0;
@@ -310,10 +311,17 @@ export class MenuHomeComponent implements OnInit {
         statusname: 'Deleted',
       }).then((url) => {
         this.option = this.option - 5
+        this.error = 0
+        this.aleratEliminar = 1
+        setTimeout(() => {
+          this.aleratEliminar = 0
+        }, 3000);
+    
       })
       this.modal = 3
       this.confirm = 0
     }
+    this.aleratEliminar = 0
   }
 
   //Modificar estado del proyecto a archivado 
@@ -334,7 +342,11 @@ export class MenuHomeComponent implements OnInit {
   confirmDelete() {
     this.confirm = 1
     this.delete(this.confirm2)
-    this.error = 1
+    
+
+
+
+ 
   }
 
   //Ver proyecto 

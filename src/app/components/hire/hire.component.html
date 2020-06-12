@@ -65,7 +65,7 @@
           <input type="password" class="form-control"
             [class.errorInput]="password.value?.length < 6 && user.value != password.value && password.value != ''"
             [class.correctInput]="user.value == password.value && password.value != '' && password.value?.length > 5"
-            placeholder="Password confirmation" name="Password" #password="ngModel" ngModel>
+            placeholder="Password confirmation" name="Password" #password="ngModel" id="Password" ngModel [class.errorInput]="password.value == '' &&  alerta ">
           <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password doesn’t
             match.</span>
           <span [hidden]="password.value?.length > 5 || password.value == ''" class="textError">Password must be at leat
@@ -77,21 +77,30 @@
     <div class="title2 container">
       <p>Where are you located?</p>
     </div>
+
+
     <div class="field3 container">
       <div class="row">
-        <div class="col-sm input-group" [formGroup]="formData">
-          <input required type="number" class="validate form-control" placeholder="Enter city or zipcode."
-            name="Entercityorzipcode" (ngModel)="Zipcode" id="Zipcode" #Zipcode formControlName="Zipcode"
-            [ngClass]="{ 'is-invalid': submitted && f.Zipcode.errors }">
-          <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
-            <div *ngIf="f.Zipcode.errors.required" class="textError">Please enter a Zipcode.</div>
-          </div>
+        <div class="col-sm input-group">
+          <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel"
+            ngModel [(ngModel)]="zipcodeSelect" id="zipcode"     [class.errorInput]="zipcode.value == '' &&  alerta " >
+          <ul class="list-group" *ngIf="!zipcodeSelectActive">
+            <ng-container *ngFor="let z of zipCodeCity | searchZip: zipcode.value">
+              <li class="list-group-item d-flex justify-content-between align-items-center" (click)="selecZip(z.city)">
+                {{z.city}}
+                <span class="badge badge-primary">{{z.zip}}</span>
+              </li>
+            </ng-container>
+          </ul>
         </div>
         <div class="col-sm input-group" style="visibility: hidden;">
           <input type="text" class="form-control" disabled placeholder="" name="">
         </div>
       </div>
     </div>
+
+
+
     <div class="buttons container">
       <button type='submit' name="button" class="btn btn-outline-warning next" *ngIf='page == 0'>Next</button>
     </div>

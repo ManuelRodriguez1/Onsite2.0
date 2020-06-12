@@ -1062,8 +1062,9 @@ h4,
 .normalText {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: normal !important;
     font-size: 18px;
+    columns: #000000;
     font-weight: 600;
     line-height: 22px;
 }
@@ -1417,7 +1418,12 @@ h4,
 .menu a {
     cursor: pointer;
 }
-
+.ellipsis{
+    width: 81px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 @keyframes lds-roller {
     0% {
         transform: rotate(0deg);
