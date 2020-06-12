@@ -13,7 +13,7 @@ import * as $ from 'jquery';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
-  reviews: any[] = []
+  reviews;
   up = false;
   repro: any = ''
   description;
@@ -27,7 +27,7 @@ export class MenuHomeComponent implements OnInit {
   peoples: any[] = [];
   people = 0;
   alerta = false;
-  aleratEliminar=0;
+  aleratEliminar = 0;
   howmany = "Select";
   page = 1;
   contadorreviw = 0;
@@ -130,16 +130,9 @@ export class MenuHomeComponent implements OnInit {
 
             res1.descripcion = this.reviewdescripcion;
             res1.rating = this.estrellitasreviws1;
-
             console.log(this.reviews);
-
             this.updateReviews();
-
-
-
           } else {
-
-
             var contador = 1;
             this.reviews.find((res1) => {
               console.log(this.reviews.length + "====" + contador);
@@ -150,27 +143,14 @@ export class MenuHomeComponent implements OnInit {
                 this.updateReviews();
               }
               contador++;
-
             })
-
-
-
-
-
-
           }
-
-
         })
 
         console.log(this.reviews);
       }
-
       console.log(res);
       console.log("kate");
-
-
-
     })
 
   }
@@ -316,7 +296,7 @@ export class MenuHomeComponent implements OnInit {
         setTimeout(() => {
           this.aleratEliminar = 0
         }, 3000);
-    
+
       })
       this.modal = 3
       this.confirm = 0
@@ -342,11 +322,11 @@ export class MenuHomeComponent implements OnInit {
   confirmDelete() {
     this.confirm = 1
     this.delete(this.confirm2)
-    
 
 
 
- 
+
+
   }
 
   //Ver proyecto 
