@@ -124,7 +124,7 @@ export class MenuHomeComponent implements OnInit {
       if (res) {
 
         this.reviews = res
-        this.reviews.find((res1) => {
+        this.reviews.map((res1) => {
           if (res1.id == this.user.uid) {
 
             res1.descripcion = this.reviewdescripcion;
@@ -140,7 +140,7 @@ export class MenuHomeComponent implements OnInit {
 
 
             var contador = 1;
-            this.reviews.find((res1) => {
+            this.reviews.map((res1) => {
               console.log(this.reviews.length + "====" + contador);
               if (res1.id != this.user.uid && contador == this.reviews.length) {
 
