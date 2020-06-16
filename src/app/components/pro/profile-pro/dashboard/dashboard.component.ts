@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         })
       })
+      console.log(this.projects);
 
     this.sub2 = this.proU.projects.subscribe((res) => {
       this.projects.push(res)
@@ -68,6 +69,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub1.unsubscribe()
     this.sub2.unsubscribe()
+  }
+  openExplorePro(){
+    location.href="/ExplorePro";
   }
 
 }
