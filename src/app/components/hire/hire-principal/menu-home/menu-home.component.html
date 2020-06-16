@@ -237,7 +237,7 @@ The project has been deleted
           <div class="row">
             <div class="col-sm-6 form-group">
               <p class="normalText py-3">Start date</p>
-              <input type="date" name="startdate" max="3000-12-31" [(ngModel)]="viewP.startdate"
+              <input type="date" name="startdate" placeholder="dd/mm/yyyy"  max="3000-12-31" [(ngModel)]="viewP.startdate"
                 [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta"
                 [class.correctInput]="startdate.value != '' && startdate.value != undefined " min="1000-01-01"
                 class="form-control" #startdate="ngModel">
@@ -247,7 +247,7 @@ The project has been deleted
             </div>
             <div class="col-sm-6 form-group">
               <p class="normalText py-3">End date</p>
-              <input type="date" name="enddate" max="3000-12-31" min="1000-01-01" class="form-control"
+              <input type="date" name="enddate" placeholder="dd/mm/yyyy"  max="3000-12-31" min="1000-01-01" class="form-control"
                 [(ngModel)]="viewP.enddate" #enddate="ngModel"
                 [class.errorInput]=" enddate.value == undefined &&   alerta"
                 [class.correctInput]="enddate.value != '' && enddate.value != undefined "
@@ -582,7 +582,7 @@ The project has been deleted
             </div>
 
             <div  class="row mb-4">
-              <div class="col-sm  " *ngFor="let reviews of usuariosReviwsTodos">
+              <div class="col-sm  mt-23 " *ngFor="let reviews of usuariosReviwsTodos">
                 <div class="media">
                   <div class="profile-mini" [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
                   <div class="media-body">
