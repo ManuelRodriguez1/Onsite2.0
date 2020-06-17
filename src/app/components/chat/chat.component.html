@@ -26,7 +26,7 @@
                                 <div class="nombrechatNaranja">{{u.projectname}}</div>
                             </div>
                             <div class="iconsChatUser">
-                                <!-- <div class="right100p" *ngIf="num.ojo"><img src="../../../assets/iconos/ojoChat.svg"></div> -->
+                                <div class="right100p" *ngIf="!u.noRead"><img src="../../../assets/iconos/ojoChat.svg"></div>
                                 <!-- <div *ngIf="num.carpeta"><img src="../../../assets/iconos/carpetaChat.svg"></div> -->
                             </div>
                         </div>
@@ -47,10 +47,6 @@
                         <hr>
                     </div>
                     <div class="containerChat ml-0">
-                        <p class="nomFecha">
-                            Month, Day, Year
-                        </p>
-
                         <div class="chatContainerHeight containerChat">
 
                             <!-- <div class="messagePro1">
@@ -65,7 +61,11 @@
                             <div class="messagePro2">User Name has declined the offer.</div>
 
                             <div class="messagePro2 messagePro3">User Name has accepted the offer.</div> -->
+
                             <ng-container *ngFor="let m of messages">
+                                <p class="nomFecha">
+                                    {{ m.fecha.toDate() | date: 'MMM, dd h:mm a' }}
+                                </p>
                                 <div style="overflow: hidden;">
                                     <div class="messageNormal" [class.messageMy]="myId == m.id">
                                         {{ m.message }}

@@ -163,12 +163,13 @@ export class ProuserService {
   }
   //CHAT
   //Añadir conversación
-  chatMsg(idHire: string, idPro: string, msg: string) {
+  chatMsg(idHire: string, idPro: string, msg: string, read: boolean) {
     var chatTemp: any = []
     var temp: any = {
       'fecha': new Date(),
       'id': this.user.uid,
-      'message': msg
+      'message': msg,
+      'read': false
     }
     this.getChat(idHire, idPro).get().subscribe((res) => {
       if (res.data()) {
@@ -185,7 +186,7 @@ export class ProuserService {
     return this.af.collection('Chat').doc(idHire + '|' + idPro)
   }
   //Comprobar mensajes
-  getChatExist(){
+  getChatExist() {
     return this.af.collection('Chat')
   }
 }

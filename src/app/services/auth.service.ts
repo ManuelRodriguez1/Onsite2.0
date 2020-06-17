@@ -1,6 +1,5 @@
 import { CanActivate, Router,ActivatedRouteSnapshot } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import { Injectable, EventEmitter } from "@angular/core";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/do';
@@ -24,10 +23,14 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/Home'])
         
       }else{
-        const role = route.data.role;
+        var role = ''
         this.auth.authState.subscribe(authState => {
+          if(route.data.role === undefined){
+            role = authState.displayName
+          }else{
+            role = route.data.role;
+          }
           if (authState) {
-            console.log(authState.displayName+"============"+role);
             if (authState.displayName !== role  ) {
               if(authState.displayName=="hire"){
                 //location.href="/Hireprincipal";

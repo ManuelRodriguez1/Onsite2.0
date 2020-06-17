@@ -236,7 +236,8 @@ hr {
 }
 
 .containerH155 {
-    margin-bottom: 150px;
+    height: calc(100vh - 247px);
+    overflow-y: scroll;
 }
 
 .btnEnviarMsj {
@@ -280,6 +281,7 @@ hr {
     width: auto;
     float: left;
     margin-left: 18px;
+    max-width: 70%;
 }
 
 .messageMy {
