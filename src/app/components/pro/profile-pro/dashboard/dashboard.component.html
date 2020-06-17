@@ -1,9 +1,9 @@
 <div class="containerMin">
 <div class="container shadow" [class.heightTemp]="applyPro == 1" *ngIf="select == 0">
   <div class="project">
-    <div class="alert alert-danger" role="alert" [hidden]="applyPro == 0">
+    <!--div class="alert alert-danger" role="alert" [hidden]="applyPro == 0">
       You have not yet applied to a project!
-    </div>
+    </div-->
     <div class="lds-roller" *ngIf="loading == true">
       <div></div>
       <div></div>
@@ -14,22 +14,32 @@
       <div></div>
       <div></div>
     </div>
-    <ng-container *ngFor="let p of projects">
-      <div class="projects row">
-        <div class="col-sm-6 ml-48">
-          <p class="mt-44"><span class="title2">Project:</span> {{p.projectname}} </p>
-          <p class="mt-33">Status: {{p.statusname}} </p>
-          <p class="mt-23">Location: {{p.location}} </p>
-          <div class="mt-23 mb-32">
-            <div class="iconSkills fl mt-mr2"></div>
-            <p class="purple normalText"><span *ngFor="let s of p.skills"> {{s}}, </span> </p>
+    <div *ngIf="projects.length!=0 ; else other_content"  >
+      <ng-container   *ngFor="let p of projects">
+        <div class="projects row">
+          <div class="col-sm-6 ml-48">
+            <p class="mt-44"><span class="title2">Project:</span> {{p.projectname}} </p>
+            <p class="mt-33">Status: {{p.statusname}} </p>
+            <p class="mt-23">Location: {{p.location}} </p>
+            <div class="mt-23 mb-32">
+              <div class="iconSkills fl mt-mr2"></div>
+              <p class="purple normalText"><span *ngFor="let s of p.skills"> {{s}}, </span> </p>
+            </div>
+          </div>
+          <div class="moreInfo orange" (click)="infoProject(p)">
+            <p>View more</p>
           </div>
         </div>
-        <div class="moreInfo orange" (click)="infoProject(p)">
-          <p>View more</p>
-        </div>
+      </ng-container>
+    </div>
+  
+    <ng-template #other_content>
+      <div class="btnInitialDash">
+        <p class="normalText">You don’t have any projects</p>
+        <button  (click)="openExplorePro()" class="orangeBtn medium">Get Started </button>
       </div>
-    </ng-container>
+    </ng-template>
+
   </div>
 </div>
 

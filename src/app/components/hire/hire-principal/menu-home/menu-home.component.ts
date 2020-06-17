@@ -103,6 +103,7 @@ export class MenuHomeComponent implements OnInit {
 
   ngOnInit() {
 
+    this.projects = []
 
     //Consulta todos los proyecto apenas detecta un cambio 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
@@ -331,6 +332,7 @@ export class MenuHomeComponent implements OnInit {
 
   //Ver proyecto 
   viewProject(p) {
+    this.dataApply = []
     this.selectskills = p.skills;
     this.peoples = p.people;
     this.files = p.briefmaterial;

@@ -10,7 +10,7 @@
     float: left;
     margin-right: 13px;
     width: 170px !important;
-    height: 46$px;
+    height: 46px;
 }
 
 .botonesOnsite {
@@ -97,6 +97,7 @@
 .flechaforgot {
     position: absolute;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 
@@ -195,11 +196,13 @@ body {
     line-height: 22px;
     text-align: center;
     color: #FF8600;
+    cursor: pointer;
 }
 
 .memberSing {
     margin-top: 70px;
     text-align: center;
+    cursor: pointer;
 }
 
 .memberSing a {

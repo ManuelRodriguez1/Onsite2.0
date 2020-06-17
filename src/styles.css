@@ -1066,7 +1066,7 @@ h4,
     font-size: 18px;
     columns: #000000;
     font-weight: 600;
-    line-height: 22px;
+    line-height: 36px;
 }
 
 .form-control {
@@ -1423,6 +1423,9 @@ h4,
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.containerMin{
+    min-height: 600px;
 }
 @keyframes lds-roller {
     0% {

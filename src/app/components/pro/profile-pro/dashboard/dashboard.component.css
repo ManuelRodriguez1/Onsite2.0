@@ -16,7 +16,23 @@
     margin-right: 10px;
 }
 .heightTemp{
-    height: calc(100vh - 606px);
+   /* height: calc(100vh - 606px);*/
+     height:600px ;
+
+}
+.btnInitialDash{
+
+    width: auto;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.btnInitialDash button{
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
 }
 .moreInfo{
     position: absolute;
@@ -24,7 +40,4 @@
     top: 44px;
     text-decoration: underline;
     cursor: pointer;
-}
-.containerMin{
-    min-height: 600px;;
 }
