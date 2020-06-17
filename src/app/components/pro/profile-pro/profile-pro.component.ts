@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as crypto from "crypto-js";
+import { AngularFirestore } from 'angularfire2/firestore';
 import { ProuserService } from 'src/app/services/prouser.service';
 declare var $: any
 
@@ -19,6 +20,8 @@ export class ProfileProComponent implements OnInit {
   menushow: boolean = false
   project: boolean = false
   alert: number = 1
+  repro: any = ''
+  usuariosReviwsTodos: any[] = [];
   // Variables eventos
   up: boolean = false
   skills: any[] = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
@@ -40,7 +43,8 @@ export class ProfileProComponent implements OnInit {
   rating: any[] = []
 
   constructor(
-    private prouser: ProuserService
+    private prouser: ProuserService,
+    private db: AngularFirestore
   ) { }
   //Show data of User
   ngOnInit() {
@@ -82,6 +86,33 @@ export class ProfileProComponent implements OnInit {
   //Show Option
   selectOption(e) {
     this.select = e
+    if (this.profile.reviews) {
+      var temp: number = 0
+      this.profile.reviews.forEach((r) => {
+        temp += r.rating
+        console.log(r.id);
+
+        this.db.collection("users_hire").doc(r.id).snapshotChanges()
+          .subscribe((data) => {
+
+            this.repro = data.payload.data()
+            console.log(this.repro);
+            this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
+
+           /* if (r.id == this.user.uid) {
+              this.reviewR = r.descripcion;
+              this.valStarts = r.rating
+              this.estrellitasreviws1 = r.rating
+            }*/
+          })
+
+
+      })
+      console.log(this.usuariosReviwsTodos);
+
+    }
+
+
   }
   // Update account information
   accountForm(f: NgForm) {

@@ -270,31 +270,27 @@
                         <p>Reviews</p>
                     </div>
                     <div class="row mt-38 mb-43">
-                        <div class="col-sm">
+                        <div class="col-sm mb-30" *ngFor="let reviews of usuariosReviwsTodos">
                             <div class="media">
-                                <div class="profile mini"></div>
+                                <div class="profile mini" [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
                                 <div class="media-body">
-                                    <div class="title3 mt-25 ml-14">
-                                        <p>Gordon Freeman</p>
+                                    <div class="title3 mt-12 ml-14">
+                                        <p>{{reviews.name}}</p>
                                     </div>
+                                    <div class="stars ml-14">
+
+                                        <div class="starG" [class.starO]="reviews.rating >= 1"></div>
+                                        <div class="starG" [class.starO]="reviews.rating >= 2"></div>
+                                        <div class="starG" [class.starO]="reviews.rating >= 3"></div>
+                                        <div class="starG" [class.starO]="reviews.rating >= 4"></div>
+                                        <div class="starG mr-13" [class.starO]="reviews.rating == 5"></div>
+                
+                                      </div>
                                 </div>
                             </div>
-                            <p class="mt-21 smallText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Vulputate mi sit amet mauris
-                                commodo quis imperdiet massa tincidunt. Morbi blandit cursus risus at
-                                ultrices. Nunc non blandit. <a class="orange" href="#">Show less</a></p>
+                            <p class="mt-21 smallText">{{reviews.descripcion}} <!--a class="orange" href="#">Show less</a--></p>
                         </div>
-                        <div class="col-sm">
-                            <div class="media">
-                                <div class="profile mini"></div>
-                                <div class="media-body">
-                                    <div class="title3 mt-25 ml-14">
-                                        <p>John Doe</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mt-21 smallText">Review... <a class="orange" href="#">Show more</a></p>
-                        </div>
+                    
                     </div>
                 </div>
             </div>
