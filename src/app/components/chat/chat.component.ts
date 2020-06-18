@@ -25,6 +25,10 @@ export class ChatComponent implements OnInit, OnDestroy {
   myId: string = ''
   mesg: string = ''
   dateToday: any = new Date()
+  // Filtros chat
+  unread: boolean = false
+  totalUnread: number = 0
+  search: string = ''
   //Suscripciones
   sub1: Subscription
   sub2: Subscription
@@ -74,6 +78,7 @@ export class ChatComponent implements OnInit, OnDestroy {
             })
           })
         });
+        this.info.chatUnread.emit(this.users.length)
       })
     }
     if (this.info.user.displayName == 'pro') {
@@ -101,14 +106,17 @@ export class ChatComponent implements OnInit, OnDestroy {
                       if (h.data().applyUsers) {
                         var temp2: any = h.data().applyUsers
                         if (temp2.includes(this.myId)) {
-                          this.users[this.cont].projectname = h.data().projectname
-                          this.cont++
+                          if (this.cont != this.users.length) {
+                            this.users[this.cont].projectname = h.data().projectname
+                            this.cont++
+                          }
                         }
                       }
                     })
                   })
               })
           }
+          this.info.chatUnread.emit(this.users.length)
         })
       })
     }
@@ -126,7 +134,18 @@ export class ChatComponent implements OnInit, OnDestroy {
             })
           }
         })
+        this.info.chatUnread.emit(this.users.length)
       })
+
+    this.info.chatUnread.subscribe((d: number) => {
+      var temp: number = 0
+      this.users.map((m) => {
+        if (!m.noRead) {
+          temp++
+        }
+      })
+      this.totalUnread = temp
+    })
   }
 
   initChat(e: any) {
@@ -184,6 +203,14 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.info.chatMsg(hire, pro, msg, true)
       this.mesg = ''
       $(".chatContainerHeight").animate({ scrollTop: $('.chatContainerHeight').prop("scrollHeight") }, 1000);
+    }
+  }
+
+  filter(num: number) {
+    if (num == 1) {
+      this.unread = false
+    } else {
+      this.unread = true
     }
   }
 

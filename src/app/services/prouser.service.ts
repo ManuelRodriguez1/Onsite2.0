@@ -19,6 +19,7 @@ export class ProuserService {
   usersChat = new EventEmitter<any>()
   projects = new EventEmitter<any>()
   initChat = new EventEmitter<boolean>()
+  chatUnread = new EventEmitter<number>()
 
   constructor(
     public afA: AngularFireAuth,

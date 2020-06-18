@@ -44,6 +44,8 @@ import { OrderPipe } from './pipes/order.pipe';
 import { AzPipe } from './pipes/az.pipe';
 import { AzStatusPipe } from './pipes/az-status.pipe';
 import { SearchZipPipe } from './pipes/search-zip.pipe';
+import { ChatSearchPipe } from './pipes/chat-search.pipe';
+import { ChatTextPipe } from './pipes/chat-text.pipe';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { SearchZipPipe } from './pipes/search-zip.pipe';
     AzPipe,
     AzStatusPipe,
     SearchZipPipe,
+    ChatSearchPipe,
+    ChatTextPipe,
   
   ],
   imports: [

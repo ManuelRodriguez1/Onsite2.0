@@ -35,7 +35,7 @@
 
 .menuOptionFilter {
     text-align: center;
-    color: #010973;
+    color: #9D9D9D;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -50,6 +50,21 @@
 .menuOptionFilter span {
     float: left;
     padding-right: 30px;
+    cursor: pointer;
+}
+
+.menuOptionFilter span:hover {
+    color: #010973;
+    text-decoration: underline;
+}
+
+.blueColor {
+    color: #010973;
+    text-decoration: underline;
+}
+
+.nombreschat {
+    cursor: pointer;
 }
 
 .menuOptionFilter b {
@@ -146,6 +161,7 @@ hr {
 
 .right100p {
     margin-right: 10px;
+    margin-top: 5px;
 }
 
 .person_user_chat .nombrechatNaranja {

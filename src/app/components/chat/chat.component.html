@@ -3,19 +3,19 @@
         <div class="row">
             <div class="col-sm chatrightborder">
                 <div class="h--155 backBlue">
-                    <div _ngcontent-c4="" class="input-group divinputsearch">
-                        <div _ngcontent-c4="" class="searchGray absoluteSearch"></div>
-                        <input _ngcontent-c4="" class="form-control inputbusquechat" placeholder="Search by name or project" type="text">
+                    <div class="input-group divinputsearch">
+                        <div class="searchGray absoluteSearch"></div>
+                        <input type="text" class="form-control inputbusquechat" placeholder="Search by name or project" name="search" [(ngModel)]="search">
                     </div>
                     <div class="menuOptionFilter">
-                        <span>All</span>
-                        <span>Unread <b>(5)</b></span>
+                        <span (click)="filter(1)" [class.blueColor]="!unread">All</span>
+                        <span (click)="filter(2)" [class.blueColor]="unread">Unread <b>({{totalUnread}})</b></span>
                         <span>Archived</span>
                     </div>
                 </div>
                 <hr>
                 <div class="containerH155">
-                    <div class="person_user_chat" *ngFor="let u of users">
+                    <div class="person_user_chat" *ngFor="let u of users | chatText: search | chatSearch: unread ">
                         <!-- <span *ngIf="num.puntoMessage"  class="puntoMessage"></span> -->
                         <div class="divcontainerChat" (click)="initChat(u)">
                             <div class="nombreschat">
@@ -26,8 +26,8 @@
                                 <div class="nombrechatNaranja">{{u.projectname}}</div>
                             </div>
                             <div class="iconsChatUser">
-                                <div class="right100p" *ngIf="!u.noRead"><img src="../../../assets/iconos/ojoChat.svg"></div>
-                                <!-- <div *ngIf="num.carpeta"><img src="../../../assets/iconos/carpetaChat.svg"></div> -->
+                                <div class="right100p eyeM" [class.eyeN]="!u.noRead"></div>
+                                <div class="folderChat"></div>
                             </div>
                         </div>
                     </div>
