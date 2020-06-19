@@ -1,28 +1,24 @@
-
-    <div class="contenedorseccionbanner container1280Final ">
-        <div class="row sectionHome1" >
-            <div class="col-12 col-md-6 izquierdaseccion2home">
-                <div class="tituloseccionbannerhome">
-                    <h4> Find the best in construction</h4>
-                </div>
-                <div class="subtituloseccionbannerhome">
-                    <h2>Connecting the right people with the right jobs one click at a time.</h2>
-                </div>
-                <div class="btnHomeSection">
-                    <button (click)="hire()"  class="orangeBtn medium">Join as a hirer</button>
-                    <button (click)="pro()"  class="blueBtn medium btnPro">Join as a pro</button>
-                </div>
+<div class="contenedorseccionbanner container1280Final ">
+    <div class="row sectionHome1">
+        <div class="col-12 col-md-6 izquierdaseccion2home">
+            <div class="tituloseccionbannerhome">
+                <h4> Find the best in construction</h4>
             </div>
-            <div class="col-12 col-md-6 derechaseccion2home">
-                <img class="imgSliderHome" src="../../../assets/imagenes/Home/Home1.png">
+            <div class="subtituloseccionbannerhome">
+                <h2>Connecting the right people with the right jobs one click at a time.</h2>
+            </div>
+            <div class="btnHomeSection">
+                <button (click)="hire()" class="orangeBtn medium">Join as a hirer</button>
+                <button (click)="pro()" class="blueBtn medium btnPro">Join as a pro</button>
             </div>
         </div>
+        <div class="col-12 col-md-6 derechaseccion2home">
+            <img class="imgSliderHome" src="../../../assets/imagenes/Home/Home1.png">
+        </div>
+    </div>
 
-     
-    <div class="sectionHome1 row ">
 
-
-
+    <div class="sectionHome1 row sectionAbout" id="Aboutus">
         <div class="col-12 col-md-6 izquierdaseccion2home">
             <img class="imgAbout" src="../../../assets/imagenes/Home/aboutUs.png">
         </div>
@@ -30,19 +26,14 @@
             <div class="contenedorderechaseccion2Home ">
                 <h4>About us</h4>
                 <p class="text2seccion2home">
-                    At Onhive our mission is to cultivate a digital marketplace by matching the right personnel with jobs in a simple and transparent way. Connecting people with jobs in a convenient and friendly way. Our process allows users to find opportunities in their location based on their skills.                </p>
-
+                    At Onhive our mission is to cultivate a digital marketplace by matching the right personnel with
+                    jobs in a simple and transparent way. Connecting people with jobs in a convenient and friendly way.
+                    Our process allows users to find opportunities in their location based on their skills. </p>
                 <button class="blueBtn medium btnseccion2home">Learn more</button>
             </div>
         </div>
-
-
-
-
-
     </div>
-      
-    </div>
+</div>
 
 
 
@@ -78,16 +69,17 @@
 
 
 
-<div id="seccion3Home">
+<div id="seccion3Home" class="sectionHowitworks">
     <div class="row container1280Final">
-        <h4 class="contenedortituloseccion3home" >How it works</h4>
+        <h4 class="contenedortituloseccion3home">How it works</h4>
     </div>
     <div class="row contenedorseccion3Home container1280Final ">
-     
-        <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home " *ngFor="let num of Steps">
+
+        <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home "
+            *ngFor="let num of Steps">
             <div class="cuadroinfoseccion3home">
-              <img src="{{num.img}}">
-           
+                <img src="{{num.img}}">
+
             </div>
             <h1 class="tituloseccion3home">
                 {{num.paso}}

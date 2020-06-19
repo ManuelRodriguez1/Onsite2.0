@@ -19,7 +19,7 @@ export class ProjectService {
     private afs: AngularFireStorage) {
   }
 //Crear nuevo proyecto o modificar nuevo proyecto
-  newProject(f: NgForm, file: any[], briefMaterial: any[], selectskills: any[], peoples: any[]) {
+  newProject(f: NgForm, file: any[], briefMaterial: any[], selectskills: any[], peoples: any[],locationApp,latitude,longitude) {
     var idProject;
     if (f.value.id) {
       idProject = f.value.id;
@@ -31,7 +31,9 @@ export class ProjectService {
       projectname: f.value.projectname,
       creationdate: this.currentDate,
       description: f.value.description,
-      location: f.value.location,
+      location: locationApp,
+      latitude:latitude,
+      longitude:longitude,
       estimated: f.value.estimated,
       startdate: f.value.startdate,
       enddate: f.value.enddate,

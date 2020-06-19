@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-sm-5">
                         <div class="map mt-47">
-                            <agm-map [latitude]="lat" [longitude]="long"></agm-map>
+                            <agm-map [latitude]="p.latitude" [longitude]="p.longitude"></agm-map>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     <p>Location Map</p>
                 </div>
                 <div class="mapBig mt-20 mb-57">
-                    <agm-map [latitude]="lat" [longitude]="long"></agm-map>
+                    <agm-map [latitude]="infoProject.latitude" [longitude]="infoProject.longitude"></agm-map>
                 </div>
             </div>
         </div>

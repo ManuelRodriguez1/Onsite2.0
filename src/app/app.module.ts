@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireModule } from "angularfire2";
@@ -32,6 +31,7 @@ import { ProfileHireComponent } from './components/hire/hire-principal/profile-h
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { PlantillaComponent } from './components/plantilla/plantilla.component';
+import { ChangeEmailComponent } from './components/hire/hire-principal/change-email-------/change-email.component';
 import { LatestPipe } from './pipes/latest.pipe';
 import { ProService } from './services/pro.service';
 import { ProuserService } from './services/prouser.service';
@@ -46,6 +46,7 @@ import { AzStatusPipe } from './pipes/az-status.pipe';
 import { SearchZipPipe } from './pipes/search-zip.pipe';
 import { ChatSearchPipe } from './pipes/chat-search.pipe';
 import { ChatTextPipe } from './pipes/chat-text.pipe';
+import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ChatTextPipe } from './pipes/chat-text.pipe';
     ProfileHireComponent,
     EmailVerificationComponent,
     PlantillaComponent,
+    ChangeEmailComponent,
     LatestPipe,
     ChatComponent,
     DashboardComponent,
@@ -78,6 +80,10 @@ import { ChatTextPipe } from './pipes/chat-text.pipe';
   
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA_Ot_HfQuVnjjcS5pdW2YD3CiC2Z9CMrA',
+        libraries: ['places']
+    }),
     BrowserModule,
     RouterModule.forRoot(router),
     AngularFireModule.initializeApp(environment.firebase),
@@ -89,9 +95,6 @@ import { ChatTextPipe } from './pipes/chat-text.pipe';
     SlickCarouselModule,
     Ng5SliderModule,
     NgMultiSelectDropDownModule.forRoot(),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBmzxZXY2uUS9cKxiHAT09tnR1bKiJtJWI'
-    }),
     AngularFirestoreModule,
     AngularFireStorageModule
   ],

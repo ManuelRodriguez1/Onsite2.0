@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProuserService } from 'src/app/services/prouser.service';
 import * as firebase from "firebase";
 import { Subscription } from 'rxjs';
+import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,9 +23,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   //Subscripciones
   sub1: Subscription
   sub2: Subscription
-  constructor(private proU: ProuserService) { firebase.firestore().enablePersistence() }
+  public latitude: number;
+  public longitude: number;
+  public zoom: number;
+
+  lat: number = 51.678418
+  long: number = 7.809007
+  constructor(private proU: ProuserService,private mapsAPILoader: MapsAPILoader) { firebase.firestore().enablePersistence() }
 
   ngOnInit() {
+
     this.sub1 = this.proU.getInfoHire().snapshotChanges()
       .subscribe((h) => {
         this.projects = []
@@ -64,6 +72,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   infoProject(e: any){
     this.select = 1
     this.infoPro = e
+    console.log(this.infoPro);
+    
   }
 
   ngOnDestroy() {

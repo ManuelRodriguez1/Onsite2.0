@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule, ElementRef, NgZone } from '@angular/core';
+import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { NgForm, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -67,37 +68,27 @@ export class MenuHomeComponent implements OnInit {
   rate: number = 0
   estrellitasreviws1 = 0;
   reviewdescripcion = "";
+
+
+
+
+  //mapa
+  radius
+  public latitude: number;
+  public longitude: number;
+  public searchControl: FormControl;
+  public zoom: number;
+
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
   constructor(private db: AngularFirestore,
     public projectService: ProjectService,
     public afAuth: AngularFireAuth,
-    private afs: AngularFireStorage) {
+    private afs: AngularFireStorage,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone) {
 
-  }
-  //mostra lista de skill
-  list(e) {
-    if (e == 1) {
-      this.up = !this.up;
-    }
-  }
-  //Agregar Skill
-  selectskill(e) {
-    var i = this.selectskills.indexOf(e)
-    if (i === -1) {
-      this.selectskills.push(e);
-      this.peoples.push({ "skill": e, "quantity": "" });
-      console.log(this.peoples);
-    }
-    this.visiblePeople = true
-  }
-  //Eliminar Skill
-  close(e) {
-    var i = this.selectskills.indexOf(e)
-    if (i !== -1) {
-      this.selectskills.splice(i, 1)
-      this.peoples.splice(i, 1)
-      console.log(this.peoples);
-    }
-    this.visiblePeople = false
   }
 
 
@@ -154,8 +145,81 @@ export class MenuHomeComponent implements OnInit {
       console.log("kate");
     })
 
-  }
+    //mapa
+    //set google maps defaults
+    this.zoom = 8;
+    this.latitude = 39.8282;
+    this.longitude = -98.5795;
+    let radius=Number;
+    //create search FormControl
+    this.searchControl = new FormControl();
 
+    //set current position
+    this.setCurrentPosition();
+    //load Places Autocomplete
+   
+ 
+
+  }
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 12;
+      });
+    }
+  }
+  mapa(){
+
+    setTimeout(()=>{
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+  },3000);
+  }
+  //mostra lista de skill
+  list(e) {
+    if (e == 1) {
+      this.up = !this.up;
+    }
+  }
+  //Agregar Skill
+  selectskill(e) {
+    var i = this.selectskills.indexOf(e)
+    if (i === -1) {
+      this.selectskills.push(e);
+      this.peoples.push({ "skill": e, "quantity": "" });
+      console.log(this.peoples);
+    }
+    this.visiblePeople = true
+  }
+  //Eliminar Skill
+  close(e) {
+    var i = this.selectskills.indexOf(e)
+    if (i !== -1) {
+      this.selectskills.splice(i, 1)
+      this.peoples.splice(i, 1)
+      console.log(this.peoples);
+    }
+    this.visiblePeople = false
+  }
 
 
   //update this.reviews
@@ -180,6 +244,7 @@ export class MenuHomeComponent implements OnInit {
 
   //Agregar Proyecto BD
   addProject(f: NgForm) {
+    console.log(f.value);
     this.error = 2
     this.submitted = true
     var aux = []
@@ -192,6 +257,7 @@ export class MenuHomeComponent implements OnInit {
         $("#" + skill).removeClass("correctInput");
         $(".a" + skill).html("people is required");
         $("#" + skill).addClass("errorInput");
+        
       } else {
         $(".a" + skill).html("");
         $("#" + skill).removeClass("errorInput");
@@ -199,11 +265,16 @@ export class MenuHomeComponent implements OnInit {
       }
       aux.push({ "skill": skill, "quantity": quantity })
     });
+
+    let locationApp=$("#search").val();
     //Validacion campos 
-    if (f.status == "INVALID" || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == []) {
-      if (f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
-        || f.value.location === undefined || f.value.location == "" || f.value.estimated === undefined || f.value.estimated == "" ||
-        this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
+    console.log(locationApp);
+    console.log(aux[0] );
+   
+    
+    if (f.status == "INVALID" ||  locationApp == "" || aux.length ==0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0 ) {
+      if (locationApp == "" ||  f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
+        ||  f.value.estimated === undefined || f.value.estimated == "" || this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
         || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
         this.alerta = true;
       }
@@ -212,7 +283,7 @@ export class MenuHomeComponent implements OnInit {
       var temp = false
 
       //Crear o editar funcion 
-      this.projectService.newProject(f, this.file, this.files, this.selectskills, aux)
+      this.projectService.newProject(f, this.file, this.files, this.selectskills, aux,locationApp,this.latitude,this.longitude)
 
       this.modal = 1
       this.section = 1
@@ -226,6 +297,8 @@ export class MenuHomeComponent implements OnInit {
   //Vista crear nuevo proyecto
 
   next() {
+
+    this.mapa()
     this.error = 2
     this.page++;
     this.HomeFormularioNw++;
@@ -424,6 +497,7 @@ export class MenuHomeComponent implements OnInit {
   goToEditProject(idP) {
     this.HomeFormularioNw = 1;
     console.log("ok")
+    this.mapa();
   }
   //Mostrar los reviews
   leave() {
@@ -466,11 +540,6 @@ export class MenuHomeComponent implements OnInit {
         this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
         this.updateReviews()
       }
-
-
-
-
-
 
     }
   }
