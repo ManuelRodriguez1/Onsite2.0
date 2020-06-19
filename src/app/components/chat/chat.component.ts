@@ -24,10 +24,16 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages: any = []
   myId: string = ''
   mesg: string = ''
+  dateToday: any = new Date()
+  // Filtros chat
+  unread: boolean = false
+  totalUnread: number = 0
+  search: string = ''
   //Suscripciones
   sub1: Subscription
   sub2: Subscription
   sub3: Subscription
+  tempSub: Subscription
 
   constructor(private info: ProuserService) { firebase.firestore().enablePersistence() }
 
@@ -37,11 +43,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.myId = this.info.user.uid
 
     if (this.info.user.displayName == 'hire') {
-      this.sub1 = this.info.getInfoHire().doc(this.info.user.uid).collection('projects').snapshotChanges()
+      this.sub1 = this.info.getInfoHire().doc(this.info.user.uid).collection('projects').get()
         .subscribe((p) => {
           p.forEach((p) => {
-            if (p.payload.doc.data().applyUsers || p.payload.doc.data().applyUsers.length > 0) {
-              this.info.usersChat.emit(p.payload.doc.data())
+            if (p.data().applyUsers || p.data().applyUsers.length > 0) {
+              this.info.usersChat.emit(p.data())
             }
           })
         })
@@ -50,47 +56,100 @@ export class ChatComponent implements OnInit, OnDestroy {
         var temp: any = ''
         this.users.push({ 'projectname': res.projectname })
         res.applyUsers.forEach(e => {
-          this.info.getInfoPro().doc(e).snapshotChanges().subscribe((inf) => {
-            temp = inf.payload.data()
-            this.users[this.cont].name = temp.name + ' ' + temp.lastname
-            this.users[this.cont].photo = temp.photoUrl
-            this.users[this.cont].idOther = e
-            this.cont++
+          this.info.getInfoPro().doc(e).get().subscribe((inf) => {
+            var t2: boolean = false
+            this.info.getChatExist().get().subscribe((s) => {
+              s.forEach((f) => {
+                if (f.id.includes(e) && f.id.includes(this.myId)) {
+                  var t = f.data().chat
+                  if (t[t.length - 1].id == this.myId) {
+                    t2 = true
+                  }
+                }
+              })
+              temp = inf.data()
+              if (this.cont != this.users.length) {
+                this.users[this.cont].name = temp.name + ' ' + temp.lastname
+                this.users[this.cont].photo = temp.photoUrl
+                this.users[this.cont].idOther = e
+                this.users[this.cont].noRead = t2
+                this.cont++
+              }
+            })
           })
         });
+        this.info.chatUnread.emit(this.users.length)
       })
     }
     if (this.info.user.displayName == 'pro') {
-      this.info.getChatExist().get().subscribe((c) => {
+      this.sub1 = this.info.getChatExist().get().subscribe((c) => {
         c.forEach((c) => {
-          if (c.id.includes(this.info.user.uid)) {
+          if (c.id.includes(this.myId)) {
             var temp: any[] = c.id.split('|')
-            this.info.getInfoHire().doc(temp[0]).snapshotChanges()
+            var t: any[] = c.data().chat
+            var t2: boolean = false
+            if (t[t.length - 1].id == this.myId) {
+              t2 = true
+            }
+            this.info.getInfoHire().doc(temp[0]).get()
               .subscribe((user) => {
-                var temp: any = user.payload.data()
+                var temp: any = user.data()
                 this.users.push({
                   'name': temp.name + ' ' + temp.lastname,
                   'photo': temp.photoUrl,
-                  'idOther': user.payload.id
+                  'idOther': user.id,
+                  'noRead': t2
                 })
-                user.payload.ref.collection('projects')
-                  .onSnapshot((h) => {
+                user.ref.collection('projects').get()
+                  .then((h) => {
                     h.forEach((h) => {
-                      var temp: string = h.data().applyUsers
-                      if (temp.includes(this.info.user.uid)) {
-                        this.users[this.cont].projectname = h.data().projectname
-                        this.cont++
+                      if (h.data().applyUsers) {
+                        var temp2: any = h.data().applyUsers
+                        if (temp2.includes(this.myId)) {
+                          if (this.cont != this.users.length) {
+                            this.users[this.cont].projectname = h.data().projectname
+                            this.cont++
+                          }
+                        }
                       }
                     })
                   })
               })
           }
+          this.info.chatUnread.emit(this.users.length)
         })
       })
     }
+
+    this.sub3 = this.info.getChatExist().stateChanges()
+      .subscribe((d) => {
+        d.map((i) => {
+          if (i.payload.doc.id.includes(this.myId) && i.type === 'modified') {
+            var temp = i.payload.doc.id.split('|')
+            var t = this.info.user.displayName == 'hire' ? temp[1] : temp[0]
+            this.users.map((m) => {
+              if (m.idOther == t && m.idOther != this.idPro) {
+                m.noRead = false
+              }
+            })
+          }
+        })
+        this.info.chatUnread.emit(this.users.length)
+      })
+
+    this.info.chatUnread.subscribe((d: number) => {
+      var temp: number = 0
+      this.users.map((m) => {
+        if (!m.noRead) {
+          temp++
+        }
+      })
+      this.totalUnread = temp
+    })
   }
 
   initChat(e: any) {
+    this.messages = []
     var hire: string = ''
     var pro: string = ''
     this.name = e.name
@@ -107,16 +166,25 @@ export class ChatComponent implements OnInit, OnDestroy {
       pro = this.info.user.uid
     }
 
-    this.info.getChat(hire, pro).snapshotChanges()
+    this.tempSub = this.info.getChat(hire, pro).snapshotChanges()
       .subscribe((res) => {
         if (res.payload.data()) {
           var i: any = res.payload.data()
-          this.messages = i.chat
-          setTimeout(() => {
-            $('.chatContainerHeight').scrollTop($('.chatContainerHeight').prop('scrollHeight'));
-          }, 300);
+          var user = this.info.user.displayName == 'hire' ? pro : hire
+          if (this.idPro == user) {
+            this.messages = i.chat
+            setTimeout(() => {
+              $('.chatContainerHeight').scrollTop($('.chatContainerHeight').prop('scrollHeight'));
+            }, 20);
+          }
         }
       })
+
+    this.users.map((m) => {
+      if (m.idOther == this.idPro) {
+        m.noRead = true
+      }
+    })
   }
 
   chatMessage(e: string, msg: string) {
@@ -132,15 +200,28 @@ export class ChatComponent implements OnInit, OnDestroy {
         pro = this.info.user.uid
       }
 
-      this.info.chatMsg(hire, pro, msg)
+      this.info.chatMsg(hire, pro, msg, true)
       this.mesg = ''
       $(".chatContainerHeight").animate({ scrollTop: $('.chatContainerHeight').prop("scrollHeight") }, 1000);
     }
   }
 
+  filter(num: number) {
+    if (num == 1) {
+      this.unread = false
+    } else {
+      this.unread = true
+    }
+  }
+
   ngOnDestroy() {
-    this.sub1.unsubscribe()
-    this.sub2.unsubscribe()
+    if (this.info.user.displayName == 'hire') {
+      this.sub1.unsubscribe()
+      this.sub2.unsubscribe()
+    } else {
+      this.sub1.unsubscribe()
+    }
     this.sub3.unsubscribe()
+    this.tempSub.unsubscribe()
   }
 }

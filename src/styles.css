@@ -1302,6 +1302,27 @@ h4,
 }
 
 
+/* Estilos Chat */
+
+.eyeM {
+    background: url('./assets/iconos/ojoChatDesac.svg') no-repeat center;
+    background-size: contain;
+    width: 23px;
+    height: 14px;
+}
+
+.eyeN {
+    background-image: url('./assets/iconos/ojoChat.svg');
+}
+
+.folderChat {
+    background: url('./assets/iconos/carpetaChat.svg') no-repeat center;
+    background-size: contain;
+    width: 19px;
+    height: 19px;
+}
+
+
 /* loading temporal */
 
 .lds-roller {
@@ -1418,15 +1439,18 @@ h4,
 .menu a {
     cursor: pointer;
 }
-.ellipsis{
+
+.ellipsis {
     width: 81px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.containerMin{
+
+.containerMin {
     min-height: 600px;
 }
+
 @keyframes lds-roller {
     0% {
         transform: rotate(0deg);

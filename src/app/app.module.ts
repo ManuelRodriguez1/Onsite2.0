@@ -44,6 +44,8 @@ import { OrderPipe } from './pipes/order.pipe';
 import { AzPipe } from './pipes/az.pipe';
 import { AzStatusPipe } from './pipes/az-status.pipe';
 import { SearchZipPipe } from './pipes/search-zip.pipe';
+import { ChatSearchPipe } from './pipes/chat-search.pipe';
+import { ChatTextPipe } from './pipes/chat-text.pipe';
 import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 
 @NgModule({
@@ -73,6 +75,8 @@ import { AgmCoreModule,MapsAPILoader } from '@agm/core';
     AzPipe,
     AzStatusPipe,
     SearchZipPipe,
+    ChatSearchPipe,
+    ChatTextPipe,
   
   ],
   imports: [

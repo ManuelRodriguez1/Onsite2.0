@@ -10,15 +10,17 @@ export class LatestPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     var projects: any[] = []
-    setTimeout(() => {
-      for (let i of value) {
-        if (i.projectname.toLowerCase().includes(args.toLowerCase())) {
-          projects.push(i)
-        }
+    for (let i of value) {
+      if (i.projectname.toLowerCase().includes(args.toLowerCase())) {
+        projects.push(i)
       }
-    }, 300);
-    this.userP.filterPag.emit(projects)
-
-    return projects
+    }
+    if (args == '') {
+      this.userP.filterPag.emit(value)
+      return value
+    } else {
+      this.userP.filterPag.emit(projects)
+      return projects
+    }
   }
 }

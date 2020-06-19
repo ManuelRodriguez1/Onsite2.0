@@ -76,7 +76,7 @@ export class ProfileProComponent implements OnInit {
       if (this.profile.reviews) {
         var temp: number = 0
         this.profile.reviews.forEach((r) => {
-          temp += r.rating
+          temp += parseInt(r.rating)
         })
         this.rate = Math.round(temp / this.profile.reviews.length)
       }
