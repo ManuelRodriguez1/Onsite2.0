@@ -68,7 +68,15 @@
                                 </p>
                                 <div style="overflow: hidden;">
                                     <div class="messageNormal" [class.messageMy]="myId == m.id">
-                                        {{ m.message }}
+                                        <ng-container *ngIf="!m.adj; else fileAdj">
+                                            {{ m.message }}
+                                        </ng-container>
+                                        <ng-template #fileAdj>
+                                            <a [href]="m.message" target="_blank">
+                                                <div class="fileIcon" style="margin: 0 auto"></div>
+                                                <p class="textAdj">{{m.nameAdj}}</p>
+                                            </a>
+                                        </ng-template>
                                     </div>
                                 </div>
                             </ng-container>
@@ -78,7 +86,8 @@
                         <div class="containerChat mr-0">
                             <div class="mensajescHat">
                                 <form action="" (ngSubmit)="chatMessage(idPro, mesg)">
-                                    <div class="btnEnviarMsj"><img src="../../../assets/iconos/enviarMsj.svg"></div>
+                                    <input type="file" name="adj" id="adj" (change)="adjFile($event)" hidden accept=".pdf, .jpg, .jpeg, .png, .gif, .zip, .rar">
+                                    <div class="btnEnviarMsj"><label for="adj"><img src="../../../assets/iconos/enviarMsj.svg"></label></div>
                                     <input class="form-control inputChatFinally" id="msgChat" type="text" name="mesg" placeholder="Write your message" ngModel [(ngModel)]="mesg" autocomplete="off">
                                     <button type="submit" class="blueBtn small"> Send </button>
                                 </form>
