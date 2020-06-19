@@ -1,5 +1,5 @@
 <div class="alert alert-primary" [class.alertInitial]="aleratEliminar == 0" role="alert">
-The project has been deleted 
+  The project has been deleted
 </div>
 
 <form #formPro="ngForm" (ngSubmit)="addProject(formPro)" class="form-Project">
@@ -23,7 +23,7 @@ The project has been deleted
               <div class="row py-3 px-5 title-table">
                 <div class="col-sm">Name</div>
                 <div class="col-sm">Status</div>
-                <div class="col-sm"></div> 
+                <div class="col-sm"></div>
               </div>
               <div class="col-sm-12 divcol " [class.projects]="option == 1">
                 <div class="col-sm-12 divcol normalText">
@@ -200,17 +200,20 @@ The project has been deleted
           </div>
           <div class="row">
             <div class="col-sm-6 input-group">
-              <input required type="text" class="form-control" placeholder="Street name, City, State ZIP"
-                name="location" id="location" #location="ngModel"
-                [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "
-                [class.correctInput]="location.value != '' && location.value != undefined "
-                [(ngModel)]="viewP.location" />
+             
+                <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off"
+                  type="text" class="form-control" #search [formControl]="searchControl"  name="search" id="search" [class.errorInput]="search.value == ''  &&  alerta "
+                  [class.correctInput]="search.value != '' && search.value != undefined " [(ngModel)]="viewP.location">
+                 
+                  <span *ngIf="search.value == ''  &&   alerta " class="textError">Please
+                    enter a location.</span>
+              
+                </div>
+          
 
-              <span *ngIf="location.value == '' || location.value == undefined &&   alerta " class="textError">Please
-                enter a location.</span>
-
-            </div>
+        
           </div>
+
           <div class="row">
             <div class="title2 pb-3 pt-4">
               <h1 class="changeColorBlue">Estimated budget</h1>
@@ -224,7 +227,8 @@ The project has been deleted
                 [class.correctInput]="estimated.value != '' && estimated.value != undefined "
                 [(ngModel)]="viewP.estimated" />
               <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta "
-                class="textError">Estimated is required.</span>
+                class="textError">Estimated
+                is required.</span>
 
 
             </div>
@@ -237,7 +241,8 @@ The project has been deleted
           <div class="row">
             <div class="col-sm-6 form-group">
               <p class="normalText py-3">Start date</p>
-              <input type="date" name="startdate" placeholder="dd/mm/yyyy"  max="3000-12-31" [(ngModel)]="viewP.startdate"
+              <input type="date" name="startdate" placeholder="dd/mm/yyyy" max="3000-12-31"
+                [(ngModel)]="viewP.startdate"
                 [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta"
                 [class.correctInput]="startdate.value != '' && startdate.value != undefined " min="1000-01-01"
                 class="form-control" #startdate="ngModel">
@@ -247,8 +252,8 @@ The project has been deleted
             </div>
             <div class="col-sm-6 form-group">
               <p class="normalText py-3">End date</p>
-              <input type="date" name="enddate" placeholder="dd/mm/yyyy"  max="3000-12-31" min="1000-01-01" class="form-control"
-                [(ngModel)]="viewP.enddate" #enddate="ngModel"
+              <input type="date" name="enddate" placeholder="dd/mm/yyyy" max="3000-12-31" min="1000-01-01"
+                class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel"
                 [class.errorInput]=" enddate.value == undefined &&   alerta"
                 [class.correctInput]="enddate.value != '' && enddate.value != undefined "
                 [class.errorInput]="startdate.value > enddate.value">
@@ -279,8 +284,8 @@ The project has been deleted
             <div class="form-check checkbox form-group m-2">
               <input type="checkbox" class="form-check-input input-assumpte" id="passtest" name="passtest"
                 #passtest="ngModel" [(ngModel)]="viewP.passtest"
-                [class.errorInput]="location.value == '' || location.value == undefined  &&  alerta "
-                [class.correctInput]="location.value != '' && location.value != undefined " />
+                [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta "
+                [class.correctInput]="passtest.value != '' && passtest.value != undefined " />
               <label class="form-check-label" for="passtest">
                 <span class="check-text">All workers must pass a background test.</span>
               </label>
@@ -352,7 +357,7 @@ The project has been deleted
       <div class="row mt-51 ml-48">
         <div class="col-sm mx-4 my-3">
           <img src="../../../../../assets/iconos/Location_Icon.svg" alt="">
-         <p class="normalText"> {{ viewP.location }}</p>
+          <p class="normalText"> {{ viewP.location }}</p>
         </div>
       </div>
     </div>
@@ -581,7 +586,7 @@ The project has been deleted
               <p>Reviews</p>
             </div>
 
-            <div  class="row mb-4">
+            <div class="row mb-4">
               <div class="col-sm  mt-23 " *ngFor="let reviews of usuariosReviwsTodos">
                 <div class="media">
                   <div class="profile-mini" [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
@@ -627,7 +632,7 @@ The project has been deleted
               <div>
              
               </div-->
-              <div class="stars mt-23 ml-48"  >
+              <div class="stars mt-23 ml-48">
                 <input type="hidden" id="valStarts" value="{{valStarts}}">
                 <div class="starG" [class.starO]="estrellitasreviws1 >= 1" (click)="estrellitasreviws(1)"></div>
                 <div class="starG" [class.starO]="estrellitasreviws1 >= 2" (click)="estrellitasreviws(2)"></div>
@@ -635,7 +640,7 @@ The project has been deleted
                 <div class="starG" [class.starO]="estrellitasreviws1 >= 4" (click)="estrellitasreviws(4)"></div>
                 <div class="starG mr-13" [class.starO]="estrellitasreviws1 == 5" (click)="estrellitasreviws(5)"></div>
               </div>
-              <span class="textError" id="currentRaterror"></span> 
+              <span class="textError" id="currentRaterror"></span>
             </div>
           </div>
           <div class="row pl-3">

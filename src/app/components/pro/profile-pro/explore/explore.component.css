@@ -135,8 +135,11 @@
     height: 201px;
     background: gray;
     margin-left: 98px;
+    overflow: hidden;
+    position: relative;
 }
 .mapBig{
+    position: relative;
     background: gray;
     width: 948px;
     height: 439px;
