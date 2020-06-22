@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, OnChanges,HostListener } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, Event, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from "angularfire2/firestore";
 import { getAllRouteGuards } from '@angular/router/src/utils/preactivation';
-
 import * as $ from 'jquery';
 
 @Component({
@@ -27,12 +26,11 @@ export class MenuComponent implements OnInit {
   popad = false;
   user: any
   UserName = "";
-
   message: string;
   editMessage: string;
-  private fragment: string;
 
-  constructor(public af: AngularFireAuth, private router: Router, private afstore: AngularFirestore,private route: ActivatedRoute) {
+
+  constructor(public af: AngularFireAuth, private router: Router, private afstore: AngularFirestore, private route: ActivatedRoute) {
 
 
     this.af.authState.subscribe(auth => {
@@ -52,15 +50,9 @@ export class MenuComponent implements OnInit {
     });
   }
   ngOnInit() {
+  
+  }
 
-    console.log(this.user);
-    this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
-  }
-  ngAfterViewInit(): void {
-    try {
-      document.querySelector('#' + this.fragment).scrollIntoView();
-    } catch (e) { }
-  }
   flechaUsuario() {
 
     if (this.popad == false) {
@@ -71,8 +63,6 @@ export class MenuComponent implements OnInit {
   }
 
   paginaMensajeMenu(user, url) {
-
-
 
     if (url == "/Home" || url == "/Pro" || url == "/Hire") {
 
@@ -132,20 +122,18 @@ export class MenuComponent implements OnInit {
   }
   logout() {
     this.af.auth.signOut();
-    console.log('logged out');
-    //  this.router.navigateByUrl("/Home");
-    location.href = "/Home"
+    location.href = "/"
 
- 
+
   }
   navigateabout() {
-        $('body,html').stop(true,true).animate({				
-          scrollTop: $("#Aboutus").offset().top-200
-        },1000);
+    $('body,html').stop(true, true).animate({
+      scrollTop: $("#Aboutus").offset().top
+    }, 1000);
   }
   navigateHowitworks() {
-    $('body,html').stop(true,true).animate({				
+    $('body,html').stop(true, true).animate({
       scrollTop: $("#Howitworks").offset().top
-    },1000);
-}
+    }, 1000);
+  }
 }

@@ -52,59 +52,26 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(window).scroll(function(){
+    var windowHeight = $(window).scrollTop();
+    var contenido1 = $("#Howitworks").offset().top;
+    var contenido2 = $("#Aboutus").offset().top;
+    if (windowHeight >= contenido2) {
+      $(".Aboutus").addClass("menuSelect")
+      $(".Howitworks").removeClass("menuSelect")
+    } else {
+      $(".Aboutus").removeClass("menuSelect")
+    }
 
+    if (windowHeight >= contenido1) {
+      $(".Aboutus").removeClass("menuSelect")
+      $(".Howitworks").addClass("menuSelect")
+    } else {
+      $(".Howitworks").removeClass("menuSelect")
+    }
+  });
   }
 
-  // array paso 4 slider home 
-  /*
-  slides = [
-    { img: "0", imagensuperior: "../../../assets/imagenes/img1seccion4Home.png", subtitulo: "1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.", name: "Name - Name." },
-    { img: "1", imagensuperior: "../../../assets/imagenes/img2seccion4Home.png", subtitulo: "2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.", name: "Name - Name." },
-    { img: "2", imagensuperior: "../../../assets/imagenes/img3seccion4Home.png", subtitulo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.", name: "Name - Name." },
-    { img: "3", imagensuperior: "../../../assets/imagenes/img1seccion4Home.png", subtitulo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus.", name: "Name - Name." }
-  ];
-
-
-  slideConfig = {
-    "slidesToShow": 3,
-    "slidesToScroll": 3,
-    responsive: [
-
-      {
-        breakpoint: 900,
-        settings: {
-          variableWidth: false,
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          variableWidth: false,
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 680,
-        settings: {
-          variableWidth: false,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false
-        }
-      }
-    ],
-    "dots": true, "infinite": true, "autoplay": true, "autoplaySpeed": 15000, "prevArrow": "<div class='slick-prevew '></div>",
-    "nextArrow": "<div class='slick-nextsig '></div>",
-  };
-
-*/
 
 
 }
