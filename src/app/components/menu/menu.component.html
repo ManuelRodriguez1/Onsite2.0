@@ -5,14 +5,14 @@
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <div class="aimg">
-            <a href="#">
+            <a href="/">
                 <img src="assets/logos/Logo_principal_menu.svg" alt="Logo Onhive">
             </a>
         </div>
         <div class="aimg2  {{ m }}">{{ m }}</div>
         <ul *ngIf="Sesion==false || userMenu=='Home'" class="menu">
-            <li><a href="/Home#Aboutus" (click)="navigateabout()">About us</a></li>
-            <li><a href="/Home#Howitworks" (click)="navigateHowitworks()">How it works</a></li>
+            <li><a class="Aboutus" href="/Home#Aboutus" (click)="navigateabout()">About us</a></li>
+            <li><a class="Howitworks" href="/Home#Howitworks" (click)="navigateHowitworks()">How it works</a></li>
             <li data-toggle="modal" data-target="#exampleModal"><a>Sign in</a></li>
             <li data-toggle="modal" data-target="#mi_modal" class="btnFinalSignUp"><button class="blueBtn small">Sign
                     up</button>
