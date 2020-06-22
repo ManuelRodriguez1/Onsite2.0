@@ -1,123 +1,162 @@
-.container{
+.container {
     margin-top: 162px;
     margin-bottom: 74px;
     padding: 0;
     overflow: hidden;
 }
-.divcol{
+
+.divcol {
     padding: 0;
 }
-.mt--3{
+
+.mt--3 {
     margin-top: -3px;
 }
-.mt-0{
+
+.mt-0 {
     margin-top: 0;
 }
-.mt-8{
+
+.mt-8 {
     margin-top: 8px;
 }
-.mt-12{
+
+.mt-12 {
     margin-top: 12px;
 }
-.mt-17{
+
+.mt-17 {
     margin-top: 17px;
 }
-.mt-20{
+
+.mt-20 {
     margin-top: 20px;
 }
-.mt-30{
+
+.mt-30 {
     margin-top: 30px;
 }
-.mt-33{
+
+.mt-33 {
     margin-top: 33px;
 }
-.mt-38{
+
+.mt-38 {
     margin-top: 38px;
 }
-.mt-44{
+
+.mt-44 {
     margin-top: 44px;
 }
-.mt-47{
+
+.mt-47 {
     margin-top: 47px;
 }
-.mt-49{
+
+.mt-49 {
     margin-top: 49px;
 }
-.mr-97{
+
+.mr-97 {
     margin-right: 97px;
 }
-.ml-14{
+
+.ml-14 {
     margin-left: 14px;
 }
-.ml-48{
+
+.ml-48 {
     margin-left: 48px;
 }
-.ml-137{
+
+.ml-137 {
     margin-left: 137px;
 }
-.mr-6{
+
+.mr-6 {
     margin-right: 6px;
 }
-.mr-8{
+
+.mr-8 {
     margin-right: 8px;
 }
-.mr-48{
+
+.mr-48 {
     margin-right: 48px;
 }
-.mb-12{
+
+.mb-12 {
     margin-bottom: 12px;
 }
-.mb-42{
+
+.mb-42 {
     margin-bottom: 42px;
 }
-.mb-45{
+
+.mb-45 {
     margin-bottom: 45px;
 }
-.mb-57{
+
+.mb-57 {
     margin-bottom: 57px;
 }
-.pl-36{
+
+.pl-36 {
     padding-left: 36px;
 }
-.h-326{
+
+.h-326 {
     height: 326px;
 }
-.fr{
+
+.fr {
     float: right;
 }
-.fl{
+
+.fl {
     float: left;
 }
-.mt-mr{
+
+.mt-mr {
     margin-top: -20px;
     margin-right: -22px;
 }
-.mt-mr2{
+
+.mt-mr2 {
     margin-top: 6px;
     margin-right: 9px;
 }
-.absoluteSearch{
+
+.absoluteSearch {
     position: absolute;
     z-index: 1;
     top: 50%;
     transform: translateY(-50%);
     left: 5px;
 }
-.hr{
+
+.hr {
     margin-bottom: 0;
 }
-.project{
+
+.hoverOrange:hover {
+    opacity: 0.8;
+}
+
+.project {
     height: 862px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
-.projects{
+
+.projects {
     height: 290px;
     border-bottom: 1px solid #9D9D9D;
     position: relative;
     cursor: pointer;
 }
-.projects::before{
+
+.projects::before {
     content: '';
     position: absolute;
     left: 11px;
@@ -127,10 +166,12 @@
     background: #FF8600;
     transition: .5s;
 }
-.projects:hover::before{
+
+.projects:hover::before {
     left: 15px;
 }
-.map{
+
+.map {
     width: 313px;
     height: 201px;
     background: gray;
@@ -138,16 +179,19 @@
     overflow: hidden;
     position: relative;
 }
-.mapBig{
+
+.mapBig {
     position: relative;
     background: gray;
     width: 948px;
     height: 439px;
 }
-.modal{
-   background: rgba(0, 0, 0, 0.5);
+
+.modal {
+    background: rgba(0, 0, 0, 0.5);
 }
-.message{
+
+.message {
     text-align: center;
     background: white;
     position: relative;
@@ -157,50 +201,62 @@
     margin-top: 90px;
     border-radius: 6px;
 }
-.message .title{
+
+.message .title {
     font-size: 30px;
     line-height: 41px;
 }
-.showModal{
+
+.showModal {
     display: block;
 }
-.grayBtn{
+
+.grayBtn {
     content: 'Applied';
     background: #ECECEC;
     color: #9D9D9D;
 }
-.grayBtn:hover{
+
+.grayBtn:hover {
     background: #ECECEC;
     color: #9D9D9D;
     border: 0;
 }
-.orLines{
+
+.orLines {
     color: #9D9D9D;
     float: left;
     width: 100%;
     position: relative;
 }
-.orLines::before, .orLines::after{
+
+.orLines::before,
+.orLines::after {
     content: '';
     width: 151px;
     border: 0.5px solid #9D9D9D;
-    position: absolute; 
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
-.orLines::before{
+
+.orLines::before {
     left: 55px;
 }
-.orLines::after{
+
+.orLines::after {
     right: 55px;
 }
-.w360{
+
+.w360 {
     width: 360px;
 }
-.pagination{
+
+.pagination {
     overflow: hidden;
 }
-.buttonsPag{
+
+.buttonsPag {
     display: inline-flex;
     margin-top: 27px;
     margin-left: auto;
@@ -213,40 +269,48 @@
     text-align: center;
     height: 42px;
 }
-.firstPag{
+
+.firstPag {
     width: 92px;
     border-right: 0.5px solid #9D9D9D;
     cursor: pointer;
 }
-.prevPag{
+
+.prevPag {
     width: 126px;
     cursor: pointer;
     border-right: 0.5px solid #9D9D9D;
 }
-.numbers{
+
+.numbers {
     width: 55px;
     border-right: 0.5px solid #9D9D9D;
     cursor: pointer;
 }
-.nextPag{
+
+.nextPag {
     width: 87px;
     cursor: pointer;
 }
-.lastPag{
+
+.lastPag {
     width: 94px;
     border-left: 0.5px solid #9D9D9D;
     cursor: pointer;
 }
-.clickP{
+
+.clickP {
     color: #010973;
 }
-.bgP{
+
+.bgP {
     background: #ECECEC;
     border-bottom: 0.5px solid #9D9D9D;
     color: #9D9D9D;
 }
-@media(min-width: 1045px){
-    .container{
+
+@media(min-width: 1045px) {
+    .container {
         max-width: 1044px !important;
     }
 }
