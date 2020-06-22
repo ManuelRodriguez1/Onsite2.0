@@ -17,6 +17,9 @@
     opacity: 0.7;
     cursor: pointer;
 }
+.enlaceNativo{
+    color: white;
+}
 #contenedorinferiorfooter {
     width: 1268px;
     position: absolute;

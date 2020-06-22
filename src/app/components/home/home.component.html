@@ -18,105 +18,47 @@
     </div>
 
 
-
-</div>
-
-<div class="row  container1280Final" #Aboutus  id="Aboutus">
-    <div class="col-12 col-md-6 izquierdaseccion2home">
-        <img class="imgAbout" src="../../../assets/imagenes/Home/aboutUs.png">
-    </div>
-    <div class="col-12 col-md-6 derechaseccion2home">
-        <div class="contenedorderechaseccion2Home ">
-            <h4>About us</h4>
-            <p class="text2seccion2home">
-                At Onhive our mission is to cultivate a digital marketplace by matching the right personnel with
-                jobs in a simple and transparent way. Connecting people with jobs in a convenient and friendly way.
-                Our process allows users to find opportunities in their location based on their skills. </p>
-            <button class="blueBtn medium btnseccion2home">Learn more</button>
+    <div class="sectionHome1 row sectionAbout" #Aboutus id="Aboutus">
+        <div class="col-12 col-md-6 izquierdaseccion2home">
+            <img class="imgAbout" src="../../../assets/imagenes/Home/aboutUs.png">
         </div>
         <div class="col-12 col-md-6 derechaseccion2home">
             <div class="contenedorderechaseccion2Home ">
                 <h4>About us</h4>
                 <p class="text2seccion2home">
-                    At Onhive our mission is to cultivate a digital marketplace by matching the right personnel with jobs in a simple and transparent way. Connecting people with jobs in a convenient and friendly way. Our process allows users to find opportunities in their
-                    location based on their skills. </p>
-                <button class="blueBtn medium btnseccion2home" style="display: none;">Learn more</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--div id="seccion2Home">
-
-    <div class="contenedorseccion2home row ">
-
-
-
-        <div class="col-12 col-md-6 izquierdaseccion2home">
-            <img src="../../../assets/imagenes/seccion2img1.png">
-        </div>
-        <div class="col-12 col-md-6 derechaseccion2home">
-            <div class="contenedorderechaseccion2Home ">
-                <p class="text1seccion2home">About us</p>
-                <p class="text2seccion2home">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet dui leo. Etiam nec sodales justo. Etiam tortor nibh, interdum at sapien a, pharetra venenatis dui. Nulla egestas interdum nibh sit amet luctus. Etiam suscipit mauris quis turpis
-                    vehicula tincidunt. Mauris vitae sapien eu nulla pharetra vehicula. Nam porta enim id vestibulum.
-                </p>
-
+                    At Onhive our mission is to cultivate a digital marketplace by matching the right personnel with
+                    jobs in a simple and transparent way. Connecting people with jobs in a convenient and friendly way.
+                    Our process allows users to find opportunities in their location based on their skills. </p>
                 <button class="blueBtn medium btnseccion2home">Learn more</button>
             </div>
         </div>
-
-
-
-
-
     </div>
 </div>
 
--->
-
-
-
-<div id="seccion3Home" class="sectionHowitworks">
-    <div class="row container1280Final">
-        <h4 class="contenedortituloseccion3home">How it works</h4>
-    </div>
-    <div class="row contenedorseccion3Home container1280Final ">
-
-        <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home "
-            *ngFor="let num of Steps">
-            <div class="cuadroinfoseccion3home">
-                <img src="{{num.img}}">
-
-            </div>
-    
+<div id="Howitworks">
+    <div id="seccion3Home" #Howitworks>
+        <div class="row container1280Final">
+            <h4 class="contenedortituloseccion3home">How it works</h4>
         </div>
-    </div>
-</div>
+        <div class="row contenedorseccion3Home container1280Final ">
 
+            <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home "
+                *ngFor="let num of Steps">
+                <div class="cuadroinfoseccion3home">
+                    <img src="{{num.img}}">
 
-
-<!--div class="container-carousel container1280Final">
-    <div id="seccion4Home">
-        <div class="contenedorinformacionseccion4">
-            <div class="tituloseccion4home">
-                <p>Reviews</p>
-            </div>
-
-            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-                    <div class="contenedorinfoseccion4{{ slide.img }} sliderseccion4">
-                        <div class="contenedorimagensuperior">
-                            <img src="{{slide.imagensuperior }}" alt="" width="100%">
-                        </div>
-                        <div class="contenedorinferiorseccion4">
-                            <p>{{slide.subtitulo}}</p>
-                            <p>{{slide.name}}</p>
-                        </div>
-                    </div>
                 </div>
-            </ngx-slick-carousel>
+                <h1 class="tituloseccion3home">
+                    {{num.paso}}
+                </h1>
+
+                <div class="subtituloseccion3home">
+                    <p>{{num.text}}</p>
+                </div>
+
+            </div>
+
         </div>
     </div>
-</div-->
+
+</div>
