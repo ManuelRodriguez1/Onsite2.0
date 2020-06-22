@@ -69,7 +69,7 @@
           <input type="hidden" class="form-control" name="id" id="id" ngModel #id="ngModel" [(ngModel)]="viewP.id" />
           <div class="row py-2">
             <div class="title2">
-              <h1 class="changeColorBlue">Project’s name</h1>
+              <h1 class="changeColorBlue " id="btnPointer2">Project’s name</h1>
             </div>
           </div>
           <div class="row">
@@ -153,12 +153,12 @@
             </div>
           </div>
           <div class="row">
-            <div class="container skill m-0 pb-3 pl-0">
-              <div class="col-sm input-group">
+            <div class="container skill m-0 pb-3 pl-0" id="btnPointer" >
+              <div class="col-sm input-group btnPointer" (click)='list(1)'>
                 <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()"
-                  [class.errorInput]="selectskills.value == '' " style="cursor: default;">
+                  [class.errorInput]="selectskills.value == '' " style="cursor: pointer;" >
 
-                <div class="down" [ngClass]="{'up': up == true}" (click)='list(1)'></div>
+                <div class="down" [ngClass]="{'up': up == true}" ></div>
 
               </div>
               <div class="list-group" [hidden]='up == false'>

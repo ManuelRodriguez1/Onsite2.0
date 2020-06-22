@@ -39,15 +39,9 @@
   right: -190px !important;
   top: 60% !important;
 }
-/*
-.description-form{
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 160%;
-  color: #000000;
-}*/
+.btnPointer{
+  cursor: pointer !important;
+}
 .btn-addfile{
   background-color: #C4C4C4;
   color: #000000;

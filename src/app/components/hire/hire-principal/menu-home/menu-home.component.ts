@@ -6,8 +6,7 @@ import { NgForm, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireStorage } from "angularfire2/storage";
-import * as $ from 'jquery';
-
+declare var $: any
 @Component({
   selector: 'app-menu-home',
   templateUrl: './menu-home.component.html',
@@ -150,15 +149,22 @@ export class MenuHomeComponent implements OnInit {
     this.zoom = 8;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-    let radius=Number;
+    let radius = Number;
     //create search FormControl
     this.searchControl = new FormControl();
 
     //set current position
     this.setCurrentPosition();
     //load Places Autocomplete
-   
- 
+    $('html').on('click', ()=>{
+      this.up=false;
+      console.log("click afuera");
+    })
+    $("#btnPointer2").click(function(e){
+      e.stopPropagation()
+      console.log("click adentro");
+    })
+
 
   }
   private setCurrentPosition() {
@@ -170,35 +176,36 @@ export class MenuHomeComponent implements OnInit {
       });
     }
   }
-  mapa(){
+  mapa() {
 
-    setTimeout(()=>{
-    this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+    setTimeout(() => {
+      this.mapsAPILoader.load().then(() => {
+        let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+        autocomplete.addListener("place_changed", () => {
+          this.ngZone.run(() => {
+            //get the place result
+            let place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
+            //verify result
+            if (place.geometry === undefined || place.geometry === null) {
+              return;
+            }
 
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+            //set latitude, longitude and zoom
+            this.latitude = place.geometry.location.lat();
+            this.longitude = place.geometry.location.lng();
+            this.zoom = 12;
+          });
         });
       });
-    });
-  },3000);
+    }, 3000);
   }
   //mostra lista de skill
   list(e) {
     if (e == 1) {
       this.up = !this.up;
     }
+
   }
   //Agregar Skill
   selectskill(e) {
@@ -257,7 +264,7 @@ export class MenuHomeComponent implements OnInit {
         $("#" + skill).removeClass("correctInput");
         $(".a" + skill).html("people is required");
         $("#" + skill).addClass("errorInput");
-        
+
       } else {
         $(".a" + skill).html("");
         $("#" + skill).removeClass("errorInput");
@@ -266,15 +273,15 @@ export class MenuHomeComponent implements OnInit {
       aux.push({ "skill": skill, "quantity": quantity })
     });
 
-    let locationApp=$("#search").val();
+    let locationApp = $("#search").val();
     //Validacion campos 
     console.log(locationApp);
-    console.log(aux[0] );
-   
-    
-    if (f.status == "INVALID" ||  locationApp == "" || aux.length ==0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0 ) {
-      if (locationApp == "" ||  f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
-        ||  f.value.estimated === undefined || f.value.estimated == "" || this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
+    console.log(aux[0]);
+
+
+    if (f.status == "INVALID" || locationApp == "" || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
+      if (locationApp == "" || f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
+        || f.value.estimated === undefined || f.value.estimated == "" || this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
         || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
         this.alerta = true;
       }
@@ -283,12 +290,13 @@ export class MenuHomeComponent implements OnInit {
       var temp = false
 
       //Crear o editar funcion 
-      this.projectService.newProject(f, this.file, this.files, this.selectskills, aux,locationApp,this.latitude,this.longitude)
+      this.projectService.newProject(f, this.file, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude)
 
       this.modal = 1
       this.section = 1
       this.projects = []
     }
+    this.righttv = 'text-dashboard';
 
   }
 
