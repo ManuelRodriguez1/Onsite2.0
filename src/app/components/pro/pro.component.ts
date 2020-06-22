@@ -1,7 +1,8 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProService } from 'src/app/services/pro.service';
 import zipcode from '../../../assets/files/zipcode.json';
+declare var $: any
 
 @Component({
   selector: 'app-pro',
@@ -33,6 +34,7 @@ export class ProComponent implements OnInit {
   zipCodeCity: any = zipcode
   zipcodeSelect: string = ''
   zipcodeSelectActive: boolean = false
+  temp: any = true
 
   constructor(private servicePro: ProService) { }
 
@@ -44,16 +46,24 @@ export class ProComponent implements OnInit {
         this.select = 0
         this.verifyEmail = true
       }
-    })      
+    })  
+    $('html').on('click', ()=>{
+      this.up = false
+    })
+    $("#clickSkills").click(function(e){
+      e.stopPropagation()
+    })
   }
 
-  list(e) {
+
+  list(e: number) {
     if (e == 1) {
       this.up = !this.up;
     } else {
       this.up2 = !this.up2;
     }
   }
+  
   next() {
     this.page++
     this.select = this.page
@@ -93,7 +103,7 @@ export class ProComponent implements OnInit {
   check() {
     this.checkbox = !this.checkbox
   }
-  selecZip(e:string){
+  selecZip(e: string) {
     this.zipcodeSelect = e
     this.zipcodeSelectActive = true
   }
