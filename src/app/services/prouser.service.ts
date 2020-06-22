@@ -20,6 +20,7 @@ export class ProuserService {
   projects = new EventEmitter<any>()
   initChat = new EventEmitter<boolean>()
   chatUnread = new EventEmitter<number>()
+  adjFile = new EventEmitter<string>()
 
   constructor(
     public afA: AngularFireAuth,
@@ -164,13 +165,15 @@ export class ProuserService {
   }
   //CHAT
   //Añadir conversación
-  chatMsg(idHire: string, idPro: string, msg: string, read: boolean) {
+  chatMsg(idHire: string, idPro: string, msg: string, adj: boolean = false, nameAdj: string = '') {
     var chatTemp: any = []
     var temp: any = {
       'fecha': new Date(),
       'id': this.user.uid,
       'message': msg,
-      'read': false
+      'read': false,
+      'adj': adj,
+      'nameAdj': nameAdj
     }
     this.getChat(idHire, idPro).get().subscribe((res) => {
       if (res.data()) {
@@ -189,5 +192,15 @@ export class ProuserService {
   //Comprobar mensajes
   getChatExist() {
     return this.af.collection('Chat')
+  }
+  //Archivos adjuntos
+  addFileAdj(e: any, hire: string, pro: string) {
+    this.afs.ref('Chat/' + hire + '|' + pro + '/' + e.target.files[0].name).put(e.target.files[0])
+      .then((res) => {
+        res.ref.getDownloadURL()
+          .then((url) => {
+            this.adjFile.emit(url)
+          })
+      })
   }
 }

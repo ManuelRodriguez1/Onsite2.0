@@ -263,6 +263,19 @@ hr {
     position: relative;
     transform: translateY(-50%);
     display: inline-flex;
+    cursor: pointer;
+}
+
+.btnEnviarMsj label {
+    cursor: pointer;
+}
+
+.textAdj {
+    margin-top: 6px;
+    width: 70px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .inputChatFinally {

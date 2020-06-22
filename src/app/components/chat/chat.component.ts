@@ -185,9 +185,10 @@ export class ChatComponent implements OnInit, OnDestroy {
         m.noRead = true
       }
     })
+    this.info.chatUnread.emit(this.users.length)
   }
 
-  chatMessage(e: string, msg: string) {
+  chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string) {
     var hire: string = ''
     var pro: string = ''
 
@@ -200,10 +201,26 @@ export class ChatComponent implements OnInit, OnDestroy {
         pro = this.info.user.uid
       }
 
-      this.info.chatMsg(hire, pro, msg, true)
+      this.info.chatMsg(hire, pro, msg, adj, nameAdj)
       this.mesg = ''
       $(".chatContainerHeight").animate({ scrollTop: $('.chatContainerHeight').prop("scrollHeight") }, 1000);
     }
+  }
+
+  adjFile(e: any){
+    var hire: string = ''
+    var pro: string = ''
+    if(this.info.user.displayName == 'hire'){
+      hire = this.info.user.uid
+      pro = this.idPro
+    }else{
+      hire = this.idPro
+      pro = this.info.user.uid
+    }
+    this.info.addFileAdj(e, hire, pro)
+    this.info.adjFile.subscribe((url)=>{
+      this.chatMessage(this.idPro, url, true, e.target.files[0].name.toLowerCase())
+    })
   }
 
   filter(num: number) {

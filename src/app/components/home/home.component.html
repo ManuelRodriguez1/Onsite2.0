@@ -34,6 +34,15 @@
                 Our process allows users to find opportunities in their location based on their skills. </p>
             <button class="blueBtn medium btnseccion2home">Learn more</button>
         </div>
+        <div class="col-12 col-md-6 derechaseccion2home">
+            <div class="contenedorderechaseccion2Home ">
+                <h4>About us</h4>
+                <p class="text2seccion2home">
+                    At Onhive our mission is to cultivate a digital marketplace by matching the right personnel with jobs in a simple and transparent way. Connecting people with jobs in a convenient and friendly way. Our process allows users to find opportunities in their
+                    location based on their skills. </p>
+                <button class="blueBtn medium btnseccion2home" style="display: none;">Learn more</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -67,27 +76,19 @@
 
 -->
 
-<div id="Howitworks">
-    <div id="seccion3Home" #Howitworks >
-        <div class="row container1280Final">
-            <h4 class="contenedortituloseccion3home">How it works</h4>
-        </div>
-        <div class="row contenedorseccion3Home container1280Final ">
-    
-            <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home "
-                *ngFor="let num of Steps">
-                <div class="cuadroinfoseccion3home">
-                    <img src="{{num.img}}">
-    
-                </div>
-                <h1 class="tituloseccion3home">
-                    {{num.paso}}
-                </h1>
-    
-                <div class="subtituloseccion3home">
-                    <p>{{num.text}}</p>
-                </div>
-    
+
+
+<div id="seccion3Home" class="sectionHowitworks">
+    <div class="row container1280Final">
+        <h4 class="contenedortituloseccion3home">How it works</h4>
+    </div>
+    <div class="row contenedorseccion3Home container1280Final ">
+
+        <div id="contenedor1seccion3homeinfo" class="col-12 col-sm-6 col-md-6 col-lg-3 contenedorinfoseccion3Home "
+            *ngFor="let num of Steps">
+            <div class="cuadroinfoseccion3home">
+                <img src="{{num.img}}">
+
             </div>
     
         </div>

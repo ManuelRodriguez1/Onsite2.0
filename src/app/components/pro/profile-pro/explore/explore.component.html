@@ -5,13 +5,12 @@
                 <div class="row fields">
                     <div class="input-group">
                         <div class="searchGray absoluteSearch"></div>
-                        <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects"
-                            [(ngModel)]="searchProject" name="searchProject">
+                        <input type="text" class="form-control pl-36 col-sm-6" placeholder="Search for projects" [(ngModel)]="searchProject" name="searchProject">
                         <div class="normalText fl ml-48">
                             <p><strong>{{ projects2.length }} Results</strong></p>
                         </div>
                         <div class="normalText fr ml-137">
-                            <p>Sort by: <span style="cursor: pointer;" class="orange" (click)="filterChange()"><strong
+                            <p>Sort by: <span style="cursor: pointer;" class="orange hoverOrange" (click)="filterChange()"><strong
                                         *ngIf="changeFilter">Latest</strong>
                                     <strong *ngIf="!changeFilter">First</strong></span></p>
                             <div class="arrowDownGray fr mt-mr" (click)="filterChange()"></div>
@@ -59,9 +58,7 @@
                 <div class="prevPag" [class.clickP]="start > 1" (click)="prevPage()">
                     <p>Previous</p>
                 </div>
-                <div class="numbers clickP"
-                    [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) "
-                    (click)="changePag(page)" *ngFor="let page of pages">
+                <div class="numbers clickP" [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) " (click)="changePag(page)" *ngFor="let page of pages">
                     <p>{{ page }}</p>
                 </div>
                 <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects2.length">
@@ -82,8 +79,7 @@
                 <p class="mt-44">{{infoProject.description}}</p>
             </div>
             <div class="col-sm mr-48" *ngIf="this.emailV">
-                <button class="blueBtn small fr" (click)="apply()"
-                    *ngIf="buttonApply; else aplicado"><span>Apply</span></button>
+                <button class="blueBtn small fr" (click)="apply()" *ngIf="buttonApply; else aplicado"><span>Apply</span></button>
                 <ng-template #aplicado>
                     <button class="blueBtn small fr disabled grayBtn" disabled><span>Applied</span></button>
                 </ng-template>
@@ -148,8 +144,7 @@
             <div class="title mt-44">
                 <p>You have successfully <br>applied to this offer</p>
             </div>
-            <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and
-                agree on payment terms.</p>
+            <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and agree on payment terms.</p>
             <a href="/Dashboard">
                 <button class="blueBtn large mt-30 w360">Back to dashboard</button>
             </a>
