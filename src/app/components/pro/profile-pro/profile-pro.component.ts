@@ -85,6 +85,7 @@ export class ProfileProComponent implements OnInit {
   }
   //Show Option
   selectOption(e) {
+    this.usuariosReviwsTodos = [];
     this.select = e
     if (this.profile.reviews) {
       var temp: number = 0

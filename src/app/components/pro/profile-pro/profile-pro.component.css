@@ -290,3 +290,7 @@ iframe{
 .orange{
     color: #FF8600;
 }
+.descriptionProfile{
+    margin-right: 48px;
+    overflow: hidden;
+}
