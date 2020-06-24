@@ -61,219 +61,219 @@
                         </div>
                     </div>
                 </div>
-              </div>
-              <hr class="m-0">
-              <div class="row py-3 px-5">
-                <div class="col-sm-6 input-group pl-3 crateNewProject" (click)="next()">
-                  <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
-                  <span class="mt-2 new-project normalText">Create new project</span>
-                </div>
-              </div>
             </div>
-            <div *ngIf="HomeFormularioNw == 1">
-                <div class="container containerMarginhr">
-                    <input type="hidden" class="form-control" name="id" id="id" ngModel #id="ngModel" [(ngModel)]="viewP.id" />
-                    <div class="row py-2">
-                        <div class="title2">
-                            <h1 class="changeColorBlue " id="btnPointer2">Project’s name</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 input-group">
-                            <input required type="text" class="form-control" placeholder="e.g. Excavation at 280 S." [class.errorInput]="projectname.value == '' ||  alerta " [class.correctInput]="projectname.value != '' && projectname.value != undefined " name="projectname" id="projectname"
-                                #projectname="ngModel" [(ngModel)]="viewP.projectname" />
-
-
-                            <span *ngIf="projectname.value =='' || projectname.value ==undefined &&   alerta " class="textError">Project name is required characters.</span>
-
-                        </div>
-                    </div>
-                    <div class="row pt-3">
-                        <div class="title2">
-                            <h1 class="changeColorBlue">Project description</h1>
-                        </div>
-                    </div>
-                    <div class="row py-2">
-                        <p class="normalText">
-                            Type what the project is about and the estimated time you expect it to be completed. Include an overview of what you need done.
-                        </p>
-                    </div>
-                    <div class="row fields">
-                        <div class="col-sm input-group">
-                            <textarea class="form-control" id="description" rows="4" name="description" id="description" (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000" #description="ngModel" [class.errorInput]="description.value == '' ||  alerta || description.value > 4000 "
-                                [class.correctInput]="description.value != '' && description.value != undefined " [(ngModel)]="viewP.description" required></textarea>
-
-
-                        </div>
-                        <div class="errordescriptexarea">
-                            <span *ngIf="description.value =='' || description.value == undefined &&   alerta " class="textError">Description of the projec is required</span>
-                        </div>
-                    </div>
-                    <div class="row text-right">
-                        <div class="col-sm">
-                            <span class="normalText">{{contador}} characters remaining</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="title2">
-                            <h1 class="changeColorBlue">Brief material</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p class="normalText">
-                            Add any documents or images that might be helpful in explaining more about your project.
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm input-group m-0">
-                            <div class="input-group custom-file" *ngFor="let f of files; let i = index">
-                                <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
-
-                                <label for="customFileCert{{i}}" class="custom-file-label">
-                  <div class="afterFile">{{f.name}}</div>
-                </label>
-                                <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'" (click)="deleteBriefMaterial(f)"></div>
-                            </div>
-                            <div class="input-group-prepend iconAdd" (click)="addfiles()">
-                                <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" title="Add material" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="title2 m-0 pb-3">
-                            <h1 class="changeColorBlue">Skills</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container skill m-0 pb-3 pl-0" id="btnPointer">
-                            <div class="col-sm input-group btnPointer" (click)='list(1)'>
-                                <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()" [class.errorInput]="selectskills.value == '' " style="cursor: pointer;">
-
-                                <div class="down" [ngClass]="{'up': up == true}"></div>
-
-                            </div>
-                            <div class="list-group" [hidden]='up == false'>
-                                <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
-                                    <p>{{s}}</p>
-                                </div>
-                            </div>
-                            <div class="skillselct" [hidden]="selectskills == null">
-                                <div class="skillsel" *ngFor="let s of selectskills">
-                                    <p>{{s}}</p>
-                                    <div class="close" (click)='close(s)'></div>
-                                </div>
-                            </div>
-                        </div>
-                        <span *ngIf="selectskills.length == 0 &&   alerta " class="textError"> Skills is required.</span>
-
-                    </div>
-                    <div class="row py-3" *ngIf="visiblePeople">
-                        <div class="title2">
-                            <h1 class="changeColorBlue">Number of people per skills</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 form-group" *ngFor="let p of peoples">
-                            <p class="normalText pb-2">{{p.skill}}</p>
-                            <input required type="Number" class="form-control addPeople" placeholder="" value="{{p.quantity}}" name="people" id="{{p.skill}}" [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta " [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined "
-                            />
-                            <span class="textError a{{p.skill}}"></span>
-
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="title2 pb-3">
-                            <h1 class="changeColorBlue">Location</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 input-group">
-
-                            <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl" name="search" id="search" [class.errorInput]="search.value == ''  &&  alerta " [class.correctInput]="search.value != '' && search.value != undefined "
-                                [(ngModel)]="viewP.location">
-
-                            <span *ngIf="search.value == ''  &&   alerta " class="textError">Please
-                    enter a location.</span>
-
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="row">
-                        <div class="title2 pb-3 pt-4">
-                            <h1 class="changeColorBlue">Estimated budget</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 input-group">
-                            <input required type="text" class="form-control" placeholder="$10,000 - $20,000" name="estimated" id="estimated" #estimated="ngModel" [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta" [class.correctInput]="estimated.value != '' && estimated.value != undefined "
-                                [(ngModel)]="viewP.estimated" />
-                            <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta " class="textError">Estimated
-                is required.</span>
-
-
-                        </div>
-                    </div>
-                    <div class="row pt-5">
-                        <div class="title2">
-                            <h1 class="changeColorBlue">Estimated time for the project</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <p class="normalText py-3">Start date</p>
-                            <input type="date" name="startdate" placeholder="dd/mm/yyyy" max="3000-12-31" [(ngModel)]="viewP.startdate" [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta" [class.correctInput]="startdate.value != '' && startdate.value != undefined "
-                                min="1000-01-01" class="form-control" #startdate="ngModel">
-                            <span *ngIf="startdate.value == undefined &&   alerta " class="textError">Start date is required</span>
-
-
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            <p class="normalText py-3">End date</p>
-                            <input type="date" name="enddate" placeholder="dd/mm/yyyy" max="3000-12-31" min="1000-01-01" class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel" [class.errorInput]=" enddate.value == undefined &&   alerta" [class.correctInput]="enddate.value != '' && enddate.value != undefined "
-                                [class.errorInput]="startdate.value > enddate.value">
-                            <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
-                            <span *ngIf="  enddate.value == undefined &&   alerta " class="textError">End date is required</span>
-
-
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-check checkbox form-group m-2">
-                            <input class="form-check-input input-assumpte" type="checkbox" id="taketest" name="taketest" [(ngModel)]="viewP.taketest" #taketest="ngModel" [class.errorInput]="taketest.value != true  &&  alerta " [class.correctInput]="taketest.value == true" />
-                            <label class="form-check-label" for="taketest">
-                <span class="check-text">All workers must take a background test.</span>
-              </label>
-                            <div>
-                                <span *ngIf="taketest.value != true &&   alerta " class="textError">All workers must take a background
-                  test</span>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-check checkbox form-group m-2">
-                            <input type="checkbox" class="form-check-input input-assumpte" id="passtest" name="passtest" #passtest="ngModel" [(ngModel)]="viewP.passtest" [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta " [class.correctInput]="passtest.value != '' && passtest.value != undefined "
-                            />
-                            <label class="form-check-label" for="passtest">
-                <span class="check-text">All workers must pass a background test.</span>
-              </label>
-                            <div>
-                                <span *ngIf="passtest.value != true &&   alerta " class="textError">All workers must pass a background
-                  test</span>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="blueBtn small my-5 float-right" type="submit">Post</button>
+            <hr class="m-0">
+            <div class="row py-3 px-5">
+                <div class="col-sm-6 input-group pl-3 crateNewProject" (click)="next()">
+                    <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
+                    <span class="mt-2 new-project normalText">Create new project</span>
                 </div>
             </div>
         </div>
+        <div *ngIf="HomeFormularioNw == 1">
+            <div class="container containerMarginhr">
+                <input type="hidden" class="form-control" name="id" id="id" ngModel #id="ngModel" [(ngModel)]="viewP.id" />
+                <div class="row py-2">
+                    <div class="title2">
+                        <h1 class="changeColorBlue " id="btnPointer2">Project’s name</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 input-group">
+                        <input required type="text" class="form-control" placeholder="e.g. Excavation at 280 S." [class.errorInput]="projectname.value == '' ||  alerta " [class.correctInput]="projectname.value != '' && projectname.value != undefined " name="projectname" id="projectname"
+                            #projectname="ngModel" [(ngModel)]="viewP.projectname" />
+
+
+                        <span *ngIf="projectname.value =='' || projectname.value ==undefined &&   alerta " class="textError">Project name is required characters.</span>
+
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="title2">
+                        <h1 class="changeColorBlue">Project description</h1>
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <p class="normalText">
+                        Type what the project is about and the estimated time you expect it to be completed. Include an overview of what you need done.
+                    </p>
+                </div>
+                <div class="row fields">
+                    <div class="col-sm input-group">
+                        <textarea class="form-control" id="description" rows="4" name="description" id="description" (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000" #description="ngModel" [class.errorInput]="description.value == '' ||  alerta || description.value > 4000 "
+                            [class.correctInput]="description.value != '' && description.value != undefined " [(ngModel)]="viewP.description" required></textarea>
+
+
+                    </div>
+                    <div class="errordescriptexarea">
+                        <span *ngIf="description.value =='' || description.value == undefined &&   alerta " class="textError">Description of the projec is required</span>
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-sm">
+                        <span class="normalText">{{contador}} characters remaining</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="title2">
+                        <h1 class="changeColorBlue">Brief material</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="normalText">
+                        Add any documents or images that might be helpful in explaining more about your project.
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-sm input-group m-0">
+                        <div class="input-group custom-file" *ngFor="let f of files; let i = index">
+                            <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
+
+                            <label for="customFileCert{{i}}" class="custom-file-label">
+                  <div class="afterFile">{{f.name}}</div>
+                </label>
+                            <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'" (click)="deleteBriefMaterial(f)"></div>
+                        </div>
+                        <div class="input-group-prepend iconAdd" (click)="addfiles()">
+                            <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" title="Add material" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="title2 m-0 pb-3">
+                        <h1 class="changeColorBlue">Skills</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container skill m-0 pb-3 pl-0" id="btnPointer">
+                        <div class="col-sm input-group btnPointer" (click)='list(1)'>
+                            <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()" [class.errorInput]="selectskills.value == '' " style="cursor: pointer;">
+
+                            <div class="down" [ngClass]="{'up': up == true}"></div>
+
+                        </div>
+                        <div class="list-group" [hidden]='up == false'>
+                            <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
+                                <p>{{s}}</p>
+                            </div>
+                        </div>
+                        <div class="skillselct" [hidden]="selectskills == null">
+                            <div class="skillsel" *ngFor="let s of selectskills">
+                                <p>{{s}}</p>
+                                <div class="close" (click)='close(s)'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span *ngIf="selectskills.length == 0 &&   alerta " class="textError"> Skills is required.</span>
+
+                </div>
+                <div class="row py-3" *ngIf="visiblePeople">
+                    <div class="title2">
+                        <h1 class="changeColorBlue">Number of people per skills</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group" *ngFor="let p of peoples">
+                        <p class="normalText pb-2">{{p.skill}}</p>
+                        <input required type="Number" class="form-control addPeople" placeholder="" value="{{p.quantity}}" name="people" id="{{p.skill}}" [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta " [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined "
+                        />
+                        <span class="textError a{{p.skill}}"></span>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="title2 pb-3">
+                        <h1 class="changeColorBlue">Location</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 input-group">
+
+                        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl" name="search" id="search" [class.errorInput]="search.value == ''  &&  alerta " [class.correctInput]="search.value != '' && search.value != undefined "
+                            [(ngModel)]="viewP.location">
+
+                        <span *ngIf="search.value == ''  &&   alerta " class="textError">Please
+                    enter a location.</span>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="row">
+                    <div class="title2 pb-3 pt-4">
+                        <h1 class="changeColorBlue">Estimated budget</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 input-group">
+                        <input required type="text" class="form-control" placeholder="$10,000 - $20,000" name="estimated" id="estimated" #estimated="ngModel" [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta" [class.correctInput]="estimated.value != '' && estimated.value != undefined "
+                            [(ngModel)]="viewP.estimated" />
+                        <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta " class="textError">Estimated
+                is required.</span>
+
+
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="title2">
+                        <h1 class="changeColorBlue">Estimated time for the project</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <p class="normalText py-3">Start date</p>
+                        <input type="date" name="startdate" placeholder="dd/mm/yyyy" max="3000-12-31" [(ngModel)]="viewP.startdate" [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta" [class.correctInput]="startdate.value != '' && startdate.value != undefined "
+                            min="1000-01-01" class="form-control" #startdate="ngModel">
+                        <span *ngIf="startdate.value == undefined &&   alerta " class="textError">Start date is required</span>
+
+
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <p class="normalText py-3">End date</p>
+                        <input type="date" name="enddate" placeholder="dd/mm/yyyy" max="3000-12-31" min="1000-01-01" class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel" [class.errorInput]=" enddate.value == undefined &&   alerta" [class.correctInput]="enddate.value != '' && enddate.value != undefined "
+                            [class.errorInput]="startdate.value > enddate.value">
+                        <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
+                        <span *ngIf="  enddate.value == undefined &&   alerta " class="textError">End date is required</span>
+
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-check checkbox form-group m-2">
+                        <input class="form-check-input input-assumpte" type="checkbox" id="taketest" name="taketest" [(ngModel)]="viewP.taketest" #taketest="ngModel" [class.errorInput]="taketest.value != true  &&  alerta " [class.correctInput]="taketest.value == true" />
+                        <label class="form-check-label" for="taketest">
+                <span class="check-text">All workers must take a background test.</span>
+              </label>
+                        <div>
+                            <span *ngIf="taketest.value != true &&   alerta " class="textError">All workers must take a background
+                  test</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-check checkbox form-group m-2">
+                        <input type="checkbox" class="form-check-input input-assumpte" id="passtest" name="passtest" #passtest="ngModel" [(ngModel)]="viewP.passtest" [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta " [class.correctInput]="passtest.value != '' && passtest.value != undefined "
+                        />
+                        <label class="form-check-label" for="passtest">
+                <span class="check-text">All workers must pass a background test.</span>
+              </label>
+                        <div>
+                            <span *ngIf="passtest.value != true &&   alerta " class="textError">All workers must pass a background
+                  test</span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <button class="blueBtn small my-5 float-right" type="submit">Post</button>
+            </div>
+        </div>
+
     </section>
 </form>
 <div *ngIf="HomeFormularioNw == 2">
