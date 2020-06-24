@@ -35,6 +35,8 @@ export class ProComponent implements OnInit {
   zipcodeSelect: string = ''
   zipcodeSelectActive: boolean = false
   temp: any = true
+  progress: number = 0
+  progressBar: boolean = false
 
   constructor(private servicePro: ProService) { }
 
@@ -46,11 +48,11 @@ export class ProComponent implements OnInit {
         this.select = 0
         this.verifyEmail = true
       }
-    })  
-    $('html').on('click', ()=>{
+    })
+    $('html').on('click', () => {
       this.up = false
     })
-    $("#clickSkills").click(function(e){
+    $("#clickSkills, .skillselct").click(function (e) {
       e.stopPropagation()
     })
   }
@@ -63,7 +65,7 @@ export class ProComponent implements OnInit {
       this.up2 = !this.up2;
     }
   }
-  
+
   next() {
     this.page++
     this.select = this.page
@@ -99,6 +101,16 @@ export class ProComponent implements OnInit {
     var i = this.cust
     this.file.push(e.target.files[0])
     this.customers[i] = e.target.files[0].name
+    this.progressBar = true
+    for (let i = 0; i <= 100; i++) {
+      setTimeout(() => {
+        this.progress++
+      }, 100);
+    }
+    setTimeout(() => {
+      this.progressBar = false
+      this.progress = 0
+    }, 1000)
   }
   check() {
     this.checkbox = !this.checkbox
@@ -106,5 +118,16 @@ export class ProComponent implements OnInit {
   selecZip(e: string) {
     this.zipcodeSelect = e
     this.zipcodeSelectActive = true
+  }
+  deleteCert(e: any) {
+    var i = this.customers.indexOf(e);
+    if (i !== -1) {
+      this.customers.splice(i, 1)
+      this.cust = this.cust - 1 
+    }
+    if(this.customers.length == 0){
+      this.customers = ['Add certificate file']
+      this.cust = 0
+    }
   }
 }

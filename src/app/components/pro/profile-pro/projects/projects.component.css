@@ -74,10 +74,31 @@
     margin-top: -5px;
 }
 
+.messageIcon:hover,
+.trash:hover {
+    opacity: 0.7;
+}
+
 .p-0 .col-sm {
     padding: 0;
 }
 
 .fixed {
     position: fixed;
+}
+
+@media screen and (max-width: 470px) {
+    .mobile {
+        display: none;
+    }
+    .proMobile .row .col-sm:nth-child(2) {
+        margin-top: 8px;
+        font-size: 12px;
+    }
+    .proMobile .row .col-sm:nth-child(2) p::before {
+        content: 'Status: ';
+    }
+    .proMobile .row .col-sm:last-child {
+        margin-top: -25px;
+    }
 }

@@ -156,6 +156,10 @@
     cursor: pointer;
 }
 
+.projects .normalText span:last-child label {
+    display: none;
+}
+
 .projects::before {
     content: '';
     position: absolute;
@@ -309,8 +313,74 @@
     color: #9D9D9D;
 }
 
+.btnDesktop {
+    display: none;
+}
+
 @media(min-width: 1045px) {
     .container {
         max-width: 1044px !important;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .fields .normalText {
+        width: 100%;
+        margin-left: 0;
+    }
+    .fields .normalText:last-child {
+        display: none;
+    }
+    .absoluteSearch {
+        top: 29%;
+    }
+    .map {
+        display: none;
+    }
+    .divcol {
+        margin-right: 48px;
+    }
+    .hr {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+    .projects {
+        margin-left: 24px;
+        margin-right: 10px;
+    }
+    .projects:hover::before,
+    .projects::before {
+        left: 0;
+    }
+    .projects::before {
+        width: 0px;
+    }
+    .projects:hover::before {
+        width: 4px;
+    }
+    .projects .ml-48 {
+        margin-left: 0;
+    }
+    .numbers {
+        display: none;
+    }
+    .btnMobile {
+        display: none;
+    }
+    .btnDesktop {
+        display: block;
+        width: 83%;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        margin-bottom: 40px;
+    }
+    .mapBig {
+        width: 93%;
+        height: 281px;
+    }
+    .otherContainer .ml-48 {
+        padding: 0;
+        margin-right: 23px;
     }
 }

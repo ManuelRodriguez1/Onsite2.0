@@ -27,7 +27,7 @@
             </div>
         </div>
         <hr class="hr mt-30">
-        <div class="row ml-48 mt-17 p-0">
+        <div class="row ml-48 mt-17 p-0 mobile">
             <div class="col-sm gray">
                 <p>Name</p>
                 <div class="arrowDownGray" (click)="azOrder()"></div>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-sm"></div>
         </div>
-        <div class="mt-17">
+        <div class="mt-17 proMobile">
             <ng-container *ngFor="let p of projects | filter: f | az: az | azStatus: azStatus">
                 <ng-container>
                     <div class="row ml-48 mt-22 p-0">
@@ -50,7 +50,9 @@
                         </div>
                         <div class="col-sm">
                             <div class="webkit">
-                                <div class="messageIcon"></div>
+                                <a href="/Chat">
+                                    <div class="messageIcon"></div>
+                                </a>
                                 <div class="trash" (click)="trash(p)"></div>
                             </div>
                         </div>

@@ -22,20 +22,17 @@
                 <form #aF="ngForm" (ngSubmit)="accountForm(aF)" action="">
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel
-                                [(ngModel)]="profile.name" [placeholder]="profile.name">
+                            <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel [(ngModel)]="profile.name" [placeholder]="profile.name">
                         </div>
                         <div class="input-group col-sm">
-                            <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel"
-                                ngModel [(ngModel)]="profile.lastname" [placeholder]="profile.lastname">
+                            <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel" ngModel [(ngModel)]="profile.lastname" [placeholder]="profile.lastname">
                         </div>
                     </div>
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel
-                                [(ngModel)]="profile.email" [placeholder]="profile.email"
-                                [class.errorInput]="!emailVal">
-                            <span class="textError" [hidden]="emailVal">Wrong email</span>
+                            <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel [(ngModel)]="profile.email" [placeholder]="profile.email" [class.errorInput]="!correctEmail.exec(email.value) && email.value != ''">
+                            <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must be a valid
+                                email address</span>
                         </div>
                         <div class="input-group col-sm">
                             <input type="text" hidden>
@@ -43,25 +40,19 @@
                     </div>
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <textarea class="form-control" rows="8" maxlength="400" id="description" name="description"
-                                #description="ngModel" ngModel [(ngModel)]="profile.description"
-                                placeholder="Enter an appealing description of yourself so people want to hire you (400 characters left)"></textarea>
+                            <textarea class="form-control" rows="8" maxlength="400" id="description" name="description" #description="ngModel" ngModel [(ngModel)]="profile.description" placeholder="Enter an appealing description of yourself so people want to hire you (400 characters left)"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="blueBtn small mt-12" id="btnAccount"
-                        [class.disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == ''"
-                        [disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == ''">Update</button>
+                    <button type="submit" class="blueBtn small mt-12" id="btnAccount" [class.disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == '' || !correctEmail.exec(email.value)" [disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == '' || !correctEmail.exec(email.value)">Update</button>
                 </form>
                 <hr class="hr mt-30">
                 <div class="title2">
                     <p class="changeColorBlue">Update password</p>
                 </div>
-                <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
+                <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="" class="formR">
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="password" [class.errorInput]="cPass.value != password && cPass.value != ''"
-                                [class.correctInput]="cPass.value == password && cPass.value != ''" class="form-control"
-                                placeholder="Current password" name="cPass" id="cPass" #cPass="ngModel" ngModel>
+                            <input type="password" [class.errorInput]="cPass.value != password && cPass.value != ''" [class.correctInput]="cPass.value == password && cPass.value != ''" class="form-control" placeholder="Current password" name="cPass" id="cPass" #cPass="ngModel" ngModel>
                             <span class="textError" [hidden]="cPass.value == password || cPass.value == ''">It isn't the
                                 current
                                 password</span>
@@ -72,27 +63,20 @@
                     </div>
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="password" [class.errorInput]="pass1.value?.length < 6 && pass1.value != ''"
-                                [class.correctInput]="pass1.value?.length > 5 && pass1.value != ''" class="form-control"
-                                placeholder="New password" name="pass1" id="pass1" ngModel #pass1="ngModel">
+                            <input type="password" [class.errorInput]="pass1.value?.length < 6 && pass1.value != ''" [class.correctInput]="pass1.value?.length > 5 && pass1.value != ''" class="form-control" placeholder="New password" name="pass1" id="pass1" ngModel #pass1="ngModel">
                             <span class="textError" [hidden]="pass1.value?.length > 5 || pass1.value == ''">Password
                                 must be at leat 6
                                 characters.</span>
                         </div>
                         <div class="input-group col-sm">
-                            <input type="password"
-                                [class.correctInput]="pass2.value == pass1.value && pass2.value != ''"
-                                [class.errorInput]="pass2.value != pass1.value && pass2.value != ''"
-                                class="form-control" placeholder="Confirm new password" name="pass2" id="pass2" ngModel
+                            <input type="password" [class.correctInput]="pass2.value == pass1.value && pass2.value != ''" [class.errorInput]="pass2.value != pass1.value && pass2.value != ''" class="form-control" placeholder="Confirm new password" name="pass2" id="pass2" ngModel
                                 #pass2="ngModel">
                             <span class="textError" [hidden]="pass2.value == pass1.value || pass2.value == ''">Password
                                 doesn’t
                                 match.</span>
                         </div>
                     </div>
-                    <button type="submit" class="blueBtn small mt-12" id="buttonPass"
-                        [class.disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6"
-                        [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6">Update</button>
+                    <button type="submit" class="blueBtn small mt-12" id="buttonPass" [class.disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6" [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6">Update</button>
                 </form>
                 <hr class="hr mt-30">
                 <div class="title2">
@@ -100,8 +84,7 @@
                 </div>
                 <div class="fields flex">
                     <div class="profile mini" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
-                    <input type="file" class="custom-file-input customFile" id="customProfile"
-                        accept=".jpg, .jpeg, .png, .svg" name="certificate" (change)="imageProfile($event)">
+                    <input type="file" class="custom-file-input customFile" id="customProfile" accept=".jpg, .jpeg, .png, .svg" name="certificate" (change)="imageProfile($event)">
                     <label for="customProfile" class="blueBtn medium ml-30 labelButton">Upload file</label>
                 </div>
                 <hr class="hr mt-30">
@@ -111,14 +94,11 @@
                 <div class="row">
                     <div class="col-sm input-group">
                         <div class="input-group custom-file">
-                            <input *ngIf="cv[0].name == 'Add a file'" type="file" class="custom-file-input customFile"
-                                (change)="uploadCV($event)" accept=".pdf" id="customFileCV">
-                            <label for="customFileCV" class="custom-file-label"
-                                [class.cDefault]="cv[0].name != 'Add a file'">
+                            <input *ngIf="cv[0].name == 'Add a file'" type="file" class="custom-file-input customFile" (change)="uploadCV($event)" accept=".pdf" id="customFileCV">
+                            <label for="customFileCV" class="custom-file-label" [class.cDefault]="cv[0].name != 'Add a file'">
                                 <div class="afterFile">{{cv[0].name}}</div>
                             </label>
-                            <div class="deleteCert" title="Delete CV" [hidden]="cvClose == false"
-                                (click)="deleteCV(cv[0])"></div>
+                            <div class="deleteCert" title="Delete CV" [hidden]="cvClose == false" (click)="deleteCV(cv[0])"></div>
                         </div>
                     </div>
                 </div>
@@ -129,20 +109,21 @@
                 <div class="skill mt-21">
                     <div class="row">
                         <div class="col-sm input-group">
-                            <input type="text" id="skillsUnselect" readonly class="form-control"
-                                placeholder="Select Skills" onfocus="this.blur()" style="cursor: default;">
+                            <div class="form-control" [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
+                                <p style="line-height: 31px;">Select Skills</p>
+                                <div class="skillselct" [hidden]="selectskills == null">
+                                    <div class="skillsel" *ngFor="let s of selectskills">
+                                        <p>{{s}}</p>
+                                        <div class="close" (click)='close(s)'></div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="down" [ngClass]="{'up': up == true}" (click)='list()'></div>
                         </div>
                     </div>
                     <div class="list-group" [hidden]='up == false'>
                         <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
                             <p>{{s}}</p>
-                        </div>
-                    </div>
-                    <div class="skillselct" [hidden]="selectskills == null">
-                        <div class="skillsel" *ngFor="let s of selectskills">
-                            <p>{{s}}</p>
-                            <div class="close" (click)='close(s)'></div>
                         </div>
                     </div>
                     <button type="button" class="blueBtn medium mt-12" (click)="updateSkills()">Update skills</button>
@@ -154,15 +135,11 @@
                 <div class="row">
                     <div class="col-sm input-group">
                         <div class="input-group custom-file" *ngFor="let c of customers; let i = index">
-                            <input type="file" *ngIf="c.name == 'Add certificate file'"
-                                class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg"
-                                name="certificate" #certificate="ngModel" ngModel (change)="uploadCert($event)">
-                            <label for="customFileCert{{i}}" class="custom-file-label"
-                                [class.cDefault]="c.name != 'Add certificate file'">
+                            <input type="file" *ngIf="c.name == 'Add certificate file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel (change)="uploadCert($event)">
+                            <label for="customFileCert{{i}}" class="custom-file-label" [class.cDefault]="c.name != 'Add certificate file'">
                                 <div class="afterFile">{{c.name}}</div>
                             </label>
-                            <div class="deleteCert" title="Delete certificate" *ngIf="c.name != 'Add certificate file'"
-                                (click)="deleteCert(c)"></div>
+                            <div class="deleteCert" title="Delete certificate" *ngIf="c.name != 'Add certificate file'" (click)="deleteCert(c)"></div>
                         </div>
                         <div class="input-group-prepend iconAdd" (click)="addcustomer()">
                             <div class="icon_img btnround" title="Add certificate"></div>
@@ -186,9 +163,7 @@
                             <div class="starG" [class.starO]="rate >= 3"></div>
                             <div class="starG" [class.starO]="rate >= 4"></div>
                             <div class="starG mr-13" [class.starO]="rate == 5"></div>
-                            <p class="smallText">(<span *ngIf="!this.profile.reviews">no</span><span
-                                    *ngIf="this.profile.reviews">{{this.profile.reviews.length}}</span>
-                                reviews)
+                            <p class="smallText">(<span *ngIf="!this.profile.reviews">no</span><span *ngIf="this.profile.reviews">{{this.profile.reviews.length}}</span> reviews)
                             </p>
                         </div>
                     </div>
@@ -248,8 +223,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm input-group">
-                            <ng-container
-                                *ngIf="customers.length != 0 && customers.length != null && customers[0].name != 'Add certificate file'">
+                            <ng-container *ngIf="customers.length != 0 && customers.length != null && customers[0].name != 'Add certificate file'">
                                 <div *ngFor="let co of customers" class="mr-30">
                                     <a [href]="customers[0].url" target="_blank">
                                         <div class="fileIcon certIcon"></div>
@@ -257,8 +231,7 @@
                                     <p class="ellipsis">{{co.name}}</p>
                                 </div>
                             </ng-container>
-                            <div
-                                *ngIf="customers.length == 0 || customers.length == null || customers[0].name == 'Add certificate file'">
+                            <div *ngIf="customers.length == 0 || customers.length == null || customers[0].name == 'Add certificate file'">
                                 <p>No files have been uploaded.</p>
                             </div>
                         </div>
@@ -284,13 +257,15 @@
                                         <div class="starG" [class.starO]="reviews.rating >= 3"></div>
                                         <div class="starG" [class.starO]="reviews.rating >= 4"></div>
                                         <div class="starG mr-13" [class.starO]="reviews.rating == 5"></div>
-                
-                                      </div>
+
+                                    </div>
                                 </div>
                             </div>
-                            <p class="mt-21 smallText">{{reviews.descripcion}} <!--a class="orange" href="#">Show less</a--></p>
+                            <p class="mt-21 smallText">{{reviews.descripcion}}
+                                <!--a class="orange" href="#">Show less</a-->
+                            </p>
                         </div>
-                    
+
                     </div>
                 </div>
             </div>
