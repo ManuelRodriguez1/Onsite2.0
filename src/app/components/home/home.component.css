@@ -24,7 +24,7 @@
 .contenedorseccionbanner {
     margin: 0 auto;
     margin-top: 90px;
-    overflow: hidden;
+   /* overflow: hidden;*/
 }
 
 .contenedorderechaseccion2Home {
@@ -136,13 +136,18 @@ margin-top: 40px;
 /* Inicio Seccion 4 Home */
 
 /* Fin Seccion 4 Home */
-/*
-@media screen and (max-width: 1320px) {
-    .contenedorderechaseccion2Home {
-        width: calc(100% - 60px) !important;
-    }
-}
 
+@media screen and (max-width: 1345px) {
+    .imgSliderHome{
+        width: 100%;
+        height: auto;
+    }
+    .subtituloseccionbannerhome{
+        width: 100%;
+    }
+   
+}
+/*
 @media screen and (max-width: 990px) {
     .contenedortituloseccion3home {
         padding-top: 45px;
