@@ -38,6 +38,7 @@ export class ProfileProComponent implements OnInit {
   password: string = ''
   //Validar correo
   emailVal: boolean = true
+  correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
   //Rating
   rate: number = 0
   rating: any[] = []
@@ -81,6 +82,12 @@ export class ProfileProComponent implements OnInit {
         this.rate = Math.round(temp / this.profile.reviews.length)
       }
 
+    })
+    $('html').on('click', () => {
+      this.up = false
+    })
+    $("#clickSkills, .skillselct").click(function (e) {
+      e.stopPropagation()
     })
   }
   //Show Option

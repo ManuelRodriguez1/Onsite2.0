@@ -10,13 +10,12 @@
                     <div class="menuOptionFilter">
                         <span (click)="filter(1)" [class.blueColor]="!unread">All</span>
                         <span (click)="filter(2)" [class.blueColor]="unread">Unread <b>({{totalUnread}})</b></span>
-                        <span>Archived</span>
+                        <!-- <span>Archived</span> -->
                     </div>
                 </div>
                 <hr>
                 <div class="containerH155">
                     <div class="person_user_chat" *ngFor="let u of users | chatText: search | chatSearch: unread ">
-                        <!-- <span *ngIf="num.puntoMessage"  class="puntoMessage"></span> -->
                         <div class="divcontainerChat" (click)="initChat(u)">
                             <div class="nombreschat">
                                 <div class="profile mini imagenChatPerson" [ngStyle]="{'background-image': 'url('+u.photo+')'}">
@@ -27,7 +26,7 @@
                             </div>
                             <div class="iconsChatUser">
                                 <div class="right100p eyeM" [class.eyeN]="!u.noRead"></div>
-                                <div class="folderChat"></div>
+                                <!-- <div class="folderChat"></div> -->
                             </div>
                         </div>
                     </div>
@@ -35,6 +34,15 @@
                 </div>
             </div>
             <div class="col-8">
+                <ng-container *ngIf="users.length == 0 && info.user.displayName == 'pro'">
+                    <div class="noMessages">
+                        <hr class="hr mt-155">
+                        <p class="mt-28">Messages will appear when your hirer contacts you after <br>applying to an offer. Get started looking for a new project.</p>
+                        <a href="/ExplorePro">
+                            <button class="btn blueBtn medium mt-40">Explore</button>
+                        </a>
+                    </div>
+                </ng-container>
                 <ng-container *ngIf="chat">
                     <div class="containerChat">
                         <div class="h--155 backBlue">
@@ -48,20 +56,6 @@
                     </div>
                     <div class="containerChat ml-0">
                         <div class="chatContainerHeight containerChat">
-
-                            <!-- <div class="messagePro1">
-                                <div class="textNormal">
-                                    <span>{{name}}</span> wants to hire you as a <span>Drywall Hanger.</span> Will you accept <span>$12/hour</span>?
-                                </div>
-                                <button class="orangeBtn small">Yes</button>
-                                <button class="orangeBtn small">No</button>
-                                <button class="blueBtn medium">Negotiate</button>
-                            </div>
-
-                            <div class="messagePro2">User Name has declined the offer.</div>
-
-                            <div class="messagePro2 messagePro3">User Name has accepted the offer.</div> -->
-
                             <ng-container *ngFor="let m of messages">
                                 <p class="nomFecha">
                                     {{ m.fecha.toDate() | date: 'MMM, dd h:mm a' }}

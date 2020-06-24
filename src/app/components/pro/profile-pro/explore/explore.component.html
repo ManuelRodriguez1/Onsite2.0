@@ -39,7 +39,7 @@
                         <p class="mt-20">Status: {{ p.statusname }}</p>
                         <div class="mt-49 mb-42">
                             <div class="iconSkills fl mt-mr2"></div>
-                            <p class="purple normalText"><span *ngFor="let s of p.skills">{{ s }}, </span> </p>
+                            <p class="purple normalText"><span *ngFor="let s of p.skills">{{ s }}<label>,</label> </span> </p>
                         </div>
                     </div>
                     <div class="col-sm-5">
@@ -71,14 +71,14 @@
         </div>
     </div>
 
-    <div class="container shadow" *ngIf="select == 1">
+    <div class="container shadow otherContainer" *ngIf="select == 1">
         <div class="row fields mt-47 h-326">
             <div class="col-sm ml-48">
                 <p><span class="title2">Project:</span> {{infoProject.projectname}}.</p>
                 <p class="mt-12">Status: {{infoProject.statusname}}</p>
                 <p class="mt-44">{{infoProject.description}}</p>
             </div>
-            <div class="col-sm mr-48" *ngIf="this.emailV">
+            <div class="col-sm mr-48 btnMobile" *ngIf="this.emailV">
                 <button class="blueBtn small fr" (click)="apply()" *ngIf="buttonApply; else aplicado"><span>Apply</span></button>
                 <ng-template #aplicado>
                     <button class="blueBtn small fr disabled grayBtn" disabled><span>Applied</span></button>
@@ -133,6 +133,10 @@
                 </div>
             </div>
         </div>
+        <button class="blueBtn small fr btnDesktop" (click)="apply()" *ngIf="buttonApply; else aplicado"><span>Apply</span></button>
+        <ng-template #aplicado>
+            <button class="blueBtn small fr disabled grayBtn btnDesktop" disabled><span>Applied</span></button>
+        </ng-template>
     </div>
 
     <div class="textv mr-97">

@@ -1006,6 +1006,20 @@ h4,
     margin-top: 0;
 }
 
+.skillselct {
+    margin-left: -4px;
+    top: -33px;
+    position: relative;
+    margin-bottom: -44px;
+    margin-right: 20px;
+    width: fit-content;
+}
+
+.down {
+    top: 18px;
+    right: 20px;
+}
+
 .errorInput {
     border: 1px solid #F43E40;
     color: #F43E40 !important;
@@ -1448,7 +1462,7 @@ h4,
 }
 
 .containerMin {
-    min-height: 600px;
+    max-height: fit-content;
 }
 
 @keyframes lds-roller {
@@ -1466,5 +1480,53 @@ h4,
 @media screen and (max-width: 1320px) {
     .container1280Final {
         width: calc(100% - 60px) !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .textv {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .fields .row .input-group:first-child,
+    .fields2 .row .input-group:first-child {
+        margin-bottom: 16px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .info p:nth-of-type(2) {
+        display: none;
+    }
+    .back {
+        right: auto;
+    }
+    .custom-file-label {
+        width: 100vw;
+        margin-right: 0;
+    }
+    .iconAdd {
+        margin: 0 auto;
+        margin-top: -29px;
+        height: 78px;
+    }
+    .deleteCert {
+        right: 0;
+    }
+    .profile {
+        width: 80px;
+        height: 80px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .mini {
+        width: 60px;
+        height: 60px;
+    }
+    .verifyUser {
+        line-height: 130%;
+        padding: 10px 12% 0 12%;
     }
 }

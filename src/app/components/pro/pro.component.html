@@ -71,19 +71,21 @@
             <div class="container skill" id="clickSkills">
                 <div class="row">
                     <div class="col-sm input-group" (click)="list(1)">
-                        <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()" style="cursor: default;">
+                        <div class="form-control" [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
+                            <p style="line-height: 31px;">Select Skills</p>
+                            <div class="skillselct" [hidden]="selectskills == null">
+                                <div class="skillsel" *ngFor="let s of selectskills">
+                                    <p>{{s}}</p>
+                                    <div class="close" (click)='close(s)'></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="down" [ngClass]="{'up': up == true}"></div>
                     </div>
                 </div>
                 <div class="list-group" [hidden]='up == false'>
                     <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
                         <p>{{s}}</p>
-                    </div>
-                </div>
-                <div class="skillselct" [hidden]="selectskills == null">
-                    <div class="skillsel" *ngFor="let s of selectskills">
-                        <p>{{s}}</p>
-                        <div class="close" (click)='close(s)'></div>
                     </div>
                 </div>
             </div>
@@ -103,10 +105,14 @@
                         <label for="customFile" class="custom-file-label">
               <div class="afterFile">{{c}}</div>
             </label>
+                        <div class="deleteCert" title="Delete certificate" *ngIf="c != 'Add certificate file'" (click)="deleteCert(c)"></div>
                     </div>
                     <div class="input-group-prepend iconAdd" (click)="addcustomer()">
                         <div class="icon_img btnround"></div>
                     </div>
+                </div>
+                <div class="progress" style="width: 97%; margin: 0 auto" *ngIf="progressBar">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
 

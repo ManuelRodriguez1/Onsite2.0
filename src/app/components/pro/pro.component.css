@@ -94,6 +94,13 @@ input::placeholder {
 .custom-file-label:nth-child(4n) {
     margin-right: 0;
 }
-.list-group{
+
+.list-group {
     width: 100%;
+}
+
+@media screen and (max-width: 470px) {
+    .changeColor {
+        font-size: 14px !important;
+    }
 }
