@@ -6,7 +6,8 @@ import { NgForm, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ProjectService } from '../../../../services/project.service';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireStorage } from "angularfire2/storage";
-declare var $: any
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-menu-home',
   templateUrl: './menu-home.component.html',
@@ -92,7 +93,12 @@ export class MenuHomeComponent implements OnInit {
 
 
   ngOnInit() {
-
+    $(document).on("click", (e)=>{
+      var container = $(".btnPointer");
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        this.up = false;
+      }
+    });
     this.projects = []
 
     //Consulta todos los proyecto apenas detecta un cambio 
@@ -156,14 +162,7 @@ export class MenuHomeComponent implements OnInit {
     //set current position
     this.setCurrentPosition();
     //load Places Autocomplete
-    $('html').on('click', ()=>{
-      this.up=false;
-      console.log("click afuera");
-    })
-    $("#btnPointer2").click(function(e){
-      e.stopPropagation()
-      console.log("click adentro");
-    })
+
 
 
   }
@@ -205,7 +204,7 @@ export class MenuHomeComponent implements OnInit {
     if (e == 1) {
       this.up = !this.up;
     }
-
+ 
   }
   //Agregar Skill
   selectskill(e) {

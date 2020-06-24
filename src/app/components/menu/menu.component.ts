@@ -63,8 +63,9 @@ export class MenuComponent implements OnInit {
   }
 
   paginaMensajeMenu(user, url) {
+    console.log(url);
 
-    if (url == "/Home" || url == "/Pro" || url == "/Hire") {
+    if (url == "/Home" || url == "/Pro" || url == "/Hire" || url == "/") {
 
       this.userMenu = "Home";
       this.af.authState.subscribe(auth => {

@@ -350,6 +350,10 @@ iframe {
 .orange {
     color: #FF8600;
 }
+.descriptionProfile{
+    margin-right: 48px;
+    overflow: hidden;
+}
 
 @media screen and (max-width: 470px) {
     .textw {

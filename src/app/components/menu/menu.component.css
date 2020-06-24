@@ -3,7 +3,7 @@
          margin: 0 auto;
          height: 100%;
      }
-     .menu li:hover a{
+     .menu li a:hover {
         color: #9D9D9D;
      }
      .is-active{
@@ -148,15 +148,15 @@
      
      .top-nav .menu-icon {
          cursor: pointer;
-         float: right;
+         float: left;
          top: 50%;
          position: relative;
          transform: translateY(-50%);
-         padding: 20px;
+        /* padding: 20px;*/
      }
      
      .top-nav .menu-icon .navicon {
-         background: #20232d;
+         background: #FF8600;
          display: block;
          height: 2px;
          position: relative;
@@ -165,7 +165,7 @@
      
      .top-nav .menu-icon .navicon:before,
      .top-nav .menu-icon .navicon:after {
-         background: #20232d;
+         background: #FF8600;
          content: "";
          display: block;
          height: 100%;

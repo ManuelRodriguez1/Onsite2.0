@@ -88,6 +88,9 @@
   top: 0;
   opacity: 0;
 }
+.opChat:hover,.opProject:hover{
+opacity: 0.7;
+}
 .btn-post{
   width: 134px;
   height: 47px;
@@ -100,6 +103,9 @@
   line-height: 25px;
   letter-spacing: 0.04em;
   cursor: pointer;
+}
+.crateNewProject:hover,.optionSelect:hover{
+  opacity: 0.7;
 }
 .btn-post:hover{
   background-color: #FFFFFF;
@@ -126,6 +132,9 @@
   line-height: 160%;
   color: #9D9D9D;
   padding: 2%;
+}
+.list-options span:hover{
+opacity: 0.7;
 }
 .project-name:hover{
   text-decoration: none;
