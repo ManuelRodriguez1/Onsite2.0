@@ -147,8 +147,16 @@
                 <div class="row">
                     <div class="container skill m-0 pb-3 pl-0" id="btnPointer">
                         <div class="col-sm input-group btnPointer" (click)='list(1)'>
-                            <input type="text" readonly class="form-control" placeholder="Select Skills" onfocus="this.blur()" [class.errorInput]="selectskills.value == '' " style="cursor: pointer;">
 
+                            <div class="form-control" [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
+                                <p style="line-height: 31px;">Select Skills</p>
+                                <div class="skillselct" [hidden]="selectskills == null">
+                                    <div class="skillsel" *ngFor="let s of selectskills">
+                                        <p>{{s}}</p>
+                                        <div class="close" (click)='close(s)'></div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="down" [ngClass]="{'up': up == true}"></div>
 
                         </div>
@@ -157,12 +165,7 @@
                                 <p>{{s}}</p>
                             </div>
                         </div>
-                        <div class="skillselct" [hidden]="selectskills == null">
-                            <div class="skillsel" *ngFor="let s of selectskills">
-                                <p>{{s}}</p>
-                                <div class="close" (click)='close(s)'></div>
-                            </div>
-                        </div>
+
                     </div>
                     <span *ngIf="selectskills.length == 0 &&   alerta " class="textError"> Skills is required.</span>
 
