@@ -19,7 +19,19 @@
          top: 0;
          box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
      }
-     
+     .personMenu{
+         display: none;
+         cursor: pointer;
+         top: 50%;
+         position: relative;
+         -webkit-transform: translateY(-50%);
+         transform: translateY(-50%);
+         right: 0;
+         float: right;
+     }
+     .personMenu:hover{
+         opacity: 0.7;
+     }
      .btnFinalSignUp {
          margin-right: 0px !important;
          line-height: normal !important;
@@ -152,7 +164,10 @@
          top: 50%;
          position: relative;
          transform: translateY(-50%);
-        /* padding: 20px;*/
+         padding: 8px 0px 8px 0px;
+     }
+     .top-nav .menu-icon:hover {
+        opacity: 0.7;
      }
      
      .top-nav .menu-icon .navicon {
@@ -161,6 +176,7 @@
          height: 2px;
          position: relative;
          width: 1.625rem;
+         border-radius: 2px;
      }
      
      .top-nav .menu-icon .navicon:before,
@@ -172,6 +188,7 @@
          position: absolute;
          transition: all 0.2s ease-out;
          width: 100%;
+         border-radius: 2px;
      }
      
      .top-nav .menu-icon .navicon:before {
@@ -186,8 +203,10 @@
          display: none;
      }
      
+     
      .top-nav .menu-btn:checked~.menu {
-         max-height: 300px;
+         max-height: 100vh;
+         height: 100vh;
      }
      
      .top-nav .menu-btn:checked~.menu-icon .navicon {
@@ -210,7 +229,7 @@
      .menuSelect{
         color: #9D9D9D !important;
     }
-     @media (min-width: 900px) {
+     @media (min-width: 901px) {
          .top-nav li {
              margin: 0 10px;
          }
@@ -219,7 +238,7 @@
          }
      }
      
-     @media (max-width: 900px) {
+     @media (max-width: 901px) {
          .menu {
              list-style: none;
              overflow: hidden;
@@ -228,30 +247,63 @@
              align-items: flex-start;
              width: 100%;
              max-height: 0;
+             height: 100%;
              transition: max-height 0.2s ease-out;
              top: 0 !important;
              transform: none !important;
              position: absolute !important;
              background: white;
              margin-top: 90px;
+             box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1);
          }
+        
          .menu li {
-             width: 100%;
+            width: calc(100% - 60px) !important;
+            margin: 0 auto !important;
+            border-bottom: 1px solid #9D9D9D ;
          }
-         nav img {
+         nav .aimg img {
              width: 155px;
          }
-         .aimg {
-             height: auto !important;
+      
+         .aimg{
+            left: 50% !important;
+            transform: translate(-50%,-50%) !important;
+            top: 50% !important;
+            height: auto !important;
+            position: absolute !important;
          }
+         .personMenu{
+            display: block;
+        }
+        .btnFinalSignUp{
+            line-height: 80px !important;
+        }
+        .btnFinalSignUp .blueBtn{ 
+            background: none;
+            color: black;
+            width: auto;
+            height: auto;
+            font-size: 15px !important;
+        
+        }
+        .btnFinalSignUp .blueBtn:hover{
+            border: none !important;
+            color:#9D9D9D !important;
+
+        }
      }
      
      @media (max-width: 500px) {
-         .aimg2 {
-             height: 30px;
-             margin-left: 15px;
-             padding-left: 15px;
-             line-height: 30px;
-             font-size: 15px;
-         }
+        nav .aimg img {
+            width: 121px;
+            height: 35px;
+        }
+        nav{
+            height: 60px !important;
+        }
+        .menu{
+            margin-top: 60px !important;
+        }
+     
      }
