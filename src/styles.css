@@ -1026,7 +1026,7 @@ h4,
 }
 
 .errorInput {
-    border: 1px solid #F43E40;
+    border: 1px solid #F43E40 !important;
     color: #F43E40 !important;
 }
 

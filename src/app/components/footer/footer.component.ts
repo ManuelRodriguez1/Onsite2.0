@@ -19,6 +19,7 @@ export class FooterComponent implements OnInit {
   today = new Date(Date.parse(Date()));
   registerForm: FormGroup;
   submitted = false;
+
   constructor(public afAuth: AngularFireAuth,private db: AngularFirestore,private formBuilder: FormBuilder) { 
   }
   
@@ -50,8 +51,9 @@ let email=JSON.stringify(this.registerForm.value.email);
     })
     .then(function(docRef) {
 
-       
-       $("#error1").html("Success");
+
+   
+       $("#error1").html("Thank you for subscribing!");
         $("#emailFooter").val("");
 
 
@@ -64,6 +66,10 @@ let email=JSON.stringify(this.registerForm.value.email);
     });
     }
     
+    arrowTop(){
+      $('html, body').animate({scrollTop: 0}, 600);
+
+    }
     
 
   

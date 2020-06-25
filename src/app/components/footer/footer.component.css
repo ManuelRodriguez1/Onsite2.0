@@ -58,7 +58,7 @@
 
 .contenedorsuperiorfooter {
     position: relative;
-    height: 222px;
+    height: 180px;
     margin: 0 auto;
     margin-top: 50px;
 }
@@ -134,7 +134,7 @@
 }
 
 .derechasuperiorfooter {
-    width: 357px;
+   width: 357px;
     float: right;
 }
 
@@ -175,7 +175,7 @@
 
 .form-footer {
     width: calc(170px + (315 - 170) * ((100vw - 375px) / (1280 - 375)));
-    height: 47px;
+    height: 46px;
     background-color: transparent;
     float: left;
     font-size: 15px;
@@ -189,28 +189,25 @@
 }
 
 .colormsj {
-    color: white;
+    color:  #21D8C6;
+    padding: 2px;
 }
 
-.btn-footer {
-    width: 136px;
-    height: 47px;
-    background: #E76800;
-    border: 1px solid #E76800;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    /*outline: none;*/
-    cursor: pointer;
-    font-family: 'Open Sans', sans-serif;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 16px;
-    line-height: 22px;
-    letter-spacing: 0.04em;
-}
 
 .formfooter {
     margin-top: 12px;
+}
+.arrowTop1{
+    background-image: url("../../../assets/iconos/arrowTop1.svg");
+    height: 40px;
+    width: 40px;
+    float: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+.arrowTop1:hover{
+    background-image: url("../../../assets/iconos/aroowTopHover.svg");
 }
 
 @media (max-width: 700px) {
