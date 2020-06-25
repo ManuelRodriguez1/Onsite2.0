@@ -26,10 +26,12 @@
 
 
                     <input type="text" id="emailFooter" formControlName="email" class="form-control form-footer" [class.errorInput]="submitted && f.email.errors "  />
-
-
-
                     <button class="orangeBtn small "> Subscribe </button>
+                    <div class="progress" style="width: 71%; margin: 0 auto" *ngIf="progressBar">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="99"></div>
+                    </div>
+
+                    
 
                  
                 </form>

@@ -7,8 +7,10 @@
 }
 
 .imgSliderHome {
-    width: 630px;
-    height: 344px;
+    /*width: 630px;
+    height: 344px;*/
+    width:  calc(325px + (630 - 325) * ((100vw - 375px) / (1920 - 375)));
+    height:  calc(176px + (344 - 176) * ((100vw - 375px) / (1920 - 375)));
 
 }
 .sectionHome1{
@@ -142,30 +144,71 @@ margin-top: 40px;
         left: 50%;
         position: relative;
         transform: translate(-50%);
+        /*width: 100%;
+        height: auto;*/
     }
     .subtituloseccionbannerhome{
+        width: 100%;
+    }
+    .text2seccion2home{
         width: 100%;
     }
    
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 991px) {
     .sectionHome1{
         display: flex;
     }
     .izquierdaseccion2home{
         order: 2;
+        margin-top: 60px;
     }
     .derechaseccion2home{
         order: 1;
     }
+    .imgSliderHome{
+       /* width: 630px;
+        height: 344px;*/
+    }
+    .sectionAbout{
+        padding-top: 0px;
+    }
+    #Aboutus{
+        padding-top: 150px;
+    }
+    .imgAbout{
+        left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .imgAbout{
+      width: 400px;
+      height: 400px;
+    }
    
 }
 
+
 @media screen and (max-width: 650px) {
-    .imgSliderHome{
+   /* .imgSliderHome{
       width: 100%;
       height: auto;
+    }*/
+   
+}
+@media screen and (max-width: 480px) {
+    .btnHomeSection .orangeBtn{
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .btnHomeSection .btnPro{
+        width: 100%;
+        margin-left: 0px;
+
     }
    
 }

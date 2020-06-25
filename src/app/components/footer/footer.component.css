@@ -15,10 +15,11 @@
 }
 .enlaceNativo:hover{
     opacity: 0.7;
-    cursor: pointer;
+   
 }
 .enlaceNativo{
-    color: white;
+    color: white !important;
+    cursor: pointer;
 }
 #contenedorinferiorfooter {
     width: 1268px;
@@ -113,6 +114,7 @@
     background-size: contain;
     float: left;
     margin-left: 12px;
+    cursor: pointer;
 }
 
 #iconofootfacebook {
@@ -120,17 +122,25 @@
     height: 17px;
     background-image: url('../../../assets/iconos/facebookfooter.svg');
 }
+#iconofootfacebook:hover {
+    background-image: url('../../../assets/iconos/hoverf.svg');
+}
 
 #iconofootinstagram {
     width: 17px;
     height: 17px;
     background-image: url('../../../assets/iconos/instagramfooter.svg');
 }
-
+#iconofootinstagram:hover {
+    background-image: url('../../../assets/iconos/hoveri.svg');
+}
 #iconofoottwitter {
     width: 20px;
     height: 17px;
     background-image: url('../../../assets/iconos/twitterfooter.svg');
+}
+#iconofoottwitter:hover {
+    background-image: url('../../../assets/iconos/hovert.svg');
 }
 
 .derechasuperiorfooter {
@@ -196,6 +206,7 @@
 
 .formfooter {
     margin-top: 12px;
+    margin-right: 5px;
 }
 .arrowTop1{
     background-image: url("../../../assets/iconos/arrowTop1.svg");
@@ -208,6 +219,18 @@
 }
 .arrowTop1:hover{
     background-image: url("../../../assets/iconos/aroowTopHover.svg");
+}
+.progress{
+    margin-left: 1px !important;
+    height: 4px;
+    border-radius: 0;
+    position: absolute;
+    margin-top: -5px !important;
+    background-color:transparent;
+}
+.progress-bar{
+    background-color:#21D8C6;
+    margin-right: 3px !important;
 }
 
 @media (max-width: 700px) {
