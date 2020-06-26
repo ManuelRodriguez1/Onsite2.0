@@ -107,7 +107,7 @@ export class MenuHomeComponent implements OnInit {
         d.forEach((d) => {
           this.projects.push(d.payload.doc.data())
         })
-        console.log(this.projects)
+     
       })
     //Funcion reviews
 
@@ -116,8 +116,6 @@ export class MenuHomeComponent implements OnInit {
 
     this.projectService.Buscador.subscribe((res) => {
 
-      console.log("de->" + this.reviewdescripcion);
-      console.log("est->" + this.estrellitasreviws1);
 
       if (res) {
 
@@ -127,16 +125,16 @@ export class MenuHomeComponent implements OnInit {
 
             res1.descripcion = this.reviewdescripcion;
             res1.rating = this.estrellitasreviws1;
-            console.log(this.reviews);
+       
             this.updateReviews();
           } else {
             var contador = 1;
             this.reviews.map((res1) => {
-              console.log(this.reviews.length + "====" + contador);
+          
               if (res1.id != this.user.uid && contador == this.reviews.length) {
 
                 this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
-                console.log(this.reviews);
+            
                 this.updateReviews();
               }
               contador++;
@@ -144,10 +142,9 @@ export class MenuHomeComponent implements OnInit {
           }
         })
 
-        console.log(this.reviews);
+  
       }
-      console.log(res);
-      console.log("kate");
+ 
     })
 
     //mapa
@@ -212,7 +209,7 @@ export class MenuHomeComponent implements OnInit {
     if (i === -1) {
       this.selectskills.push(e);
       this.peoples.push({ "skill": e, "quantity": "" });
-      console.log(this.peoples);
+
     }
     this.visiblePeople = true
   }
@@ -222,7 +219,7 @@ export class MenuHomeComponent implements OnInit {
     if (i !== -1) {
       this.selectskills.splice(i, 1)
       this.peoples.splice(i, 1)
-      console.log(this.peoples);
+
     }
     this.visiblePeople = false
   }
@@ -230,7 +227,7 @@ export class MenuHomeComponent implements OnInit {
 
   //update this.reviews
   updateReviews() {
-    console.log("manuel->" + this.profileP.id);
+ 
     this.db.collection("users_pro").doc(this.profileP.id).update({
       reviews: this.reviews,
     }).then((res) => {
@@ -250,7 +247,7 @@ export class MenuHomeComponent implements OnInit {
 
   //Agregar Proyecto BD
   addProject(f: NgForm) {
-    console.log(f.value);
+
     this.error = 2
     this.submitted = true
     var aux = []
@@ -274,8 +271,7 @@ export class MenuHomeComponent implements OnInit {
 
     let locationApp = $("#search").val();
     //Validacion campos 
-    console.log(locationApp);
-    console.log(aux[0]);
+ 
 
 
     if (f.status == "INVALID" || locationApp == "" || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
@@ -428,7 +424,7 @@ export class MenuHomeComponent implements OnInit {
         this.db.collection("users_pro").doc(this.apply[i]).get()
           .subscribe((data) => {
             this.dataApply.push(data.data());
-            console.log(this.dataApply);
+ 
             data.data().skills.forEach(element => {
               this.buscar_team_skill(element, data.data());
             });
@@ -449,7 +445,7 @@ export class MenuHomeComponent implements OnInit {
       var i = this.viewP.skills.indexOf(userProSkill)
       if (i === 0) {
         this.teamSkills.push({ "team": userProSkill, "dataApply": dataApply })
-        console.log(this.teamSkills);
+
       }
     }
   }
@@ -463,18 +459,18 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw = 3
     this.section = 4
     this.profileP = profile;
-    console.log(this.profileP.reviews);
+   
     if (this.profileP.reviews) {
       var temp: number = 0
       this.profileP.reviews.forEach((r) => {
         temp += r.rating
-        console.log(r.id);
+   
 
         this.db.collection("users_hire").doc(r.id).snapshotChanges()
           .subscribe((data) => {
 
             this.repro = data.payload.data()
-            console.log(this.repro);
+     
             this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
 
             if (r.id == this.user.uid) {
@@ -486,8 +482,18 @@ export class MenuHomeComponent implements OnInit {
 
 
       })
-      console.log(this.usuariosReviwsTodos);
-      this.rate = Math.round(temp / this.profileP.reviews.length)
+
+   
+
+      if (this.profileP.reviews) {
+        var temp: number = 0
+        this.profileP.reviews.forEach((r) => {
+          temp += parseInt(r.rating)
+        })
+        this.rate = Math.round(temp / this.profileP.reviews.length)
+      }
+   
+
 
     }
 
@@ -495,7 +501,7 @@ export class MenuHomeComponent implements OnInit {
 
 
 
-    console.log(this.profileP);
+
 
   }
 
@@ -503,7 +509,6 @@ export class MenuHomeComponent implements OnInit {
   //Ver el proyecto segun el id para editar 
   goToEditProject(idP) {
     this.HomeFormularioNw = 1;
-    console.log("ok")
     this.mapa();
   }
   //Mostrar los reviews
@@ -539,7 +544,7 @@ export class MenuHomeComponent implements OnInit {
 
       this.reviewdescripcion = review.val()
       this.estrellitasreviws1 = valStarts.val()
-      console.log(this.profileP);
+
 
       if (this.profileP.reviews) {
         this.projectService.Buscador.emit(this.profileP.reviews)

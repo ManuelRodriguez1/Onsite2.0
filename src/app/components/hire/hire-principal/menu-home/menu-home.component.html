@@ -404,7 +404,12 @@
                             </div>
                         </div>
                         <div class="col-sm mx-4 pt-3">
-                            <span class="vprofile" (click)="goToProfile(da)">View profile</span>
+                            <div class="pr-3 opChat messageIcon profileHire1"></div>
+
+                            <span class="vprofile profileHire2" (click)="goToProfile(da)">
+
+                                <div class="profileHirePro"></div>
+                            </span>
                         </div>
                     </div>
                     <hr class="hr m-0" />
@@ -437,10 +442,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm mx-4 mt-2">
-                    <img src="../../../../../assets/iconos/sendM.svg" alt="">
-                    <img src="../../../../../assets/iconos/error-icon-p.svg" alt="" class="pl-3">
+
+                <div class="col-sm mx-4 pt-3">
+                    <div class="pr-3 opChat messageIcon profileHire1"></div>
+
+                    <span class="vprofile profileHire2" (click)="goToProfile(da)">
+
+                        <div class="profileHirePro"></div>
+                    </span>
+
+                    <div class="pr-3 opChat errorProfilehire"></div>
                 </div>
+
                 <hr class="hr my-1" />
             </div>
             <hr class="hr my-1" />
@@ -597,13 +610,15 @@
                 </div>
                 <hr class="hr">
                 <div class="row" *ngIf="profileP.reviews">
-                    <div class="col-sm  ml-48">
+                    <div class="col-sm  ml-48  mr-48">
                         <div class="title3 mb-4">
                             <p>Reviews</p>
                         </div>
+                        <p class="smallText mr-48" *ngIf="usuariosReviwsTodos.length==0">Your opinion is very valuable to your workers, help people improve and be
+                            recognized for their skills, leave a review!</p>
 
                         <div class="row mb-4">
-                            <div class="col-sm  mt-23 " *ngFor="let reviews of usuariosReviwsTodos">
+                            <div class="col-6 mt-23 " *ngFor="let reviews of usuariosReviwsTodos">
                                 <div class="media">
                                     <div class="profile-mini"
                                         [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
@@ -619,11 +634,12 @@
                                                 <div class="starG mr-13" [class.starO]="reviews.rating == 5"></div>
 
                                             </div>
-                                            <div>
-                                                <p class="mt-21 smallText">{{reviews.descripcion}} </p>
-                                            </div>
+                                            
                                         </div>
                                     </div>
+                                </div>
+                                <div>
+                                    <p class="mt-21 smallText reviwsTamaño">{{reviews.descripcion}} </p>
                                 </div>
                             </div>
 
