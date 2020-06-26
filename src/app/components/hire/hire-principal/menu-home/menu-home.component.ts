@@ -337,6 +337,7 @@ export class MenuHomeComponent implements OnInit {
     this.select = 0
     this.HomeFormularioNw = 0
     this.modal = 3
+    //location.href="/Hireprincipal";
 
   }
   //Eliminar material

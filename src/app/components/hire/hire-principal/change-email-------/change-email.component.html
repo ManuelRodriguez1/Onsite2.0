@@ -296,14 +296,15 @@
 
                 <div class="row">
                     <div class="form-check  form-group m-2">
-                        <input type="checkbox" class="checkbox__input" id="passtest" name="passtest" #passtest="ngModel"
-                            [(ngModel)]="viewP.passtest"
-                            [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta "
-                            [class.correctInput]="passtest.value != '' && passtest.value != undefined " />
+                        <label class="checkbox">
+                            <input type="checkbox" class="checkbox__input" id="passtest" name="passtest"
+                                #passtest="ngModel" [(ngModel)]="viewP.passtest"
+                                [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta "
+                                [class.correctInput]="passtest.value != '' && passtest.value != undefined " />
 
-                        <span class="checkbox__checkmark"></span>
-                        <span class="smallText">All workers must pass a background test.</span>
-
+                            <span class="checkbox__checkmark"></span>
+                            <span class="smallText">All workers must pass a background test.</span>
+                        </label>
 
 
                         <div>
