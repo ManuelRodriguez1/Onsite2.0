@@ -18,8 +18,10 @@
 }
 
 .imgAbout{
-    width: 540px;
-    height: 555px;
+   /* width: 540px;
+    height: 555px;*/
+    width:  calc(245px + (540 - 245) * ((100vw - 375px) / (1920 - 375)));
+    height:  calc(252px + (555 - 252) * ((100vw - 375px) / (1920 - 375)));
 }
 
 
