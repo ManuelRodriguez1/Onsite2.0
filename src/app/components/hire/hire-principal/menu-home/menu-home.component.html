@@ -40,9 +40,15 @@
                                             <div class="col-sm ">
                                                 <div class=" webkit">
                                                     <div class="pr-3 opChat messageDesactive" disabled></div>
-                                                    <div class="pr-3 opChat carpeta"
-                                                        [class.carpetaDesactive]=' p.status  == 3'
-                                                        (click)="archivedStatus(p.id)"></div>
+                                                    <div class="pr-3 opChat carpeta" *ngIf="p.status  != 3"
+                                                      
+                                                        (click)="archivedStatus(p.id)">
+                                                    </div>
+                                                    <div class="pr-3 opChat unarchive" *ngIf="p.status  == 3"
+                                                   
+                                                        (click)="UnarchivedStatus(p.id)">
+                                                    </div>
+
                                                     <div class="pr-3 opProject trash"
                                                         [class.trashDesactive]=' p.status  == 4' (click)="delete(p.id)">
                                                     </div>
@@ -317,7 +323,8 @@
                 </div>
 
                 <button class="blueBtn small my-5 float-right" type="submit">Post</button>
-                <button class="blueBtn small my-5 float-right" type="button" (click)="HomeFormularioNw = 0" style="margin-right: 12px">Cancel</button>
+                <button class="blueBtn small my-5 float-right" type="button" (click)="HomeFormularioNw = 0"
+                    style="margin-right: 12px">Cancel</button>
             </div>
         </div>
 

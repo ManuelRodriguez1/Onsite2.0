@@ -396,6 +396,21 @@ export class MenuHomeComponent implements OnInit {
 
 
   }
+  //Modificar estado a pendiente
+  
+  UnarchivedStatus(idP) {
+    this.option = this.option + 5
+
+    this.projects = []
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
+      status: 1,
+      statusname: 'Pending',
+    }).then((url) => {
+      this.option = this.option - 5
+    })
+
+
+  }
   //ventana emergente confirmar para cambiar estado del proyecto a eliminado 
   confirmDelete() {
     this.confirm = 1
