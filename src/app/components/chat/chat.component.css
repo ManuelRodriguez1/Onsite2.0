@@ -113,6 +113,11 @@
     position: absolute;
     width: 100%;
     margin: 0 auto;
+    bottom: 20px;
+}
+
+.divCabezera .nombrechatNaranja {
+    bottom: 0;
 }
 
 .person_user_chat {
@@ -265,11 +270,12 @@ hr {
 }
 
 .textAdj {
-    margin-top: 6px;
-    width: 70px;
+    margin-top: 8px;
     text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 10px;
+    color: #9D9D9D;
+    letter-spacing: 0.04em;
+    font-weight: 600;
 }
 
 .inputChatFinally {
@@ -368,4 +374,212 @@ hr {
 .noMessages p {
     line-height: 160%;
     font-size: 14px;
+}
+
+.pfmt {
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+.modalChat {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    z-index: 30;
+}
+
+.modalChatInt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 470px;
+    border-radius: 6px;
+}
+
+.modalChatInt .closeChat {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+}
+
+.modalChatInt .closeChat:hover {
+    opacity: 0.7;
+}
+
+.modalChatInt .title2 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.modalChatInt .mt-50 {
+    margin-top: 50px;
+}
+
+.modalChatInt {
+    margin-top: 20px;
+}
+
+.modalChatInt .contentPrice {
+    overflow: hidden;
+    margin-top: 20px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modalChatInt .contentPrice .input {
+    width: 118px;
+    float: left;
+    height: 45px;
+    text-align: center;
+}
+
+.modalChatInt .contentPrice .input:focus {
+    outline: none;
+}
+
+.modalChatInt .contentPrice p {
+    float: left;
+    font-size: 14px;
+    margin-left: 12px;
+    margin-top: 14px;
+}
+
+.modalChatInt .mt-20 {
+    margin-top: 20px;
+}
+
+.modalChatInt .select {
+    margin-top: 20px;
+    width: 360px;
+    height: 45px;
+    margin-left: 55px;
+}
+
+.modalChatInt .list-group {
+    width: 360px;
+    margin-left: 55px;
+    max-height: 124px;
+    overflow: auto;
+}
+
+.modalChatInt .order {
+    top: 23px;
+    right: 13px;
+}
+
+.modalChatInt .btn {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 360px;
+    margin-left: 55px;
+}
+
+.offerChat {
+    background: #010973;
+    color: white;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 14px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lh-160 {
+    line-height: 160%;
+}
+
+@media screen and (max-width: 470px) {
+    .containerH155 {
+        margin-left: 24px;
+        margin-right: 7px;
+    }
+    hr {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+    .person_user_chat .divcontainerChat {
+        margin-left: 8px;
+    }
+    .person_user_chat .nombrechatNaranja {
+        color: #FF8600;
+        font-size: 10px;
+    }
+    .person_user_chat {
+        height: 93px !important;
+    }
+    .person_user_chat .iconsChatUser {
+        margin-bottom: auto;
+        top: 59%;
+        transform: translateY(-50%);
+        right: -50px;
+    }
+    .menuOptionFilter {
+        margin-top: 16px;
+        width: auto;
+    }
+    .divinputsearch {
+        width: calc(100% - 40px);
+    }
+    .h--155::before {
+        content: 'Messages';
+        font-size: 18px;
+        color: #010973;
+        font-weight: bold;
+        position: absolute;
+        top: 14px;
+        left: 24px;
+    }
+    .shadow,
+    .chatrightborder {
+        box-shadow: none !important;
+    }
+    .col-8 {
+        display: none;
+        max-width: 100%;
+        padding-left: 24px;
+        padding-right: 24px;
+        flex: none;
+    }
+    .col-8 .h--155::before {
+        display: none;
+    }
+    .divCabezera {
+        margin-top: 15px;
+    }
+    .divCabezera .mini {
+        float: left;
+        margin-right: 14px;
+    }
+    .divCabezera .nombrechatNaranja {
+        float: left;
+        position: relative;
+    }
+    .col-8 .h--155 {
+        height: 89px;
+    }
+    .col-8 .containerChat {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .col-8 hr {
+        margin-left: 0;
+    }
+    .mensajescHat .blueBtn {
+        width: 25px;
+        height: 25px;
+        background-color: transparent;
+    }
+    .inputChatFinally {
+        width: 74%;
+        float: left;
+        border-right: 1px solid #9D9D9D;
+    }
 }
