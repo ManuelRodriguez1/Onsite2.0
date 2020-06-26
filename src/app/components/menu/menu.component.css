@@ -47,6 +47,10 @@
      
      .flechaUsuario {
          margin-left: 10px;
+         cursor: pointer;
+     }
+     .flechaUsuario:hover {
+         opacity: 0.7;
      }
      
      .bgpodpad {

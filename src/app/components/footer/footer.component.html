@@ -19,23 +19,27 @@
             </div>
         </div>
         <div class="derechasuperiorfooter">
+            <div (click)="arrowTop()" class="arrowTop1"></div>
             <div class="contenedorform">
                 <p>Subscribe to our newsletter</p>
                 <form [formGroup]="registerForm" (ngSubmit)="test()" action="" class="formfooter">
 
 
-                    <input type="text" id="emailFooter" formControlName="email" class="form-control form-footer" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-
-
-
-                    <button class="btn-footer"> Subscribe </button>
-
-                    <div *ngIf="submitted && f.email.errors" class="textError">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    <input type="text" id="emailFooter" formControlName="email" class="form-control form-footer" [class.errorInput]="submitted && f.email.errors "  />
+                    <button class="orangeBtn small "> Subscribe </button>
+                    <div class="progress" style="width: 71%; margin: 0 auto" *ngIf="progressBar">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="99"></div>
                     </div>
-                    <div id="error1" class="colormsj"></div>
+
+                    
+
+                 
                 </form>
+                <div *ngIf="submitted && f.email.errors" class="textError">
+                    <div *ngIf="f.email.errors.required">Email is required to subscribe</div>
+                    <div *ngIf="f.email.errors.email">Please provide a valid e-mail address </div>
+                </div>
+                <div id="error1" class="colormsj"></div>
             </div>
 
         </div>
@@ -43,7 +47,7 @@
 
     <div class="inferiorfooter">
         <div id="contenedorinferiorfooter" class="container1280Final">
-            <p>Contact</p>
+            <p style="display: none;">Contact</p>
             <p>©2020 Onhive All rights reserved / <a href="https://nativo.design/" class="enlaceNativo" target="_blank"> Designed by Nativo</a></p>
         </div>
     </div>

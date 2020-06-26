@@ -10,6 +10,9 @@
                         <div class="tituloContImg">
                             Sign in to Onhive
                         </div>
+                        <button type="button" class="close cerrarModal" data-dismiss="modal" aria-label="Close">
+                           
+                        </button>
                         <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="Formulario">
                             <div class="fields container">
                                 <div class="row">
@@ -106,15 +109,14 @@
 <div class="modal fade" id="mi_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-body">
-
-
                 <div class="contenedorImagen">
                     <div class="tituloContImg">
                         Sign up to Onhive
                     </div>
-
+                    <button type="button" class="close cerrarModal" data-dismiss="modal" aria-label="Close">
+                        
+                    </button>
                     <div class="row">
                         <div class="col-sm input-group textNormal margint30 textNormalmsm">
                             Get started and choose the profile you want to join as.

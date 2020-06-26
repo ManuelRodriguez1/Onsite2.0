@@ -99,6 +99,19 @@
     margin-top: 15px;
     cursor: pointer;
 }
+.cerrarModal{
+    height: 30px;
+    width: 30px;
+    margin-top: 45px;
+    margin-right: 30px;
+    padding: 0;
+    top: 0;
+    background-image: url("../../../assets/iconos/cerrarModal.svg");
+}
+
+.cerrarModal:hover{
+    opacity: 0.7;
+}
 
 
 /* Page setup, nothing to do with the checkbox */
