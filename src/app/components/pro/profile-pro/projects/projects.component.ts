@@ -18,6 +18,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   idDoc: any = ''
   cont: number = 0
   alert: number = 1
+  chat: boolean = false
   //loading
   loading: boolean = true
   //Subscripciones
@@ -39,8 +40,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
                 proj.docChanges().map((info) => {
                   if (info.doc.data().applyUsers) {
                     if (info.doc.data().applyUsers.includes(this.proU.user.uid)) {
-                      this.idDoc = id
-                      this.proU.projects.emit(info.doc.data())
+                      this.proU.getChatExist().doc(id + '|' + this.proU.user.uid).get()
+                        .subscribe((v) => {
+                          this.chat = v.exists
+                          this.idDoc = id
+                          this.proU.projects.emit(info.doc.data())
+                        })
                     }
                   }
                 })
@@ -52,6 +57,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.sub2 = this.proU.projects.subscribe((res) => {
       this.projects.push(res)
       this.projects[this.cont].idDoc = this.idDoc
+      this.projects[this.cont].chat = this.chat
       this.cont++
       this.loading = false
     })

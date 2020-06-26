@@ -25,6 +25,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   myId: string = ''
   mesg: string = ''
   dateToday: any = new Date()
+  // Modal Chat
+  skills: any[] = []
+  up: boolean = false
+  modal: boolean = false
+  skillS: string = ''
+  onlyNumber = new RegExp(/^[1-9][0-9]{0,4}(?:[.]\d{0,2})?$/)
   // Filtros chat
   unread: boolean = false
   totalUnread: number = 0
@@ -46,15 +52,17 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.sub1 = this.info.getInfoHire().doc(this.info.user.uid).collection('projects').get()
         .subscribe((p) => {
           p.forEach((p) => {
-            if (p.data().applyUsers || p.data().applyUsers.length > 0) {
-              this.info.usersChat.emit(p.data())
+            if (p.data().applyUsers) {
+              if(p.data().applyUsers.length > 0){
+                this.info.usersChat.emit(p.data())
+              }
             }
           })
         })
 
       this.sub2 = this.info.usersChat.subscribe((res) => {
         var temp: any = ''
-        this.users.push({ 'projectname': res.projectname })
+        this.users.push({ 'projectname': res.projectname, 'skills': res.skills })
         res.applyUsers.forEach(e => {
           this.info.getInfoPro().doc(e).get().subscribe((inf) => {
             var t2: boolean = false
@@ -74,11 +82,11 @@ export class ChatComponent implements OnInit, OnDestroy {
                 this.users[this.cont].idOther = e
                 this.users[this.cont].noRead = t2
                 this.cont++
+                this.info.chatUnread.emit(this.users.length)
               }
             })
           })
         });
-        this.info.chatUnread.emit(this.users.length)
       })
     }
     if (this.info.user.displayName == 'pro') {
@@ -139,7 +147,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.info.chatUnread.subscribe((d: number) => {
       var temp: number = 0
-      this.users.map((m) => {
+      this.users.map((m) => {      
         if (!m.noRead) {
           temp++
         }
@@ -156,6 +164,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.projectName = e.projectname
     this.photo = e.photo
     this.idPro = e.idOther
+    this.skills = e.skills
     this.chat = true
 
     if (this.info.user.displayName == 'hire') {
@@ -186,9 +195,17 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
     })
     this.info.chatUnread.emit(this.users.length)
+
+    //  Jquery para responsive
+
+    if ($(window).width() < 471) {
+      $('.chatrightborder').hide()
+      $('.col-8').show()
+    }
+
   }
 
-  chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string) {
+  chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string, offer?:boolean, accept?:boolean, price?:number, proname?: string, team?:string) {
     var hire: string = ''
     var pro: string = ''
 
@@ -201,24 +218,24 @@ export class ChatComponent implements OnInit, OnDestroy {
         pro = this.info.user.uid
       }
 
-      this.info.chatMsg(hire, pro, msg, adj, nameAdj)
+      this.info.chatMsg(hire, pro, msg, adj, nameAdj, offer, accept, price, proname, team)
       this.mesg = ''
       $(".chatContainerHeight").animate({ scrollTop: $('.chatContainerHeight').prop("scrollHeight") }, 1000);
     }
   }
 
-  adjFile(e: any){
+  adjFile(e: any) {
     var hire: string = ''
     var pro: string = ''
-    if(this.info.user.displayName == 'hire'){
+    if (this.info.user.displayName == 'hire') {
       hire = this.info.user.uid
       pro = this.idPro
-    }else{
+    } else {
       hire = this.idPro
       pro = this.info.user.uid
     }
     this.info.addFileAdj(e, hire, pro)
-    this.info.adjFile.subscribe((url)=>{
+    this.info.adjFile.subscribe((url) => {
       this.chatMessage(this.idPro, url, true, e.target.files[0].name.toLowerCase())
     })
   }
@@ -229,6 +246,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     } else {
       this.unread = true
     }
+  }
+
+  createOffer(price: number){
+    this.chatMessage(this.idPro, 'offer', false, '', true, false, price, this.name, this.skillS)
   }
 
   ngOnDestroy() {

@@ -50,6 +50,10 @@
                                 <div class="profile mini imagenChatPerson" [ngStyle]="{'background-image': 'url('+photo+')'}"></div>
                                 <div class="nombrechatazul title3">{{name}}</div>
                                 <div class="nombrechatNaranja">{{projectName}}</div>
+                                <button type="button" class="btn blueBtn small pfmt" (click)="modal = true" *ngIf="info.user.displayName == 'hire'; else btnPro">Hire</button>
+                                <ng-template #btnPro>
+                                    <button type="button" class="btn blueBtn small pfmt">Accept</button>
+                                </ng-template>
                             </div>
                         </div>
                         <hr>
@@ -61,16 +65,22 @@
                                     {{ m.fecha.toDate() | date: 'MMM, dd h:mm a' }}
                                 </p>
                                 <div style="overflow: hidden;">
-                                    <div class="messageNormal" [class.messageMy]="myId == m.id">
+                                    <div class="messageNormal" [class.messageMy]="myId == m.id" *ngIf="!m.offer && !m.accept">
                                         <ng-container *ngIf="!m.adj; else fileAdj">
                                             {{ m.message }}
                                         </ng-container>
                                         <ng-template #fileAdj>
                                             <a [href]="m.message" target="_blank">
                                                 <div class="fileIcon" style="margin: 0 auto"></div>
-                                                <p class="textAdj">{{m.nameAdj}}</p>
+                                                <p class="textAdj">Click to view the file.</p>
                                             </a>
                                         </ng-template>
+                                    </div>
+                                    <div *ngIf="m.offer && info.user.displayName == 'hire'" class="offerChat">
+                                        <p>You have offered <strong>{{m.name}} ${{m.price}}</strong> per hour as a <strong>{{m.team}}</strong>.</p>
+                                    </div>
+                                    <div *ngIf="m.offer && info.user.displayName == 'pro'" class="offerChat lh-160">
+                                        <p><strong>{{name}}</strong> wants to offer you <strong>${{m.price}}</strong> per hour as a <strong>{{m.team}}</strong>.<br> Click on <strong>Accept</strong> if you agree with this offer.</p>
                                     </div>
                                 </div>
                             </ng-container>
@@ -92,5 +102,30 @@
                 </ng-container>
             </div>
         </div>
+    </div>
+</div>
+<div class="modalChat" *ngIf="modal">
+    <div class="modalChatInt">
+        <div class="closeChat" (click)="modal = false"></div>
+        <div class="title2 mt-50">
+            <p>What is your offer?</p>
+        </div>
+        <div class="contentPrice">
+            <input type="text" class="input" placeholder="$0.00" name="price" #price="ngModel" ngModel [class.errorInput]="!onlyNumber.exec(price.value) && price.value != ''" [class.correctInput]="onlyNumber.exec(price.value)">
+            <p>/ per hour</p>
+        </div>
+        <div class="title2 mt-20">
+            <p>In which field?</p>
+        </div>
+        <div class="input-group select" (click)="up = !up">
+            <input type="text" class="form-control" placeholder="Select team" onfocus="this.blur()" [(ngModel)]="skillS" style="cursor: pointer;">
+            <div class="order" [ngClass]="{'up': up == true}"></div>
+        </div>
+        <div class="list-group" [hidden]='up == false'>
+            <div class="list-group-item" *ngFor="let s of skills" (click)="skillS = s; up = false">
+                <p>{{s}}</p>
+            </div>
+        </div>
+        <button (click)="createOffer(price.value); modal = false" type="button" class="btn blueBtn large" [class.disabled]="price.value == '' || price.value == 0 || skillS == '' || !onlyNumber.exec(price.value)" [disabled]="price.value == '' || price.value == 0 || skillS == '' || !onlyNumber.exec(price.value)">Confirm</button>
     </div>
 </div>
