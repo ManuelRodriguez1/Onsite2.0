@@ -36,7 +36,7 @@
                                                         (click)="viewProject(p)">{{p.projectname}}</span>
                                                 </li>
                                             </div>
-                                            <div class="col-sm normalText">{{p.statusname}}</div>
+                                            <div class="col-sm normalText c{{p.statusname}}">{{p.statusname}}</div>
                                             <div class="col-sm ">
                                                 <div class=" webkit">
                                                     <div class="pr-3 opChat messageDesactive" disabled></div>
@@ -273,21 +273,19 @@
                         <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
                         <span *ngIf="  enddate.value == undefined &&   alerta " class="textError">End date is
                             required</span>
-
-
-
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-check checkbox form-group m-2">
-                        <input class="form-check-input input-assumpte" type="checkbox" id="taketest" name="taketest"
-                            [(ngModel)]="viewP.taketest" #taketest="ngModel"
-                            [class.errorInput]="taketest.value != true  &&  alerta "
-                            [class.correctInput]="taketest.value == true" />
-                        <label class="form-check-label" for="taketest">
-                            <span class="check-text">All workers must take a background test.</span>
+                    <div class="form-check form-group m-2">
+                        <label class="checkbox">
+                            <input type="checkbox" id="taketest" name="taketest" class="checkbox__input"
+                                [(ngModel)]="viewP.taketest" #taketest="ngModel"
+                                [class.errorInput]="taketest.value != true  &&  alerta "
+                                [class.correctInput]="taketest.value == true" />
+                            <span class="checkbox__checkmark"></span>
+                            <span class="smallText">All workers must take a background test.</span>
                         </label>
-                        <div>
+                        <div class="">
                             <span *ngIf="taketest.value != true &&   alerta " class="textError">All workers must take a
                                 background
                                 test</span>
@@ -295,15 +293,20 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="form-check checkbox form-group m-2">
-                        <input type="checkbox" class="form-check-input input-assumpte" id="passtest" name="passtest"
-                            #passtest="ngModel" [(ngModel)]="viewP.passtest"
-                            [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta "
-                            [class.correctInput]="passtest.value != '' && passtest.value != undefined " />
-                        <label class="form-check-label" for="passtest">
-                            <span class="check-text">All workers must pass a background test.</span>
+                    <div class="form-check  form-group m-2">
+                        <label class="checkbox">
+                            <input type="checkbox" class="checkbox__input" id="passtest" name="passtest"
+                                #passtest="ngModel" [(ngModel)]="viewP.passtest"
+                                [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta "
+                                [class.correctInput]="passtest.value != '' && passtest.value != undefined " />
+
+                            <span class="checkbox__checkmark"></span>
+                            <span class="smallText">All workers must pass a background test.</span>
                         </label>
+
+
                         <div>
                             <span *ngIf="passtest.value != true &&   alerta " class="textError">All workers must pass a
                                 background
@@ -336,7 +339,8 @@
             </div>
             <div class="row mt-51 ml-48">
                 <div class="col-sm mt-2 mx-4">
-                    <span class="normalText">Status: {{ viewP.statusname }}</span>
+                    <span class="normalText ">Status: <span
+                            class="c{{ viewP.statusname }}">{{ viewP.statusname }}</span></span>
                 </div>
             </div>
             <div class="row mt-51 ml-48">
@@ -614,7 +618,8 @@
                         <div class="title3 mb-4">
                             <p>Reviews</p>
                         </div>
-                        <p class="smallText mr-48" *ngIf="usuariosReviwsTodos.length==0">Your opinion is very valuable to your workers, help people improve and be
+                        <p class="smallText mr-48" *ngIf="usuariosReviwsTodos.length==0">Your opinion is very valuable
+                            to your workers, help people improve and be
                             recognized for their skills, leave a review!</p>
 
                         <div class="row mb-4">
@@ -634,7 +639,7 @@
                                                 <div class="starG mr-13" [class.starO]="reviews.rating == 5"></div>
 
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
