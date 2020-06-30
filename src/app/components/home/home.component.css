@@ -89,14 +89,9 @@ margin-top: 40px;
 }
 
 .cuadroinfoseccion3home {
-  
-    /*width: 223px;
-    height: 263px;*/
-
-    width:  calc(133px + (223 - 133) * ((100vw - 375px) / (1920 - 375)));
-    height:  calc(157px + (263 - 157) * ((100vw - 375px) / (1920 - 375)));
-
     margin: 0 auto;
+    height: 270px;
+    text-align: center;
 }
 .cuadroinfoseccion3home img{
     width: 100%;
@@ -139,7 +134,27 @@ margin-top: 40px;
     margin-top: 170px;
 
 }
+.cuadroinfoseccion3home .imagenreponsive1{
+    width:  calc(133px + (223 - 133) * ((100vw - 375px) / (1920 - 375)));
+    height:  calc(157px + (263 - 157) * ((100vw - 375px) / (1920 - 375)));
+}
 
+.cuadroinfoseccion3home .imagenreponsive2{
+    width:  calc(165px + (238 - 165) * ((100vw - 375px) / (1920 - 375)));
+    height:  calc(155px + (219 - 155) * ((100vw - 375px) / (1920 - 375)));
+}
+
+
+.cuadroinfoseccion3home .imagenreponsive3{
+    width:  calc(165px + (249 - 165) * ((100vw - 375px) / (1920 - 375)));
+    height:  calc(157px + (208 - 157) * ((100vw - 375px) / (1920 - 375)));
+}
+
+
+.cuadroinfoseccion3home .imagenreponsive4{
+    width:  calc(182px + (273 - 182) * ((100vw - 375px) / (1920 - 375)));
+    height:  calc(151px + (254 - 151) * ((100vw - 375px) / (1920 - 375)));
+}
 
 /* Fin Seccion 3 Home */
 
@@ -168,6 +183,11 @@ margin-top: 40px;
 @media screen and (max-width: 991px) {
     .sectionHome1{
         display: flex;
+    }
+    .cuadroinfoseccion3home
+    {
+        height:210px;
+        margin-top: 50px;
     }
     .izquierdaseccion2home{
         order: 2;

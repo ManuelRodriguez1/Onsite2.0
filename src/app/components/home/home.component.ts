@@ -24,16 +24,16 @@ export class HomeComponent implements OnInit {
   //array paso 3 home 
   Steps = [
     {
-      'img': '../../../assets/imagenes/Home/Step1.png', 'paso': 'Sign up to Onhive', 'text': 'Sign up as a Pro or as a Hirer. '
+      'codigo':'1','img': '../../../assets/imagenes/Home/Step1.png', 'paso': 'Sign up to Onhive', 'text': 'Sign up as a Pro or as a Hirer. '
     },
     {
-      'img': '../../../assets/imagenes/Home/Step2.png',  'paso': 'Set up your profile', 'text': 'Complete your profile with your personal information.'
+      'codigo':'2', 'img': '../../../assets/imagenes/Home/Step2.png',  'paso': 'Set up your profile', 'text': 'Complete your profile with your personal information.'
     },
     {
-      'img': '../../../assets/imagenes/Home/Step3.png',  'paso': 'Apply or post', 'text': 'Apply or post a project based on the skills you have or the skills you are looking for.'
+      'codigo':'3', 'img': '../../../assets/imagenes/Home/Step3.png',  'paso': 'Apply or post', 'text': 'Apply or post a project based on the skills you have or the skills you are looking for.'
     },
     {
-      'img': '../../../assets/imagenes/Home/Step4.png',  'paso': 'Start working', 'text': 'Message a Pro or a Hirer to agree on payments and hourly wage.'
+      'codigo':'4', 'img': '../../../assets/imagenes/Home/Step4.png',  'paso': 'Start working', 'text': 'Message a Pro or a Hirer to agree on payments and hourly wage.'
     }];
 
   hire() {
