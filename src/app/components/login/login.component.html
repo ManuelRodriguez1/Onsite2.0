@@ -1,5 +1,6 @@
 <!-- Modal Sign in-->
-<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -11,13 +12,15 @@
                             Sign in to Onhive
                         </div>
                         <button type="button" class="close cerrarModal" data-dismiss="modal" aria-label="Close">
-                           
+
                         </button>
                         <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="Formulario">
                             <div class="fields container">
                                 <div class="row">
                                     <div class="col-sm input-group">
-                                        <input class='validate form-control  heigInput emailLogin' type="email" id="exampleInputEmail1" name='email' [(ngModel)]="email" placeholder="Email" required>
+                                        <input class='validate form-control  heigInput emailLogin' type="email"
+                                            id="exampleInputEmail1" name='email' [(ngModel)]="email" placeholder="Email"
+                                            required>
 
                                         <span class="textError">{{error}}</span>
 
@@ -25,7 +28,9 @@
                                 </div>
                                 <div class="row classMargincampo">
                                     <div class="col-sm input-group">
-                                        <input class='validate  form-control heigInput' type='password' id="exampleInputPassword1" (ngModel)="password" name='password' placeholder="Password" required/>
+                                        <input class='validate  form-control heigInput' type='password'
+                                            id="exampleInputPassword1" (ngModel)="password" name='password'
+                                            placeholder="Password" required />
                                         <span class="textError">{{error2}}</span>
                                     </div>
                                 </div>
@@ -40,7 +45,8 @@
                                     <div class="col-sm input-group">
                                         <div>
                                             <label class="checkbox" (click)="checkbox()">
-                                                <input type="checkbox" id="loginCheckbox" checked="{{vmactivo}}"  class="checkbox__input"/>
+                                                <input type="checkbox" id="loginCheckbox" checked="{{vmactivo}}"
+                                                    class="checkbox__input" />
                                                 <span class="checkbox__checkmark"></span>
                                                 <span class="remember_me">Remember me</span>
                                             </label>
@@ -54,7 +60,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm memberSing">
-                                        Not a member yet? <a data-toggle="modal" data-target="#mi_modal" (click)="poppad2()">Sign up</a>
+                                        Not a member yet? <a data-toggle="modal" data-target="#mi_modal"
+                                            (click)="poppad2()">Sign up</a>
                                     </div>
                                 </div>
                             </div>
@@ -62,21 +69,27 @@
                     </div>
 
                     <div class="center forgot" *ngIf="Forgot==1">
-                        <svg (click)="Forgot2()" width="12" class="flechaforgot" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1L1 11L11 21" stroke="black"/>
-                            </svg>
+                        <svg (click)="Forgot2()" width="12" class="flechaforgot" height="22" viewBox="0 0 12 22"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 1L1 11L11 21" stroke="black" />
+                        </svg>
                         <div class="tituloContImg">
 
                             Reset your password </div>
-                            <div class="col-sm input-group textNormal margint30 textNormalmsm">
-                                Enter your Onhive.com email address so we can reset your password.
-                            </div>
+                        <button type="button" class="close cerrarModal" data-dismiss="modal" aria-label="Close">
+                        </button>
+
+                        <div class="col-sm input-group textNormal margint30 textNormalmsm">
+                            Enter your Onhive.com email address so we can reset your password.
+                        </div>
                         <div class="z-depth-1 grey lighten-4 row" style="margin-top:50px; height: 150px;">
-                            <form #formData='ngForm' (ngSubmit)="onRecuperation(formData)" class="col s12" method="post">
+                            <form #formData='ngForm' (ngSubmit)="onRecuperation(formData)" class="col s12"
+                                method="post">
                                 <div class="row ">
                                     <div class="col-sm input-group">
 
-                                        <input class='validate form-control' id="exampleInputEmail1" type='email' (ngModel)="email" name='emailreset' placeholder="Enter email" required/>
+                                        <input class='validate form-control' id="exampleInputEmail1" type='email'
+                                            (ngModel)="email" name='emailreset' placeholder="Enter email" required />
                                         <span class="textError">{{error3}}</span>
                                         <span class="ocultarForgot  "></span>
 
@@ -115,7 +128,7 @@
                         Sign up to Onhive
                     </div>
                     <button type="button" class="close cerrarModal" data-dismiss="modal" aria-label="Close">
-                        
+
                     </button>
                     <div class="row">
                         <div class="col-sm input-group textNormal margint30 textNormalmsm">
@@ -126,13 +139,15 @@
                         <div class="col-sm input-group textNormal textnomarMargin">
                             <div class="botonesOnsite margint30">
 
-                           
-                                    <button (click)="activarpro()" [class.activarbtn]="activar == true"   class="blueBtn small btnup">As a pro</button>
-                           
 
-                           
-                                    <button (click)="activarhire()" [class.activarbtn]="activar1 == true" class="blueBtn small btnup">As a hirer</button>
-                           
+                                <button (click)="activarpro()" [class.activarbtn]="activar == true"
+                                    class="blueBtn small btnup">As a pro</button>
+
+
+
+                                <button (click)="activarhire()" [class.activarbtn]="activar1 == true"
+                                    class="blueBtn small btnup">As a hirer</button>
+
 
                             </div>
                         </div>
@@ -145,23 +160,23 @@
                         </div>
                         <div class="row">
                             <div class="col-sm input-group">
-                                <button (click)="pro()"  class="botonNaranja margint30">
-                                            Continue
-                                        </button>
+                                <button (click)="pro()" class="botonNaranja margint30">
+                                    Continue
+                                </button>
                             </div>
                         </div>
                     </div>
                     <div *ngIf="activar1==true">
                         <div class="row">
                             <div class="col-sm input-group textNormal textNormalmsm  margint30 colorGris">
-                                Join as a hirer if you are looking for a Pro to help you in your project. 
+                                Join as a hirer if you are looking for a Pro to help you in your project.
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm input-group">
-                                <button (click)="hire()"  class="botonNaranja margint30" >
-                                            Continue
-                                        </button>
+                                <button (click)="hire()" class="botonNaranja margint30">
+                                    Continue
+                                </button>
                             </div>
                         </div>
                     </div>

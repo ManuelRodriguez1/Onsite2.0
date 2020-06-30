@@ -22,6 +22,7 @@
   display: -webkit-box;
   float: right;
   margin-right: 62px;
+  width: 137px;
 
   }
 .text-dashboard{
@@ -257,13 +258,14 @@ span:hover{
 .form-control:disabled, .form-control[readonly] {
   background: transparent;
 }
+/*
 .input-assumpte:checked+label:before {
   background-color: #010973;
 }
 .input-assumpte+label:before{
   border: 1px solid #010973;
   margin: 0;
-}
+}*/
 .plus-button:hover{
   cursor: pointer;
 }
@@ -1006,3 +1008,28 @@ a{
 .errorProfilehire:hover{
   opacity: 0.7;
 }
+.cPending{
+  color: #FF8600;
+}
+.cActive{
+  color:#21D8C6;
+}
+.cArchived{
+  color: #9D9D9D;
+}
+.unarchive{
+    background: url("../../../../../assets/iconos/Unarchive.svg") no-repeat center;
+    width: 37px;
+    height: 26px;
+    background-size: cover;
+    cursor: pointer;
+    margin-right: 27px;
+    margin-top: -1px;
+    margin-left: -10px;
+    cursor:  pointer !important;
+    
+}
+.unarchive:hover{
+  opacity: 0.7 !important;
+}
+

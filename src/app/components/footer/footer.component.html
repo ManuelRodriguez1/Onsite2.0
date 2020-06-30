@@ -1,8 +1,16 @@
 <div class="contenedorfooter">
 
     <div class="contenedorsuperiorfooter container1280Final">
+        <div id="icono2footer" class="footerMovil">
+            <a href="/">
+                <img src="../../../assets/logos/Logo_footer.svg">
+            </a>
+            <div (click)="arrowTop()" class="arrowTop1"></div>
+        </div>
         <div class="izquierdasuperiorfooter">
-            <div id="iconologofooter">
+           
+           
+            <div id="iconologofooter" class="NofooterMovil">
                 <a href="/">
                     <img src="../../../assets/logos/Logo_White.svg">
                 </a>
@@ -19,7 +27,7 @@
             </div>
         </div>
         <div class="derechasuperiorfooter">
-            <div (click)="arrowTop()" class="arrowTop1"></div>
+            <div (click)="arrowTop()" class="arrowTop1 NofooterMovil"></div>
             <div class="contenedorform">
                 <p>Subscribe to our newsletter</p>
                 <form [formGroup]="registerForm" (ngSubmit)="test()" action="" class="formfooter">
@@ -27,7 +35,7 @@
 
                     <input type="text" id="emailFooter" formControlName="email" class="form-control form-footer" [class.errorInput]="submitted && f.email.errors "  />
                     <button class="orangeBtn small "> Subscribe </button>
-                    <div class="progress" style="width: 71%; margin: 0 auto" *ngIf="progressBar">
+                    <div class="progress" style="margin: 0 auto" *ngIf="progressBar">
                         <div class="progress-bar" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="99"></div>
                     </div>
 

@@ -22,7 +22,7 @@ export class MenuHomeComponent implements OnInit {
   selectskills: any[] = [];
   usuariosReviwsTodos: any[] = [];
   teamSkills: any[] = [];
-  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
+  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   private contador = 4000 //Agreg
   projectname;
   peoples: any[] = [];
@@ -337,6 +337,7 @@ export class MenuHomeComponent implements OnInit {
     this.select = 0
     this.HomeFormularioNw = 0
     this.modal = 3
+    //location.href="/Hireprincipal";
 
   }
   //Eliminar material
@@ -389,6 +390,21 @@ export class MenuHomeComponent implements OnInit {
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
       status: 3,
       statusname: 'Archived',
+    }).then((url) => {
+      this.option = this.option - 5
+    })
+
+
+  }
+  //Modificar estado a pendiente
+  
+  UnarchivedStatus(idP) {
+    this.option = this.option + 5
+
+    this.projects = []
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
+      status: 1,
+      statusname: 'Pending',
     }).then((url) => {
       this.option = this.option - 5
     })
