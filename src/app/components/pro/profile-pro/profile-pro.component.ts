@@ -84,9 +84,9 @@ export class ProfileProComponent implements OnInit {
 
     })
     $('html').on('click', () => {
-      this.up = false
+      // this.up = false
     })
-    $("#clickSkills, .skillselct").click(function (e) {
+    $(".skill, .down").click(function (e) {
       e.stopPropagation()
     })
   }
@@ -165,10 +165,6 @@ export class ProfileProComponent implements OnInit {
     this.prouser.deleteCv(e)
   }
   //Section Skills
-  list() {
-    this.up = !this.up;
-  }
-
   selectskill(e) {
     var i = this.selectskills.indexOf(e)
     i === -1 && this.selectskills.push(e);

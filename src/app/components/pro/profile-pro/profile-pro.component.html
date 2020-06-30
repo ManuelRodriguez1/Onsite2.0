@@ -118,10 +118,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="down" [ngClass]="{'up': up == true}" (click)='list()'></div>
+                            <div class="down" [ngClass]="{'up': up == true}" (click)="up = !up"></div>
                         </div>
                     </div>
-                    <div class="list-group" [hidden]='up == false'>
+                    <div class="list-group" *ngIf="up">
                         <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
                             <p>{{s}}</p>
                         </div>
@@ -174,7 +174,7 @@
                         <p class="mt-23 smallText">0</p>
                     </div>
                 </div>
-                <div class="row mt-45 ml-48 mr-48" >
+                <div class="row mt-45 ml-48 mr-48">
                     <div class="col-sm">
                         <div class="title3">
                             <p>Certificates</p>

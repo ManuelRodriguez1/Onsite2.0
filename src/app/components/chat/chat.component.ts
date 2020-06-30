@@ -28,13 +28,21 @@ export class ChatComponent implements OnInit, OnDestroy {
   // Modal Chat
   skills: any[] = []
   up: boolean = false
-  modal: boolean = false
+  modal: number = 0
+  hire: boolean = false
   skillS: string = ''
   onlyNumber = new RegExp(/^[1-9][0-9]{0,4}(?:[.]\d{0,2})?$/)
+  infoTemp: any = ''
   // Filtros chat
   unread: boolean = false
   totalUnread: number = 0
   search: string = ''
+  //Message Accept
+  word: string = 'Accept'
+  negotiation: any = []
+  idProject: string = ''
+  priceHour: number = 0
+  disabled: boolean = true
   //Suscripciones
   sub1: Subscription
   sub2: Subscription
@@ -53,7 +61,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         .subscribe((p) => {
           p.forEach((p) => {
             if (p.data().applyUsers) {
-              if(p.data().applyUsers.length > 0){
+              if (p.data().applyUsers.length > 0) {
                 this.info.usersChat.emit(p.data())
               }
             }
@@ -116,6 +124,7 @@ export class ChatComponent implements OnInit, OnDestroy {
                         if (temp2.includes(this.myId)) {
                           if (this.cont != this.users.length) {
                             this.users[this.cont].projectname = h.data().projectname
+                            this.users[this.cont].idProject = h.id
                             this.cont++
                           }
                         }
@@ -147,7 +156,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.info.chatUnread.subscribe((d: number) => {
       var temp: number = 0
-      this.users.map((m) => {      
+      this.users.map((m) => {
         if (!m.noRead) {
           temp++
         }
@@ -165,6 +174,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.photo = e.photo
     this.idPro = e.idOther
     this.skills = e.skills
+    this.idProject = e.idProject
     this.chat = true
 
     if (this.info.user.displayName == 'hire') {
@@ -182,6 +192,8 @@ export class ChatComponent implements OnInit, OnDestroy {
           var user = this.info.user.displayName == 'hire' ? pro : hire
           if (this.idPro == user) {
             this.messages = i.chat
+            this.word = this.messages[this.messages.length - 1].accept ? 'Accepted' : 'Accept'
+            this.disabled = this.messages[this.messages.length - 1].offer ? false : true
             setTimeout(() => {
               $('.chatContainerHeight').scrollTop($('.chatContainerHeight').prop('scrollHeight'));
             }, 20);
@@ -205,7 +217,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   }
 
-  chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string, offer?:boolean, accept?:boolean, price?:number, proname?: string, team?:string) {
+  chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string, offer?: boolean, accept?: boolean, price?: number, proname?: string, team?: string) {
     var hire: string = ''
     var pro: string = ''
 
@@ -217,6 +229,12 @@ export class ChatComponent implements OnInit, OnDestroy {
         hire = e
         pro = this.info.user.uid
       }
+      if (this.messages[this.messages.length - 1].offer && msg != 'offer') {
+        offer = true
+        price = this.messages[this.messages.length - 1].price
+        team = this.messages[this.messages.length - 1].team
+      }
+      if (accept == true) { offer = false }
 
       this.info.chatMsg(hire, pro, msg, adj, nameAdj, offer, accept, price, proname, team)
       this.mesg = ''
@@ -248,8 +266,48 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  createOffer(price: number){
+  createOffer(price: number) {
     this.chatMessage(this.idPro, 'offer', false, '', true, false, price, this.name, this.skillS)
+  }
+
+  acceptOffer() {
+    if (this.messages[this.messages.length - 1].offer) {
+      this.skillS = this.messages[this.messages.length - 1].team
+      this.priceHour = this.messages[this.messages.length - 1].price
+      this.chatMessage(this.idPro, 'accept', false, '', false, true, this.priceHour, this.name, this.skillS)
+      this.info.getInfoHire().doc(this.idPro).collection('projects').doc(this.idProject).get()
+        .toPromise().then((p) => {
+          if (p.data().negotiation) {
+            this.negotiation = p.data().negotiation
+          }
+        }).then(() => {
+          this.negotiation.push({
+            idPro: this.myId,
+            negotiation: true,
+            priceHour: this.priceHour,
+            skill: this.skillS
+          })
+        }).then(() => {
+          this.info.getInfoHire().doc(this.idPro).collection('projects').doc(this.idProject).update({
+            'negotiation': this.negotiation
+          })
+        })
+    }
+  }
+
+  deleteChat() {
+    var hire: string = ''
+    var pro: string = ''
+    if (this.info.user.displayName == 'hire') {
+      hire = this.info.user.uid
+      pro = this.infoTemp.idOther
+    } else {
+      hire = this.infoTemp.idOther
+      pro = this.info.user.uid
+    }
+    this.info.getChat(hire, pro).delete().then(()=>{
+      location.reload()
+    })
   }
 
   ngOnDestroy() {
