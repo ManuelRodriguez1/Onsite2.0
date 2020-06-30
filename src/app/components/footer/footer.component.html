@@ -1,8 +1,16 @@
 <div class="contenedorfooter">
 
     <div class="contenedorsuperiorfooter container1280Final">
+        <div id="icono2footer" class="footerMovil">
+            <a href="/">
+                <img src="../../../assets/logos/Logo_footer.svg">
+            </a>
+            <div (click)="arrowTop()" class="arrowTop1"></div>
+        </div>
         <div class="izquierdasuperiorfooter">
-            <div id="iconologofooter">
+           
+           
+            <div id="iconologofooter" class="NofooterMovil">
                 <a href="/">
                     <img src="../../../assets/logos/Logo_White.svg">
                 </a>
@@ -19,7 +27,7 @@
             </div>
         </div>
         <div class="derechasuperiorfooter">
-            <div (click)="arrowTop()" class="arrowTop1"></div>
+            <div (click)="arrowTop()" class="arrowTop1 NofooterMovil"></div>
             <div class="contenedorform">
                 <p>Subscribe to our newsletter</p>
                 <form [formGroup]="registerForm" (ngSubmit)="test()" action="" class="formfooter">
