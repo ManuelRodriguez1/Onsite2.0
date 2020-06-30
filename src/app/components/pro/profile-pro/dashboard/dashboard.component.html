@@ -1,19 +1,17 @@
 <div class="containerMin">
   <div class="container shadow" *ngIf="select == 0">
     <div class="project">
-      <!--div class="alert alert-danger" role="alert" [hidden]="applyPro == 0">
-      You have not yet applied to a project!
-    </div-->
-      <div class="lds-roller" *ngIf="loading == true">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+  
+    <div class="row">
+      <div class="col-sm">
+        <div class="title2 ml-48">
+          <p>Recent projects</p>
+        </div>
       </div>
+
+    </div>
+    <hr _ngcontent-c4="" class="hr mt-30">
+     
       <div *ngIf="projects.length!=0 ; else other_content">
         <ng-container *ngFor="let p of projects">
           <div class="projects row">
@@ -34,14 +32,33 @@
       </div>
 
       <ng-template #other_content>
-        <div class="btnInitialDash">
-          <p class="normalText">You don’t have any projects</p>
-          <button (click)="openExplorePro()" class="orangeBtn medium">Get Started </button>
-        </div>
+  
+       
+          <div class="row ml-48 mt-17 p-0 mr-48">
+
+            <div class="btnInitialDash">
+              <p class="normalText">You have not applied for any project yet.</p>
+              <p class="normalText">Explore for a project that suits your skills.</p>
+              <button (click)="openExplorePro()" class="blueBtn medium">Explore</button>
+            </div>
+
+          </div>
+
+
       </ng-template>
 
     </div>
   </div>
+  <!--div class="lds-roller" *ngIf="loading == true">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div-->
   <div class="container shadow" *ngIf="select == 1">
     <div class="row fields mt-47 h-326">
       <div class="col-sm ml-48">
@@ -81,7 +98,7 @@
         </div>
         <div class="mapBig mt-20 mb-57">
           <agm-map [latitude]="infoPro.latitude" [longitude]="infoPro.longitude"></agm-map>
-    
+
         </div>
       </div>
     </div>
