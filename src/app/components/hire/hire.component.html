@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="col-sm input-group" [formGroup]="formData">
-          <input type="Number" class="form-control" placeholder="Phone Number" (ngModel)="PhoneNumber"
+          <input type="text" class="form-control" placeholder="Phone Number" (ngModel)="PhoneNumber"
             name="PhoneNumber" #phone formControlName="PhoneNumber"
             [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }">
           <div *ngIf="submitted && f.PhoneNumber.errors" class="invalid-feedback">
