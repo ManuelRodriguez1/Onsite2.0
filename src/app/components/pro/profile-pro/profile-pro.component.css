@@ -7,7 +7,9 @@
 .divcol {
     padding: 0;
 }
-
+.down:hover{
+    opacity: 0.7;
+}
 .dropdown-menu {
     position: initial;
     margin-top: 55.89px;
@@ -354,6 +356,20 @@ iframe {
     margin-right: 48px;
     overflow: hidden;
 }
+.mr-48 {
+    margin-right: 48px;
+}
+.mr-48 {
+    margin-right: 48px;
+}
+.smallText{
+    color:#000000 !important;
+}
+.reviwsDescriptionFinally{
+    width: 100%;
+    overflow: hidden;   
+}
+
 
 @media screen and (max-width: 470px) {
     .textw {

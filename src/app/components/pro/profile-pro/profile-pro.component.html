@@ -107,7 +107,7 @@
                     <p class="changeColorBlue">Skills</p>
                 </div>
                 <div class="skill mt-21">
-                    <div class="row">
+                    <div class="row btnPointer">
                         <div class="col-sm input-group">
                             <div class="form-control" [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
                                 <p style="line-height: 31px;">Select Skills</p>
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div *ngIf="select == 1" class="normalText">
-                <div class="row mt-51 ml-48">
+                <div class="row mt-51 ml-48 mr-48">
                     <div class="col-sm">
                         <div class="title3">
                             <p>Rating</p>
@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <hr class="hr mt-30">
-                <div class="ml-48">
+                <div class="ml-48 mr-48">
                     <div class="title2">
                         <p>Profile description</p>
                     </div>
@@ -191,7 +191,7 @@
                             Description...</span>{{profile.description}}</p>
                 </div>
                 <hr class="hr mt-30">
-                <div class="ml-48">
+                <div class="ml-48 mr-48">
                     <div class="title2">
                         <p>CV</p>
                     </div>
@@ -206,7 +206,7 @@
                     </div>
                 </div>
                 <hr class="hr mt-30">
-                <div class="ml-48">
+                <div class="ml-48 mr-48">
                     <div class="title2">
                         <p>Skills</p>
                     </div>
@@ -217,7 +217,7 @@
                     </div>
                 </div>
                 <hr class="hr mt-30">
-                <div class="ml-48">
+                <div class="ml-48 mr-48">
                     <div class="title2">
                         <p>Certificates</p>
                     </div>
@@ -238,12 +238,15 @@
                     </div>
                 </div>
                 <hr class="hr mt-30">
-                <div class="ml-48">
+                <div class="ml-48 mr-48">
                     <div class="title2">
-                        <p>Reviews</p>
+                        <p>Reviews  <span class="smallText">({{usuariosReviwsTodos.length}})</span></p>
+                    </div>
+                    <div *ngIf="usuariosReviwsTodos.length == 0 ">
+                        <p>You have no reviews yet? You can ask your hirer for one!</p>
                     </div>
                     <div class="row mt-38 mb-43">
-                        <div class="col-sm mb-30" *ngFor="let reviews of usuariosReviwsTodos">
+                        <div class="col-6 mb-30" *ngFor="let reviews of usuariosReviwsTodos">
                             <div class="media">
                                 <div class="profile mini" [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
                                 <div class="media-body">
@@ -261,7 +264,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-21 smallText">{{reviews.descripcion}}
+                            <p class="mt-21 reviwsDescriptionFinally ">{{reviews.descripcion}}
                                 <!--a class="orange" href="#">Show less</a-->
                             </p>
                         </div>

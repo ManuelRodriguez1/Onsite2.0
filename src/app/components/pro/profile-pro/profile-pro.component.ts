@@ -24,7 +24,7 @@ export class ProfileProComponent implements OnInit {
   usuariosReviwsTodos: any[] = [];
   // Variables eventos
   up: boolean = false
-  skills: any[] = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Fishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
+  skills: any[] = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   selectskills: any[] = [];
   customers = [{ 'name': 'Add certificate file', 'url': '' }];
   cv = [{ "name": 'Add a file', "url": '' }]
@@ -49,6 +49,15 @@ export class ProfileProComponent implements OnInit {
   ) { }
   //Show data of User
   ngOnInit() {
+    //boton slkill se cierre
+    $(document).on("click", (e)=>{
+
+      var container = $(".btnPointer");
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        this.up = false;
+      }
+    });
+
     this.prouser.getInfo().snapshotChanges().subscribe((d) => {
       this.profile = d.payload.data()
       this.selectskills = this.profile.skills
@@ -83,12 +92,15 @@ export class ProfileProComponent implements OnInit {
       }
 
     })
+    /*
     $('html').on('click', () => {
       this.up = false
     })
     $("#clickSkills, .skillselct").click(function (e) {
       e.stopPropagation()
-    })
+    })*/
+
+    console.log(this.usuariosReviwsTodos);
   }
   //Show Option
   selectOption(e) {
