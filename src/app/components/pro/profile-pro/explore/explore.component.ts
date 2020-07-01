@@ -17,6 +17,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   projects2: any[] = []
   loading: boolean
   users: any[] = []
+  users2: any[] = []
   emailV: boolean = false
   //Informacion proyecto
   infoProject: any[] = []
@@ -74,7 +75,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
                       tempProjects[cont].idProject = k.doc.id
                       tempProjects[cont].idUser = profile.id
                       tempProjects[cont].photo = profile.photoUrl
-                      tempProjects[cont].name = profile.name+' '+profile.lastname
+                      tempProjects[cont].name = profile.name + ' ' + profile.lastname
                       cont++
                     }
                   }
@@ -105,11 +106,12 @@ export class ExploreComponent implements OnInit, OnDestroy {
       switch (res) {
         case 1:
           this.users.push(this.prouser.user.uid)
+          this.users2.push(this.prouser.user.uid)
           this.prouser.users.emit(2)
           break;
         case 2:
           var infoPro: any = this.infoProject
-          this.prouser.applyProject(infoPro.idUser, infoPro.idProject, this.users)
+          this.prouser.applyProject(infoPro.idUser, infoPro.idProject, this.users, this.users2)
           break;
       }
     })
@@ -130,6 +132,9 @@ export class ExploreComponent implements OnInit, OnDestroy {
         if (info.applyUsers) {
           this.users = info.applyUsers
           this.prouser.similar.emit(this.prouser.user.uid)
+        }
+        if (info.applyUsers2) {
+          this.users2 = info.applyUsers2
         }
       })
   }
@@ -178,7 +183,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.changePag(i)
   }
 
-  filterChange(){
+  filterChange() {
     this.changeFilter = !this.changeFilter
   }
 

@@ -51,7 +51,7 @@
                         <div class="col-sm">
                             <div class="webkit">
                                 <a href="/Chat" *ngIf="p.chat; else disChat">
-                                    <div class="messageIcon"></div>
+                                    <div class="messageIcon" (click)="messages(p)"></div>
                                 </a>
                                 <ng-template #disChat>
                                     <div class="messageDisabled"></div>

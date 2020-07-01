@@ -93,6 +93,11 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.projects.splice(j, 1)
   }
 
+  //Ir al Inbox especifico
+  messages(p: any) {
+    localStorage.setItem('key', p.idDoc + '|' + this.proU.user.uid)
+  }
+
   azOrder() {
     this.az = !this.az
   }
