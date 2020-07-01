@@ -28,29 +28,22 @@
                             <div class="col-sm-12 divcol " [class.projects]="option == 1">
                                 <div class="col-sm-12 divcol normalText">
                                     <ng-container *ngFor="let p of projects | filter: option">
-                                        <div class="row py-2 px-4 pb-3"
-                                            *ngIf="(p.status !=4 && option!=4) || (p.status==4 && option==4)">
+                                        <div class="row py-2 px-4 pb-3" *ngIf="(p.status !=4 && option!=4) || (p.status==4 && option==4)">
                                             <div class="col-sm">
                                                 <li class="list-name">
-                                                    <span class="project-name "
-                                                        (click)="viewProject(p)">{{p.projectname}}</span>
+                                                    <span class="project-name " (click)="viewProject(p)">{{p.projectname}}</span>
                                                 </li>
                                             </div>
                                             <div class="col-sm normalText c{{p.statusname}}">{{p.statusname}}</div>
                                             <div class="col-sm ">
                                                 <div class=" webkit">
                                                     <div class="pr-3 opChat messageDesactive" disabled></div>
-                                                    <div class="pr-3 opChat carpeta" *ngIf="p.status  != 3"
-                                                      
-                                                        (click)="archivedStatus(p.id)">
+                                                    <div class="pr-3 opChat carpeta" *ngIf="p.status  != 3" (click)="archivedStatus(p.id)">
                                                     </div>
-                                                    <div class="pr-3 opChat unarchive" *ngIf="p.status  == 3"
-                                                   
-                                                        (click)="UnarchivedStatus(p.id)">
+                                                    <div class="pr-3 opChat unarchive" *ngIf="p.status  == 3" (click)="UnarchivedStatus(p.id)">
                                                     </div>
 
-                                                    <div class="pr-3 opProject trash"
-                                                        [class.trashDesactive]=' p.status  == 4' (click)="delete(p.id)">
+                                                    <div class="pr-3 opProject trash" [class.trashDesactive]=' p.status  == 4' (click)="delete(p.id)">
                                                     </div>
 
                                                 </div>
@@ -66,8 +59,7 @@
                             <hr class="m-0">
                             <div class="row py-3 px-5">
                                 <div class="col-sm-6 input-group pl-3 crateNewProject" (click)="next()">
-                                    <img src="../../../../../assets/iconos/plus-button.svg" alt=""
-                                        class="plus-button pr-3" />
+                                    <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button pr-3" />
                                     <span class="mt-2 new-project normalText">Create new project</span>
                                 </div>
                             </div>
@@ -79,8 +71,7 @@
         </div>
         <div *ngIf="HomeFormularioNw == 1">
             <div class="container containerMarginhr">
-                <input type="hidden" class="form-control" name="id" id="id" ngModel #id="ngModel"
-                    [(ngModel)]="viewP.id" />
+                <input type="hidden" class="form-control" name="id" id="id" ngModel #id="ngModel" [(ngModel)]="viewP.id" />
                 <div class="row py-2">
                     <div class="title2">
                         <h1 class="changeColorBlue " id="btnPointer2">Project’s name</h1>
@@ -88,15 +79,11 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 input-group">
-                        <input required type="text" class="form-control" placeholder="e.g. Excavation at 280 S."
-                            [class.errorInput]="projectname.value == '' ||  alerta "
-                            [class.correctInput]="projectname.value != '' && projectname.value != undefined "
-                            name="projectname" id="projectname" #projectname="ngModel"
-                            [(ngModel)]="viewP.projectname" />
+                        <input required type="text" class="form-control" placeholder="e.g. Excavation at 280 S." [class.errorInput]="projectname.value == '' ||  alerta " [class.correctInput]="projectname.value != '' && projectname.value != undefined " name="projectname" id="projectname"
+                            #projectname="ngModel" [(ngModel)]="viewP.projectname" />
 
 
-                        <span *ngIf="projectname.value =='' || projectname.value ==undefined &&   alerta "
-                            class="textError">Project name is required characters.</span>
+                        <span *ngIf="projectname.value =='' || projectname.value ==undefined &&   alerta " class="textError">Project name is required characters.</span>
 
                     </div>
                 </div>
@@ -107,24 +94,18 @@
                 </div>
                 <div class="row py-2">
                     <p class="normalText">
-                        Type what the project is about and the estimated time you expect it to be completed. Include an
-                        overview of what you need done.
+                        Type what the project is about and the estimated time you expect it to be completed. Include an overview of what you need done.
                     </p>
                 </div>
                 <div class="row fields">
                     <div class="col-sm input-group">
-                        <textarea class="form-control" id="description" rows="4" name="description" id="description"
-                            (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000"
-                            #description="ngModel"
-                            [class.errorInput]="description.value == '' ||  alerta || description.value > 4000 "
-                            [class.correctInput]="description.value != '' && description.value != undefined "
-                            [(ngModel)]="viewP.description" required></textarea>
+                        <textarea class="form-control" id="description" rows="4" name="description" id="description" (keyup)="onKey($event)" placeholder="Describe your project here..." maxlength="4000" #description="ngModel" [class.errorInput]="description.value == '' ||  alerta || description.value > 4000 "
+                            [class.correctInput]="description.value != '' && description.value != undefined " [(ngModel)]="viewP.description" required></textarea>
 
 
                     </div>
                     <div class="errordescriptexarea">
-                        <span *ngIf="description.value =='' || description.value == undefined &&   alerta "
-                            class="textError">Description of the projec is required</span>
+                        <span *ngIf="description.value =='' || description.value == undefined &&   alerta " class="textError">Description of the projec is required</span>
                     </div>
                 </div>
                 <div class="row text-right">
@@ -145,19 +126,15 @@
                 <div class="row">
                     <div class="col-sm input-group m-0">
                         <div class="input-group custom-file" *ngFor="let f of files; let i = index">
-                            <input type="file" *ngIf="f.name == 'Add material file'"
-                                class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg"
-                                name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
+                            <input type="file" *ngIf="f.name == 'Add material file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
 
                             <label for="customFileCert{{i}}" class="custom-file-label">
                                 <div class="afterFile">{{f.name}}</div>
                             </label>
-                            <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'"
-                                (click)="deleteBriefMaterial(f)"></div>
+                            <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'" (click)="deleteBriefMaterial(f)"></div>
                         </div>
                         <div class="input-group-prepend iconAdd" (click)="addfiles()">
-                            <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button"
-                                title="Add material" />
+                            <img src="../../../../../assets/iconos/plus-button.svg" alt="" class="plus-button" title="Add material" />
                         </div>
                     </div>
                 </div>
@@ -200,10 +177,8 @@
                 <div class="row">
                     <div class="col-sm-6 form-group" *ngFor="let p of peoples">
                         <p class="normalText pb-2">{{p.skill}}</p>
-                        <input required type="Number" class="form-control addPeople" placeholder=""
-                            value="{{p.quantity}}" name="people" id="{{p.skill}}"
-                            [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta "
-                            [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined " />
+                        <input required type="Number" class="form-control addPeople" placeholder="" value="{{p.quantity}}" name="people" id="{{p.skill}}" [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta " [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined "
+                        />
                         <span class="textError a{{p.skill}}"></span>
 
 
@@ -217,10 +192,7 @@
                 <div class="row">
                     <div class="col-sm-6 input-group">
 
-                        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off"
-                            type="text" class="form-control" #search [formControl]="searchControl" name="search"
-                            id="search" [class.errorInput]="search.value == ''  &&  alerta "
-                            [class.correctInput]="search.value != '' && search.value != undefined "
+                        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl" name="search" id="search" [class.errorInput]="search.value == ''  &&  alerta " [class.correctInput]="search.value != '' && search.value != undefined "
                             [(ngModel)]="viewP.location">
 
                         <span *ngIf="search.value == ''  &&   alerta " class="textError">Please
@@ -239,13 +211,9 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 input-group">
-                        <input required type="text" class="form-control" placeholder="$10,000 - $20,000"
-                            name="estimated" id="estimated" #estimated="ngModel"
-                            [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta"
-                            [class.correctInput]="estimated.value != '' && estimated.value != undefined "
+                        <input required type="text" class="form-control" placeholder="$10,000 - $20,000" name="estimated" id="estimated" #estimated="ngModel" [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta" [class.correctInput]="estimated.value != '' && estimated.value != undefined "
                             [(ngModel)]="viewP.estimated" />
-                        <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta "
-                            class="textError">Estimated
+                        <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta " class="textError">Estimated
                             is required.</span>
 
 
@@ -259,10 +227,7 @@
                 <div class="row">
                     <div class="col-sm-6 form-group">
                         <p class="normalText py-3">Start date</p>
-                        <input type="date" name="startdate" placeholder="dd/mm/yyyy" max="3000-12-31"
-                            [(ngModel)]="viewP.startdate"
-                            [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta"
-                            [class.correctInput]="startdate.value != '' && startdate.value != undefined "
+                        <input type="date" name="startdate" placeholder="dd/mm/yyyy" max="3000-12-31" [(ngModel)]="viewP.startdate" [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta" [class.correctInput]="startdate.value != '' && startdate.value != undefined "
                             min="1000-01-01" class="form-control" #startdate="ngModel">
                         <span *ngIf="startdate.value == undefined &&   alerta " class="textError">Start date is
                             required</span>
@@ -271,10 +236,7 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <p class="normalText py-3">End date</p>
-                        <input type="date" name="enddate" placeholder="dd/mm/yyyy" max="3000-12-31" min="1000-01-01"
-                            class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel"
-                            [class.errorInput]=" enddate.value == undefined &&   alerta"
-                            [class.correctInput]="enddate.value != '' && enddate.value != undefined "
+                        <input type="date" name="enddate" placeholder="dd/mm/yyyy" max="3000-12-31" min="1000-01-01" class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel" [class.errorInput]=" enddate.value == undefined &&   alerta" [class.correctInput]="enddate.value != '' && enddate.value != undefined "
                             [class.errorInput]="startdate.value > enddate.value">
                         <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
                         <span *ngIf="  enddate.value == undefined &&   alerta " class="textError">End date is
@@ -323,8 +285,7 @@
                 </div>
 
                 <button class="blueBtn small my-5 float-right" type="submit">Post</button>
-                <button class="blueBtn small my-5 float-right" type="button" (click)="HomeFormularioNw = 0"
-                    style="margin-right: 12px">Cancel</button>
+                <button class="blueBtn small my-5 float-right" type="button" (click)="HomeFormularioNw = 0" style="margin-right: 12px">Cancel</button>
             </div>
         </div>
 
@@ -416,7 +377,7 @@
                             </div>
                         </div>
                         <div class="col-sm mx-4 pt-3">
-                            <div class="pr-3 opChat messageIcon profileHire1"></div>
+                            <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(da.id)"></div>
 
                             <span class="vprofile profileHire2" (click)="goToProfile(da)">
 
@@ -456,7 +417,7 @@
                 </div>
 
                 <div class="col-sm mx-4 pt-3">
-                    <div class="pr-3 opChat messageIcon profileHire1"></div>
+                    <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(so.dataApply.id)"></div>
 
                     <span class="vprofile profileHire2" (click)="goToProfile(da)">
 
@@ -530,8 +491,7 @@
                             <div class="starG" [class.starO]="rate >= 3"></div>
                             <div class="starG" [class.starO]="rate >= 4"></div>
                             <div class="starG mr-13" [class.starO]="rate == 5"></div>
-                            <p class="smallText">(<span *ngIf="!profileP.reviews">no</span><span
-                                    *ngIf="profileP.reviews">{{profileP.reviews.length}}</span> reviews)
+                            <p class="smallText">(<span *ngIf="!profileP.reviews">no</span><span *ngIf="profileP.reviews">{{profileP.reviews.length}}</span> reviews)
                             </p>
                         </div>
                     </div>
@@ -602,8 +562,7 @@
                         <div class="row">
                             <div class="col-sm input-group pl-3">
                                 <div *ngFor="let ce of profileP.certificate" class="mr-30">
-                                    <ng-container
-                                        *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
+                                    <ng-container *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
                                         <!-- <div *ngFor="let co of profile.certificate" class="mr-30"> -->
                                         <a target="_blank" href="{{ce.url}}">
                                             <div class="fileIcon certIcon"></div>
@@ -611,8 +570,7 @@
                                         </a>
                                         <!-- </div> -->
                                     </ng-container>
-                                    <div
-                                        *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || profileP.certificate.name == 'Add certificate file'">
+                                    <div *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || profileP.certificate.name == 'Add certificate file'">
                                         <p>No files have been uploaded.</p>
                                     </div>
                                 </div>
@@ -626,15 +584,12 @@
                         <div class="title3 mb-4">
                             <p>Reviews</p>
                         </div>
-                        <p class="smallText mr-48" *ngIf="usuariosReviwsTodos.length==0">Your opinion is very valuable
-                            to your workers, help people improve and be
-                            recognized for their skills, leave a review!</p>
+                        <p class="smallText mr-48" *ngIf="usuariosReviwsTodos.length==0">Your opinion is very valuable to your workers, help people improve and be recognized for their skills, leave a review!</p>
 
                         <div class="row mb-4">
                             <div class="col-6 mt-23 " *ngFor="let reviews of usuariosReviwsTodos">
                                 <div class="media">
-                                    <div class="profile-mini"
-                                        [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
+                                    <div class="profile-mini" [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
                                     <div class="media-body">
                                         <div class="title3 mt-3 pl-2">
                                             <p>{{reviews.name}}</p>
@@ -681,25 +636,18 @@
               </div-->
                             <div class="stars mt-23 ml-48">
                                 <input type="hidden" id="valStarts" value="{{valStarts}}">
-                                <div class="starG" [class.starO]="estrellitasreviws1 >= 1"
-                                    (click)="estrellitasreviws(1)"></div>
-                                <div class="starG" [class.starO]="estrellitasreviws1 >= 2"
-                                    (click)="estrellitasreviws(2)"></div>
-                                <div class="starG" [class.starO]="estrellitasreviws1 >= 3"
-                                    (click)="estrellitasreviws(3)"></div>
-                                <div class="starG" [class.starO]="estrellitasreviws1 >= 4"
-                                    (click)="estrellitasreviws(4)"></div>
-                                <div class="starG mr-13" [class.starO]="estrellitasreviws1 == 5"
-                                    (click)="estrellitasreviws(5)"></div>
+                                <div class="starG" [class.starO]="estrellitasreviws1 >= 1" (click)="estrellitasreviws(1)"></div>
+                                <div class="starG" [class.starO]="estrellitasreviws1 >= 2" (click)="estrellitasreviws(2)"></div>
+                                <div class="starG" [class.starO]="estrellitasreviws1 >= 3" (click)="estrellitasreviws(3)"></div>
+                                <div class="starG" [class.starO]="estrellitasreviws1 >= 4" (click)="estrellitasreviws(4)"></div>
+                                <div class="starG mr-13" [class.starO]="estrellitasreviws1 == 5" (click)="estrellitasreviws(5)"></div>
                             </div>
                             <span class="textError" id="currentRaterror"></span>
                         </div>
                     </div>
                     <div class="row pl-3">
                         <div class="col-sm ml-48  mr-48  input-group">
-                            <textarea class="form-control" id="reviewR" rows="4" name="reviewR"
-                                placeholder="Leave your review here. (400 characters left)"
-                                value="{{reviewR}}"></textarea>
+                            <textarea class="form-control" id="reviewR" rows="4" name="reviewR" placeholder="Leave your review here. (400 characters left)" value="{{reviewR}}"></textarea>
                             <span class="textError" id="reviewRerror"></span>
                         </div>
                     </div>

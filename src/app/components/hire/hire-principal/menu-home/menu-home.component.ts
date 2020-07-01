@@ -433,26 +433,19 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw = 2
     this.section = 0;
     this.viewP = p;
-    this.apply = this.viewP.applyUsers;
+    this.apply = this.viewP.applyUsers2;
     this.visiblePeople = true;
     if (this.apply) {
       for (var i = 0; i < this.apply.length; i++) {
         this.db.collection("users_pro").doc(this.apply[i]).get()
           .subscribe((data) => {
             this.dataApply.push(data.data());
- 
             data.data().skills.forEach(element => {
               this.buscar_team_skill(element, data.data());
             });
-
-
           })
       }
-
-
     }
-
-
   }
 
   //Funcion para buscar team skill segun el proyecto 
@@ -461,7 +454,6 @@ export class MenuHomeComponent implements OnInit {
       var i = this.viewP.skills.indexOf(userProSkill)
       if (i === 0) {
         this.teamSkills.push({ "team": userProSkill, "dataApply": dataApply })
-
       }
     }
   }
@@ -536,7 +528,11 @@ export class MenuHomeComponent implements OnInit {
     this.LeaveForm = 0
   }
 
-
+  //Ir al Inbox especifico
+  messages(id:string){
+    localStorage.setItem('key', this.afAuth.auth.currentUser.uid+'|'+id)
+    location.href = '/Chat'
+  }
 
   //Modificar Reviews
   postReview() {

@@ -64,9 +64,10 @@ export class ProuserService {
       })
   }
   //Aplicar un proyecto agregando ID del usuario
-  applyProject(idUser: string, idProject: string, users: any[]) {
+  applyProject(idUser: string, idProject: string, users: any[], users2: any[]) {
     this.getInfoHire().doc(idUser).collection('projects').doc(idProject).update({
-      applyUsers: users
+      applyUsers: users,
+      applyUsers2: users2
     })
   }
   //ACTUALIZACIÓN DE INFORMACIÓN USUARIO

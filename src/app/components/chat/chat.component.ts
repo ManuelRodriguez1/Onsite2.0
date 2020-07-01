@@ -43,6 +43,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   idProject: string = ''
   priceHour: number = 0
   disabled: boolean = true
+  applyusers: any[] = []
   //Suscripciones
   sub1: Subscription
   sub2: Subscription
@@ -94,7 +95,7 @@ export class ChatComponent implements OnInit, OnDestroy {
               }
             })
           })
-        });
+        })
       })
     }
     if (this.info.user.displayName == 'pro') {
@@ -126,6 +127,7 @@ export class ChatComponent implements OnInit, OnDestroy {
                             this.users[this.cont].projectname = h.data().projectname
                             this.users[this.cont].idProject = h.id
                             this.cont++
+                            this.info.chatUnread.emit(this.users.length)
                           }
                         }
                       }
@@ -133,7 +135,6 @@ export class ChatComponent implements OnInit, OnDestroy {
                   })
               })
           }
-          this.info.chatUnread.emit(this.users.length)
         })
       })
     }
@@ -156,6 +157,21 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.info.chatUnread.subscribe((d: number) => {
       var temp: number = 0
+      var key: any = ''
+      var i: any = ''
+      if (localStorage.getItem('key')) {
+        key = localStorage.getItem('key').split('|')
+        if (this.info.user.displayName == 'hire') {
+          i = key[1]
+        } else {
+          i = key[0]
+        }
+        this.users.map((m) => {
+          if (m.idOther == i) {
+            this.initChat(m)
+          }
+        })
+      }
       this.users.map((m) => {
         if (!m.noRead) {
           temp++
@@ -176,6 +192,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.skills = e.skills
     this.idProject = e.idProject
     this.chat = true
+    if (localStorage.getItem('key')) {
+      localStorage.removeItem('key')
+    }
 
     if (this.info.user.displayName == 'hire') {
       hire = this.info.user.uid
@@ -229,10 +248,12 @@ export class ChatComponent implements OnInit, OnDestroy {
         hire = e
         pro = this.info.user.uid
       }
-      if (this.messages[this.messages.length - 1].offer && msg != 'offer') {
-        offer = true
-        price = this.messages[this.messages.length - 1].price
-        team = this.messages[this.messages.length - 1].team
+      if (this.messages.length > 0) {
+        if (this.messages[this.messages.length - 1].offer && msg != 'offer') {
+          offer = true
+          price = this.messages[this.messages.length - 1].price
+          team = this.messages[this.messages.length - 1].team
+        }
       }
       if (accept == true) { offer = false }
 
@@ -280,6 +301,9 @@ export class ChatComponent implements OnInit, OnDestroy {
           if (p.data().negotiation) {
             this.negotiation = p.data().negotiation
           }
+          if (p.data().applyUsers2) {
+            this.applyusers = p.data().applyUsers2
+          }
         }).then(() => {
           this.negotiation.push({
             idPro: this.myId,
@@ -287,9 +311,12 @@ export class ChatComponent implements OnInit, OnDestroy {
             priceHour: this.priceHour,
             skill: this.skillS
           })
+          var i = this.applyusers.indexOf(this.myId)
+          i !== -1 && this.applyusers.splice(i, 1)
         }).then(() => {
           this.info.getInfoHire().doc(this.idPro).collection('projects').doc(this.idProject).update({
-            'negotiation': this.negotiation
+            'negotiation': this.negotiation,
+            'applyUsers2': this.applyusers
           })
         })
     }
@@ -305,7 +332,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       hire = this.infoTemp.idOther
       pro = this.info.user.uid
     }
-    this.info.getChat(hire, pro).delete().then(()=>{
+    this.info.getChat(hire, pro).delete().then(() => {
       location.reload()
     })
   }
