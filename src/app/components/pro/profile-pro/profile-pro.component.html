@@ -243,7 +243,7 @@
                 <hr class="hr mt-30">
                 <div class="ml-48 mr-48">
                     <div class="title2">
-                        <p>Reviews  <span class="smallText">({{usuariosReviwsTodos.length}})</span></p>
+                        <p>Reviews <span class="smallText">({{usuariosReviwsTodos.length}})</span></p>
                     </div>
                     <div *ngIf="usuariosReviwsTodos.length == 0 ">
                         <p>You have no reviews yet? You can ask your hirer for one!</p>
@@ -267,9 +267,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-21 smallText">{{reviews.descripcion}}</p>
-                            <p class="mt-21 reviwsDescriptionFinally ">{{reviews.descripcion}}
-                            </p>
+                            <p class="mt-21 reviwsDescriptionFinally">{{reviews.descripcion}}</p>
                         </div>
                         <span class="orange viewAll" (click)="limit = usuariosReviwsTodos.length" *ngIf="limit == 2">View all</span>
                     </div>
