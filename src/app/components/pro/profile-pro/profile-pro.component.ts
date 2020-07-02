@@ -31,6 +31,7 @@ export class ProfileProComponent implements OnInit {
   cvClose: boolean = false
   countC: number = 0
   uploadDoc: number = 0
+  plus: boolean = false
   // Datos usuario
   cust: number = 0
   imageP: any = ''
@@ -95,15 +96,14 @@ export class ProfileProComponent implements OnInit {
       }
 
     })
-    /*
-    $('html').on('click', () => {
-      // this.up = false
+    
+    $(window).scroll(function(){
+      if($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)){
+        $(".textv").css({'position':'absolute', 'top': 'auto', 'margin-top': '-16%'})
+      } else{
+        $(".textv").css({'position':'', 'top': '', 'margin-top': ''})
+      }
     })
-    $(".skill, .down").click(function (e) {
-      e.stopPropagation()
-    })*/
-
-    console.log(this.usuariosReviwsTodos);
   }
   //Show Option
   selectOption(e) {
@@ -198,9 +198,11 @@ export class ProfileProComponent implements OnInit {
     this.customers.push({ 'name': 'Add certificate file', 'url': '' });
     this.cust = this.customers.length - 1;
     this.uploadDoc = 0
+    this.plus = false
   }
 
   uploadCert(e) {
+    this.plus = true
     this.prouser.updateCert(e, this.cust, this.customers)
     for(let i = 0; i <= 100; i++){
       setTimeout(() => {

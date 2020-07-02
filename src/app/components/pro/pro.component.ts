@@ -23,6 +23,7 @@ export class ProComponent implements OnInit {
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
   customers = ['Add certificate file'];
+  uploadDocu: number = 0
   customers2: any[] = [];
   notSame: boolean = false
   file: any[] = []
@@ -123,6 +124,7 @@ export class ProComponent implements OnInit {
     var i = this.customers.indexOf(e);
     if (i !== -1) {
       this.customers.splice(i, 1)
+      this.file.splice(i, 1)
       this.cust = this.cust - 1 
     }
     if(this.customers.length == 0){

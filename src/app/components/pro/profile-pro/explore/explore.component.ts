@@ -3,6 +3,7 @@ import { ProuserService } from 'src/app/services/prouser.service';
 import * as firebase from "firebase/app";
 import { Router } from "@angular/router";
 import { Subscription } from 'rxjs';
+declare var $: any
 
 @Component({
   selector: 'app-explore',
@@ -26,7 +27,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   buttonApply: boolean = true
   //Filtro
   searchProject: string = ''
-  changeFilter: boolean = true
+  changeFilter: boolean
   //Paginación
   pages: number[] = []
   start: number = 1
@@ -55,7 +56,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
         d.forEach((j) => {
           var profile: any = j.payload.doc.data()
           if (profile.project) {
-            j.payload.doc.ref.collection("projects").orderBy("creationdate", "desc")
+            j.payload.doc.ref.collection("projects")
               .onSnapshot((d) => {
                 d.docChanges().map((k) => {
                   if (k.doc.data().status == 1) {
@@ -77,19 +78,23 @@ export class ExploreComponent implements OnInit, OnDestroy {
                       tempProjects[cont].photo = profile.photoUrl
                       tempProjects[cont].name = profile.name + ' ' + profile.lastname
                       cont++
+                      this.prouser.pagination.emit(tempProjects)
+                      this.prouser.filterPag.emit(tempProjects)
                     }
                   }
                 })
               })
           }
         })
-        this.prouser.pagination.emit(tempProjects)
-        this.prouser.filterPag.emit(tempProjects)
-        this.loading = false
+
       })
 
     this.suscription = this.prouser.pagination.subscribe((res) => {
-      this.projects = res
+      setTimeout(() => {
+        this.projects = res
+        this.loading = false
+        this.changeFilter = true
+      }, 500);
     })
 
     this.suscription2 = this.prouser.filterPag.subscribe((res) => {
@@ -118,6 +123,14 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.suscription4 = this.prouser.similar.subscribe(res => {
       if (this.users.includes(res)) {
         this.buttonApply = false
+      }
+    })
+
+    $(window).scroll(function(){
+      if($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)){
+        $(".textv").css({'position':'absolute', 'top': 'auto', 'margin-top': '-16%'})
+      } else{
+        $(".textv").css({'position':'', 'top': '', 'margin-top': ''})
       }
     })
   }

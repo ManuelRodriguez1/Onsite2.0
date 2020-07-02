@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProuserService } from 'src/app/services/prouser.service';
 import * as firebase from "firebase";
 import { Subscription } from 'rxjs';
+declare var $: any
 
 @Component({
   selector: 'app-projects',
@@ -79,6 +80,13 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       }, 100)
     })
 
+    $(window).scroll(function(){
+      if($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)){
+        $(".textv").css({'position':'absolute', 'top': 'auto', 'margin-top': '-16%'})
+      } else{
+        $(".textv").css({'position':'', 'top': '', 'margin-top': ''})
+      }
+    })
 
   }
 

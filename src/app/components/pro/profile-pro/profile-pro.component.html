@@ -65,7 +65,7 @@
                         <div class="input-group col-sm">
                             <input type="password" [class.errorInput]="pass1.value?.length < 6 && pass1.value != ''" [class.correctInput]="pass1.value?.length > 5 && pass1.value != ''" class="form-control" placeholder="New password" name="pass1" id="pass1" ngModel #pass1="ngModel">
                             <span class="textError" [hidden]="pass1.value?.length > 5 || pass1.value == ''">Password
-                                must be at leat 6
+                                must be at least 6
                                 characters.</span>
                         </div>
                         <div class="input-group col-sm">
@@ -144,7 +144,7 @@
                             </label>
                             <div class="deleteCert" title="Delete certificate" *ngIf="c.name != 'Add certificate file'" (click)="deleteCert(c)"></div>
                         </div>
-                        <div class="input-group-prepend iconAdd" (click)="addcustomer()">
+                        <div class="input-group-prepend iconAdd" (click)="addcustomer()" *ngIf="customers[customers.length - 1].name != 'Add certificate file'">
                             <div class="icon_img btnround" title="Add certificate"></div>
                         </div>
                     </div>

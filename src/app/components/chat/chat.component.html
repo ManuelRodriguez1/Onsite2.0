@@ -36,10 +36,19 @@
             <div class="col-8">
                 <ng-container *ngIf="users.length == 0 && info.user.displayName == 'pro'">
                     <div class="noMessages">
-                        <hr class="hr mt-155">
+                        <!-- <hr class="hr mt-155"> -->
                         <p class="mt-28">Messages will appear when your hirer contacts you after <br>applying to an offer. Get started looking for a new project.</p>
                         <a href="/ExplorePro">
                             <button class="btn blueBtn medium mt-40">Explore</button>
+                        </a>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="users.length == 0 && info.user.displayName == 'hire'">
+                    <div class="noMessages">
+                        <!-- <hr class="hr mt-155"> -->
+                        <p class="mt-28">Messages will appear when you contact a pro. Get started <br>posting a project.</p>
+                        <a href="/Hireprincipal">
+                            <button class="btn blueBtn medium mt-40">Projects</button>
                         </a>
                     </div>
                 </ng-container>

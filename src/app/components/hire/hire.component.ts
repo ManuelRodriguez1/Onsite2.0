@@ -27,6 +27,7 @@ export class HireComponent implements OnInit {
   zipcodeSelectActive: boolean = false
   formData: FormGroup;
   submitted = false;
+  correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
 
   constructor(
     private serviceHire: HireService,

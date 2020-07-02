@@ -27,61 +27,80 @@
             </div>
         </div>
         <hr class="hr mt-30">
-        <div class="row ml-48 mt-17 p-0 mobile">
-            <div class="col-sm gray">
-                <p>Name</p>
-                <div class="arrowDownGray" (click)="azOrder()"></div>
+        <ng-container *ngIf="projects.length != 0 ; else other_content">
+            <div class="row ml-48 mt-17 p-0 mobile">
+                <div class="col-sm gray">
+                    <p>Name</p>
+                    <div class="arrowDownGray" (click)="azOrder()"></div>
+                </div>
+                <div class="col-sm gray">
+                    <p>Status</p>
+                    <div class="arrowDownGray" (click)="azStat()"></div>
+                </div>
+                <div class="col-sm"></div>
             </div>
-            <div class="col-sm gray">
-                <p>Status</p>
-                <div class="arrowDownGray" (click)="azStat()"></div>
-            </div>
-            <div class="col-sm"></div>
-        </div>
-        <div class="mt-17 proMobile">
-            <ng-container *ngFor="let p of projects | filter: f | az: az | azStatus: azStatus">
-                <ng-container>
-                    <div class="row ml-48 mt-22 p-0">
-                        <div class="col-sm">
-                            <p>{{p.projectname}}</p>
-                        </div>
-                        <div class="col-sm">
-                            <p>{{p.statusname}}</p>
-                        </div>
-                        <div class="col-sm">
-                            <div class="webkit">
-                                <a href="/Chat" *ngIf="p.chat; else disChat">
-                                    <div class="messageIcon" (click)="messages(p)"></div>
-                                </a>
-                                <ng-template #disChat>
-                                    <div class="messageDisabled"></div>
-                                </ng-template>
-                                <div class="trash" (click)="trash(p)"></div>
+            <div class="mt-17 proMobile">
+                <ng-container *ngFor="let p of projects | filter: f | az: az | azStatus: azStatus">
+                    <ng-container>
+                        <div class="row ml-48 mt-22 p-0">
+                            <div class="col-sm">
+                                <p>{{p.projectname}}</p>
+                            </div>
+                            <div class="col-sm">
+                                <p>{{p.statusname}}</p>
+                            </div>
+                            <div class="col-sm">
+                                <div class="webkit">
+                                    <a href="/Chat" *ngIf="p.chat; else disChat">
+                                        <div class="messageIcon" (click)="messages(p)"></div>
+                                    </a>
+                                    <ng-template #disChat>
+                                        <div class="messageDisabled"></div>
+                                    </ng-template>
+                                    <div class="trash" (click)="trash(p)"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <hr class="hr mt-22">
+                        <hr class="hr mt-22">
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-        </div>
-        <div class="pagination">
-            <div class="buttonsPag">
-                <div class="firstPag" [class.clickP]="start > 1" (click)="firstPage()">
-                    <span></span>
-                </div>
-                <div class="prevPag" [class.clickP]="start > 1" (click)="prevPage()">
-                    <span></span>
-                </div>
-                <div class="numbers clickP" [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) " (click)="changePag(page)" *ngFor="let page of pages">
-                    <p>{{ page }}</p>
-                </div>
-                <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects2.length">
-                    <span></span>
-                </div>
-                <div class="lastPag" [class.clickP]="end < projects2.length" (click)="lastPage()">
-                    <span></span>
+            </div>
+            <div class="pagination">
+                <div class="buttonsPag">
+                    <div class="firstPag" [class.clickP]="start > 1" (click)="firstPage()">
+                        <span></span>
+                    </div>
+                    <div class="prevPag" [class.clickP]="start > 1" (click)="prevPage()">
+                        <span></span>
+                    </div>
+                    <div class="numbers clickP" [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) " (click)="changePag(page)" *ngFor="let page of pages">
+                        <p>{{ page }}</p>
+                    </div>
+                    <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects2.length">
+                        <span></span>
+                    </div>
+                    <div class="lastPag" [class.clickP]="end < projects2.length" (click)="lastPage()">
+                        <span></span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
+        <ng-template #other_content>
+
+
+            <div class="row ml-48 mt-17 p-0 mr-48">
+
+                <div class="btnInitialDash">
+                    <p class="normalText">You have not applied for any project yet.</p>
+                    <p class="normalText">Explore for a project that suits your skills.</p>
+                    <a href="/ExplorePro">
+                        <button class="blueBtn medium">Explore</button>
+                    </a>
+                </div>
+
+            </div>
+
+
+        </ng-template>
     </div>
 </div>

@@ -50,6 +50,11 @@ export class MenuComponent implements OnInit {
     });
   }
   ngOnInit() {
+    $(document).ready(function(){
+      if(window.location.pathname == '/VerificationEmail'){
+        $(".verifyUser").hide()
+      }     
+    })
   
   }
 

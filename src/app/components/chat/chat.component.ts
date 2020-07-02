@@ -62,7 +62,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         .subscribe((p) => {
           p.forEach((p) => {
             if (p.data().applyUsers) {
-              if (p.data().applyUsers.length > 0) {
+              if (p.data().applyUsers.length > 0) {                
                 this.info.usersChat.emit(p.data())
               }
             }
@@ -71,8 +71,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
       this.sub2 = this.info.usersChat.subscribe((res) => {
         var temp: any = ''
-        this.users.push({ 'projectname': res.projectname, 'skills': res.skills })
         res.applyUsers.forEach(e => {
+          this.users.push({ 'projectname': res.projectname, 'skills': res.skills })
           this.info.getInfoPro().doc(e).get().subscribe((inf) => {
             var t2: boolean = false
             this.info.getChatExist().get().subscribe((s) => {
@@ -119,10 +119,10 @@ export class ChatComponent implements OnInit, OnDestroy {
                 })
                 user.ref.collection('projects').get()
                   .then((h) => {
-                    h.forEach((h) => {
+                    h.forEach((h) => {                      
                       if (h.data().applyUsers) {
                         var temp2: any = h.data().applyUsers
-                        if (temp2.includes(this.myId)) {
+                        if (temp2.includes(this.myId)) {                         
                           if (this.cont != this.users.length) {
                             this.users[this.cont].projectname = h.data().projectname
                             this.users[this.cont].idProject = h.id
@@ -316,7 +316,9 @@ export class ChatComponent implements OnInit, OnDestroy {
         }).then(() => {
           this.info.getInfoHire().doc(this.idPro).collection('projects').doc(this.idProject).update({
             'negotiation': this.negotiation,
-            'applyUsers2': this.applyusers
+            'applyUsers2': this.applyusers,
+            'status': 2,
+            'statusname': 'Active'
           })
         })
     }

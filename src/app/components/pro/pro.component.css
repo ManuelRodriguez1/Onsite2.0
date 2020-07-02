@@ -99,6 +99,14 @@ input::placeholder {
     width: 100%;
 }
 
+.progress {
+    border: 1px solid #FF8600;
+}
+
+.progress-bar {
+    background: #FF8600;
+}
+
 @media screen and (max-width: 470px) {
     .changeColor {
         font-size: 14px !important;

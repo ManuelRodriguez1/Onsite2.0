@@ -7,28 +7,23 @@
             <div class="fields container">
                 <div class="row">
                     <div class="col-sm input-group">
-                        <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel"
-                            placeholder="First Name">
+                        <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
                     </div>
                     <div class="col-sm input-group">
-                        <input type="text" class="form-control" placeholder="Last Name" name="lastname" ngModel
-                            #lastname="ngModel">
+                        <input type="text" class="form-control" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm input-group">
-                        <input type="email" class="form-control"
-                            [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')"
-                            [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail"
-                            placeholder="E-mail" name="email" #email="ngModel" ngModel>
+                        <input type="email" class="form-control" [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')" [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail" placeholder="E-mail" name="email"
+                            #email="ngModel" ngModel>
                         <span [hidden]="!verifyEmail" class="textError">Email already exists!</span>
                         <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must
                             be a valid
                             email address</span>
                     </div>
                     <div class="col-sm input-group">
-                        <input type="text" class="form-control" placeholder="Phone Number" name="phone" #phone="ngModel"
-                            ngModel>
+                        <input type="text" class="form-control" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
                     </div>
                 </div>
             </div>
@@ -39,19 +34,14 @@
             <div class="fields2 container">
                 <div class="row">
                     <div class="col-sm input-group">
-                        <input type="password" class="form-control"
-                            [class.errorInput]="user.value?.length < 6 && user.value != ''"
-                            [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password"
-                            name="user" #user="ngModel" ngModel>
+                        <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''" [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user" #user="ngModel" ngModel>
                         <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be
-                            at leat 6
+                            at least 6
                             characters.</span>
                     </div>
                     <div class="col-sm input-group">
-                        <input type="password" class="form-control"
-                            [class.errorInput]="user.value != password.value && password.value != ''"
-                            [class.correctInput]="user.value == password.value && password.value != ''"
-                            placeholder="Password confirmation" name="password" #password="ngModel" ngModel>
+                        <input type="password" class="form-control" [class.errorInput]="user.value != password.value && password.value != ''" [class.correctInput]="user.value == password.value && password.value != ''" placeholder="Password confirmation" name="password" #password="ngModel"
+                            ngModel>
                         <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password
                             doesn’t
                             match.</span>
@@ -64,12 +54,10 @@
             <div class="field3 container">
                 <div class="row">
                     <div class="col-sm input-group">
-                        <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode"
-                            #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
+                        <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
                         <ul class="list-group" *ngIf="!zipcodeSelectActive">
                             <ng-container *ngFor="let z of zipCodeCity | searchZip: zipcode.value">
-                                <li class="list-group-item d-flex justify-content-between align-items-center"
-                                    (click)="selecZip(z.city)">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" (click)="selecZip(z.city)">
                                     {{z.city}}
                                     <span class="badge badge-primary">{{z.zip}}</span>
                                 </li>
@@ -107,8 +95,7 @@
         </section>
         <section [hidden]='page < 2 || page > 2' class="container">
             <div class="texts2">
-                <p class="changeColor">In this last step you can add your certificate(s) PDF file(s) to support your
-                    skill(s). This step is not mandatory and you can add them later in your account settings. </p>
+                <p class="changeColor">In this last step you can add your certificate(s) PDF file(s) to support your skill(s). This step is not mandatory and you can add them later in your account settings. </p>
                 <div class="title2">
                     <p class="changeColorBlue">Certificates</p>
                 </div>
@@ -117,22 +104,18 @@
             <div class="row">
                 <div class="col-sm input-group">
                     <div class="input-group custom-file" *ngFor="let c of customers;">
-                        <input type="file" class="custom-file-input customFile" id="customFile"
-                            accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel
-                            (change)="uploadDoc($event)">
+                        <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
                         <label for="customFile" class="custom-file-label">
                             <div class="afterFile">{{c}}</div>
                         </label>
-                        <div class="deleteCert" title="Delete certificate" *ngIf="c != 'Add certificate file'"
-                            (click)="deleteCert(c)"></div>
+                        <div class="deleteCert" title="Delete certificate" *ngIf="c != 'Add certificate file'" (click)="deleteCert(c)"></div>
                     </div>
-                    <div class="input-group-prepend iconAdd" (click)="addcustomer()">
+                    <div class="input-group-prepend iconAdd" (click)="addcustomer()" *ngIf="customers[customers.length - 1] != 'Add certificate file'">
                         <div class="icon_img btnround"></div>
                     </div>
                 </div>
                 <div class="progress" style="width: 97%; margin: 0 auto" *ngIf="progressBar">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="0"
-                        aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
 
@@ -152,17 +135,14 @@
             <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 3' (click)='back()'>
                 <p>Back</p>
             </div>
-            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0'
-                [disabled]="name.value == '' || lastname.value == ''
+            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
     || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || user.value.length < 6 || user.value != password.value">
                 Next
             </button>
-            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2'
-                [disabled]="selectskills.length == 0">
+            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills.length == 0">
                 Next
             </button>
-            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 2"
-                [disabled]="checkbox == false">Finish</button>
+            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 2" [disabled]="checkbox == false">Finish</button>
         </div>
     </div>
 </form>

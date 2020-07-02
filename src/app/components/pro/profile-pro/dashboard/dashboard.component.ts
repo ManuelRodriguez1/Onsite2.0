@@ -3,6 +3,7 @@ import { ProuserService } from 'src/app/services/prouser.service';
 import * as firebase from "firebase";
 import { Subscription } from 'rxjs';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+declare var $: any
 
 @Component({
   selector: 'app-dashboard',
@@ -67,6 +68,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         clearInterval(this.inter)
       }
     }, 1000)
+
+    $(window).scroll(function(){
+      if($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)){
+        $(".textv").css({'position':'absolute', 'top': 'auto', 'margin-top': '-16%'})
+      } else{
+        $(".textv").css({'position':'', 'top': '', 'margin-top': ''})
+      }
+    })
   }
 
   infoProject(e: any){
