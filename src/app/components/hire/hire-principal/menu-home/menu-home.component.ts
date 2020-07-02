@@ -59,6 +59,7 @@ export class MenuHomeComponent implements OnInit {
   error = 0
   apply: any[] = [];
   dataApply: any[] = [];
+  negotiation: any[] = [];
   LeaveForm = 1
   sProject: string = ''
   visiblePeople = false
@@ -68,7 +69,9 @@ export class MenuHomeComponent implements OnInit {
   rate: number = 0
   estrellitasreviws1 = 0;
   reviewdescripcion = "";
+  contadorEliminarnegotiation = 0
 
+  contNegotiation = 0
 
 
 
@@ -93,7 +96,7 @@ export class MenuHomeComponent implements OnInit {
 
 
   ngOnInit() {
-    $(document).on("click", (e)=>{
+    $(document).on("click", (e) => {
       var container = $(".btnPointer");
       if (!container.is(e.target) && container.has(e.target).length === 0) {
         this.up = false;
@@ -107,7 +110,7 @@ export class MenuHomeComponent implements OnInit {
         d.forEach((d) => {
           this.projects.push(d.payload.doc.data())
         })
-     
+
       })
     //Funcion reviews
 
@@ -125,16 +128,16 @@ export class MenuHomeComponent implements OnInit {
 
             res1.descripcion = this.reviewdescripcion;
             res1.rating = this.estrellitasreviws1;
-       
+
             this.updateReviews();
           } else {
             var contador = 1;
             this.reviews.map((res1) => {
-          
+
               if (res1.id != this.user.uid && contador == this.reviews.length) {
 
                 this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
-            
+
                 this.updateReviews();
               }
               contador++;
@@ -142,9 +145,9 @@ export class MenuHomeComponent implements OnInit {
           }
         })
 
-  
+
       }
- 
+
     })
 
     //mapa
@@ -201,7 +204,7 @@ export class MenuHomeComponent implements OnInit {
     if (e == 1) {
       this.up = !this.up;
     }
- 
+
   }
   //Agregar Skill
   selectskill(e) {
@@ -227,7 +230,7 @@ export class MenuHomeComponent implements OnInit {
 
   //update this.reviews
   updateReviews() {
- 
+
     this.db.collection("users_pro").doc(this.profileP.id).update({
       reviews: this.reviews,
     }).then((res) => {
@@ -271,7 +274,7 @@ export class MenuHomeComponent implements OnInit {
 
     let locationApp = $("#search").val();
     //Validacion campos 
- 
+
 
 
     if (f.status == "INVALID" || locationApp == "" || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
@@ -397,7 +400,7 @@ export class MenuHomeComponent implements OnInit {
 
   }
   //Modificar estado a pendiente
-  
+
   UnarchivedStatus(idP) {
     this.option = this.option + 5
 
@@ -434,28 +437,78 @@ export class MenuHomeComponent implements OnInit {
     this.section = 0;
     this.viewP = p;
     this.apply = this.viewP.applyUsers2;
+    if (this.viewP.negotiation) {
+      this.teamSkills = this.viewP.negotiation
+      this.teamSkills.forEach(element => {
+        this.buscar_team_skill(element.idPro, element.skill);
+      });
+    }
+
+
+
+    console.log(this.teamSkills);
     this.visiblePeople = true;
     if (this.apply) {
       for (var i = 0; i < this.apply.length; i++) {
         this.db.collection("users_pro").doc(this.apply[i]).get()
           .subscribe((data) => {
             this.dataApply.push(data.data());
-            data.data().skills.forEach(element => {
-              this.buscar_team_skill(element, data.data());
-            });
           })
       }
     }
   }
 
   //Funcion para buscar team skill segun el proyecto 
-  buscar_team_skill(userProSkill, dataApply) {
-    if (this.viewP.skills) {
-      var i = this.viewP.skills.indexOf(userProSkill)
-      if (i === 0) {
-        this.teamSkills.push({ "team": userProSkill, "dataApply": dataApply })
+  buscar_team_skill(userPro, skill) {
+
+
+    this.db.collection("users_pro").doc(userPro).get()
+      .subscribe((data) => {
+
+        this.negotiation.push(data.data());
+        //this.dataApply.push(data.data());
+        this.negotiation[this.contNegotiation].skillNegotiation = skill;
+        this.contNegotiation++;
+      })
+    console.log(this.negotiation);
+  }
+
+
+  //Eliminar usuario Pro de aplly users 
+  eliminarPersonAplly(idEliminarPro,idProyecto) {
+    console.log(idEliminarPro);
+    console.log(idProyecto);
+    console.log(this.negotiation);
+
+
+    this.teamSkills.forEach((myObject, index) => {
+      if (myObject.idPro == idEliminarPro.id) {
+        this.teamSkills.splice(index, 1);
+    
       }
-    }
+
+    });
+  
+    this.negotiation.forEach((myObject, index) => {
+      if (myObject.id == idEliminarPro.id) {
+        this.negotiation.splice(index, 1);
+        
+      }
+
+    });
+   
+
+  
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProyecto).update({
+       negotiation: this.teamSkills,
+     }).then((res) => {
+      
+     }).catch((error) => {
+ 
+     })
+
+  
+
   }
   //Numero de estrellas reviws
   estrellitasreviws(e) {
@@ -467,18 +520,18 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw = 3
     this.section = 4
     this.profileP = profile;
-   
+
     if (this.profileP.reviews) {
       var temp: number = 0
       this.profileP.reviews.forEach((r) => {
         temp += r.rating
-   
+
 
         this.db.collection("users_hire").doc(r.id).snapshotChanges()
           .subscribe((data) => {
 
             this.repro = data.payload.data()
-     
+
             this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
 
             if (r.id == this.user.uid) {
@@ -491,7 +544,7 @@ export class MenuHomeComponent implements OnInit {
 
       })
 
-   
+
 
       if (this.profileP.reviews) {
         var temp: number = 0
@@ -500,7 +553,7 @@ export class MenuHomeComponent implements OnInit {
         })
         this.rate = Math.round(temp / this.profileP.reviews.length)
       }
-   
+
 
 
     }
@@ -529,8 +582,8 @@ export class MenuHomeComponent implements OnInit {
   }
 
   //Ir al Inbox especifico
-  messages(id:string){
-    localStorage.setItem('key', this.afAuth.auth.currentUser.uid+'|'+id)
+  messages(id: string) {
+    localStorage.setItem('key', this.afAuth.auth.currentUser.uid + '|' + id)
     location.href = '/Chat'
   }
 
