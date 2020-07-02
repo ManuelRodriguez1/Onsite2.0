@@ -12,6 +12,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   //List projects
   projects: any[] = []
+  projects2: any[] = []
   f: number = 5
   az: boolean
   azStatus: boolean
@@ -19,11 +20,17 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   cont: number = 0
   alert: number = 1
   chat: boolean = false
+  //Paginación
+  pages: number[] = []
+  start: number = 1
+  end: number = 5
+  cantResul: number = 10
   //loading
   loading: boolean = true
   //Subscripciones
   sub1: Subscription
   sub2: Subscription
+  sub3: Subscription
 
   constructor(private proU: ProuserService) { firebase.firestore().enablePersistence() }
 
@@ -60,12 +67,25 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       this.projects[this.cont].chat = this.chat
       this.cont++
       this.loading = false
+      this.proU.pagination.emit(this.projects)
     })
+
+    this.sub3 = this.proU.pagination.subscribe((res) => {
+      this.projects2 = res
+      setTimeout(() => {
+        this.pagination()
+        this.start = 1
+        this.end = this.cantResul
+      }, 100)
+    })
+
+
   }
 
   ngOnDestroy() {
     this.sub1.unsubscribe()
     this.sub2.unsubscribe()
+    this.sub3.unsubscribe()
   }
 
   filterStatus(e: number) {
@@ -73,7 +93,6 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   trash(e: any) {
-    console.info(e)
     this.f = this.f + 5
     setTimeout(() => {
       this.f = this.f - 5
@@ -91,6 +110,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     }, 3000);
     var j = this.projects.indexOf(e)
     this.projects.splice(j, 1)
+    this.proU.pagination.emit(this.projects)
   }
 
   //Ir al Inbox especifico
@@ -104,5 +124,38 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   azStat() {
     this.azStatus = !this.azStatus
+  }
+
+  pagination() {
+    this.pages = []
+    var page: number
+    page = Math.ceil(this.projects2.length / this.cantResul)
+    for (let i = 1; i <= page; i++) {
+      this.pages.push(i)
+    }
+  }
+  changePag(e: number) {
+    this.start = ((e * this.cantResul) - this.cantResul) == 0 ? 1 : (e * this.cantResul) - this.cantResul
+    this.end = e * this.cantResul
+  }
+  nextPage() {
+    if (this.end < this.projects2.length) {
+      this.start += this.cantResul
+      this.end += this.cantResul
+    }
+  }
+  prevPage() {
+    if (this.start > 1) {
+      this.start -= this.cantResul
+      this.end -= this.cantResul
+    }
+  }
+  firstPage() {
+    this.start = 1
+    this.end = this.cantResul
+  }
+  lastPage() {
+    var i = this.pages[this.pages.length - 1]
+    this.changePag(i)
   }
 }

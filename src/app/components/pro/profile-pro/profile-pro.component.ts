@@ -30,6 +30,7 @@ export class ProfileProComponent implements OnInit {
   cv = [{ "name": 'Add a file', "url": '' }]
   cvClose: boolean = false
   countC: number = 0
+  uploadDoc: number = 0
   // Datos usuario
   cust: number = 0
   imageP: any = ''
@@ -42,6 +43,8 @@ export class ProfileProComponent implements OnInit {
   //Rating
   rate: number = 0
   rating: any[] = []
+  //Reviews
+  limit: number = 2
 
   constructor(
     private prouser: ProuserService,
@@ -194,10 +197,16 @@ export class ProfileProComponent implements OnInit {
   addcustomer() {
     this.customers.push({ 'name': 'Add certificate file', 'url': '' });
     this.cust = this.customers.length - 1;
+    this.uploadDoc = 0
   }
 
   uploadCert(e) {
     this.prouser.updateCert(e, this.cust, this.customers)
+    for(let i = 0; i <= 100; i++){
+      setTimeout(() => {
+        this.uploadDoc = i 
+      }, 1000);
+    }
   }
 
   deleteCert(e: any) {

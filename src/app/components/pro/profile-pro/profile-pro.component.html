@@ -138,6 +138,9 @@
                             <input type="file" *ngIf="c.name == 'Add certificate file'" class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel (change)="uploadCert($event)">
                             <label for="customFileCert{{i}}" class="custom-file-label" [class.cDefault]="c.name != 'Add certificate file'">
                                 <div class="afterFile">{{c.name}}</div>
+                                <div class="uploading" *ngIf="c.name == 'Add certificate file' && uploadDoc > 0">
+                                    <div class="loadingBar" [ngStyle]="{'width':uploadDoc+'%'}"></div>
+                                </div>
                             </label>
                             <div class="deleteCert" title="Delete certificate" *ngIf="c.name != 'Add certificate file'" (click)="deleteCert(c)"></div>
                         </div>
@@ -246,7 +249,7 @@
                         <p>You have no reviews yet? You can ask your hirer for one!</p>
                     </div>
                     <div class="row mt-38 mb-43">
-                        <div class="col-6 mb-30" *ngFor="let reviews of usuariosReviwsTodos">
+                        <div class="col-sm mb-30" *ngFor="let reviews of usuariosReviwsTodos | slice:0:limit;">
                             <div class="media">
                                 <div class="profile mini" [ngStyle]="{'background-image' : 'url('+reviews.photoUrl+')'}"></div>
                                 <div class="media-body">
@@ -264,11 +267,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <p class="mt-21 smallText">{{reviews.descripcion}}</p>
                             <p class="mt-21 reviwsDescriptionFinally ">{{reviews.descripcion}}
-                                <!--a class="orange" href="#">Show less</a-->
                             </p>
                         </div>
-
+                        <span class="orange viewAll" (click)="limit = usuariosReviwsTodos.length" *ngIf="limit == 2">View all</span>
                     </div>
                 </div>
             </div>

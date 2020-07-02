@@ -275,13 +275,13 @@
 }
 
 .firstPag {
-    width: 92px;
+    width: 86px;
     border-right: 0.5px solid #9D9D9D;
     cursor: pointer;
 }
 
 .prevPag {
-    width: 126px;
+    width: 86px;
     cursor: pointer;
     border-right: 0.5px solid #9D9D9D;
 }
@@ -293,12 +293,12 @@
 }
 
 .nextPag {
-    width: 87px;
+    width: 86px;
     cursor: pointer;
 }
 
 .lastPag {
-    width: 94px;
+    width: 86px;
     border-left: 0.5px solid #9D9D9D;
     cursor: pointer;
 }

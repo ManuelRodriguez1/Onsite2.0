@@ -53,19 +53,19 @@
         <div class="pagination">
             <div class="buttonsPag">
                 <div class="firstPag" [class.clickP]="start > 1" (click)="firstPage()">
-                    <p>First</p>
+                    <span></span>
                 </div>
                 <div class="prevPag" [class.clickP]="start > 1" (click)="prevPage()">
-                    <p>Previous</p>
+                    <span></span>
                 </div>
                 <div class="numbers clickP" [class.bgP]="start >= ((page*cantResul)-cantResul) && end <= (page*cantResul) " (click)="changePag(page)" *ngFor="let page of pages">
                     <p>{{ page }}</p>
                 </div>
                 <div class="nextPag" (click)="nextPage()" [class.clickP]="end < projects2.length">
-                    <p>Next</p>
+                    <span></span>
                 </div>
                 <div class="lastPag" [class.clickP]="end < projects2.length" (click)="lastPage()">
-                    <p>Last</p>
+                    <span></span>
                 </div>
             </div>
         </div>
