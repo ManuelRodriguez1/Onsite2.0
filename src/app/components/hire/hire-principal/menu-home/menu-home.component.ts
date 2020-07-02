@@ -14,7 +14,7 @@ import * as $ from 'jquery';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
-  reviews;
+  reviews =[] ;
   up = false;
   repro: any = ''
   description;
@@ -58,6 +58,7 @@ export class MenuHomeComponent implements OnInit {
   confirm2 = ''
   error = 0
   apply: any[] = [];
+  applyUsers: any[] = [];
   dataApply: any[] = [];
   negotiation: any[] = [];
   LeaveForm = 1
@@ -103,11 +104,14 @@ export class MenuHomeComponent implements OnInit {
       }
     });
     this.projects = []
+    console.log("111111111");
 
     //Consulta todos los proyecto apenas detecta un cambio 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
       .subscribe((d) => {
+        this.projects = []
         d.forEach((d) => {
+          console.log("22222");
           this.projects.push(d.payload.doc.data())
         })
 
@@ -152,21 +156,21 @@ export class MenuHomeComponent implements OnInit {
 
     //mapa
     //set google maps defaults
-    this.zoom = 8;
+    /*this.zoom = 8;
     this.latitude = 39.8282;
-    this.longitude = -98.5795;
+    this.longitude = -98.5795;*/
     let radius = Number;
     //create search FormControl
     this.searchControl = new FormControl();
 
     //set current position
-    this.setCurrentPosition();
+   // this.setCurrentPosition();
     //load Places Autocomplete
 
 
 
   }
-  private setCurrentPosition() {
+  /*private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -174,7 +178,7 @@ export class MenuHomeComponent implements OnInit {
         this.zoom = 12;
       });
     }
-  }
+  }*/
   mapa() {
 
     setTimeout(() => {
@@ -370,6 +374,7 @@ export class MenuHomeComponent implements OnInit {
       this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
         status: 4,
         statusname: 'Deleted',
+        applyUsers:[],
       }).then((url) => {
         this.option = this.option - 5
         this.error = 0
@@ -436,6 +441,7 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw = 2
     this.section = 0;
     this.viewP = p;
+    this.applyUsers = this.viewP.applyUsers;
     this.apply = this.viewP.applyUsers2;
     if (this.viewP.negotiation) {
       this.teamSkills = this.viewP.negotiation
@@ -476,9 +482,7 @@ export class MenuHomeComponent implements OnInit {
 
   //Eliminar usuario Pro de aplly users 
   eliminarPersonAplly(idEliminarPro,idProyecto) {
-    console.log(idEliminarPro);
-    console.log(idProyecto);
-    console.log(this.negotiation);
+ 
 
 
     this.teamSkills.forEach((myObject, index) => {
@@ -497,14 +501,23 @@ export class MenuHomeComponent implements OnInit {
 
     });
    
+    var i = this.applyUsers.indexOf(idEliminarPro.id)
+    if (i !== -1) {
+      this.applyUsers.splice(i, 1)
+     
 
+    }
+    console.log(this.applyUsers);
   
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProyecto).update({
        negotiation: this.teamSkills,
+       applyUsers:this.applyUsers
+
      }).then((res) => {
+
+
+      console.log("bien");
       
-     }).catch((error) => {
- 
      })
 
   
@@ -589,9 +602,12 @@ export class MenuHomeComponent implements OnInit {
 
   //Modificar Reviews
   postReview() {
+    console.log("Entro a postReview");
     var review = $("#reviewR");
     var valStarts = $("#valStarts");
 
+    console.log(review);
+    console.log(valStarts);
 
     if (valStarts.val() === 0 || valStarts.val() === undefined || valStarts.val() == "") {
       $("#currentRaterror").html("You must rate to post your review.");
@@ -606,14 +622,21 @@ export class MenuHomeComponent implements OnInit {
       $("#currentRaterror").html("");
       // this.LeaveForm = 0
 
+      console.log("else postReview1");
+
 
       this.reviewdescripcion = review.val()
       this.estrellitasreviws1 = valStarts.val()
 
-
-      if (this.profileP.reviews) {
+      console.log("else postReview2");
+      if (this.profileP.reviews.length!=0) {
+        console.log(this.profileP.reviews);
+        console.log("else postReview3");
         this.projectService.Buscador.emit(this.profileP.reviews)
       } else {
+        console.log("id"+this.user.uid);
+        console.log("rating"+this.estrellitasreviws1);
+        console.log("descripcion"+this.reviewdescripcion);
         this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
         this.updateReviews()
       }
