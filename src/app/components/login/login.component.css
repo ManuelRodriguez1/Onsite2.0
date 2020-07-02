@@ -146,7 +146,9 @@ body {
 .Formulario {
     margin-top: 40px;
 }
-
+.flechaforgot11{
+    margin-top: -96px !important;
+}
 .labelpass {
     margin-top: 30px;
 }
