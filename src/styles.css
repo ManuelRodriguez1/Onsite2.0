@@ -1509,6 +1509,7 @@ h4,
 
 
 /* Page setup, nothing to do with the checkbox */
+
 .checkbox {
     -webkit-box-align: center;
     align-items: center;
@@ -1571,6 +1572,47 @@ h4,
 
 
 /* fin loading temporal */
+
+
+/* Paginacion */
+
+.firstPag,
+.nextPag,
+.prevPag,
+.lastPag {
+    position: relative;
+}
+
+.firstPag span,
+.lastPag span {
+    width: 9px;
+    height: 12px;
+    background: url('./assets/iconos/prev2.svg') center no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.prevPag span,
+.nextPag span {
+    width: 4px;
+    height: 12px;
+    background: url('./assets/iconos/prev1.svg') center no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nextPag span {
+    background-image: url('./assets/iconos/next1.svg');
+}
+
+.lastPag span {
+    background-image: url('./assets/iconos/next2.svg');
+}
 
 @media screen and (max-width: 1320px) {
     .container1280Final {
