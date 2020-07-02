@@ -107,7 +107,8 @@
 
                     </div>
                     <div class="errordescriptexarea">
-                        <span *ngIf="description.value =='' || description.value == undefined &&   alerta " class="textError">Description of the projec is required</span>
+                        <span *ngIf="description.value =='' || description.value == undefined &&   alerta "
+                            class="textError">Description of the project is required</span>
                     </div>
                 </div>
                 <div class="row text-right">
@@ -179,8 +180,10 @@
                 <div class="row">
                     <div class="col-sm-6 form-group" *ngFor="let p of peoples">
                         <p class="normalText pb-2">{{p.skill}}</p>
-                        <input required type="Number" class="form-control addPeople" placeholder="" value="{{p.quantity}}" name="people" id="{{p.skill}}" [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta " [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined "
-                        />
+                        <input required  min="1" max="100" type="Number" class="form-control addPeople" placeholder=""
+                            value="{{p.quantity}}" name="people" id="{{p.skill}}"
+                            [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta "
+                            [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined " />
                         <span class="textError a{{p.skill}}"></span>
 
 
@@ -215,8 +218,8 @@
                     <div class="col-sm-6 input-group">
                         <input required type="text" class="form-control" placeholder="$10,000 - $20,000" name="estimated" id="estimated" #estimated="ngModel" [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta" [class.correctInput]="estimated.value != '' && estimated.value != undefined "
                             [(ngModel)]="viewP.estimated" />
-                        <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta " class="textError">Estimated
-                            is required.</span>
+                        <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta "
+                            class="textError">Estimate is required.</span>
 
 
                     </div>
@@ -229,7 +232,10 @@
                 <div class="row">
                     <div class="col-sm-6 form-group">
                         <p class="normalText py-3">Start date</p>
-                        <input type="date" name="startdate" placeholder="dd/mm/yyyy" max="3000-12-31" [(ngModel)]="viewP.startdate" [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta" [class.correctInput]="startdate.value != '' && startdate.value != undefined "
+                        <input type="date" name="startdate" placeholder="mm/dd/yyyy" max="3000-12-31"
+                            [(ngModel)]="viewP.startdate"
+                            [class.errorInput]="startdate.value == 'mm/dd/yyyy' || startdate.value == '' || startdate.value == undefined &&   alerta"
+                            [class.correctInput]="startdate.value != '' && startdate.value != undefined "
                             min="1000-01-01" class="form-control" #startdate="ngModel">
                         <span *ngIf="startdate.value == undefined &&   alerta " class="textError">Start date is
                             required</span>
@@ -238,7 +244,10 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <p class="normalText py-3">End date</p>
-                        <input type="date" name="enddate" placeholder="dd/mm/yyyy" max="3000-12-31" min="1000-01-01" class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel" [class.errorInput]=" enddate.value == undefined &&   alerta" [class.correctInput]="enddate.value != '' && enddate.value != undefined "
+                        <input type="date" name="enddate" placeholder="mm/dd/yyyy" max="3000-12-31" min="1000-01-01"
+                            class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel"
+                            [class.errorInput]=" enddate.value == undefined &&   alerta"
+                            [class.correctInput]="enddate.value != '' && enddate.value != undefined "
                             [class.errorInput]="startdate.value > enddate.value">
                         <span class="textError" [hidden]="startdate.value <= enddate.value">Dates do not match</span>
                         <span *ngIf="  enddate.value == undefined &&   alerta " class="textError">End date is
@@ -346,7 +355,7 @@
             </div>
             <div class="row mt-51 ml-48">
                 <div class="col-sm mx-4 my-3">
-                    <img src="../../../../../assets/iconos/Location_Icon.svg" alt="">
+                    <img class="locationIconhi" src="../../../../../assets/iconos/Location_Icon.svg" alt="">
                     <p class="normalText"> {{ viewP.location }}</p>
                 </div>
             </div>

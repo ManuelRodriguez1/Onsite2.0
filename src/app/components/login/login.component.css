@@ -47,7 +47,7 @@
 
 .flechaforgot {
     position: absolute;
-    margin-top: 15px;
+    margin-top: -16px;
     cursor: pointer;
 }
 .cerrarModal{
@@ -146,11 +146,18 @@ body {
 .Formulario {
     margin-top: 40px;
 }
-
+.flechaforgot11{
+    margin-top: -96px !important;
+}
 .labelpass {
     margin-top: 30px;
 }
-
+.margint80{
+    margin-top: 80px;
+}
+.bolspan{
+    font-weight: bold;
+}
 .forgotPass {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
@@ -175,8 +182,8 @@ body {
 .botonNaranja {
     width: 100%;
     height: 46px;
-    background: #E76800;
-    border: 1px solid #E76800;
+    background: #FF8600;
+    border: 1px solid #FF8600;
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 800;
@@ -186,6 +193,7 @@ body {
     color: #FFFFFF;
     margin-top: 20px;
     border-radius: 2px;
+    cursor: pointer ;
 }
 
 .lineaFinalultimate {
@@ -195,7 +203,7 @@ body {
 .btnLogin {
     width: 73.11px;
     height: 30px;
-    border: 1px solid #F08E00;
+    border: 1px solid #FF8600;
     box-sizing: border-box;
     margin-top: 4px;
 }

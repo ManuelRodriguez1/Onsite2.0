@@ -31,3 +31,9 @@
     color: #010973;
     border-color: #010973;
 }
+.containerMin2{
+    min-height: 600px;
+}
+.next{
+    right: 0;
+}

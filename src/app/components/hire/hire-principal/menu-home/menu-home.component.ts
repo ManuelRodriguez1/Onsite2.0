@@ -34,7 +34,7 @@ export class MenuHomeComponent implements OnInit {
   contadorreviw = 0;
   select = 0;
   HomeFormularioNw = 0;
-  files = [{ 'name': 'Add material file', 'url': '' }];
+  files = [{ 'name': ' Add a file', 'url': '' }];
   file: any[] = [];
   countC: number = 0
   skills2Howmany: any[] = [];
@@ -317,7 +317,7 @@ export class MenuHomeComponent implements OnInit {
   }
   //Add files material
   addfiles() {
-    this.files.push({ 'name': 'Add material file', 'url': '' });
+    this.files.push({ 'name': ' Add a file', 'url': '' });
     this.cust = this.files.length - 1;
   }
   //Modificar files material
@@ -360,7 +360,7 @@ export class MenuHomeComponent implements OnInit {
       }, 200);
     }
     if (this.files.length == 0) {
-      this.files = [{ 'name': 'Add material file', 'url': '' }];
+      this.files = [{ 'name': ' Add a file', 'url': '' }];
       this.countC = 0
     }
   }
@@ -629,7 +629,8 @@ export class MenuHomeComponent implements OnInit {
       this.estrellitasreviws1 = valStarts.val()
 
       console.log("else postReview2");
-      if (this.profileP.reviews.length!=0) {
+      console.log(this.profileP.reviews);
+      if (this.profileP.reviews) {
         console.log(this.profileP.reviews);
         console.log("else postReview3");
         this.projectService.Buscador.emit(this.profileP.reviews)

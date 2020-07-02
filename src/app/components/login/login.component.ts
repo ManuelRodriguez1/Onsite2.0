@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   list = "";
 rtrespuesta="";
 vmactivo;
+emailAddress1;
 modal : NgbModalRef;
 
   constructor(public af: AngularFireAuth, private router: Router,private modalService: NgbModal) {
@@ -85,14 +86,16 @@ var array=[];
   if(formData.valid) {
     var auth = firebase.auth();
     var emailAddress = formData.value.emailreset;
+    this.emailAddress1=emailAddress;
 
-    auth.sendPasswordResetEmail(emailAddress).then(function() {
+    auth.sendPasswordResetEmail(emailAddress).then(() => {
    
       
   
         $("#exampleInputEmail1").val("");
         $("#exampleInputEmail1").removeClass("errorInput");
-        $(".ocultarForgot").html("Check email");
+       // $(".ocultarForgot").html("Check email");
+       this.Forgot = 2;
     })
 
   }
