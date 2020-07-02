@@ -1,4 +1,4 @@
-<section class="container" *ngIf="estadoEmail==1">
+<section class="container containerMin2" *ngIf="estadoEmail==1">
     <div class="title">
         <p>Your email has been verified! </p>
     </div>
@@ -15,7 +15,7 @@
 
 </section>
 
-<section class="container" *ngIf="estadoEmail==2">
+<section class="container containerMin2" *ngIf="estadoEmail==2">
 
     <form #updateForm="ngForm" (ngSubmit)="updatepass(updateForm)" action="">
         <div class="title">
@@ -25,11 +25,11 @@
         <div class="fields2">
             <div class="row">
                 <div class="col-sm input-group">
-                    <input type="password" #email="ngModel" name="pass1" id="pass1" placeholder="Password" class=" validate form-control" required ngModel>
+                    <input type="password" #email="ngModel" name="pass1" id="pass1" placeholder="New password" class=" validate form-control" required ngModel>
                     <span class="textError">{{messageerror}}</span>
                 </div>
                 <div class="col-sm input-group">
-                    <input class="validate form-control" type="password" #pass="ngModel" name="pass2" placeholder="check Password" required ngModel>
+                    <input class="validate form-control" type="password" #pass="ngModel" name="pass2" placeholder=" Confirm new password " required ngModel>
                 </div>
             </div>
         </div>

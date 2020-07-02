@@ -78,7 +78,7 @@ export class FooterComponent implements OnInit {
            this.progress = 0
            $("#error1").html("");
            $("#emailFooter").val("");
-         }, 10000)
+         }, 4000)
          
 
 

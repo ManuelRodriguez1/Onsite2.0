@@ -65,7 +65,7 @@
                             <div class="row py-3 px-5">
                                 <div class="col-sm-6 input-group pl-3 crateNewProject" (click)="next()">
                                     <img src="../../../../../assets/iconos/plus-button.svg" alt=""
-                                        class="plus-button pr-3" />
+                                        class="plus-button" />
                                     <span class="mt-2 new-project normalText">Create new project</span>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="errordescriptexarea">
                         <span *ngIf="description.value =='' || description.value == undefined &&   alerta "
-                            class="textError">Description of the projec is required</span>
+                            class="textError">Description of the project is required</span>
                     </div>
                 </div>
                 <div class="row text-right">
@@ -198,7 +198,7 @@
                 <div class="row">
                     <div class="col-sm-6 form-group" *ngFor="let p of peoples">
                         <p class="normalText pb-2">{{p.skill}}</p>
-                        <input required type="Number" class="form-control addPeople" placeholder=""
+                        <input required  min="1" max="100" type="Number" class="form-control addPeople" placeholder=""
                             value="{{p.quantity}}" name="people" id="{{p.skill}}"
                             [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta "
                             [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined " />
@@ -243,8 +243,7 @@
                             [class.correctInput]="estimated.value != '' && estimated.value != undefined "
                             [(ngModel)]="viewP.estimated" />
                         <span *ngIf="estimated.value =='' || estimated.value == undefined &&   alerta "
-                            class="textError">Estimated
-                            is required.</span>
+                            class="textError">Estimate is required.</span>
 
 
                     </div>
@@ -257,9 +256,9 @@
                 <div class="row">
                     <div class="col-sm-6 form-group">
                         <p class="normalText py-3">Start date</p>
-                        <input type="date" name="startdate" placeholder="dd/mm/yyyy" max="3000-12-31"
+                        <input type="date" name="startdate" placeholder="mm/dd/yyyy" max="3000-12-31"
                             [(ngModel)]="viewP.startdate"
-                            [class.errorInput]="startdate.value == 'dd/mm/aaaa' || startdate.value == '' || startdate.value == undefined &&   alerta"
+                            [class.errorInput]="startdate.value == 'mm/dd/yyyy' || startdate.value == '' || startdate.value == undefined &&   alerta"
                             [class.correctInput]="startdate.value != '' && startdate.value != undefined "
                             min="1000-01-01" class="form-control" #startdate="ngModel">
                         <span *ngIf="startdate.value == undefined &&   alerta " class="textError">Start date is
@@ -269,7 +268,7 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <p class="normalText py-3">End date</p>
-                        <input type="date" name="enddate" placeholder="dd/mm/yyyy" max="3000-12-31" min="1000-01-01"
+                        <input type="date" name="enddate" placeholder="mm/dd/yyyy" max="3000-12-31" min="1000-01-01"
                             class="form-control" [(ngModel)]="viewP.enddate" #enddate="ngModel"
                             [class.errorInput]=" enddate.value == undefined &&   alerta"
                             [class.correctInput]="enddate.value != '' && enddate.value != undefined "
@@ -381,7 +380,7 @@
             </div>
             <div class="row mt-51 ml-48">
                 <div class="col-sm mx-4 my-3">
-                    <img src="../../../../../assets/iconos/Location_Icon.svg" alt="">
+                    <img class="locationIconhi" src="../../../../../assets/iconos/Location_Icon.svg" alt="">
                     <p class="normalText"> {{ viewP.location }}</p>
                 </div>
             </div>
