@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   lat: number = 51.678418
   long: number = 7.809007
-  constructor(private proU: ProuserService,private mapsAPILoader: MapsAPILoader) { firebase.firestore().enablePersistence() }
+  constructor(private proU: ProuserService,private mapsAPILoader: MapsAPILoader) { firebase.firestore().enablePersistence({experimentalTabSynchronization: true})}
 
   ngOnInit() {
 

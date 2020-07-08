@@ -35,11 +35,11 @@
                 <div class="projects row" (click)="sendInfo(p)" *ngIf="(i+1) >= start && (i+1) <= end">
                     <div class="col-sm-6 ml-48">
                         <p class="mt-47"><span class="title2">Project:</span> {{ p.projectname }}</p>
-                        <p class="mt-20">{{ p.description }}</p>
+                        <p class="mt-20 h-17">{{ p.description }}</p>
                         <p class="mt-20">Status: {{ p.statusname }}</p>
                         <div class="mt-49 mb-42">
                             <div class="iconSkills fl mt-mr2"></div>
-                            <p class="purple normalText"><span *ngFor="let s of p.skills">{{ s }}<label>,</label> </span> </p>
+                            <p class="purple normalText"><span *ngFor="let s of p.skills">{{ s }}<label>,</label>&nbsp;</span></p>
                         </div>
                     </div>
                     <div class="col-sm-5">

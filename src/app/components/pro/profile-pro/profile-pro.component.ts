@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as crypto from "crypto-js";
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ProuserService } from 'src/app/services/prouser.service';
+import { Subscription } from 'rxjs';
 declare var $: any
 
 @Component({
@@ -10,7 +11,7 @@ declare var $: any
   templateUrl: './profile-pro.component.html',
   styleUrls: ['./profile-pro.component.css']
 })
-export class ProfileProComponent implements OnInit {
+export class ProfileProComponent implements OnInit, OnDestroy {
 
   text = 'Profile';
   righttv = ''
@@ -31,6 +32,7 @@ export class ProfileProComponent implements OnInit {
   cvClose: boolean = false
   countC: number = 0
   uploadDoc: number = 0
+  uploadDoc2: number = 0
   plus: boolean = false
   // Datos usuario
   cust: number = 0
@@ -46,6 +48,8 @@ export class ProfileProComponent implements OnInit {
   rating: any[] = []
   //Reviews
   limit: number = 2
+  //Subscripciones
+  sub1: Subscription
 
   constructor(
     private prouser: ProuserService,
@@ -62,7 +66,7 @@ export class ProfileProComponent implements OnInit {
       }
     });
 
-    this.prouser.getInfo().snapshotChanges().subscribe((d) => {
+    this.sub1 = this.prouser.getInfo().snapshotChanges().subscribe((d) => {
       this.profile = d.payload.data()
       this.selectskills = this.profile.skills
       this.password = crypto.AES.decrypt(this.profile.password, 'N@!o').toString(crypto.enc.Utf8)
@@ -174,7 +178,14 @@ export class ProfileProComponent implements OnInit {
   }
   //Section CV
   uploadCV(e: any) {
-    this.prouser.addCV(e)
+    for(let i = 0; i <= 100; i++){
+      setTimeout(() => {
+        this.uploadDoc2 = i         
+      }, 1000);
+    }
+    setTimeout(() => {
+      this.prouser.addCV(e)
+    }, 1000);
   }
   deleteCV(e: any) {
     this.prouser.deleteCv(e)
@@ -224,6 +235,10 @@ export class ProfileProComponent implements OnInit {
       this.customers = [{ 'name': 'Add certificate file', 'url': '' }];
       this.countC = 0
     }
+  }
+
+  ngOnDestroy(){
+    this.sub1.unsubscribe()
   }
 
 }

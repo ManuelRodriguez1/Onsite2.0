@@ -36,6 +36,10 @@
     margin-top: 35px;
 }
 
+.projects .normalText span:last-child label {
+    display: none;
+}
+
 .moreInfo {
     position: absolute;
     right: 48px;

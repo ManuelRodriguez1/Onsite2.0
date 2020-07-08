@@ -150,6 +150,17 @@ export class ExploreComponent implements OnInit, OnDestroy {
           this.users2 = info.applyUsers2
         }
       })
+    this.prouser.getProjectSameHire(infoPro.idUser).get()
+    .subscribe((d)=>{
+      d.forEach((p)=>{
+        var info = p.data()
+        if(info.applyUsers){
+          if(info.applyUsers.includes(this.prouser.user.uid)){
+            this.buttonApply = false
+          }
+        }
+      })
+    })
   }
   apply() {
     this.modal = 1

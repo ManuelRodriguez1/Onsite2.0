@@ -237,6 +237,13 @@
     position: relative;
 }
 
+.h-17 {
+    height: 17px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .orLines::before,
 .orLines::after {
     content: '';

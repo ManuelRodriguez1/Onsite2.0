@@ -1,55 +1,55 @@
 <div class="containerMin">
-  <div class="container shadow" *ngIf="select == 0">
-    <div class="project">
-  
-    <div class="row">
-      <div class="col-sm">
-        <div class="title2 ml-48">
-          <p>Recent projects</p>
+    <div class="container shadow" *ngIf="select == 0">
+        <div class="project">
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="title2 ml-48">
+                        <p>Recent projects</p>
+                    </div>
+                </div>
+
+            </div>
+            <hr _ngcontent-c4="" class="hr mt-30">
+
+            <div *ngIf="projects.length!=0 ; else other_content">
+                <ng-container *ngFor="let p of projects">
+                    <div class="projects row">
+                        <div class="col-sm-6 ml-48">
+                            <p class="mt-44"><span class="title2">Project:</span> {{p.projectname}} </p>
+                            <p class="mt-33">Status: {{p.statusname}} </p>
+                            <p class="mt-23">Location: {{p.location}} </p>
+                            <div class="mt-23 mb-32">
+                                <div class="iconSkills fl mt-mr2"></div>
+                                <p class="purple normalText"><span *ngFor="let s of p.skills"> {{s}}<label>,</label>&nbsp;</span> </p>
+                            </div>
+                        </div>
+                        <div class="moreInfo orange" (click)="infoProject(p)">
+                            <p>View more</p>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <ng-template #other_content>
+
+
+                <div class="row ml-48 mt-17 p-0 mr-48">
+
+                    <div class="btnInitialDash">
+                        <p class="normalText">You have not applied for any project yet.</p>
+                        <p class="normalText">Explore for a project that suits your skills.</p>
+                        <button (click)="openExplorePro()" class="blueBtn medium">Explore</button>
+                    </div>
+
+                </div>
+
+
+            </ng-template>
+
         </div>
-      </div>
-
     </div>
-    <hr _ngcontent-c4="" class="hr mt-30">
-     
-      <div *ngIf="projects.length!=0 ; else other_content">
-        <ng-container *ngFor="let p of projects">
-          <div class="projects row">
-            <div class="col-sm-6 ml-48">
-              <p class="mt-44"><span class="title2">Project:</span> {{p.projectname}} </p>
-              <p class="mt-33">Status: {{p.statusname}} </p>
-              <p class="mt-23">Location: {{p.location}} </p>
-              <div class="mt-23 mb-32">
-                <div class="iconSkills fl mt-mr2"></div>
-                <p class="purple normalText"><span *ngFor="let s of p.skills"> {{s}}, </span> </p>
-              </div>
-            </div>
-            <div class="moreInfo orange" (click)="infoProject(p)">
-              <p>View more</p>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-
-      <ng-template #other_content>
-  
-       
-          <div class="row ml-48 mt-17 p-0 mr-48">
-
-            <div class="btnInitialDash">
-              <p class="normalText">You have not applied for any project yet.</p>
-              <p class="normalText">Explore for a project that suits your skills.</p>
-              <button (click)="openExplorePro()" class="blueBtn medium">Explore</button>
-            </div>
-
-          </div>
-
-
-      </ng-template>
-
-    </div>
-  </div>
-  <!--div class="lds-roller" *ngIf="loading == true">
+    <!--div class="lds-roller" *ngIf="loading == true">
     <div></div>
     <div></div>
     <div></div>
@@ -59,51 +59,51 @@
     <div></div>
     <div></div>
   </div-->
-  <div class="container shadow" *ngIf="select == 1">
-    <div class="row fields mt-47 h-326">
-      <div class="col-sm ml-48">
-        <p><span class="title2">Project:</span> {{infoPro.projectname}}.</p>
-        <p class="mt-12">Status: {{infoPro.statusname}}</p>
-        <p class="mt-44">{{infoPro.description}}</p>
-      </div>
-    </div>
-    <hr class="hr">
-    <div class="row fields">
-      <div class="col-sm ml-48">
-        <div class="title2">
-          <p>Skills</p>
+    <div class="container shadow" *ngIf="select == 1">
+        <div class="row fields mt-47 h-326">
+            <div class="col-sm ml-48">
+                <p><span class="title2">Project:</span> {{infoPro.projectname}}.</p>
+                <p class="mt-12">Status: {{infoPro.statusname}}</p>
+                <p class="mt-44">{{infoPro.description}}</p>
+            </div>
         </div>
-        <div class="mt-20" style="overflow: hidden;">
-          <div class="skillsel onlySkill" *ngFor="let si of infoPro.skills">
-            <p>{{si}}</p>
-          </div>
+        <hr class="hr">
+        <div class="row fields">
+            <div class="col-sm ml-48">
+                <div class="title2">
+                    <p>Skills</p>
+                </div>
+                <div class="mt-20" style="overflow: hidden;">
+                    <div class="skillsel onlySkill" *ngFor="let si of infoPro.skills">
+                        <p>{{si}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <hr class="hr mt-38">
-    <div class="row fields">
-      <div class="col-sm ml-48">
-        <div class="title2">
-          <p>Location</p>
+        <hr class="hr mt-38">
+        <div class="row fields">
+            <div class="col-sm ml-48">
+                <div class="title2">
+                    <p>Location</p>
+                </div>
+                <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>{{infoPro.location}}</p>
+            </div>
         </div>
-        <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>{{infoPro.location}}</p>
-      </div>
-    </div>
-    <hr class="hr mt-33">
-    <div class="row fields">
-      <div class="col-sm ml-48">
-        <div class="title2">
-          <p>Location Map</p>
-        </div>
-        <div class="mapBig mt-20 mb-57">
-          <agm-map [latitude]="infoPro.latitude" [longitude]="infoPro.longitude"></agm-map>
+        <hr class="hr mt-33">
+        <div class="row fields">
+            <div class="col-sm ml-48">
+                <div class="title2">
+                    <p>Location Map</p>
+                </div>
+                <div class="mapBig mt-20 mb-57">
+                    <agm-map [latitude]="infoPro.latitude" [longitude]="infoPro.longitude"></agm-map>
 
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="textv mr-10">
-    <p>Dashboard</p>
-  </div>
+    <div class="textv mr-10">
+        <p>Dashboard</p>
+    </div>
 </div>

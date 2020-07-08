@@ -10,7 +10,7 @@
                 <div class="textw">
                     <p>{{profile.name}} {{profile.lastname}}</p>
                 </div>
-                <p class="optionSelect" (click)="selectOption(1)" [class.noOption]="select == 1">Profile overall</p>
+                <p class="optionSelect" (click)="selectOption(1)" [class.noOption]="select == 1">Profile overview</p>
                 <p class="optionSelect" (click)="selectOption(2)" [class.noOption]="select == 2">Edit profile</p>
             </div>
         </div>
@@ -97,8 +97,11 @@
                             <input *ngIf="cv[0].name == 'Add a file'" type="file" class="custom-file-input customFile" (change)="uploadCV($event)" accept=".pdf" id="customFileCV">
                             <label for="customFileCV" class="custom-file-label" [class.cDefault]="cv[0].name != 'Add a file'">
                                 <div class="afterFile">{{cv[0].name}}</div>
+                                <div class="uploading" *ngIf="cv[0].name == 'Add a file' && uploadDoc2 > 0">
+                                    <div class="loadingBar" [ngStyle]="{'width':uploadDoc2+'%'}"></div>
+                                </div>
                             </label>
-                            <div class="deleteCert" title="Delete CV" [hidden]="cvClose == false" (click)="deleteCV(cv[0])"></div>
+                            <div class="deleteCert" title="Delete CV" [hidden]="cvClose == false" (click)="deleteCV(cv[0]); uploadDoc2 = 0"></div>
                         </div>
                     </div>
                 </div>
@@ -142,7 +145,7 @@
                                     <div class="loadingBar" [ngStyle]="{'width':uploadDoc+'%'}"></div>
                                 </div>
                             </label>
-                            <div class="deleteCert" title="Delete certificate" *ngIf="c.name != 'Add certificate file'" (click)="deleteCert(c)"></div>
+                            <div class="deleteCert" title="Delete certificate" *ngIf="c.name != 'Add certificate file'" (click)="deleteCert(c); uploadDoc = 0"></div>
                         </div>
                         <div class="input-group-prepend iconAdd" (click)="addcustomer()" *ngIf="customers[customers.length - 1].name != 'Add certificate file'">
                             <div class="icon_img btnround" title="Add certificate"></div>

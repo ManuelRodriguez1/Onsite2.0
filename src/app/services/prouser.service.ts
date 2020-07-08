@@ -43,6 +43,9 @@ export class ProuserService {
   getProject(idUser: string, idProject: string) {
     return this.getInfoHire().doc(idUser).collection('projects').doc(idProject)
   }
+  getProjectSameHire(idUser: string){
+    return this.getInfoHire().doc(idUser).collection('projects')
+  }
   //MANEJO DE CREDENCIALES USUARIO
   //Credenciales del usuario
   credential(user: string, password: string) {

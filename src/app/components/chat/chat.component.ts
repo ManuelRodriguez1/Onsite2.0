@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   sub3: Subscription
   tempSub: Subscription
 
-  constructor(private info: ProuserService) { firebase.firestore().enablePersistence() }
+  constructor(public info: ProuserService) { firebase.firestore().enablePersistence() }
 
 
   ngOnInit() {

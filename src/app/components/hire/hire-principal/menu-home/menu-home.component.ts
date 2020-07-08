@@ -34,7 +34,7 @@ export class MenuHomeComponent implements OnInit {
   contadorreviw = 0;
   select = 0;
   HomeFormularioNw = 0;
-  files = [{ 'name': ' Add a file', 'url': '' }];
+  files = [{ 'name': 'Add material file', 'url': '' }];
   file: any[] = [];
   countC: number = 0
   skills2Howmany: any[] = [];
@@ -73,6 +73,7 @@ export class MenuHomeComponent implements OnInit {
   contadorEliminarnegotiation = 0
 
   contNegotiation = 0
+  uploadDoc1: number = 0
 
 
 
@@ -156,21 +157,21 @@ export class MenuHomeComponent implements OnInit {
 
     //mapa
     //set google maps defaults
-    /*this.zoom = 8;
+    this.zoom = 8;
     this.latitude = 39.8282;
-    this.longitude = -98.5795;*/
+    this.longitude = -98.5795;
     let radius = Number;
     //create search FormControl
     this.searchControl = new FormControl();
 
     //set current position
-   // this.setCurrentPosition();
+   this.setCurrentPosition();
     //load Places Autocomplete
 
 
 
   }
-  /*private setCurrentPosition() {
+  setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -178,7 +179,7 @@ export class MenuHomeComponent implements OnInit {
         this.zoom = 12;
       });
     }
-  }*/
+  }
   mapa() {
 
     setTimeout(() => {
@@ -317,16 +318,29 @@ export class MenuHomeComponent implements OnInit {
   }
   //Add files material
   addfiles() {
-    this.files.push({ 'name': ' Add a file', 'url': '' });
+    this.files.push({ 'name': 'Add material file', 'url': '' });
     this.cust = this.files.length - 1;
+    this.uploadDoc1 = 0
   }
   //Modificar files material
   uploadDoc(e) {
+    for(let i = 0; i <= 60; i++){
+      setTimeout(() => {
+        console.log(this.uploadDoc1);
+        this.uploadDoc1 = i 
+      }, 1000);
+    }
     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
     fileDoc.then((url) => {
       url.ref.getDownloadURL()
         .then((url) => {
           this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
+          for(let i = 60; i <= 100; i++){
+            setTimeout(() => {
+              console.log(this.uploadDoc1);
+              this.uploadDoc1 = i 
+            }, 1000);
+          }
         })
     })
   }
@@ -360,9 +374,10 @@ export class MenuHomeComponent implements OnInit {
       }, 200);
     }
     if (this.files.length == 0) {
-      this.files = [{ 'name': ' Add a file', 'url': '' }];
+      this.files = [{ 'name': 'Add material file', 'url': '' }];
       this.countC = 0
     }
+    this.uploadDoc1 = 0
   }
   //Modificar estado del proyecto a eliminado 
   delete(idP) {
