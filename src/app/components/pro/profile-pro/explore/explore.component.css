@@ -56,6 +56,9 @@
 .mt-49 {
     margin-top: 49px;
 }
+.mt-53 {
+    margin-top: 53px;
+}
 
 .mr-97 {
     margin-right: 97px;
@@ -332,6 +335,19 @@
 
 .btnDesktop {
     display: none;
+}
+.noExplore{
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+}
+.containerNoExplore{
+    box-shadow: none !important;
+}
+.containerNoExplore p{
+    width: 450px;
+    font-size: 16px;
+    line-height: 26px;
 }
 
 @media(min-width: 1045px) {

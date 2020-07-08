@@ -916,8 +916,10 @@ h2,
 h3,
 .h3 {
     font-family: 'Open Sans', sans-serif;
-    font-size: 62px;
-    line-height: 84px;
+    font-size: 45px;
+    line-height: 54px;
+    font-style: normal;
+    font-weight: 800;
 }
 
 h4,

@@ -133,6 +133,10 @@ export class ExploreComponent implements OnInit, OnDestroy {
         $(".textv").css({'position':'', 'top': '', 'margin-top': ''})
       }
     })
+
+    console.log(this.projects);
+    console.log(this.projects.length);
+    
   }
   sendInfo(e) {
     this.infoProject = e
@@ -173,6 +177,10 @@ export class ExploreComponent implements OnInit, OnDestroy {
   }
   backExplore() {
     location.reload()
+  }
+  profile1(){
+ 
+    location.href="/ProfilePro";
   }
   pagination() {
     this.pages = []
@@ -218,4 +226,5 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.suscription3.unsubscribe()
     this.suscription4.unsubscribe()
   }
+
 }
