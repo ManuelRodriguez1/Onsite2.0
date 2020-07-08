@@ -80,9 +80,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   infoProject(e: any){
     this.select = 1
-    this.infoPro = e
-    console.log(this.infoPro);
-    
+    this.infoPro = e    
   }
 
   ngOnDestroy() {

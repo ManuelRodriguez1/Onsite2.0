@@ -21,6 +21,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   cont: number = 0
   alert: number = 1
   chat: boolean = false
+  infoProject: number = 0
+  infoPro: any = ''
   //Paginación
   pages: number[] = []
   start: number = 1
@@ -106,11 +108,15 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       this.f = this.f - 5
     }, 200);
     var users: any[] = e.applyUsers
+    var users2: any[] = e.applyUsers2
     var i = users.indexOf(this.proU.user.uid)
+    var j = users2.indexOf(this.proU.user.uid)
     i !== -1 && users.splice(i, 1)
+    j !== -1 && users2.splice(j, 1)
     this.proU.getInfoHire().doc(e.idDoc).collection("projects").doc(e.id)
       .update({
-        "applyUsers": users
+        "applyUsers": users,
+        "applyUsers2": users2
       })
     this.alert = 0
     setTimeout(() => {
@@ -119,6 +125,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     var j = this.projects.indexOf(e)
     this.projects.splice(j, 1)
     this.proU.pagination.emit(this.projects)
+  }
+// Informacion del proyecto
+  infoProjects(e: any){
+    this.infoPro = e
   }
 
   //Ir al Inbox especifico
