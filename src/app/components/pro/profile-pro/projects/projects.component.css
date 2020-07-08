@@ -99,6 +99,20 @@
     margin-top: 35px;
 }
 
+.dotStatus::before {
+    top: 41%;
+    transform: translateY(-50%);
+    left: -19px;
+}
+
+.proMobile .col-sm-4 {
+    cursor: pointer;
+}
+
+.proMobile .col-sm-4:hover {
+    opacity: 0.7;
+}
+
 @media screen and (max-width: 470px) {
     .mobile {
         display: none;

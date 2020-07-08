@@ -2,7 +2,7 @@
     The <strong>project</strong> has been deleted
 </div>
 <div class="containerMin">
-    <div class="container shadow">
+    <div class="container shadow" *ngIf="infoProject == 0">
         <div class="row">
             <div class="col-sm">
                 <div class="title2 ml-48">
@@ -29,7 +29,7 @@
         <hr class="hr mt-30">
         <ng-container *ngIf="projects.length != 0 ; else other_content">
             <div class="row ml-48 mt-17 p-0 mobile">
-                <div class="col-sm gray">
+                <div class="col-sm-4 gray">
                     <p>Name</p>
                     <div class="arrowDownGray" (click)="azOrder()"></div>
                 </div>
@@ -37,17 +37,31 @@
                     <p>Status</p>
                     <div class="arrowDownGray" (click)="azStat()"></div>
                 </div>
+                <div class="col-sm gray">
+                    <p>Starting date</p>
+                    <!-- <div class="arrowDownGray"></div> -->
+                </div>
+                <div class="col-sm gray">
+                    <p>Ending date</p>
+                    <!-- <div class="arrowDownGray"></div> -->
+                </div>
                 <div class="col-sm"></div>
             </div>
             <div class="mt-17 proMobile">
                 <ng-container *ngFor="let p of projects | filter: f | az: az | azStatus: azStatus">
                     <ng-container>
                         <div class="row ml-48 mt-22 p-0">
-                            <div class="col-sm">
+                            <div class="col-sm-4" (click)="infoProjects(p); infoProject = 1">
                                 <p>{{p.projectname}}</p>
                             </div>
-                            <div class="col-sm">
+                            <div class="col-sm dotStatus" [class.dotOrange]="p.status == 1" [class.dotBlue]="p.status == 2">
                                 <p>{{p.statusname}}</p>
+                            </div>
+                            <div class="col-sm">
+                                <p>{{p.startdate | date: 'shortDate'}}</p>
+                            </div>
+                            <div class="col-sm">
+                                <p>{{p.enddate | date: 'shortDate'}}</p>
                             </div>
                             <div class="col-sm">
                                 <div class="webkit">
@@ -103,4 +117,49 @@
 
         </ng-template>
     </div>
+
+    <div class="container shadow" *ngIf="infoProject == 1">
+        <div class="row fields mt-47 h-326">
+            <div class="col-sm ml-48">
+                <p><span class="title2">Project:</span> {{infoPro.projectname}}.</p>
+                <p class="mt-12">Status: {{infoPro.statusname}}</p>
+                <p class="mt-44">{{infoPro.description}}</p>
+            </div>
+        </div>
+        <hr class="hr">
+        <div class="row fields">
+            <div class="col-sm ml-48">
+                <div class="title2">
+                    <p>Skills</p>
+                </div>
+                <div class="mt-20" style="overflow: hidden;">
+                    <div class="skillsel onlySkill" *ngFor="let si of infoPro.skills">
+                        <p>{{si}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr mt-38">
+        <div class="row fields">
+            <div class="col-sm ml-48">
+                <div class="title2">
+                    <p>Location</p>
+                </div>
+                <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>{{infoPro.location}}</p>
+            </div>
+        </div>
+        <hr class="hr mt-33">
+        <div class="row fields">
+            <div class="col-sm ml-48">
+                <div class="title2">
+                    <p>Location Map</p>
+                </div>
+                <div class="mapBig mt-20 mb-57">
+                    <agm-map [latitude]="infoPro.latitude" [longitude]="infoPro.longitude"></agm-map>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

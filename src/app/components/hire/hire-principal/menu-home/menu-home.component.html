@@ -20,21 +20,25 @@
                                 </div>
                             </div>
                             <hr class="m-0">
-                            <div class="row py-3 px-5 title-table">
-                                <div class="col-sm">Name</div>
+                            <div class="row py-3 px-5 title-table" style="width: 96%;">
+                                <div class="col-sm-4">Name</div>
                                 <div class="col-sm">Status</div>
+                                <div class="col-sm">Starting date</div>
+                                <div class="col-sm">Ending date</div>
                                 <div class="col-sm"></div>
                             </div>
                             <div class="col-sm-12 divcol " [class.projects]="option == 1">
                                 <div class="col-sm-12 divcol normalText">
                                     <ng-container *ngFor="let p of projects | filter: option">
                                         <div class="row py-2 px-4 pb-3" *ngIf="(p.status !=4 && option!=4) || (p.status==4 && option==4)">
-                                            <div class="col-sm">
+                                            <div class="col-sm-4">
                                                 <li class="list-name">
                                                     <span class="project-name " (click)="viewProject(p)">{{p.projectname}}</span>
                                                 </li>
                                             </div>
-                                            <div class="col-sm normalText c{{p.statusname}}">{{p.statusname}}</div>
+                                            <div class="col-sm normalText dotStatus" [class.dotOrange]="p.status == 1" [class.dotBlue]="p.status == 2">{{p.statusname}}</div>
+                                            <div class="col-sm normalText">{{p.startdate | date: 'shortDate'}}</div>
+                                            <div class="col-sm normalText">{{p.enddate | date: 'shortDate'}}</div>
                                             <div class="col-sm ">
                                                 <div class=" webkit">
                                                     <a href="/Chat">
