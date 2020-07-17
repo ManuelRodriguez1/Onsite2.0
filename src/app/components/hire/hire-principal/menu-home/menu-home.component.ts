@@ -198,7 +198,14 @@ export class MenuHomeComponent implements OnInit {
             //set latitude, longitude and zoom
             this.latitude = place.geometry.location.lat();
             this.longitude = place.geometry.location.lng();
+            
             this.zoom = 12;
+            place.address_components.map((m)=>{
+              if(m.types.join('').includes('postal_code')){
+                console.log(m.long_name);
+              }
+            })
+            
           });
         });
       });

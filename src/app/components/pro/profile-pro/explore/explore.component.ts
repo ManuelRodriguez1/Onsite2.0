@@ -33,6 +33,8 @@ export class ExploreComponent implements OnInit, OnDestroy {
   start: number = 1
   end: number = 5
   cantResul: number = 5
+  //Skills
+  skill: any = []
 
   suscription0: Subscription
   suscription: Subscription
@@ -47,46 +49,60 @@ export class ExploreComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.emailV = this.prouser.user.emailVerified
-    this.suscription0 = this.prouser.getInfoHire().snapshotChanges()
-      .subscribe((d) => {
-        var tempProjects: any[] = []
-        this.projects = []
-        this.projects2 = []
-        var cont: number = 0;
-        d.forEach((j) => {
-          var profile: any = j.payload.doc.data()
-          if (profile.project) {
-            j.payload.doc.ref.collection("projects")
-              .onSnapshot((d) => {
-                d.docChanges().map((k) => {
-                  if (k.doc.data().status == 1) {
-                    if (k.type === 'modified') {
-                      // this.projects.map((m) => {
-                      //   if (m[0].creationdate === k.doc.data().creationdate) {
-                      //     m = [k.doc.data(), {
-                      //       "idProject": k.doc.id,
-                      //       "idUser": profile.id,
-                      //       "photo": profile.photoUrl,
-                      //       "name": profile.name + ' ' + profile.lastname
-                      //     }]
-                      //   }
-                      // })
-                    } else {
-                      tempProjects.push(k.doc.data())
-                      tempProjects[cont].idProject = k.doc.id
-                      tempProjects[cont].idUser = profile.id
-                      tempProjects[cont].photo = profile.photoUrl
-                      tempProjects[cont].name = profile.name + ' ' + profile.lastname
-                      cont++
-                      this.prouser.pagination.emit(tempProjects)
-                      this.prouser.filterPag.emit(tempProjects)
-                    }
-                  }
-                })
-              })
-          }
-        })
+    this.prouser.getInfoPro().doc(this.prouser.user.uid).get()
+      .forEach((data) => {
+        this.skill = data.data().skills.sort()
+      }).then(() => {
+        this.suscription0 = this.prouser.getInfoHire().snapshotChanges()
+          .subscribe((d) => {
+            var tempProjects: any[] = []
+            this.projects = []
+            this.projects2 = []
+            var cont: number = 0;
+            d.forEach((j) => {
+              var profile: any = j.payload.doc.data()
+              if (profile.project) {
+                j.payload.doc.ref.collection("projects")
+                  .onSnapshot((d) => {
+                    d.docChanges().map((k) => {
+                      if (k.doc.data().status == 1) {
+                        if (k.type === 'modified') {
+                          // this.projects.map((m) => {
+                          //   if (m[0].creationdate === k.doc.data().creationdate) {
+                          //     m = [k.doc.data(), {
+                          //       "idProject": k.doc.id,
+                          //       "idUser": profile.id,
+                          //       "photo": profile.photoUrl,
+                          //       "name": profile.name + ' ' + profile.lastname
+                          //     }]
+                          //   }
+                          // })
+                        } else {
+                          var temp = k.doc.data().skills.sort()
+                          var temp2: boolean = false
+                          this.skill.map((m) => {
+                            if (temp.join(' ').trim().includes(m)) {
+                              temp2 = true
+                            }
+                          })
+                          if (temp2) {
+                            tempProjects.push(k.doc.data())
+                            tempProjects[cont].idProject = k.doc.id
+                            tempProjects[cont].idUser = profile.id
+                            tempProjects[cont].photo = profile.photoUrl
+                            tempProjects[cont].name = profile.name + ' ' + profile.lastname
+                            cont++
+                            this.prouser.pagination.emit(tempProjects)
+                            this.prouser.filterPag.emit(tempProjects)
+                          }
+                        }
+                      }
+                    })
+                  })
+              }
+            })
 
+          })
       })
 
     this.suscription = this.prouser.pagination.subscribe((res) => {
@@ -126,17 +142,17 @@ export class ExploreComponent implements OnInit, OnDestroy {
       }
     })
 
-    $(window).scroll(function(){
-      if($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)){
-        $(".textv").css({'position':'absolute', 'top': 'auto', 'margin-top': '-16%'})
-      } else{
-        $(".textv").css({'position':'', 'top': '', 'margin-top': ''})
+    $(window).scroll(function () {
+      if ($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)) {
+        $(".textv").css({ 'position': 'absolute', 'top': 'auto', 'margin-top': '-16%' })
+      } else {
+        $(".textv").css({ 'position': '', 'top': '', 'margin-top': '' })
       }
     })
 
     console.log(this.projects);
     console.log(this.projects.length);
-    
+
   }
   sendInfo(e) {
     this.infoProject = e
@@ -155,16 +171,16 @@ export class ExploreComponent implements OnInit, OnDestroy {
         }
       })
     this.prouser.getProjectSameHire(infoPro.idUser).get()
-    .subscribe((d)=>{
-      d.forEach((p)=>{
-        var info = p.data()
-        if(info.applyUsers){
-          if(info.applyUsers.includes(this.prouser.user.uid)){
-            this.buttonApply = false
+      .subscribe((d) => {
+        d.forEach((p) => {
+          var info = p.data()
+          if (info.applyUsers) {
+            if (info.applyUsers.includes(this.prouser.user.uid)) {
+              this.buttonApply = false
+            }
           }
-        }
+        })
       })
-    })
   }
   apply() {
     this.modal = 1
@@ -178,9 +194,9 @@ export class ExploreComponent implements OnInit, OnDestroy {
   backExplore() {
     location.reload()
   }
-  profile1(){
- 
-    location.href="/ProfilePro";
+  profile1() {
+
+    location.href = "/ProfilePro";
   }
   pagination() {
     this.pages = []

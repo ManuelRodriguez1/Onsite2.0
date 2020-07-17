@@ -26,7 +26,7 @@
 .webkit {
     display: -webkit-box;
     float: right;
-    margin-right: 62px;
+    /* margin-right: 62px; */
     width: 137px;
 }
 
