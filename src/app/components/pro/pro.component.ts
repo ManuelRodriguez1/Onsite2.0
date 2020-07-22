@@ -1,7 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { MapsAPILoader } from "@agm/core";
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProService } from 'src/app/services/pro.service';
-import zipcode from '../../../assets/files/zipcode.json';
+// import zipcode from '../../../assets/files/zipcode.json';
 declare var $: any
 
 @Component({
@@ -32,16 +33,35 @@ export class ProComponent implements OnInit {
   emailText: string[] = []
   error: string = ''
   correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
-  zipCodeCity: any = zipcode
-  zipcodeSelect: string = ''
-  zipcodeSelectActive: boolean = false
+  // zipCodeCity: any = zipcode
+  zipcodeSelect: string = 'Searching...'
+  // zipcodeSelectActive: boolean = false
   temp: any = true
   progress: number = 0
   progressBar: boolean = false
 
-  constructor(private servicePro: ProService) { }
+  constructor(private servicePro: ProService, private map: MapsAPILoader) { }
 
   ngOnInit() {
+
+    this.map.load().then(() => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(p => {
+          var latlong = new google.maps.LatLng(p.coords.latitude, p.coords.longitude)
+          let geocoder = new google.maps.Geocoder()
+          geocoder.geocode({ "location": latlong }, (r, s) => {
+            if (s == google.maps.GeocoderStatus.OK) {
+              r[0].address_components.map((m) => {
+                if (m.types.join('').includes('postal_code')) {
+                  this.zipcodeSelect = m.long_name
+                }
+              })
+            }
+          })
+        })
+      }
+    })
+
     this.servicePro.error.subscribe((res) => {
       this.error = res
       if (this.error != '') {
@@ -50,12 +70,16 @@ export class ProComponent implements OnInit {
         this.verifyEmail = true
       }
     })
+
     $('html').on('click', () => {
       this.up = false
     })
+
     $("#clickSkills, .skillselct").click(function (e) {
       e.stopPropagation()
     })
+
+
   }
 
 
@@ -116,18 +140,18 @@ export class ProComponent implements OnInit {
   check() {
     this.checkbox = !this.checkbox
   }
-  selecZip(e: string) {
-    this.zipcodeSelect = e
-    this.zipcodeSelectActive = true
-  }
+  // selecZip(e: string) {
+  //   this.zipcodeSelect = e
+  //   this.zipcodeSelectActive = true
+  // }
   deleteCert(e: any) {
     var i = this.customers.indexOf(e);
     if (i !== -1) {
       this.customers.splice(i, 1)
       this.file.splice(i, 1)
-      this.cust = this.cust - 1 
+      this.cust = this.cust - 1
     }
-    if(this.customers.length == 0){
+    if (this.customers.length == 0) {
       this.customers = ['Add certificate file']
       this.cust = 0
     }

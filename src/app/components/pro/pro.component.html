@@ -54,15 +54,15 @@
             <div class="field3 container">
                 <div class="row">
                     <div class="col-sm input-group">
-                        <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
-                        <ul class="list-group" *ngIf="!zipcodeSelectActive">
+                        <input type="text" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" placeholder="Enter zipcode." name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
+                        <!-- <ul class="list-group" *ngIf="!zipcodeSelectActive">
                             <ng-container *ngFor="let z of zipCodeCity | searchZip: zipcode.value">
                                 <li class="list-group-item d-flex justify-content-between align-items-center" (click)="selecZip(z.city)">
                                     {{z.city}}
                                     <span class="badge badge-primary">{{z.zip}}</span>
                                 </li>
                             </ng-container>
-                        </ul>
+                        </ul> -->
                     </div>
                     <div class="col-sm input-group" style="visibility: hidden;">
                         <input type="text" class="form-control" disabled placeholder="" name="">
@@ -136,7 +136,7 @@
                 <p>Back</p>
             </div>
             <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
-    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || user.value.length < 6 || user.value != password.value">
+    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || user.value.length < 6 || user.value != password.value">
                 Next
             </button>
             <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills.length == 0">
