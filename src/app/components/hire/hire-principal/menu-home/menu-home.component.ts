@@ -50,7 +50,7 @@ export class MenuHomeComponent implements OnInit {
   user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
   option = 5;
   customers2: any[] = [];
-  viewP: any[] = [];
+  viewP:any = ''
   profile: any = ''
   profileP: any = ''
   modal: number = 0
@@ -98,6 +98,7 @@ export class MenuHomeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.viewP= {}
     $(document).on("click", (e) => {
       var container = $(".btnPointer");
       if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -112,7 +113,7 @@ export class MenuHomeComponent implements OnInit {
       .subscribe((d) => {
         this.projects = []
         d.forEach((d) => {
-          console.log("22222");
+        
           this.projects.push(d.payload.doc.data())
         })
 
@@ -171,7 +172,7 @@ export class MenuHomeComponent implements OnInit {
     // and puts cursor back in right position.
 
     // get input value
-    console.log(input);
+   
     var input_val = input.target.value;
 
     // don't validate empty input
@@ -218,11 +219,13 @@ export class MenuHomeComponent implements OnInit {
     }
 
     // send updated string to input
-    console.log(input_val);
+
     if(num==1){
+      this.viewP;
      // $("#estimated").val(input_val)
       this.viewP.estimated=input_val;
     }else if(num==2){
+  
      // $("#estimated1").val(input_val)
      this.viewP.estimated1=input_val;
     }
@@ -243,6 +246,7 @@ export class MenuHomeComponent implements OnInit {
     }
   }
 
+
   //funcion autocompletado google maps
   mapa() {
   
@@ -255,7 +259,7 @@ export class MenuHomeComponent implements OnInit {
         };
         let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, options);
         autocomplete.addListener("place_changed", () => {
-          console.log("belxy");
+      
           this.ngZone.run(() => {
             //get the place result
             let place: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -270,10 +274,11 @@ export class MenuHomeComponent implements OnInit {
             this.longitude = place.geometry.location.lng();
 
             this.zoom = 12;
-            console.log(place);
+       
             place.address_components.map((m) => {
               if (m.types.join('').includes('postal_code')) {
-                console.log(m.long_name);
+           
+       
                 this.viewP.googleZipCode=m.long_name;
                 //$("#googleZipCode").val(m.long_name);
                 //$("#googleZipCode").removeClass("errorInput");
@@ -337,6 +342,12 @@ export class MenuHomeComponent implements OnInit {
   onKey(event) {
     this.contador = 4000 - event.target.value.length
   }
+  //cancel project
+  cancelEditProyect(){
+    alert("1");
+    this.HomeFormularioNw = 0
+    this.viewP=[]
+  }
 
   //Agregar Proyecto BD
   addProject(f: NgForm) {
@@ -365,22 +376,22 @@ export class MenuHomeComponent implements OnInit {
     });
 
     let locationApp = $("#search").val();
-    console.log(locationApp);
+
    
     //Validacion campos 
 
 
 
     if (f.status == "INVALID" || locationApp == "" || locationApp === undefined  || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
-      console.log("form1");
+
       if (locationApp == "" || f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
         || f.value.estimated === undefined || f.value.estimated == "" || this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
         || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
-          console.log("form2");
+    
         this.alerta = true;
       }
     } else if (f.value) {
-      console.log("form3");
+
 
       var temp = false
 
@@ -390,6 +401,7 @@ export class MenuHomeComponent implements OnInit {
       this.modal = 1
       this.section = 1
       this.projects = []
+      this.viewP=[]
     }
     this.righttv = 'text-dashboard';
 
@@ -418,7 +430,7 @@ export class MenuHomeComponent implements OnInit {
   uploadDoc(e) {
     for (let i = 0; i <= 60; i++) {
       setTimeout(() => {
-        console.log(this.uploadDoc1);
+ 
         this.uploadDoc1 = i
       }, 1000);
     }
@@ -429,7 +441,7 @@ export class MenuHomeComponent implements OnInit {
           this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
           for (let i = 60; i <= 100; i++) {
             setTimeout(() => {
-              console.log(this.uploadDoc1);
+   
               this.uploadDoc1 = i
             }, 1000);
           }
@@ -559,7 +571,7 @@ export class MenuHomeComponent implements OnInit {
 
 
 
-    console.log(this.teamSkills);
+  
     this.visiblePeople = true;
     if (this.apply) {
       for (var i = 0; i < this.apply.length; i++) {
@@ -583,7 +595,7 @@ export class MenuHomeComponent implements OnInit {
         this.negotiation[this.contNegotiation].skillNegotiation = skill;
         this.contNegotiation++;
       })
-    console.log(this.negotiation);
+
   }
 
 
@@ -614,7 +626,7 @@ export class MenuHomeComponent implements OnInit {
 
 
     }
-    console.log(this.applyUsers);
+  
 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProyecto).update({
       negotiation: this.teamSkills,
@@ -623,7 +635,7 @@ export class MenuHomeComponent implements OnInit {
     }).then((res) => {
 
 
-      console.log("bien");
+     
 
     })
 
@@ -709,12 +721,11 @@ export class MenuHomeComponent implements OnInit {
 
   //Modificar Reviews
   postReview() {
-    console.log("Entro a postReview");
+
     var review = $("#reviewR");
     var valStarts = $("#valStarts");
 
-    console.log(review);
-    console.log(valStarts);
+
 
     if (valStarts.val() === 0 || valStarts.val() === undefined || valStarts.val() == "") {
       $("#currentRaterror").html("You must rate to post your review.");
@@ -729,22 +740,16 @@ export class MenuHomeComponent implements OnInit {
       $("#currentRaterror").html("");
       // this.LeaveForm = 0
 
-      console.log("else postReview1");
+
 
 
       this.reviewdescripcion = review.val()
       this.estrellitasreviws1 = valStarts.val()
 
-      console.log("else postReview2");
-      console.log(this.profileP.reviews);
+  
       if (this.profileP.reviews) {
-        console.log(this.profileP.reviews);
-        console.log("else postReview3");
         this.projectService.Buscador.emit(this.profileP.reviews)
       } else {
-        console.log("id" + this.user.uid);
-        console.log("rating" + this.estrellitasreviws1);
-        console.log("descripcion" + this.reviewdescripcion);
         this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
         this.updateReviews()
       }
