@@ -31,10 +31,12 @@ export class ProjectService {
       projectname: f.value.projectname,
       creationdate: this.currentDate,
       description: f.value.description,
+      googleZipCode: f.value.googleZipCode,
       location: locationApp,
       latitude:latitude,
       longitude:longitude,
       estimated: f.value.estimated,
+      estimated1: f.value.estimated1,
       startdate: f.value.startdate,
       enddate: f.value.enddate,
       taketest: f.value.taketest,
@@ -68,91 +70,5 @@ export class ProjectService {
       })
 
   }
-  /*
-    getInfoPro(idPro: string) {
-      return this.db.collection("users_pro").doc(idPro)
-    }
-  
-    getInfoProjects(){
-      return this.db.collection("users_hire").doc(this.user.uid).collection("projects")
-    }
-  
-    getInfoProject(idProject){
-      return this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProject)
-    }
-  
-    updateUrlMaterial(name: string, url: string = '', idProject) {
-      this.getInfoProject(idProject).update({
-        "briefmaterial": [{ "name": name, "url": url }]
-      })
-    }
-  
-    updateSkill(skill: any, idProject){
-      this.getInfoProject(idProject).update({
-        "skills": skill
-      })
-    }
-  
-    updateProject(f: NgForm, briefMaterial: any[], selectskills: any[], selectpeople: any[], idProject) {
-      return this.getInfoProject(idProject)
-        .update({
-          projectname: f.value.projectname,
-          creationdate: this.currentDate,
-          description: f.value.description,
-          location: f.value.location,
-          estimated: f.value.estimated,
-          startdate: f.value.startdate,
-          enddate: f.value.enddate,
-          taketest: f.value.taketest,
-          passtest: f.value.passtest,
-          skills: selectskills,
-          people: selectpeople,
-          status: f.value.status,
-          statusname: 'Active',
-          briefmaterial: briefMaterial
-        })
-    }
-  
-    updateUrlMat(material: any, idProject){
-      this.getInfoProject(idProject).update({
-        "briefmaterial": material
-      })
-    }
-  
-    deleteMaterial(material: any, idProject){
-      this.afs.ref('Users_hire/' + this.user.uid + idProject + "/" + material.name).delete()
-    }
-  
-    updateMaterial(material: any, pos: any, materials: any, idProject){
-      this.afs.ref('Users_hire/' + this.user.uid + idProject + "/" + material.target.files[0].name).put(material.target.files[0])
-      .then((url) => {
-        url.ref.getDownloadURL()
-        .then((u) => {
-          materials[pos] = { "name": material.target.files[0].name, "url": u }
-        })
-        .then(() => {
-          this.updateUrlMat(materials,idProject)
-        })
-      })
-    }
-  
-    deleteProject(idProject){
-      this.getInfoProject(idProject).update({
-        status: 4,
-        statusname: 'Deleted'
-      })
-    }
-  
-    archivedProject(idProject){
-      this.getInfoProject(idProject).update({
-        status: 3,
-        statusname: 'Archived'
-      })
-    }
-  
-    applyRating(idPro: string, userreviews: any[]){
-      this.getInfoPro(idPro).update({
-        reviews: userreviews
-      })
-    }*/
+ 
 }

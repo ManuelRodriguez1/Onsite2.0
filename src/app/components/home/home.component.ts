@@ -56,19 +56,26 @@ export class HomeComponent implements OnInit {
     var windowHeight = $(window).scrollTop();
     var contenido1 = $("#Howitworks").offset().top;
     var contenido2 = $("#Aboutus").offset().top;
-    if (windowHeight >= contenido2) {
-      $(".Aboutus").addClass("menuSelect")
-      $(".Howitworks").removeClass("menuSelect")
-    } else {
-      $(".Aboutus").removeClass("menuSelect")
+    if($("#Aboutus").length){
+      if (windowHeight >= contenido2) {
+        $(".Aboutus").addClass("menuSelect")
+        $(".Howitworks").removeClass("menuSelect")
+      } else {
+        $(".Aboutus").removeClass("menuSelect")
+      }
+  
     }
 
-    if (windowHeight >= contenido1) {
-      $(".Aboutus").removeClass("menuSelect")
-      $(".Howitworks").addClass("menuSelect")
-    } else {
-      $(".Howitworks").removeClass("menuSelect")
+    if($("#Howitworks").length){
+      if (windowHeight >= contenido1) {
+        $(".Aboutus").removeClass("menuSelect")
+        $(".Howitworks").addClass("menuSelect")
+      } else {
+        $(".Howitworks").removeClass("menuSelect")
+      }
     }
+   
+   
   });
   }
 

@@ -20,10 +20,10 @@
             </div>
             <div class="row mt-3">
                 <div class="col-sm input-group" [formGroup]="formData">
-                    <input required type="text" class="form-control" [class.errorInput]="verifyEmail == true || !correctEmail.exec(Email) && Email != ''" [class.correctInput]="correctEmail.exec(Email)" placeholder="E-mail" [(ngModel)]="Email" name="Email" id="Email" #email
-                        formControlName="Email" [ngClass]="{ 'is-invalid': submitted && f.Email.errors }">
+                    <input required type="text" class="form-control" [class.errorInput]="verifyEmail == true || !correctEmail.exec(Email) && Email != '' && correctEmailTrue" [class.correctInput]="correctEmail.exec(Email)" placeholder="E-mail" [(ngModel)]="Email" name="Email" id="Email" #email
+                        formControlName="Email" (keyup)="onKey($event)"  [ngClass]="{ 'is-invalid': submitted && f.Email.errors }">
                     <span [hidden]="verifyEmail == false" class="textError">Email already exists!</span>
-                    <div *ngIf="!correctEmail.exec(Email) && Email != ''" class="textError">Email must be a valid email address</div>
+                    <div *ngIf="!correctEmail.exec(Email) && Email != '' && correctEmailTrue" class="textError">Email must be a valid email address</div>
                     <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
                         <div *ngIf="f.Email.errors.required" class="textError">Please enter a email.</div>
                     </div>
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="title2 container">
+        <!--div class="title2 container">
             <p>Where are you located?</p>
         </div>
 
@@ -88,7 +88,7 @@
                     <input type="text" class="form-control" disabled placeholder="" name="">
                 </div>
             </div>
-        </div>
+        </div-->
 
 
 

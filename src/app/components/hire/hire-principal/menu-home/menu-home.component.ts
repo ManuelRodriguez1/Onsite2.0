@@ -14,7 +14,7 @@ import * as $ from 'jquery';
   styleUrls: ['./menu-home.component.css']
 })
 export class MenuHomeComponent implements OnInit {
-  reviews =[] ;
+  reviews = [];
   up = false;
   repro: any = ''
   description;
@@ -50,7 +50,7 @@ export class MenuHomeComponent implements OnInit {
   user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
   option = 5;
   customers2: any[] = [];
-  viewP: any = ''
+  viewP: any[] = [];
   profile: any = ''
   profileP: any = ''
   modal: number = 0
@@ -71,7 +71,7 @@ export class MenuHomeComponent implements OnInit {
   estrellitasreviws1 = 0;
   reviewdescripcion = "";
   contadorEliminarnegotiation = 0
-
+  zipcodeTex=true;
   contNegotiation = 0
   uploadDoc1: number = 0
 
@@ -105,7 +105,7 @@ export class MenuHomeComponent implements OnInit {
       }
     });
     this.projects = []
-    console.log("111111111");
+
 
     //Consulta todos los proyecto apenas detecta un cambio 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").snapshotChanges()
@@ -118,43 +118,27 @@ export class MenuHomeComponent implements OnInit {
 
       })
     //Funcion reviews
-
-
-
-
     this.projectService.Buscador.subscribe((res) => {
-
-
       if (res) {
-
         this.reviews = res
         this.reviews.map((res1) => {
           if (res1.id == this.user.uid) {
-
             res1.descripcion = this.reviewdescripcion;
             res1.rating = this.estrellitasreviws1;
-
             this.updateReviews();
           } else {
             var contador = 1;
             this.reviews.map((res1) => {
-
               if (res1.id != this.user.uid && contador == this.reviews.length) {
-
                 this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
-
                 this.updateReviews();
               }
               contador++;
             })
           }
         })
-
-
       }
-
     })
-
     //mapa
     //set google maps defaults
     this.zoom = 8;
@@ -163,14 +147,92 @@ export class MenuHomeComponent implements OnInit {
     let radius = Number;
     //create search FormControl
     this.searchControl = new FormControl();
-
     //set current position
-   this.setCurrentPosition();
+    this.setCurrentPosition();
     //load Places Autocomplete
-
-
-
   }
+
+
+  onKeymoneda(event) {
+    this.formatCurrency(event,1);
+  }
+  onKeymoneda1(event) {
+    this.formatCurrency(event,2);
+  }
+
+  formatNumber(n) {
+    // format number 1000000 to 1,234,567
+    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  }
+
+
+  formatCurrency(input,num) {
+    // appends $ to value, validates decimal side
+    // and puts cursor back in right position.
+
+    // get input value
+    console.log(input);
+    var input_val = input.target.value;
+
+    // don't validate empty input
+    if (input_val === "") { return; }
+
+    // original length
+    var original_len = input_val.length;
+
+ 
+    // check for decimal
+    if (input_val.indexOf(".") >= 0) {
+
+      // get position of first decimal
+      // this prevents multiple decimals from
+      // being entered
+      var decimal_pos = input_val.indexOf(".");
+
+      // split number by decimal point
+      var left_side = input_val.substring(0, decimal_pos);
+      var right_side = input_val.substring(decimal_pos);
+
+      // add commas to left side of number
+      left_side = this.formatNumber(left_side);
+
+      // validate right side
+      right_side = this.formatNumber(right_side);
+
+      // On blur make sure 2 numbers after decimal
+     
+      // Limit decimal to only 2 digits
+      right_side = right_side.substring(0, 2);
+
+      // join number by .
+      input_val = "$" + left_side + "." + right_side;
+
+    } else {
+      // no decimal entered
+      // add commas to number
+      // remove all non-digits
+      input_val = this.formatNumber(input_val);
+      input_val = "$" + input_val;
+
+    
+    }
+
+    // send updated string to input
+    console.log(input_val);
+    if(num==1){
+     // $("#estimated").val(input_val)
+      this.viewP.estimated=input_val;
+    }else if(num==2){
+     // $("#estimated1").val(input_val)
+     this.viewP.estimated1=input_val;
+    }
+   
+ 
+    
+  }
+
+//geolocalizacion
+
   setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -180,12 +242,20 @@ export class MenuHomeComponent implements OnInit {
       });
     }
   }
+
+  //funcion autocompletado google maps
   mapa() {
+  
 
     setTimeout(() => {
       this.mapsAPILoader.load().then(() => {
-        let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+        var options = {
+          componentRestrictions: { 'country': 'us' },
+          types: ['address'] // (cities)
+        };
+        let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, options);
         autocomplete.addListener("place_changed", () => {
+          console.log("belxy");
           this.ngZone.run(() => {
             //get the place result
             let place: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -198,14 +268,22 @@ export class MenuHomeComponent implements OnInit {
             //set latitude, longitude and zoom
             this.latitude = place.geometry.location.lat();
             this.longitude = place.geometry.location.lng();
-            
+
             this.zoom = 12;
-            place.address_components.map((m)=>{
-              if(m.types.join('').includes('postal_code')){
+            console.log(place);
+            place.address_components.map((m) => {
+              if (m.types.join('').includes('postal_code')) {
                 console.log(m.long_name);
+                this.viewP.googleZipCode=m.long_name;
+                //$("#googleZipCode").val(m.long_name);
+                //$("#googleZipCode").removeClass("errorInput");
+                //$("#googleZipCode").addClass("correctInput");
+
+                this.zipcodeTex=false;
+
               }
             })
-            
+
           });
         });
       });
@@ -263,6 +341,8 @@ export class MenuHomeComponent implements OnInit {
   //Agregar Proyecto BD
   addProject(f: NgForm) {
 
+    console.log(f);
+
     this.error = 2
     this.submitted = true
     var aux = []
@@ -285,17 +365,22 @@ export class MenuHomeComponent implements OnInit {
     });
 
     let locationApp = $("#search").val();
+    console.log(locationApp);
+   
     //Validacion campos 
 
 
 
-    if (f.status == "INVALID" || locationApp == "" || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
+    if (f.status == "INVALID" || locationApp == "" || locationApp === undefined  || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
+      console.log("form1");
       if (locationApp == "" || f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
         || f.value.estimated === undefined || f.value.estimated == "" || this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
         || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
+          console.log("form2");
         this.alerta = true;
       }
     } else if (f.value) {
+      console.log("form3");
 
       var temp = false
 
@@ -331,10 +416,10 @@ export class MenuHomeComponent implements OnInit {
   }
   //Modificar files material
   uploadDoc(e) {
-    for(let i = 0; i <= 60; i++){
+    for (let i = 0; i <= 60; i++) {
       setTimeout(() => {
         console.log(this.uploadDoc1);
-        this.uploadDoc1 = i 
+        this.uploadDoc1 = i
       }, 1000);
     }
     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
@@ -342,10 +427,10 @@ export class MenuHomeComponent implements OnInit {
       url.ref.getDownloadURL()
         .then((url) => {
           this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
-          for(let i = 60; i <= 100; i++){
+          for (let i = 60; i <= 100; i++) {
             setTimeout(() => {
               console.log(this.uploadDoc1);
-              this.uploadDoc1 = i 
+              this.uploadDoc1 = i
             }, 1000);
           }
         })
@@ -396,7 +481,7 @@ export class MenuHomeComponent implements OnInit {
       this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idP).update({
         status: 4,
         statusname: 'Deleted',
-        applyUsers:[],
+        applyUsers: [],
       }).then((url) => {
         this.option = this.option - 5
         this.error = 0
@@ -503,46 +588,46 @@ export class MenuHomeComponent implements OnInit {
 
 
   //Eliminar usuario Pro de aplly users 
-  eliminarPersonAplly(idEliminarPro,idProyecto) {
- 
+  eliminarPersonAplly(idEliminarPro, idProyecto) {
+
 
 
     this.teamSkills.forEach((myObject, index) => {
       if (myObject.idPro == idEliminarPro.id) {
         this.teamSkills.splice(index, 1);
-    
+
       }
 
     });
-  
+
     this.negotiation.forEach((myObject, index) => {
       if (myObject.id == idEliminarPro.id) {
         this.negotiation.splice(index, 1);
-        
+
       }
 
     });
-   
+
     var i = this.applyUsers.indexOf(idEliminarPro.id)
     if (i !== -1) {
       this.applyUsers.splice(i, 1)
-     
+
 
     }
     console.log(this.applyUsers);
-  
-    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProyecto).update({
-       negotiation: this.teamSkills,
-       applyUsers:this.applyUsers
 
-     }).then((res) => {
+    this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProyecto).update({
+      negotiation: this.teamSkills,
+      applyUsers: this.applyUsers
+
+    }).then((res) => {
 
 
       console.log("bien");
-      
-     })
 
-  
+    })
+
+
 
   }
   //Numero de estrellas reviws
@@ -657,9 +742,9 @@ export class MenuHomeComponent implements OnInit {
         console.log("else postReview3");
         this.projectService.Buscador.emit(this.profileP.reviews)
       } else {
-        console.log("id"+this.user.uid);
-        console.log("rating"+this.estrellitasreviws1);
-        console.log("descripcion"+this.reviewdescripcion);
+        console.log("id" + this.user.uid);
+        console.log("rating" + this.estrellitasreviws1);
+        console.log("descripcion" + this.reviewdescripcion);
         this.reviews.push({ "id": this.user.uid, "rating": this.estrellitasreviws1, "descripcion": this.reviewdescripcion })
         this.updateReviews()
       }

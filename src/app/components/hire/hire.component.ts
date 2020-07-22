@@ -28,12 +28,23 @@ export class HireComponent implements OnInit {
   formData: FormGroup;
   submitted = false;
   correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
+  correctEmailTrue=false;
 
   constructor(
     private serviceHire: HireService,
     private db: AngularFirestore,
     private formBuilder: FormBuilder
   ) { }
+
+
+  onKey(event) {
+
+    if(event.target.value.length>0){
+      this.correctEmailTrue=true;
+    }
+
+ 
+  }
 
   ngOnInit() {
     this.formData = this.formBuilder.group({
@@ -55,7 +66,9 @@ export class HireComponent implements OnInit {
   onSubmit(f) {
     this.submitted = true;
     console.log(this.formData);
-    if (this.formData.invalid  || $("#zipcode").val() == "" || $("#Password").val() == "") {
+   // if (this.formData.invalid  || $("#zipcode").val() == "" || $("#Password").val() == "") {
+
+   if (this.formData.invalid  ||  $("#Password").val() == "") {
       console.log("Invalid")
       this.alerta=true;
     } if (this.formData.valid) {
@@ -73,7 +86,7 @@ export class HireComponent implements OnInit {
             this.verifyEmail = temp
           })
           if (!this.verifyEmail) {
-            f.value.Zipcode=$("#zipcode").val();
+           // f.value.Zipcode=$("#zipcode").val();
 
             this.serviceHire.registerHire(f);
 
