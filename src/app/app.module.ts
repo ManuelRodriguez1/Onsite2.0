@@ -46,6 +46,7 @@ import { SearchZipPipe } from './pipes/search-zip.pipe';
 import { ChatSearchPipe } from './pipes/chat-search.pipe';
 import { ChatTextPipe } from './pipes/chat-text.pipe';
 import { AgmCoreModule,MapsAPILoader } from '@agm/core';
+import { SkillsPipe } from './pipes/skills.pipe';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { AgmCoreModule,MapsAPILoader } from '@agm/core';
     SearchZipPipe,
     ChatSearchPipe,
     ChatTextPipe,
+    SkillsPipe,
   
   ],
   imports: [

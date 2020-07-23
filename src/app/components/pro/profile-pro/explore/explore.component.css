@@ -3,6 +3,7 @@
     margin-bottom: 74px;
     padding: 0;
     overflow: hidden;
+    position: relative;
 }
 
 .divcol {
@@ -56,6 +57,7 @@
 .mt-49 {
     margin-top: 49px;
 }
+
 .mt-53 {
     margin-top: 53px;
 }
@@ -139,7 +141,7 @@
     z-index: 1;
     top: 50%;
     transform: translateY(-50%);
-    left: 5px;
+    left: 224px;
 }
 
 .hr {
@@ -336,18 +338,139 @@
 .btnDesktop {
     display: none;
 }
-.noExplore{
+
+.noExplore {
     width: 500px;
     height: 500px;
     object-fit: contain;
 }
-.containerNoExplore{
+
+.containerNoExplore {
     box-shadow: none !important;
 }
-.containerNoExplore p{
+
+.containerNoExplore p {
     width: 450px;
     font-size: 16px;
     line-height: 26px;
+}
+
+.filterBtn {
+    width: 122px;
+    height: 46px;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+    color: #010973;
+    font-weight: 600;
+    font-family: 'Open Sans';
+    border-radius: 4px;
+    border: 1px solid #9D9D9D;
+    background: transparent;
+    cursor: pointer;
+}
+
+.filterBtn:hover {
+    color: #9D9D9D;
+    border: 1px solid #010973;
+}
+
+.ml-12 {
+    margin-left: 12px;
+}
+
+.w-250 {
+    width: 250px;
+}
+
+.gray {
+    color: #9D9D9D;
+}
+
+.borderGray {
+    border: 1px solid #9D9D9D;
+    border-radius: 2px !important;
+    padding-left: 10px;
+}
+
+.skillsCheckContainer {
+    width: 376px;
+    position: absolute;
+    top: 0;
+    background: white;
+    z-index: 2;
+    border-radius: 6px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+    overflow: initial;
+    left: 302px;
+    top: 96px;
+}
+
+.skillsCheckContainer:before {
+    width: 0;
+    height: 0;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    border-bottom: 14px solid #fff;
+    content: '';
+    position: absolute;
+    top: -13px;
+    left: 48px;
+}
+
+.column {
+    margin-top: 33px;
+}
+
+.col1 {
+    float: left;
+    margin-left: 24px;
+}
+
+.col2 {
+    float: right;
+    margin-right: 53px;
+}
+
+.item {
+    margin-bottom: 7px;
+    font-size: 14px;
+    line-height: 160%;
+    position: relative;
+}
+
+.item .checkbox__checkmark {
+    position: absolute;
+    top: 4px;
+}
+
+.item .remember_me {
+    margin-left: 32px;
+}
+
+.checkbox__input:checked~.remember_me {
+    font-weight: bold;
+}
+
+.done {
+    width: 100%;
+    float: left;
+    height: 57px;
+    background: #FF8600;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    margin-top: 34px;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    font-weight: 800;
+    border-radius: 0px 0px 6px 6px;
+}
+
+.done:hover {
+    background: white;
+    color: #FF8600;
+    border: 1px solid #FF8600;
 }
 
 @media(min-width: 1045px) {

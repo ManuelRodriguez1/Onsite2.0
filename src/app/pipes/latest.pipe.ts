@@ -11,7 +11,10 @@ export class LatestPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     var projects: any[] = []
     for (let i of value) {
-      if (i.projectname.toLowerCase().includes(args.toLowerCase()) || i.skills.join(' ').toLowerCase().includes(args.toLowerCase())) {       
+      // if (i.projectname.toLowerCase().includes(args.toLowerCase().trim()) || i.skills.sort().join(' ').toLowerCase().includes(args.toLowerCase().trim())) {       
+      //   projects.push(i)
+      // }
+      if (i.projectname.toLowerCase().includes(args.toLowerCase().trim())) {       
         projects.push(i)
       }
     }

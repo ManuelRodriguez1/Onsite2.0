@@ -28,6 +28,9 @@ export class ExploreComponent implements OnInit, OnDestroy {
   //Filtro
   searchProject: string = ''
   changeFilter: boolean
+  skillFilter: any[] = []
+  sf: any[] = []
+  skf: boolean = false
   //Paginación
   pages: number[] = []
   start: number = 1
@@ -67,25 +70,16 @@ export class ExploreComponent implements OnInit, OnDestroy {
                     d.docChanges().map((k) => {
                       if (k.doc.data().status == 1) {
                         if (k.type === 'modified') {
-                          // this.projects.map((m) => {
-                          //   if (m[0].creationdate === k.doc.data().creationdate) {
-                          //     m = [k.doc.data(), {
-                          //       "idProject": k.doc.id,
-                          //       "idUser": profile.id,
-                          //       "photo": profile.photoUrl,
-                          //       "name": profile.name + ' ' + profile.lastname
-                          //     }]
+                         
+                        } else {
+                          // var temp = k.doc.data().skills.sort()
+                          // var temp2: boolean = false
+                          // this.skill.map((m) => {
+                          //   if (temp.join(' ').trim().includes(m)) {
+                          //     temp2 = true
                           //   }
                           // })
-                        } else {
-                          var temp = k.doc.data().skills.sort()
-                          var temp2: boolean = false
-                          this.skill.map((m) => {
-                            if (temp.join(' ').trim().includes(m)) {
-                              temp2 = true
-                            }
-                          })
-                          if (temp2) {
+                          // if (temp2) {
                             tempProjects.push(k.doc.data())
                             tempProjects[cont].idProject = k.doc.id
                             tempProjects[cont].idUser = profile.id
@@ -94,7 +88,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
                             cont++
                             this.prouser.pagination.emit(tempProjects)
                             this.prouser.filterPag.emit(tempProjects)
-                          }
+                          // }
                         }
                       }
                     })
@@ -233,6 +227,26 @@ export class ExploreComponent implements OnInit, OnDestroy {
 
   filterChange() {
     this.changeFilter = !this.changeFilter
+  }
+
+  sFilter(e: any, skill: string){
+    if(e.target.checked){
+      if(!this.skillFilter.includes(skill)){
+        this.skillFilter.push(skill)
+      }
+    }else{
+      if(this.skillFilter.includes(skill)){
+        var i = this.skillFilter.indexOf(skill)
+        this.skillFilter.splice(i, 1)
+      }
+    }    
+  }
+
+  filter(){
+    this.sf = this.skillFilter
+    if(this.skillFilter.length == 0){
+      this.sf = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation']
+    }
   }
 
   ngOnDestroy() {

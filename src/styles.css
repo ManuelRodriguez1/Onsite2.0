@@ -1534,33 +1534,40 @@ h4,
     display: block;
 }
 
-.checkbox__input:focus~.checkbox__checkmark {
-    border-color: #000000;
+.checkbox__input:checked~.checkbox__checkmark {
+    background: #FF8600;
+    border-color: #FF8600;
 }
+
+
+/* 
+.checkbox__input:focus~.checkbox__checkmark {
+    border-color: #FF8600;
+} */
 
 .checkbox__checkmark {
     align-items: center;
-    border: 1px solid #000000;
+    border: 1px solid #9D9D9D;
     display: flex;
     justify-content: center;
     margin-right: 0.5rem;
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
+    height: 12px;
+    width: 12px;
+    border-radius: 2px;
     float: left;
 }
 
 .checkbox__checkmark::after {
-    border: solid #FF8600;
-    border-width: 0 2px 2px 0;
+    border: solid #fff;
+    border-width: 0 1px 1px 0;
     content: "";
     display: none;
-    height: 15px;
+    height: 8px;
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
-    width: 7px;
-    margin-left: 5px;
-    margin-top: -8px;
+    width: 4px;
+    margin-left: 0px;
+    margin-top: -3px;
 }
 
 @keyframes lds-roller {
