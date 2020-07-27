@@ -138,6 +138,23 @@
             </div>
             <button class="done" (click)="skf = false">Done</button>
         </div>
+        <div class="distance" [ngStyle]="{'display': milf ? 'block' : 'none'}">
+            <p>Distance from your location <span>(miles)</span></p>
+            <div class="ndist">
+                <div class="numd" [class.hdist]='mf == 5' (click)="mf = 5">5</div>
+                <div class="numd" [class.hdist]='mf == 10' (click)="mf = 10">10</div>
+                <div class="numd" [class.hdist]='mf == 15' (click)="mf = 15">15</div>
+                <div class="numd" [class.hdist]='mf == 20' (click)="mf = 20">20</div>
+                <div class="numd" [class.hdist]='mf == 25' (click)="mf = 25">25</div>
+                <div class="numd" [class.hdist]='mf == 30' (click)="mf = 30">30</div>
+            </div>
+            <button class="done" (click)="milf = false">Done</button>
+        </div>
+        <div class="oldestnew" [ngStyle]="{'display': newoldf ? 'block' : 'none'}">
+            <div class="itemold" [class.newoldB]="newold == 1" (click)="newold = 1">Newest to Oldest</div>
+            <div class="itemold" [class.newoldB]="newold == 2" (click)="newold = 2">Oldest to Newest</div>
+            <button class="done" (click)="newoldf = false">Done</button>
+        </div>
         <div class="divcol mt-44 ml-48">
             <form action="">
                 <div class="row fields">
@@ -147,15 +164,13 @@
                         <!-- <div class="normalText fl ml-48">
                             <p><strong>{{ projects2.length }} Results</strong></p>
                         </div> -->
-                        <!-- <div class="normalText fr ml-137">
-                            <p>Sort by: <span style="cursor: pointer;" class="orange hoverOrange" (click)="filterChange()"><strong *ngIf="changeFilter">Latest</strong>
-                                    <strong *ngIf="!changeFilter">First</strong></span></p>
-                            <div class="arrowDownGray fr mt-mr" (click)="filterChange()"></div>
-                        </div> -->
-                        <button class="filterBtn ml-12 fl" (click)="skf = !skf">Skills</button>
-                        <button class="filterBtn ml-12 fl">Distance</button>
-                        <button class="filterBtn w-250 ml-12 fl"><span class="gray">Sort by:</span> Newest - Oldest</button>
-                        <button class="orangeBtn small ml-12 fl" (click)="filter(); skf = false">Refresh</button>
+                        <button class="filterBtn ml-12 fl" (click)="skf = !skf; milf = false; newoldf = false">Skills</button>
+                        <button class="filterBtn ml-12 fl" (click)="milf = !milf; skf = false; newoldf = false">Distance</button>
+                        <button class="filterBtn w-250 ml-12 fl" (click)="newoldf = !newoldf; skf = false; milf = false"><span class="gray">Sort by: </span> 
+                            <span *ngIf="newold == 1">Newest - Oldest</span>
+                            <span *ngIf="newold == 2">Oldest - Newest</span>
+                        </button>
+                        <button class="orangeBtn small ml-12 fl" (click)="filter(); skf = false; milf = false; newoldf = false">Refresh</button>
                     </div>
                 </div>
             </form>
@@ -174,7 +189,7 @@
                 <div></div>
                 <div></div>
             </div>
-            <ng-container *ngFor="let p of projects | search: searchProject | order: changeFilter | skills: sf; let i = index">
+            <ng-container *ngFor="let p of projects | search: searchProject | order: changeFilter | skills: sf | distance: miles; let i = index">
                 <div class="projects row" (click)="sendInfo(p)" *ngIf="(i+1) >= start && (i+1) <= end">
                     <div class="col-sm-6 ml-48">
                         <p class="mt-47"><span class="title2">Project:</span> {{ p.projectname }}</p>

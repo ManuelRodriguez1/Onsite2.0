@@ -3,6 +3,7 @@ import { ProuserService } from 'src/app/services/prouser.service';
 import * as firebase from "firebase/app";
 import { Router } from "@angular/router";
 import { Subscription } from 'rxjs';
+import { MapsAPILoader } from '@agm/core';
 declare var $: any
 
 @Component({
@@ -31,6 +32,13 @@ export class ExploreComponent implements OnInit, OnDestroy {
   skillFilter: any[] = []
   sf: any[] = []
   skf: boolean = false
+  miles: number = 100
+  mf: number = 100
+  milf: boolean = false
+  myzip: any = ''
+  distan: number = 0
+  newold: number = 1
+  newoldf: boolean = false
   //Paginación
   pages: number[] = []
   start: number = 1
@@ -45,7 +53,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   suscription3: Subscription
   suscription4: Subscription
 
-  constructor(private prouser: ProuserService, public router: Router) {
+  constructor(private prouser: ProuserService, public router: Router, private map: MapsAPILoader) {
     this.loading = true
     firebase.firestore().enablePersistence()
   }
@@ -55,6 +63,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.prouser.getInfoPro().doc(this.prouser.user.uid).get()
       .forEach((data) => {
         this.skill = data.data().skills.sort()
+        this.myzip = data.data().zipcode
       }).then(() => {
         this.suscription0 = this.prouser.getInfoHire().snapshotChanges()
           .subscribe((d) => {
@@ -70,7 +79,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
                     d.docChanges().map((k) => {
                       if (k.doc.data().status == 1) {
                         if (k.type === 'modified') {
-                         
+
                         } else {
                           // var temp = k.doc.data().skills.sort()
                           // var temp2: boolean = false
@@ -80,14 +89,22 @@ export class ExploreComponent implements OnInit, OnDestroy {
                           //   }
                           // })
                           // if (temp2) {
-                            tempProjects.push(k.doc.data())
-                            tempProjects[cont].idProject = k.doc.id
-                            tempProjects[cont].idUser = profile.id
-                            tempProjects[cont].photo = profile.photoUrl
-                            tempProjects[cont].name = profile.name + ' ' + profile.lastname
-                            cont++
-                            this.prouser.pagination.emit(tempProjects)
-                            this.prouser.filterPag.emit(tempProjects)
+                          this.map.load().then(() => {
+                            new google.maps.DistanceMatrixService().getDistanceMatrix({ 'origins': [this.myzip], 'destinations': [k.doc.data().googleZipCode], 'travelMode': google.maps.TravelMode.DRIVING }, (results: any) => {
+                              if (results.rows[0].elements[0].distance !== undefined) {
+                                this.distan = results.rows[0].elements[0].distance.value
+                              }
+                              tempProjects.push(k.doc.data())
+                              tempProjects[cont].idProject = k.doc.id
+                              tempProjects[cont].idUser = profile.id
+                              tempProjects[cont].photo = profile.photoUrl
+                              tempProjects[cont].name = profile.name + ' ' + profile.lastname
+                              tempProjects[cont].distance = this.distan
+                              cont++
+                              this.prouser.pagination.emit(tempProjects)
+                              this.prouser.filterPag.emit(tempProjects)
+                            })
+                          })
                           // }
                         }
                       }
@@ -143,10 +160,6 @@ export class ExploreComponent implements OnInit, OnDestroy {
         $(".textv").css({ 'position': '', 'top': '', 'margin-top': '' })
       }
     })
-
-    console.log(this.projects);
-    console.log(this.projects.length);
-
   }
   sendInfo(e) {
     this.infoProject = e
@@ -225,28 +238,26 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.changePag(i)
   }
 
-  filterChange() {
-    this.changeFilter = !this.changeFilter
-  }
-
-  sFilter(e: any, skill: string){
-    if(e.target.checked){
-      if(!this.skillFilter.includes(skill)){
+  sFilter(e: any, skill: string) {
+    if (e.target.checked) {
+      if (!this.skillFilter.includes(skill)) {
         this.skillFilter.push(skill)
       }
-    }else{
-      if(this.skillFilter.includes(skill)){
+    } else {
+      if (this.skillFilter.includes(skill)) {
         var i = this.skillFilter.indexOf(skill)
         this.skillFilter.splice(i, 1)
       }
-    }    
+    }
   }
 
-  filter(){
+  filter() {
     this.sf = this.skillFilter
-    if(this.skillFilter.length == 0){
+    this.miles = this.mf    
+    if (this.skillFilter.length == 0) {
       this.sf = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation']
     }
+    this.changeFilter = this.newold == 1 ? true : false
   }
 
   ngOnDestroy() {

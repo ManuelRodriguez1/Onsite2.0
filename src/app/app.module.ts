@@ -47,6 +47,7 @@ import { ChatSearchPipe } from './pipes/chat-search.pipe';
 import { ChatTextPipe } from './pipes/chat-text.pipe';
 import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 import { SkillsPipe } from './pipes/skills.pipe';
+import { DistancePipe } from './pipes/distance.pipe';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { SkillsPipe } from './pipes/skills.pipe';
     ChatSearchPipe,
     ChatTextPipe,
     SkillsPipe,
+    DistancePipe,
   
   ],
   imports: [
