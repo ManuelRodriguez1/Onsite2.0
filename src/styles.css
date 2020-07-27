@@ -1487,7 +1487,7 @@ h4,
 
 .containerMin {
     max-height: fit-content;
-    min-height: 600px;
+    min-height: 700px;
 }
 
 .acceptChat::before {
