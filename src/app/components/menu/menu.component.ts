@@ -68,7 +68,7 @@ export class MenuComponent implements OnInit {
   }
 
   paginaMensajeMenu(user, url) {
-    console.log(url);
+   
 
     if (url == "/Home" || url == "/Pro" || url == "/Hire" || url == "/") {
 
@@ -102,11 +102,11 @@ export class MenuComponent implements OnInit {
     }
     if (this.estado == "hire") {
       this.userMenu = "Hirer";
-      console.log(user.uid)
+
       var data = this.afstore.collection("users_hire").doc(user.uid).snapshotChanges()
       data.subscribe((d) => {
         this.profile = d.payload.data()
-        console.log(this.profile);
+     
         if (this.profile) {
           if (this.profile.photoUrl != "") { this.imageP = this.profile.photoUrl }
           if (this.profile.name != "") { this.UserName = this.profile.name }
@@ -118,7 +118,7 @@ export class MenuComponent implements OnInit {
       var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
       data.subscribe((d) => {
         this.profile = d.payload.data()
-        console.log(this.profile);
+   
         if (this.profile) {
           if (this.profile.photoUrl != "") { this.imageP = this.profile.photoUrl }
           if (this.profile.name != "") { this.UserName = this.profile.name }

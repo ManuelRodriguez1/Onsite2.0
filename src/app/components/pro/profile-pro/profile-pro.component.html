@@ -116,6 +116,7 @@
                                 <p style="line-height: 31px;">Select Skills</p>
                                 <div class="skillselct" [hidden]="selectskills == null">
                                     <div class="skillsel" *ngFor="let s of selectskills">
+                                        <img src="../../../../assets/imgProIcon/{{s}}.png">
                                         <p>{{s}}</p>
                                         <div class="close" (click)='close(s)'></div>
                                     </div>
@@ -218,6 +219,7 @@
                     </div>
                     <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
                         <div class="skillsel onlySkill" *ngFor="let so of selectskills">
+                            <img src="../../../../assets/imgProIcon/{{so}}.png">
                             <p>{{so}}</p>
                         </div>
                     </div>

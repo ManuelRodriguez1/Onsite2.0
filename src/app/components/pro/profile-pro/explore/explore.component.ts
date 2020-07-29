@@ -163,7 +163,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   }
   sendInfo(e) {
     this.infoProject = e
-    console.log(this.infoProject);
+  
     this.select = 1
     var infoPro: any = this.infoProject
     this.prouser.getProject(infoPro.idUser, infoPro.idProject).get()
