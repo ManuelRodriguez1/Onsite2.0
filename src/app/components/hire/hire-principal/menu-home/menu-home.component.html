@@ -185,6 +185,7 @@
                                 <p style="line-height: 31px;">Select Skills</p>
                                 <div class="skillselct" [hidden]="selectskills == null">
                                     <div class="skillsel" *ngFor="let s of selectskills">
+                                        <img src="../../../../../assets/imgProIcon/{{s}}.png">
                                         <p>{{s}}</p>
                                         <div class="close" (click)='close(s)'></div>
                                     </div>
@@ -271,9 +272,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6 form-group">
+                    <div class="col-sm-6 form-group estimatedDivRegistro">
+                        <p class="normalText py-3">From</p>
                         <input required type="text" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
-                            (keyup)="onKeymoneda($event)" class="form-control" placeholder="$10,000 - $20,000"
+                            (keyup)="onKeymoneda($event)" class="form-control" placeholder="$1,000"
                             name="estimated" id="estimated" #estimated="ngModel"
                             [class.errorInput]="estimated.value == '' || estimated.value == undefined &&   alerta"
                             [class.correctInput]="estimated.value != '' && estimated.value != undefined "
@@ -285,9 +287,10 @@
 
 
                     </div>
-                    <div class="col-sm-6 form-group">
+                    <div class="col-sm-6 form-group estimatedDivRegistro">
+                        <p class="normalText py-3">To</p>
                         <input required type="text" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
-                            (keyup)="onKeymoneda1($event)" class="form-control" placeholder="$10,000 - $20,000"
+                            (keyup)="onKeymoneda1($event)" class="form-control" placeholder="$10,000"
                             name="estimated1" id="estimated1" #estimated1="ngModel"
                             [class.errorInput]="estimated1.value == '' || estimated1.value == undefined &&   alerta"
                             [class.correctInput]="estimated1.value != '' && estimated1.value != undefined "
@@ -417,6 +420,7 @@
                 <div class="col-sm mx-4 my-2">
                     <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
                         <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
+                            <img src="../../../../../assets/imgProIcon/{{so}}.png">
                             <p>{{so}}</p>
                         </div>
                     </div>
@@ -460,6 +464,7 @@
                         <div class="col-sm-6 pt-2">
                             <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
                                 <div class="skillsel onlySkill" *ngFor="let so of da.skills">
+                                    <img src="../../../../../assets/imgProIcon/{{so}}.png">
                                     <p> {{so}}</p>
                                 </div>
                             </div>
@@ -502,6 +507,7 @@
                     <div class="col-sm-6">
                         <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
                             <div class="skillsel onlySkill" *ngFor="let da of  neg.skills">
+                                <img src="../../../../../assets/imgProIcon/{{da}}.png">
                                 <p>{{da}}</p>
                             </div>
                         </div>
@@ -643,6 +649,7 @@
                         </div>
                         <!-- <div class="mt-2" style="overflow: hidden;" [hidden]="profile.skills == null"> -->
                         <div class="skillsel onlySkill mt-2" *ngFor="let so of profileP.skills">
+                            <img src="../../../../../assets/imgProIcon/{{so}}.png">
                             <p>{{so}}</p>
                         </div>
                         <!-- </div> -->

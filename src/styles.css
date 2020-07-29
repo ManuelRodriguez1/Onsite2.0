@@ -498,27 +498,43 @@ table {
 .skillselct {
     overflow: hidden;
     margin: -40px 0 0 9px;
-    ;
+    
 }
 
 .skillsel {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: normal;
-    line-height: 160%;
-    font-size: 14px;
+    line-height: 36px;
+    font-size: 18px;
     text-align: center;
     position: relative;
     float: left;
-    color: white;
-    background-color: #FF8600;
-    /* margin-right: 24px; */
-    /* margin-top: 24px; */
-    border-radius: 4px;
+    background-color: #ECECEC;
+    border-radius: 7px;
+    font-weight: bold;
+    color: #000000;
 }
 
 .skillsel p {
-    margin: 6px 29px 7px 10px;
+  /*  margin: 6px 29px 7px 10px;*/
+  margin: 0;
+  margin-left: 50px;
+  height: 36px;
+  margin-right: 30px;
+}
+
+.skillsel .close{
+    background-color: #9D9D9D;
+    border-radius: 50%;
+
+}
+.skillsel img {
+    float: left;
+    margin-left: 10px;
+    display: flex;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
 }
 
 .close {
@@ -1215,7 +1231,7 @@ h4,
 .profile {
     width: 150px;
     height: 150px;
-    background: #9D9D9D no-repeat;
+    background: #ECECEC no-repeat;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
@@ -1247,6 +1263,7 @@ h4,
 
 .onlySkill p {
     margin-right: 10px;
+    margin-left: 42px;
 }
 
 .locationIcon {

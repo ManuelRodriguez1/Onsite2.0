@@ -344,7 +344,7 @@ export class MenuHomeComponent implements OnInit {
   }
   //cancel project
   cancelEditProyect(){
-    alert("1");
+
     this.HomeFormularioNw = 0
     this.viewP=[]
   }
