@@ -20,7 +20,7 @@ export class ProComponent implements OnInit {
   selectskills: any[] = [];
   //selectskills2 = null;
   title = ['Enter your information:', 'Select skills'];
-  text = ['About You', 'Your Skills'];
+  text = ['About You', 'Your Skills', 'Your Tools'];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
   customers = ['Add certificate file'];
@@ -39,6 +39,7 @@ export class ProComponent implements OnInit {
   temp: any = true
   progress: number = 0
   progressBar: boolean = false
+  tools: any[] = []
 
   constructor(private servicePro: ProService, private map: MapsAPILoader) { }
 
@@ -70,26 +71,7 @@ export class ProComponent implements OnInit {
         this.verifyEmail = true
       }
     })
-
-    /*$('html').on('click', () => {
-      this.up = false
-    })
-
-    $("#clickSkills, .skillselct").click(function (e) {
-      e.stopPropagation()
-    })*/
-
-
   }
-
-/*
-  list(e: number) {
-    if (e == 1) {
-      this.up = !this.up;
-    } else {
-      this.up2 = !this.up2;
-    }
-  }*/
 
   next() {
     this.page++
@@ -118,29 +100,29 @@ export class ProComponent implements OnInit {
       i !== -1 && this.selectskills.splice(i, 1)
     }
 
-
-
-
-
- 
-    console.log(this.selectskills);
-    //this.skills2 = [this.selectskills + ' Hanger', this.selectskills + ' Apprentice', 'Metal Framer','Metal Framer Apprentice', this.selectskills + ' Finisher', 'Fire Taper'];
   }
-  selectskill2(e) {
-    //this.up2 = !this.up2;
-    //this.selectskills2 = e
+  toolsAdd(e: any, tool: string){
+    var temp: any = ''
+    if(e.code == 'Enter' || e.code == 'Comma'){
+      temp = e.code == 'Comma' ? tool.substr(0, tool.length - 1) : tool
+      this.tools.push(temp)
+      $('#toolsIn').val('')
+    }
   }
   close(e) {
     var i = this.selectskills.indexOf(e)
     i !== -1 && this.selectskills.splice(i, 1)
-    //e == 2 && this.selectskills2 == null
+  }
+  closeTool(e){
+    var i = this.tools.indexOf(e)
+    i !== -1 && this.tools.splice(i, 1)
   }
   addcustomer() {
     this.customers.push('Add certificate file');
     this.cust = this.cust + 1;
   }
   test(f: NgForm) {
-    this.servicePro.registerPro(f, this.file, this.customers2, this.selectskills)
+    this.servicePro.registerPro(f, this.file, this.customers2, this.selectskills, this.tools)
   }
   uploadDoc(e) {
     var i = this.cust
@@ -160,10 +142,7 @@ export class ProComponent implements OnInit {
   check() {
     this.checkbox = !this.checkbox
   }
-  // selecZip(e: string) {
-  //   this.zipcodeSelect = e
-  //   this.zipcodeSelectActive = true
-  // }
+  
   deleteCert(e: any) {
     var i = this.customers.indexOf(e);
     if (i !== -1) {

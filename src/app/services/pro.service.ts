@@ -21,7 +21,7 @@ export class ProService {
     private router: Router
   ) { }
 
-  registerPro(f: NgForm, file: any[], customers2: any[], selectskills: any[]){
+  registerPro(f: NgForm, file: any[], customers2: any[], selectskills: any[], tools: any[]){
     this.af.auth.createUserWithEmailAndPassword(f.value.email, f.value.password)
     .then(() => {
       var user = firebase.auth().currentUser
@@ -42,7 +42,8 @@ export class ProService {
           description: null,
           estado: "pro",
           certificate: customers2,
-          cvUrl: null
+          cvUrl: null,
+          tools: tools
         })
 
         if(file != []){

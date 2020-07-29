@@ -535,6 +535,34 @@ table {
     opacity: 1;
 }
 
+.tools {
+    overflow: hidden;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 19px;
+}
+
+.tool {
+    font-size: 14px;
+    line-height: 160%;
+    color: white;
+    border-radius: 7px;
+    background: #0d91FF;
+    float: left;
+    margin-right: 12px;
+    position: relative;
+    padding: 4px 30px 4px 10px;
+}
+
+.tool .close {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #1476C8;
+    background-image: url('./assets/iconos/closeTool.svg');
+}
+
 .closeChat {
     width: 30px;
     height: 30px;
