@@ -40,6 +40,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   profile: any = ''
   credential: any
   password: string = ''
+  tools: any[] = []
   //Validar correo
   emailVal: boolean = true
   correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
@@ -58,7 +59,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   //Show data of User
   ngOnInit() {
     //boton slkill se cierre
-    $(document).on("click", (e)=>{
+    $(document).on("click", (e) => {
 
       var container = $(".btnPointer");
       if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -83,6 +84,8 @@ export class ProfileProComponent implements OnInit, OnDestroy {
         }
       }
 
+      if(this.profile.tools){ this.tools = this.profile.tools }
+
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
 
       if (this.profile.cvUrl != null) {
@@ -100,12 +103,12 @@ export class ProfileProComponent implements OnInit, OnDestroy {
       }
 
     })
-    
-    $(window).scroll(function(){
-      if($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)){
-        $(".textv").css({'position':'absolute', 'top': 'auto', 'margin-top': '-16%'})
-      } else{
-        $(".textv").css({'position':'', 'top': '', 'margin-top': ''})
+
+    $(window).scroll(function () {
+      if ($(window).scrollTop() >= ($(".contenedorfooter").offset().top - $(".contenedorfooter").height() - 110)) {
+        $(".textv").css({ 'position': 'absolute', 'top': 'auto', 'margin-top': '-16%' })
+      } else {
+        $(".textv").css({ 'position': '', 'top': '', 'margin-top': '' })
       }
     })
   }
@@ -126,11 +129,11 @@ export class ProfileProComponent implements OnInit, OnDestroy {
             console.log(this.repro);
             this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
 
-           /* if (r.id == this.user.uid) {
-              this.reviewR = r.descripcion;
-              this.valStarts = r.rating
-              this.estrellitasreviws1 = r.rating
-            }*/
+            /* if (r.id == this.user.uid) {
+               this.reviewR = r.descripcion;
+               this.valStarts = r.rating
+               this.estrellitasreviws1 = r.rating
+             }*/
           })
 
 
@@ -178,9 +181,9 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   }
   //Section CV
   uploadCV(e: any) {
-    for(let i = 0; i <= 100; i++){
+    for (let i = 0; i <= 100; i++) {
       setTimeout(() => {
-        this.uploadDoc2 = i         
+        this.uploadDoc2 = i
       }, 1000);
     }
     setTimeout(() => {
@@ -204,6 +207,23 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   updateSkills() {
     this.prouser.updateSkill(this.selectskills)
   }
+  //Actualizar tools
+  toolsAdd(e: any, tool: string) {
+    var temp: any = ''
+    if (e.code == 'Enter' || e.code == 'Comma') {
+      temp = e.code == 'Comma' ? tool.substr(0, tool.length - 1) : tool
+      this.tools.push(temp)
+      $('#toolsIn').val('')
+    }
+  }
+  closeTool(e) {
+    var i = this.tools.indexOf(e)
+    i !== -1 && this.tools.splice(i, 1)
+  }
+
+  updateTools(){
+    this.prouser.updateTool(this.tools)
+  }
   //Section Certificate
   addcustomer() {
     this.customers.push({ 'name': 'Add certificate file', 'url': '' });
@@ -215,9 +235,9 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   uploadCert(e) {
     this.plus = true
     this.prouser.updateCert(e, this.cust, this.customers)
-    for(let i = 0; i <= 100; i++){
+    for (let i = 0; i <= 100; i++) {
       setTimeout(() => {
-        this.uploadDoc = i 
+        this.uploadDoc = i
       }, 1000);
     }
   }
@@ -237,7 +257,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sub1.unsubscribe()
   }
 

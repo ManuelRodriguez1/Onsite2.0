@@ -134,6 +134,23 @@
                 </div>
                 <hr class="hr mt-30">
                 <div class="title2">
+                    <p class="changeColorBlue">Tools</p>
+                    <p class="descripColor">Type the name of the tools you own and hit enter or add a comma after each <br>name to add it as a list item.</p>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm input-group">
+                        <input type="text" class="form-control" placeholder="E.g. Screw gun, Hammer, Wrench set, nail gun..." (keyup)="toolsAdd($event, toolsIn.value)" id="toolsIn" name="toolsIn" #toolsIn="ngModel" ngModel>
+                    </div>
+                    <div class="tools" [hidden]="tools.length == 0">
+                        <div class="tool" *ngFor="let t of tools">
+                            <p>{{t}}</p>
+                            <div class="close" (click)='closeTool(t)'></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="blueBtn medium mt-12" (click)="updateTools()">Update tools</button>
+                <hr class="hr mt-30">
+                <div class="title2">
                     <p class="changeColorBlue">Certificates</p>
                 </div>
                 <div class="row">

@@ -43,7 +43,7 @@ export class ProuserService {
   getProject(idUser: string, idProject: string) {
     return this.getInfoHire().doc(idUser).collection('projects').doc(idProject)
   }
-  getProjectSameHire(idUser: string){
+  getProjectSameHire(idUser: string) {
     return this.getInfoHire().doc(idUser).collection('projects')
   }
   //MANEJO DE CREDENCIALES USUARIO
@@ -138,6 +138,12 @@ export class ProuserService {
       "skills": skill
     })
   }
+  //Actualizar tools del usuario
+  updateTool(tools: any) {
+    this.getInfo().update({
+      "tools": tools
+    })
+  }
   //Actualizar certificados Usuario
   updateCert(cert: any, pos: any, certs: any) {
     this.afs.ref('Users_pro/' + this.user.uid + "/" + cert.target.files[0].name).put(cert.target.files[0])
@@ -169,7 +175,7 @@ export class ProuserService {
   }
   //CHAT
   //Añadir conversación
-  chatMsg(idHire: string, idPro: string, msg: string, adj: boolean = false, nameAdj: string = '', offer: boolean = false, accept: boolean = false, price:number = 0, proname: string = '', team: string = '') {
+  chatMsg(idHire: string, idPro: string, msg: string, adj: boolean = false, nameAdj: string = '', offer: boolean = false, accept: boolean = false, price: number = 0, proname: string = '', team: string = '') {
     var chatTemp: any = []
     var temp: any = {
       'fecha': new Date(),
@@ -178,7 +184,7 @@ export class ProuserService {
       'read': false,
       'adj': adj,
       'nameAdj': nameAdj,
-      'offer':offer,
+      'offer': offer,
       'accept': accept,
       'price': price,
       'name': proname,
