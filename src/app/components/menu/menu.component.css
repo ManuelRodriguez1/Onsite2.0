@@ -55,17 +55,57 @@
      
      .bgpodpad {
          background-color: white;
-         width: 254px;
+         width: 215px;
+         height: 145px;
          position: absolute;
          right: 0;
          margin-right: 10px;
          margin-top: 20px;
+         box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+        border-radius: 6px;
+
      }
      
      .bgpodpad li {
          display: block !important;
          line-height: 50px !important;
+         height: 50px;
+         margin: 0 !important;
+       
      }
+     .bgpodpadDivP{
+        margin-left: 24px;
+        margin-right: 24px;
+     }
+     .bgpodpad li:hover{
+        background: #ECECEC !important;
+
+     }
+     .bgpodpad li:hover a{
+        font-weight: 800 !important;
+        color: black !important;
+     }
+     .bgpodpad li a{
+        font-weight: normal !important;
+        font-size: 14px !important;
+     }
+     .imgMenuprofile{
+        background-image: url("../../../assets/iconos/My_Profile_Menu.png");
+        height: 16px;
+        width: 16px;
+        margin-top: 15px;
+        margin-right: 15px;
+        float: left;
+    }
+
+    .imgMenuout{
+        background-image: url("../../../assets/iconos/Sign_Out.png");
+        width: 15px;
+        height: 13px;
+        margin-top: 20px;
+        float: left;
+        margin-right: 15px;
+    }
      
      .bgpodpad::before {
          content: "";
@@ -75,8 +115,32 @@
          position: absolute;
          right: 0;
          margin-top: -10px;
-         margin-right: 10px;
+         margin-right: 60px;
      }
+     .bgMenuClose{
+         background-color: #FF8600;
+         color: #ffffff;
+         font-family: 'Open Sans', sans-serif;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        height: 46px;
+        line-height: 46px;
+        border-bottom-left-radius:6px;
+        border-bottom-right-radius:6px;
+        
+     }
+
+     .bgMenuClose:hover {
+        background: #ffffff;
+        color: #FF8600;
+        border: 1px solid #FF8600;
+
+    }
+    
      
      .imagenUserMenu {
          width: 50px;
@@ -89,6 +153,7 @@
          background-size: cover;
          background-position: center;
          background-repeat: none;
+         
      }
      
      nav .aimg {
