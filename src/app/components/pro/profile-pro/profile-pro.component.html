@@ -1,12 +1,12 @@
 <div class="alert alert-primary" [class.alertInitial]="alert == 1" role="alert">
-    Your <strong>password</strong> has been updated.
+    Your <strong>{{textAlert}}</strong> has been updated.
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
             <div class="cont">
-                <div class="profile" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
+                <div class="profile" [ngStyle]="{'background-image': 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
                 <div class="textw">
                     <p>{{profile.name}} {{profile.lastname}}</p>
                 </div>
@@ -76,14 +76,14 @@
                                 match.</span>
                         </div>
                     </div>
-                    <button type="submit" class="blueBtn small mt-12" id="buttonPass" [class.disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6" [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6">Update</button>
+                    <button type="submit" class="blueBtn small mt-12" id="buttonPass" [class.grayBtn]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6" [disabled]="cPass.value == '' || pass1.value == '' || pass2.value == '' || pass1.value != pass2.value || cPass.value != password || pass1.value?.length < 6">Update</button>
                 </form>
                 <hr class="hr mt-30">
                 <div class="title2">
                     <p class="changeColorBlue">Profile picture</p>
                 </div>
                 <div class="fields flex">
-                    <div class="profile mini" [ngStyle]="{'background-image': 'url('+imageP+')'}"></div>
+                    <div class="profile mini" [ngStyle]="{'background-image': 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
                     <input type="file" class="custom-file-input customFile" id="customProfile" accept=".jpg, .jpeg, .png, .svg" name="certificate" (change)="imageProfile($event)">
                     <label for="customProfile" class="blueBtn medium ml-30 labelButton">Upload file</label>
                 </div>
@@ -239,6 +239,22 @@
                             <img src="../../../../assets/imgProIcon/{{so}}.png">
                             <p>{{so}}</p>
                         </div>
+                    </div>
+                </div>
+                <hr class="hr mt-30">
+                <div class="ml-48 mr-48">
+                    <div class="title2">
+                        <p class="changeColorBlue">Tools</p>
+                    </div>
+                    <div class="row">
+                        <div class="tools" [hidden]="tools.length == 0">
+                            <div class="tool" *ngFor="let t of tools" style="padding-right: 10px">
+                                <p>{{t}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tools.length == 0">
+                        <p>No tools have been added.</p>
                     </div>
                 </div>
                 <hr class="hr mt-30">

@@ -356,11 +356,34 @@ iframe {
     cursor: default;
 }
 
+.input-group>.custom-file {
+    overflow: initial;
+    margin-right: 40px;
+}
+
+.deleteCert {
+    right: -7px;
+}
+
+.icon_img {
+    margin-top: 52px;
+}
+
+.grayBtn {
+    background: #ECECEC;
+    color: #9D9D9D;
+    cursor: not-allowed;
+}
+
+.grayBtn:hover {
+    border: none;
+}
+
 
 /* Estilos overall */
 
 .projects {
-    box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
 }
 
 .orange {

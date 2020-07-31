@@ -116,22 +116,23 @@
 
         <section [hidden]='page < 3 || page > 3' class="container">
             <div class="texts2">
-                <p class="changeColor">In this last step you can add your certificate(s) PDF file(s) to support your skill(s). This step is not mandatory and you can add them later in your account settings. </p>
                 <div class="title2">
                     <p class="changeColorBlue">Certificates</p>
                 </div>
+                <p class="changeColor">In this last step you can add your certificate(s) PDF file(s) to support your skill(s). This step is not mandatory and you can add them later in your account settings. </p>
             </div>
 
             <div class="row">
                 <div class="col-sm input-group">
                     <div class="input-group custom-file" *ngFor="let c of customers;">
                         <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
-                        <label for="customFile" class="custom-file-label">
-                            <div class="afterFile">{{c}}</div>
+                        <label for="customFile" class="custom-file-label" [ngStyle]="{'border': c != 'Add a file' ? 0 : ''}">
+                            <div class="afterFile" *ngIf="c == 'Add a file'">{{c}}</div>
                         </label>
-                        <div class="deleteCert" title="Delete certificate" *ngIf="c != 'Add certificate file'" (click)="deleteCert(c)"></div>
+                        <div class="fileIcon certIcon" *ngIf="c != 'Add a file'"></div>
+                        <div class="deleteCert" title="Delete certificate" *ngIf="c != 'Add a file'" (click)="deleteCert(c)"></div>
                     </div>
-                    <div class="input-group-prepend iconAdd" (click)="addcustomer()" *ngIf="customers[customers.length - 1] != 'Add certificate file'">
+                    <div class="input-group-prepend iconAdd" (click)="addcustomer()" *ngIf="customers[customers.length - 1] != 'Add a file'">
                         <div class="icon_img btnround"></div>
                     </div>
                 </div>
@@ -157,16 +158,16 @@
                 <p>Back</p>
             </div>
             <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
-    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || user.value.length < 6 || user.value != password.value">
+    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || user.value.length < 6 || user.value != password.value" [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || user.value.length < 6 || user.value != password.value">
                 Next
             </button>
-            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills.length == 0">
+            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills.length == 0" [class.grayBtn]="selectskills.length == 0">
                 Next
             </button>
             <button type="button" class="btn btn-outline-warning next" [class.blueBtn]="tools.length == 0" (click)='next()' *ngIf='page > 1 && page < 3'>
                <span *ngIf="tools.length == 0"> Skip </span> <span *ngIf="tools.length > 0">Next</span>
             </button>
-            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 3" [disabled]="checkbox == false">Finish</button>
+            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 3" [disabled]="checkbox == false" [class.grayBtn]="checkbox == false">Finish</button>
         </div>
     </div>
 </form>
