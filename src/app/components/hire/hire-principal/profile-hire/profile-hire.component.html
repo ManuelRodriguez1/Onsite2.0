@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="cont">
-                <div class="profile" [ngStyle]="{ 'background-image': 'url(' + imageP + ')' }"></div>
+                <div class="profile" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
                 <div class="textw">
                     <p>{{ profile.name }} {{ profile.lastname }} </p>
                 </div>
@@ -121,7 +121,7 @@
                     <p class="changeColorBlue">Profile picture</p>
                 </div>
                 <div class="fields flex">
-                    <div class="profile mini" [ngStyle]="{ 'background-image': 'url(' + imageP + ')' }"></div>
+                    <div class="profile mini" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
                     <input type="file" class="custom-file-input customFile" id="customProfile" accept=".jpg, .jpeg, .png, .svg" name="certificate" (change)="imageProfile($event)" />
                     <label for="customProfile" class="blueBtn medium ml-30 labelButton">Upload file</label>
                 </div>

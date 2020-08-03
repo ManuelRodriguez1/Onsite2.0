@@ -152,7 +152,8 @@
          background: #ECECEC;
          background-size: cover;
          background-position: center;
-         background-repeat: none;
+         background-repeat: no-repeat;
+         background-image: url("../../../assets/iconos/iconProfileMini.svg");
          
      }
      

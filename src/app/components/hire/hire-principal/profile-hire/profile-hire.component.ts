@@ -115,9 +115,10 @@ export class ProfileHireComponent implements OnInit {
             $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
             $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
             this.alert = 0
+            this.textAlert="Password";
             setTimeout(() => {
               this.alert = 1
-              this.textAlert="Password";
+           
             }, 3000);
           }, 200);
         })
