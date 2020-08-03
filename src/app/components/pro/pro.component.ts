@@ -23,7 +23,7 @@ export class ProComponent implements OnInit {
   text = ['About You', 'Your Skills', 'Your Tools'];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
-  customers = ['Add certificate file'];
+  customers = ['Add a file'];
   uploadDocu: number = 0
   customers2: any[] = [];
   notSame: boolean = false
@@ -118,13 +118,13 @@ export class ProComponent implements OnInit {
     i !== -1 && this.tools.splice(i, 1)
   }
   addcustomer() {
-    this.customers.push('Add certificate file');
+    this.customers.push('Add a file');
     this.cust = this.cust + 1;
   }
   test(f: NgForm) {
     this.servicePro.registerPro(f, this.file, this.customers2, this.selectskills, this.tools)
   }
-  uploadDoc(e) {
+  uploadDoc(e) {   
     var i = this.cust
     this.file.push(e.target.files[0])
     this.customers[i] = e.target.files[0].name
@@ -151,7 +151,7 @@ export class ProComponent implements OnInit {
       this.cust = this.cust - 1
     }
     if (this.customers.length == 0) {
-      this.customers = ['Add certificate file']
+      this.customers = ['Add a file']
       this.cust = 0
     }
   }

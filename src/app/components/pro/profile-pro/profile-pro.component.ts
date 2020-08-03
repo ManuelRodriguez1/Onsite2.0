@@ -22,6 +22,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   project: boolean = false
   alert: number = 1
   repro: any = ''
+  textAlert: string = ''
   usuariosReviwsTodos: any[] = [];
   // Variables eventos
   up: boolean = false
@@ -84,7 +85,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
         }
       }
 
-      if(this.profile.tools){ this.tools = this.profile.tools }
+      if (this.profile.tools) { this.tools = this.profile.tools }
 
       if (this.profile.photoUrl != null) { this.imageP = this.profile.photoUrl }
 
@@ -124,16 +125,8 @@ export class ProfileProComponent implements OnInit, OnDestroy {
 
         this.db.collection("users_hire").doc(r.id).snapshotChanges()
           .subscribe((data) => {
-
             this.repro = data.payload.data()
-            console.log(this.repro);
             this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
-
-            /* if (r.id == this.user.uid) {
-               this.reviewR = r.descripcion;
-               this.valStarts = r.rating
-               this.estrellitasreviws1 = r.rating
-             }*/
           })
 
 
@@ -157,6 +150,12 @@ export class ProfileProComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.alert = 0
+    this.textAlert = 'account information'
+    setTimeout(() => {
+      this.alert = 1
+    }, 3000);
+
   }
   //Update Password
   passForm(f: NgForm) {
@@ -168,6 +167,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
             $("#cPass, #pass1, #pass2").removeClass("errorInput correctInput")
             $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
             this.alert = 0
+            this.textAlert = 'password'
             setTimeout(() => {
               this.alert = 1
             }, 3000);
@@ -206,6 +206,11 @@ export class ProfileProComponent implements OnInit, OnDestroy {
 
   updateSkills() {
     this.prouser.updateSkill(this.selectskills)
+    this.alert = 0
+    this.textAlert = 'skill'
+    setTimeout(() => {
+      this.alert = 1
+    }, 3000);
   }
   //Actualizar tools
   toolsAdd(e: any, tool: string) {
@@ -221,8 +226,13 @@ export class ProfileProComponent implements OnInit, OnDestroy {
     i !== -1 && this.tools.splice(i, 1)
   }
 
-  updateTools(){
+  updateTools() {
     this.prouser.updateTool(this.tools)
+    this.alert = 0
+    this.textAlert = 'tool'
+    setTimeout(() => {
+      this.alert = 1
+    }, 3000);
   }
   //Section Certificate
   addcustomer() {
