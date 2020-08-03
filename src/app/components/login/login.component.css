@@ -102,11 +102,7 @@ body {
     border-color: #FFB665 !important;
 }
 
-.botonNaranja:disabled {
-    background: #FFB665 !important;
-    color: white !important;
-    border-color: #FFB665 !important;
-}
+
 
 .modal.show .modal-dialog,
 .modalup.show .modal-dialog {

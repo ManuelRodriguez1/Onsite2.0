@@ -1205,6 +1205,7 @@ h4,
 .grayBtn:disabled {
     background: #ECECEC !important;
     color: #9D9D9D !important;
+    border:none !important;
 }
 
 .arrowDownGray {
