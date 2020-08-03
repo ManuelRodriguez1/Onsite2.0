@@ -58,6 +58,8 @@ export class MenuHomeComponent implements OnInit {
   confirm2 = ''
   error = 0
   apply: any[] = [];
+  tools: any[] = []
+
   applyUsers: any[] = [];
   dataApply: any[] = [];
   negotiation: any[] = [];
@@ -98,6 +100,7 @@ export class MenuHomeComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.viewP= {}
     $(document).on("click", (e) => {
       var container = $(".btnPointer");

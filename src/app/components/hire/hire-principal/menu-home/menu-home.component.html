@@ -655,6 +655,20 @@
                         <!-- </div> -->
                     </div>
                 </div>
+                <hr class="hr" *ngIf="profileP.tools && profileP.tools.length != 0">
+                <div class="ml-48 mr-48" *ngIf="profileP.tools && profileP.tools.length != 0">
+                    <div class="title2">
+                        <p class="title3">Tools</p>
+                    </div>
+                    <div class="row">
+                        <div class="tools" [hidden]="profileP.tools && profileP.tools.length == 0">
+                            <div class="tool" *ngFor="let t of profileP.tools" style="padding-right: 10px">
+                                <p>{{t}}</p>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
                 <hr class="hr">
                 <div class="row">
                     <div class="col-sm  ml-48">
