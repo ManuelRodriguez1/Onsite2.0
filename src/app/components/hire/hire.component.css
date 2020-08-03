@@ -5,11 +5,7 @@
   left: 65px;
   font-size: 13px;
 }
-.next:disabled{
-  background: #FFB665 !important;
-  color: white !important;
-  border-color: #FFB665 !important;
-}
+
 .alertMessage{
   left: 15px;
 }

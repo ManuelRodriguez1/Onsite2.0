@@ -33,7 +33,7 @@ export class ProfileHireComponent implements OnInit {
   countProject = 0
   emailVal: boolean = true
   alert: number = 1
-
+  textAlert: string = ''
   constructor(
     private af: AngularFirestore,
     private hireuser: HireuserService
@@ -79,10 +79,17 @@ export class ProfileHireComponent implements OnInit {
 
   imageProfile(e: any) {
     this.hireuser.updateProfileImg(e)
+
+    this.alert = 0
+    this.textAlert = 'picture'
+    setTimeout(() => {
+      this.alert = 1
+    }, 3000);
   }
 
   accountForm(f: NgForm) {
     if (this.hireuser.updateAccount(f, this.profile.name, this.profile.lastname)) {
+  
     }
     if (f.value.email.trim() != '') {
       if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {
@@ -91,6 +98,12 @@ export class ProfileHireComponent implements OnInit {
         this.emailVal = false
       }
     }
+
+    this.alert = 0
+    this.textAlert = 'account information'
+    setTimeout(() => {
+      this.alert = 1
+    }, 3000);
 
   }
   passForm(f: NgForm) {
@@ -104,6 +117,7 @@ export class ProfileHireComponent implements OnInit {
             this.alert = 0
             setTimeout(() => {
               this.alert = 1
+              this.textAlert="Password";
             }, 3000);
           }, 200);
         })
