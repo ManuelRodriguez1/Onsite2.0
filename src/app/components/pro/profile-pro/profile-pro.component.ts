@@ -60,12 +60,14 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   //Show data of User
   ngOnInit() {
     //boton slkill se cierre
-    $(document).on("click", (e) => {
+   $(document).on("click", (e) => {
 
       var container = $(".btnPointer");
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
+      var container2close=$(".list-group-scroll");
+      if (!container.is(e.target) && container.has(e.target).length === 0 && !container2close.is(e.target) && container2close.has(e.target).length === 0) {
         this.up = false;
       }
+    
     });
 
     this.sub1 = this.prouser.getInfo().snapshotChanges().subscribe((d) => {
