@@ -2,6 +2,7 @@ import { MapsAPILoader } from "@agm/core";
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProService } from 'src/app/services/pro.service';
+import { ICONS } from './icons';
 // import zipcode from '../../../assets/files/zipcode.json';
 declare var $: any
 
@@ -40,10 +41,14 @@ export class ProComponent implements OnInit {
   progress: number = 0
   progressBar: boolean = false
   tools: any[] = []
+  //Icons to register
+  icon1: string = ''
+  icon2: string = '' 
 
   constructor(private servicePro: ProService, private map: MapsAPILoader) { }
 
   ngOnInit() {
+    this.icon1 = ICONS[0]
 
     this.map.load().then(() => {
       if (navigator.geolocation) {
@@ -138,9 +143,6 @@ export class ProComponent implements OnInit {
       this.progressBar = false
       this.progress = 0
     }, 1000)
-  }
-  check() {
-    this.checkbox = !this.checkbox
   }
   
   deleteCert(e: any) {
