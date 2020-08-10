@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProService } from 'src/app/services/pro.service';
 import { ICONS } from './icons';
+import { DomSanitizer } from "@angular/platform-browser";
 // import zipcode from '../../../assets/files/zipcode.json';
 declare var $: any
 
@@ -42,13 +43,14 @@ export class ProComponent implements OnInit {
   progressBar: boolean = false
   tools: any[] = []
   //Icons to register
-  icon1: string = ''
+  icon1: any = ''
   icon2: string = '' 
+  imgprev: any = ''
 
-  constructor(private servicePro: ProService, private map: MapsAPILoader) { }
+  constructor(private servicePro: ProService, private map: MapsAPILoader, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.icon1 = ICONS[0]
+    this.icon1 = this.sanitizer.bypassSecurityTrustHtml(ICONS[0].icon1)
 
     this.map.load().then(() => {
       if (navigator.geolocation) {
@@ -76,6 +78,14 @@ export class ProComponent implements OnInit {
         this.verifyEmail = true
       }
     })
+  }
+
+  preview(e:any){
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = () => {
+      this.imgprev = reader.result
+    }
   }
 
   next() {

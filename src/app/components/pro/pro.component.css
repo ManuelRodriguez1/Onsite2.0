@@ -99,6 +99,16 @@ input::placeholder {
     width: 100%;
 }
 
+.mt-12 {
+    margin-top: 12px;
+}
+
+.icon1 {
+    /* width: 872px;
+    height: 607px; */
+    margin-top: 243px;
+}
+
 .progress {
     border: 1px solid #FF8600;
 }
@@ -137,6 +147,36 @@ input::placeholder {
     left: 50%;
     position: absolute;
     margin-top: 5px;
+}
+
+.sectionCont .container {
+    max-width: 450px;
+}
+
+.uploadSection {
+    text-align: center;
+}
+
+.uploadSection .info {
+    margin-top: 185px;
+    text-align: center;
+}
+
+.uploadSection .info p:last-child {
+    margin-top: 20px;
+}
+
+.bigProfile {
+    margin: 0 auto;
+    margin-top: 70px;
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+}
+
+.uploadSection .blueBtn {
+    margin-top: 66px;
+    line-height: 280%;
 }
 
 .containerSkillNew {
@@ -192,6 +232,15 @@ input::placeholder {
     position: relative;
     padding-top: 15px;
     overflow-x: hidden;
+}
+
+.buttons {
+    max-width: 87.8%;
+}
+
+.title,
+.info p {
+    padding-left: 0;
 }
 
 
