@@ -37,7 +37,7 @@ export class HireService {
             phone: f.value.PhoneNumber,
             password: crypto.AES.encrypt(f.value.Password, 'N@!o').toString(),
             email: user.email,
-           // zipcode: f.value.Zipcode,
+            zipcode: f.value.zipcode,
             estado: "hire",
             project: false
           })

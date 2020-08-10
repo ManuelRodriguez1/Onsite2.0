@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
     var windowHeight = $(window).scrollTop();
     var contenido1 = $("#Howitworks").offset().top;
     var contenido2 = $("#Aboutus").offset().top;
-    if($("#Aboutus").length){
+    if($("#Aboutus").length==1){
       if (windowHeight >= contenido2) {
         $(".Aboutus").addClass("menuSelect")
         $(".Howitworks").removeClass("menuSelect")
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
   
     }
 
-    if($("#Howitworks").length){
+    if($("#Howitworks").length==1){
       if (windowHeight >= contenido1) {
         $(".Aboutus").removeClass("menuSelect")
         $(".Howitworks").addClass("menuSelect")

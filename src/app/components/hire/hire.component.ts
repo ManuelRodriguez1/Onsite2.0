@@ -73,7 +73,8 @@ export class HireComponent implements OnInit {
       LastName: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       PhoneNumber: ['', Validators.required],
-      Password: ['', [Validators.required, Validators.minLength(6)]]
+      Password: ['', [Validators.required, Validators.minLength(6)]],
+      zipcode: ['', [Validators.required, Validators.minLength(5),Validators.maxLength(5)]]
     });
 
     this.serviceHire.error.subscribe((respError) => {
@@ -87,12 +88,15 @@ export class HireComponent implements OnInit {
   onSubmit(f) {
     this.submitted = true;
     console.log(this.formData);
-   // if (this.formData.invalid  || $("#zipcode").val() == "" || $("#Password").val() == "") {
-
-   if (this.formData.invalid  ||  $("#Password").val() == "") {
+    console.log(f.value.zipcode.length);
+   if (this.formData.invalid  || $("#Password").val() == "" ) {
       console.log("Invalid")
       this.alerta=true;
-    } if (this.formData.valid) {
+   
+    } 
+    
+    if (this.formData.valid) {
+  
       console.log("ok")
       console.log(this.formData.value)
       var temp = false
@@ -107,7 +111,7 @@ export class HireComponent implements OnInit {
             this.verifyEmail = temp
           })
           if (!this.verifyEmail) {
-           // f.value.Zipcode=$("#zipcode").val();
+         
 
             this.serviceHire.registerHire(f);
 
@@ -119,8 +123,5 @@ export class HireComponent implements OnInit {
       }
     }
   }
-    selecZip(e: string) {
-      this.zipcodeSelect = e
-      this.zipcodeSelectActive = true
-    }
+  
   }
