@@ -378,6 +378,9 @@ iframe {
 .grayBtn:hover {
     border: none;
 }
+.done{
+    margin-top: 1px;
+}
 
 
 /* Estilos overall */

@@ -112,11 +112,11 @@
                 <div class="skill mt-21">
                     <div class="row btnPointer">
                         <div class="col-sm input-group">
-                            <div class="form-control" [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
+                            <div class="form-control"  (click)="up = !up"  [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
                                 <p style="line-height: 31px;">Select Skills</p>
-                                <div class="skillselct" [hidden]="selectskills == null">
+                                <div class="skillselct"[hidden]="selectskills == null">
                                     <div class="skillsel" *ngFor="let s of selectskills">
-                                        <img src="../../../../assets/imgProIcon/{{s}}.png">
+                                       <div class="div1"><img src="../../../../assets/imgProIcon/{{s}}.png"></div> 
                                         <p>{{s}}</p>
                                         <div class="close" (click)='close(s)'></div>
                                     </div>
@@ -126,9 +126,13 @@
                         </div>
                     </div>
                     <div class="list-group" *ngIf="up">
-                        <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
-                            <p>{{s}}</p>
+                        <div class="list-group-scroll">
+                            <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
+                                <div><img src="../../../../assets/imgProIcon/{{s}}.png"></div>
+                                <p>{{s}}</p>
+                            </div>
                         </div>
+                        <button class="done"   (click)="up = !up">Done</button>
                     </div>
                     <button type="button" class="blueBtn medium mt-12" (click)="updateSkills()">Update skills</button>
                 </div>
@@ -223,7 +227,7 @@
                         <a [href]="cv[0].url" target="_blank">
                             <div class="fileIcon"></div>
                         </a>
-                        <p>{{cv[0].name}}</p>
+                        <p class="ellipsis">{{cv[0].name}}</p>
                     </div>
                     <div *ngIf="cv[0].name == 'Add a file' || cv[0].name == null">
                         <p>No files have been uploaded.</p>
@@ -236,7 +240,7 @@
                     </div>
                     <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
                         <div class="skillsel onlySkill" *ngFor="let so of selectskills">
-                            <img src="../../../../assets/imgProIcon/{{so}}.png">
+                            <div class="div1"><img src="../../../../assets/imgProIcon/{{so}}.png"></div>
                             <p>{{so}}</p>
                         </div>
                     </div>

@@ -454,26 +454,6 @@
     font-weight: bold;
 }
 
-.done {
-    width: 100%;
-    float: left;
-    height: 44px;
-    background: #FF8600;
-    border: 0;
-    color: white;
-    cursor: pointer;
-    margin-top: 34px;
-    font-size: 16px;
-    letter-spacing: 0.04em;
-    font-weight: 800;
-    border-radius: 0px 0px 6px 6px;
-}
-
-.done:hover {
-    background: white;
-    color: #FF8600;
-    border: 1px solid #FF8600;
-}
 
 .distance {
     width: 384px;
