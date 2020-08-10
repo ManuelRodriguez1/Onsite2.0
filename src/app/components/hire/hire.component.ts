@@ -1,8 +1,8 @@
+import { MapsAPILoader } from "@agm/core";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HireService } from 'src/app/services/hire.service';
 import { AngularFirestore } from "angularfire2/firestore";
-import zipcode from '../../../assets/files/zipcode.json';
 import * as $ from 'jquery';
 @Component({
   selector: "app-hire",
@@ -22,18 +22,18 @@ export class HireComponent implements OnInit {
   alerta=false;
   Entercityorzipcode;
   PhoneNumber;
-  zipCodeCity: any = zipcode
-  zipcodeSelect: string = ''
+ /// zipCodeCity: any = zipcode
   zipcodeSelectActive: boolean = false
   formData: FormGroup;
   submitted = false;
   correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
   correctEmailTrue=false;
-
+  zipcodeSelect: string = 'Searching...'
   constructor(
     private serviceHire: HireService,
     private db: AngularFirestore,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private map: MapsAPILoader
   ) { }
 
 
@@ -47,6 +47,27 @@ export class HireComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    //zipcode automatico registro
+    this.map.load().then(() => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(p => {
+          var latlong = new google.maps.LatLng(p.coords.latitude, p.coords.longitude)
+          let geocoder = new google.maps.Geocoder()
+          geocoder.geocode({ "location": latlong }, (r, s) => {
+            if (s == google.maps.GeocoderStatus.OK) {
+              r[0].address_components.map((m) => {
+                if (m.types.join('').includes('postal_code')) {
+                  this.zipcodeSelect = m.long_name
+                }
+              })
+            }
+          })
+        })
+      }
+    })
+
+
     this.formData = this.formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],

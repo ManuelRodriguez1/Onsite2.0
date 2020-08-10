@@ -22,7 +22,7 @@ export class MenuHomeComponent implements OnInit {
   selectskills: any[] = [];
   usuariosReviwsTodos: any[] = [];
   teamSkills: any[] = [];
-  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
+  skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   private contador = 4000 //Agreg
   projectname;
   peoples: any[] = [];
