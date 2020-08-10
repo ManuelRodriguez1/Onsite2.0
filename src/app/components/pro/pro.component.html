@@ -1,52 +1,55 @@
 <form #formPro="ngForm" (ngSubmit)="test(formPro)" action="">
     <div class="containerMin">
-        <div class="title container">
-            <p>{{title[select]}}</p>
-            <span class="normalText" *ngIf="select==1">Click on the skills that suit your profile and what you do.</span>
-        </div>
-        <section [hidden]='page > 0'>
-            <div class="fields container">
-                <div class="row">
-                    <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
-                    <input type="text" class="form-control" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
-                    <input type="email" class="form-control" [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')" [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail" placeholder="E-mail" name="email"
-                        #email="ngModel" ngModel>
-                    <span [hidden]="!verifyEmail" class="textError">Email already exists!</span>
-                    <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must
+        <section [hidden]='page > 0' class="sectionCont">
+            <div class="row">
+                <div class="col-sm">
+                    <svg class="icon1" [innerHTML]="icon1" viewBox="0 0 871 608" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+                </div>
+                <div class="col-sm">
+                    <div class="title container">
+                        <p>{{title[select]}}</p>
+                        <span class="normalText" *ngIf="select==1">Click on the skills that suit your profile and what you do.</span>
+                    </div>
+                    <div class="fields container">
+                        <div class="row">
+                            <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
+                            <input type="text" class="form-control mt-12" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
+                            <input type="email" class="form-control mt-12" [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')" [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail" placeholder="E-mail" name="email"
+                                #email="ngModel" ngModel>
+                            <span [hidden]="!verifyEmail" class="textError">Email already exists!</span>
+                            <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must
                             be a valid
                             email address</span>
-                    <input type="text" class="form-control" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
-                </div>
-            </div>
-            <div class="info container">
-                <p>Enter your password</p>
-                <p>Your username will be your e-mail address.</p>
-            </div>
-            <div class="fields2 container">
-                <div class="row">
-                    <div class="col-sm input-group">
-                        <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''" [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user" #user="ngModel" ngModel>
-                        <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be
+                            <input type="text" class="form-control mt-12" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
+                        </div>
+                    </div>
+                    <div class="info container" style="padding: 0;">
+                        <p>Enter your password</p>
+                        <p>Your username will be your e-mail address.</p>
+                    </div>
+                    <div class="fields2 container">
+                        <div class="row">
+                            <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''" [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user" #user="ngModel" ngModel>
+                            <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be
                             at least 6
                             characters.</span>
-                    </div>
-                    <div class="col-sm input-group">
-                        <input type="password" class="form-control" [class.errorInput]="user.value != password.value && password.value != ''" [class.correctInput]="user.value == password.value && password.value != ''" placeholder="Password confirmation" name="password" #password="ngModel"
-                            ngModel>
-                        <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password
+                            <input type="password" class="form-control mt-12" [class.errorInput]="user.value != password.value && password.value != ''" [class.correctInput]="user.value == password.value && password.value != ''" placeholder="Password confirmation" name="password"
+                                #password="ngModel" ngModel>
+                            <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password
                             doesn’t
                             match.</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="title2 container">
-                <p>Where are you located?</p>
-            </div>
-            <div class="field3 container">
-                <div class="row">
-                    <div class="col-sm input-group">
-                        <input type="text" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" placeholder="Enter zipcode." name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
-                        <!-- <ul class="list-group" *ngIf="!zipcodeSelectActive">
+                    <div class="title2 container" style="padding: 0;">
+                        <p>Where are you located?</p>
+                    </div>
+                    <div class="field3 container">
+                        <div class="row">
+                            <input type="text" class="form-control" placeholder="Enter zipcode." [class.errorInput]="zipcode.value.length > 5" [class.correctInput]="zipcode.value.length < 6 && zipcode.value.length > 1" name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
+                            <span [hidden]="zipcode.value.length < 6" class="textError">
+                                Please enter a valid ZIP Code.
+                            </span>
+                            <!-- <ul class="list-group" *ngIf="!zipcodeSelectActive">
                             <ng-container *ngFor="let z of zipCodeCity | searchZip: zipcode.value">
                                 <li class="list-group-item d-flex justify-content-between align-items-center" (click)="selecZip(z.city)">
                                     {{z.city}}
@@ -54,15 +57,23 @@
                                 </li>
                             </ng-container>
                         </ul> -->
-                    </div>
-                    <div class="col-sm input-group" style="visibility: hidden;">
-                        <input type="text" class="form-control" disabled placeholder="" name="">
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section [hidden]='page < 1 || page > 1'>
+        <section [hidden]="page < 1 || page > 1" class="uploadSection">
+            <div class="info container">
+                <p>Upload a photo</p>
+                <p>Feel free to add a picture of yourself for your profile page.</p>
+            </div>
+            <div class="bigProfile profile profilePro" id="prevImg" [ngStyle]="{'background-image': imgprev != '' && 'url('+imgprev+')'}"></div>
+            <input type="file" class="custom-file-input customFile" id="uploadPhoto" accept=".jpg, .jpeg" (change)="preview($event)">
+            <label for="uploadPhoto" class="blueBtn medium">Choose a file</label>
+        </section>
+
+        <section [hidden]='page < 2 || page > 2'>
             <div class="container skill">
                 <!--div class="list-group" [hidden]='up == false'-->
                 <div class="row containerskillNewPrincipal">
@@ -84,7 +95,7 @@
             </div>
         </section>
 
-        <section [hidden]='page < 2 || page > 2'>
+        <section [hidden]='page < 3 || page > 3'>
             <div class="container skill" id="clickSkills">
                 <div class="row">
                     <div class="info container">
@@ -148,7 +159,7 @@
                 <p>Back</p>
             </div>
             <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
-    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || user.value.length < 6 || user.value != password.value" [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || user.value.length < 6 || user.value != password.value">
+    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value" [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value">
                 Next
             </button>
             <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills.length == 0" [class.grayBtn]="selectskills.length == 0">
