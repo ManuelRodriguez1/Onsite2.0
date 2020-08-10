@@ -1,100 +1,120 @@
 <form (ngSubmit)="onSubmit(formData)" method="">
-    <div class="title container">
-        <p>{{title[select]}}</p>
-    </div>
+   
     <section [hidden]='page > 0'>
-        <div class="fields container">
+        <div class="fields container mt-185">
+
             <div class="row">
-                <div class="col-sm input-group" [formGroup]="formData">
-                    <input required type="text" class="form-control" id="FirstName" name="FirstName" (ngModel)="FirstName" placeholder="First Name" #name formControlName="FirstName" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }">
-                    <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
-                        <div *ngIf="f.FirstName.errors.required" class="textError">First Name is required</div>
+                <div class="col-sm">
+                    <img src="../../../assets/imagenes/Hire/ImgRegistroHire.png">
+                </div>
+                <div class="col-sm">
+                    <div class="title container">
+                        <p>{{title[select]}}</p>
+                    </div>
+                    <div class="input-group mt-12" [formGroup]="formData">
+                        <input required type="text" class="form-control" id="FirstName" name="FirstName"
+                            (ngModel)="FirstName" placeholder="First Name" #name formControlName="FirstName"
+                            [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }">
+                        <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.FirstName.errors.required" class="textError">First Name is required</div>
+                        </div>
+                    </div>
+                    <div class="input-group mt-12" [formGroup]="formData">
+                        <input required type="text" class="form-control" placeholder="Last Name" name="LastName"
+                            (ngModel)="LastName" #lastname formControlName="LastName"
+                            [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }">
+                        <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.LastName.errors.required" class="textError">Last Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mt-12" [formGroup]="formData">
+                        <input required type="text" class="form-control"
+                            [class.errorInput]="verifyEmail == true || !correctEmail.exec(Email) && Email != '' && correctEmailTrue"
+                            [class.correctInput]="correctEmail.exec(Email)" placeholder="E-mail" [(ngModel)]="Email"
+                            name="Email" id="Email" #email formControlName="Email" (keyup)="onKey($event)"
+                            [ngClass]="{ 'is-invalid': submitted && f.Email.errors }">
+                        <span [hidden]="verifyEmail == false" class="textError">Email already exists!</span>
+                        <div *ngIf="!correctEmail.exec(Email) && Email != '' && correctEmailTrue" class="textError">
+                            Email must be a valid email address</div>
+                        <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                            <div *ngIf="f.Email.errors.required" class="textError">Please enter a email.</div>
+                        </div>
+                    </div>
+                    <div class="input-group mt-12" [formGroup]="formData">
+                        <input type="text" class="form-control" placeholder="Phone Number" (ngModel)="PhoneNumber"
+                            name="PhoneNumber" #phone formControlName="PhoneNumber"
+                            [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }">
+                        <div *ngIf="submitted && f.PhoneNumber.errors" class="invalid-feedback">
+                            <div *ngIf="f.PhoneNumber.errors.required" class="textError">Phone is required.</div>
+                        </div>
+                    </div>
+                    <div class="fields container">
+                        <span class="errorEmail">{{error}} </span>
+                    </div>
+                    <div class="info container">
+                        <p>Enter your password</p>
+                        <p>Your username will be your e-mail address.</p>
+                    </div>
+
+                    <div class="input-group mt-12" [formGroup]="formData">
+                        <input type="password" class="form-control"
+                            [class.errorInput]="user.value?.length < 6 && user.value != ''"
+                            [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password"
+                            name="user" #user formControlName="Password"
+                            [ngClass]="{ 'is-invalid': submitted && f.Password.errors }">
+
+                        <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                            <div *ngIf="f.Password.errors.required" class="textError">Please enter a password.</div>
+                            <div *ngIf="f.Password.errors.minlength" class="textError">Password must be at least 6
+                                characters.</div>
+                        </div>
+                    </div>
+                    <div class="input-group mt-12">
+                        <input type="password" class="form-control"
+                            [class.errorInput]="password.value?.length < 6 && user.value != password.value && password.value != ''"
+                            [class.correctInput]="user.value == password.value && password.value != '' && password.value?.length > 5"
+                            placeholder="Password confirmation" name="Password" #password="ngModel" id="Password"
+                            ngModel [class.errorInput]="password.value == '' &&  alerta ">
+                        <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password
+                            doesn’t
+                            match.</span>
+                        <span [hidden]="password.value?.length > 5 || password.value == ''" class="textError">Password
+                            must be at least
+                            6
+                            characters.</span>
+                    </div>
+
+
+                    <div class="title2 container">
+                        <p>Where are you located?</p>
+                    </div>
+
+
+                    <div class="input-group mt-12">
+                        <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode"
+                            #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect" id="zipcode"
+                            [class.errorInput]="zipcode.value == '' &&  alerta ">
+                        
+                    </div>
+                    <div class="input-group mt-12" style="visibility: hidden;">
+                        <input type="text" class="form-control" disabled placeholder="" name="">
+                    </div>
+
+
+
+
+                    <div class="buttons container">
+                        <button type='submit' name="button" class="btn btn-outline-warning next"
+                            *ngIf='page == 0'>Next</button>
                     </div>
                 </div>
-                <div class="col-sm input-group" [formGroup]="formData">
-                    <input required type="text" class="form-control" placeholder="Last Name" name="LastName" (ngModel)="LastName" #lastname formControlName="LastName" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }">
-                    <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
-                        <div *ngIf="f.LastName.errors.required" class="textError">Last Name is required</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-sm input-group" [formGroup]="formData">
-                    <input required type="text" class="form-control" [class.errorInput]="verifyEmail == true || !correctEmail.exec(Email) && Email != '' && correctEmailTrue" [class.correctInput]="correctEmail.exec(Email)" placeholder="E-mail" [(ngModel)]="Email" name="Email" id="Email" #email
-                        formControlName="Email" (keyup)="onKey($event)"  [ngClass]="{ 'is-invalid': submitted && f.Email.errors }">
-                    <span [hidden]="verifyEmail == false" class="textError">Email already exists!</span>
-                    <div *ngIf="!correctEmail.exec(Email) && Email != '' && correctEmailTrue" class="textError">Email must be a valid email address</div>
-                    <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
-                        <div *ngIf="f.Email.errors.required" class="textError">Please enter a email.</div>
-                    </div>
-                </div>
-                <div class="col-sm input-group" [formGroup]="formData">
-                    <input type="text" class="form-control" placeholder="Phone Number" (ngModel)="PhoneNumber" name="PhoneNumber" #phone formControlName="PhoneNumber" [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }">
-                    <div *ngIf="submitted && f.PhoneNumber.errors" class="invalid-feedback">
-                        <div *ngIf="f.PhoneNumber.errors.required" class="textError">Phone is required.</div>
-                    </div>
-                </div>
+
             </div>
         </div>
-        <div class="fields container">
-            <span class="errorEmail">{{error}} </span>
-        </div>
-        <div class="info container">
-            <p>Enter your password</p>
-            <p>Your username will be your e-mail address.</p>
-        </div>
-        <div class="fields2 container">
-            <div class="row">
-                <div class="col-sm input-group" [formGroup]="formData">
-                    <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''" [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user" #user formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }">
-
-          <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
-            <div *ngIf="f.Password.errors.required" class="textError">Please enter a password.</div>
-            <div *ngIf="f.Password.errors.minlength" class="textError">Password must be at least 6 characters.</div>
-          </div>
-        </div>
-        <div class="col-sm input-group">
-          <input type="password" class="form-control"
-            [class.errorInput]="password.value?.length < 6 && user.value != password.value && password.value != ''"
-            [class.correctInput]="user.value == password.value && password.value != '' && password.value?.length > 5"
-            placeholder="Password confirmation" name="Password" #password="ngModel" id="Password" ngModel [class.errorInput]="password.value == '' &&  alerta ">
-          <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password doesn’t
-            match.</span>
-                    <span [hidden]="password.value?.length > 5 || password.value == ''" class="textError">Password must be at least
-            6
-            characters.</span>
-                </div>
-            </div>
-        </div>
-        <!--div class="title2 container">
-            <p>Where are you located?</p>
-        </div>
-
-
-        <div class="field3 container">
-            <div class="row">
-                <div class="col-sm input-group">
-                    <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect" id="zipcode" [class.errorInput]="zipcode.value == '' &&  alerta ">
-                    <ul class="list-group" *ngIf="!zipcodeSelectActive">
-                        <ng-container *ngFor="let z of zipCodeCity | searchZip: zipcode.value">
-                            <li class="list-group-item d-flex justify-content-between align-items-center" (click)="selecZip(z.city)">
-                                {{z.city}}
-                                <span class="badge badge-primary">{{z.zip}}</span>
-                            </li>
-                        </ng-container>
-                    </ul>
-                </div>
-                <div class="col-sm input-group" style="visibility: hidden;">
-                    <input type="text" class="form-control" disabled placeholder="" name="">
-                </div>
-            </div>
-        </div-->
 
 
 
-        <div class="buttons container">
-            <button type='submit' name="button" class="btn btn-outline-warning next" *ngIf='page == 0'>Next</button>
-        </div>
     </section>
 </form>
 <div class="textv">

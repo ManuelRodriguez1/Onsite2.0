@@ -185,7 +185,7 @@
                                 <p style="line-height: 31px;">Select Skills</p>
                                 <div class="skillselct" [hidden]="selectskills == null">
                                     <div class="skillsel" *ngFor="let s of selectskills">
-                                        <img src="../../../../../assets/imgProIcon/{{s}}.png">
+                                       <div class="div1"><img src="../../../../../assets/imgProIcon/{{s}}.png"></div> 
                                         <p>{{s}}</p>
                                         <div class="close" (click)='close(s)'></div>
                                     </div>
@@ -194,10 +194,15 @@
                             <div class="down" [ngClass]="{'up': up == true}"></div>
 
                         </div>
+                        
                         <div class="list-group" [hidden]='up == false'>
-                            <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
-                                <p>{{s}}</p>
+                            <div class="list-group-scroll">
+                                <div class="list-group-item" *ngFor="let s of skills" (click)="selectskill(s)">
+                                    <div><img src="../../../../../assets/imgProIcon/{{s}}.png"></div>
+                                    <p>{{s}}</p>
+                                </div>
                             </div>
+                            <button class="done"   (click)="up = !up">Done</button>
                         </div>
 
                     </div>
