@@ -184,9 +184,9 @@
 }
 
 .map {
-    width: 313px;
-    height: 201px;
-    background: gray;
+    width: 300px;
+    height: 200px;
+    /* background: gray; */
     margin-left: 98px;
     overflow: hidden;
     position: relative;
@@ -195,12 +195,52 @@
 .mapBig {
     position: relative;
     background: gray;
-    width: 948px;
-    height: 439px;
+    width: 616px;
+    height: 321px;
+    margin-right: 48px;
 }
 
 .modal {
     background: rgba(0, 0, 0, 0.5);
+}
+
+.skillsel p {
+    float: right;
+}
+
+.skillsel img {
+    margin: 5px 8px 5px 10px;
+}
+
+.colmLeft {
+    margin-top: 20px;
+    line-height: 160%;
+}
+
+.colmLeft p:nth-child(3),
+.colmLeft p:nth-child(5) {
+    margin-top: 30px;
+}
+
+.materialBrief {
+    overflow: hidden;
+}
+
+.brief {
+    float: left;
+    margin-right: 52px;
+}
+
+.brief p {
+    margin-top: 8px;
+    overflow: hidden;
+    width: 92px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wLocation {
+    width: 284px;
 }
 
 .message {
@@ -453,7 +493,6 @@
 .checkbox__input:checked~.remember_me {
     font-weight: bold;
 }
-
 
 .distance {
     width: 384px;
