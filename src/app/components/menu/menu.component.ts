@@ -55,7 +55,33 @@ export class MenuComponent implements OnInit {
         $(".verifyUser").hide()
       }     
     })
+    $(window).scroll(function(){
+      var windowHeight = $(window).scrollTop();
+    
+      if($("#Aboutus").length==1){
+        
+        var contenido2 = $("#Aboutus").offset().top;
+        if (windowHeight >= contenido2) {
+          $(".Aboutus").addClass("menuSelect")
+          $(".Howitworks").removeClass("menuSelect")
+        } else {
+          $(".Aboutus").removeClass("menuSelect")
+        }
+    
+      }
   
+      if($("#Howitworks").length==1){
+        var contenido1 = $("#Howitworks").offset().top;
+        if (windowHeight >= contenido1) {
+          $(".Aboutus").removeClass("menuSelect")
+          $(".Howitworks").addClass("menuSelect")
+        } else {
+          $(".Howitworks").removeClass("menuSelect")
+        }
+      }
+     
+     
+    });
   }
 
   flechaUsuario() {

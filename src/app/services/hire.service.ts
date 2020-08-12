@@ -21,7 +21,7 @@ export class HireService {
       
     }
 
-    registerHire(f: NgForm){
+    registerHire(f: NgForm,filePicture: any[]){
       this.af.auth.createUserWithEmailAndPassword(f.value.Email, f.value.Password)
       .then(() => {
         var user = firebase.auth().currentUser
@@ -41,6 +41,26 @@ export class HireService {
             estado: "hire",
             project: false
           })
+          //addPicture
+          if(filePicture != []){
+            for (let i = 0; i < filePicture.length; i++) {
+              var fileDoc = this.afs.ref('Users_hire/' + user.uid + "/imageProfile").put(filePicture[i])
+              fileDoc.then((url) => {
+                url.ref.getDownloadURL()
+                  .then((url) => {
+                
+                    setTimeout(() => {
+                      this.db.collection("users_hire").doc(user.uid).update({
+                        "photoUrl": url
+                      })
+                    }, 200);
+
+
+                  })
+              })
+            }
+          }
+
         }).then(() => this.router.navigate(['/ProfileHire']))
       }).catch((err) => {
         console.log(err);
@@ -48,6 +68,7 @@ export class HireService {
        
       });
     }
+ 
   }
 
   

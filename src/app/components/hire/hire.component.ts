@@ -18,11 +18,12 @@ export class HireComponent implements OnInit {
   verifyEmail: boolean = false
   FirstName;
   LastName;
+  filePicture: any[] = []
   Email;
   alerta=false;
   Entercityorzipcode;
   PhoneNumber;
- /// zipCodeCity: any = zipcode
+  imgprev: any = ''
   zipcodeSelectActive: boolean = false
   formData: FormGroup;
   submitted = false;
@@ -79,14 +80,38 @@ export class HireComponent implements OnInit {
 
     this.serviceHire.error.subscribe((respError) => {
       this.error = respError;
+      this.page=0;
 
     })
   }
 
   get f() { return this.formData.controls; }
 
-  onSubmit(f) {
+  next() {
+   
     this.submitted = true;
+    if(this.formData.valid){
+      this.page=1;
+    }
+    //this.select = this.page
+  }
+  back() {
+    this.page=0;
+ 
+  }
+  preview(e:any){
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    this.filePicture.push(e.target.files[0])
+    reader.onload = () => {
+      this.imgprev = reader.result
+    }
+    
+  }
+  
+
+  onSubmit(f) {
+   
     console.log(this.formData);
     console.log(f.value.zipcode.length);
    if (this.formData.invalid  || $("#Password").val() == "" ) {
@@ -109,11 +134,12 @@ export class HireComponent implements OnInit {
               temp = true
             }
             this.verifyEmail = temp
+            this.page=0;
           })
           if (!this.verifyEmail) {
          
 
-            this.serviceHire.registerHire(f);
+            this.serviceHire.registerHire(f,this.filePicture);
 
             console.log(this.error);
 

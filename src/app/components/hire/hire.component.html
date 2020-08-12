@@ -107,10 +107,7 @@
 
 
 
-                    <div class="buttons container">
-                        <button type='submit' name="button" class="btn btn-outline-warning next"
-                            *ngIf='page == 0'>Next</button>
-                    </div>
+                
                 </div>
 
             </div>
@@ -119,6 +116,30 @@
 
 
     </section>
+    <section [hidden]="page < 1 || page > 1" class="uploadSection">
+        <div class="fields container ">
+
+        <div class="info container">
+            <p>Upload a photo</p>
+            <p>Feel free to add a picture of yourself for your profile page.</p>
+        </div>
+        <div class="bigProfile profile profileHire" id="prevImg" [ngStyle]="{'background-image': imgprev != '' && 'url('+imgprev+')'}"></div>
+        <input type="file" class="custom-file-input customFile" id="uploadPhoto" accept=".jpg, .jpeg, .png" (change)="preview($event)">
+        <label for="uploadPhoto" class="blueBtn medium">Choose a file</label>
+        </div>
+    </section>
+    <div class="buttons container">
+                 
+        <button type='button' name="button" (click)='next()' class="btn btn-outline-warning next"
+            *ngIf='page == 0'>Next</button>
+        <!--button type='submit' name="button" (click)='next()' class="btn btn-outline-warning next"
+            *ngIf='page == 0'>Next</button-->
+            <div class="btn btn-outline-warning back" *ngIf='page == 1' (click)='back()'>
+                <p>Back</p>
+            </div>
+            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 1" >Finish</button>
+
+    </div>
 </form>
 <div class="textv">
     <p>{{text[select]}}</p>

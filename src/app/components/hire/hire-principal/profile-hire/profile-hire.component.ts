@@ -34,6 +34,7 @@ export class ProfileHireComponent implements OnInit {
   emailVal: boolean = true
   alert: number = 1
   textAlert: string = ''
+  zipcode: string = '';
   constructor(
     private af: AngularFirestore,
     private hireuser: HireuserService
@@ -41,23 +42,26 @@ export class ProfileHireComponent implements OnInit {
 
   ngOnInit() {
     this.emailVerified = this.user.emailVerified
-    this.af.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0).where("status", "<", 3)
+    this.af.collection("users_hire").doc(this.user.uid).collection("projects").ref.where("status", ">", 0)
       .onSnapshot({ includeMetadataChanges: true }, (d) => {
         d.docChanges().forEach((d) => {
           this.projects.push([d.doc.data()])
-          if (d.doc.data().status === 3) {
+      
+          if (d.doc.data().status === 2) {
             this.projectsCompleted.push(d.doc.data())
-          } else if (d.type === 'removed') {
-            this.projects.forEach((data) => {
-              if (data[0].t == d.doc.data().t) {
-                this.projects.splice(this.projects.indexOf(data), 1)
-              }
-            })
-          }
+          } 
+          //else if (d.type === 'removed') {
+            //this.projects.forEach((data) => {
+              //if (data[0].t == d.doc.data().t) {
+                //this.projects.splice(this.projects.indexOf(data), 1)
+              //}
+           // })
+          //}
         })
       })
     this.hireuser.getInfoUser().snapshotChanges().subscribe((d) => {
       this.profile = d.payload.data()
+  
     
     
       if (this.profile) {
@@ -68,6 +72,9 @@ export class ProfileHireComponent implements OnInit {
 
         if (this.profile.photoUrl != null) {
           this.imageP = this.profile.photoUrl
+        }
+        if (this.profile.zipcode) {
+          this.zipcode = this.profile.zipcode
         }
         if (this.profile.photoUrl != null && this.emailVerified != false) {
           this.profileCompleted = true
@@ -94,17 +101,30 @@ export class ProfileHireComponent implements OnInit {
     if (f.value.email.trim() != '') {
       if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {
         this.hireuser.updateEmail(this.credential, f.value.email)
+
+        this.alert = 0
+        this.textAlert = 'account information'
+        setTimeout(() => {
+          this.alert = 1
+        }, 3000);
       } else {
         this.emailVal = false
+       
       }
     }
 
+   
+
+  }
+
+  locationForm(f: NgForm){
+    this.hireuser.updateUlocation(f.value.zipcode)
     this.alert = 0
-    this.textAlert = 'account information'
+    this.textAlert = 'location'
     setTimeout(() => {
       this.alert = 1
     }, 3000);
-
+    
   }
   passForm(f: NgForm) {
     if (f.value.pass1 == f.value.pass2) {

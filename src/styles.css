@@ -354,7 +354,7 @@ table {
     height: 47px;
     line-height: 31px;
     font-family: 'Open Sans', sans-serif;
-    border-radius: 2px;
+    border-radius: 4px;
     font-weight: 800;
     letter-spacing: 0.04em;
     background-color: #FF8600;
@@ -372,7 +372,7 @@ table {
     line-height: 31px;
     text-align: center;
     font-family: 'Open Sans';
-    border-radius: 2px;
+    border-radius: 4px;
     font-weight: 800;
     letter-spacing: 0.04em;
     background-color: #FF8600;
@@ -947,20 +947,19 @@ body.modal-open {
     font-size: 16px !important;
     font-weight: 800 !important;
     letter-spacing: 0.04em;
-    border-radius: 2px;
+    border-radius: 4px;
     border: 0;
 }
 
 .orangeBtn {
     color: #fff;
     font-family: 'Open Sans', sans-serif;
-    border-radius: 2px;
     font-weight: 800;
     letter-spacing: 0.04em;
     background: #FF8600;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 4px;
     border: 0;
 }
 
@@ -1271,7 +1270,7 @@ h4,
 }
 
 .shadow {
-    box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1) !important;
 }
 
 .orange {
@@ -1327,6 +1326,9 @@ h4,
 
 .profilePro {
     background-image: url('./assets/iconos/profilePro.svg');
+}
+.profileHire {
+    background-image: url('./assets/iconos/profileHire.svg');
 }
 
 .flex {
@@ -1842,6 +1844,32 @@ h4,
 
 .btnPointer {
     cursor: pointer;
+}
+
+.uploadSection {
+    text-align: center;
+}
+
+.uploadSection .info {
+    margin-top: 185px;
+    text-align: center;
+}
+
+.uploadSection .info p:last-child {
+    margin-top: 20px;
+}
+
+.bigProfile {
+    margin: 0 auto;
+    margin-top: 70px;
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+}
+
+.uploadSection .blueBtn {
+    margin-top: 66px;
+    line-height: 280%;
 }
 
 @media screen and (max-width: 1320px) {

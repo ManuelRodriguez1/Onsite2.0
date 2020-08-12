@@ -81,5 +81,9 @@ export class HireuserService {
         "photoUrl": img
       })
     }
-
+    updateUlocation(zipcode) {
+      this.getInfoUser().update({
+        "zipcode": zipcode
+      })
+    }
 }
