@@ -19,7 +19,7 @@ export class ProjectService {
     private afs: AngularFireStorage) {
   }
 //Crear nuevo proyecto o modificar nuevo proyecto
-  newProject(f: NgForm, file: any[], briefMaterial: any[], selectskills: any[], peoples: any[],locationApp,latitude,longitude) {
+  newProject(f: NgForm, file: any[],  selectskills: any[], peoples: any[],locationApp,latitude,longitude, ProjectImage: any[]) {
     var idProject;
     if (f.value.id) {
       idProject = f.value.id;
@@ -36,7 +36,6 @@ export class ProjectService {
       latitude:latitude,
       longitude:longitude,
       estimated: f.value.estimated,
-      estimated1: f.value.estimated1,
       startdate: f.value.startdate,
       enddate: f.value.enddate,
       taketest: f.value.taketest,
@@ -44,12 +43,13 @@ export class ProjectService {
       skills: selectskills,
       people: peoples,
       status: 1,
-      statusname: 'Pending',
-      briefmaterial: briefMaterial
+      statusname: 'Pending'
+
     }, { merge: true }).then(() => {
       this.db.collection('users_hire').doc(this.user.uid).set({
         "project": true
       }, { merge: true })
+      let briefMaterial=[]
       for (let i = 0; i < file.length; i++) {
         var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + idProject + "/" + file[i].name).put(file[i])
         fileDoc.then((url) => {
@@ -63,6 +63,25 @@ export class ProjectService {
               }, 200);
             })
         })
+      }
+      if(ProjectImage != []){
+      
+ 
+          var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + idProject+ "/projects/"+ProjectImage[0].name).put(ProjectImage[0])
+          fileDoc.then((url) => {
+            url.ref.getDownloadURL()
+              .then((url) => {
+            
+                setTimeout(() => {
+                  this.db.collection('users_hire').doc(this.user.uid).collection('projects').doc(idProject).update({
+                    "ProjectImage": url
+                  })
+                }, 200);
+
+
+              })
+          })
+        
       }
     })
       .catch((error) => {

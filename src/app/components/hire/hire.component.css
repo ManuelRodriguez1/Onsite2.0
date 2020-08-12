@@ -9,9 +9,7 @@
 .alertMessage{
   left: 15px;
 }
-.errorEmail{
-  color: #F43E40;
-}
+
 .was-validated .form-control:invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .custom-select.is-invalid{
   color: #F43E40;
 }
@@ -39,7 +37,4 @@
 }
 .next{
   right: 0px;
-}
-.buttons{
-  margin-top: 0px;
 }

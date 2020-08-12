@@ -49,8 +49,8 @@
                             <div *ngIf="f.PhoneNumber.errors.required" class="textError">Phone is required.</div>
                         </div>
                     </div>
-                    <div class="fields container">
-                        <span class="errorEmail">{{error}} </span>
+                    <div class="info container">
+                        <span class="textError">{{error}} </span>
                     </div>
                     <div class="info container">
                         <p>Enter your password</p>
@@ -70,19 +70,17 @@
                                 characters.</div>
                         </div>
                     </div>
-                    <div class="input-group mt-12">
+                    <div class="input-group mt-12" >
                         <input type="password" class="form-control"
                             [class.errorInput]="password.value?.length < 6 && user.value != password.value && password.value != ''"
                             [class.correctInput]="user.value == password.value && password.value != '' && password.value?.length > 5"
                             placeholder="Password confirmation" name="Password" #password="ngModel" id="Password"
                             ngModel [class.errorInput]="password.value == '' &&  alerta ">
                         <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password
-                            doesn’t
-                            match.</span>
+                            doesn’t match.</span>
                         <span [hidden]="password.value?.length > 5 || password.value == ''" class="textError">Password
-                            must be at least
-                            6
-                            characters.</span>
+                            must be at least 6 characters.
+                        </span>
                     </div>
 
 
@@ -91,23 +89,25 @@
                     </div>
 
 
-                    <div class="input-group mt-12">
+                    <div class="input-group mt-12" [formGroup]="formData">
                         <input type="text" class="form-control" placeholder="Enter city or zipcode." name="zipcode"
-                            #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect" id="zipcode"
-                            [class.errorInput]="zipcode.value == '' &&  alerta ">
+                            #zipcode ngModel [(ngModel)]="zipcodeSelect" id="zipcode" formControlName="zipcode"
+                            [class.errorInput]="zipcode.value == null &&  alerta "   [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }">
+
+                            <div *ngIf="submitted && f.zipcode.errors" class="invalid-feedback">
+                                <div *ngIf="f.zipcode.errors.required" class="textError"> Please enter a valid ZIP Code. </div>
+                                <div *ngIf="f.zipcode.errors.minlength" class="textError">Please enter a valid ZIP Code.</div>
+                                <div *ngIf="f.zipcode.errors.maxLength" class="textError">Please enter a valid ZIP Code.</div>
+                            </div>
+                           
                         
                     </div>
-                    <div class="input-group mt-12" style="visibility: hidden;">
-                        <input type="text" class="form-control" disabled placeholder="" name="">
-                    </div>
+                   
 
 
 
 
-                    <div class="buttons container">
-                        <button type='submit' name="button" class="btn btn-outline-warning next"
-                            *ngIf='page == 0'>Next</button>
-                    </div>
+                
                 </div>
 
             </div>
@@ -116,6 +116,30 @@
 
 
     </section>
+    <section [hidden]="page < 1 || page > 1" class="uploadSection">
+        <div class="fields container ">
+
+        <div class="info container">
+            <p>Upload a photo</p>
+            <p>Feel free to add a picture of yourself for your profile page.</p>
+        </div>
+        <div class="bigProfile profile profileHire" id="prevImg" [ngStyle]="{'background-image': imgprev != '' && 'url('+imgprev+')'}"></div>
+        <input type="file" class="custom-file-input customFile" id="uploadPhoto" accept=".jpg, .jpeg, .png" (change)="preview($event)">
+        <label for="uploadPhoto" class="blueBtn medium">Choose a file</label>
+        </div>
+    </section>
+    <div class="buttons container">
+                 
+        <button type='button' name="button" (click)='next()' class="btn btn-outline-warning next"
+            *ngIf='page == 0'>Next</button>
+        <!--button type='submit' name="button" (click)='next()' class="btn btn-outline-warning next"
+            *ngIf='page == 0'>Next</button-->
+            <div class="btn btn-outline-warning back" *ngIf='page == 1' (click)='back()'>
+                <p>Back</p>
+            </div>
+            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 1" >Finish</button>
+
+    </div>
 </form>
 <div class="textv">
     <p>{{text[select]}}</p>

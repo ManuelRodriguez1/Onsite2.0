@@ -1,6 +1,7 @@
 .started {
     width: 100%;
     box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+    min-height: 600px;
 }
 
 .list-project {
@@ -137,11 +138,13 @@
 }
 
 .title-list {
-    font-style: normal;
+    margin-top: 0px;
+    padding: 2%;
+    /*font-style: normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 22px;
     line-height: 41px;
-    color: #010973;
+    color: #010973;*/
 }
 
 .list-options {
@@ -208,10 +211,10 @@ span:hover{
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal !important;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    line-height: 22px;
-    color: #000000;
+    line-height: 26px;
+    color: #010973;
 }
 
 .project-name:hover {
@@ -247,16 +250,12 @@ span:hover{
 }
 
 
-/*
+
 .custom-file-label{
-  width: 166px;
-  height: 112px;
-  border: 1px dashed #9D9D9D;
   cursor: pointer;
-  margin-top: 14px;
+  margin-top: 30px;
   margin-bottom: 35px;
   position: relative;
-  cursor: pointer;
   margin-right: 37px;
 }
 .custom-file-label:nth-child(4n){
@@ -265,40 +264,20 @@ span:hover{
 .custom-file-label::after{
   display: none;
 }
-.custom-file-label .afterFile{
-  width: 124px;
-  height: 26px;
-  font-family: 'Open Sans', sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 25px;
-  letter-spacing: 0.04em;
-  top: 50%;
-  left: 50%;
-  bottom: auto;
-  transform: translate(-50%, -50%);
-  padding: 0;
-  text-align: center;
-  color: black;
-  background: #ECECEC;
-  border-radius: 2px;
-  position: absolute;
-}
-.custom-file-label .afterFile:hover{
-  background: #e8e8e8;
-}
+
+
 .input-group > .custom-file{
   overflow: hidden;
   height: auto;
   width: auto;
   flex: initial;
 }
-*/
+
 
 .iconAdd {
     align-items: center;
     height: 126px;
+    margin-top: 23px;
 }
 
 .btnround {
@@ -1057,9 +1036,19 @@ a {
 }
 
 .container {
-    margin-top: 0px;
-    /*margin-top: 10%;
-  margin-bottom: 10%;*/
+    /*margin-top: 0px;*/
+   
+}
+.containervacioproyectsdiv{
+    margin-top: 50px;
+    width: 480px;
+}
+
+.containervacioproyectsdiv p{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 16px;
+    line-height: 25px;
 }
 
 .divcol {
@@ -1187,7 +1176,38 @@ a {
     margin-right: 12px;
     margin-top: 8px;
 }
-.estimatedDivRegistro{
-    max-width: 219px;
-    margin-right: 12px;
+
+.margin0{
+    margin: 0px !important;
+  
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+.containerOptios1{
+    margin-right: 50px;
+    line-height: 30px;
+}
+.btncontainerOptios1{
+    margin-left: -48px;
+    vertical-align: middle;
+    margin-top: 15px;
+}
+.normalText{
+    font-size: 16px;
+    line-height:26px;
+}
+.title{
+    margin-top: 0;
+}
+.imagenproyecto{
+    background-size: cover;
+    border-radius: 0;
+}
+.btnprocessImagen{
+    margin-top: 60px;
+    margin-left: -23px;
+}
+.btnchange{
+    text-align: center;
+    line-height: 45px;
 }

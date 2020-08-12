@@ -52,31 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    $(window).scroll(function(){
-    var windowHeight = $(window).scrollTop();
-    var contenido1 = $("#Howitworks").offset().top;
-    var contenido2 = $("#Aboutus").offset().top;
-    if($("#Aboutus").length){
-      if (windowHeight >= contenido2) {
-        $(".Aboutus").addClass("menuSelect")
-        $(".Howitworks").removeClass("menuSelect")
-      } else {
-        $(".Aboutus").removeClass("menuSelect")
-      }
   
-    }
-
-    if($("#Howitworks").length){
-      if (windowHeight >= contenido1) {
-        $(".Aboutus").removeClass("menuSelect")
-        $(".Howitworks").addClass("menuSelect")
-      } else {
-        $(".Howitworks").removeClass("menuSelect")
-      }
-    }
-   
-   
-  });
   }
 
 

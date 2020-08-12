@@ -75,7 +75,7 @@
                 <p>Feel free to add a picture of yourself for your profile page.</p>
             </div>
             <div class="bigProfile profile profilePro" id="prevImg" [ngStyle]="{'background-image': imgprev != '' && 'url('+imgprev+')'}"></div>
-            <input type="file" class="custom-file-input customFile" id="uploadPhoto" accept=".jpg, .jpeg" (change)="preview($event)">
+            <input type="file" class="custom-file-input customFile" id="uploadPhoto" accept=".jpg, .jpeg, .png" (change)="preview($event)">
             <label for="uploadPhoto" class="blueBtn medium">Choose a file</label>
         </section>
 

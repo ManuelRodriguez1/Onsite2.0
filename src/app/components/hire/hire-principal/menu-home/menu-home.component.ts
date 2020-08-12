@@ -35,6 +35,7 @@ export class MenuHomeComponent implements OnInit {
   select = 0;
   HomeFormularioNw = 0;
   files = [{ 'name': 'Add material file', 'url': '' }];
+  filesPicture = [{ 'name': 'Add a file', 'url': '' }];
   file: any[] = [];
   countC: number = 0
   skills2Howmany: any[] = [];
@@ -59,7 +60,6 @@ export class MenuHomeComponent implements OnInit {
   error = 0
   apply: any[] = [];
   tools: any[] = []
-
   applyUsers: any[] = [];
   dataApply: any[] = [];
   negotiation: any[] = [];
@@ -76,9 +76,10 @@ export class MenuHomeComponent implements OnInit {
   zipcodeTex=true;
   contNegotiation = 0
   uploadDoc1: number = 0
-
-
-
+  containervacioproyects=true;
+  filePicture: any[] = []
+  imgprev: any = ''
+  imgprevValue=true;
   //mapa
   radius
   public latitude: number;
@@ -104,7 +105,8 @@ export class MenuHomeComponent implements OnInit {
     this.viewP= {}
     $(document).on("click", (e) => {
       var container = $(".btnPointer");
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
+      var container2 = $(".list-group-scroll");
+      if (!container.is(e.target) && container.has(e.target).length === 0 && !container2.is(e.target) && container2.has(e.target).length === 0) {
         this.up = false;
       }
     });
@@ -160,9 +162,7 @@ export class MenuHomeComponent implements OnInit {
   onKeymoneda(event) {
     this.formatCurrency(event,1);
   }
-  onKeymoneda1(event) {
-    this.formatCurrency(event,2);
-  }
+
 
   formatNumber(n) {
     // format number 1000000 to 1,234,567
@@ -225,12 +225,7 @@ export class MenuHomeComponent implements OnInit {
 
     if(num==1){
       this.viewP;
-     // $("#estimated").val(input_val)
       this.viewP.estimated=input_val;
-    }else if(num==2){
-  
-     // $("#estimated1").val(input_val)
-     this.viewP.estimated1=input_val;
     }
    
  
@@ -283,10 +278,7 @@ export class MenuHomeComponent implements OnInit {
            
        
                 this.viewP.googleZipCode=m.long_name;
-                //$("#googleZipCode").val(m.long_name);
-                //$("#googleZipCode").removeClass("errorInput");
-                //$("#googleZipCode").addClass("correctInput");
-
+            
                 this.zipcodeTex=false;
 
               }
@@ -350,6 +342,7 @@ export class MenuHomeComponent implements OnInit {
 
     this.HomeFormularioNw = 0
     this.viewP=[]
+    this.containervacioproyects=true;
   }
 
   //Agregar Proyecto BD
@@ -399,7 +392,7 @@ export class MenuHomeComponent implements OnInit {
       var temp = false
 
       //Crear o editar funcion 
-      this.projectService.newProject(f, this.file, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude)
+      this.projectService.newProject(f, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude,this.filePicture)
 
       this.modal = 1
       this.section = 1
@@ -422,21 +415,48 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw++;
     this.section = 2;
     this.righttv = 'text-new-project';
+    this.containervacioproyects=false;
   }
+
+  //imagen del proyecto
+
+  preview(e:any){
+    this.filePicture=[];
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    this.filePicture.push(e.target.files[0])
+    reader.onload = () => {
+      this.imgprev = reader.result
+      this.imgprevValue=false;
+    }
+    console.log(this.filePicture);
+    
+  }
+  
   //Add files material
   addfiles() {
+    console.log("1111");
     this.files.push({ 'name': 'Add material file', 'url': '' });
     this.cust = this.files.length - 1;
     this.uploadDoc1 = 0
   }
   //Modificar files material
   uploadDoc(e) {
-    for (let i = 0; i <= 60; i++) {
+    console.log("2222");
+   
+
+    for (let i = 0; i <= 100; i++) {
       setTimeout(() => {
- 
         this.uploadDoc1 = i
+        if(i==100){
+          this.uploadDoc1 = 0;
+         this.files[this.cust] = e.target.files[0];
+        }
       }, 1000);
     }
+  
+ 
+   /*
     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
     fileDoc.then((url) => {
       url.ref.getDownloadURL()
@@ -449,17 +469,13 @@ export class MenuHomeComponent implements OnInit {
             }, 1000);
           }
         })
-    })
+    })*/
   }
   //opcion segun filtro vista 
   selectOption(e) {
     this.option = e
   }
-  /*
-    showModal() {
-      this.modal = 1
-    }
-  */
+
 
   hideModal() {
     this.select = 0
@@ -472,6 +488,7 @@ export class MenuHomeComponent implements OnInit {
   deleteBriefMaterial(e: any) {
     var i = this.files.indexOf(e);
     if (i !== -1) {
+      //como 
       this.afs.ref('Users_pro/' + this.user.uid + "/" + e.name).delete()
       this.files.splice(i, 1)
       setTimeout(() => {

@@ -18,11 +18,12 @@ export class HireComponent implements OnInit {
   verifyEmail: boolean = false
   FirstName;
   LastName;
+  filePicture: any[] = []
   Email;
   alerta=false;
   Entercityorzipcode;
   PhoneNumber;
- /// zipCodeCity: any = zipcode
+  imgprev: any = ''
   zipcodeSelectActive: boolean = false
   formData: FormGroup;
   submitted = false;
@@ -73,26 +74,54 @@ export class HireComponent implements OnInit {
       LastName: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       PhoneNumber: ['', Validators.required],
-      Password: ['', [Validators.required, Validators.minLength(6)]]
+      Password: ['', [Validators.required, Validators.minLength(6)]],
+      zipcode: ['', [Validators.required, Validators.minLength(5),Validators.maxLength(5)]]
     });
 
     this.serviceHire.error.subscribe((respError) => {
       this.error = respError;
+      this.page=0;
 
     })
   }
 
   get f() { return this.formData.controls; }
 
-  onSubmit(f) {
+  next() {
+   
     this.submitted = true;
-    console.log(this.formData);
-   // if (this.formData.invalid  || $("#zipcode").val() == "" || $("#Password").val() == "") {
+    if(this.formData.valid){
+      this.page=1;
+    }
+    //this.select = this.page
+  }
+  back() {
+    this.page=0;
+ 
+  }
+  preview(e:any){
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    this.filePicture.push(e.target.files[0])
+    reader.onload = () => {
+      this.imgprev = reader.result
+    }
+    
+  }
+  
 
-   if (this.formData.invalid  ||  $("#Password").val() == "") {
+  onSubmit(f) {
+   
+    console.log(this.formData);
+    console.log(f.value.zipcode.length);
+   if (this.formData.invalid  || $("#Password").val() == "" ) {
       console.log("Invalid")
       this.alerta=true;
-    } if (this.formData.valid) {
+   
+    } 
+    
+    if (this.formData.valid) {
+  
       console.log("ok")
       console.log(this.formData.value)
       var temp = false
@@ -105,11 +134,12 @@ export class HireComponent implements OnInit {
               temp = true
             }
             this.verifyEmail = temp
+            this.page=0;
           })
           if (!this.verifyEmail) {
-           // f.value.Zipcode=$("#zipcode").val();
+         
 
-            this.serviceHire.registerHire(f);
+            this.serviceHire.registerHire(f,this.filePicture);
 
             console.log(this.error);
 
@@ -119,8 +149,5 @@ export class HireComponent implements OnInit {
       }
     }
   }
-    selecZip(e: string) {
-      this.zipcodeSelect = e
-      this.zipcodeSelectActive = true
-    }
+  
   }

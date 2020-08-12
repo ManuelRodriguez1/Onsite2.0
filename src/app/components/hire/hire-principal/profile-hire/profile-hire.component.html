@@ -1,12 +1,14 @@
 <div class="alert alert-primary" [class.alertInitial]="alert == 1" role="alert">
-    Your <strong>{{textAlert}}</strong>  has been updated.
+    Your <strong>{{textAlert}}</strong> has been updated.
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
             <div class="cont">
-                <div class="profile" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
+                <div class="profile profileHire"
+                    [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}">
+                </div>
                 <div class="textw">
                     <p>{{ profile.name }} {{ profile.lastname }} </p>
                 </div>
@@ -26,27 +28,20 @@
                 <form #aF="ngForm" (ngSubmit)="accountForm(aF)" action="">
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel [(ngModel)]="profile.name" />
+                            <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel
+                                [(ngModel)]="profile.name" />
                         </div>
                         <div class="input-group col-sm">
-                            <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel" ngModel [(ngModel)]="profile.lastname" />
+                            <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel"
+                                ngModel [(ngModel)]="profile.lastname" />
                         </div>
                     </div>
                     <div class="row fields">
-                        <!--div class="input-group col-sm">
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="email"
-                #email="ngModel"
-                ngModel
-                [(ngModel)]="profile.email"
-                [class.errorInput]="!emailVal"
-              />
-            </div-->
+
                         <div class="input-group col-sm">
-                            <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel [(ngModel)]="profile.email" [placeholder]="profile.email" [class.errorInput]="!emailVal">
+                            <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel
+                                [(ngModel)]="profile.email" [placeholder]="profile.email"
+                                [class.errorInput]="!emailVal">
                             <span class="textError" [hidden]="emailVal">Wrong email</span>
                         </div>
                         <div class="input-group col-sm">
@@ -54,10 +49,34 @@
                         </div>
 
                     </div>
-                    <button type="submit" class="blueBtn small mt-12 grayBtn" id="btnAccount" [class.disabled]="name.value == '' || lastname.value == '' || email.value == '' " [disabled]=" name.value == '' && lastname.value == '' && email.value == '' ">
-            Update
-          </button>
+                    <button type="submit" class="blueBtn small mt-12 grayBtn" id="btnAccount"
+                        [class.disabled]="name.value == '' || lastname.value == '' || email.value == '' "
+                        [disabled]="name.value == '' || lastname.value == '' || email.value == '' ">
+                        Update
+                    </button>
                 </form>
+                <hr class="hr mt-30" />
+                <div class="title2">
+                    <p class="changeColorBlue">Update location</p>
+                </div>
+                <form #lF="ngForm" (ngSubmit)="locationForm(lF)" action="">
+                    <div class="row fields">
+                        <div class="input-group col-sm">
+                            <input type="text" class="form-control" placeholder="Enter city, state or ZIP"
+                                name="zipcode" id="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="profile.zipcode" />
+                        </div>
+                        <div class="input-group col-sm">
+                            <input type="text" class="form-control" hidden />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="blueBtn small mt-12 grayBtn" id="buttonzipcode" [class.disabled]="
+                    zipcode.value == '' " [disabled]="zipcode.value == ''">
+                        Update
+                    </button>
+
+                </form>
+
                 <hr class="hr mt-30" />
                 <div class="title2">
                     <p class="changeColorBlue">Update password</p>
@@ -65,10 +84,14 @@
                 <form #pF="ngForm" (ngSubmit)="passForm(pF)" action="">
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="password" [class.errorInput]="cPass.value != profile.password && cPass.value != '' " [class.correctInput]=" cPass.value == password && cPass.value != ''" class="form-control" placeholder="Current password" name="cPass" id="cPass" #cPass="ngModel"
-                                ngModel />
-                            <span class="textError" [hidden]="cPass.value == password || cPass.value == ''">It isn't the current
-                password</span>
+                            <input type="password"
+                                [class.errorInput]="cPass.value != profile.password && cPass.value != '' "
+                                [class.correctInput]=" cPass.value == password && cPass.value != ''"
+                                class="form-control" placeholder="Current password" name="cPass" id="cPass"
+                                #cPass="ngModel" ngModel />
+                            <span class="textError" [hidden]="cPass.value == password || cPass.value == ''">It isn't the
+                                current
+                                password</span>
                         </div>
                         <div class="input-group col-sm">
                             <input type="text" class="form-control" hidden />
@@ -76,79 +99,91 @@
                     </div>
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="password" [class.errorInput]=" pass1.value.length < 6 && pass1.value != '' " [class.correctInput]=" pass1.value.length > 5 && pass1.value != ''" class="form-control" placeholder="New password" name="pass1" id="pass1" ngModel #pass1="ngModel"
-                            />
-                            <span class="textError" [hidden]="pass1.value.length > 5 || pass1.value == ''">Password must be at least 6
-                characters.</span>
+                            <input type="password" [class.errorInput]=" pass1.value.length < 6 && pass1.value != '' "
+                                [class.correctInput]=" pass1.value.length > 5 && pass1.value != ''" class="form-control"
+                                placeholder="New password" name="pass1" id="pass1" ngModel #pass1="ngModel" />
+                            <span class="textError" [hidden]="pass1.value.length > 5 || pass1.value == ''">Password must
+                                be at least 6
+                                characters.</span>
                         </div>
                         <div class="input-group col-sm">
                             <input type="password" [class.correctInput]="pass1.value?.length > 5  &&
-                  pass2.value == pass1.value && pass2.value != ''
-                " [class.errorInput]="
-                  pass2.value != pass1.value && pass2.value != '' && pass1.value?.length < 6
-                " class="form-control" placeholder="Confirm new password" name="pass2" id="pass2" ngModel #pass2="ngModel" />
-                            <span class="textError" [hidden]="pass2.value == pass1.value || pass2.value == ''">Password doesn’t
-                match.</span>
-                            <span [hidden]="pass2.value?.length > 5 || pass2.value == ''" class="textError">Password must be at least 6
-                characters.</span>
+                                pass2.value == pass1.value && pass2.value != ''
+                                " [class.errorInput]="
+                                pass2.value != pass1.value && pass2.value != '' && pass1.value?.length < 6
+                                " class="form-control" placeholder="Confirm new password" name="pass2" id="pass2"
+                                ngModel #pass2="ngModel" />
+                            <span class="textError" [hidden]="pass2.value == pass1.value || pass2.value == ''">Password
+                                doesn’t
+                                match.</span>
+                            <span [hidden]="pass2.value?.length > 5 || pass2.value == ''" class="textError">Password
+                                must be at least 6
+                                characters.</span>
                         </div>
                     </div>
                     <button type="submit" class="blueBtn small mt-12 grayBtn" id="buttonPass" [class.disabled]="
-              cPass.value == '' ||
-              pass1.value == '' ||
-              pass2.value == '' ||
-              pass1.value != pass2.value ||
-              cPass.value != password ||
-              pass1.value?.length < 6
-            " [disabled]="
-              cPass.value == '' ||
-              pass1.value == '' ||
-              pass2.value == '' ||
-              pass1.value != pass2.value ||
-              cPass.value != password ||
-              pass1.value?.length < 6
-            ">
-            Update
-          </button>
-                    <!--div class="alert alert-success" [class.alertInitial]="alert == 1" role="alert" style="margin-top: 20px;">
-            Password updated correctly!
-          </div>
-          <div _ngcontent-c4="" class="alert alert-primary alertInitial" role="alert"> Your <strong _ngcontent-c4="">password</strong> has been updated.
-          </div-->
+                        cPass.value == '' ||
+                        pass1.value == '' ||
+                        pass2.value == '' ||
+                        pass1.value != pass2.value ||
+                        cPass.value != password ||
+                        pass1.value?.length < 6
+                        " [disabled]="
+                        cPass.value == '' ||
+                        pass1.value == '' ||
+                        pass2.value == '' ||
+                        pass1.value != pass2.value ||
+                        cPass.value != password ||
+                        pass1.value?.length < 6
+                        ">
+                        Update
+                    </button>
+
                 </form>
+
+
                 <hr class="hr mt-30" />
                 <div class="title2">
                     <p class="changeColorBlue">Profile picture</p>
                 </div>
                 <div class="fields flex">
-                    <div class="profile mini" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
-                    <input type="file" class="custom-file-input customFile" id="customProfile" accept=".jpg, .jpeg, .png, .svg" name="certificate" (change)="imageProfile($event)" />
+                    <div class="profile mini profileHire"
+                        [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}">
+                    </div>
+                    <input type="file" class="custom-file-input customFile" id="customProfile"
+                        accept=".jpg, .jpeg, .png, .svg" name="certificate" (change)="imageProfile($event)" />
                     <label for="customProfile" class="blueBtn medium ml-30 labelButton">Upload file</label>
                 </div>
             </div>
             <div class="col-sm-12 divcol normalText">
                 <div *ngIf="select == 2">
-                    <div class="overall">
-                        <div class="row pt-5 pl-3">
+                    <div class="overall pb-30" >
+                        <div class="row headerperfilhire">
+                            <div class="col-sm-6 title titlehire">Hirer User</div>
+                            <div class="col-sm-6 rightHire"> <span class="py-2"
+                                    [class]="emailVerified ? 'verifiedU':'notVerified'">
+                                    {{emailVerified == true ? 'Verified user':'User not verified'}}</span></div>
+                        </div>
+                        <div class="row mt-30">
                             <div class="col-sm-6">
-                                <p class="title3 py-2">Projects posted</p>
-                                {{ projects?.length }}
+                                <p class="title3 py-2">Location</p>
+                                <img _ngcontent-c5="" alt="" class="locationIconhi" src="../../../../../assets/iconos/Location_Icon.svg">
+                             
+                                {{ this.zipcode }}
                             </div>
+                          
+                        </div>
+                        <div class="row  mt-30">
                             <div class="col-sm-6">
                                 <p class="title3 py-2">Projects completed</p>
-                                {{ projectsCompleted?.length }}
+                                <p class="projectspnumber">{{ projectsCompleted?.length }}</p>
+                                
                             </div>
-                        </div>
-                        <div class="row py-5 pl-3">
                             <div class="col-sm-6">
-                                <p class="title3 py-2">Profile completed</p>
-                                {{ profileCompleted }}
+                                <p class="title3 py-2">Projects posted</p>
+                                <p class="projectspnumber">{{ projects?.length }}</p>
                             </div>
-                            <div class="col-sm-6 mt-2">
-                                <span class="py-2" [class]="emailVerified ? 'verifiedU':'notVerified'">
-                  <img [src]="emailVerified ? '../../../../../assets/iconos/verified.svg' : ''" />
-                  {{emailVerified == true ? 'Verified user':'User not verified'}}</span>
-                            </div>
+
                         </div>
                     </div>
                 </div>
