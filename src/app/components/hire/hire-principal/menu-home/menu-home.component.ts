@@ -51,7 +51,7 @@ export class MenuHomeComponent implements OnInit {
   user_hire: any = this.db.collection("users_hire").doc(this.user.uid)
   option = 5;
   customers2: any[] = [];
-  viewP:any = ''
+  viewP: any = ''
   profile: any = ''
   profileP: any = ''
   modal: number = 0
@@ -73,13 +73,13 @@ export class MenuHomeComponent implements OnInit {
   estrellitasreviws1 = 0;
   reviewdescripcion = "";
   contadorEliminarnegotiation = 0
-  zipcodeTex=true;
+  zipcodeTex = true;
   contNegotiation = 0
   uploadDoc1: number = 0
-  containervacioproyects=true;
+  containervacioproyects = true;
   filePicture: any[] = []
   imgprev: any = ''
-  imgprevValue=true;
+  imgprevValue = true;
   //mapa
   radius
   public latitude: number;
@@ -102,7 +102,7 @@ export class MenuHomeComponent implements OnInit {
 
   ngOnInit() {
 
-    this.viewP= {}
+    this.viewP = {}
     $(document).on("click", (e) => {
       var container = $(".btnPointer");
       var container2 = $(".list-group-scroll");
@@ -118,7 +118,7 @@ export class MenuHomeComponent implements OnInit {
       .subscribe((d) => {
         this.projects = []
         d.forEach((d) => {
-        
+
           this.projects.push(d.payload.doc.data())
         })
 
@@ -160,7 +160,7 @@ export class MenuHomeComponent implements OnInit {
 
 
   onKeymoneda(event) {
-    this.formatCurrency(event,1);
+    this.formatCurrency(event, 1);
   }
 
 
@@ -170,12 +170,12 @@ export class MenuHomeComponent implements OnInit {
   }
 
 
-  formatCurrency(input,num) {
+  formatCurrency(input, num) {
     // appends $ to value, validates decimal side
     // and puts cursor back in right position.
 
     // get input value
-   
+
     var input_val = input.target.value;
 
     // don't validate empty input
@@ -184,7 +184,7 @@ export class MenuHomeComponent implements OnInit {
     // original length
     var original_len = input_val.length;
 
- 
+
     // check for decimal
     if (input_val.indexOf(".") >= 0) {
 
@@ -204,7 +204,7 @@ export class MenuHomeComponent implements OnInit {
       right_side = this.formatNumber(right_side);
 
       // On blur make sure 2 numbers after decimal
-     
+
       // Limit decimal to only 2 digits
       right_side = right_side.substring(0, 2);
 
@@ -218,21 +218,20 @@ export class MenuHomeComponent implements OnInit {
       input_val = this.formatNumber(input_val);
       input_val = "$" + input_val;
 
-    
+
     }
 
     // send updated string to input
 
-    if(num==1){
-      this.viewP;
-      this.viewP.estimated=input_val;
+    if (num == 1) {
+      this.viewP.estimated = input_val;
     }
-   
- 
-    
+
+
+
   }
 
-//geolocalizacion
+  //geolocalizacion
 
   setCurrentPosition() {
     if ("geolocation" in navigator) {
@@ -247,7 +246,7 @@ export class MenuHomeComponent implements OnInit {
 
   //funcion autocompletado google maps
   mapa() {
-  
+
 
     setTimeout(() => {
       this.mapsAPILoader.load().then(() => {
@@ -257,7 +256,7 @@ export class MenuHomeComponent implements OnInit {
         };
         let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, options);
         autocomplete.addListener("place_changed", () => {
-      
+
           this.ngZone.run(() => {
             //get the place result
             let place: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -272,14 +271,14 @@ export class MenuHomeComponent implements OnInit {
             this.longitude = place.geometry.location.lng();
 
             this.zoom = 12;
-       
+
             place.address_components.map((m) => {
               if (m.types.join('').includes('postal_code')) {
-           
-       
-                this.viewP.googleZipCode=m.long_name;
-            
-                this.zipcodeTex=false;
+
+
+                this.viewP.googleZipCode = m.long_name;
+
+                this.zipcodeTex = false;
 
               }
             })
@@ -338,11 +337,11 @@ export class MenuHomeComponent implements OnInit {
     this.contador = 4000 - event.target.value.length
   }
   //cancel project
-  cancelEditProyect(){
+  cancelEditProyect() {
 
     this.HomeFormularioNw = 0
-    this.viewP=[]
-    this.containervacioproyects=true;
+    this.viewP = []
+    this.containervacioproyects = true;
   }
 
   //Agregar Proyecto BD
@@ -373,17 +372,17 @@ export class MenuHomeComponent implements OnInit {
 
     let locationApp = $("#search").val();
 
-   
+
     //Validacion campos 
 
 
 
-    if (f.status == "INVALID" || locationApp == "" || locationApp === undefined  || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
+    if (f.status == "INVALID" || locationApp == "" || locationApp === undefined || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
 
       if (locationApp == "" || f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
         || f.value.estimated === undefined || f.value.estimated == "" || this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
         || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
-    
+
         this.alerta = true;
       }
     } else if (f.value) {
@@ -392,12 +391,12 @@ export class MenuHomeComponent implements OnInit {
       var temp = false
 
       //Crear o editar funcion 
-      this.projectService.newProject(f, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude,this.filePicture)
+      this.projectService.newProject(f, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude, this.filePicture)
 
       this.modal = 1
       this.section = 1
       this.projects = []
-      this.viewP=[]
+      this.viewP = []
     }
     this.righttv = 'text-dashboard';
 
@@ -415,24 +414,29 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw++;
     this.section = 2;
     this.righttv = 'text-new-project';
-    this.containervacioproyects=false;
+    this.containervacioproyects = false;
+    this.selectskills = [];
+    this.visiblePeople = false
+    this.peoples = []
+    this.files = [{ 'name': 'Add material file', 'url': '' }];
+    this.imgprev = "";
   }
 
   //imagen del proyecto
 
-  preview(e:any){
-    this.filePicture=[];
+  preview(e: any) {
+    this.filePicture = [];
     let reader = new FileReader()
     reader.readAsDataURL(e.target.files[0])
     this.filePicture.push(e.target.files[0])
     reader.onload = () => {
       this.imgprev = reader.result
-      this.imgprevValue=false;
+      this.imgprevValue = false;
     }
     console.log(this.filePicture);
-    
+
   }
-  
+
   //Add files material
   addfiles() {
     console.log("1111");
@@ -443,33 +447,33 @@ export class MenuHomeComponent implements OnInit {
   //Modificar files material
   uploadDoc(e) {
     console.log("2222");
-   
+
 
     for (let i = 0; i <= 100; i++) {
       setTimeout(() => {
         this.uploadDoc1 = i
-        if(i==100){
+        if (i == 100) {
           this.uploadDoc1 = 0;
-         this.files[this.cust] = e.target.files[0];
+          this.files[this.cust] = e.target.files[0];
         }
       }, 1000);
     }
-  
- 
-   /*
-    var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
-    fileDoc.then((url) => {
-      url.ref.getDownloadURL()
-        .then((url) => {
-          this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
-          for (let i = 60; i <= 100; i++) {
-            setTimeout(() => {
-   
-              this.uploadDoc1 = i
-            }, 1000);
-          }
-        })
-    })*/
+
+
+    /*
+     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
+     fileDoc.then((url) => {
+       url.ref.getDownloadURL()
+         .then((url) => {
+           this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
+           for (let i = 60; i <= 100; i++) {
+             setTimeout(() => {
+    
+               this.uploadDoc1 = i
+             }, 1000);
+           }
+         })
+     })*/
   }
   //opcion segun filtro vista 
   selectOption(e) {
@@ -582,6 +586,13 @@ export class MenuHomeComponent implements OnInit {
     this.viewP = p;
     this.applyUsers = this.viewP.applyUsers;
     this.apply = this.viewP.applyUsers2;
+
+    if (this.viewP.ProjectImage) {
+      console.log("11111 imagen ");
+      this.imgprev = this.viewP.ProjectImage;
+      console.log(this.imgprev);
+
+    }
     if (this.viewP.negotiation) {
       this.teamSkills = this.viewP.negotiation
       this.teamSkills.forEach(element => {
@@ -591,7 +602,7 @@ export class MenuHomeComponent implements OnInit {
 
 
 
-  
+
     this.visiblePeople = true;
     if (this.apply) {
       for (var i = 0; i < this.apply.length; i++) {
@@ -618,7 +629,46 @@ export class MenuHomeComponent implements OnInit {
 
   }
 
+  //  Eliminar usuario pro de aplicantes 
+  eliminarPersonAplly_final_Apply(idEliminarPro, idProyecto) {
+    console.log(idEliminarPro+"--"+ idProyecto);
+    var i = this.applyUsers.indexOf(idEliminarPro.id)
+    if (i !== -1) {
+      this.applyUsers.splice(i, 1)
+      console.log("1");
+    }
 
+    var x = this.apply.indexOf(idEliminarPro.id)
+    if (x !== -1) {
+      this.apply.splice(x, 1)
+      console.log("2");
+    }
+
+    console.log(this.dataApply);
+  
+
+
+    this.dataApply.forEach((myObject, index) => {
+      if (myObject.id == idEliminarPro.id) {
+        this.dataApply.splice(index, 1);
+
+      }
+
+    });
+
+
+   this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProyecto).update({
+      applyUsers: this.applyUsers,
+      applyUsers2: this.apply,
+
+    }).then((res) => {
+
+
+    })
+    
+
+
+  }
   //Eliminar usuario Pro de aplly users 
   eliminarPersonAplly(idEliminarPro, idProyecto) {
 
@@ -646,17 +696,13 @@ export class MenuHomeComponent implements OnInit {
 
 
     }
-  
+
 
     this.db.collection("users_hire").doc(this.user.uid).collection("projects").doc(idProyecto).update({
       negotiation: this.teamSkills,
       applyUsers: this.applyUsers
 
     }).then((res) => {
-
-
-     
-
     })
 
 
@@ -766,7 +812,7 @@ export class MenuHomeComponent implements OnInit {
       this.reviewdescripcion = review.val()
       this.estrellitasreviws1 = valStarts.val()
 
-  
+
       if (this.profileP.reviews) {
         this.projectService.Buscador.emit(this.profileP.reviews)
       } else {

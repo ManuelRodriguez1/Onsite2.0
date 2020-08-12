@@ -440,143 +440,160 @@
 <div *ngIf="HomeFormularioNw == 2">
     <div class="container  containerMarginhr normalText">
         <div class="overall">
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 mt-4">
-                    <div class="title3">
+            <div class="row pt-48 ml-48 mr-48">
+                <div class="col-sm-6 ">
+                    <div class="title">
                         <p>Project: <span class="normalText">{{ viewP.projectname }}</span></p>
                     </div>
                 </div>
-                <div class="col-sm mx-4 mt-4">
+                <div class="col-sm-6 ">
                     <div class="vprofile text-right">
-                        <span (click)="goToEditProject(viewP.id)">Edit</span>
+                        <button class="blueBtn small " (click)="goToEditProject(viewP.id)">Edit</button>
                     </div>
                 </div>
             </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mt-2 mx-4">
+            <div class="row mt-20 ml-48 mr-48 ">
+                <div class="col-sm-6 ">
                     <span class="normalText ">Status: <span
                             class="c{{ viewP.statusname }}">{{ viewP.statusname }}</span></span>
+                            <br>
+                            <br>
+                            {{ viewP.description }}
+                </div>
+                <div class="col-sm-6 ">
+                  <img *ngIf="viewP.ProjectImage" class="imagProjectInitial" src="{{viewP.ProjectImage}}">
+                  
                 </div>
             </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm-8 my-4 mx-4">
-                    <span class="normalText">Project Description...</span><br> {{ viewP.description }}
-                </div>
-            </div>
+    
             <hr class="hr mt-30" />
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-3">
+            <div class="row mt-23  ml-48 mr-48">
+                <div class="col-sm ">
                     <div class="title3">
-                        <p class="title3">Skills:</p>
+                        <p class="title">Skills:</p>
                     </div>
                 </div>
             </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-2">
+            <div class="row mt-23 ml-48 mr-48">
+                <div class="col-sm ">
                     <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
                         <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-                            <img src="../../../../../assets/imgProIcon/{{so}}.png">
+                            <div class="div1"><img src="../../../../../assets/imgProIcon/{{so}}.png"></div>
                             <p>{{so}}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <hr class="hr mt-30" />
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-2">
-                    <div class="title3">
-                        <p class="title3">Location:</p>
+            <div class="row mt-23 ml-48 mr-48 mb-23 pb-23" >
+                <div class="col-sm-6">
+                    <div class="title">
+                        <p class="title">Details:</p>
                     </div>
+
+                    <p class="mt-2 normalText"><b>Location:</b></p>
+                    <p class="mt-2 normalText w-300">{{ viewP.location }}</p>
+
+                    <p class="mt-2 normalText"><b>Starting date:</b></p>
+                    <p class="mt-2 normalText">{{viewP.startdate | date: 'MM/dd/yy'}}</p>
+
+                    <p class="mt-2 normalText"><b>Ending date:</b></p>
+                    <p class="mt-2 normalText">{{viewP.enddate | date: 'MM/dd/yy'}}</p>
+
+                    <br>
+                </div>
+                <div class="col-sm-6">
+                    <br>
+                    <agm-map class="agmMap" [latitude]="viewP.latitude" [longitude]="viewP.longitude"></agm-map>
+                    <br>
+                    <br>
                 </div>
             </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-3">
-                    <img class="locationIconhi" src="../../../../../assets/iconos/Location_Icon.svg" alt="">
-                    <p class="normalText"> {{ viewP.location }}</p>
-                </div>
-            </div>
+         
         </div>
         <div class="overall mt-4 overflow-auto">
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 mt-4">
-                    <div class="title3">
+            <div class="row mt-51 ml-48 mt-4">
+                <div class="col-sm mt-4">
+                    <div class="title">
                         <p>Applicants:</p>
                     </div>
                 </div>
             </div>
             <hr class="hr mt-30" />
-            <div class="row py-2 ml-2 title-table">
+            <div class="row  ml-48 mr-48 title-table">
                 <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
                 <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3">
                 </div>
             </div>
-            <div class="aplicants">
-                <div *ngFor="let da of dataApply">
-                    <div class="row py-2">
-                        <div class="col-sm-3 ml-4 pt-3 ">
+
+                <div class="aplicants" *ngFor="let da of dataApply">
+                    <div class="row  ml-48 mr-48 " >
+                        <div class="col-sm-3  pt-3 ">
                             {{ da.name}}
                         </div>
-                        <div class="col-sm-6 pt-2">
+                        <div class="col-sm-6  pt-3 ">
                             <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
                                 <div class="skillsel onlySkill" *ngFor="let so of da.skills">
-                                    <img src="../../../../../assets/imgProIcon/{{so}}.png">
+                                    <div class="div1"><img src="../../../../../assets/imgProIcon/{{so}}.png"></div>
                                     <p> {{so}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm mx-4 pt-3">
-                            <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(da.id)"></div>
-
-                            <span class="vprofile profileHire2" (click)="goToProfile(da)">
-
-                                <div class="profileHirePro"></div>
-                            </span>
+                        <div class="col-sm  pt-3 ">
+                            <div class="menuPrincipalApplicants">
+                                <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(da.id)"></div>
+                                <span class="vprofile profileHire2" (click)="goToProfile(da)">
+    
+                                    <div class="profileHirePro"></div>
+                                </span>
+                                <div class="pr-3 opChat errorProfilehire" (click)="eliminarPersonAplly_final_Apply(da,viewP.id)"></div>
+                            </div>
+                           
                         </div>
                     </div>
-                    <hr class="hr m-0" />
+                    <hr class="hr" />
                 </div>
-            </div>
         </div>
         <div class="overall mt-4 overflow-auto" *ngFor="let teams of viewP.skills">
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 mt-4">
-                    <div class="title3">
+            <div class="row mt-51  ml-48 mr-48">
+                <div class="col-sm mt-4">
+                    <div class="title">
                         <p>{{teams}} team</p>
                     </div>
                 </div>
             </div>
             <hr class="hr mt-30" />
-            <div class="row py-2 ml-2 title-table">
+            <div class="row  ml-48 mr-48 title-table">
                 <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
                 <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3">
                 </div>
             </div>
 
-            <div class="row mt-51 ml-48 py-2" *ngFor="let neg of negotiation">
+            <div class="row mt-51  ml-48 mr-48 py-2" *ngFor="let neg of negotiation">
 
                 <ng-container *ngIf="neg.skillNegotiation == teams">
 
-                    <div class="col-sm-3 ml-4 mt-2">
+                    <div class="col-sm-3 mt-2">
                         {{ neg.name}}
                     </div>
                     <div class="col-sm-6">
                         <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
                             <div class="skillsel onlySkill" *ngFor="let da of  neg.skills">
-                                <img src="../../../../../assets/imgProIcon/{{da}}.png">
+                                <div class="div1"><img src="../../../../../assets/imgProIcon/{{da}}.png"></div>
                                 <p>{{da}}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm mx-4 pt-3">
-                        <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(neg.id)"></div>
-
-                        <span class="vprofile profileHire2" (click)="goToProfile(neg)">
-
-                            <div class="profileHirePro"></div>
-                        </span>
-
-                        <div class="pr-3 opChat errorProfilehire" (click)="eliminarPersonAplly(neg,viewP.id)"></div>
+                    <div class="col-sm pt-3">
+                        <div class="menuPrincipalApplicants">
+                            <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(neg.id)"></div>
+                            <span class="vprofile profileHire2" (click)="goToProfile(neg)">
+                                <div class="profileHirePro"></div>
+                            </span>
+                            <div class="pr-3 opChat errorProfilehire" (click)="eliminarPersonAplly(neg,viewP.id)"></div>
+                        </div>
+                      
                     </div>
 
                     <hr class="hr my-1" />
