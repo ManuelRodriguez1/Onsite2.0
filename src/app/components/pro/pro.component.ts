@@ -21,20 +21,20 @@ export class ProComponent implements OnInit {
   page = 0;
   selectskills: any[] = [];
   //selectskills2 = null;
-  title = ['Enter your information:', 'Select skills'];
-  text = ['About You', 'Your Skills', 'Your Tools'];
+  text = ['About You', 'About You', 'Your Skills', 'Your Tools', '', 'Verification'];
   skills = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation'];
   skills2: any = []
-  customers = ['Add a file'];
+  customers = [];
   uploadDocu: number = 0
   customers2: any[] = [];
   notSame: boolean = false
   file: any[] = []
-  checkbox: boolean = false
+  checkboxTerms: boolean = false
   verifyEmail: boolean = false
   emailText: string[] = []
   error: string = ''
   correctEmail: any = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/)
+  photo: any = ''
   // zipCodeCity: any = zipcode
   zipcodeSelect: string = 'Searching...'
   // zipcodeSelectActive: boolean = false
@@ -44,7 +44,7 @@ export class ProComponent implements OnInit {
   tools: any[] = []
   //Icons to register
   icon1: any = ''
-  icon2: string = '' 
+  icon2: any = ''
   imgprev: any = ''
 
   constructor(private servicePro: ProService, private map: MapsAPILoader, private sanitizer: DomSanitizer) { }
@@ -80,7 +80,8 @@ export class ProComponent implements OnInit {
     })
   }
 
-  preview(e:any){
+  preview(e: any) {
+    this.photo = e
     let reader = new FileReader()
     reader.readAsDataURL(e.target.files[0])
     reader.onload = () => {
@@ -97,28 +98,26 @@ export class ProComponent implements OnInit {
     this.select = this.page;
   }
   selectskill(e) {
-    // this.up = !this.up;
-
-    var i = this.selectskills.indexOf(e);
+      var i = this.selectskills.indexOf(e);
     var checkbox = $("input[title='input" + e + "']");
     checkbox.prop("checked", !checkbox.prop("checked"));
 
     if ($(checkbox).is(':checked')) {
-      $("#divSkill"+e).addClass("containerSkillNewSelect");
+      $("#divSkill" + e).addClass("containerSkillNewSelect");
       var i = this.selectskills.indexOf(e);
       if (i == -1) {
         this.selectskills.push(e);
       }
     } else {
-      $("#divSkill"+e).removeClass("containerSkillNewSelect");
+      $("#divSkill" + e).removeClass("containerSkillNewSelect");
       var i = this.selectskills.indexOf(e)
       i !== -1 && this.selectskills.splice(i, 1)
     }
 
   }
-  toolsAdd(e: any, tool: string){
+  toolsAdd(e: any, tool: string) {
     var temp: any = ''
-    if(e.code == 'Enter' || e.code == 'Comma'){
+    if (e.code == 'Enter' || e.code == 'Comma') {
       temp = e.code == 'Comma' ? tool.substr(0, tool.length - 1) : tool
       this.tools.push(temp)
       $('#toolsIn').val('')
@@ -128,43 +127,53 @@ export class ProComponent implements OnInit {
     var i = this.selectskills.indexOf(e)
     i !== -1 && this.selectskills.splice(i, 1)
   }
-  closeTool(e){
+  closeTool(e) {
     var i = this.tools.indexOf(e)
     i !== -1 && this.tools.splice(i, 1)
   }
-  addcustomer() {
-    this.customers.push('Add a file');
-    this.cust = this.cust + 1;
-  }
   test(f: NgForm) {
-    this.servicePro.registerPro(f, this.file, this.customers2, this.selectskills, this.tools)
+    this.servicePro.registerPro(f, this.file, this.customers2, this.selectskills, this.tools, this.photo)
+    this.page = 5
+    this.select = 5
   }
-  uploadDoc(e) {   
-    var i = this.cust
-    this.file.push(e.target.files[0])
-    this.customers[i] = e.target.files[0].name
-    this.progressBar = true
-    for (let i = 0; i <= 100; i++) {
-      setTimeout(() => {
-        this.progress++
-      }, 100);
+  uploadDoc(e: any, data: number) {  
+    if(data == 2){
+      this.file.push(e)
+      this.customers.push({'name':e.name, 'size':e.size}) 
+    } else{
+      for(let i = 0; i < e.target.files.length; i++){
+        this.file.push(e.target.files[i])
+        this.customers.push({'name': e.target.files[i].name, 'size': e.target.files[i].size})
+      }
     }
-    setTimeout(() => {
-      this.progressBar = false
-      this.progress = 0
-    }, 1000)
   }
-  
+  dropCert(e: any) {
+    e.preventDefault()
+    if (e.dataTransfer.items) {
+      for (let i = 0; i < e.dataTransfer.items.length; i++) {
+        if (e.dataTransfer.items[i].kind === 'file') {
+          var file = e.dataTransfer.items[i].getAsFile()
+          this.uploadDoc(file, 2)
+        }
+      }
+    }
+  }
+  dragoverCert(e: any) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+  dragleaveCert(e: any) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
   deleteCert(e: any) {
     var i = this.customers.indexOf(e);
     if (i !== -1) {
       this.customers.splice(i, 1)
       this.file.splice(i, 1)
-      this.cust = this.cust - 1
     }
-    if (this.customers.length == 0) {
-      this.customers = ['Add a file']
-      this.cust = 0
-    }
+  }
+  resend(){
+    this.servicePro.firebase.auth().currentUser.sendEmailVerification()
   }
 }

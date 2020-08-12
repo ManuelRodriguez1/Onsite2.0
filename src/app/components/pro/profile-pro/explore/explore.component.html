@@ -201,8 +201,8 @@
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <div class="map mt-47">
-                            <agm-map [latitude]="p.latitude" [longitude]="p.longitude"></agm-map>
+                        <div class="map mt-47 projectImage">
+                            <img *ngIf="p.ProjectImage && p.ProjectImage != ''" [src]="p.ProjectImage" alt="" width="100%" height="100%">
                         </div>
                     </div>
                 </div>
@@ -272,21 +272,38 @@
                 </div>
             </div>
         </div>
-        <hr class="hr mt-38">
-        <div class="row fields">
+        <hr class="hr mt-38" *ngIf="infoProject.briefmaterial && infoProject.briefmaterial.length > 0">
+        <div class="row fields" *ngIf="infoProject.briefmaterial && infoProject.briefmaterial.length > 0">
             <div class="col-sm ml-48">
                 <div class="title2">
-                    <p>Location</p>
+                    <p>Brief material</p>
                 </div>
-                <p class="mt-17"><span class="locationIcon fl mr-8 mt--3"></span>{{infoProject.location}}</p>
+                <div class="mt-20" style="overflow: hidden;">
+                    <div class="materialBrief">
+                        <div class="brief" *ngFor="let bf of infoProject.briefmaterial">
+                            <a [href]="bf.url" target="_blank">
+                                <div class="fileIcon"></div>
+                            </a>
+                            <p>{{bf.name}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <hr class="hr mt-33">
+        <hr class="hr mt-38">
+        <div class="title2 ml-48">
+            <p>Details</p>
+        </div>
         <div class="row fields">
-            <div class="col-sm ml-48">
-                <div class="title2">
-                    <p>Location Map</p>
-                </div>
+            <div class="col-sm ml-48 colmLeft">
+                <p><strong>Location:</strong></p>
+                <p class="wLocation">{{ infoProject.location }}</p>
+                <p><strong>Starting date:</strong></p>
+                <p>{{ infoProject.startdate | date : 'MM/dd/y' }}</p>
+                <p><strong>Ending date:</strong></p>
+                <p>{{ infoProject.enddate | date: 'MM/dd/y' }}</p>
+            </div>
+            <div class="col-sm">
                 <div class="mapBig mt-20 mb-57">
                     <agm-map [latitude]="infoProject.latitude" [longitude]="infoProject.longitude"></agm-map>
                 </div>

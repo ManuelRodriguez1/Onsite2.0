@@ -56,7 +56,9 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   constructor(
     private prouser: ProuserService,
     private db: AngularFirestore
-  ) { }
+  ) { 
+    
+  }
   //Show data of User
   ngOnInit() {
     //boton slkill se cierre

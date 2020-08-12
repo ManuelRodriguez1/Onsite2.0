@@ -81,14 +81,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
                         if (k.type === 'modified') {
 
                         } else {
-                          // var temp = k.doc.data().skills.sort()
-                          // var temp2: boolean = false
-                          // this.skill.map((m) => {
-                          //   if (temp.join(' ').trim().includes(m)) {
-                          //     temp2 = true
-                          //   }
-                          // })
-                          // if (temp2) {
+                         // if (temp2) {
                           this.map.load().then(() => {
                             new google.maps.DistanceMatrixService().getDistanceMatrix({ 'origins': [this.myzip], 'destinations': [k.doc.data().googleZipCode], 'travelMode': google.maps.TravelMode.DRIVING }, (results: any) => {
                               if (results.rows[0].elements[0].distance !== undefined) {
