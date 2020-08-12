@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="cont">
-                <div class="profile" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
+                <div class="profile profilePro" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP && 'cover'}"></div>
                 <div class="textw">
                     <p>{{profile.name}} {{profile.lastname}}</p>
                 </div>
@@ -83,7 +83,7 @@
                     <p class="changeColorBlue">Profile picture</p>
                 </div>
                 <div class="fields flex">
-                    <div class="profile mini" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'initial'}"></div>
+                    <div class="profile mini profilePro" [ngStyle]="{'background-image': imageP != '' && 'url('+imageP+')', 'background-size': imageP && 'cover'}"></div>
                     <input type="file" class="custom-file-input customFile" id="customProfile" accept=".jpg, .jpeg, .png, .svg" name="certificate" (change)="imageProfile($event)">
                     <label for="customProfile" class="blueBtn medium ml-30 labelButton">Upload file</label>
                 </div>
@@ -112,11 +112,11 @@
                 <div class="skill mt-21">
                     <div class="row btnPointer">
                         <div class="col-sm input-group">
-                            <div class="form-control"  (click)="up = !up"  [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
+                            <div class="form-control" (click)="up = !up" [ngStyle]="{'height': selectskills.length == 0 ? '' : 'auto'}">
                                 <p style="line-height: 31px;">Select Skills</p>
-                                <div class="skillselct"[hidden]="selectskills == null">
+                                <div class="skillselct" [hidden]="selectskills == null">
                                     <div class="skillsel" *ngFor="let s of selectskills">
-                                       <div class="div1"><img src="../../../../assets/imgProIcon/{{s}}.png"></div> 
+                                        <div class="div1"><img src="../../../../assets/imgProIcon/{{s}}.png"></div>
                                         <p>{{s}}</p>
                                         <div class="close" (click)='close(s)'></div>
                                     </div>
@@ -132,7 +132,7 @@
                                 <p>{{s}}</p>
                             </div>
                         </div>
-                        <button class="done"   (click)="up = !up">Done</button>
+                        <button class="done" (click)="up = !up">Done</button>
                     </div>
                     <button type="button" class="blueBtn medium mt-12" (click)="updateSkills()">Update skills</button>
                 </div>
@@ -176,6 +176,10 @@
                 </div>
             </div>
             <div *ngIf="select == 1" class="normalText">
+                <div class="noVerify">
+                    <p>Pro User</p>
+                    <p [class.verifyUser]="prouser.user.emailVerified"><span *ngIf="!prouser.user.emailVerified">User not verified</span><span *ngIf="prouser.user.emailVerified">Verified user</span></p>
+                </div>
                 <div class="row mt-51 ml-48 mr-48">
                     <div class="col-sm">
                         <div class="title3">

@@ -1,55 +1,55 @@
 <form #formPro="ngForm" (ngSubmit)="test(formPro)" action="">
     <div class="containerMin">
         <section [hidden]='page > 0' class="sectionCont">
-            <div class="row">
-                <div class="col-sm">
-                    <svg class="icon1" [innerHTML]="icon1" viewBox="0 0 871 608" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
-                </div>
-                <div class="col-sm">
-                    <div class="title container">
-                        <p>{{title[select]}}</p>
-                        <span class="normalText" *ngIf="select==1">Click on the skills that suit your profile and what you do.</span>
+            <div class="containerPrincipal">
+                <div class="row">
+                    <div class="col-sm">
+                        <svg class="icon1" [innerHTML]="icon1" viewBox="0 0 616 608" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
                     </div>
-                    <div class="fields container">
-                        <div class="row">
-                            <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
-                            <input type="text" class="form-control mt-12" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
-                            <input type="email" class="form-control mt-12" [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')" [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail" placeholder="E-mail" name="email"
-                                #email="ngModel" ngModel>
-                            <span [hidden]="!verifyEmail" class="textError">Email already exists!</span>
-                            <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must
+                    <div class="col-sm">
+                        <div class="title container">
+                            <p>Enter your information:</p>
+                        </div>
+                        <div class="fields container">
+                            <div class="row">
+                                <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" placeholder="First Name">
+                                <input type="text" class="form-control mt-12" placeholder="Last Name" name="lastname" ngModel #lastname="ngModel">
+                                <input type="email" class="form-control mt-12" [class.errorInput]="verifyEmail || (!correctEmail.exec(email.value) && email.value != '')" [class.correctInput]="correctEmail.exec(email.value) && email.value != '' && !verifyEmail" placeholder="E-mail" name="email"
+                                    #email="ngModel" ngModel>
+                                <span [hidden]="!verifyEmail" class="textError">Email already exists!</span>
+                                <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must
                             be a valid
                             email address</span>
-                            <input type="text" class="form-control mt-12" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
+                                <input type="text" class="form-control mt-12" placeholder="Phone Number" name="phone" #phone="ngModel" ngModel>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info container" style="padding: 0;">
-                        <p>Enter your password</p>
-                        <p>Your username will be your e-mail address.</p>
-                    </div>
-                    <div class="fields2 container">
-                        <div class="row">
-                            <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''" [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user" #user="ngModel" ngModel>
-                            <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be
+                        <div class="info container" style="padding: 0;">
+                            <p>Enter your password</p>
+                            <p>Your username will be your e-mail address.</p>
+                        </div>
+                        <div class="fields2 container">
+                            <div class="row">
+                                <input type="password" class="form-control" [class.errorInput]="user.value?.length < 6 && user.value != ''" [class.correctInput]="user.value?.length >= 6 && user.value != ''" placeholder="Password" name="user" #user="ngModel" ngModel>
+                                <span [hidden]="user.value?.length > 5 || user.value == ''" class="textError">Password must be
                             at least 6
                             characters.</span>
-                            <input type="password" class="form-control mt-12" [class.errorInput]="user.value != password.value && password.value != ''" [class.correctInput]="user.value == password.value && password.value != ''" placeholder="Password confirmation" name="password"
-                                #password="ngModel" ngModel>
-                            <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password
+                                <input type="password" class="form-control mt-12" [class.errorInput]="user.value != password.value && password.value != ''" [class.correctInput]="user.value == password.value && password.value != ''" placeholder="Password confirmation" name="password"
+                                    #password="ngModel" ngModel>
+                                <span [hidden]="user.value == password.value || password.value == ''" class="textError">Password
                             doesn’t
                             match.</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="title2 container" style="padding: 0;">
-                        <p>Where are you located?</p>
-                    </div>
-                    <div class="field3 container">
-                        <div class="row">
-                            <input type="text" class="form-control" placeholder="Enter zipcode." [class.errorInput]="zipcode.value.length > 5" [class.correctInput]="zipcode.value.length < 6 && zipcode.value.length > 1" name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
-                            <span [hidden]="zipcode.value.length < 6" class="textError">
+                        <div class="title2 container" style="padding: 0;">
+                            <p>Where are you located?</p>
+                        </div>
+                        <div class="field3 container">
+                            <div class="row">
+                                <input type="text" class="form-control" placeholder="Enter zipcode." [class.errorInput]="zipcode.value.length > 5" [class.correctInput]="zipcode.value.length < 6 && zipcode.value.length > 1" name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
+                                <span [hidden]="zipcode.value.length < 6" class="textError absBottom">
                                 Please enter a valid ZIP Code.
                             </span>
-                            <!-- <ul class="list-group" *ngIf="!zipcodeSelectActive">
+                                <!-- <ul class="list-group" *ngIf="!zipcodeSelectActive">
                             <ng-container *ngFor="let z of zipCodeCity | searchZip: zipcode.value">
                                 <li class="list-group-item d-flex justify-content-between align-items-center" (click)="selecZip(z.city)">
                                     {{z.city}}
@@ -57,6 +57,12 @@
                                 </li>
                             </ng-container>
                         </ul> -->
+                            </div>
+                            <button type="button" class="btn btn-outline-warning next mt-42" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
+                            || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value"
+                                [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value">
+                            Next
+                        </button>
                         </div>
                     </div>
                 </div>
@@ -74,6 +80,10 @@
         </section>
 
         <section [hidden]='page < 2 || page > 2'>
+            <div class="title container">
+                <p>Select skills</p>
+                <span class="normalText">Click on the skills that suit your profile and what you do.</span>
+            </div>
             <div class="container skill">
                 <!--div class="list-group" [hidden]='up == false'-->
                 <div class="row containerskillNewPrincipal">
@@ -95,81 +105,121 @@
             </div>
         </section>
 
-        <section [hidden]='page < 3 || page > 3'>
+        <section [hidden]='page < 3 || page > 3' class="toolsContainer">
             <div class="container skill" id="clickSkills">
                 <div class="row">
-                    <div class="info container">
-                        <p>Do you own any tools?</p>
-                        <span class="normalText">Type the name of the tools you own and hit enter or add a comma after each name to add it as a list item.</span>
+                    <div class="col-sm">
+                        <div class="icon2"></div>
                     </div>
-                    <div class="col-sm input-group" style="margin-top: 20px;">
-                        <input type="text" class="form-control" placeholder="E.g. Screw gun, Hammer, Wrench set, nail gun..." (keyup)="toolsAdd($event, toolsIn.value)" id="toolsIn" name="toolsIn" #toolsIn="ngModel" ngModel>
-                    </div>
-                    <div class="tools" [hidden]="tools.length == 0">
-                        <div class="tool" *ngFor="let t of tools">
-                            <p>{{t}}</p>
-                            <div class="close" (click)='closeTool(t)'></div>
+                    <div class="col-sm">
+                        <div class="info container">
+                            <p>Do you own any tools?</p>
+                            <span class="normalText">Type the name of the tools you own and hit enter or add a comma after each name to add it as a list item.</span>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <input type="text" class="form-control" placeholder="E.g. Screw gun, Hammer, Wrench set, nail gun..." (keyup)="toolsAdd($event, toolsIn.value)" id="toolsIn" name="toolsIn" #toolsIn="ngModel" ngModel>
+                        </div>
+                        <div class="tools" [hidden]="tools.length == 0">
+                            <div class="tool" *ngFor="let t of tools">
+                                <p>{{t}}</p>
+                                <div class="close" (click)='closeTool(t)'></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="btn btn-outline-warning back" (click)='back()'>
+                    <p>Back</p>
+                </div>
+                <button type="button" class="btn btn-outline-warning next" [class.blueBtn]="tools.length == 0" (click)='next()' *ngIf='page == 3'>
+                    <span *ngIf="tools.length == 0"> Skip </span> <span *ngIf="tools.length > 0">Next</span>
+                 </button>
             </div>
         </section>
 
-        <section [hidden]='page < 3 || page > 3' class="container">
-            <div class="texts2">
-                <div class="title2">
-                    <p class="changeColorBlue">Certificates</p>
+        <section [hidden]='page < 4 || page > 4' class="container certContainer">
+            <div class="containercert">
+                <div class="texts2">
+                    <div class="title2">
+                        <p class="changeColorBlue">Certificates</p>
+                    </div>
+                    <p class="changeColor">In this last step you can add your certificate(s) PDF file(s) to support your <br>skill(s). This step is not mandatory and you can add them later in your account settings. </p>
                 </div>
-                <p class="changeColor">In this last step you can add your certificate(s) PDF file(s) to support your skill(s). This step is not mandatory and you can add them later in your account settings. </p>
+                <div class="shadowDiv">
+                    <div class="otherTittle">
+                        <p>Upload your files (optional)</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="dropzone" (drop)="dropCert($event)" (dragover)="dragoverCert($event)" (dragleave)="dragleaveCert($event)">
+                                <p>Drag and drop files here</p>
+                                <p>OR</p>
+                                <input type="file" multiple class="custom-file-input customFile" id="customFile" (change)="uploadDoc($event, 1)" accept=".pdf, .jpg, .jpeg, .png">
+                                <label type="button" class="blueBtn small" for="customFile">Add files</label>
+                                <p>Supported Files:</p>
+                                <p>JPG, PNG, PDF</p>
+                                <p>Maximum file size: 25 MB</p>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="iconFiles" *ngIf="customers.length == 0"></div>
+                            <div class="filesCert" *ngIf="customers.length > 0">
+                                <div class="infoText">
+                                    <p>UPLOADED:</p>
+                                    <p>File(s): {{customers.length}}</p>
+                                </div>
+                                <div class="containerFiles">
+                                    <div class="filesUploaded" *ngFor="let f of customers">
+                                        <div class="fileIcon"></div>
+                                        <p>{{f.name}} <br><span>{{(f.size / 1000000) | number}} mb</span></p>
+                                        <div class="deleteCert" title="Delete certificate" (click)="deleteCert(f)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label class="checkbox">
+                    <input type="checkbox" id="check1" class="checkbox__input" (change)="this.checkboxTerms = !this.checkboxTerms" />
+                    <span class="checkbox__checkmark"></span>
+                    <span class="form-check-label">
+                        <!-- <p>I accept and agree to the <a href="#">Terms of Use.</a></p> -->
+                        <p>I accept and agree to the Terms of Use.</p>
+                    </span>
+                </label>
+
+
             </div>
 
-            <div class="row">
-                <div class="col-sm input-group">
-                    <div class="input-group custom-file" *ngFor="let c of customers;">
-                        <input type="file" class="custom-file-input customFile" id="customFile" accept=".pdf, .jpg, .jpeg" name="certificate" #certificate="ngModel" ngModel (change)="uploadDoc($event)">
-                        <label for="customFile" class="custom-file-label" [ngStyle]="{'border': c != 'Add a file' ? 0 : ''}">
-                            <div class="afterFile" *ngIf="c == 'Add a file'">{{c}}</div>
-                        </label>
-                        <div class="fileIcon certIcon" *ngIf="c != 'Add a file'"></div>
-                        <div class="deleteCert" title="Delete certificate" *ngIf="c != 'Add a file'" (click)="deleteCert(c)"></div>
-                    </div>
-                    <div class="input-group-prepend iconAdd" (click)="addcustomer()" *ngIf="customers[customers.length - 1] != 'Add a file'">
-                        <div class="icon_img btnround"></div>
-                    </div>
-                </div>
-                <div class="progress" style="width: 97%; margin: 0 auto" *ngIf="progressBar">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-
-
-            <label class="checkbox" (click)="this.checkbox = !this.checkbox">
-                <input type="checkbox" id="check1" class="checkbox__input" />
-                <span class="checkbox__checkmark"></span>
-                <span class="form-check-label">
-                    <!--p>I accept and agree to the <a href="#">Terms of Use.</a></p-->
-                    <p>I accept and agree to the Terms of Use.</p>
-                </span>
-            </label>
 
 
         </section>
-        <div class="buttons container">
-            <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 4' (click)='back()'>
+        <div class="buttons container" *ngIf="page < 5">
+            <div class="btn btn-outline-warning back" *ngIf='page > 0 && page < 3 || page == 4' (click)='back()'>
                 <p>Back</p>
             </div>
-            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
-    || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value" [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value">
+            <button type="button" class="btn btn-outline-warning next" [class.blueBtn]="imgprev == ''" (click)="next()" *ngIf="page == 1">
+                <span *ngIf="imgprev == ''">Skip</span><span *ngIf="imgprev != ''">Next</span>
+            </button>
+            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page == 2' [disabled]="selectskills.length == 0" [class.grayBtn]="selectskills.length == 0">
                 Next
             </button>
-            <button type="button" class="btn btn-outline-warning next" (click)='next()' *ngIf='page > 0 && page < 2' [disabled]="selectskills.length == 0" [class.grayBtn]="selectskills.length == 0">
-                Next
-            </button>
-            <button type="button" class="btn btn-outline-warning next" [class.blueBtn]="tools.length == 0" (click)='next()' *ngIf='page > 1 && page < 3'>
-               <span *ngIf="tools.length == 0"> Skip </span> <span *ngIf="tools.length > 0">Next</span>
-            </button>
-            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 3" [disabled]="this.checkbox == false" [class.grayBtn]="this.checkbox == false">Finish</button>
+            <button type="submit" class="btn btn-outline-warning next" *ngIf="page == 4" [disabled]="this.checkboxTerms == false" [class.grayBtn]="this.checkboxTerms == false">Finish</button>
         </div>
+
+        <section *ngIf="page == 5" class="verifyEmailSec">
+            <div class="title2 container">
+                <p>Verify your email</p>
+            </div>
+            <p class="mt-20">We have sent you an email to verify your email address, please check your inbox. <br>If you haven't received the email, resend to verify.</p>
+            <div class="emailVerifySend"></div>
+            <div class="container">
+                <button type="button" class="btn btn-outline-warning next" (click)="resend()">Resend</button>
+            </div>
+            <a href="/ProfilePro">
+                <button type="button" class="btn next changeButton">Change email</button>
+            </a>
+        </section>
+
     </div>
 </form>
 <div class="textv">
