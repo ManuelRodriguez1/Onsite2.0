@@ -16,16 +16,16 @@ import * as crypto from "crypto-js";
 })
 export class EmailVerificationComponent implements OnInit {
 
-  text: any[] = ["Verification", "Email Change"];
+  text: any[] = ["Verification", "Verification"];
   error: any[];
   error1;
-  estadoEmail;
   messageerror = "";
-
+  estadoEmail=0
 
   constructor(private router: Router,public aff: AngularFireAuth,private af: AngularFirestore) { }
 
   ngOnInit() {
+    console.log(firebase.auth().currentUser);
 
     // Get the action to complete.
     var mode = this.getParameterByName('mode');
@@ -84,7 +84,9 @@ export class EmailVerificationComponent implements OnInit {
 console.log(error);
     });
   }
-
+  resend(){
+    firebase.auth().currentUser.sendEmailVerification()
+  }
 
 
 

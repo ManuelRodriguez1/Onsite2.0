@@ -60,7 +60,7 @@
                             <div class="row margin0 divcol py-3 px-5 " [class.projects]="option == 1">
                                 <div class="col-sm-12 divcol normalText">
                                     <ng-container *ngFor="let p of projects | filter: option">
-                                        <div class="row py-4 px-4 pb-3"
+                                        <div class="row  px-4"
                                             *ngIf="(p.status !=4 && option!=4) || (p.status==4 && option==4)">
                                             <div class="col-sm-4">
                                                 <!-- <li class="list-name"> -->
@@ -178,15 +178,15 @@
                         sizes and devices.
                     </p>
                 </div>
-                
+             
                 <div class="row">
                     <div class="col-sm input-group m-0">
                         <div class="input-group custom-file" >
                             <input type="file" class="custom-file-input customFile" id="uploadPhoto"
                                 accept=".jpg, .jpeg, .png" (change)="preview($event)" name="uploadPhoto"
                                  >
-                            <label for="uploadPhoto" class="custom-file-label imagenproyecto" id="prevImg"
-                            [ngStyle]="{'background-image' : 'url('+imgprev+')'}">
+                            <label for="uploadPhoto" class="custom-file-label imagenproyecto" id="prevImg">
+                            <img *ngIf="imgprev !='' " src="{{imgprev}}">
                                 <div class="afterFile" *ngIf="imgprevValue">Add a file</div>
                             </label>
                         </div>

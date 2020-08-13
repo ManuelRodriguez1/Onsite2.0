@@ -1729,6 +1729,20 @@ h4,
     background-size: contain;
 }
 
+.emailVerifySend2 {
+    width: 441px;
+    height: 370px;
+    background: url('./assets/iconos/emailSendVerify2.png') no-repeat left center;
+    background-size: contain;
+    margin: 0 auto;
+}
+.emailVerifySend3{
+    width: 736px;
+    height: 503px;
+    background: url('./assets/iconos/emailSendVerify3.png') no-repeat left center;
+    background-size: contain;
+    margin: 0 auto;
+}
 
 /* Paginacion */
 
@@ -1925,6 +1939,35 @@ h4,
     color: #9D9D9D;
     font-size: 16px;
   }
+
+
+.verifyEmailSec {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.verifyEmailSec .title2 {
+    margin-top: 178px;
+}
+
+.emailVerifySend {
+    margin: 0 auto;
+    margin-top: 35px;
+}
+
+.verifyEmailSec .next {
+    position: relative;
+    right: auto;
+    margin-top: 39px;
+}
+
+.verifyEmailSec .changeButton {
+    margin-top: 12px;
+}
+.mt-20 {
+    margin-top: 20px;
+    line-height: 160%;
+}
 
 @media screen and (max-width: 1320px) {
     .container1280Final {

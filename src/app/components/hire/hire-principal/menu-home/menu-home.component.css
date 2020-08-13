@@ -1224,6 +1224,12 @@ a {
 .imagenproyecto{
     background-size: cover;
     border-radius: 0;
+    padding: 0;
+}
+.imagenproyecto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .btnprocessImagen{
     margin-top: 60px;

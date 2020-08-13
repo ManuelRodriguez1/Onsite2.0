@@ -35,6 +35,7 @@ export class MenuHomeComponent implements OnInit {
   select = 0;
   HomeFormularioNw = 0;
   files = [{ 'name': 'Add material file', 'url': '' }];
+  brieftest= [{ 'name': 'Add material file', 'url': '' }];
   filesPicture = [{ 'name': 'Add a file', 'url': '' }];
   file: any[] = [];
   countC: number = 0
@@ -345,6 +346,7 @@ export class MenuHomeComponent implements OnInit {
     this.HomeFormularioNw = 0
     this.viewP = []
     this.containervacioproyects = true;
+    this.imgprevValue=true;
   }
 
   //Agregar Proyecto BD
@@ -393,6 +395,8 @@ export class MenuHomeComponent implements OnInit {
 
       var temp = false
 console.log(this.files);
+console.log(this.filePicture);
+console.log(this.brieftest);
       //Crear o editar funcion 
       this.projectService.newProject(f, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude, this.filePicture)
 
@@ -400,6 +404,7 @@ console.log(this.files);
       this.section = 1
       this.projects = []
       this.viewP = []
+      this.imgprevValue = true;
     }
     this.righttv = 'text-dashboard';
 
@@ -458,26 +463,20 @@ console.log(this.files);
         this.uploadDoc1 = i
         if (i == 100) {
           this.uploadDoc1 = 0;
-          this.files[this.cust] = e.target.files[0];
+   
+
+                var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
+                fileDoc.then((url) => {
+                  url.ref.getDownloadURL()
+                    .then((url) => {
+                      this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
+                    })
+                })
         }
       }, 1000);
     }
 
 
-    /*
-     var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + "/" + e.target.files[0].name).put(e.target.files[0])
-     fileDoc.then((url) => {
-       url.ref.getDownloadURL()
-         .then((url) => {
-           this.files[this.cust] = { "name": e.target.files[0].name, "url": url }
-           for (let i = 60; i <= 100; i++) {
-             setTimeout(() => {
-    
-               this.uploadDoc1 = i
-             }, 1000);
-           }
-         })
-     })*/
   }
   //opcion segun filtro vista 
   selectOption(e) {
@@ -791,6 +790,11 @@ console.log(this.profileP);
   goToEditProject(idP) {
     this.HomeFormularioNw = 1;
     this.mapa();
+    if(this.imgprev!=""){
+      this.imgprevValue=false;
+    }else{
+      this.imgprevValue=true;
+    }
   }
   //Mostrar los reviews
   leave() {

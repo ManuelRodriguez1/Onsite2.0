@@ -43,30 +43,16 @@ export class ProjectService {
       skills: selectskills,
       people: peoples,
       status: 1,
-      statusname: 'Pending'
+      statusname: 'Pending',
+      briefmaterial:file
 
     }, { merge: true }).then(() => {
       this.db.collection('users_hire').doc(this.user.uid).set({
         "project": true
       }, { merge: true })
-      let briefMaterial=[]
-      for (let i = 0; i < file.length; i++) {
-        var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + idProject + "/" + file[i].name).put(file[i])
-        fileDoc.then((url) => {
-          url.ref.getDownloadURL()
-            .then((url) => {
-              briefMaterial.push({ "name": file[i].name, "url": url })
-              setTimeout(() => {
-                this.db.collection('users_hire').doc(this.user.uid).collection('projects').doc(idProject).set({
-                  'briefmaterial': briefMaterial
-                }, { merge: true })
-              }, 200);
-            })
-        })
-      }
-      if(ProjectImage != []){
-      
- 
+    
+     
+    if(ProjectImage != []){
           var fileDoc = this.afs.ref('Users_hire/' + this.user.uid + idProject+ "/projects/"+ProjectImage[0].name).put(ProjectImage[0])
           fileDoc.then((url) => {
             url.ref.getDownloadURL()
@@ -81,7 +67,6 @@ export class ProjectService {
 
               })
           })
-        
       }
     })
       .catch((error) => {

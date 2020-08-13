@@ -180,33 +180,11 @@ input::placeholder {
     width: 416px;
 }
 
-.verifyEmailSec {
-    text-align: center;
-}
-
-.verifyEmailSec .title2 {
-    margin-top: 178px;
-}
-
 .mt-20 {
     margin-top: 20px;
     line-height: 160%;
 }
 
-.emailVerifySend {
-    margin: 0 auto;
-    margin-top: 35px;
-}
-
-.verifyEmailSec .next {
-    position: relative;
-    right: auto;
-    margin-top: 39px;
-}
-
-.verifyEmailSec .changeButton {
-    margin-top: 12px;
-}
 
 .infoText {
     position: relative;
