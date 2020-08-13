@@ -1757,6 +1757,20 @@ h4,
     background-size: contain;
 }
 
+.emailVerifySend2 {
+    width: 441px;
+    height: 370px;
+    background: url('./assets/iconos/emailSendVerify2.png') no-repeat left center;
+    background-size: contain;
+    margin: 0 auto;
+}
+.emailVerifySend3{
+    width: 736px;
+    height: 503px;
+    background: url('./assets/iconos/emailSendVerify3.png') no-repeat left center;
+    background-size: contain;
+    margin: 0 auto;
+}
 
 /* Paginacion */
 
@@ -1916,11 +1930,71 @@ h4,
     width: 300px;
     height: 300px;
     background-size: cover;
+    position: relative;
 }
 
+.bigProfile::before {
+    content: '';
+    position: absolute;
+    width: 95px;
+    height: 82px;
+    background: url('./assets/imgProIcon/starts.png') center no-repeat;
+    background-size: contain;
+    top: -27px;
+    right: -46px;
+}
+
+.bigProfile::after {
+    content: '';
+    position: absolute;
+    width: 67px;
+    height: 64px;
+    background: url('./assets/imgProIcon/stars2.png') center no-repeat;
+    background-size: contain;
+    bottom: 0;
+    left: -30px;
+}
 .uploadSection .blueBtn {
     margin-top: 66px;
     line-height: 280%;
+}.projectspnumber{
+    width: 46px;
+    height: 28px;
+    background: #ECECEC;
+    border-radius: 29px;
+    text-align: center;
+    line-height: 26px;
+    color: #9D9D9D;
+    font-size: 16px;
+  }
+
+
+.verifyEmailSec {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.verifyEmailSec .title2 {
+    margin-top: 178px;
+}
+
+.emailVerifySend {
+    margin: 0 auto;
+    margin-top: 35px;
+}
+
+.verifyEmailSec .next {
+    position: relative;
+    right: auto;
+    margin-top: 39px;
+}
+
+.verifyEmailSec .changeButton {
+    margin-top: 12px;
+}
+.mt-20 {
+    margin-top: 20px;
+    line-height: 160%;
 }
 
 @media screen and (max-width: 1320px) {

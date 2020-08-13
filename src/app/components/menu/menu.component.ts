@@ -138,6 +138,12 @@ export class MenuComponent implements OnInit {
           if (this.profile.name != "") { this.UserName = this.profile.name }
         }
       })
+
+      this.afstore.collection("users_hire").doc(user.uid).set({
+        verifyUser: this.user ,
+      }, { merge: true }).then(() => {
+      })
+
     } else if (this.estado == "pro") {
 
       this.userMenu = "Pro";

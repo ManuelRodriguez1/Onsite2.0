@@ -60,7 +60,7 @@
                             <div class="row margin0 divcol py-3 px-5 " [class.projects]="option == 1">
                                 <div class="col-sm-12 divcol normalText">
                                     <ng-container *ngFor="let p of projects | filter: option">
-                                        <div class="row py-4 px-4 pb-3"
+                                        <div class="row  px-4"
                                             *ngIf="(p.status !=4 && option!=4) || (p.status==4 && option==4)">
                                             <div class="col-sm-4">
                                                 <!-- <li class="list-name"> -->
@@ -93,8 +93,9 @@
                                                 </div>
 
                                             </div>
+                                            <hr class="w100"  >
                                         </div>
-                                        <hr class="m-0">
+                                       
                                     </ng-container>
                                     <div>
                                     </div>
@@ -177,14 +178,15 @@
                         sizes and devices.
                     </p>
                 </div>
+             
                 <div class="row">
                     <div class="col-sm input-group m-0">
                         <div class="input-group custom-file" >
                             <input type="file" class="custom-file-input customFile" id="uploadPhoto"
                                 accept=".jpg, .jpeg, .png" (change)="preview($event)" name="uploadPhoto"
                                  >
-                            <label for="uploadPhoto" class="custom-file-label imagenproyecto" id="prevImg"
-                            [ngStyle]="{'background-image': imgprev != '' && 'url('+imgprev+')'}">
+                            <label for="uploadPhoto" class="custom-file-label imagenproyecto" id="prevImg">
+                            <img *ngIf="imgprev !='' " src="{{imgprev}}">
                                 <div class="afterFile" *ngIf="imgprevValue">Add a file</div>
                             </label>
                         </div>
@@ -440,143 +442,187 @@
 <div *ngIf="HomeFormularioNw == 2">
     <div class="container  containerMarginhr normalText">
         <div class="overall">
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 mt-4">
-                    <div class="title3">
+            <div class="row pt-48 ml-48 mr-48">
+                <div class="col-sm-6 ">
+                    <div class="title">
                         <p>Project: <span class="normalText">{{ viewP.projectname }}</span></p>
                     </div>
                 </div>
-                <div class="col-sm mx-4 mt-4">
+                <div class="col-sm-6 ">
                     <div class="vprofile text-right">
-                        <span (click)="goToEditProject(viewP.id)">Edit</span>
+                        <button class="blueBtn small " (click)="goToEditProject(viewP.id)">Edit</button>
                     </div>
                 </div>
             </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mt-2 mx-4">
+            <div class="row mt-20 ml-48 mr-48 ">
+                <div class="col-sm-6 ">
                     <span class="normalText ">Status: <span
                             class="c{{ viewP.statusname }}">{{ viewP.statusname }}</span></span>
+                            <br>
+                            <br>
+                            {{ viewP.description }}
+                </div>
+                <div class="col-sm-6 ">
+                  <img *ngIf="viewP.ProjectImage" class="imagProjectInitial" src="{{viewP.ProjectImage}}">
+                  
                 </div>
             </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm-8 my-4 mx-4">
-                    <span class="normalText">Project Description...</span><br> {{ viewP.description }}
-                </div>
-            </div>
+    
             <hr class="hr mt-30" />
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-3">
+            <div class="row mt-23  ml-48 mr-48">
+                <div class="col-sm ">
                     <div class="title3">
-                        <p class="title3">Skills:</p>
+                        <p class="title">Skills:</p>
                     </div>
                 </div>
             </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-2">
+            <div class="row mt-23 ml-48 mr-48">
+                <div class="col-sm ">
                     <div class="mt-27" style="overflow: hidden;" [hidden]="selectskills == null">
                         <div class="skillsel onlySkill" *ngFor="let so of viewP.skills">
-                            <img src="../../../../../assets/imgProIcon/{{so}}.png">
+                            <div class="div1"><img src="../../../../../assets/imgProIcon/{{so}}.png"></div>
                             <p>{{so}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr class="hr mt-30" />
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-2">
-                    <div class="title3">
-                        <p class="title3">Location:</p>
+         
+            <ng-container *ngIf="viewP.briefmaterial.length != 0 && viewP.briefmaterial.length != null && viewP.briefmaterial[0].name != 'Add material file'">
+                <hr class="hr mt-30" />
+                <div class="row mt-23  ml-48 mr-48">
+                    <div class="col-sm ">
+                        <div class="title3">
+                            <p class="title">Brief material</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 my-3">
-                    <img class="locationIconhi" src="../../../../../assets/iconos/Location_Icon.svg" alt="">
-                    <p class="normalText"> {{ viewP.location }}</p>
+                <div class="row mt-23 ml-48 mr-48">
+                    <div class="col-sm ">
+                        <div *ngFor="let br of viewP.briefmaterial" >
+                            <div class="briefmaterialLeft" *ngIf="br.name != 'Add material file' && br.name != null">
+                                <a [href]="br.url" target="_blank">
+                                    <div class="fileIcon"></div>
+                                </a>
+                                <p class="ellipsis">{{br.name}}</p>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+    
+            </ng-container>
+            
+
+            <hr class="hr mt-30" />
+            <div class="row mt-23 ml-48 mr-48 mb-23 pb-23" >
+                <div class="col-sm-6">
+                    <div class="title">
+                        <p class="title">Details:</p>
+                    </div>
+
+                    <p class="mt-2 normalText"><b>Location:</b></p>
+                    <p class="mt-2 normalText w-300">{{ viewP.location }}</p>
+
+                    <p class="mt-2 normalText"><b>Starting date:</b></p>
+                    <p class="mt-2 normalText">{{viewP.startdate | date: 'MM/dd/yy'}}</p>
+
+                    <p class="mt-2 normalText"><b>Ending date:</b></p>
+                    <p class="mt-2 normalText">{{viewP.enddate | date: 'MM/dd/yy'}}</p>
+
+                    <br>
+                </div>
+                <div class="col-sm-6">
+                    <br>
+                    <agm-map class="agmMap" [latitude]="viewP.latitude" [longitude]="viewP.longitude"></agm-map>
+                    <br>
+                    <br>
                 </div>
             </div>
+         
         </div>
         <div class="overall mt-4 overflow-auto">
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 mt-4">
-                    <div class="title3">
+            <div class="row mt-51 ml-48 mt-4">
+                <div class="col-sm mt-4">
+                    <div class="title">
                         <p>Applicants:</p>
                     </div>
                 </div>
             </div>
             <hr class="hr mt-30" />
-            <div class="row py-2 ml-2 title-table">
+            <div class="row  ml-48 mr-48 title-table">
                 <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
                 <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3">
                 </div>
             </div>
-            <div class="aplicants">
-                <div *ngFor="let da of dataApply">
-                    <div class="row py-2">
-                        <div class="col-sm-3 ml-4 pt-3 ">
+
+                <div class="aplicants" *ngFor="let da of dataApply">
+                    <div class="row  ml-48 mr-48 " >
+                        <div class="col-sm-3  pt-3 ">
                             {{ da.name}}
                         </div>
-                        <div class="col-sm-6 pt-2">
+                        <div class="col-sm-6  pt-3 ">
                             <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
                                 <div class="skillsel onlySkill" *ngFor="let so of da.skills">
-                                    <img src="../../../../../assets/imgProIcon/{{so}}.png">
+                                    <div class="div1"><img src="../../../../../assets/imgProIcon/{{so}}.png"></div>
                                     <p> {{so}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm mx-4 pt-3">
-                            <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(da.id)"></div>
-
-                            <span class="vprofile profileHire2" (click)="goToProfile(da)">
-
-                                <div class="profileHirePro"></div>
-                            </span>
+                        <div class="col-sm  pt-3 ">
+                            <div class="menuPrincipalApplicants">
+                                <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(da.id)"></div>
+                                <span class="vprofile profileHire2" (click)="goToProfile(da)">
+    
+                                    <div class="profileHirePro"></div>
+                                </span>
+                                <div class="pr-3 opChat errorProfilehire" (click)="eliminarPersonAplly_final_Apply(da,viewP.id)"></div>
+                            </div>
+                           
                         </div>
                     </div>
-                    <hr class="hr m-0" />
+                    <hr class="hr" />
                 </div>
-            </div>
         </div>
         <div class="overall mt-4 overflow-auto" *ngFor="let teams of viewP.skills">
-            <div class="row mt-51 ml-48">
-                <div class="col-sm mx-4 mt-4">
-                    <div class="title3">
+            <div class="row mt-51  ml-48 mr-48">
+                <div class="col-sm mt-4">
+                    <div class="title">
                         <p>{{teams}} team</p>
                     </div>
                 </div>
             </div>
             <hr class="hr mt-30" />
-            <div class="row py-2 ml-2 title-table">
+            <div class="row  ml-48 mr-48 title-table">
                 <div class="col-sm-3">Name<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3"></div>
                 <div class="col-sm pl-4">Skills<img src="../../../../../assets/iconos/order.svg" alt="" class="pl-3">
                 </div>
             </div>
 
-            <div class="row mt-51 ml-48 py-2" *ngFor="let neg of negotiation">
+            <div class="row mt-51  ml-48 mr-48 py-2" *ngFor="let neg of negotiation">
 
                 <ng-container *ngIf="neg.skillNegotiation == teams">
 
-                    <div class="col-sm-3 ml-4 mt-2">
+                    <div class="col-sm-3 mt-2">
                         {{ neg.name}}
                     </div>
                     <div class="col-sm-6">
                         <div class="mt-27" style="overflow: auto;" [hidden]="selectskills == null">
                             <div class="skillsel onlySkill" *ngFor="let da of  neg.skills">
-                                <img src="../../../../../assets/imgProIcon/{{da}}.png">
+                                <div class="div1"><img src="../../../../../assets/imgProIcon/{{da}}.png"></div>
                                 <p>{{da}}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm mx-4 pt-3">
-                        <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(neg.id)"></div>
-
-                        <span class="vprofile profileHire2" (click)="goToProfile(neg)">
-
-                            <div class="profileHirePro"></div>
-                        </span>
-
-                        <div class="pr-3 opChat errorProfilehire" (click)="eliminarPersonAplly(neg,viewP.id)"></div>
+                    <div class="col-sm pt-3">
+                        <div class="menuPrincipalApplicants">
+                            <div class="pr-3 opChat messageIcon profileHire1" (click)="messages(neg.id)"></div>
+                            <span class="vprofile profileHire2" (click)="goToProfile(neg)">
+                                <div class="profileHirePro"></div>
+                            </span>
+                            <div class="pr-3 opChat errorProfilehire" (click)="eliminarPersonAplly(neg,viewP.id)"></div>
+                        </div>
+                      
                     </div>
 
                     <hr class="hr my-1" />
@@ -633,8 +679,13 @@
                         (click)="messages(profileP.id)">Message</button>
                 </div>
             </div>
-            <div class="col-sm-8 overall">
-                <div class="row mt-51 ml-48">
+            <div class="col-sm-8 overall p0">
+                <div class="noVerify1">
+                    <p>Pro User</p>
+                    <p class="verifyUser1"><span>Verified user</span></p>
+                </div>
+
+                <div class="row mt-51 ml-48 mr-48">
                     <div class="col-sm">
                         <div class="title3 my-2">
                             <p>Rating</p>
@@ -658,7 +709,7 @@
                         <div class="title3 my-2">
                             <p>Jobs completed</p>
                         </div>
-                        <p class="mt-23 smallText">0</p>
+                        <p class="mt-23 smallText projectspnumber">0</p>
                     </div>
                 </div>
                 <div class="row mt-4 ml-48 mr-48">
@@ -666,7 +717,7 @@
                         <div class="title3">
                             <p>Certificates</p>
                         </div>
-                        <p class="mt-2 smallText">{{profileP.certificate?.length}}</p>
+                        <p class="mt-2 smallText projectspnumber">{{countC1}}</p>
                     </div>
                 </div>
                 <hr class="hr">
@@ -675,12 +726,13 @@
                         <div class="title3">
                             <p>Profile description</p>
                         </div>
-                        <p class="mt-2 normalText">{{ profileP.description }}</p>
+                        <p class="mt-2 normalText"><span *ngIf="profile.description == null"><b>{{ profileP.name }} {{ profileP.lastname }}</b> has not added a description yet.</span>{{profileP.description }}</p>
+                        
                     </div>
                 </div>
                 <hr class="hr">
                 <div class="row my-2">
-                    <div class="col-sm  ml-48">
+                    <div class="col-sm  ml-48 mr-48">
                         <div class="title3">
                             <p>CV</p>
                         </div>
@@ -688,26 +740,27 @@
                             <div *ngIf="cv.name != 'Add material file' && cv.name != null">
                                 <a target="_blank" href="{{cv.url}}">
                                     <div class="fileIcon"></div>
-                                    <p class="normalText">{{cv.name}}</p>
+                                    <p class="normalText ellipsis">{{cv.name}}</p>
                                 </a>
 
 
                             </div>
                             <div *ngIf="cv.name == 'Add material file' || cv.name == null ">
-                                <p>No files have been uploaded.</p>
+                                <p><b>{{ profileP.name }} {{ profileP.lastname }}</b> Mauro Poche has not uploaded any CV file.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr class="hr">
                 <div class="row my-2">
-                    <div class="col-sm  ml-48">
+                    <div class="col-sm  ml-48 mr-48">
                         <div class="title3">
                             <p>Skills</p>
                         </div>
                         <!-- <div class="mt-2" style="overflow: hidden;" [hidden]="profile.skills == null"> -->
                         <div class="skillsel onlySkill mt-2" *ngFor="let so of profileP.skills">
-                            <img src="../../../../../assets/imgProIcon/{{so}}.png">
+                            <div class="div1">   <img src="../../../../../assets/imgProIcon/{{so}}.png"> </div>
+                         
                             <p>{{so}}</p>
                         </div>
                         <!-- </div> -->
@@ -729,15 +782,17 @@
                 </div>
                 <hr class="hr">
                 <div class="row">
-                    <div class="col-sm  ml-48">
+                    <div class="col-sm  ml-48 mr-48">
                         <div class="title3">
                             <p>Certificates</p>
                         </div>
                         <div class="row">
                             <div class="col-sm input-group pl-3">
+                                
                                 <div *ngFor="let ce of profileP.certificate" class="mr-30">
+                              
                                     <ng-container
-                                        *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
+                                        *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && ce.name != 'Add certificate file'">
                                         <!-- <div *ngFor="let co of profile.certificate" class="mr-30"> -->
                                         <a target="_blank" href="{{ce.url}}">
                                             <div class="fileIcon certIcon"></div>
@@ -746,8 +801,8 @@
                                         <!-- </div> -->
                                     </ng-container>
                                     <div
-                                        *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || profileP.certificate.name == 'Add certificate file'">
-                                        <p>No files have been uploaded.</p>
+                                        *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || ce.name == 'Add certificate file'">
+                                        <p class="normalText">No files have been uploaded.</p>
                                     </div>
                                 </div>
                             </div>
@@ -760,8 +815,7 @@
                         <div class="title3 mb-4">
                             <p>Reviews</p>
                         </div>
-                        <p class="smallText mr-48" *ngIf="usuariosReviwsTodos.length==0">Your opinion is very valuable
-                            to your workers, help people improve and be recognized for their skills, leave a review!</p>
+                        <p class="normalText mr-48" *ngIf="usuariosReviwsTodos.length==0">Be the first one to leave a review if you have worked with <b>{{ profileP.name }} {{ profileP.lastname }}</b>> in a project before.</p>
 
                         <div class="row mb-4">
                             <div class="col-6 mt-23 " *ngFor="let reviews of usuariosReviwsTodos">
@@ -794,25 +848,23 @@
                 </div>
                 <div *ngIf="LeaveForm == 0">
                     <div class="row">
-                        <div class="col-sm  ml-48">
+                        <div class="col-sm  ml-48 mr-48">
                             <button class="blueBtn medium w360 pl-3 mr-3 mrboton" (click)="leave()">Leave a
                                 review</button>
                         </div>
                     </div>
                 </div>
                 <div *ngIf="LeaveForm == 1">
-                    <div class="row mt-4 ml-48">
+                  
+                    <div class="row mt-4 ml-48 mr-48">
                         <div class="title3 mb-2">
                             <p>Rating </p>
                         </div>
                     </div>
                     <div class="row mt-1 pl-3">
                         <div class="form-group">
-                            <!--ngb-rating [(rate)]="currentRate" aria-valuenow="3" id="currentRate" name="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
-              <div>
-             
-              </div-->
-                            <div class="stars mt-23 ml-48">
+                   
+                            <div class="stars mt-23 ml-48 mr-48">
                                 <input type="hidden" id="valStarts" value="{{valStarts}}">
                                 <div class="starG" [class.starO]="estrellitasreviws1 >= 1"
                                     (click)="estrellitasreviws(1)"></div>
@@ -825,7 +877,7 @@
                                 <div class="starG mr-13" [class.starO]="estrellitasreviws1 == 5"
                                     (click)="estrellitasreviws(5)"></div>
                             </div>
-                            <span class="textError ml-48" id="currentRaterror"></span>
+                            <span class="textError ml-48 mr-48" id="currentRaterror"></span>
                         </div>
                     </div>
                     <div class="row pl-3">
@@ -836,7 +888,7 @@
                             <span class="textError" id="reviewRerror"></span>
                         </div>
                     </div>
-                    <div class="row mt-3 float-right mrboton">
+                    <div class="row mt-3 float-right mrboton mr-48">
                         <button class="blueBtn small w360 mr-3 cancelRate" (click)="cancelRate()">Cancel</button>
                         <button class="blueBtn small w360 mr-3" (click)="postReview()">Post</button>
                     </div>

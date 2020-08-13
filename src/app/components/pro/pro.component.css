@@ -128,31 +128,6 @@ input::placeholder {
     margin: 0 auto;
 }
 
-.profilePro {
-    position: relative;
-}
-
-.profilePro::before {
-    content: '';
-    position: absolute;
-    width: 95px;
-    height: 82px;
-    background: url('../../../assets/imgProIcon/starts.png') center no-repeat;
-    background-size: contain;
-    top: -27px;
-    right: -46px;
-}
-
-.profilePro::after {
-    content: '';
-    position: absolute;
-    width: 67px;
-    height: 64px;
-    background: url('../../../assets/imgProIcon/stars2.png') center no-repeat;
-    background-size: contain;
-    bottom: 0;
-    left: -30px;
-}
 
 .certContainer .shadowDiv {
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
@@ -205,33 +180,11 @@ input::placeholder {
     width: 416px;
 }
 
-.verifyEmailSec {
-    text-align: center;
-}
-
-.verifyEmailSec .title2 {
-    margin-top: 178px;
-}
-
 .mt-20 {
     margin-top: 20px;
     line-height: 160%;
 }
 
-.emailVerifySend {
-    margin: 0 auto;
-    margin-top: 35px;
-}
-
-.verifyEmailSec .next {
-    position: relative;
-    right: auto;
-    margin-top: 39px;
-}
-
-.verifyEmailSec .changeButton {
-    margin-top: 12px;
-}
 
 .infoText {
     position: relative;
