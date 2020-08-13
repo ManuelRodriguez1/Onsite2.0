@@ -220,13 +220,21 @@
                                 class="custom-file-input customFile" id="customFileCert{{i}}" accept=".pdf, .jpg, .jpeg, .png"
                                 name="material" #material="ngModel" ngModel (change)="uploadDoc($event)">
 
-                            <label for="customFileCert{{i}}" class="custom-file-label">
+                            <label *ngIf="f.name == 'Add material file' " for="customFileCert{{i}}" class="custom-file-label">
                                 <div class="afterFile">{{f.name}}</div>
                                 <div class="uploading" *ngIf="f.name == 'Add material file' && uploadDoc1 > 0">
                                     <div class="loadingBar" [ngStyle]="{'width':uploadDoc1+'%'}"></div>
                                 </div>
                             </label>
-                            <div class="deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'"
+                             <ng-container *ngIf="f.name != 'Add material file' " >
+                                <div class="briefmaterialLeftaddproject" *ngIf="f.name  != 'Add material file' && f.name != null">
+                                    <a [href]="f.url" target="_blank">
+                                        <div class="fileIcon"></div>
+                                    </a>
+                                    <p class="ellipsis">{{f.name}}</p>
+                                </div>
+                            </ng-container>
+                            <div class="briefmateridele deleteCert" title="Delete Material" *ngIf="f.name != 'Add material file'"
                                 (click)="deleteBriefMaterial(f)"></div>
                         </div>
                         <div class="input-group-prepend iconAdd" (click)="addfiles()"

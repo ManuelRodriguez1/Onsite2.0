@@ -1,0 +1,6 @@
+.changeButton:hover{
+    background: none !important;
+    color: #010973 !important;
+    border: none !important;
+    opacity: 0.7 !important;
+}

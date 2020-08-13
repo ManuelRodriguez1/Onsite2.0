@@ -48,6 +48,7 @@ import { ChatTextPipe } from './pipes/chat-text.pipe';
 import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 import { SkillsPipe } from './pipes/skills.pipe';
 import { DistancePipe } from './pipes/distance.pipe';
+import { VerifiedEmailComponent } from './components/verified-email/verified-email.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { DistancePipe } from './pipes/distance.pipe';
     ChatTextPipe,
     SkillsPipe,
     DistancePipe,
+    VerifiedEmailComponent,
   
   ],
   imports: [

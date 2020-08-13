@@ -70,7 +70,7 @@ export class ProjectService {
       }
     })
       .catch((error) => {
-        alert(error.message)
+      
       })
 
   }
