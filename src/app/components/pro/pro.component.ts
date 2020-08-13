@@ -133,8 +133,8 @@ export class ProComponent implements OnInit {
   }
   test(f: NgForm) {
     this.servicePro.registerPro(f, this.file, this.customers2, this.selectskills, this.tools, this.photo)
-    this.page = 5
-    this.select = 5
+    // this.page = 5
+    // this.select = 5
   }
   uploadDoc(e: any, data: number) {  
     if(data == 2){

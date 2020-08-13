@@ -78,11 +78,8 @@ export class ProService {
               })
           }
 
-        })
-        .then(() => {
-          setTimeout(() => {
-            this.router.navigate(['/VerificationEmail'])
-          }, 1500);
+        }).then(()=>{
+          this.router.navigate(['/Verification'])
         })
       }).catch((error) => {
         console.log(error);
