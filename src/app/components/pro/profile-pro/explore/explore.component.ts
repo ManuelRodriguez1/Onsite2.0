@@ -266,9 +266,9 @@ export class ExploreComponent implements OnInit, OnDestroy {
     if (this.showAgainCheck) {
       if (!localStorage.getItem('applyMessage')) {
         localStorage.setItem('applyMessage', 'true')
-        location.href = '/Projects'
       }
     }
+    location.href = '/Projects'
   }
 
   ngOnDestroy() {
