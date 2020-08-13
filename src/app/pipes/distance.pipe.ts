@@ -17,7 +17,6 @@ export class DistancePipe implements PipeTransform {
       }
     }
     if(args > 30){
-      console.log(args);
       this.userP.filterPag.emit(value)
       return value;
     }else{

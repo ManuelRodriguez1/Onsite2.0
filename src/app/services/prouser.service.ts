@@ -175,7 +175,7 @@ export class ProuserService {
   }
   //CHAT
   //Añadir conversación
-  chatMsg(idHire: string, idPro: string, msg: string, adj: boolean = false, nameAdj: string = '', offer: boolean = false, accept: boolean = false, price: number = 0, proname: string = '', team: string = '') {
+  chatMsg(idHire: string, idPro: string, msg: string, adj: boolean = false, nameAdj: string = '', offer: boolean = false, accept: boolean = false, price: number = 0, proname: string = '', team: string = '', projectId: string = '') {
     var chatTemp: any = []
     var temp: any = {
       'fecha': new Date(),
@@ -188,7 +188,8 @@ export class ProuserService {
       'accept': accept,
       'price': price,
       'name': proname,
-      'team': team
+      'team': team,
+      'projectId': projectId
     }
     this.getChat(idHire, idPro).get().subscribe((res) => {
       if (res.data()) {

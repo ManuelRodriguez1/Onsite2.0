@@ -105,12 +105,42 @@
     left: -19px;
 }
 
+.proMobile {
+    height: 308px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .proMobile .col-sm-4 {
     cursor: pointer;
 }
 
 .proMobile .col-sm-4:hover {
     opacity: 0.7;
+}
+
+.textProjectEmpty {}
+
+.textProjectEmpty p:first-child {
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 120%;
+}
+
+.textProjectEmpty p:nth-child(2) {
+    font-size: 16px;
+    line-height: 155%;
+    margin-top: 53px;
+}
+
+.textProjectEmpty .blueBtn {
+    margin-top: 52px;
+}
+
+@media screen and (min-width: 1440px) {
+    .iconShowProject {
+        right: 257px;
+    }
 }
 
 @media screen and (max-width: 470px) {

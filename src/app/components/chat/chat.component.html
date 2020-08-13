@@ -1,4 +1,4 @@
-<div class="container shadow">
+<div class="container shadow" *ngIf="users.length > 0">
     <div class="divcol ">
         <div class="row">
             <div class="col-sm chatrightborder">
@@ -18,11 +18,11 @@
                     <div class="person_user_chat" *ngFor="let u of users | chatText: search | chatSearch: unread ">
                         <div class="divcontainerChat">
                             <div class="nombreschat" (click)="initChat(u)">
-                                <div class="profile mini imagenChatPerson" [ngStyle]="{'background-image': 'url('+u.photo+')'}">
+                                <div class="profile mini imagenChatPerson" [class.profileHire]="info.user.displayName == 'pro'" [class.profilePro]="info.user.displayName == 'hire'" [ngStyle]="{'background-image': u.photo && 'url('+u.photo+')'}">
                                     <a href="{{u.photo}}" target="_blank"></a>
                                 </div>
                                 <div class="nombrechatazul title3">{{u.name}}</div>
-                                <div class="nombrechatNaranja">{{u.projectname}}</div>
+                                <!-- <div class="nombrechatNaranja">{{u.projectname}}</div> -->
                             </div>
                             <div class="iconsChatUser">
                                 <div class="right100p eyeM" [class.eyeN]="!u.noRead"></div>
@@ -34,32 +34,14 @@
                 </div>
             </div>
             <div class="col-8">
-                <ng-container *ngIf="users.length == 0 && info.user.displayName == 'pro'">
-                    <div class="noMessages">
-                        <!-- <hr class="hr mt-155"> -->
-                        <p class="mt-28">Messages will appear when your hirer contacts you after <br>applying to an offer. Get started looking for a new project.</p>
-                        <a href="/ExplorePro">
-                            <button class="btn blueBtn medium mt-40">Explore</button>
-                        </a>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="users.length == 0 && info.user.displayName == 'hire'">
-                    <div class="noMessages">
-                        <!-- <hr class="hr mt-155"> -->
-                        <p class="mt-28">Messages will appear when you contact a pro. Get started <br>posting a project.</p>
-                        <a href="/Hireprincipal">
-                            <button class="btn blueBtn medium mt-40">Projects</button>
-                        </a>
-                    </div>
-                </ng-container>
                 <ng-container *ngIf="chat">
                     <div class="containerChat">
                         <div class="h--155 backBlue">
                             <div class="divCabezera ">
-                                <div class="profile mini imagenChatPerson" [ngStyle]="{'background-image': 'url('+photo+')'}"></div>
+                                <div class="profile mini imagenChatPerson" [class.profileHire]="info.user.displayName == 'pro'" [class.profilePro]="info.user.displayName == 'hire'" [ngStyle]="{'background-image': photo && 'url('+photo+')'}"></div>
                                 <div class="nombrechatazul title3">{{name}}</div>
-                                <div class="nombrechatNaranja">{{projectName}}</div>
-                                <button type="button" class="btn blueBtn small pfmt" (click)="modal = 1" *ngIf="info.user.displayName == 'hire'; else btnPro">Hire</button>
+                                <!-- <div class="nombrechatNaranja">{{projectName}}</div> -->
+                                <button type="button" class="btn blueBtn small pfmt" (click)="modal = 1; projectsFind()" *ngIf="info.user.displayName == 'hire'; else btnPro">Hire</button>
                                 <ng-template #btnPro>
                                     <button type="button" class="btn blueBtn small pfmt" [class.disabled]="disabled" [disabled]="disabled" (click)="acceptOffer()">{{word}}</button>
                                 </ng-template>
@@ -115,6 +97,49 @@
         </div>
     </div>
 </div>
+
+<ng-container *ngIf="users.length == 0 && info.user.displayName == 'pro'">
+    <div class="container noMessages">
+        <div class="row">
+            <div class="col-sm">
+                <div class="titleChat">
+                    <p>Apply for a project to get in touch with a hirer. </p>
+                </div>
+                <div class="textChat">
+                    <p>Once you apply for a project, the hirer will check your profile and will contact you through this page to negotiate payment options and fees. Apply for more projects to increase the chances to get hired. </p>
+                </div>
+                <a href="/ExplorePro">
+                    <button class="btn blueBtn large mt-40">Back to explore</button>
+                </a>
+            </div>
+            <div class="col-sm">
+                <div class="negotiationChat"></div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="users.length == 0 && info.user.displayName == 'hire'">
+    <div class="container noMessages">
+        <div class="row">
+            <div class="col-sm">
+                <div class="titleChat">
+                    <p>Get in touch with a Pro <br>to negotiate</p>
+                </div>
+                <div class="textChat">
+                    <p>Once you apply for a project, the hirer will check your profile and will contact you through this page to negotiate payment options and fees. Apply for more projects to increase the chances to get hired. </p>
+                </div>
+                <a href="/Hireprincipal">
+                    <button class="btn blueBtn large mt-40">Back to projects</button>
+                </a>
+            </div>
+            <div class="col-sm">
+                <div class="negotiationChat"></div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
 <div class="modalChat" *ngIf="modal != 0">
     <div class="modalChatInt" [ngStyle]="{'width': modal == 2 ? '388px' : ''}">
         <div [hidden]="modal == 2">
@@ -138,7 +163,21 @@
                     <p>{{s}}</p>
                 </div>
             </div>
-            <button (click)="createOffer(price.value); modal = false" type="button" class="btn blueBtn large" [class.disabled]="price.value == '' || price.value == 0 || skillS == '' || !onlyNumber.exec(price.value)" [disabled]="price.value == '' || price.value == 0 || skillS == '' || !onlyNumber.exec(price.value)">Confirm</button>
+            <ng-container *ngIf="showProjects.length > 1">
+                <div class="title2 mt-20">
+                    <p>For which project?</p>
+                </div>
+                <div class="input-group select" (click)="up2 = !up2">
+                    <input type="text" class="form-control" placeholder="Project’s name" onfocus="this.blur()" [(ngModel)]="projectS" style="cursor: pointer;">
+                    <div class="order" [ngClass]="{'up': up2 == true}"></div>
+                </div>
+                <div class="list-group" [hidden]='up2 == false'>
+                    <div class="list-group-item" *ngFor="let p of showProjects" (click)="projectS = p.projectName; idProject = p.idProject; up2 = false">
+                        <p>{{p.projectName}}</p>
+                    </div>
+                </div>
+            </ng-container>
+            <button (click)="createOffer(price.value); modal = false" type="button" class="btn blueBtn large" [class.disabled]="price.value == '' || price.value == 0 || skillS == '' || projectS == '' || !onlyNumber.exec(price.value)" [disabled]="price.value == '' || price.value == 0 || skillS == '' || projectS == '' || !onlyNumber.exec(price.value)">Confirm</button>
         </div>
         <div [hidden]="modal == 1">
             <div class="title2" style="line-height: 41px;">
