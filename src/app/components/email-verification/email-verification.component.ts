@@ -20,7 +20,7 @@ export class EmailVerificationComponent implements OnInit {
   error: any[];
   error1;
   messageerror = "";
-  estadoEmail=0
+  estadoEmail;
 
   constructor(private router: Router,public aff: AngularFireAuth,private af: AngularFirestore) { }
 
@@ -83,9 +83,6 @@ export class EmailVerificationComponent implements OnInit {
     }).catch(function (error) {
 console.log(error);
     });
-  }
-  resend(){
-    firebase.auth().currentUser.sendEmailVerification()
   }
 
 

@@ -61,7 +61,7 @@ export class HireService {
             }
           }
 
-        }).then(() => this.router.navigate(['/ProfileHire']))
+        }).then(() => this.router.navigate(['/Verification']))
       }).catch((err) => {
         console.log(err);
         this.error.emit(err.message);

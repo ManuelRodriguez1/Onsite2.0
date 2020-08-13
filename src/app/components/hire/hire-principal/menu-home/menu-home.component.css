@@ -278,6 +278,7 @@ span:hover{
     align-items: center;
     height: 126px;
     margin-top: 23px;
+    margin-left: 23px;
 }
 
 .btnround {
@@ -1319,4 +1320,18 @@ padding: 0;
 }
 .w100{
     width: 100%;
+}
+.briefmaterialLeftaddproject .fileIcon{
+margin: 0 auto;
+}
+.briefmateridele.deleteCert{
+    right: 0;
+}
+.briefmaterialLeftaddproject {
+    width: 120px;
+    margin-right: 20px;
+}
+
+.briefmaterialLeftaddproject .ellipsis{
+    margin: 0 auto;
 }
