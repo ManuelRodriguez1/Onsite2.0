@@ -1888,8 +1888,30 @@ h4,
     width: 300px;
     height: 300px;
     background-size: cover;
+    position: relative;
 }
 
+.bigProfile::before {
+    content: '';
+    position: absolute;
+    width: 95px;
+    height: 82px;
+    background: url('./assets/imgProIcon/starts.png') center no-repeat;
+    background-size: contain;
+    top: -27px;
+    right: -46px;
+}
+
+.bigProfile::after {
+    content: '';
+    position: absolute;
+    width: 67px;
+    height: 64px;
+    background: url('./assets/imgProIcon/stars2.png') center no-repeat;
+    background-size: contain;
+    bottom: 0;
+    left: -30px;
+}
 .uploadSection .blueBtn {
     margin-top: 66px;
     line-height: 280%;

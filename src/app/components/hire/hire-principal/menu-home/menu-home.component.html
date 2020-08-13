@@ -177,6 +177,7 @@
                         sizes and devices.
                     </p>
                 </div>
+                
                 <div class="row">
                     <div class="col-sm input-group m-0">
                         <div class="input-group custom-file" >
@@ -184,7 +185,7 @@
                                 accept=".jpg, .jpeg, .png" (change)="preview($event)" name="uploadPhoto"
                                  >
                             <label for="uploadPhoto" class="custom-file-label imagenproyecto" id="prevImg"
-                            [ngStyle]="{'background-image': imgprev != '' && 'url('+imgprev+')'}">
+                            [ngStyle]="{'background-image' : 'url('+imgprev+')'}">
                                 <div class="afterFile" *ngIf="imgprevValue">Add a file</div>
                             </label>
                         </div>
@@ -484,6 +485,33 @@
                     </div>
                 </div>
             </div>
+         
+            <ng-container *ngIf="viewP.briefmaterial.length != 0 && viewP.briefmaterial.length != null && viewP.briefmaterial[0].name != 'Add material file'">
+                <hr class="hr mt-30" />
+                <div class="row mt-23  ml-48 mr-48">
+                    <div class="col-sm ">
+                        <div class="title3">
+                            <p class="title">Brief material</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-23 ml-48 mr-48">
+                    <div class="col-sm ">
+                        <div *ngFor="let br of viewP.briefmaterial" >
+                            <div class="briefmaterialLeft" *ngIf="br.name != 'Add material file' && br.name != null">
+                                <a [href]="br.url" target="_blank">
+                                    <div class="fileIcon"></div>
+                                </a>
+                                <p class="ellipsis">{{br.name}}</p>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+    
+            </ng-container>
+            
+
             <hr class="hr mt-30" />
             <div class="row mt-23 ml-48 mr-48 mb-23 pb-23" >
                 <div class="col-sm-6">

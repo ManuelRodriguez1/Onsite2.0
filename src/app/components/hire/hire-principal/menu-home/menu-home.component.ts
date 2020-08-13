@@ -78,8 +78,10 @@ export class MenuHomeComponent implements OnInit {
   uploadDoc1: number = 0
   containervacioproyects = true;
   filePicture: any[] = []
-  imgprev: any = ''
+  imgprev: any;
+   
   imgprevValue = true;
+  deleteBriefMaterialvar=false;
   //mapa
   radius
   public latitude: number;
@@ -389,7 +391,7 @@ export class MenuHomeComponent implements OnInit {
 
 
       var temp = false
-
+console.log(this.files);
       //Crear o editar funcion 
       this.projectService.newProject(f, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude, this.filePicture)
 
@@ -430,6 +432,7 @@ export class MenuHomeComponent implements OnInit {
     reader.readAsDataURL(e.target.files[0])
     this.filePicture.push(e.target.files[0])
     reader.onload = () => {
+      console.log(reader.result);
       this.imgprev = reader.result
       this.imgprevValue = false;
     }
@@ -490,22 +493,32 @@ export class MenuHomeComponent implements OnInit {
   }
   //Eliminar material
   deleteBriefMaterial(e: any) {
-    var i = this.files.indexOf(e);
-    if (i !== -1) {
-      //como 
-      this.afs.ref('Users_pro/' + this.user.uid + "/" + e.name).delete()
-      this.files.splice(i, 1)
-      setTimeout(() => {
-        this.user_hire.update({
-          "briefmaterial": this.files
-        })
-      }, 200);
+
+    if(this.deleteBriefMaterialvar){
+      var i = this.files.indexOf(e);
+      if (i !== -1) {
+        //como 
+        this.afs.ref('Users_pro/' + this.user.uid + "/" + e.name).delete()
+        this.files.splice(i, 1)
+        setTimeout(() => {
+          this.user_hire.update({
+            "briefmaterial": this.files
+          })
+        }, 200);
+      }
+      
+    }else{
+      var i = this.files.indexOf(e);
+      if (i !== -1) {
+        this.files.splice(i, 1)
+      }
     }
     if (this.files.length == 0) {
       this.files = [{ 'name': 'Add material file', 'url': '' }];
       this.countC = 0
     }
     this.uploadDoc1 = 0
+   
   }
   //Modificar estado del proyecto a eliminado 
   delete(idP) {

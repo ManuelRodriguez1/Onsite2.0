@@ -1210,7 +1210,7 @@ a {
     line-height: 30px;
 }
 .btncontainerOptios1{
-    margin-left: -68px;
+    margin-left: -48px;
     vertical-align: middle;
     margin-top: 15px;
 }
@@ -1249,4 +1249,8 @@ a {
 }
 .menuPrincipalApplicants{
     float: right;
+}
+.briefmaterialLeft{
+    float: left;
+    margin-right: 100px;
 }
