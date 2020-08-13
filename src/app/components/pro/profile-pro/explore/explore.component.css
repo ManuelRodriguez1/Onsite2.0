@@ -585,6 +585,77 @@
     font-weight: bold;
 }
 
+.textTitle {
+    text-align: center;
+}
+
+.textTitle p:first-child {
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 120%;
+    margin-top: 196px;
+}
+
+.textTitle p:last-child {
+    font-size: 24px;
+    line-height: 33px;
+    margin-top: 44px;
+}
+
+.grayContainer {
+    margin-top: 71px;
+    background: #E5E5E5;
+    overflow: hidden;
+}
+
+.firstTimeImage {
+    margin-top: 82px;
+}
+
+.columTextFirsTime {
+    margin-left: 15px;
+}
+
+.columTextFirsTime .titleFist {
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 120%;
+    margin-top: 164px;
+}
+
+.columTextFirsTime ul {
+    font-size: 16px;
+    line-height: 155%;
+    margin-top: 46px;
+}
+
+.columTextFirsTime li {
+    margin-top: 42px;
+    margin-left: 36px;
+    position: relative;
+    max-width: 580px;
+}
+
+.columTextFirsTime li::before {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #FF8600;
+    top: 6px;
+    left: -35px;
+}
+
+.columTextFirsTime .btn {
+    margin-top: 57px;
+}
+
+.columTextFirsTime .checkbox {
+    margin-top: 38px;
+    margin-bottom: 64px;
+}
+
 @media(min-width: 1045px) {
     .container {
         max-width: 1044px !important;

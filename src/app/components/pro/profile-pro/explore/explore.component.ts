@@ -21,6 +21,8 @@ export class ExploreComponent implements OnInit, OnDestroy {
   users: any[] = []
   users2: any[] = []
   emailV: boolean = false
+  showAgainCheck: boolean = false
+  showMessageCheck: boolean = false
   //Informacion proyecto
   infoProject: any[] = []
   lat: number = 51.678418
@@ -81,7 +83,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
                         if (k.type === 'modified') {
 
                         } else {
-                         // if (temp2) {
+                          // if (temp2) {
                           this.map.load().then(() => {
                             new google.maps.DistanceMatrixService().getDistanceMatrix({ 'origins': [this.myzip], 'destinations': [k.doc.data().googleZipCode], 'travelMode': google.maps.TravelMode.DRIVING }, (results: any) => {
                               if (results.rows[0].elements[0].distance !== undefined) {
@@ -93,6 +95,9 @@ export class ExploreComponent implements OnInit, OnDestroy {
                               tempProjects[cont].photo = profile.photoUrl
                               tempProjects[cont].name = profile.name + ' ' + profile.lastname
                               tempProjects[cont].distance = this.distan
+                              if (profile.verifyUser) {
+                                tempProjects[cont].verifyUser = profile.verifyUser
+                              }
                               cont++
                               this.prouser.pagination.emit(tempProjects)
                               this.prouser.filterPag.emit(tempProjects)
@@ -156,7 +161,6 @@ export class ExploreComponent implements OnInit, OnDestroy {
   }
   sendInfo(e) {
     this.infoProject = e
-  
     this.select = 1
     var infoPro: any = this.infoProject
     this.prouser.getProject(infoPro.idUser, infoPro.idProject).get()
@@ -170,20 +174,25 @@ export class ExploreComponent implements OnInit, OnDestroy {
           this.users2 = info.applyUsers2
         }
       })
-    this.prouser.getProjectSameHire(infoPro.idUser).get()
-      .subscribe((d) => {
-        d.forEach((p) => {
-          var info = p.data()
-          if (info.applyUsers) {
-            if (info.applyUsers.includes(this.prouser.user.uid)) {
-              this.buttonApply = false
-            }
-          }
-        })
-      })
+    // this.prouser.getProjectSameHire(infoPro.idUser).get()
+    //   .subscribe((d) => {
+    //     d.forEach((p) => {
+    //       var info = p.data()
+    //       if (info.applyUsers) {
+    //         if (info.applyUsers.includes(this.prouser.user.uid)) {
+    //           this.buttonApply = false
+    //         }
+    //       }
+    //     })
+    //   })
   }
   apply() {
-    this.modal = 1
+    if(localStorage.getItem('applyMessage') == 'true'){
+      this.modal = 1
+    }else{
+      this.showMessageCheck = true
+      this.select = 2
+    }
     this.buttonApply = false
     this.prouser.users.emit(1)
   }
@@ -246,11 +255,20 @@ export class ExploreComponent implements OnInit, OnDestroy {
 
   filter() {
     this.sf = this.skillFilter
-    this.miles = this.mf    
+    this.miles = this.mf
     if (this.skillFilter.length == 0) {
       this.sf = ['Concrete', 'Decorator', 'Drywall', 'Electrical', 'Excavation', 'Flooring', 'General Labor', 'Insulation', 'Interior Finishing Carpentry', 'Iron Worker', 'Landscaper', 'Mason', 'Plastering', 'Plumbing', 'Roofer', 'Waterproof Installation']
     }
     this.changeFilter = this.newold == 1 ? true : false
+  }
+
+  showAgain() {
+    if (this.showAgainCheck) {
+      if (!localStorage.getItem('applyMessage')) {
+        localStorage.setItem('applyMessage', 'true')
+        location.href = '/Projects'
+      }
+    }
   }
 
   ngOnDestroy() {

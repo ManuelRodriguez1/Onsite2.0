@@ -468,6 +468,14 @@ iframe {
     color: #000000 !important;
 }
 
+.styleText {
+    background: #ECECEC;
+    width: fit-content;
+    padding: 1px 18px 1px 18px;
+    border-radius: 29px;
+    color: #9D9D9D !important;
+}
+
 .reviwsDescriptionFinally {
     width: 100%;
     overflow: hidden;

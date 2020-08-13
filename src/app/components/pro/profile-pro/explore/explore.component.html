@@ -18,7 +18,7 @@
 
         </div>
     </div>
-    <div class="container shadow" *ngIf="select == 0 && projects.length!=0">
+    <div class="container shadow" *ngIf="select == 0 && projects.length != 0">
         <div class="skillsCheckContainer" [ngStyle]="{'display': skf ? 'block' : 'none'}">
             <div class="column col1">
                 <div class="item">
@@ -250,10 +250,12 @@
                     <p>Hirer</p>
                 </div>
                 <div class="fields flex">
-                    <div class="profile mini" [ngStyle]="{'background-image' : 'url('+infoProject.photo+')'}"></div>
+                    <div class="profile mini profileHire" [ngStyle]="{'background-image' : infoProject.photo && 'url('+infoProject.photo+')'}"></div>
                     <div class="ml-14">
                         <p class="title2 mt-0">{{infoProject.name}}</p>
-                        <p class="mt-8"><span class="verify fl mr-6"></span>Verified user</p>
+                        <ng-container *ngIf="infoProject.verifyUser">
+                            <p class="mt-8"><span class="verify fl mr-6"></span>Verified user</p>
+                        </ng-container>
                     </div>
                 </div>
             </div>
@@ -325,11 +327,43 @@
                 <p>You have successfully <br>applied to this offer</p>
             </div>
             <p class="mt-30 smallText">The hirer will reach out to you soon in the Messages <br>section to negotiate and agree on payment terms.</p>
-            <a href="/Dashboard">
+            <!-- <a href="/Dashboard">
                 <button class="blueBtn large mt-30 w360">Back to dashboard</button>
             </a>
-            <span class="mt-12 mb-12 orLines">or</span>
-            <button class="blueBtn large mb-45 w360" (click)=backExplore()>Back to explore</button>
+            <span class="mt-12 mb-12 orLines">or</span> -->
+            <button class="blueBtn large mb-45 w360 mt-30" (click)=backExplore()>Back to explore</button>
+        </div>
+    </div>
+
+    <div class="firtTimeContainer" *ngIf="showMessageCheck">
+        <div class="textTitle">
+            <p>You have sucessfully <br>applied to a project!</p>
+            <p>The hirer should contact you soon in the messages section!</p>
+        </div>
+        <div class="grayContainer">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="firstTimeImage"></div>
+                </div>
+                <div class="col-sm">
+                    <div class="columTextFirsTime">
+                        <p class="titleFist">What’s next?</p>
+                        <ul>
+                            <li>The Hirer will contact you with a message.</li>
+                            <li> You will negotiate a rate with the Hirer. If you agree on a rate, you will be able to accept the job.</li>
+                            <li> The Hirer will tell you about how they will handle payment, your start date, and any information you will need to know about the job.</li>
+                        </ul>
+                        <button class="btn medium blueBtn" (click)="showAgain()">Continue</button>
+                        <label class="checkbox">
+                            <input type="checkbox" id="check1" class="checkbox__input" (change)="this.showAgainCheck = !this.showAgainCheck" />
+                            <span class="checkbox__checkmark"></span>
+                            <span class="form-check-label">
+                                <p>Do not show this page again.</p>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

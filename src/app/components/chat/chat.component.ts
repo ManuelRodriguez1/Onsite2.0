@@ -13,6 +13,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   //Info para Hire
   users: any[] = []
+  usersTem: any[] = []
+  projectsUsers: any[] = []
+  showProjects: any[] = []
   cont: number = 0
 
   //Chat
@@ -28,9 +31,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   // Modal Chat
   skills: any[] = []
   up: boolean = false
+  up2: boolean = false
   modal: number = 0
   hire: boolean = false
   skillS: string = ''
+  projectS: string = ''
   onlyNumber = new RegExp(/^[1-9][0-9]{0,4}(?:[.]\d{0,2})?$/)
   infoTemp: any = ''
   // Filtros chat
@@ -62,7 +67,8 @@ export class ChatComponent implements OnInit, OnDestroy {
         .subscribe((p) => {
           p.forEach((p) => {
             if (p.data().applyUsers) {
-              if (p.data().applyUsers.length > 0) {                
+              if (p.data().applyUsers.length > 0) {
+                this.projectsUsers.push({ 'idProject': p.id, 'projectName': p.data().projectname, 'usersPro': p.data().applyUsers })
                 this.info.usersChat.emit(p.data())
               }
             }
@@ -72,7 +78,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.sub2 = this.info.usersChat.subscribe((res) => {
         var temp: any = ''
         res.applyUsers.forEach(e => {
-          this.users.push({ 'projectname': res.projectname, 'skills': res.skills })
+          this.usersTem.push({ 'projectname': res.projectname, 'skills': res.skills })
           this.info.getInfoPro().doc(e).get().subscribe((inf) => {
             var t2: boolean = false
             this.info.getChatExist().get().subscribe((s) => {
@@ -84,16 +90,18 @@ export class ChatComponent implements OnInit, OnDestroy {
                   }
                 }
               })
-              temp = inf.data()
-              if (this.cont != this.users.length) {
-                this.users[this.cont].name = temp.name + ' ' + temp.lastname
-                this.users[this.cont].photo = temp.photoUrl
-                this.users[this.cont].idOther = e
-                this.users[this.cont].noRead = t2
-                this.cont++
-                this.info.chatUnread.emit(this.users.length)
-              }
             })
+            temp = inf.data()
+            if (this.cont != this.usersTem.length) {
+              this.usersTem[this.cont].name = temp.name + ' ' + temp.lastname
+              this.usersTem[this.cont].photo = temp.photoUrl
+              this.usersTem[this.cont].idOther = e
+              this.usersTem[this.cont].noRead = t2
+              this.cont++
+              let obj = {};
+              this.users = this.usersTem.filter(o => obj[o.idOther] ? false : obj[o.idOther] = true);
+              this.info.chatUnread.emit(this.users.length)
+            }
           })
         })
       })
@@ -119,10 +127,10 @@ export class ChatComponent implements OnInit, OnDestroy {
                 })
                 user.ref.collection('projects').get()
                   .then((h) => {
-                    h.forEach((h) => {                      
+                    h.forEach((h) => {
                       if (h.data().applyUsers) {
                         var temp2: any = h.data().applyUsers
-                        if (temp2.includes(this.myId)) {                         
+                        if (temp2.includes(this.myId)) {
                           if (this.cont != this.users.length) {
                             this.users[this.cont].projectname = h.data().projectname
                             this.users[this.cont].idProject = h.id
@@ -236,7 +244,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   }
 
-  chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string, offer?: boolean, accept?: boolean, price?: number, proname?: string, team?: string) {
+  chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string, offer?: boolean, accept?: boolean, price?: number, proname?: string, team?: string, projectId?: string) {
     var hire: string = ''
     var pro: string = ''
 
@@ -257,7 +265,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
       if (accept == true) { offer = false }
 
-      this.info.chatMsg(hire, pro, msg, adj, nameAdj, offer, accept, price, proname, team)
+      this.info.chatMsg(hire, pro, msg, adj, nameAdj, offer, accept, price, proname, team, projectId)
       this.mesg = ''
       $(".chatContainerHeight").animate({ scrollTop: $('.chatContainerHeight').prop("scrollHeight") }, 1000);
     }
@@ -288,13 +296,14 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   createOffer(price: number) {
-    this.chatMessage(this.idPro, 'offer', false, '', true, false, price, this.name, this.skillS)
+    this.chatMessage(this.idPro, 'offer', false, '', true, false, price, this.name, this.skillS, this.idProject)
   }
 
   acceptOffer() {
     if (this.messages[this.messages.length - 1].offer) {
       this.skillS = this.messages[this.messages.length - 1].team
       this.priceHour = this.messages[this.messages.length - 1].price
+      this.idProject = this.messages[this.messages.length - 1].projectId
       this.chatMessage(this.idPro, 'accept', false, '', false, true, this.priceHour, this.name, this.skillS)
       this.info.getInfoHire().doc(this.idPro).collection('projects').doc(this.idProject).get()
         .toPromise().then((p) => {
@@ -322,6 +331,25 @@ export class ChatComponent implements OnInit, OnDestroy {
           })
         })
     }
+  }
+
+  projectsFind() {
+    this.skillS = ''
+    this.showProjects = []
+    this.projectsUsers.map((m) => {
+      m.usersPro.map((n) => {
+        if (n == this.idPro) {
+          this.showProjects.push(m)
+          if (this.showProjects.length == 1) {
+            this.projectS = this.showProjects[0].projectName
+            this.idProject = this.showProjects[0].idProject
+          } else {
+            this.projectS = ''
+            this.idProject = ''
+          }
+        }
+      })
+    })
   }
 
   deleteChat() {
