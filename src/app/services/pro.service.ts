@@ -79,10 +79,11 @@ export class ProService {
           }
 
         })
-        // .then(() => {
-        //   // localStorage.setItem('user','userNew')
-        //   this.router.navigate(['/ProfilePro'])
-        // })
+        .then(() => {
+          setTimeout(() => {
+            this.router.navigate(['/VerificationEmail'])
+          }, 1500);
+        })
       }).catch((error) => {
         console.log(error);
 
