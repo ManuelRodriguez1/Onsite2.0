@@ -74,11 +74,14 @@ export class EmailVerificationComponent implements OnInit {
 
   }
   handleVerifyEmail(auth, actionCode, continueUrl, lang) {
+    console.log(auth);
+    console.log(actionCode);
+    console.log("belxy");
     this.estadoEmail = 1;
     auth.applyActionCode(actionCode).then(function (resp) {
-
+      console.log(resp);
     }).catch(function (error) {
-
+console.log(error);
     });
   }
 

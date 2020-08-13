@@ -38,6 +38,7 @@ export class MenuHomeComponent implements OnInit {
   filesPicture = [{ 'name': 'Add a file', 'url': '' }];
   file: any[] = [];
   countC: number = 0
+  countC1: number = 0
   skills2Howmany: any[] = [];
   cust = 0;
   router: any;
@@ -63,7 +64,7 @@ export class MenuHomeComponent implements OnInit {
   applyUsers: any[] = [];
   dataApply: any[] = [];
   negotiation: any[] = [];
-  LeaveForm = 1
+  LeaveForm = 0
   sProject: string = ''
   visiblePeople = false
   submitted = false;
@@ -742,6 +743,7 @@ console.log(this.files);
           .subscribe((data) => {
 
             this.repro = data.payload.data()
+            console.log(this.repro);
 
             this.usuariosReviwsTodos.push({ "id": r.id, "rating": r.rating, "descripcion": r.descripcion, "name": this.repro.name, "photoUrl": this.repro.photoUrl });
 
@@ -768,10 +770,17 @@ console.log(this.files);
 
 
     }
+  
+    if (this.profileP.certificate != '') {
+      if (this.profileP.certificate[0].name == 'Add certificate file') {
+        this.countC1 = 0
+      }
+    }
 
 
 
 
+console.log(this.profileP);
 
 
 

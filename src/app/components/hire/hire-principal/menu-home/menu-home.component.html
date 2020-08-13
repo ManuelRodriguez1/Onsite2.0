@@ -93,8 +93,9 @@
                                                 </div>
 
                                             </div>
+                                            <hr class="w100"  >
                                         </div>
-                                        <hr class="m-0">
+                                       
                                     </ng-container>
                                     <div>
                                     </div>
@@ -678,8 +679,13 @@
                         (click)="messages(profileP.id)">Message</button>
                 </div>
             </div>
-            <div class="col-sm-8 overall">
-                <div class="row mt-51 ml-48">
+            <div class="col-sm-8 overall p0">
+                <div class="noVerify1">
+                    <p>Pro User</p>
+                    <p class="verifyUser1"><span>Verified user</span></p>
+                </div>
+
+                <div class="row mt-51 ml-48 mr-48">
                     <div class="col-sm">
                         <div class="title3 my-2">
                             <p>Rating</p>
@@ -703,7 +709,7 @@
                         <div class="title3 my-2">
                             <p>Jobs completed</p>
                         </div>
-                        <p class="mt-23 smallText">0</p>
+                        <p class="mt-23 smallText projectspnumber">0</p>
                     </div>
                 </div>
                 <div class="row mt-4 ml-48 mr-48">
@@ -711,7 +717,7 @@
                         <div class="title3">
                             <p>Certificates</p>
                         </div>
-                        <p class="mt-2 smallText">{{profileP.certificate?.length}}</p>
+                        <p class="mt-2 smallText projectspnumber">{{countC1}}</p>
                     </div>
                 </div>
                 <hr class="hr">
@@ -720,12 +726,13 @@
                         <div class="title3">
                             <p>Profile description</p>
                         </div>
-                        <p class="mt-2 normalText">{{ profileP.description }}</p>
+                        <p class="mt-2 normalText"><span *ngIf="profile.description == null"><b>{{ profileP.name }} {{ profileP.lastname }}</b> has not added a description yet.</span>{{profileP.description }}</p>
+                        
                     </div>
                 </div>
                 <hr class="hr">
                 <div class="row my-2">
-                    <div class="col-sm  ml-48">
+                    <div class="col-sm  ml-48 mr-48">
                         <div class="title3">
                             <p>CV</p>
                         </div>
@@ -733,26 +740,27 @@
                             <div *ngIf="cv.name != 'Add material file' && cv.name != null">
                                 <a target="_blank" href="{{cv.url}}">
                                     <div class="fileIcon"></div>
-                                    <p class="normalText">{{cv.name}}</p>
+                                    <p class="normalText ellipsis">{{cv.name}}</p>
                                 </a>
 
 
                             </div>
                             <div *ngIf="cv.name == 'Add material file' || cv.name == null ">
-                                <p>No files have been uploaded.</p>
+                                <p><b>{{ profileP.name }} {{ profileP.lastname }}</b> Mauro Poche has not uploaded any CV file.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr class="hr">
                 <div class="row my-2">
-                    <div class="col-sm  ml-48">
+                    <div class="col-sm  ml-48 mr-48">
                         <div class="title3">
                             <p>Skills</p>
                         </div>
                         <!-- <div class="mt-2" style="overflow: hidden;" [hidden]="profile.skills == null"> -->
                         <div class="skillsel onlySkill mt-2" *ngFor="let so of profileP.skills">
-                            <img src="../../../../../assets/imgProIcon/{{so}}.png">
+                            <div class="div1">   <img src="../../../../../assets/imgProIcon/{{so}}.png"> </div>
+                         
                             <p>{{so}}</p>
                         </div>
                         <!-- </div> -->
@@ -774,15 +782,17 @@
                 </div>
                 <hr class="hr">
                 <div class="row">
-                    <div class="col-sm  ml-48">
+                    <div class="col-sm  ml-48 mr-48">
                         <div class="title3">
                             <p>Certificates</p>
                         </div>
                         <div class="row">
                             <div class="col-sm input-group pl-3">
+                                
                                 <div *ngFor="let ce of profileP.certificate" class="mr-30">
+                              
                                     <ng-container
-                                        *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && profileP.certificate.name != 'Add certificate file'">
+                                        *ngIf="profileP.certificate.length != 0 && profileP.certificate.length != null && ce.name != 'Add certificate file'">
                                         <!-- <div *ngFor="let co of profile.certificate" class="mr-30"> -->
                                         <a target="_blank" href="{{ce.url}}">
                                             <div class="fileIcon certIcon"></div>
@@ -791,8 +801,8 @@
                                         <!-- </div> -->
                                     </ng-container>
                                     <div
-                                        *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || profileP.certificate.name == 'Add certificate file'">
-                                        <p>No files have been uploaded.</p>
+                                        *ngIf="profileP.certificate.length == 0 || profileP.certificate.length == null || ce.name == 'Add certificate file'">
+                                        <p class="normalText">No files have been uploaded.</p>
                                     </div>
                                 </div>
                             </div>
@@ -805,8 +815,7 @@
                         <div class="title3 mb-4">
                             <p>Reviews</p>
                         </div>
-                        <p class="smallText mr-48" *ngIf="usuariosReviwsTodos.length==0">Your opinion is very valuable
-                            to your workers, help people improve and be recognized for their skills, leave a review!</p>
+                        <p class="normalText mr-48" *ngIf="usuariosReviwsTodos.length==0">Be the first one to leave a review if you have worked with <b>{{ profileP.name }} {{ profileP.lastname }}</b>> in a project before.</p>
 
                         <div class="row mb-4">
                             <div class="col-6 mt-23 " *ngFor="let reviews of usuariosReviwsTodos">
@@ -839,25 +848,23 @@
                 </div>
                 <div *ngIf="LeaveForm == 0">
                     <div class="row">
-                        <div class="col-sm  ml-48">
+                        <div class="col-sm  ml-48 mr-48">
                             <button class="blueBtn medium w360 pl-3 mr-3 mrboton" (click)="leave()">Leave a
                                 review</button>
                         </div>
                     </div>
                 </div>
                 <div *ngIf="LeaveForm == 1">
-                    <div class="row mt-4 ml-48">
+                  
+                    <div class="row mt-4 ml-48 mr-48">
                         <div class="title3 mb-2">
                             <p>Rating </p>
                         </div>
                     </div>
                     <div class="row mt-1 pl-3">
                         <div class="form-group">
-                            <!--ngb-rating [(rate)]="currentRate" aria-valuenow="3" id="currentRate" name="currentRate" [max]="5" class="ngb-rating"></ngb-rating>
-              <div>
-             
-              </div-->
-                            <div class="stars mt-23 ml-48">
+                   
+                            <div class="stars mt-23 ml-48 mr-48">
                                 <input type="hidden" id="valStarts" value="{{valStarts}}">
                                 <div class="starG" [class.starO]="estrellitasreviws1 >= 1"
                                     (click)="estrellitasreviws(1)"></div>
@@ -870,7 +877,7 @@
                                 <div class="starG mr-13" [class.starO]="estrellitasreviws1 == 5"
                                     (click)="estrellitasreviws(5)"></div>
                             </div>
-                            <span class="textError ml-48" id="currentRaterror"></span>
+                            <span class="textError ml-48 mr-48" id="currentRaterror"></span>
                         </div>
                     </div>
                     <div class="row pl-3">
@@ -881,7 +888,7 @@
                             <span class="textError" id="reviewRerror"></span>
                         </div>
                     </div>
-                    <div class="row mt-3 float-right mrboton">
+                    <div class="row mt-3 float-right mrboton mr-48">
                         <button class="blueBtn small w360 mr-3 cancelRate" (click)="cancelRate()">Cancel</button>
                         <button class="blueBtn small w360 mr-3" (click)="postReview()">Post</button>
                     </div>

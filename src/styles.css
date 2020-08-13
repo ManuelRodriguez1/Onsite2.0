@@ -1915,7 +1915,16 @@ h4,
 .uploadSection .blueBtn {
     margin-top: 66px;
     line-height: 280%;
-}
+}.projectspnumber{
+    width: 46px;
+    height: 28px;
+    background: #ECECEC;
+    border-radius: 29px;
+    text-align: center;
+    line-height: 26px;
+    color: #9D9D9D;
+    font-size: 16px;
+  }
 
 @media screen and (max-width: 1320px) {
     .container1280Final {
