@@ -905,3 +905,35 @@
         </div>
     </div>
 </div>
+
+<div class="firtTimeContainer" *ngIf="showMessageCheck">
+    <div class="textTitle">
+        <p>You have sucessfully <br> posted a project!</p>
+        <p>Once a Pro applies to your project, you can contact him to negotiate <br> through the messages section.</p>
+    </div>
+    <div class="grayContainer">
+        <div class="row">
+            <div class="col-sm">
+                <div class="firstTimeImageHire"></div>
+            </div>
+            <div class="col-sm">
+                <div class="columTextFirsTime">
+                    <p class="titleFist">What’s next?</p>
+                    <ul>
+                        <li> Wait for Pro users to apply for your project.</li>
+                        <li> Go to the Projects section, open a project to see the list of applicants. Check the Pros profiles to see their skills and owned tools that they can provide</li>
+                        <li>  Click on the message button to get in touch with each Pro you are willing to hire. Then in the messages section you can negotiate the hourly wage and click on the Hire blue button to make a formal offer to the Pro user. If the user accepts the offer then the user will be added to your team’s list in the project page.</li>
+                    </ul>
+                    <button class="btn medium blueBtn" (click)="showAgain()">Continue</button>
+                    <label class="checkbox">
+                        <input type="checkbox" id="check1" class="checkbox__input" (change)="this.showAgainCheck = !this.showAgainCheck" />
+                        <span class="checkbox__checkmark"></span>
+                        <span class="form-check-label">
+                            <p>Do not show this page again.</p>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

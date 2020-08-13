@@ -81,7 +81,8 @@ export class MenuHomeComponent implements OnInit {
   containervacioproyects = true;
   filePicture: any[] = []
   imgprev: any;
-   
+  showAgainCheck: boolean = false
+  showMessageCheck: boolean = false
   imgprevValue = true;
   deleteBriefMaterialvar=false;
   //mapa
@@ -348,10 +349,20 @@ export class MenuHomeComponent implements OnInit {
     this.containervacioproyects = true;
     this.imgprevValue=true;
   }
-
+  showAgain() {
+    if (this.showAgainCheck) {
+      if (!localStorage.getItem('applyMessageHire')) {
+        localStorage.setItem('applyMessageHire', 'true')
+        
+      }
+    
+    }
+    location.href = '/Hireprincipal'
+  }
   //Agregar Proyecto BD
   addProject(f: NgForm) {
 
+ 
     console.log(f);
 
     this.error = 2
@@ -394,13 +405,16 @@ export class MenuHomeComponent implements OnInit {
 
 
       var temp = false
-console.log(this.files);
-console.log(this.filePicture);
-console.log(this.brieftest);
+
       //Crear o editar funcion 
       this.projectService.newProject(f, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude, this.filePicture)
 
-      this.modal = 1
+      if(localStorage.getItem('applyMessageHire') == 'true'){
+        this.modal = 1
+      }else{
+        this.showMessageCheck = true
+        this.HomeFormularioNw = 10;
+      }
       this.section = 1
       this.projects = []
       this.viewP = []

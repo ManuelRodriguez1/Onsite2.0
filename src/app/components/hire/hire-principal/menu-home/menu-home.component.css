@@ -75,7 +75,7 @@
 .webkit button {
     border: none;
 }
-
+/*
 .btn {
     border: 1px solid #C4C4C4;
     color: #000000;
@@ -83,7 +83,7 @@
     border-radius: 2px;
     font-size: 10px;
     font-weight: bold;
-}
+}*/
 
 .messageDesactive,
 .carpeta {
