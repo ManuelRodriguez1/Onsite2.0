@@ -78,11 +78,9 @@ export class ProService {
               })
           }
 
+        }).then(()=>{
+          this.router.navigate(['/Verification'])
         })
-        // .then(() => {
-        //   // localStorage.setItem('user','userNew')
-        //   this.router.navigate(['/ProfilePro'])
-        // })
       }).catch((error) => {
         console.log(error);
 
