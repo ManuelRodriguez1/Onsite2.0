@@ -371,17 +371,17 @@ export class MenuHomeComponent implements OnInit {
 
     //Campos dinamocos para agregar personas segun skill
     $(".addPeople").each(function (index) {
-      var skill = $(this).attr("id");
+      var skill = $(this).attr("title");
       var quantity = $(this).val();
       if (quantity == "" || quantity == 0) {
-        $("#" + skill).removeClass("correctInput");
-        $(".a" + skill).html("people is required");
-        $("#" + skill).addClass("errorInput");
+        $("[title^='"+skill+ "']").removeClass("correctInput");
+        $("[title^='a"+skill+ "']").html("People is required.");
+        $("[title^='"+skill+ "']").addClass("errorInput");
 
       } else {
-        $(".a" + skill).html("");
-        $("#" + skill).removeClass("errorInput");
-        $("#" + skill).addClass("correctInput");
+        $("[title^='a"+skill+ "']").html("");
+        $("[title^='"+skill+ "']").removeClass("errorInput");
+        $("[title^='"+skill+ "']").addClass("correctInput");
       }
       aux.push({ "skill": skill, "quantity": quantity })
     });
@@ -393,11 +393,11 @@ export class MenuHomeComponent implements OnInit {
 
 
 
-    if (f.status == "INVALID" || locationApp == "" || locationApp === undefined || aux.length == 0 || f.value.passtest == false || f.value.taketest == false || f.value.passtest === undefined || f.value.taketest === undefined || this.selectskills == [] || this.selectskills.length == 0) {
+    if (f.status == "INVALID" || locationApp == "" || locationApp === undefined || aux.length == 0 || this.selectskills == [] || this.selectskills.length == 0) {
 
       if (locationApp == "" || f.value.projectname === undefined || f.value.projectname == "" || f.value.description === undefined || f.value.description == ""
         || f.value.estimated === undefined || f.value.estimated == "" || this.selectskills.length == 0 || f.value.enddate === undefined || f.value.enddate == "" || f.value.startdate === undefined || f.value.startdate == ""
-        || f.value.passtest === undefined || f.value.passtest == false || f.value.taketest === undefined || f.value.taketest == false) {
+        ) {
 
         this.alerta = true;
       }

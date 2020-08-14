@@ -290,10 +290,10 @@
                     <div class="col-sm-6 form-group" *ngFor="let p of peoples">
                         <p class="normalText pb-2">{{p.skill}}</p>
                         <input required min="1" max="100" type="Number" class="form-control addPeople" placeholder=""
-                            value="{{p.quantity}}" name="people" id="{{p.skill}}"
+                            value="{{p.quantity}}" name="people" id="{{p.skill}}" title="{{p.skill}}"
                             [class.errorInput]="people.value == 0 || people.value == '' ||  people.value == undefined  &&  alerta "
                             [class.correctInput]="people.value != 0 && people.value != '' && people.value != undefined " />
-                        <span class="textError a{{p.skill}}"></span>
+                        <span class="textError a{{p.skill}}" title="a{{p.skill}}"></span>
 
 
                     </div>
@@ -403,15 +403,14 @@
                         <label class="checkbox">
                             <input type="checkbox" id="taketest" name="taketest" class="checkbox__input"
                                 [(ngModel)]="viewP.taketest" #taketest="ngModel"
-                                [class.errorInput]="taketest.value != true  &&  alerta "
-                                [class.correctInput]="taketest.value == true" />
+                               />
                             <span class="checkbox__checkmark"></span>
                             <span class="smallText">All workers must take a background test.</span>
                         </label>
                         <div class="">
-                            <span *ngIf="taketest.value != true &&   alerta " class="textError">All workers must take a
+                            <!--span *ngIf="taketest.value != true &&   alerta " class="textError">All workers must take a
                                 background
-                                test</span>
+                                test</span-->
 
                         </div>
                     </div>
@@ -422,8 +421,7 @@
                         <label class="checkbox">
                             <input type="checkbox" class="checkbox__input" id="passtest" name="passtest"
                                 #passtest="ngModel" [(ngModel)]="viewP.passtest"
-                                [class.errorInput]="passtest.value == '' || passtest.value == undefined  &&  alerta "
-                                [class.correctInput]="passtest.value != '' && passtest.value != undefined " />
+                               />
 
                             <span class="checkbox__checkmark"></span>
                             <span class="smallText">All workers must pass a background test.</span>
@@ -431,9 +429,9 @@
 
 
                         <div>
-                            <span *ngIf="passtest.value != true &&   alerta " class="textError">All workers must pass a
+                            <!--span *ngIf="passtest.value != true &&   alerta " class="textError">All workers must pass a
                                 background
-                                test</span>
+                                test</span-->
 
                         </div>
                     </div>
