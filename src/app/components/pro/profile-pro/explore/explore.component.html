@@ -1,6 +1,6 @@
 <div class="containerMin">
 
-    <div class="container shadow containerNoExplore" *ngIf="projects.length==0">
+    <div class="container shadow containerNoExplore" *ngIf="projects.length == 0 && !loading">
         <div class="row">
             <div class="col-6">
                 <div>
@@ -18,7 +18,7 @@
 
         </div>
     </div>
-    <div class="container shadow" *ngIf="select == 0 && projects.length != 0">
+    <div class="container shadow" *ngIf="select == 0 && projects.length != 0 || loading">
         <div class="skillsCheckContainer" [ngStyle]="{'display': skf ? 'block' : 'none'}">
             <div class="column col1">
                 <div class="item">

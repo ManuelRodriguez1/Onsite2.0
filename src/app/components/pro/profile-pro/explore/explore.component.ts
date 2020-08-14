@@ -17,7 +17,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   modal: number = 0
   projects: any[] = []
   projects2: any[] = []
-  loading: boolean
+  loading: boolean = false
   users: any[] = []
   users2: any[] = []
   emailV: boolean = false
@@ -56,7 +56,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
   suscription4: Subscription
 
   constructor(private prouser: ProuserService, public router: Router, private map: MapsAPILoader) {
-    this.loading = true
+    // this.loading = true
     firebase.firestore().enablePersistence()
   }
 
@@ -76,6 +76,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
             d.forEach((j) => {
               var profile: any = j.payload.doc.data()
               if (profile.project) {
+                this.loading = true
                 j.payload.doc.ref.collection("projects")
                   .onSnapshot((d) => {
                     d.docChanges().map((k) => {

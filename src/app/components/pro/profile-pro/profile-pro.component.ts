@@ -211,7 +211,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   updateSkills() {
     this.prouser.updateSkill(this.selectskills)
     this.alert = 0
-    this.textAlert = 'skill'
+    this.textAlert = 'skills'
     setTimeout(() => {
       this.alert = 1
     }, 3000);
@@ -233,7 +233,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   updateTools() {
     this.prouser.updateTool(this.tools)
     this.alert = 0
-    this.textAlert = 'tool'
+    this.textAlert = 'tools'
     setTimeout(() => {
       this.alert = 1
     }, 3000);

@@ -68,7 +68,9 @@ export class ChatComponent implements OnInit, OnDestroy {
           p.forEach((p) => {
             if (p.data().applyUsers) {
               if (p.data().applyUsers.length > 0) {
-                this.projectsUsers.push({ 'idProject': p.id, 'projectName': p.data().projectname, 'usersPro': p.data().applyUsers })
+                if(p.data().statusname != 'Deleted'){
+                  this.projectsUsers.push({ 'idProject': p.id, 'projectName': p.data().projectname, 'usersPro': p.data().applyUsers })
+                }
                 this.info.usersChat.emit(p.data())
               }
             }
