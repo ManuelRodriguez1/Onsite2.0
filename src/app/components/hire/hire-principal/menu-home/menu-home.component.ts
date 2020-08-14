@@ -363,8 +363,7 @@ export class MenuHomeComponent implements OnInit {
   addProject(f: NgForm) {
 
  
-    console.log(f);
-
+  
     this.error = 2
     this.submitted = true
     var aux = []
@@ -405,6 +404,14 @@ export class MenuHomeComponent implements OnInit {
 
 
       var temp = false
+      if(f.value.passtest != true ){
+        f.value.passtest =false;
+      }
+
+      if(f.value.taketest != true ){
+        f.value.taketest=false; 
+      }
+      console.log(f);
 
       //Crear o editar funcion 
       this.projectService.newProject(f, this.files, this.selectskills, aux, locationApp, this.latitude, this.longitude, this.filePicture)
