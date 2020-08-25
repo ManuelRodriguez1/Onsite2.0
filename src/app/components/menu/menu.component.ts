@@ -28,6 +28,7 @@ export class MenuComponent implements OnInit {
   UserName = "";
   message: string;
   editMessage: string;
+  uid: any = ''
 
 
   constructor(public af: AngularFireAuth, private router: Router, private afstore: AngularFirestore, private route: ActivatedRoute) {
@@ -50,16 +51,16 @@ export class MenuComponent implements OnInit {
     });
   }
   ngOnInit() {
-    $(document).ready(function(){
-      if(window.location.pathname == '/VerificationEmail'){
+    $(document).ready(function () {
+      if (window.location.pathname == '/VerificationEmail') {
         $(".verifyUser").hide()
-      }     
+      }
     })
-    $(window).scroll(function(){
+    $(window).scroll(function () {
       var windowHeight = $(window).scrollTop();
-    
-      if($("#Aboutus").length==1){
-        
+
+      if ($("#Aboutus").length == 1) {
+
         var contenido2 = $("#Aboutus").offset().top;
         if (windowHeight >= contenido2) {
           $(".Aboutus").addClass("menuSelect")
@@ -67,10 +68,10 @@ export class MenuComponent implements OnInit {
         } else {
           $(".Aboutus").removeClass("menuSelect")
         }
-    
+
       }
-  
-      if($("#Howitworks").length==1){
+
+      if ($("#Howitworks").length == 1) {
         var contenido1 = $("#Howitworks").offset().top;
         if (windowHeight >= contenido1) {
           $(".Aboutus").removeClass("menuSelect")
@@ -79,8 +80,8 @@ export class MenuComponent implements OnInit {
           $(".Howitworks").removeClass("menuSelect")
         }
       }
-     
-     
+
+
     });
   }
 
@@ -94,7 +95,7 @@ export class MenuComponent implements OnInit {
   }
 
   paginaMensajeMenu(user, url) {
-   
+
 
     if (url == "/Home" || url == "/Pro" || url == "/Hire" || url == "/") {
 
@@ -114,6 +115,7 @@ export class MenuComponent implements OnInit {
     if (user) {
       this.estado = user.displayName;
       this.user = user.emailVerified
+      this.uid = user.uid
     }
     if (url == "/Hire" || this.estado == "hire") {
       this.m = "Hirer";
@@ -132,7 +134,7 @@ export class MenuComponent implements OnInit {
       var data = this.afstore.collection("users_hire").doc(user.uid).snapshotChanges()
       data.subscribe((d) => {
         this.profile = d.payload.data()
-     
+
         if (this.profile) {
           if (this.profile.photoUrl != "") { this.imageP = this.profile.photoUrl }
           if (this.profile.name != "") { this.UserName = this.profile.name }
@@ -140,7 +142,7 @@ export class MenuComponent implements OnInit {
       })
 
       this.afstore.collection("users_hire").doc(user.uid).set({
-        verifyUser: this.user ,
+        verifyUser: this.user,
       }, { merge: true }).then(() => {
       })
 
@@ -150,11 +152,46 @@ export class MenuComponent implements OnInit {
       var data = this.afstore.collection("users_pro").doc(user.uid).snapshotChanges()
       data.subscribe((d) => {
         this.profile = d.payload.data()
-   
+
         if (this.profile) {
           if (this.profile.photoUrl != "") { this.imageP = this.profile.photoUrl }
           if (this.profile.name != "") { this.UserName = this.profile.name }
         }
+      })
+    }
+
+    if (this.estado == 'pro') {
+      this.afstore.collection("users_hire").snapshotChanges().subscribe((i) => {
+        i.forEach((j) => {
+          var data: any = j.payload.doc.data()
+          if (data.project) {
+            j.payload.doc.ref.collection("projects").onSnapshot((k) => {
+              k.docChanges().forEach((l) => {
+                var user = l.doc.data().applyUsers
+                if (user.includes(this.uid)) {
+                  if (l.type == 'modified') {
+                    if (!user.includes(this.uid)) {
+                      //Usuario ha sido eliminado de un proyecto
+                    }
+                  }
+                }
+              })
+            })
+          }
+        })
+      })
+      this.afstore.collection("Chat").snapshotChanges().subscribe((a)=>{
+        a.forEach((b)=>{
+          if(b.payload.doc.id.includes(this.uid)){
+            var info: any = b.payload.doc.data()
+            if(info[info.length - 1].offer){
+              //Usuario a recibido una oferta
+            }
+            if(info[info.length - 1].id != this.uid){
+              //Usuario a recibido un nuevo mensaje
+            }
+          }
+        })
       })
     }
   }

@@ -23,6 +23,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   alert: number = 1
   repro: any = ''
   textAlert: string = ''
+  tobe: string = 'has'
   usuariosReviwsTodos: any[] = [];
   // Variables eventos
   up: boolean = false
@@ -156,6 +157,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
 
     this.alert = 0
     this.textAlert = 'account information'
+    this.tobe = 'has'
     setTimeout(() => {
       this.alert = 1
     }, 3000);
@@ -172,6 +174,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
             $("#cPass, #pass1, #pass2").next('span').attr('hidden', true)
             this.alert = 0
             this.textAlert = 'password'
+            this.tobe = 'has'
             setTimeout(() => {
               this.alert = 1
             }, 3000);
@@ -182,6 +185,12 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   //Update Image Profile
   imageProfile(e: any) {
     this.prouser.updateProfileImg(e)
+    this.textAlert = 'profile picture'
+    this.tobe = 'has'
+    this.alert = 0
+    setTimeout(() => {
+      this.alert = 1
+    }, 3000);
   }
   //Section CV
   uploadCV(e: any) {
@@ -212,6 +221,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
     this.prouser.updateSkill(this.selectskills)
     this.alert = 0
     this.textAlert = 'skills'
+    this.tobe = 'have'
     setTimeout(() => {
       this.alert = 1
     }, 3000);
@@ -234,6 +244,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
     this.prouser.updateTool(this.tools)
     this.alert = 0
     this.textAlert = 'tools'
+    this.tobe = 'have'
     setTimeout(() => {
       this.alert = 1
     }, 3000);

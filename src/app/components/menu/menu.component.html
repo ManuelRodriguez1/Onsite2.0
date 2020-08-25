@@ -24,19 +24,20 @@
 
         </ul>
         <ul *ngIf="Sesion==true && userMenu=='Pro'" class="menu">
-         
+
             <li><a href="/ExplorePro">Explore</a></li>
             <li><a href="/Projects">Projects</a></li>
             <li><a href="/Chat">Messages</a></li>
+            <li>Notifications</li>
             <li>
-                <span  [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profilePro"> </span> {{UserName}}
+                <span [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profilePro"> </span> {{UserName}}
                 <span class="flechaUsuario" (click)="flechaUsuario()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
                         <path d="M1 1L8 8L15 1" stroke="black" />
                     </svg>
                     <div *ngIf="popad==true" class="bgpodpad menu">
                         <li>
-                            <div class="bgpodpadDivP"><div class="imgMenuprofile"></div><a routerLink="/ProfilePro">My profile</a></div>
+                            <div class="bgpodpadDivP"><div class="imgMenuprofile"></div><a href="/ProfilePro">My profile</a></div>
                         </li>
                         <li>
                             <div class="bgpodpadDivP"> <div class="imgMenuout"></div><a (click)="logout()">Sign Out</a></div>
@@ -47,19 +48,19 @@
             </li>
         </ul>
 
-    <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
-        <li><a href="/Hireprincipal">Projects</a></li>
-        <li><a href="/Chat">Messages</a></li>
-        <li>
-            <span [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profileHire"> </span> {{UserName}}
-            <span class="flechaUsuario" (click)="flechaUsuario()">
+        <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
+            <li><a href="/Hireprincipal">Projects</a></li>
+            <li><a href="/Chat">Messages</a></li>
+            <li>
+                <span [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profileHire"> </span> {{UserName}}
+                <span class="flechaUsuario" (click)="flechaUsuario()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
                     <path d="M1 1L8 8L15 1" stroke="black" />
                 </svg>
                 <div *ngIf="popad==true" class="bgpodpad menu">
                     <li>
                         <div class="bgpodpadDivP">
-                            <div class="imgMenuprofile"></div><a routerLink="/ProfileHire">My profile</a>
+                            <div class="imgMenuprofile"></div><a href="/ProfileHire">My profile</a>
                         </div>
                     </li>
                     <li>
@@ -70,9 +71,9 @@
                     <button class="done">Close</button>
              </div>
             </span>
-        </li>
-    </ul>
-</div>
+            </li>
+        </ul>
+    </div>
 </nav>
 <div class="alert alert-warning verifyUser" role="alert" *ngIf="!this.user && this.Sesion">
     Please verify your <strong>email</strong> to apply for projects and get full access to all the features in Onhive.
