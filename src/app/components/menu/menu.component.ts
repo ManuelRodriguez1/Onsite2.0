@@ -24,11 +24,28 @@ export class MenuComponent implements OnInit {
   imageP: any = ''
   profile: any = ''
   popad = false;
+  notific = false;
   user: any
   UserName = "";
   message: string;
   editMessage: string;
   uid: any = ''
+  notificacion=1;
+
+  Notifications = [
+    { 
+      'name':'Hirer name1','text': 'has sent you an offer for the Project name project1.'
+    },
+    {
+      'name':'Hirer name2','text': 'has sent you an offer for the Project name project2.'
+    },
+    {
+      'name':'Hirer name3','text': 'has sent you an offer for the Project name project3.'
+    }, {
+      'name':'Hirer name4','text': 'has sent you an offer for the Project name project4.'
+    }];
+
+
 
 
   constructor(public af: AngularFireAuth, private router: Router, private afstore: AngularFirestore, private route: ActivatedRoute) {
@@ -91,6 +108,13 @@ export class MenuComponent implements OnInit {
       this.popad = true;
     } else if (this.popad == true) {
       this.popad = false;
+    }
+  }
+  notification(){
+    if (this.notific == false) {
+      this.notific = true;
+    } else if (this.notific == true) {
+      this.notific = false;
     }
   }
 
