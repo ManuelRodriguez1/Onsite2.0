@@ -86,6 +86,36 @@
     <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
         <li><a href="/Hireprincipal">Projects</a></li>
         <li><a href="/Chat">Messages</a></li>
+        <li class="vmiddle">
+            <span (click)="notification()" class="notificacion1 mnotificacion" *ngIf="notificacion==1" ></span>
+            <span (click)="notification()" class="notificacion2 mnotificacion" *ngIf="notificacion==2" ></span>
+            <div *ngIf="notific" class="bgpodpad menu notific">
+                <div *ngIf="notificacion==1" class="notificTexto">
+                    There’s no notifications.<br> All new notifications will appear in this <br> pop-up window.
+                </div>
+                <div class="" *ngIf="notificacion==2" >
+                    <div class="notificationMes"><span>NOTIFICATIONS</span> <span>Mark all as read</span></div>
+
+                    <div class="notificFinalScroll"> 
+                        <div  *ngFor="let n of Notifications" class="notificFinal">
+                 
+                            <span class="imgMenuNotific"></span>
+                            <span class="txtMenuNotific">
+                                <b>{{n.name}}</b> {{n.text}} <br>
+                                <span>FEW MINUTES AGO</span>
+                            </span>
+                            <span class="closeNot"></span>
+                           
+                        </div>
+                    </div>
+                   
+
+                </div>
+               
+                <button (click)="notification()" class="done">Close</button>
+            </div>
+
+       </li>
         <li>
             <span
                 [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}"

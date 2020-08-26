@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
   message: string;
   editMessage: string;
   uid: any = ''
-  notificacion=1;
+  notificacion=2;
 
   Notifications = [
     { 
