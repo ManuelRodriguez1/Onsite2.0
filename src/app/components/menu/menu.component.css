@@ -3,12 +3,15 @@
          margin: 0 auto;
          height: 100%;
      }
+     
      .menu li a:hover {
-        color: #9D9D9D;
+         color: #9D9D9D;
      }
-     .is-active{
-        color: #9D9D9D !important;
+     
+     .is-active {
+         color: #9D9D9D !important;
      }
+     
      nav {
          position: fixed;
          z-index: 20;
@@ -19,7 +22,8 @@
          top: 0;
          box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
      }
-     .personMenu{
+     
+     .personMenu {
          display: none;
          cursor: pointer;
          top: 50%;
@@ -29,9 +33,11 @@
          right: 0;
          float: right;
      }
-     .personMenu:hover{
+     
+     .personMenu:hover {
          opacity: 0.7;
      }
+     
      .btnFinalSignUp {
          margin-right: 0px !important;
          line-height: normal !important;
@@ -49,6 +55,7 @@
          margin-left: 10px;
          cursor: pointer;
      }
+     
      .flechaUsuario:hover svg {
          opacity: 0.7;
      }
@@ -62,8 +69,7 @@
          margin-right: 10px;
          margin-top: 20px;
          box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
-        border-radius: 6px;
-
+         border-radius: 6px;
      }
      
      .bgpodpad li {
@@ -71,41 +77,44 @@
          line-height: 50px !important;
          height: 50px;
          margin: 0 !important;
-       
      }
-     .bgpodpadDivP{
-        margin-left: 24px;
-        margin-right: 24px;
+     
+     .bgpodpadDivP {
+         margin-left: 24px;
+         margin-right: 24px;
      }
-     .bgpodpad li:hover{
-        background: #ECECEC !important;
-
+     
+     .bgpodpad li:hover {
+         background: #ECECEC !important;
      }
-     .bgpodpad li:hover a{
-        font-weight: 800 !important;
-        color: black !important;
+     
+     .bgpodpad li:hover a {
+         font-weight: 800 !important;
+         color: black !important;
      }
-     .bgpodpad li a{
-        font-weight: normal !important;
-        font-size: 14px !important;
+     
+     .bgpodpad li a {
+         font-weight: normal !important;
+         font-size: 14px !important;
      }
-     .imgMenuprofile{
-        background-image: url("../../../assets/iconos/My_Profile_Menu.png");
-        height: 16px;
-        width: 16px;
-        margin-top: 15px;
-        margin-right: 15px;
-        float: left;
-    }
-
-    .imgMenuout{
-        background-image: url("../../../assets/iconos/Sign_Out.png");
-        width: 15px;
-        height: 13px;
-        margin-top: 20px;
-        float: left;
-        margin-right: 15px;
-    }
+     
+     .imgMenuprofile {
+         background-image: url("../../../assets/iconos/My_Profile_Menu.png");
+         height: 16px;
+         width: 16px;
+         margin-top: 15px;
+         margin-right: 15px;
+         float: left;
+     }
+     
+     .imgMenuout {
+         background-image: url("../../../assets/iconos/Sign_Out.png");
+         width: 15px;
+         height: 13px;
+         margin-top: 20px;
+         float: left;
+         margin-right: 15px;
+     }
      
      .bgpodpad::before {
          content: "";
@@ -117,9 +126,12 @@
          margin-top: -10px;
          margin-right: 60px;
      }
-.done{
-    margin-top: 1px;;
-}
+     
+     .done {
+         margin-top: 1px;
+         ;
+     }
+     
      .imagenUserMenu {
          width: 50px;
          height: 50px;
@@ -131,8 +143,6 @@
          background-size: cover;
          background-position: center;
          background-repeat: no-repeat;
-       
-         
      }
      
      nav .aimg {
@@ -214,8 +224,9 @@
          transform: translateY(-50%);
          padding: 8px 0px 8px 0px;
      }
+     
      .top-nav .menu-icon:hover {
-        opacity: 0.7;
+         opacity: 0.7;
      }
      
      .top-nav .menu-icon .navicon {
@@ -251,7 +262,6 @@
          display: none;
      }
      
-     
      .top-nav .menu-btn:checked~.menu {
          max-height: 100vh;
          height: 100vh;
@@ -274,120 +284,140 @@
          top: 0;
      }
      
-     .menuSelect{
-        color: #9D9D9D !important;
-    }
-    .notific{
-        width: 410px;
-        min-height: 196px;
-        right: 185px;
-        top:68px;
-        height: auto;
-    }
-    .notificFinalScroll{
-        overflow: scroll;
-        padding-bottom: 45px;
-        max-height: 298px;
-    
-    }
-    .bgpodpad.notific::before{
-        margin-right: 15px;
-    }
-    .notific .done{
-        bottom: 0;
-        position: absolute;
-    }
-    .notificTexto{
-        font-style: normal;
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 18px;
-        text-align: center;
-        font-family: 'Open Sans', sans-serif;
-        color: #9D9D9D;
-        top: 40%;
-        position: absolute;
-        margin: 0 auto;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        width: 100%;
-    }
-    .mnotificacion{
-        height: 38px;
-        width: 38px;
-        border-radius: 50%;
-        float: left;
-        background-size: cover;
-        background-position: center;
-        cursor: pointer;
-        background-repeat: no-repeat;
-    }
-    .notificationMes{
-        font-size: 10px;
-        line-height: 46px;
-    }
-    .notificationMes span:nth-child(1){
-        margin-left: 16px;
-      
-    }
-    .notificationMes span:nth-child(2){
-        margin-right: 16px;
-        float: right;
-        color:#FF8600;
-        
-    }
-    .closeNot{
-        background-image:url("../../../assets/iconos/X_Icon_notific.svg");
-        height: 20px;
-        width: 20px;
-        float: left;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        
-    }
-    .notificFinal{
-        padding-left: 19px;
-        padding-right: 19px;
-        height: 86px;
-        position: relative;
-
-    }
-    .imgMenuNotific{
-        width: 50px;
-        height: 50px;
-        background: url("../../../assets/iconos/iconProfile.svg") ;
-        border-radius: 50%;
-        background-size: 26px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: #ECECEC;
-        float: left;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        
-    }
-    .txtMenuNotific{
-        width: 284px;
-        float: left;
-        font-size: 13px;
-        margin-left: 18px;
-        line-height: 18px;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    .vmiddle{
-        vertical-align: middle;
-    }
-    .notificacion1{
-        background-image: url("../../../assets/iconos/notificacion1.svg");
-    }
-    .notificacion2{
-        background-image: url("../../../assets/iconos/notificacion2.svg");
-    }
-    
+     .menuSelect {
+         color: #9D9D9D !important;
+     }
+     
+     .notific {
+         width: 410px;
+         min-height: 196px;
+         right: 185px;
+         top: 68px;
+         height: auto;
+     }
+     
+     .notificFinalScroll {
+         overflow-y: auto;
+         padding-bottom: 45px;
+         max-height: 298px;
+     }
+     
+     .bgpodpad.notific::before {
+         margin-right: 15px;
+     }
+     
+     .notific .done {
+         bottom: 0;
+         position: absolute;
+     }
+     
+     .notificTexto {
+         font-style: normal;
+         font-weight: normal;
+         font-size: 13px;
+         line-height: 18px;
+         text-align: center;
+         font-family: 'Open Sans', sans-serif;
+         color: #9D9D9D;
+         top: 40%;
+         position: absolute;
+         margin: 0 auto;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 100%;
+     }
+     
+     .mnotificacion {
+         height: 38px;
+         width: 38px;
+         border-radius: 50%;
+         float: left;
+         background-size: cover;
+         background-position: center;
+         cursor: pointer;
+         background-repeat: no-repeat;
+     }
+     
+     .notificationMes {
+         font-size: 10px;
+         line-height: 46px;
+     }
+     
+     .notificationMes span:nth-child(1) {
+         margin-left: 16px;
+     }
+     
+     .notificationMes span:nth-child(2) {
+         margin-right: 16px;
+         float: right;
+         color: #FF8600;
+     }
+     
+     .closeNot {
+         background-image: url("../../../assets/iconos/X_Icon_notific.svg");
+         height: 20px;
+         width: 20px;
+         float: left;
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         cursor: pointer;
+     }
+     
+     .fewMin {
+         position: absolute;
+         /* bottom: 0; */
+         color: #9D9D9D;
+         font-size: 10px;
+         /* text-transform: uppercase; */
+         letter-spacing: 0.04em;
+     }
+     
+     .notificFinal {
+         padding-left: 19px;
+         padding-right: 19px;
+         height: 86px;
+         position: relative;
+     }
+     
+     .imgMenuNotific {
+         width: 50px;
+         height: 50px;
+         background: url("../../../assets/iconos/iconProfile.svg");
+         border-radius: 50%;
+         background-size: 26px;
+         background-repeat: no-repeat;
+         background-position: center;
+         background-color: #ECECEC;
+         float: left;
+         position: relative;
+         top: 50%;
+         transform: translateY(-50%);
+     }
+     
+     .txtMenuNotific {
+         width: 284px;
+         float: left;
+         font-size: 13px;
+         margin-left: 18px;
+         line-height: 18px;
+         position: relative;
+         top: 50%;
+         transform: translateY(-50%);
+     }
+     
+     .vmiddle {
+         vertical-align: middle;
+     }
+     
+     .notificacion1 {
+         background-image: url("../../../assets/iconos/notificacion1.svg");
+     }
+     
+     .notificacion2 {
+         background-image: url("../../../assets/iconos/notificacion2.svg");
+     }
+     
      @media (min-width: 901px) {
          .top-nav li {
              margin: 0 10px;
@@ -415,54 +445,49 @@
              margin-top: 90px;
              box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1);
          }
-        
          .menu li {
-            width: calc(100% - 60px) !important;
-            margin: 0 auto !important;
-            border-bottom: 1px solid #9D9D9D ;
+             width: calc(100% - 60px) !important;
+             margin: 0 auto !important;
+             border-bottom: 1px solid #9D9D9D;
          }
          nav .aimg img {
              width: 155px;
          }
-      
-         .aimg{
-            left: 50% !important;
-            transform: translate(-50%,-50%) !important;
-            top: 50% !important;
-            height: auto !important;
-            position: absolute !important;
+         .aimg {
+             left: 50% !important;
+             transform: translate(-50%, -50%) !important;
+             top: 50% !important;
+             height: auto !important;
+             position: absolute !important;
          }
-         .personMenu{
-            display: block;
-        }
-        .btnFinalSignUp{
-            line-height: 80px !important;
-        }
-        .btnFinalSignUp .blueBtn{ 
-            background: none;
-            color: black;
-            width: auto;
-            height: auto;
-            font-size: 15px !important;
-        
-        }
-        .btnFinalSignUp .blueBtn:hover{
-            border: none !important;
-            color:#9D9D9D !important;
-
-        }
+         .personMenu {
+             display: block;
+         }
+         .btnFinalSignUp {
+             line-height: 80px !important;
+         }
+         .btnFinalSignUp .blueBtn {
+             background: none;
+             color: black;
+             width: auto;
+             height: auto;
+             font-size: 15px !important;
+         }
+         .btnFinalSignUp .blueBtn:hover {
+             border: none !important;
+             color: #9D9D9D !important;
+         }
      }
      
      @media (max-width: 500px) {
-        nav .aimg img {
-            width: 121px;
-            height: 35px;
-        }
-        nav{
-            height: 60px !important;
-        }
-        .menu{
-            margin-top: 60px !important;
-        }
-     
+         nav .aimg img {
+             width: 121px;
+             height: 35px;
+         }
+         nav {
+             height: 60px !important;
+         }
+         .menu {
+             margin-top: 60px !important;
+         }
      }

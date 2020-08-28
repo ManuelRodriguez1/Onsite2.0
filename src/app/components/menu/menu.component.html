@@ -29,39 +29,42 @@
             <li><a href="/Projects">Projects</a></li>
             <li><a href="/Chat">Messages</a></li>
             <li class="vmiddle">
-                <span (click)="notification()" class="notificacion1 mnotificacion" *ngIf="notificacion==1" ></span>
-                <span (click)="notification()" class="notificacion2 mnotificacion" *ngIf="notificacion==2" ></span>
+                <span (click)="notific = !notific" [class.notificacion2]="notify.length > 0" class="notificacion1 mnotificacion"></span>
                 <div *ngIf="notific" class="bgpodpad menu notific">
-                    <div *ngIf="notificacion==1" class="notificTexto">
+                    <div *ngIf="notify.length == 0" class="notificTexto">
                         There’s no notifications.<br> All new notifications will appear in this <br> pop-up window.
                     </div>
-                    <div class="" *ngIf="notificacion==2" >
+                    <div class="" *ngIf="notify.length > 0">
                         <div class="notificationMes"><span>NOTIFICATIONS</span> <span>Mark all as read</span></div>
 
-                        <div class="notificFinalScroll"> 
-                            <div  *ngFor="let n of Notifications" class="notificFinal">
-                     
-                                <span class="imgMenuNotific"></span>
-                                <span class="txtMenuNotific">
-                                    <b>{{n.name}}</b> {{n.text}} <br>
-                                    <span>FEW MINUTES AGO</span>
-                                </span>
+                        <div class="notificFinalScroll">
+                            <div *ngFor="let n of notify" class="notificFinal">
+                                <span class="imgMenuNotific" [ngStyle]="{'background-image' : n.img != '' && 'url('+n.img+')'}"></span>
+                                <div class="txtMenuNotific">
+                                    <b>{{n.name}}</b>
+                                    <span *ngIf="n.type == 'offer'"> has sent you an offer for the <b>{{n.project}}</b> project.</span>
+                                    <span *ngIf="n.type == 'chat'"> has sent you a message.</span>
+                                    <span *ngIf="n.type == 'remove'"> has removed you from the <b>{{n.project}}</b> project.</span><br>
+                                    <div class="fewMin">
+                                        <span *ngIf="(dateToday - n.date.toDate().getTime() / 60000) < 10">FEW MINUTES AGO</span>
+                                        <span *ngIf="(dateToday - n.date.toDate().getTime() / 60000) >= 10 && (dateToday - n.date.toDate().getTime() / 60000) < 60">{{(dateToday - n.date.toDate().getTime()) / 60000 | number:'1.0-0'}} MINUTES AGO</span>
+                                        <span *ngIf="(dateToday - n.date.toDate().getTime() / 60000) >= 60">{{(dateToday - n.date.toDate().getTime()) / 3600000 | number:'1.0-0'}} HOURS AGO</span>
+                                    </div>
+                                </div>
                                 <span class="closeNot"></span>
-                               
+
                             </div>
                         </div>
-                       
-    
+
+
                     </div>
-                   
-                    <button (click)="notification()" class="done">Close</button>
+
+                    <button (click)="notific = false" class="done">Close</button>
                 </div>
 
-           </li>
+            </li>
             <li>
-                <span
-                    [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}"
-                    class="imagenUserMenu profilePro"> </span> {{UserName}}
+                <span [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profilePro"> </span> {{UserName}}
                 <span class="flechaUsuario" (click)="flechaUsuario()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
                         <path d="M1 1L8 8L15 1" stroke="black" />
@@ -83,44 +86,43 @@
             </li>
         </ul>
 
-    <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
-        <li><a href="/Hireprincipal">Projects</a></li>
-        <li><a href="/Chat">Messages</a></li>
-        <li class="vmiddle">
-            <span (click)="notification()" class="notificacion1 mnotificacion" *ngIf="notificacion==1" ></span>
-            <span (click)="notification()" class="notificacion2 mnotificacion" *ngIf="notificacion==2" ></span>
-            <div *ngIf="notific" class="bgpodpad menu notific">
-                <div *ngIf="notificacion==1" class="notificTexto">
-                    There’s no notifications.<br> All new notifications will appear in this <br> pop-up window.
-                </div>
-                <div class="" *ngIf="notificacion==2" >
-                    <div class="notificationMes"><span>NOTIFICATIONS</span> <span>Mark all as read</span></div>
-
-                    <div class="notificFinalScroll"> 
-                        <div  *ngFor="let n of Notifications" class="notificFinal">
-                 
-                            <span class="imgMenuNotific"></span>
-                            <span class="txtMenuNotific">
-                                <b>{{n.name}}</b> {{n.text}} <br>
-                                <span>FEW MINUTES AGO</span>
-                            </span>
-                            <span class="closeNot"></span>
-                           
-                        </div>
+        <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
+            <li><a href="/Hireprincipal">Projects</a></li>
+            <li><a href="/Chat">Messages</a></li>
+            <li class="vmiddle">
+                <span (click)="notific = !notific" [class.notificacion2]="notify.length > 0" class="notificacion1 mnotificacion"></span>
+                <div *ngIf="notific" class="bgpodpad menu notific">
+                    <div *ngIf="notify.length == 0" class="notificTexto">
+                        There’s no notifications.<br> All new notifications will appear in this <br> pop-up window.
                     </div>
-                   
+                    <div class="" *ngIf="notify.length > 0">
+                        <div class="notificationMes"><span>NOTIFICATIONS</span> <span>Mark all as read</span></div>
 
+                        <div class="notificFinalScroll">
+                            <div *ngFor="let n of notify" class="notificFinal">
+                                <span class="imgMenuNotific" [ngStyle]="{'background-image' : n.img != '' && 'url('+n.img+')'}"></span>
+                                <span class="txtMenuNotific">    
+                                    <b>{{n.name}}</b> 
+                                    <span *ngIf="n.type == 'offer'"> has sent you an offer for the <b>{{n.project}}</b> project.</span>
+                                <span *ngIf="n.type == 'chat'"> has sent you a message.</span>
+                                <span *ngIf="n.type == 'remove'"> has removed you from the <b>{{n.project}}</b> project.</span><br>
+                                <span class="fewMin">FEW MINUTES AGO</span>
+                                </span>
+                                <span class="closeNot"></span>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <button (click)="notific = false" class="done">Close</button>
                 </div>
-               
-                <button (click)="notification()" class="done">Close</button>
-            </div>
 
-       </li>
-        <li>
-            <span
-                [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}"
-                class="imagenUserMenu profileHire"> </span> {{UserName}}
-            <span class="flechaUsuario" (click)="flechaUsuario()">
+            </li>
+            <li>
+                <span [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profileHire"> </span> {{UserName}}
+                <span class="flechaUsuario" (click)="flechaUsuario()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
                     <path d="M1 1L8 8L15 1" stroke="black" />
                 </svg>
@@ -138,8 +140,8 @@
         <button class="done">Close</button>
         </div>
         </span>
-        </li>
-    </ul>
+            </li>
+        </ul>
     </div>
 </nav>
 <div class="alert alert-warning verifyUser" role="alert" *ngIf="!this.user && this.Sesion">

@@ -30,20 +30,12 @@ export class MenuComponent implements OnInit {
   message: string;
   editMessage: string;
   uid: any = ''
-  notificacion=2;
-
-  Notifications = [
-    { 
-      'name':'Hirer name1','text': 'has sent you an offer for the Project name project1.'
-    },
-    {
-      'name':'Hirer name2','text': 'has sent you an offer for the Project name project2.'
-    },
-    {
-      'name':'Hirer name3','text': 'has sent you an offer for the Project name project3.'
-    }, {
-      'name':'Hirer name4','text': 'has sent you an offer for the Project name project4.'
-    }];
+  notificacion = 1;
+  Notifications: any[] = []
+  removeProject: any[] = []
+  notify: any = []
+  folder: string = ''
+  dateToday = new Date().getTime()
 
 
 
@@ -66,6 +58,8 @@ export class MenuComponent implements OnInit {
       }
 
     });
+
+   
   }
   ngOnInit() {
     $(document).ready(function () {
@@ -100,6 +94,10 @@ export class MenuComponent implements OnInit {
 
 
     });
+    // if (localStorage.getItem('notificaciones') && localStorage.getItem('notificaciones') !== undefined) {
+    //   this.notify = JSON.parse(localStorage.getItem('notificaciones'))
+    // }
+
   }
 
   flechaUsuario() {
@@ -108,13 +106,6 @@ export class MenuComponent implements OnInit {
       this.popad = true;
     } else if (this.popad == true) {
       this.popad = false;
-    }
-  }
-  notification(){
-    if (this.notific == false) {
-      this.notific = true;
-    } else if (this.notific == true) {
-      this.notific = false;
     }
   }
 
@@ -184,47 +175,114 @@ export class MenuComponent implements OnInit {
       })
     }
 
-    if (this.estado == 'pro') {
-      this.afstore.collection("users_hire").snapshotChanges().subscribe((i) => {
-        i.forEach((j) => {
-          var data: any = j.payload.doc.data()
-          if (data.project) {
-            j.payload.doc.ref.collection("projects").onSnapshot((k) => {
-              k.docChanges().forEach((l) => {
-                var user = l.doc.data().applyUsers
-                if (user.includes(this.uid)) {
-                  if (l.type == 'modified') {
-                    if (!user.includes(this.uid)) {
-                      //Usuario ha sido eliminado de un proyecto
-                    }
-                  }
-                }
-              })
-            })
-          }
-        })
-      })
-      this.afstore.collection("Chat").snapshotChanges().subscribe((a)=>{
-        a.forEach((b)=>{
-          if(b.payload.doc.id.includes(this.uid)){
-            var info: any = b.payload.doc.data()
-            if(info[info.length - 1].offer){
-              //Usuario a recibido una oferta
-            }
-            if(info[info.length - 1].id != this.uid){
-              //Usuario a recibido un nuevo mensaje
-            }
-          }
-        })
-      })
+    if(this.af.auth.currentUser.displayName == 'pro'){
+      this.folder = 'users_pro'
+    }else{
+      this.folder = 'users_hire'
     }
+    
+    this.afstore.collection(this.folder).doc(this.af.auth.currentUser.uid).snapshotChanges()
+    .subscribe((n)=>{
+      var t: any = n.payload.data()
+      if(t.notifications){
+        this.notify = t.notifications
+      }else{
+        console.log('nothing'); 
+      }
+    })
+
+    // if (this.estado == 'pro') {
+    //   this.afstore.collection("users_hire").stateChanges().subscribe((i) => {
+    //     i.forEach((j) => {
+    //       var data: any = j.payload.doc.data()
+    //       var img = ''
+    //       if (data.project) {
+    //         if (data.photoUrl && data.photoUrl != '') {
+    //           img = data.photoUrl
+    //         }
+    //         j.payload.doc.ref.collection("projects").onSnapshot({ includeMetadataChanges: true }, (k) => {
+    //           k.docChanges({ includeMetadataChanges: true }).forEach((l) => {
+    //             var user: any[] = l.doc.data().applyUsers
+    //             if (user) {
+    //               if (user.includes(this.uid)) {
+    //                 this.removeProject.push(l.doc.id)
+    //               }
+    //               if (l.type == 'modified') {
+    //                 if (this.removeProject.includes(l.doc.id)) {
+    //                   if (!user.includes(this.uid)) {
+    //                     //Usuario ha sido eliminado de un proyecto
+    //                     this.Notifications.push({ 'id': data.id + 'remove', 'name': data.name + ' ' + data.lastname, 'project': l.doc.data().projectname, 'img': img, 'type': 'remove' })
+    //                     this.notificar(data.id + 'remove', data.name + ' ' + data.lastname, l.doc.data().projectname, img, 'remove')
+    //                   }
+    //                 }
+    //               }
+    //             }
+    //           })
+    //         })
+    //       }
+    //     })
+    //   })
+    //   this.afstore.collection("Chat").stateChanges().subscribe((a) => {
+    //     a.forEach((b) => {
+    //       if (b.payload.doc.id.includes(this.uid)) {
+    //         var info: any = b.payload.doc.data()
+    //         var id = b.payload.doc.id.split("|")
+    //         var hirer = ''
+    //         var project = ''
+    //         var img = ''
+    //         let o = {}
+    //         this.afstore.collection("users_hire").doc(id[0]).get().map((m) => {
+    //           hirer = m.data().name + m.data().lastname
+    //           if (m.data().photoUrl && m.data().photoUrl != '') {
+    //             img = m.data().photoUrl
+    //           }
+    //           if (info.chat[info.chat.length - 1].offer) {
+    //             m.ref.collection("projects").doc(info.chat[info.chat.length - 1].projectId).get().then((t) => {
+    //               project = t.data().projectname
+    //             }).then(() => {
+    //               //Usuario a recibido una oferta
+    //               this.Notifications.push({ 'id': id[0] + 'offer', 'name': hirer, 'project': project, 'img': img, 'type': 'offer' })
+    //               this.Notifications = this.Notifications.filter(f => o[f.id] ? false : o[f.id] = true)
+    //               this.notificar(id[0] + 'offer', hirer, project, img, 'offer')
+    //             })
+    //           }
+    //         }).toPromise().then(() => {
+    //           if (info.chat[info.chat.length - 1].id != this.uid) {
+    //             //Usuario a recibido un nuevo mensaje
+    //             this.Notifications.push({ 'id': id[0] + 'chat', 'name': hirer, 'project': project, 'img': img, 'type': 'chat' })
+    //             this.Notifications = this.Notifications.filter(f => o[f.id] ? false : o[f.id] = true)
+    //             this.notificar(id[0] + 'offer', hirer, project, img, 'chat')
+    //           }
+    //         })
+    //       }
+    //     })
+    //   })
+    // }
   }
   logout() {
     this.af.auth.signOut();
     location.href = "/"
-
-
   }
+  // notificar(id, name, project, img, type) {
+  //   var temp: any = ''
+  //   let o = {}
+  //   if (this.notify.length > 0) {
+  //     temp = JSON.parse(localStorage.getItem('notificaciones'))
+  //     temp.push({ 'id': id, 'name': name, 'project': project, 'img': img, 'type': type })
+  //     localStorage.setItem('notificaciones', JSON.stringify(temp))
+  //     this.notify = JSON.parse(localStorage.getItem('notificaciones'))
+  //     this.notify = this.notify.filter(f => o[f.id] ? false : o[f.id] = true)
+  //   } else {
+  //     localStorage.setItem('notificaciones', JSON.stringify(this.Notifications))
+  //     this.notify = JSON.parse(localStorage.getItem('notificaciones'))
+  //     this.notify = this.notify.filter(f => o[f.id] ? false : o[f.id] = true)
+  //   }
+  // }
+  // closeNotify(e: any){
+  //   var i = this.notify.indexOf(e)
+  //    i !== -1 && this.notify.splice(i)
+
+  // }
   navigateabout() {
     $('body,html').stop(true, true).animate({
       scrollTop: $("#Aboutus").offset().top

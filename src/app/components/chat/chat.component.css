@@ -246,13 +246,13 @@ hr {
 
 .chatContainerHeight {
     height: calc(100vh - 406px);
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 100%;
 }
 
 .containerH155 {
     height: calc(100vh - 247px);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .btnEnviarMsj {

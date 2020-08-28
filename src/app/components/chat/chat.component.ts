@@ -54,6 +54,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   sub2: Subscription
   sub3: Subscription
   tempSub: Subscription
+  //Notificaciones
+  folder: any = ''
+  tempNotify: any[] = []
 
   constructor(public info: ProuserService) { firebase.firestore().enablePersistence() }
 
@@ -68,7 +71,7 @@ export class ChatComponent implements OnInit, OnDestroy {
           p.forEach((p) => {
             if (p.data().applyUsers) {
               if (p.data().applyUsers.length > 0) {
-                if(p.data().statusname != 'Deleted'){
+                if (p.data().statusname != 'Deleted') {
                   this.projectsUsers.push({ 'idProject': p.id, 'projectName': p.data().projectname, 'usersPro': p.data().applyUsers })
                 }
                 this.info.usersChat.emit(p.data())
@@ -249,30 +252,46 @@ export class ChatComponent implements OnInit, OnDestroy {
   chatMessage(e: string, msg: string, adj?: boolean, nameAdj?: string, offer?: boolean, accept?: boolean, price?: number, proname?: string, team?: string, projectId?: string) {
     var hire: string = ''
     var pro: string = ''
-
     if (msg != '') {
       if (this.info.user.displayName == 'hire') {
         hire = this.info.user.uid
         pro = e
+        this.folder = this.info.getInfoPro()
       } else {
         hire = e
         pro = this.info.user.uid
+        this.folder = this.info.getInfoHire()
       }
+      this.folder.doc(e).get().subscribe((s) => {
+        if (s.data().notifications) {
+          this.tempNotify = s.data().notifications
+        }
+      })
       if (this.messages.length > 0) {
         if (this.messages[this.messages.length - 1].offer && msg != 'offer') {
           offer = true
           price = this.messages[this.messages.length - 1].price
           team = this.messages[this.messages.length - 1].team
+          projectId = this.messages[this.messages.length - 1].projectId
+        }else{
+          this.tempNotify.push({ 'id': e + 'offer', 'name': this.name, 'project': this.projectName, 'img': this.photo, 'type': 'offer', date: new Date() })
+          this.updateNotify(e)
         }
       }
       if (accept == true) { offer = false }
 
       this.info.chatMsg(hire, pro, msg, adj, nameAdj, offer, accept, price, proname, team, projectId)
+      this.tempNotify.push({ 'id': e + 'chat', 'name': this.name, 'project': this.projectName, 'img': this.photo, 'type': 'chat', date: new Date() })
+      this.updateNotify(e)
       this.mesg = ''
       $(".chatContainerHeight").animate({ scrollTop: $('.chatContainerHeight').prop("scrollHeight") }, 1000);
     }
   }
-
+  updateNotify(e){
+    this.folder.doc(e).update({
+      'notifications': this.tempNotify
+    })
+  }
   adjFile(e: any) {
     var hire: string = ''
     var pro: string = ''
