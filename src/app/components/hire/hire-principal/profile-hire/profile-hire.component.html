@@ -29,18 +29,18 @@
                     <div class="row fields">
                         <div class="input-group col-sm">
                             <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel
-                                [(ngModel)]="profile.name" />
+                                [(ngModel)]="profile.name" placeholder="First Name"/>
                         </div>
                         <div class="input-group col-sm">
                             <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel"
-                                ngModel [(ngModel)]="profile.lastname" />
+                                ngModel [(ngModel)]="profile.lastname" placeholder="Last Name" />
                         </div>
                     </div>
                     <div class="row fields">
 
                         <div class="input-group col-sm">
                             <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel
-                                [(ngModel)]="profile.email" [placeholder]="profile.email"
+                                [(ngModel)]="profile.email" placeholder="Email" 
                                 [class.errorInput]="!emailVal">
                             <span class="textError" [hidden]="emailVal">Wrong email</span>
                         </div>

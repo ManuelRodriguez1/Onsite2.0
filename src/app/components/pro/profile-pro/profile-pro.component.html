@@ -1,4 +1,4 @@
-<div class="alert alert-primary" [class.alertInitial]="alert == 1" role="alert">
+<div class="alert alert-primary" *ngIf="errorEmailRepeat==''" [class.alertInitial]="alert == 1" role="alert">
     Your <strong>{{textAlert}}</strong> {{tobe}} been updated.
 </div>
 
@@ -22,20 +22,22 @@
                 <form #aF="ngForm" (ngSubmit)="accountForm(aF)" action="">
                     <div class="row fields">
                         <div class="input-group col-sm">
-                            <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel [(ngModel)]="profile.name" [placeholder]="profile.name">
+                            <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel [(ngModel)]="profile.name" placeholder="First Name">
                         </div>
                         <div class="input-group col-sm">
-                            <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel" ngModel [(ngModel)]="profile.lastname" [placeholder]="profile.lastname">
+                            <input type="text" class="form-control" id="midle" name="midle" #midle="ngModel" ngModel [(ngModel)]="profile.midle" placeholder="Midle Name">
                         </div>
                     </div>
                     <div class="row fields">
+                      
                         <div class="input-group col-sm">
-                            <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel [(ngModel)]="profile.email" [placeholder]="profile.email" [class.errorInput]="!correctEmail.exec(email.value) && email.value != ''">
-                            <span *ngIf="!correctEmail.exec(email.value) && email.value != ''" class="textError">Email must be a valid
-                                email address</span>
+                            <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel" ngModel [(ngModel)]="profile.lastname" placeholder="Last Name">
                         </div>
                         <div class="input-group col-sm">
-                            <input type="text" hidden>
+                            <input type="email" class="form-control" id="email" name="email" #email="ngModel" ngModel [(ngModel)]="profile.email" placeholder="Email" [class.errorInput]="!correctEmail.exec(email.value) && email.value != ''">
+                            <span *ngIf="!correctEmail.exec(email.value) && email.value != '' && errorEmailRepeat=='' " class="textError">Email must be a valid
+                                email address</span>
+                             <span *ngIf="errorEmailRepeat != '' " class="textError">{{errorEmailRepeat}}</span>
                         </div>
                     </div>
                     <div class="row fields">
@@ -43,7 +45,7 @@
                             <textarea class="form-control" rows="8" maxlength="400" id="description" name="description" #description="ngModel" ngModel [(ngModel)]="profile.description" placeholder="Enter an appealing description of yourself so people want to hire you (400 characters left)"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="blueBtn small mt-12" id="btnAccount" [class.disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == '' || !correctEmail.exec(email.value)" [disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == '' || !correctEmail.exec(email.value)">Update</button>
+                    <button type="submit" class="blueBtn small mt-12 " id="btnAccount" [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || description.value == '' || !correctEmail.exec(email.value)" [disabled]="name.value == '' || lastname.value == '' || email.value == '' || description.value == '' || !correctEmail.exec(email.value)">Update</button>
                 </form>
                 <hr class="hr mt-30">
                 <div class="title2">
