@@ -39,7 +39,7 @@
     "ng5-slider": "^1.1.12",
     "ngx-slick-carousel": "^0.4.4",
     "observable": "^2.1.4",
-    "parse": "^2.1.0",
+    "parse": "^2.10.0",
     "popper.js": "^1.14.5",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.3.3",
