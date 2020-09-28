@@ -21,7 +21,6 @@ export class ProuserService {
   initChat = new EventEmitter<boolean>()
   chatUnread = new EventEmitter<number>()
   adjFile = new EventEmitter<string>()
-  errorEmailRepeat = new EventEmitter<string>()
 
   constructor(
     public afA: AngularFireAuth,
@@ -76,15 +75,12 @@ export class ProuserService {
   }
   //ACTUALIZACIÓN DE INFORMACIÓN USUARIO
   //Actualizar informacion de usuario
-  updateAccount(f: NgForm, name: string, last: string, desc: string,midle:string) {
+  updateAccount(f: NgForm, name: string, last: string, desc: string) {
     return this.getInfo()
       .update({
         "name": f.value.name != '' ? f.value.name : name,
         "lastname": f.value.lastname != '' ? f.value.lastname : last,
-        "description": f.value.description != '' ? f.value.description : desc,
-        "midle": f.value.midle != '' ? f.value.midle : midle
-      }).catch(()=>{
-        console.log("error 1");
+        "description": f.value.description != '' ? f.value.description : desc
       })
   }
   //Actualizar email
@@ -93,22 +89,13 @@ export class ProuserService {
       .then(() => {
         this.user.updateEmail(email)
           .then(() => {
-       
             this.getInfo()
               .update({
                 "email": email
               }).then(() => {
                 this.user.sendEmailVerification()
-              }).catch(()=>{
-                console.log("error 3");
               })
-          }).catch((error)=>{
-            this.errorEmailRepeat.emit(error.message);
-            
-            console.log("error 4");
           })
-      }).catch(()=>{
-        console.log("error 2");
       })
   }
   //Actualizar password
