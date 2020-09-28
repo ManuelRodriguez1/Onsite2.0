@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "Onsite2"
+  "defaultProject": "Onsite2",
+  "cli": {
+    "analytics": "0d7e25aa-c687-4fc3-8d72-9702b401b2be"
+  }
 }
