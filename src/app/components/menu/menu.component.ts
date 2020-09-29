@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from "angularfire2/firestore";
-import { getAllRouteGuards } from '@angular/router/src/utils/preactivation';
+// import { getAllRouteGuards } from '@angular/router/src/utils/preactivation';
 import * as $ from 'jquery';
 
 @Component({
