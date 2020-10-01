@@ -33,5 +33,5 @@ export const router: Routes = [
     { path: 'Projects', component: ProjectsComponent, data: { role: "pro" }, canActivate: [AuthGuard] },
     { path: 'Chat', component: ChatComponent, canActivate: [AuthGuard] }
 ]
-export const routes: ModuleWithProviders = RouterModule.forRoot(router);
+export const routes: ModuleWithProviders<any> = RouterModule.forRoot(router);
 
