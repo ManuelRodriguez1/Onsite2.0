@@ -53,6 +53,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   limit: number = 2
   //Subscripciones
   sub1: Subscription
+  errorEmailR: string = ''
 
   constructor(
     private prouser: ProuserService,
@@ -62,6 +63,10 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   }
   //Show data of User
   ngOnInit() {
+    //Verificar si existe el correo
+    this.prouser.errorEmailR.subscribe((res)=>{
+      this.errorEmailR = res
+    })
     //boton slkill se cierre
    $(document).on("click", (e) => {
 
@@ -145,7 +150,7 @@ export class ProfileProComponent implements OnInit, OnDestroy {
   // Update account information
   accountForm(f: NgForm) {
 
-    this.prouser.updateAccount(f, this.profile.name, this.profile.lastname, this.profile.description)
+    this.prouser.updateAccount(f, this.profile.name, this.profile.lastname, this.profile.description, this.profile.midle)
 
     if (f.value.email.trim() != '' && f.value.email != this.prouser.user.email) {
       if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,9}$/.test(f.value.email)) {

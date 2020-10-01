@@ -28,7 +28,7 @@
             <li><a href="/ExplorePro">Explore</a></li>
             <li><a href="/Projects">Projects</a></li>
             <li><a href="/Chat">Messages</a></li>
-            <li class="vmiddle">
+            <!-- <li class="vmiddle">
                 <span (click)="notific = !notific" [class.notificacion2]="notify.length > 0" class="notificacion1 mnotificacion"></span>
                 <div *ngIf="notific" class="bgpodpad menu notific">
                     <div *ngIf="notify.length == 0" class="notificTexto">
@@ -62,7 +62,7 @@
                     <button (click)="notific = false" class="done">Close</button>
                 </div>
 
-            </li>
+            </li> -->
             <li>
                 <span [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profilePro"> </span> {{UserName}}
                 <span class="flechaUsuario" (click)="flechaUsuario()">
@@ -89,7 +89,7 @@
         <ul *ngIf="Sesion==true && userMenu=='Hirer'" class="menu">
             <li><a href="/Hireprincipal">Projects</a></li>
             <li><a href="/Chat">Messages</a></li>
-            <li class="vmiddle">
+            <!-- <li class="vmiddle">
                 <span (click)="notific = !notific" [class.notificacion2]="notify.length > 0" class="notificacion1 mnotificacion"></span>
                 <div *ngIf="notific" class="bgpodpad menu notific">
                     <div *ngIf="notify.length == 0" class="notificTexto">
@@ -119,7 +119,7 @@
                     <button (click)="notific = false" class="done">Close</button>
                 </div>
 
-            </li>
+            </li> -->
             <li>
                 <span [ngStyle]="{'background-image': imageP != '' && imageP != undefined && 'url('+imageP+')', 'background-size': imageP ? 'cover' : 'cover'}" class="imagenUserMenu profileHire"> </span> {{UserName}}
                 <span class="flechaUsuario" (click)="flechaUsuario()">
