@@ -45,8 +45,8 @@
                         </div>
                         <div class="field3 container">
                             <div class="row">
-                                <input type="text" class="form-control" placeholder="Enter zipcode." [class.errorInput]="zipcode.value.length > 5" [class.correctInput]="zipcode.value.length < 6 && zipcode.value.length > 1" name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
-                                <span [hidden]="zipcode.value.length < 6" class="textError absBottom">
+                                <input type="text" class="form-control" placeholder="Enter zipcode." [class.errorInput]="zipcode.value?.length > 5" [class.correctInput]="zipcode.value?.length < 6 && zipcode.value?.length > 1" name="zipcode" #zipcode="ngModel" ngModel [(ngModel)]="zipcodeSelect">
+                                <span [hidden]="zipcode.value?.length < 6" class="textError absBottom">
                                 Please enter a valid ZIP Code.
                             </span>
                                 <!-- <ul class="list-group" *ngIf="!zipcodeSelectActive">
@@ -59,8 +59,8 @@
                         </ul> -->
                             </div>
                             <button type="button" class="btn btn-outline-warning next mt-42" (click)='next()' *ngIf='page == 0' [disabled]="name.value == '' || lastname.value == ''
-                            || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value"
-                                [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value.length > 5 || user.value.length < 6 || user.value != password.value">
+                            || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value?.length > 5 || user.value?.length < 6 || user.value != password.value"
+                                [class.grayBtn]="name.value == '' || lastname.value == '' || email.value == '' || !correctEmail.exec(email.value) || phone.value == '' || password.value == '' || zipcode.value == '' || zipcode.value == 'Searching...' || zipcode.value?.length > 5 || user.value?.length < 6 || user.value != password.value">
                             Next
                         </button>
                         </div>

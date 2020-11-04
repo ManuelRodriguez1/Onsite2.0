@@ -58,7 +58,7 @@ export class MenuComponent implements OnInit {
 
     });
 
-   
+
   }
   ngOnInit() {
     $(document).ready(function () {
@@ -174,21 +174,26 @@ export class MenuComponent implements OnInit {
       })
     }
 
-    if(this.af.auth.currentUser.displayName == 'pro'){
-      this.folder = 'users_pro'
-    }else{
-      this.folder = 'users_hire'
-    }
-    
-    this.afstore.collection(this.folder).doc(this.af.auth.currentUser.uid).snapshotChanges()
-    .subscribe((n)=>{
-      var t: any = n.payload.data()
-      if(t.notifications){
-        this.notify = t.notifications
-      }else{
-        console.log('nothing'); 
+    if (this.af.auth.currentUser) {
+      if (this.af.auth.currentUser.displayName == 'pro') {
+        this.folder = 'users_pro'
+      } else {
+        this.folder = 'users_hire'
       }
-    })
+
+      this.afstore.collection(this.folder).doc(this.af.auth.currentUser.uid).snapshotChanges()
+        .subscribe((n) => {
+          var t: any = n.payload.data()
+          if (t.notifications) {
+            this.notify = t.notifications
+          } else {
+            console.log('nothing');
+          }
+        })
+    }
+
+
+
 
     // if (this.estado == 'pro') {
     //   this.afstore.collection("users_hire").stateChanges().subscribe((i) => {
