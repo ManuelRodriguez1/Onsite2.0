@@ -49,6 +49,7 @@ import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 import { SkillsPipe } from './pipes/skills.pipe';
 import { DistancePipe } from './pipes/distance.pipe';
 import { VerifiedEmailComponent } from './components/verified-email/verified-email.component';
+import { CommingComponent } from './components/comming/comming.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { VerifiedEmailComponent } from './components/verified-email/verified-ema
     SkillsPipe,
     DistancePipe,
     VerifiedEmailComponent,
+    CommingComponent,
   
   ],
   imports: [
